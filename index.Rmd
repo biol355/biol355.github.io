@@ -1,0 +1,34 @@
+---
+title: "Biol 355/356: Intro to Data Science for Biology"
+---
+
+```{r demoplot, fig.align='center', echo=FALSE, fig.height=4, fig.width=6}
+library(ggplot2)
+require(stats); require(graphics)
+qplot(conc, density, data=DNase, geom=c("point", "line"), group=Run) +
+  facet_wrap(~ Run) +
+  theme_bw() +
+  ylab("DNA Optical Density") + xlab("Protein Concentration") +
+  ggtitle("Elisa assay of DNase")
+```
+
+**Instructor:** Jarrett Byrnes, PhD.
+
+**Email:** jarrett.byrnes@umb.edu
+
+**TA:** Isaac Rosenthal
+
+**Email:** isaac.rosenthall001@umb.edu
+
+**Weekly Schedule:** Tuesday & Thursday 9:30-12:00, Lab Wednesday 12:30-3:30
+
+**Office Hours:** Prof. Byrnes will hold office hours Thursday from 1:30-3 in ISC 3130  
+&nbsp; &nbsp; TA Rosenthal will hold office hours Wed from 10-12 at the tables outside of ISC 3100.
+
+**Source for this Website:** https://github.com/biol355/biol355.github.io/
+&nbsp;  
+&nbsp;  
+&nbsp;  
+
+## Course News:  
+*1/22/2018*  Welcome to the class! Please browse around the site or download the [lecture syllabus](./governance_syllabus/byrnes_355_datascience_lecture_1.docx) and [lab syllabus](./governance_syllabus/byrnes_356_datascience_lab_1.docx)!
