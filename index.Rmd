@@ -3,6 +3,7 @@ title: "Biol 355/356: Intro to Data Science for Biology"
 ---
 
 ```{r demoplot, fig.align='center', echo=FALSE, fig.height=4, fig.width=6}
+#rmarkdown::render_site()
 library(ggplot2)
 require(stats); require(graphics)
 qplot(conc, density, data=DNase, geom=c("point", "line"), group=Run) +

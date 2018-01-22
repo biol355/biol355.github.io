@@ -1,4 +1,4 @@
-name: "Biol 607 - Intro to Computational Data Analysis for Biology"
+name: "Biol 355 - Intro to Data Science for Biology"
 
 navbar:
  title: ""
@@ -11,14 +11,14 @@ navbar:
     href: schedule.html
   - text: "R Errors"
     href: error.html
-  - text: "Texts"
-    href: texts.html
   - text: "Final Project"
     href: final.html
-  - text: "Extra Credit"
-    href: extra.html
   - text: "Syllabus"
-    href: biol607_syllabus_2016.doc
+    menu:
+       - text: "Lecture"
+         href: ./governance_syllabus/byrnes_355_datascience_lecture_1.docx
+       - text: "Lab"
+         href: ./governance_syllabus/byrnes_356_datascience_lab_1.docx
   - text: "Resources"
     href: resources.html
   - text: "Local Meetups"
@@ -27,5 +27,5 @@ navbar:
 
 output:
   html_document:
-    theme: lumen
+    theme: flatly
 output_dir: "."
