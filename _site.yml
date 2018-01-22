@@ -20,11 +20,14 @@ navbar:
        - text: "Lab"
          href: ./governance_syllabus/byrnes_356_datascience_lab_1.docx
   - text: "Data Sets"
-    href: datsets.html
+    href: datasets.html
   - text: "Resources"
     href: resources.html
   - text: "R On Twitter"
     href: https://twitter.com/jebyrnes/lists/stats-r-on-twitter
+  - text: "Meetups"
+    href: http://byrneslab.net/resources/boston-area-data-science-groups/
+
 
 output:
   html_document:
