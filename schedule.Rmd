@@ -5,7 +5,7 @@
   
 This course will be a mixture of lecture, live-code demonstrations, and opportunities for in class work. Lecture days will have small exercises for students at the end of class. We will conduct lectures and labs in a computer lab in order for students to be able to follow along and try out new concepts once described and demonstrated in lecture, enabling rapid feedback between students and faculty.
   
-G&W = [Grolemund and Wickham](http://r4ds.had.co.nz), DC = Data Carpentry Lesson, U/P for linked pdfs = biol355
+W&G = [Wickham & Grolemund](http://r4ds.had.co.nz), DC = Data Carpentry Lesson, U/P for linked pdfs = biol355
     
 ```{r dates, echo=FALSE, message=FALSE, warning=FALSE}
 library(lubridate)
@@ -17,7 +17,8 @@ current_date <- current_date+ days(7)
 datestring <- paste(month(current_date), day(current_date), year(current_date), sep="/")
 ```
 `r datestring`  
-__Readings:__ [G&W Introduction Chapter 1](http://r4ds.had.co.nz/introduction.html)  
+__Lecture:__ [Welcome!](./Lectures/01_intro.pdf)  
+__Readings:__ [W&G Introduction Chapter 1](http://r4ds.had.co.nz/introduction.html)  
 __Objective(s):__ Introduce the students to the course; understand what is data, discuss how we preserve information about data, view different examples of datasets from different disciplines.
 __Lab:__ [Data Collection](./Labs/lab_1_data_collection.html)
 
@@ -33,7 +34,7 @@ __Biological Examples:__ Transgenic mouse experimentation. Bee genomics. Subtida
 ```{r next_date, echo=FALSE}
 ```
 `r datestring`  
-__Readings:__ G&W on [Data Visualization](http://r4ds.had.co.nz/data-visualisation.html), [Tibbles & Data Frames](http://r4ds.had.co.nz/tibbles.html) and [Data Import](http://r4ds.had.co.nz/data-import.html), DC Ecology [Intro to R](http://www.datacarpentry.org/R-ecology-lesson/01-intro-to-r.html) and [starting with data](http://www.datacarpentry.org/R-ecology-lesson/02-starting-with-data.html),  [Unwin 2008](./Readings/Unwin_2008_dataviz.pdf), [Choosing a Good Chart Cheat Sheet](./Readings/choosing-a-good-chart-09.pdf)  
+__Readings:__ W&G on [Data Visualization](http://r4ds.had.co.nz/data-visualisation.html), [Tibbles & Data Frames](http://r4ds.had.co.nz/tibbles.html) and [Data Import](http://r4ds.had.co.nz/data-import.html), DC Ecology [Intro to R](http://www.datacarpentry.org/R-ecology-lesson/01-intro-to-r.html) and [starting with data](http://www.datacarpentry.org/R-ecology-lesson/02-starting-with-data.html),  [Unwin 2008](./Readings/Unwin_2008_dataviz.pdf), [Choosing a Good Chart Cheat Sheet](./Readings/choosing-a-good-chart-09.pdf)  
 __Objective(s):__  Begin to learn the R computing language, develop understanding of graphical presentation best practices. Identify the syntax of an R function (name and arguments); Create an R project in RStudio; Read data into R using read.csv(); Use R as a basic calculator; Describe and create variables in R; Interpret the output of the str() function; Install packages in R; Create a scatterplot using ggplot();  
 __Biological Examples:__ Human genome size. Plum Island LTER Plankton Distribution. HAD CRUT Global temperature anomaly over the past century.  
 
@@ -45,7 +46,7 @@ current_date <- current_date + days(7)
 datestring <- paste(month(current_date), day(current_date), year(current_date), sep="/")
 ```
 `r datestring_1` and `r datestring`  
-__Readings:__ G&W on [Data Transformation](http://r4ds.had.co.nz/transform.html), [Exploratory Data Analysis](http://r4ds.had.co.nz/exploratory-data-analysis.html), and [Pipes](http://r4ds.had.co.nz/pipes.html), DC Ecology Lesson on [Data Aggregation](http://www.datacarpentry.org/R-ecology-lesson/03-dplyr.html)  
+__Readings:__ W&G on [Data Transformation](http://r4ds.had.co.nz/transform.html), [Exploratory Data Analysis](http://r4ds.had.co.nz/exploratory-data-analysis.html), and [Pipes](http://r4ds.had.co.nz/pipes.html), DC Ecology Lesson on [Data Aggregation](http://www.datacarpentry.org/R-ecology-lesson/03-dplyr.html)  
 __Objective(s):__ Describe the meaning and identify applications of the following summary/descriptive statistics: mean, mode, median, standard deviation; Describe the split-apply-combine strategy of data reduction and summarization; Use group_by() and summarise() to calculate summary statistics for groupings within a dataset; Subset data using filter()  
 __Biological Examples:__ Human genome size. Sockeye salmon life history.  
 
@@ -53,7 +54,7 @@ __Biological Examples:__ Human genome size. Sockeye salmon life history.
 ```{r next_date, echo=FALSE}
 ```
 `r datestring`  
-__Readings:__ G&W Chapters on [Tidy Data](http://r4ds.had.co.nz/tidy-data.html), [Strings](http://r4ds.had.co.nz/strings.html), and [Factors](http://r4ds.had.co.nz/factors.html)  
+__Readings:__ W&G Chapters on [Tidy Data](http://r4ds.had.co.nz/tidy-data.html), [Strings](http://r4ds.had.co.nz/strings.html), and [Factors](http://r4ds.had.co.nz/factors.html)  
 __Objective(s):__ Understand how to reshape and manipulate data. Describe the difference between the two fundamental forms of data – long versus wide, Use the tidyr package in R to convert between long and wide data; Use unite and separate to create tidy data (where each column is a variable). Understand how to manipulate string data  
 __Biological Examples:__ Axoltl limb regeneration. Mammal taxonomic records.  
 
@@ -61,7 +62,7 @@ __Biological Examples:__ Axoltl limb regeneration. Mammal taxonomic records.
 ```{r next_date, echo=FALSE}
 ```
 `r datestring`  
-__Readings:__ G&W Chapters on [Functions](http://r4ds.had.co.nz/functions.html) and [Iteration](http://r4ds.had.co.nz/iteration.html)  
+__Readings:__ W&G Chapters on [Functions](http://r4ds.had.co.nz/functions.html) and [Iteration](http://r4ds.had.co.nz/iteration.html)  
 __Objective(s):__ Learn the benefits of reusable code, Understand the structure of a function, Discover debugging and making functions fail usefully, Apply conditional logic to build flexible code, Derive principles to make functions that are easy to understand and apply to multiple data sets.  
 __Biological Examples:__ NOAA buoy data.  
 
@@ -71,7 +72,7 @@ __Biological Examples:__ NOAA buoy data.
 ```{r next_date_2, echo=FALSE}
 ```
 `r datestring_1` and `r datestring`  
-__Readings:__  G&W Chapter on [Relational Data](http://r4ds.had.co.nz/relational-data.html), Selected readings from DC [Geospatial Introduction](http://www.datacarpentry.org/R-spatial-raster-vector-lesson/)  
+__Readings:__  W&G Chapter on [Relational Data](http://r4ds.had.co.nz/relational-data.html), Selected readings from DC [Geospatial Introduction](http://www.datacarpentry.org/R-spatial-raster-vector-lesson/)  
 __Objective(s):__ Know when and where to use different types of joins, Understand how to merge survey data with geospatial information to get a geographic understanding of epidemiological patterns  
 Note: To install gdal on a mac, there are two steps  
 1) Install Homebrew from http://brew.sh/ (this is an awesome thing to have anyway)  
@@ -95,7 +96,7 @@ __Biological Examples:__ The effects of testosterone on bird behavior. Jet-lag r
 ```{r next_date_2, echo=FALSE}
 ```
 `r datestring_1` and `r datestring`  
-__Readings:__  G&W on [Model Basics](http://r4ds.had.co.nz/model-basics.html) and [Model Building](http://r4ds.had.co.nz/model-building.html)  
+__Readings:__  W&G on [Model Basics](http://r4ds.had.co.nz/model-basics.html) and [Model Building](http://r4ds.had.co.nz/model-building.html)  
 __Objective(s):__ Fit a linear regression using lm() in R through a bivariate scatterplot, Describe when to use nonlinear models/curves, Visualization of model outcomes  
 __Biological Examples:__ Seal life history variation. Mouse anti-fungal drug development.  
 ### Week  15. Open Lab and Final Presentations
