@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Places to Find Data</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-1.1/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-1.1/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+
+.section h2 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h3 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h4 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h5 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h6 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="overview.html">Overview</a>
+</li>
+<li>
+  <a href="schedule.html">Schedule</a>
+</li>
+<li>
+  <a href="error.html">R Errors</a>
+</li>
+<li>
+  <a href="final.html">Final Project</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Syllabus
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="./governance_syllabus/byrnes_355_datascience_lecture_1.docx">Lecture</a>
+    </li>
+    <li>
+      <a href="./governance_syllabus/byrnes_356_datascience_lab_1.docx">Lab</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="datsets.html">Data Sets</a>
+</li>
+<li>
+  <a href="resources.html">Resources</a>
+</li>
+<li>
+  <a href="https://twitter.com/jebyrnes/lists/stats-r-on-twitter">R On Twitter</a>
+</li>
+<li>
+  <a href="http://byrneslab.net/resources/boston-area-data-science-groups/">Local Meetups</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Places to Find Data</h1>
+
+</div>
+
+
+<div id="search-engines" class="section level2">
+<h2>Search Engines</h2>
+<ul>
+<li><a href="http://data.gov">Data.gov</a><br />
+</li>
+<li><a href="https://www.healthdata.gov/">Healthdata.gov</a><br />
+</li>
+<li><a href="http://www.who.int/gho/database/en/">World Health Organization Data Repository</a><br />
+</li>
+<li><a href="http://temperatereefbase.imas.utas.edu.au/">Temperate Reefbase</a><br />
+</li>
+<li><a href="http://datadryad.org/">Data Dryad</a><br />
+</li>
+<li><a href="http://dataportals.org/">Dataportals.org</a><br />
+</li>
+<li><a href="https://data.worldbank.org/products/tools">World Bank Datasets</a></li>
+</ul>
+</div>
+<div id="data-sets" class="section level2">
+<h2>Data Sets</h2>
+<ul>
+<li><a href="https://data.boston.gov/">City of Boston Data Portal</a><br />
+</li>
+<li><a href="http://maps.massgis.state.ma.us/map_ol/moris.php">Massachusetts Ocean Resource Information System</a><br />
+</li>
+<li><a href="https://www.st.nmfs.noaa.gov/appstech/data-portals/index">NOAA Fisheries Datasets</a></li>
+</ul>
+</div>
+<div id="data-sets-with-r-packages" class="section level2">
+<h2>Data Sets with R Packages</h2>
+<ul>
+<li><a href="https://github.com/ropensci/rebird">R EBird Interface</a><br />
+</li>
+<li><a href="https://github.com/ropensci/rnoaa">RNOAA interface for NOAA datasets</a><br />
+</li>
+<li><a href="https://ropensci.github.io/getCRUCLdata/">HAD CRU Global Climatology Data</a></li>
+<li><a href="https://cran.rstudio.com/web/packages/tidyhydat/vignettes/tidyhydat_an_introduction.html">tidyhydat - historical hydrometric data</a><br />
+</li>
+<li><a href="http://ropensci.github.io/FedData/">US Federal Geospatial Data via FedDat</a><br />
+</li>
+<li><a href="https://github.com/ropensci/cleanEHR">Electronic Health Record Data</a><br />
+</li>
+<li><a href="https://github.com/ropensci/rfisheries">Open Fisheries</a><br />
+</li>
+<li><a href="https://github.com/ropensci/rrricanesdata">Every tropical cyclone since 1998</a><br />
+</li>
+<li><a href="https://github.com/ropensci/ccafs">Climate Change, Agriculture, and Food Security (CCAFS) General Circulation Models (GCM) data</a><br />
+</li>
+<li><a href="https://github.com/iobis/robis">R Interface for Ocean Biogeographic Information System</a><br />
+</li>
+<li><a href="https://gist.github.com/zross/6f1b1569512be06f5fb571cc425202bc">R Sample Datasets</a></li>
+</ul>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
