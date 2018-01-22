@@ -1,0 +1,61 @@
+---
+  title: "Course Overview"
+---
+  
+**Overview:** This course will introduce undergraduates to the basic concepts of how we use data in the biological sciences. We will emphasize how different branches of biology handle data creation, curation, manipulation, visualization, and some basic analyses. This course should prepare students for any data-intensive position or course in biology or other disciplines they might encounter in the future.  
+  
+In the era of genomics, high throughput environmental sensors, ecological forecasting from multi-decadal times series, and other data-intensive biological applications, understanding how to generate and use data in a meaningful fashion is key. Students interested in research in biology need to be able take information from the lab bench or field site and translate it to meaningful inferences about biological processes. This course will arm them with the skills they need to be successful biological researchers. It will enable them to take complex datasets and distill them into meaningful information from which they can draw reasoned conclusions. It will also introduce them to a suite of computational tools that are gaining popularity in biology and beyond for the integration and analysis of data. The course draws heavily on industry best practices and tools laid out by Data Carpentry for basic data science. This, this course will give them a set of knowledge and problem-solving techniques that are highly transferable both within biological disciplines and to other fields of science.  
+  
+**Objectives:**	 
+  
+By fully participating in this course, you should be able to: 
+1.	Learn how to create efficient understandable datasets for biological research.  
+2.	Build a vocabulary of visualization tools that enable students to see what their data means.  
+3.	Develop an understanding of how to manipulate data for the purposes of seeing useful patterns.  
+4.	Understand how to unify data from disparate sources to build a larger picture of biological phenomena.  
+5.	Learn basic analytical tools for deriving statistical inference from data.  
+6.	Learn common programming languages associated with data science.
+  
+  
+**Prerequisites:** Experience with programming is helpful, but not assumed.  
+
+**Content and teaching approach:**  The course will be a mixture of lecture and hands-on data analysis lab.  Students will be expected to have a computer available during the course so that they can follow examples and attempt in-class problems.
+
+**Grading:** Students will have three forms of graded work. First, students will have short pre-posts quizzes during each lecture. Second, students are expected to turn in a weekly homework problem set. Last, students will be asked to write a short report at the end of the class where they show the different steps of working with a data set or data sets of their choice to demonstrate their ability to draw inferences from data.  
+
+**Homework:** Students will be given 1-2 problems to solve every week that address core skills from the week’s lecture. Problems will either be short essays or code problems in R.
+
+**Code of Conduct and Academic Integrity:** It is the expressed policy of the University that every aspect of academic life--not only formal coursework situations, but all relationships and interactions connected to the educational process--shall be conducted in an absolutely and uncompromisingly honest manner. The University presupposes that any submission of work for academic credit is the student’s own and is in compliance with University policies, including its policies on appropriate citation and plagiarism. These policies are spelled out in the Code of Student Conduct. Students are required to adhere to the Code of Student Conduct, including requirements for academic honesty, as delineated in the University of Massachusetts Boston Graduate Catalogue and relevant program student handbook(s). 
+
+You are encouraged to visit and review the UMass website on Correct Citation and Avoiding Plagiarism: http://umb.libguides.com/citations  
+
+Penalties for academic misconduct in the course, including plagiarism and cheating, are strictly enforced, and the penalties are very serious. Penalties include an F in the assignment or exam, an F in the course, or suspension from the University. If you have questions about what constitutes plagiarism or other forms of academic misconduct, see Prof. Byrnes before completing an assignment or exam.  
+
+Ignorance of the rules does not excuse any academic conduct violation.  
+
+The University defines violations to include, but not be limited to, the following:
+*  Submitting as one's own an author's published or unpublished work (e.g. material from a journal, Internet site, newspaper, encyclopedia), in whole, in part, or in paraphrase, without fully and properly crediting the author.  
+*  Submitting as one's own work or materials obtained from another student, individual, or agency without full and proper attribution.  
+*  Submitting as one's own work material that has been produced through unacknowledged or unauthorized collaboration with others.  
+*  Submitting substantially the same work to more than one course (i.e., dual or multiple submission) without prior approval from all instructors involved.  
+*  Using any unauthorized material during an examination, such as notes, tests, calculators, cell phones, or other electronic devices.  
+*  Obtaining answers to examination questions from another person with or without that person's knowledge; furnishing answers to examination questions to another student; using or distributing unauthorized copies of or notes from an examination.  
+*  Submitting as one's own an examination taken by another person; or taking an examination in another person's place.
+*  Interfering with an instructor's ability to evaluate accurately a student's competence or performance; misleading any person in connection with one's academic work.  
+  
+Plagiarism : Plagiarism is defined by UMass Boston’s Code of Student Conduct (http://www.umb.edu/life_on_campus/policies/code/ ).   An act of academic dishonesty, plagiarism can include actions such as presenting another writer’s work as your own work; copying passages from print or internet sources without proper citation; taking ideas off the internet, modifying them, and presenting them as your own; or submitting the same work for more than one course.  If you plagiarize, you will fail this course.  Plagiarism cases will be referred to the Dean.  Plagiarism can result in further academic sanctions such as suspension from the University.  
+  
+Civility: An educational institution is a unique cultural space: here, the open sharing of ideas is not only possible, but valued above all else.  Intellectual exchange depends on showing respect for your instructor and peers, taking responsibility for your own course contributions, and demonstrating a mature understanding that learning can involve disagreement over ideas and assessment.  If you engage in uncivil behavior, such as making inappropriate comments to your professor or fellow students in the classroom, out of the classroom, or via email or social networking sites, you can be referred to the Dean of Students.”
+
+
+**Accommodations:** The University of Massachusetts Boston is committed to providing reasonable academic accommodations for all students with disabilities. This syllabus is available in alternate format upon request. If you have a disability and feel you will need accommodations in this course, please contact the Ross Center for Disability Services, Campus Center, Upper Level, Room 211 at 617.287.7430. http://www.umb.edu/academics/vpass/disability/ After registration with the Ross Center, a student should present and discuss the accommodations with the professor. Although a student can request accommodations at any time, we recommend that students inform the professor of the need for accommodations by the end of the Drop/Add period to ensure that accommodations are available for the entirety of the course. Additionaly, please see:
+
+*  Distressed and distressing students:  Seek help from the Dean of Students:
+ http://www.umb.edu/life_on_campus/dean_of_students/students_in_distress/   
+*  Counseling services:  Seek help from Health Services: http://www.umb.edu/healthservices/counseling_center  
+*  Services for students experiencing extreme off-campus circumstances, such as homelessness or domestic violence:  Seek help from the U-ACCESS Program http://www.umb.edu/life_on_campus/uaccess  
+*  Services for students experiencing academic difficulties:  Seek help from the CSM Student Success Center: https://www.umb.edu/academics/csm/student_success_center  
+or University Advising Center: http://www.umb.edu/academics/vpass/uac  
+*  Tutoring services, including the “Reading, Writing, and Study Strategies Center”: Seek help from Academic Support: http://www.umb.edu/academics/vpass/academic_support/tutoring 
+
+

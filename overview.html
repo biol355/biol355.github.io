@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Course Overview</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/lumen.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-1.1/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-1.1/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 54px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 59px;
+  margin-top: -59px;
+}
+
+.section h2 {
+  padding-top: 59px;
+  margin-top: -59px;
+}
+.section h3 {
+  padding-top: 59px;
+  margin-top: -59px;
+}
+.section h4 {
+  padding-top: 59px;
+  margin-top: -59px;
+}
+.section h5 {
+  padding-top: 59px;
+  margin-top: -59px;
+}
+.section h6 {
+  padding-top: 59px;
+  margin-top: -59px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="overview.html">Overview</a>
+</li>
+<li>
+  <a href="schedule.html">Schedule</a>
+</li>
+<li>
+  <a href="error.html">R Errors</a>
+</li>
+<li>
+  <a href="texts.html">Texts</a>
+</li>
+<li>
+  <a href="final.html">Final Project</a>
+</li>
+<li>
+  <a href="extra.html">Extra Credit</a>
+</li>
+<li>
+  <a href="biol607_syllabus_2016.doc">Syllabus</a>
+</li>
+<li>
+  <a href="resources.html">Resources</a>
+</li>
+<li>
+  <a href="http://byrneslab.net/resources/boston-area-data-science-groups/">Local Meetups</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Course Overview</h1>
+
+</div>
+
+
+<p><strong>Overview:</strong> This course will introduce undergraduates to the basic concepts of how we use data in the biological sciences. We will emphasize how different branches of biology handle data creation, curation, manipulation, visualization, and some basic analyses. This course should prepare students for any data-intensive position or course in biology or other disciplines they might encounter in the future.</p>
+<p>In the era of genomics, high throughput environmental sensors, ecological forecasting from multi-decadal times series, and other data-intensive biological applications, understanding how to generate and use data in a meaningful fashion is key. Students interested in research in biology need to be able take information from the lab bench or field site and translate it to meaningful inferences about biological processes. This course will arm them with the skills they need to be successful biological researchers. It will enable them to take complex datasets and distill them into meaningful information from which they can draw reasoned conclusions. It will also introduce them to a suite of computational tools that are gaining popularity in biology and beyond for the integration and analysis of data. The course draws heavily on industry best practices and tools laid out by Data Carpentry for basic data science. This, this course will give them a set of knowledge and problem-solving techniques that are highly transferable both within biological disciplines and to other fields of science.</p>
+<p><strong>Objectives:</strong></p>
+<p>By fully participating in this course, you should be able to: 1. Learn how to create efficient understandable datasets for biological research.<br />
+2. Build a vocabulary of visualization tools that enable students to see what their data means.<br />
+3. Develop an understanding of how to manipulate data for the purposes of seeing useful patterns.<br />
+4. Understand how to unify data from disparate sources to build a larger picture of biological phenomena.<br />
+5. Learn basic analytical tools for deriving statistical inference from data.<br />
+6. Learn common programming languages associated with data science.</p>
+<p><strong>Prerequisites:</strong> Experience with programming is helpful, but not assumed.</p>
+<p><strong>Content and teaching approach:</strong> The course will be a mixture of lecture and hands-on data analysis lab. Students will be expected to have a computer available during the course so that they can follow examples and attempt in-class problems.</p>
+<p><strong>Grading:</strong> Students will have three forms of graded work. First, students will have short pre-posts quizzes during each lecture. Second, students are expected to turn in a weekly homework problem set. Last, students will be asked to write a short report at the end of the class where they show the different steps of working with a data set or data sets of their choice to demonstrate their ability to draw inferences from data.</p>
+<p><strong>Homework:</strong> Students will be given 1-2 problems to solve every week that address core skills from the week’s lecture. Problems will either be short essays or code problems in R.</p>
+<p><strong>Code of Conduct and Academic Integrity:</strong> It is the expressed policy of the University that every aspect of academic life–not only formal coursework situations, but all relationships and interactions connected to the educational process–shall be conducted in an absolutely and uncompromisingly honest manner. The University presupposes that any submission of work for academic credit is the student’s own and is in compliance with University policies, including its policies on appropriate citation and plagiarism. These policies are spelled out in the Code of Student Conduct. Students are required to adhere to the Code of Student Conduct, including requirements for academic honesty, as delineated in the University of Massachusetts Boston Graduate Catalogue and relevant program student handbook(s).</p>
+<p>You are encouraged to visit and review the UMass website on Correct Citation and Avoiding Plagiarism: <a href="http://umb.libguides.com/citations" class="uri">http://umb.libguides.com/citations</a></p>
+<p>Penalties for academic misconduct in the course, including plagiarism and cheating, are strictly enforced, and the penalties are very serious. Penalties include an F in the assignment or exam, an F in the course, or suspension from the University. If you have questions about what constitutes plagiarism or other forms of academic misconduct, see Prof. Byrnes before completing an assignment or exam.</p>
+<p>Ignorance of the rules does not excuse any academic conduct violation.</p>
+<p>The University defines violations to include, but not be limited to, the following: * Submitting as one’s own an author’s published or unpublished work (e.g. material from a journal, Internet site, newspaper, encyclopedia), in whole, in part, or in paraphrase, without fully and properly crediting the author.<br />
+* Submitting as one’s own work or materials obtained from another student, individual, or agency without full and proper attribution.<br />
+* Submitting as one’s own work material that has been produced through unacknowledged or unauthorized collaboration with others.<br />
+* Submitting substantially the same work to more than one course (i.e., dual or multiple submission) without prior approval from all instructors involved.<br />
+* Using any unauthorized material during an examination, such as notes, tests, calculators, cell phones, or other electronic devices.<br />
+* Obtaining answers to examination questions from another person with or without that person’s knowledge; furnishing answers to examination questions to another student; using or distributing unauthorized copies of or notes from an examination.<br />
+* Submitting as one’s own an examination taken by another person; or taking an examination in another person’s place. * Interfering with an instructor’s ability to evaluate accurately a student’s competence or performance; misleading any person in connection with one’s academic work.</p>
+<p>Plagiarism : Plagiarism is defined by UMass Boston’s Code of Student Conduct (<a href="http://www.umb.edu/life_on_campus/policies/code/" class="uri">http://www.umb.edu/life_on_campus/policies/code/</a> ). An act of academic dishonesty, plagiarism can include actions such as presenting another writer’s work as your own work; copying passages from print or internet sources without proper citation; taking ideas off the internet, modifying them, and presenting them as your own; or submitting the same work for more than one course. If you plagiarize, you will fail this course. Plagiarism cases will be referred to the Dean. Plagiarism can result in further academic sanctions such as suspension from the University.</p>
+<p>Civility: An educational institution is a unique cultural space: here, the open sharing of ideas is not only possible, but valued above all else. Intellectual exchange depends on showing respect for your instructor and peers, taking responsibility for your own course contributions, and demonstrating a mature understanding that learning can involve disagreement over ideas and assessment. If you engage in uncivil behavior, such as making inappropriate comments to your professor or fellow students in the classroom, out of the classroom, or via email or social networking sites, you can be referred to the Dean of Students.”</p>
+<p><strong>Accommodations:</strong> The University of Massachusetts Boston is committed to providing reasonable academic accommodations for all students with disabilities. This syllabus is available in alternate format upon request. If you have a disability and feel you will need accommodations in this course, please contact the Ross Center for Disability Services, Campus Center, Upper Level, Room 211 at 617.287.7430. <a href="http://www.umb.edu/academics/vpass/disability/" class="uri">http://www.umb.edu/academics/vpass/disability/</a> After registration with the Ross Center, a student should present and discuss the accommodations with the professor. Although a student can request accommodations at any time, we recommend that students inform the professor of the need for accommodations by the end of the Drop/Add period to ensure that accommodations are available for the entirety of the course. Additionaly, please see:</p>
+<ul>
+<li>Distressed and distressing students: Seek help from the Dean of Students: <a href="http://www.umb.edu/life_on_campus/dean_of_students/students_in_distress/" class="uri">http://www.umb.edu/life_on_campus/dean_of_students/students_in_distress/</a><br />
+</li>
+<li>Counseling services: Seek help from Health Services: <a href="http://www.umb.edu/healthservices/counseling_center" class="uri">http://www.umb.edu/healthservices/counseling_center</a><br />
+</li>
+<li>Services for students experiencing extreme off-campus circumstances, such as homelessness or domestic violence: Seek help from the U-ACCESS Program <a href="http://www.umb.edu/life_on_campus/uaccess" class="uri">http://www.umb.edu/life_on_campus/uaccess</a><br />
+</li>
+<li>Services for students experiencing academic difficulties: Seek help from the CSM Student Success Center: <a href="https://www.umb.edu/academics/csm/student_success_center" class="uri">https://www.umb.edu/academics/csm/student_success_center</a><br />
+or University Advising Center: <a href="http://www.umb.edu/academics/vpass/uac" class="uri">http://www.umb.edu/academics/vpass/uac</a><br />
+</li>
+<li>Tutoring services, including the “Reading, Writing, and Study Strategies Center”: Seek help from Academic Support: <a href="http://www.umb.edu/academics/vpass/academic_support/tutoring" class="uri">http://www.umb.edu/academics/vpass/academic_support/tutoring</a></li>
+</ul>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
