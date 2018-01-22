@@ -25,9 +25,6 @@ navbar:
     href: resources.html
   - text: "R On Twitter"
     href: https://twitter.com/jebyrnes/lists/stats-r-on-twitter
-  - text: "Local Meetups"
-    href: http://byrneslab.net/resources/boston-area-data-science-groups/
-
 
 output:
   html_document:
