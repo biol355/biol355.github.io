@@ -1,0 +1,298 @@
+---
+title: "Diving into the Linear Model"
+output:
+  revealjs::revealjs_presentation:
+    reveal_options:
+      slideNumber: true
+      previewLinks: true
+    theme: white
+    center: false
+    transition: fade
+    self_contained: false
+    background-image: ./anova/anova.jpg
+
+---
+## Deeper into the World of Linear Models
+1. Are groups different: T, F, and Multiple Comparisons
+<br><br>
+2. Linear Regression
+<br><br>
+3. Nonlinear Regression
+
+## The Knee's The Thing!
+![](./anova/_47947_knee300.jpg) <br><br>
+
+* Test if shining light behind knees or on eyes helped jet lag
+* Also a control group with no light
+* n=7
+
+
+##  Many Questions
+
+> 1. Are groups different from 0?<br><br>
+> 2. Are groups different from each other?<br><br>
+> 3. Are groups a meaningful explanatory variable?
+
+
+## Which of these Groups Differ: A Job for T
+```{r load_prep, echo=FALSE, warning=FALSE, message=FALSE}
+library(dplyr)
+library(ggplot2)
+library(knitr)
+library(animation)
+
+opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE,
+               fig.width=7, fig.height=5)
+```
+
+```{r}
+jetlag <- read.csv("./anova/15e1KneesWhoSayNight.csv") %>%
+  group_by(treatment) %>%
+  mutate(mean_shift = mean(shift),
+         resid_shift = shift - mean_shift,
+         subj = 1:length(shift)) %>%
+  ungroup()
+
+jl_plot <- ggplot(data=jetlag, mapping=aes(x=treatment, y=shift)) +
+  stat_summary() +
+  stat_summary(geom="point", color="red", size=4) +
+  theme_bw(base_size=14) +
+  xlab("Treatment") +
+  ylab("Shift in Sleep Time\n")
+
+jl_plot
+```
+
+## The Problem of Multiple Comparisons
+```{r anim_mult_test, cache=TRUE, message=FALSE, warning=FALSE, errors=FALSE}
+set.seed(2002)
+sim_df <- data.frame(trial=1:100, x=rnorm(100*5)) %>%
+  group_by(trial) %>%
+  summarise(mean_x = mean(x), 
+            ci_x = 1.96*sd(x)/sqrt(5), 
+            p = pt(mean_x/(sd(x)/sqrt(5)), 4)) %>%
+  ungroup()
+invisible(saveGIF({
+  for(i in 1:100){
+  print(ggplot(data=sim_df[1:i,], aes(x=trial, y=p)) +
+    geom_point() +
+    xlim(c(0,100)) + ylim(c(0,1)) + theme_classic(base_size=14) +
+    geom_hline(yintercept=0.05, lwd=1, lty=2, color="red"))
+  }
+}, movie.name="multcomp.gif", interval=0.3))
+```
+<img src="./multcomp.gif">
+
+## Solutions to Multiple Comparisons?
+
+> 1. Ignore it - a test is a test
+>     Least Squares Difference test
+
+
+> 2. Lower your $\alpha$ given m = # of comparisons
+>     + Bonferroni $\alpha/m$
+>     + False Discovery Rate $k\alpha/m$ where k is rank of test
+  
+  
+>3. Other multiple comparinson correction
+>     + Tukey's Honestly Significant Difference
+
+
+## No Correction
+```{r pairs, echo=TRUE}
+pairwise.t.test(jetlag$shift, jetlag$treatment, 
+                p.adjust.method="none")
+
+```
+## Bonferroni Corrections
+```{r bonf, echo=TRUE}
+pairwise.t.test(jetlag$shift, jetlag$treatment, 
+                p.adjust.method="bonferroni")
+```
+## FDR
+```{r fdr, echo=TRUE}
+pairwise.t.test(jetlag$shift, jetlag$treatment, 
+                p.adjust.method="fdr")
+```
+
+## Tukey Test
+```{r aov, echo=TRUE}
+jet_aov <- aov(shift ~ treatment, data=jetlag)
+```
+
+<div class="fragment">
+```{r tukey, echo=TRUE}
+TukeyHSD(jet_aov)
+```
+</div>
+
+## Visualizing Comparisons
+```{r tukey-viz}
+plot(TukeyHSD(jet_aov))
+```
+
+## Deeper into the World of Linear Models
+1. Are groups different: T, F, and Multiple Comparisons
+<br><br>
+2. <font color="red">Linear Regression</font>
+<br><br>
+3. Nonlinear Regression
+
+## <font color="white">Aging Seals</font>{data-background="./lm/three-seals-on-the-beach.jpg"}
+
+## Are Older Seals Bigger?
+```{r}
+seals <- read.csv("./lm/17e8ShrinkingSeals Trites 1996.csv")
+
+seal_base <- ggplot(seals, aes(x=age.days, y=length.cm)) +
+  geom_point() +
+  theme_grey(base_size=14)
+
+seal_base
+```
+
+## Are Older Seals Bigger?
+```{r}
+seal_base +
+  stat_smooth(method="lm", formula=y ~ x)
+```
+
+## The Steps of Statistical Modeling
+
+> 1. What is your question?
+> 2. What model of the world matches your question?
+> 3. Build a test
+> 4. Evaluate test assumptions
+> 5. Evaluate test results
+> 6. Visualize
+
+## Our Question and Model
+<div class="fragment">**Question 1**: Are older seals bigger? </fragment>
+
+<div class="fragment"> **Question 2**: How much do seals grow per day? </fragment>
+<br><br>
+<div class="fragment">$$Length_i = \beta_0 + \beta_{1}Age_i + \epsilon_i$$</fragment>
+
+## More Linear Models
+<br><br>
+$$Length_i = \beta_0 + \beta_{1}Age_i + \epsilon_i$$
+<br><br>
+```{r echo=TRUE}
+seal_mod_linear <- lm(length.cm ~ age.days, data=seals)
+```
+
+## Was this Linear? Fitted Versus Residuals
+```{r}
+plot(seal_mod_linear, which=1)
+```
+
+## Testing our Error Generating Process
+```{r}
+seals <- mutate(seals, res = residuals(seal_mod_linear))
+ggplot(seals, aes(x=res)) +
+  geom_histogram(fill="blue")
+```
+
+## QQs Everywhere
+```{r}
+plot(seal_mod_linear, which=2)
+```
+
+## Is Our Model Any Good? F-that!
+```{r eval=FALSE, echo=TRUE}
+anova(seal_mod_linear)
+```
+
+```{r}
+knitr::kable(anova(seal_mod_linear))
+```
+
+## T for Coefficients
+```{r eval=FALSE, echo=TRUE}
+summary(seal_mod_linear)
+```
+
+```{r}
+knitr::kable(summary(seal_mod_linear)$coef)
+```
+
+## How Much Variation does our Model Explain?
+<br><br>
+
+$$1-Var_{residual}/Var_{total}$$
+<br><br>
+$R^2$ = `r summary(seal_mod_linear)$r.squared`
+
+## Visualization
+```{r echo=TRUE, eval=FALSE}
+seal_base <- ggplot(seals, aes(x=age.days, y=length.cm)) +
+  geom_point() +
+  theme_grey(base_size=14) +
+  stat_smooth(method="lm")
+```
+
+## Visualization
+```{r}
+seal_base +
+  stat_smooth(method="lm")
+```
+
+## Deeper into the World of Linear Models
+1. Are groups different: T, F, and Multiple Comparisons
+<br><br>
+2. Linear Regression
+<br><br>
+3. <font color="red">Nonlinear Regression</font>
+
+## Residuals v. Fitted Fishy... 
+```{r}
+plot(seal_mod_linear, which=1)
+```
+
+## A Different Data Generating Process?
+```{r}
+seal_base
+```
+
+## Possible Nonlinear Data Generating Processes
+```{r square}
+x <- seq(0.01, 10, .01)
+ggplot() +
+  geom_line(aes(x=x, y=log(x)), color="red")+
+  geom_line(aes(x=x, y=exp(x/10)), color="orange")+
+  geom_line(aes(x=x, y=x^1.3), color="blue")
+```
+
+## What Shape is the Data Generating Process?
+```{r}
+seal_base
+```
+
+## A New Model
+$$y = \beta_0 + \beta_{1}log(x) + \epsilon$$
+<div class="fragment">
+```{r, echo=TRUE}
+seal_mod_log <- lm(log(length.cm) ~ I(log(age.days)), data=seals)
+```
+<div>
+
+## Did it Fix the Residuals Problem?
+```{r}
+plot(seal_mod_log, which=1)
+```
+
+## Still Must Evaluate Error Generating Process
+```{r}
+plot(seal_mod_log, which=2)
+```
+
+## How Much Variation does our Model Explain?
+$$1-Var_{residual}/Var_{total}$$
+
+$R^2$ = `r summary(seal_mod_log)$r.squared`
+
+## Visualization
+```{r, echo=TRUE}
+seal_base + 
+  stat_smooth(method="lm", formula=y ~ I(log(x)))
+```

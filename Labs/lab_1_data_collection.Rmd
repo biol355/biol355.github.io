@@ -1,0 +1,68 @@
+---
+title: "Lab 1: Data in the Wild"
+author: "Intro to Data Science Lab"
+date: "February 3, 2016"
+output: html_document
+---
+
+We've talked a lot about the creation of data and the decisions that go into making a data artefact. These include, but are not limited to, recodring metadata, creation of a data collection protocol, creation of a data collection sheet, creation of digital objects that will store the data - both as raw scans from the data collection efforts and the creation of a workbook where you record data, metadata, and perform error checking at bare minimum.
+
+Today, let's put all of this into practice. Our goals for today and for your lab report are to implement a data collection process from stem to stern.
+
+Today we are gathered in the ISC, hub of scientific activity on campus. It's also a space full of students, and so people try and advertise opportunities for them to take advantage of. Let's sample them!
+
+###1) What's your question?
+
+There are many questions we can ask about the signs around the building. What kids of opportunities are the advertising? How are they distributed throughout the building? Are certain types of signs on certain floors? Is there any relationship to what kind of seating they are near? What about position on a board?
+
+So many questions.
+
+To begin a data collection process, you need to identify a question you want to ask about these signs. We'll take some time and then each identify the question we want to ask.
+
+###2) What data do you need to collect?
+
+Now that you have a question, what are the actual data you need to collect about individual signs? What is the minimum number of things you need to characterize about each in order to answer your question? 
+
+Identify what these properties - these measurements - of each sign would be, and create a metadata set where you describe each measurement in detail. Are there units? Are some measurements categorical with a controlled vocabulary? Etc.
+
+###3) Sampling design & Protocol
+
+You'll also want to come up with a sampling design - are you exhaustively cataloging all signs in the building, a certain number per floor, a random selection, signs only in certain locations, etc. Record a protocol for exactly what you are going to do to collect your data.
+
+###4) Data collection instrument
+
+With all of these details in hand, it's time to design your data collection instrument (i.e., data sheet). How will you design a data sheet so that anyone can pick it up and start sampling? How will it efficiently allow you to collect all of the information you need about signs around the building? What additional metadata or data management information needs to be included?
+
+###5) Collect your data!
+
+Once 1-4 have been approved by me, you are off to the races! Take the rest of your afternoon (or as long as you need) to collect data on signs around the building.
+
+###6) Data entry and management
+
+With collection completed, it's time to preserve and enter the data. First, scan your original data sheets and print them back out. Only use these to enter your data. This is good practice. "Archive" your original data sheets.
+
+Second, design an efficient data entry format. Is it long, wide, or a hybrid? Why or why not? Are there places where you need to implement a controlled vocabulary?
+
+
+###7) Quality Control
+
+One thing we have not talked about in class a lot is data quality control. You may not be good at entering your own data! Everyone's fingers slip. 
+
+For your entered data, first validate values using if statements and evaluating ranges as we demonstrated in class. Then, we'll use a method called "read-one-back".  Pull out your original data sheet, and compare it, line by line, to your data. Visually, this can get confusing, so, a better way is to record yourself reading the data sheet. Then listen to it while inspecting your entered data. Note any discrepencies.
+
+###8) Lab report
+
+For your lab report to be turned in next week please include the following. You can pull all of this together into a word document and email it to jarrett.byrnes@umb.edu
+
+* Your question
+* Your metadata
+* A printout of your filled in data collection form
+* A short description of why you designed it the way you did
+* Your entered data
+* A short description of decisions you made in creating the data entry form
+* A list of any errors detected during QC
+* Any summaries you choose to make from your data that address your question.
+
+Don't worry! We'll be revisiting this data in the future as we learn more about visualization and analysis!
+
+

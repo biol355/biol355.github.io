@@ -1,0 +1,145 @@
+---
+title: 'Lab: Linear Models in R'
+author: "Intro to Data Science for Biology"
+date: "April 27, 2016"
+output: html_document
+---
+
+Today we're going to walk through a few faded examples of linear models to make sure you have a handle on `lm` fitting in R.
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+#### A Fat Model
+Fist, the relationship between how lean you are and how quickly you lose fat. Implement this to get a sense ot the general workflow for analysis
+
+```{r, eval=FALSE}
+library(ggplot2)
+fat <- read.csv("./lm/17q04BodyFatHeatLoss Sloan and Keatinge 1973 replica.csv")
+
+#initial visualization to determine if lm is appropriate
+fat_plot <- ggplot(data=fat, aes(x=leanness, y=lossrate)) + 
+  geom_point()
+fat_plot
+
+fat_mod <- lm(lossrate ~ leanness, data=fat)
+
+#assumptions
+plot(fat_mod, which=1)
+plot(fat_mod, which=2)
+
+#f-tests of model
+anova(fat_mod)
+
+#t-tests of parameters
+summary(fat_mod)
+
+#plot with line
+fat_plot + 
+  stat_smooth(method=lm, formula=y~x)
+```
+
+#### An Itchy Followup  
+For your first faded example, let's look at the relationship between DEET and mosquito bites.
+
+```{r eval=FALSE}
+deet <- read.csv("./lm/17q24DEETMosquiteBites.csv")
+
+deet_plot <- ggplot(data=___, aes(x=dose, y=bites)) + 
+  geom_point()
+
+deet_plot
+
+deet_mod <- lm(bites ~ dose, data=deet)
+
+#assumptions
+plot(___, which=1)
+plot(___, which=2)
+
+#f-tests of model
+anova(___)
+
+#t-tests of parameters
+summary(___)
+
+#plot with line
+deet_plot + 
+  stat_smooth(method=lm, formula=y~x)
+```
+
+#### Was that relationship linear?  
+We might suspect that the relationship was nonlinear. Let's see how a simple log transform works here. Note the modifications to model fitting and `stat_smooth`.
+
+```{r eval=FALSE}
+
+deet_mod_log <- lm(log(bites) ~ dose, data=deet)
+
+#assumptions
+plot(___, which=1)
+plot(___, which=2)
+
+#f-tests of model
+anova(___)
+
+#t-tests of parameters
+summary(___)
+
+#plot with line
+deet_plot + 
+  scale_y_continuous(trans="log") +
+  stat_smooth(method=lm, formula=y~x)
+```
+
+#### Long-Lived species and Home Ranges
+Do longer lived species also have larger home ranges? Let's test this!
+```{r eval=FALSE}
+
+zoo <- read.csv("./lm/17q02ZooMortality Clubb and Mason 2003 replica.csv")
+
+zoo_plot <- ggplot(data=___, aes(x=mortality, y=homerange)) + 
+  ___()
+
+___
+
+zoo_mod <- lm(___, data=___)
+
+#assumptions
+plot(___, which=1)
+plot(___, which=2)
+
+#f-tests of model
+anova(___)
+
+#t-tests of parameters
+summary(___)
+
+#plot with line
+zoo_plot + 
+  stat_smooth(method=___, formula=___)
+```
+
+
+### Nonlinear home-ranges
+
+That definitely wasn't linear. Look at that outlier! Let's log our y and see how things change.
+
+```{r eval=FALSE}
+
+zoo_mod_log <- lm(log(___) ~ ___, ___=___)
+
+#assumptions
+___(___)
+___(___)
+
+#f-tests of model
+___(___)
+
+#t-tests of parameters
+___(___)
+
+#plot with line
+zoo_plot + 
+  scale_y_continuous(trans="___")+
+  ___(method=___, formula=___)
+
+```

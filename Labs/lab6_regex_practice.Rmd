@@ -1,0 +1,112 @@
+---
+title: "Regex practice"
+output: html_document
+---
+
+--------------------------------------------------------------------------------
+
+#### Online resources
+
+* good tutorial on using regex: [http://regexone.com/lesson/introduction_abcs](http://regexone.com/lesson/introduction_abcs)
+
+* testing page for regex: [https://regex101.com/#](https://regex101.com/#)
+
+--------------------------------------------------------------------------------
+
+#### Setup
+
+Below is the code to get you setup. You can copy and paste these dataframes into your code to create the dataframes you will need. 
+```{r, warning=FALSE, message=FALSE}
+library(dplyr)
+
+# Note that I'm using data_frame() from the dplyr package to make my data.frame!
+counties <- data_frame(counties = c('MA, 25, 001, Barnstable County, H1', 
+              'MA, 25, 003, Berkshire County, H4', 
+              'MA, 25, 005, Bristol County, H1',
+              'MA, 25, 007, Dukes County, H1',
+              'MA, 25, 009, Essex County, H4',
+              'MA, 25, 011, Franklin County, H4',
+              'MA, 25, 013, Hampden County, H4',
+              'MA, 25, 015, Hampshire County, H4',
+              'MA, 25, 017, Middlesex County, H4',
+              'MA, 25, 019, Nantucket County, H4',
+              'MA, 25, 021, Norfolk County, H1',
+              'MA, 25, 023, Plymouth County, H1',
+              'MA, 25, 025, Suffolk County, H4',
+              'MA, 25, 027, Worcester County, H4', 
+              'VA, 51, 193, Westmoreland County, H1',
+              'VA, 51, 195, Wise County, H1',
+              'VA, 51, 197, Wythe County, H1',
+              'VA, 51, 199, York County, H1',
+              'VA, 51, 510, Alexandria city, C7',
+              'VA, 51, 515, Bedford city, C7',
+              'VA, 51, 520, Bristol city, C7',
+              'VA, 51, 530, Buena Vista city, C7',
+              'VA, 51, 540, Charlottesville city, C7',
+              'VA, 51, 550, Chesapeake city, C7',
+              'VA, 51, 570, Colonial Heights city, C7'
+))
+
+dna_seqs <- data_frame(seq =c('ATG CAA TGG GGA AAT GGT ACC AGG TCC GAA CTT AAT GAG GTA AGA CAG ATT TAA', 
+'A TGC AAT GGG GAA ATG TTA CCA GGT CCG AAC TTA TTG AGG TAA GAC AGA TTT AA', 
+'AT GCA ATG GGG AAA TGT TAC CAG GTC CGA ACT TAT TAA GGT AAG ACA GAT TTA A'))
+
+```
+
+--------------------------------------------------------------------------------
+
+#### Questions
+
+1. Using grepl and filter select the massachusetts counties that contain the letter 
+'h' in their county name.
+
+2. Using grepl and filter select the massachusetts counties that contain the number 
+2 in their three digit county code.
+
+3. Using gsub, remove the word 'County' or 'city' and the trailing white space after the 
+county name. 
+
+4. Open reading frames (ORF) are sections of DNA that have the potential to code for a peptide/protein. They occur between a start codon ATG and a stop codon (TAA, TAG, or TGA) on the DNA. Write the regular expression that selects the ORF of the DNA sequences provided. 
+
+--------------------------------------------------------------------------------
+
+**Bonus questions**
+5. Super challenge: 272_71.9333_33.9167 and 80.9_-161.533 are the latitude and longitude separated by an underscore. Can you write a regular expression that highlights the latitude and longitude?
+
+6. For number 4, use R to extract the open reading frames into a new vector/dataframe. 
+
+```{r, echo = FALSE, eval = FALSE}
+# Answer 1.
+counties %>% 
+  filter(grepl("^MA", counties)) %>%
+  filter(grepl(".*,\\s\\d{2},\\s\\d{3},\\sH|h", counties))
+
+
+# Answer 2. 
+counties %>% 
+  filter(grepl("^MA", counties)) %>%
+  filter(grepl(".*,\\s\\d{2},\\s\\d|2\\d|2", counties))
+
+# Answer 3.
+gsub('\\sCounty|\\scity', '', counties$counties)
+ 
+emails <- 
+c('detailsunitednations@gmail.com'
+'newgovernorcbn2014@gmail.com'
+'gordch101@yahoo.com.hk'
+' Petersimonsbacka@swedishmedtech.se.com'
+'dipjsc.dubai@gmail.com'
+'dipjsc.uae@gmail.com'
+'qrtinfoyou@gmail.com'
+'cpiatbariloche@speedy.com.ar'
+'manitoba02@gmail.com'
+'dr.robertp1@hotmail.com'
+'western.union577@qq.com'
+'upsservices9201@outlook.com'
+'mr.jamescornwall@qq.com'
+)
+
+```
+
+ 
+ 

@@ -1,0 +1,420 @@
+\documentclass{beamer}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Lecture 19 - T & and Chisq
+%%%   
+%%%
+%%% Last Modified 10/1/2012
+%%%
+%%% Changelog:
+% More on using t.test function
+% chisq.test function
+% maybe a better chisq demo?
+% cut making them write a function
+%%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%\input{handoutPreamble.Rnw} %for when we use the handout argument for documentclass
+\input{slidePreamble.Rnw}
+
+%%%%%load in code chunks, and run some preperatory code
+<<set-options, echo=FALSE, cache=FALSE>>=
+source("./beamerPrep.R")
+#read_chunk("./lecture_10.R")
+opts_chunk$set(size = "footnotesize")
+opts_chunk$set(fig.align = "center")
+opts_chunk$set(out.height="0.55\\textwidth")
+opts_chunk$set(out.width="0.55\\textwidth")
+par(mar=c(5,4,2,2))
+@
+%<<lecture19 prep, echo=FALSE, cache=FALSE>>=
+%@
+
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\huge \center Cornerstone hypothesis tests: T and $\chi^2$ !
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+ \frametitle{Review}
+ \begin{enumerate}
+ \item Functions \\
+ \hfill \\
+ \item Z-Tests \\
+ \hfill \\
+ \item Integrating Power, Z-Tests, and Functions \\
+ \hfill \\
+
+ \end{enumerate}
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+ \frametitle{Today}
+ \begin{enumerate}
+
+\item One Sample T-Tests \\
+ \hfill \\
+ \item The $\chi^2$ test \\
+ \hfill \\
+ \item Discussion: Are you a Neo-Fischerian? \\
+
+ \end{enumerate}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Enter the Z-Test}
+\begin{center}
+ \Huge $Z = \frac{\bar{Y} - \mu}{\sigma/\sqrt{n}}$
+\end{center}
+
+The Z-score compares a sample mean to an assumed (known) population mean.\\
+\hfill \\
+\pause
+We call it a Z-Score because we correct by the standard error based on a known POPULATION standard deviation.
+\end{frame}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\bgroup
+\setbeamercolor{background canvas}{bg=black}
+\begin{frame}[plain]
+\includegraphics[width=1\paperwidth]{./images/10/beers_guinness_desktop_1600x1200_hd-wallpaper-494940.jpeg}
+\end{frame}
+\egroup
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+ \frametitle{William "Student" Gosset}
+\begin{columns}
+\column{0.5\textwidth}
+\begin{itemize} 
+  \item{Quality control often works with small samples}
+  \item{Small samples are seldom normal}
+  \item{AND we rarely know the TRUE population SD}
+\end{itemize}
+\column{0.5\textwidth}
+\includegraphics[width=0.9\textwidth]{./images/10/800px-William_Sealy_Gosset.jpg}\\
+\end{columns}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+\frametitle{Sample's Aren't Normal: Student's T}
+\begin{center}
+<<tsamp, echo=FALSE, out.width="0.7\\textwidth", out.height="0.7\\textwidth">>=
+
+makeTPlot <- function(n, ...){
+  vec <- rnorm(n)
+  densLines <- density(vec)
+  ymax <- max(c(0.4, max(densLines$y)))
+  plot(densLines, col="blue", lwd=4, lty=2, xlim=c(-4,4), ylim=c(0,ymax), 
+       xlab="X", cex.lab=1.4, cex.axis=1.4, cex.main=1.8, ...)
+  
+  x <- seq(-4,4,.01)
+  matplot(x, dnorm(x), type="l", add=T, col="red", lwd=5)
+}
+
+set.seed(31415)
+par(mfrow=c(2,2))
+makeTPlot(3, main="N=3")
+makeTPlot(5, main="N=5")
+makeTPlot(10, main="N=10")
+makeTPlot(20, main="N=20")
+par(mfrow=c(1,1))
+@
+\end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+\frametitle{Sample's Aren't Normal: Student's T}
+\begin{center}
+<<t, echo=FALSE, out.width="0.5\\textwidth", out.height="0.5\\textwidth">>=
+library(ggplot2)
+x<-seq(-3,3,.01)
+y<-dnorm(seq(-3,3,.01))
+x2<-seq(-3,-1.96,0.1)
+plot(x,dnorm(x), type="l", cex=2.5, lwd=3, cex.lab=1.4, cex.axis=1.4)
+matplot(x,dt(x, df=1), type="l", cex=2.5, col="red", add=T, lty=2, lwd=3)
+text(1, 0.4, "Normal", col="black", cex=1.5)
+text(1.1, 0.35, "T, DF=1", col="red", cex=1.5)
+@
+\end{center}
+\pause
+DF = Degrees of Freedom\\ {\hspace*{2em}}= Sample Size - \# of Estiamted Parameters\\
+For t, this is n-1
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+\frametitle{Sample's Aren't Normal: Student's T}
+\begin{center}
+<<t2, echo=FALSE>>=
+plot(x,dnorm(x), type="l", cex=2.5, lwd=3, cex.lab=1.4, cex.axis=1.4)
+matplot(x,dt(x, df=1), type="l", cex=2.5, col="red", add=T, lty=2, lwd=3)
+matplot(x,dt(x, df=5), type="l", cex=2.5, col="blue", add=T, lty=3, lwd=2)
+text(1, 0.4, "Normal", col="black", cex=1.5)
+text(1.1, 0.35, "T, DF=1", col="red", cex=1.5)
+text(1.1, 0.33, "T, DF=5", col="blue", cex=1.5)
+@
+\end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{T Versus Z}
+\begin{center}
+ \huge $Z = \frac{\bar{Y} - \mu}{\sigma/\sqrt{n}}$
+
+\hfill \\
+ \hfill \\
+
+ \huge $T = \frac{\bar{Y} - \mu}{s/\sqrt{n}}$
+\end{center}
+\begin{itemize}
+  \item{For T, we calculate the sample standard error}
+  \item{T is more useful if $<$ 30 samples}
+\end{itemize}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+\frametitle{Exercise: Gimme a T (function)}
+\begin{center}
+  $T = \frac{\bar{Y} - \mu}{SE_{\bar{Y}}}$
+
+<<tdist, echo=FALSE, out.width="0.5\\textwidth", out.height="0.5\\textwidth">>=
+library(ggplot2)
+x<-seq(-3,3,.01)
+y<-dt(seq(-3,3,.01), 25)
+x2<-seq(-3,-1.96,0.1)
+ggplot(mapping=aes(x=x, y=y), ylab="Density", xlab="Z", type="l")+geom_line(position="jitter") + theme_bw() + 
+   geom_area(mapping = aes(x=x2, y=dt(x2, 25)), fill="blue", alpha=0.7, position="jitter") +
+  geom_area(mapping = aes(x=-x2, y=dt(x2, 25)), fill="blue", alpha=0.7, position="jitter")  +
+  ylab("Probability Density")
+@
+\end{center}
+
+Write a oneSampleT function using pt().  Write a SE function, too.\\
+Challenge: make it return additional information of your choice.
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+\frametitle{Exercise: Gimme a T (function)}
+\begin{center}
+
+
+<<oneSampleT>>=
+#SE first
+se <- function(sample) sd(sample) / (sqrt(length(sample)))
+
+#now T
+oneSampleT <- function(sample, mu=0){
+  t <- (mean(sample) - mu) / se(sample)
+  
+  2 * pt(abs(t), df=length(sample)-1, lower.tail=F)
+}
+@
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Exercise: Gimme a T (function)}
+\begin{center}
+
+
+<<oneSampleTEval, size="scriptsize">>=
+samp<-rnorm(50, 1)
+t.test(samp)
+oneSampleT(samp)
+@
+\end{center}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Extensions of the One-Sample T-test}
+\begin{center}
+ \huge $T = \frac{\bar{Y} - \mu}{s/\sqrt{n}}$
+\end{center}
+\begin{itemize}
+  \item{When values represent differences between paired treatments, this is a {\bf paired T-test}}
+  \item{Often used to assess whether a parameter is different from 0}
+  \item{If $\bar{Y}$ is the difference between two means, s and n become pooled}
+  \item{Pooling involves a variety of formulae accomodating differences in SE and N }
+\end{itemize}
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+\frametitle{}
+\includegraphics[width=0.9\textwidth]{./images/10/bacteria-in-a-petri-dish-compressed.jpg}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+\frametitle{Consider the $\chi^2$}
+\begin{itemize}
+  \item{Test {\bf Goodness of fit} between observed and expected values}
+  \pause
+  \hfill \\
+  \item{If there is no difference, deviations should be normally distributed noise}
+  \pause
+  \hfill \\
+  \item{Summing up + and - differences is problematic - so we square!}
+  \pause
+  \hfill \\
+  \item{The square of a normal distribution is the $\chi^2$ distribution!}
+  \pause
+  \hfill \\
+  \item{The $\chi^2$ is defined by degrees of freedom = n-1!}
+\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+\frametitle{Consider the $\chi^2$}
+\begin{center}
+$\chi^2 = \sum\frac{\displaystyle(O-E)^2}{E}$
+
+<<chisq, echo=FALSE, fig.height=6, fig.width=8, out.height="0.6\\textwidth", out.width="0.8\\textwidth">>=
+chdata<-expand.grid(df=seq(1,9,3), x=seq(0,15,.05))
+
+qplot(x, dchisq(x, df=df), data=chdata, geom="line", color=factor(df), group=df, size=I(1.5), lty=factor(df)) +
+  theme_bw() +
+  ylim(0,0.5) +
+  xlab("Y") +
+  ylab("Probability Density") +
+  geom_vline(xintercept=0) +
+  scale_color_discrete("Degrees of Freedom") 
+@
+
+\end{center}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+\frametitle{}
+\center \large When would you use a $\chi^2$ test?
+\includegraphics[width=0.9\textwidth]{./images/10/bacteria-in-a-petri-dish-compressed.jpg}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+\frametitle{Assumptions of the $\chi^2$}
+\large
+
+\begin{enumerate}
+  \item No expected values less that 1
+  \item 80\% of the expected values must be $>$5 
+\end{enumerate}
+
+What happens if I violate the assumptions?  Combine categories or use a different test.
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+\frametitle{Example of the $\chi^2$}
+
+
+The number of tomato plants that failed due to disease in a farm should follow a negative binomial distribution in any given year with 2 plants dying and an overdispersion parameter of 5.  Famer Dale seeded tomato plants in 100 different plots.  Looking across his field, he finds the following pattern of mortality. \\
+
+0 plants died: 9 plots \\
+1 plants died: 23 plots \\
+2 plants died: 22 plots \\
+3 plants died: 18 plots \\
+4 plants died: 19 plots \\
+$>$4 plants died: 9 plots \\
+\hfill \\
+Was this an anomolously bad year?
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+\frametitle{What are our Expectations?}
+Negative Binomial with a $\mu$ of 2 and dispersion parameter of 5.
+
+<<dnbin, echo=FALSE>>=
+x<-0:10
+y<-dnbinom(x, mu = 2, size=5)
+ggplot(mapping=aes(xmin=x-0.25, xmax=x+0.25, ymin=rep(0, length(x)), ymax=y)) + geom_rect() +
+  theme_bw() + ylab("Probability") + xlab("# of Plants Dying")
+@
+
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+\frametitle{Example of the $\chi^2$}
+
+<<dnbincode, tidy=FALSE>>=
+100*dnbinom(0:4, mu=2, size=5)
+100*(pnbinom(4, mu=2, size=5, lower.tail=FALSE))
+@
+\pause
+\hfill \\
+0 plants died: 9 plots, 18.59 expected \\
+1 plants died: 23 plots, 26,56 expected \\
+2 plants died: 22 plots, 22.77 expected \\
+3 plants died: 18 plots, 15.17 expected \\
+4 plants died: 19 plots, 8.67 expected \\
+$>$4 plants died: 9 plots, 8.23 expected \\
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]
+\frametitle{Example of the $\chi^2$}
+
+<<dnbinomTest, tidy=FALSE>>=
+observed <- c(9,23,22,18,19,9)
+
+expected<- c(100*dnbinom(0:4, mu=2, size=5), 
+             100*(pnbinom(4, mu=2, size=5, lower.tail=FALSE)))
+
+chisq<-sum((observed-expected)^2/expected)
+
+chisq
+
+pchisq(chisq, df=6-1, lower.tail=FALSE)
+
+@
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Extensions of the  $\chi^2$ test}
+\begin{center}
+ \huge $\chi^2 = \sum\frac{\displaystyle(O-E)^2}{E}$
+\end{center}
+\begin{itemize}
+  \item{Modification for small sample size}
+  \item{Exact tests (e.g., Fisher's Exact) to look at exact predictions of probabilities}
+  \item{Goodness of fit to evaluate whether we have a good model}
+\end{itemize}
+\end{frame}
+
+
+\end{document}

@@ -1,0 +1,183 @@
+---
+title: "Function lab notes"
+date: "March 23, 2016"
+output: html_document
+---
+
+Function template:  
+
+```{r, eval = FALSE}
+func_name <- function(arg1, arg2, ...) {
+  
+  func_code_here
+
+  return(object_to_return)
+
+}
+```
+In this template:
+
+* *function_name* is what you decide to call your function. This is usually a verb that describes what the function does; e.g., 'get_max_diff', 'get_first_year', ...
+
+* *arg1* this is the name of an argument (again you decide what the name is). This is what you will call the input when you are within the body of the function code
+
+* *function_code_here* is where you write the code. This is where you transform your inputs into the output
+
+Remember that a function takes input (which could be multiple things), does something to that input, and then returns some kind of output. 
+
+--------------------------------------------------------------------------------
+
+* How can we use a function to help us read in the buoy data, what do we need to do? What is our goal?*  
+The smallest task that we want to accomplish is to read a single data file for buoy data from buoy 44013 into R. What would this look like?
+
+```{r, eval = FALSE}
+buoy_1986 <- read.csv('./buoydata/44013_1986.csv', na.strings = c("99", "999"))
+```
+
+Ok, the next thing we want is to read in data from a bunch of years!
+
+```{r, eval = FALSE}
+buoy_1987 <- read.csv('./buoydata/44013_1987.csv', na.strings = c("99", "999"))
+buoy_1988 <- read.csv('./buoydata/44013_1988.csv', na.strings = c("99", "999"))
+buoy_1989 <- read.csv('./buoydata/44013_1989.csv', na.strings = c("99", "999"))
+buoy_1990 <- read.csv('./buoydata/44013_1990.csv', na.strings = c("99", "999"))
+```
+
+We've already seen that this is tedious and that we can simplify this process by writing a function. Now that you've decided that it is time to write a function, here are some things to ask yourself.
+
+* What parts of your code are consistent across every line/code chunk? 
+* What parts are different? 
+* What is the output that you want your function to return?
+
+Break to think.  
+
+What are some things that we think we need to be able to do?  
+
+* create a variable filename - i.e., write a filename where the year can change based on an input
+* use read.csv() to read in the 'constructed' filename
+* include an na.strings argument to specify that '99' and '999' mean that no data exists for a given cell
+
+
+
+```{r, eval = FALSE}
+read_buoy <- function(a_year){
+  
+  #file to read in
+  filename <- paste0("./buoydata/44013_", a_year, ".csv")
+  
+  a_buoy <- read.csv(filename, na.strings = c("99", "999"))
+  
+  return(a_buoy)
+  
+}
+head(read_buoy(1986))
+```
+
+--------------------------------------------------------------------------------
+
+### Using conditionals! 
+
+--------------------------------------------------------------------------------
+
+#### Logical Operators
+See - [http://www.statmethods.net/management/operators.html](http://www.statmethods.net/management/operators.html)
+
+|   Operator   | Description              |
+|:------------:|--------------------------|
+|      <       | less than                |
+|     <=       | less than or equal to    |
+|      >       | greater than             |
+|     >=       | greater than or equal to |
+|     ==       | exactly equal to         |
+|     !=       | not equal to             |
+|     !x       | Not x                    |
+|    x | y     | x OR y                   |
+|    x & y     | x AND y                  |
+|   isTRUE(x)  | test if X is TRUE        |
+
+--------------------------------------------------------------------------------
+
+See [http://www.programiz.com/r-programming/if-else-statement](http://www.programiz.com/r-programming/if-else-statement) for a good tutorial on if/else statements.
+
+#### If statement structure: 
+
+```{r, eval = FALSE}
+
+if (test_expression) {
+   statement
+}
+
+```
+
+### If ... else ... statement structure: 
+```{r, eval = FALSE}
+
+if (test_expression) {
+   statement1
+} else {
+   statement2
+}
+
+```
+
+Conditionals example:  
+
+```{r}
+f_to_c <- function(farenheit) {
+  celsius <- (farenheit -  32)  *  5 / 9 
+  return(celsius)
+}
+
+```
+
+Let's introduce condition statements/tests. These are if, then else, statements. 
+
+```{r}
+x <- 4 == 3
+x
+```
+
+```{r}
+### If statement
+x <- 5
+if (x > 0) {
+   print("Positive number")
+} 
+
+### If/else statement
+x <- -5
+if(x > 0){
+   print("Non-negative number")
+} else {
+   print("Negative number")
+}
+
+### But that doesn't account for zero!
+x <- 0
+if(x > 0){
+   print("Non-negative number")
+} else {
+   print("Negative number")
+}
+
+x <- 0
+if (x > 0) {
+   print("Non-negative number")
+} else {
+   print("Negative number")
+}
+
+```
+
+
+
+If the temperature is less than -10 C, print 'Nope'
+
+If the temperature is greater than 300, print "I'm moving back to Canada."
+
+```{r}
+f_to_c <- function(farenheit) {
+  celsius <- (farenheit -  32)  *  5 / 9 
+  return(celsius)
+}
+```

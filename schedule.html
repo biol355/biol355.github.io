@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Course Schedule and Readings</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/lumen.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-1.1/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-1.1/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 54px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 59px;
+  margin-top: -59px;
+}
+
+.section h2 {
+  padding-top: 59px;
+  margin-top: -59px;
+}
+.section h3 {
+  padding-top: 59px;
+  margin-top: -59px;
+}
+.section h4 {
+  padding-top: 59px;
+  margin-top: -59px;
+}
+.section h5 {
+  padding-top: 59px;
+  margin-top: -59px;
+}
+.section h6 {
+  padding-top: 59px;
+  margin-top: -59px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html"></a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="overview.html">Overview</a>
+</li>
+<li>
+  <a href="schedule.html">Schedule</a>
+</li>
+<li>
+  <a href="error.html">R Errors</a>
+</li>
+<li>
+  <a href="texts.html">Texts</a>
+</li>
+<li>
+  <a href="final.html">Final Project</a>
+</li>
+<li>
+  <a href="extra.html">Extra Credit</a>
+</li>
+<li>
+  <a href="biol607_syllabus_2016.doc">Syllabus</a>
+</li>
+<li>
+  <a href="resources.html">Resources</a>
+</li>
+<li>
+  <a href="http://byrneslab.net/resources/boston-area-data-science-groups/">Local Meetups</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Course Schedule and Readings</h1>
+
+</div>
+
+
+<p>While the topics covered are broad, each week will feature different examples from genetics, ecology, molecular, and evolutionary biology highlighting uses of each individual set of techniques.</p>
+<p>This course will be a mixture of lecture, live-code demonstrations, and opportunities for in class work. Lecture days will have small exercises for students at the end of class. We will conduct lectures and labs in a computer lab in order for students to be able to follow along and try out new concepts once described and demonstrated in lecture, enabling rapid feedback between students and faculty.</p>
+<p>G&amp;W = <a href="http://r4ds.had.co.nz">Grolemund and Wickham</a>, DC = Data Carpentry Lesson, U/P for linked pdfs = biol355</p>
+<div id="week-1." class="section level3">
+<h3>Week 1.</h3>
+<p>1/23/2018<br />
+<strong>Readings:</strong> <a href="http://r4ds.had.co.nz/introduction.html">G&amp;W Introduction Chapter 1</a><br />
+<strong>Objective(s):</strong> Introduce the students to the course; understand what is data, discuss how we preserve information about data, view different examples of datasets from different disciplines. <strong>Lab:</strong> <a href="./Labs/lab_1_data_collection.html">Data Collection</a></p>
+</div>
+<div id="week-2.-data-creation" class="section level3">
+<h3>Week 2. Data Creation</h3>
+<p>1/30/2018<br />
+<strong>Readings:</strong> <a href="http://www.datacarpentry.org/spreadsheet-ecology-lesson/">DC Spreadsheet Ecology Lesson</a><br />
+<strong>Objective(s):</strong> Compare poor versus good practice in creating data. Differentiate between data recording and data entry. Develop a practical familiarity with data quality control. Discuss what is good metadata and current metadata standards.<br />
+<strong>Biological Examples:</strong> Transgenic mouse experimentation. Bee genomics. Subtidal field surveys. Current data sharing archives in biology.</p>
+</div>
+<div id="week-3-4.-visualization-introduction-to-r" class="section level3">
+<h3>Week 3 &amp; 4. Visualization &amp; Introduction to R</h3>
+<p>2/6/2018<br />
+<strong>Readings:</strong> G&amp;W on <a href="http://r4ds.had.co.nz/data-visualisation.html">Data Visualization</a>, <a href="http://r4ds.had.co.nz/tibbles.html">Tibbles &amp; Data Frames</a> and <a href="http://r4ds.had.co.nz/data-import.html">Data Import</a>, DC Ecology <a href="http://www.datacarpentry.org/R-ecology-lesson/01-intro-to-r.html">Intro to R</a> and <a href="http://www.datacarpentry.org/R-ecology-lesson/02-starting-with-data.html">starting with data</a>, <a href="./Readings/Unwin_2008_dataviz.pdf">Unwin 2008</a>, <a href="./Readings/choosing-a-good-chart-09.pdf">Choosing a Good Chart Cheat Sheet</a><br />
+<strong>Objective(s):</strong> Begin to learn the R computing language, develop understanding of graphical presentation best practices. Identify the syntax of an R function (name and arguments); Create an R project in RStudio; Read data into R using read.csv(); Use R as a basic calculator; Describe and create variables in R; Interpret the output of the str() function; Install packages in R; Create a scatterplot using ggplot();<br />
+<strong>Biological Examples:</strong> Human genome size. Plum Island LTER Plankton Distribution. HAD CRUT Global temperature anomaly over the past century.</p>
+</div>
+<div id="week-56.-data-reduction-and-summarization" class="section level3">
+<h3>Week 5&amp;6. Data Reduction and Summarization</h3>
+<p>2/13/2018 and 2/20/2018<br />
+<strong>Readings:</strong> G&amp;W on <a href="http://r4ds.had.co.nz/transform.html">Data Transformation</a>, <a href="http://r4ds.had.co.nz/exploratory-data-analysis.html">Exploratory Data Analysis</a>, and <a href="http://r4ds.had.co.nz/pipes.html">Pipes</a>, DC Ecology Lesson on <a href="http://www.datacarpentry.org/R-ecology-lesson/03-dplyr.html">Data Aggregation</a><br />
+<strong>Objective(s):</strong> Describe the meaning and identify applications of the following summary/descriptive statistics: mean, mode, median, standard deviation; Describe the split-apply-combine strategy of data reduction and summarization; Use group_by() and summarise() to calculate summary statistics for groupings within a dataset; Subset data using filter()<br />
+<strong>Biological Examples:</strong> Human genome size. Sockeye salmon life history.</p>
+</div>
+<div id="week-7.-tidy-data-and-data-cleaning" class="section level3">
+<h3>Week 7. Tidy Data and Data Cleaning</h3>
+<p>2/27/2018<br />
+<strong>Readings:</strong> G&amp;W Chapters on <a href="http://r4ds.had.co.nz/tidy-data.html">Tidy Data</a>, <a href="http://r4ds.had.co.nz/strings.html">Strings</a>, and <a href="http://r4ds.had.co.nz/factors.html">Factors</a><br />
+<strong>Objective(s):</strong> Understand how to reshape and manipulate data. Describe the difference between the two fundamental forms of data – long versus wide, Use the tidyr package in R to convert between long and wide data; Use unite and separate to create tidy data (where each column is a variable). Understand how to manipulate string data<br />
+<strong>Biological Examples:</strong> Axoltl limb regeneration. Mammal taxonomic records.</p>
+</div>
+<div id="week-8.-functions" class="section level3">
+<h3>Week 8. Functions</h3>
+<p>3/6/2018<br />
+<strong>Readings:</strong> G&amp;W Chapters on <a href="http://r4ds.had.co.nz/functions.html">Functions</a> and <a href="http://r4ds.had.co.nz/iteration.html">Iteration</a><br />
+<strong>Objective(s):</strong> Learn the benefits of reusable code, Understand the structure of a function, Discover debugging and making functions fail usefully, Apply conditional logic to build flexible code, Derive principles to make functions that are easy to understand and apply to multiple data sets.<br />
+<strong>Biological Examples:</strong> NOAA buoy data.</p>
+</div>
+<div id="week-9-10.-data-mashups-and-geospatial-data" class="section level3">
+<h3>Week 9 &amp; 10. Data “Mashups” and Geospatial Data</h3>
+<p>3/20/2018 and 3/27/2018<br />
+<strong>Readings:</strong> G&amp;W Chapter on <a href="http://r4ds.had.co.nz/relational-data.html">Relational Data</a>, Selected readings from DC <a href="http://www.datacarpentry.org/R-spatial-raster-vector-lesson/">Geospatial Introduction</a><br />
+<strong>Objective(s):</strong> Know when and where to use different types of joins, Understand how to merge survey data with geospatial information to get a geographic understanding of epidemiological patterns<br />
+Note: To install gdal on a mac, there are two steps<br />
+1) Install Homebrew from <a href="http://brew.sh/" class="uri">http://brew.sh/</a> (this is an awesome thing to have anyway)<br />
+2) in Terminal type<br />
+<code>brew install gdal</code><br />
+To install on a Windows PC<br />
+1) Install OSGEO4W <a href="https://trac.osgeo.org/osgeo4w/wiki" class="uri">https://trac.osgeo.org/osgeo4w/wiki</a><br />
+2) Use it to install gdal</p>
+<p><strong>Biological Examples:</strong> Hemlock wooly adelgid distribution. CDC records of heart disease across counties of the US. Change in coastal sea surface temperature since 1850.</p>
+</div>
+<div id="week-11-12.-t-tests-and-p-values" class="section level3">
+<h3>Week 11 &amp; 12. T-Tests and P-Values</h3>
+<p>4/3/2018 and 4/10/2018<br />
+<strong>Readings:</strong> <a href="./Readings/cortina%20and%20Dunlop%201997%20significance%20testing%20p%20value.pdf">Cortina and Dunlop 1997</a><br />
+<strong>Objective(s):</strong> Describe the basics of probability and p-values, Compare groups of data using T-tests and its extensions.<br />
+<strong>Biological Examples:</strong> The effects of testosterone on bird behavior. Jet-lag recovery and circadian rhythms.</p>
+</div>
+<div id="week-13-14.-linear-regression" class="section level3">
+<h3>Week 13 &amp; 14. Linear Regression</h3>
+<p>4/17/2018 and 4/24/2018<br />
+<strong>Readings:</strong> G&amp;W on <a href="http://r4ds.had.co.nz/model-basics.html">Model Basics</a> and <a href="http://r4ds.had.co.nz/model-building.html">Model Building</a><br />
+<strong>Objective(s):</strong> Fit a linear regression using lm() in R through a bivariate scatterplot, Describe when to use nonlinear models/curves, Visualization of model outcomes<br />
+<strong>Biological Examples:</strong> Seal life history variation. Mouse anti-fungal drug development.<br />
+### Week 15. Open Lab and Final Presentations</p>
+<p>5/1/2018</p>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

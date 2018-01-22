@@ -1,0 +1,91 @@
+---
+title: "Lab 8 - Data mashups!"
+output: html_document
+---
+
+--------------------------------------------------------------------------------
+
+Today we will be working with two datasets. The first is mammal physiology data and the second is the hemlock and woolly adelgid data from yesterday. 
+
+
+```{r, echo = FALSE, eval = FALSE}
+library(dplyr)
+library(tidyr)
+
+# data preparation
+
+mam <- read.csv('Data/mammal_physiology_data.csv')
+
+str(mam)
+
+taxonomy <- 
+  select(.data = mam, Higher.classification, Order, Family, Common.Name, Genus, Species) %>%
+  unite(col = `Scientific Name`, Genus, Species, sep = ' ') %>% 
+  sample_n(630)
+
+write.csv(select(mam, -Higher.classification, -Order, -Family, -Common.Name), 'Data/mammal_physiology.csv')
+write.csv(taxonomy, 'Data/mammal_taxonomy.csv')
+
+```
+
+--------------------------------------------------------------------------------
+
+Before you begin, check out the mammal physiology datasets in excel:
+
+* mammal_physiology.csv - contains data about the body temperatures, body mass, and, basal metabolic rate of mammal species.
+* mammal_taxonomy.csv - contains additional taxonomic information
+
+
+#### Exercises:
+
+##### Mammal physiology
+
+1. Get to know the new dataset. Let's take a look at how some physiological variables like basal metabolic rate varies with body size across all species. Then let's break the data into groupings like Family or Genus. To do this you will need to load both the mammal_physiology_data and the mammal_taxonomy data. 
+
+* a) Using the mammal_physiology_dataset.csv plot the relationship between basal metabolic rate and body mass to look at how metabolic rate scales with body mass. Make two plots, one using the raw data and the other using log-transformed axes to produce a linear fit. Add a line of best fit to the linearised data. Note: an '*' has been used to indicate missing values. Also remember to make sure that R does not read strings in as factors. 
+
+* b) Great! Now let's see how this varies across different groups. We will make the same plots, but this time facet or colour by *i*) Order and *ii*) Family. But before we do this, we're going to have to combine some datasets. Just as when you work with any dataset, you need to have some idea of where you're going. This often means figuring out what your final dataframe that you will use for plotting needs to look like. Write out the column names that you need your new data frame to contain in order to create plots *i* and *ii*. 
+
+* c) Now that you have done this, look at the notes from yesterday, the [dplyr cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf) or [this tutorial](https://cran.r-project.org/web/packages/dplyr/vignettes/two-table.html) to help you decide what type of join you might want to use to combine the mammal physiology and mammal taxonomy datasets. *Note, look back at the columns you wrote down in step b, joining might not be the only step you need to do here.*
+
+* d) Now create plots *i* and *ii* from question b!
+
+2. This all seems great, except we're missing taxonomic data for some of the species (compare the number of rows in mammal physiology with the number of rows in mammal taxonomy)! We need to know which species in the mammal physiology data table are missing matches in the mammal taxonomy table. However, there are too many species for us to go through and figure this out by hand! Using the notes from yesterday, or the other resources listed in 1c, see if you can use a type of join to identify the missing taxonomic data.
+
+--------------------------------------------------------------------------------
+
+3. Revisiting yesterday's example - Hemlock and Woolly Adelgids
+
+* a) You want to plot a map of all of the sites that were sampled in the hemlock and wooly adelgid study. But you would like the size of the points to be area, and you would like the colour of the points to be dead hemlock area. If you were already given the code to create the ggmap of the entire study area (as was in the etherpad yesterday), list all of the columns of the data frame that you would need to create the described plot. 
+
+* b) Translate what is happening below for each line of code, putting it into plain English. Where appropriate describe why something is being done. Be specific - i.e., don't just say, 'reading data in'; describe what data you are reading in. Where appropriate, describe *why* the motivation behind a given line of code. 
+
+```{r, eval = FALSE}
+
+library(readxl)
+library(ggplot2)
+library(ggmap)
+
+bio_hem <- read_excel('Data/hemlock.xlsx', sheet = "Biological Data")
+phys_hem <- read_excel('Data/hemlock.xlsx', sheet = "Physical Data")
+
+full_hem <- 
+  left_join(phys_hem, bio_hem, by = c('Stand' = 'Stand')) %>% 
+  select(-Longitude.y, -Latitude.y, -Year.y) %>% 
+  rename(Longitude = Longitude.x, Latitude = Latitude.x, Year = Year.x)
+
+forests <- get_map(location = c(mean(full_hem$Longitude), mean(full_hem$Latitude)),
+               source="google", maptype="satellite", zoom=5)
+               
+hem_plot_map <- ggmap(forests)
+hem_plot_map
+
+```
+
+* c) On the map above, plot the sites sampled and set the size of the points to vary based on area, and change the colour of the points based on dead hemlock area.
+
+* d) Some of the sites are missing the physical/environmental data. However, you do not know which sites are missing these data and you don't want to go through by hand to figure this out. Similar to what you did in question 2, can you choose an appropriate type of join to isolate what sites in the biological data are missing a match in the physical data? Once you have identified these sites, plot them on the map.
+
+* e) Some of the sites are missing biological data. Again, you do not know which sites are missing you don't want to go through the data by hand to figure this out. Identify the sites that are missing the biological data and once you have identified these sites, plot them on the map.
+
+* Bonus) Can you plot all of the sites on a single map where the size of the points vary based on area, and the colour of the points are based on dead hemlock area, but also display the sites where physical data and biological data are missing?

@@ -1,0 +1,163 @@
+---
+title: "Generalized Linear Models"
+author: "<br><br>Intro to Data Science for Biology"
+output:
+  revealjs::revealjs_presentation:
+    reveal_options:
+      slideNumber: true
+      previewLinks: true
+    theme: white
+    center: false
+    transition: fade
+    self_contained: false
+    data-background: './anova/anova.jpg'
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Nonlinear Data is Everywhere
+```{r, warning=FALSE, message = FALSE}
+library(dplyr)
+library(ggplot2)
+library(car)
+zoo <- read.csv("./glm/17q02ZooMortality Clubb and Mason 2003 replica.csv")
+home <- ggplot(zoo, aes(x=mortality, y=homerange)) + geom_point()
+home
+```
+
+## We can transform...
+```{r}
+home +
+  scale_y_continuous(trans="log") +
+  stat_smooth(method="lm") 
+```
+
+## But often nonlinear data = non-gaussian error generating process
+```{r}
+home +
+  stat_smooth(method="glm", method.args=list(family=gaussian(link="log")))
+```
+
+## Generalized Linear Models Errors
+Error Generating Proces | Common Use | Typical DGP Shape|
+------------------------|------------|------------------|
+Log-Linear              | Error accumulates additively, and then is exponentiated | Exponential|
+Poisson                 | Count data | Exponential |
+Binomial                | Frequency, probability data | Logistic |
+
+## Log-Normal Distributions
+$$ Y_i \sim LN(\mu, \sigma^2)$$
+
+> * Used for data whose error is additive, but from multiplicative process
+> * $Y_i = e^X + e^{\epsilon_i}, \epsilon_i \sim  N(0, \sigma^2)$
+>       + Error is additive
+>       + E.g. variance is from external sources, happens to be LN
+> * This is **very** different form a log transform
+> * $Y_i = e^{x}e^{\epsilon_i}$
+>       + Error is multiplicative
+>       + E.g., variance is something that accumulates over time
+
+## The GLM
+```{r, echo=TRUE}
+zoo_mod <- glm(homerange ~ mortality, data=zoo,
+               family=gaussian(link="log"))
+```
+
+## Our two big questions
+1. Does our model explain more variation in the data than a null model?
+<br><br>
+2. Are the parameters different from 0?
+
+## Evaluating the DGP: $\chi^2$ Likelihood Ratios
+> * We fit GLMs using different techniques
+> * A model has a Likelihood of the model given the data
+> * The ratio of the likelihood of the model versus the likelihood of a null model is $\chi^2$ distributed
+> * It's like an F test, but with Likelihoods instead of Mean Squares
+
+
+## $\chi^2$ Likelihood Ratios
+```{r, echo=TRUE}
+library(car)
+Anova(zoo_mod)
+```
+
+## Plotting with stat_smooth and glms
+```{r, echo=TRUE, eval=FALSE}
+home +
+  stat_smooth(method="glm", 
+              method.args=list(family=gaussian(link="log")))
+
+```
+
+## Plotting with stat_smooth and glms
+```{r}
+home +
+  stat_smooth(method="glm", 
+              method.args=list(family=gaussian(link="log")))
+```
+
+## Generalized Linear Models Errors
+Error Generating Proces | Common Use | Typical DGP Shape|
+------------------------|------------|------------------|
+Log-Linear              | Error accumulates additively, and then is exponentiated | Exponential|
+Poisson                 | Count data | Exponential |
+Binomial                | Frequency, probability data | Logistic |
+
+## Does Size of Holdfast Matter?
+<center><img src="./glm/postelsia_holdfast.sized.jpg"></center>
+
+* Kelps are held to rock by holdfasts
+* Older kelps have bigger holdfasts
+* Does size of holdfast influence number of stipes from kelp?
+
+## Does Size of Holdfast Matter?
+```{r}
+kelp <- read.csv("./glm/giant_kelp_all_years_20110921_clean.csv")
+kelp_plot <- ggplot(kelp, aes(x=HLD_DIAM, y=FRONDS)) +
+  geom_point()
+kelp_plot
+```
+
+## Poisson Distributions
+$$Y_i \sim P(\lambda)$$
+
+> * Discrete Distribution
+> * Used for **count data**
+> * $\lambda$ = mean
+> * Variance increases linearly with mean
+
+
+## The GLM
+```{r, echo=TRUE}
+kelp_mod <- glm(FRONDS ~ HLD_DIAM, data=kelp,
+               family=poisson(link="log"))
+```
+
+## Fit
+```{r, echo=TRUE, eval=FALSE}
+kelp_plot +
+  stat_smooth(method="glm", method.args=(family=poisson))
+```
+
+## Generalized Linear Models Errors
+Error Generating Proces | Common Use | Typical DGP Shape|
+------------------------|------------|------------------|
+Log-Linear              | Error accumulates additively, and then is exponentiated | Exponential|
+Poisson                 | Count data | Exponential |
+Binomial                | Frequency, probability data | Logistic |
+
+## {data-background="./glm/cryptosporidiosis-cryptosporidium-hominis.jpeg"}
+
+## {data-background="./glm/mouseinject.jpg"}
+
+
+## Binomial Distribution
+$$ Y_i \sim B(prob, size) $$
+
+> * Discrete Distribution
+> * prob = probability of something happening
+> * size = # of discrete trials
+> * Used for frequency or probability data
+> * We estimate coefficients that influence prob

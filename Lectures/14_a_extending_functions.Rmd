@@ -1,0 +1,112 @@
+---
+title: "Writing Flexible Functions"
+author: "Intro to Data Science for Biology"
+date: "March 24, 2016"
+output: html_document
+---
+
+```{r}
+read_buoy <- function(a_year){
+  
+  #file to read in
+  filename <- paste0("./buoydata/44013_", a_year, ".csv")
+  
+  a_buoy <- read.csv(filename, na.strings = c("99", "999"))
+  
+  return(a_buoy)
+  
+}
+
+head(read_buoy(1986))
+```
+
+```{r}
+standardize_buoy <- function(buoydata){
+  
+  #make sure the year column is called YY
+  names(buoydata) <- gsub("X.YY", "YY", names(buoydata))
+  names(buoydata) <- gsub("YYYY", "YY", names(buoydata))
+
+  #If the year > 2005, remove the second row 
+  if(as.numeric(buoydata$YY[1])>2005) buoydata <- buoydata[-1,]
+  
+  #Make sure our columns of interest are numeric
+  buoydata <- buoydata %>% 
+    mutate(YY = as.numeric(YY),
+           MM = as.numeric(MM),
+           DD = as.numeric(DD),
+           WTMP = as.numeric(WTMP),
+           WVHT = as.numeric(WVHT))
+
+  #make sure the years all are in the thousands
+  if(buoydata$YY[1]<1999) buoydata$YY <- buoydata$YY + 1900
+
+  return(buoydata)
+  
+}
+```
+
+```{r}
+format_buoy <- function(buoydata){
+  buoydata <- buoydata %>%
+    dplyr::select(YY, MM, DD, WVHT, WTMP) %>%
+    rename(Year = YY,
+         Month = MM,
+         Day = DD,
+         Wave_Height = WVHT,
+         Temperature_c = WTMP) %>%
+    group_by(Year, Month, Day) %>%
+    summarise(Wave_Height = mean(Wave_Height, na.rm=T),
+            Temperature_c = mean(Temperature_c, na.rm=T)) %>%
+    ungroup()
+
+  return(buoydata)
+}
+```
+## Modularity
+
+```{r}
+make_buoy_data <- function(a_year){
+  #Read in a file based on year
+  buoy_data <- read_buoy(a_year)
+
+  #Standardize file format 
+  #for between year differences
+  buoy_data <- standardize_buoy(buoy_data )
+
+  #Take that data frame and format it
+  buoy_data <- format_buoy(buoy_data )
+
+  #Return formatted data frame
+  return(buoy_data)
+}
+
+```
+
+```{r}
+buoys <- make_buoy_data(1986)
+
+for(one_year in 1987:2013){
+  buoys <- rbind(buoys, make_buoy_data(one_year))
+}
+
+str(buoys)
+unique(buoys$Year)
+```
+
+
+```{r}
+buoys_annual <- buoys %>%
+  filter(Year>1980) %>%
+  group_by(Year) %>%
+  summarise(Temperature_c = mean(Temperature_c, na.rm=T),
+            Wave_Height = mean(Wave_Height, na.rm=T)) %>%
+  ungroup()
+
+library(ggplot2)
+ggplot(buoys_annual, aes(x=Year, y=Temperature_c)) +
+  geom_line()
+
+ggplot(buoys_annual, aes(x=Year, y=Wave_Height)) +
+  geom_line() + 
+  theme_bw(base_size=17)

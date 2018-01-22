@@ -1,0 +1,90 @@
+---
+title: Lab 4 coding notes and lab write-up questions
+---
+
+```{r}
+library(ggplot2)
+
+# Looking at stickleback data.
+stickles <- read.csv('Data/03e3SticklebackPlates.csv', stringsAsFactors = FALSE)
+
+# Plotting the frequency distribution of the number of plates on a stickleback 
+# (type of fish)
+ggplot(stickles, aes(x=no.plates)) +
+  geom_histogram()
+
+# Grouping based on the genotype - homozygous recessive, heterozygous, and 
+# homozygous dominant
+ggplot(stickles, aes(x=no.plates, fill = genotype)) +
+  geom_histogram() + 
+  facet_grid(genotype ~ .)
+
+# Learning to use a new package, dplyr to select subsets of data
+library(dplyr)
+
+# Select only the mm data
+filter(stickles, genotype == 'mm')
+
+# Operators that allow you to test logical conditions (TRUE/FALSE)
+1 == 2
+1 == 1
+1 >= 2
+1 <= 2
+1 > 2
+1 < 2
+1 != 2
+
+# Plot only the mm data
+ggplot(data = filter(stickles, genotype == 'mm'), aes(x = no.plates)) + 
+  geom_histogram()
+
+# Subset the data and exclude the heterozygote
+filter(stickles, genotype != 'Mm')
+
+# Calculate a new column
+mutate(stickles, diff = no.plates - mean(no.plates))
+
+# Let's meet the chain operator %>%. This allows us to pass data from one 
+# statement to another. 
+stickles %>%
+  filter(genotype == 'mm') %>%
+  mutate(diff = no.plates - mean(no.plates)) %>%
+  ggplot(data = ., aes(x = diff)) + 
+    geom_histogram()
+
+# Plot the difference between the mean and each value of plates per fish
+mutate(stickles, diff = no.plates - mean(no.plates)) %>% 
+  ggplot(data = ., aes(x = diff)) + 
+    geom_histogram()
+
+
+# Using group_by and summarise to get summary statistics for different groups.
+mean(stickles$no.plates)
+
+mm <- filter(stickles, genotype == 'mm')
+head(mm)
+mean(mm$no.plates)
+
+stickles %>% 
+  group_by(genotype) %>%
+  summarise(avg_plates = mean(no.plates))
+
+str(range(stickles$no.plates))
+```
+
+Lab write-up questions:  
+  
+Question 1:
+  
+  For each of the 3 groups in the stickleback data, compare the mean and median values that you expect given the plots. For each plot, do you expect the mean and median to be similar, the mean to be larger than the median, or the median to be larger than the mean? Why? Which of the mean or median is the best metric for each of the groups?
+
+Question 2:
+  
+  Calculate the squared difference (of the number of plates) for the homozygote dominant subpopulation. Plot a histogram of this squared difference value.
+
+Question 3:
+  
+  For each of the 3 genotypes in the stickleback data, calculate the mean, standard deviation, median, min, and max values.
+
+
+

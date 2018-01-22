@@ -1,0 +1,9 @@
+base
+dplyr
+tidyr
+ggplot2
+sp
+rgdal
+readxl
+maps
+mapdata

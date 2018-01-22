@@ -1,0 +1,816 @@
+Month-Year,Farm Operator,Product Name,EPA Reg. No.,Total Used (Gallons),Total Used (Pounds),A.I. (1) Name,A.I. (1) Pounds,A.I. (2) Name,A.I. (2) Pounds,A.I. (3) Name,A.I. (3) Pounds,Total area applied to ,Field area applied to
+12/01/2013 12:00:00 AM,Kaua'i Coffee Co. LLC,No RUP's used,,0,0,,,,,,,0,0
+12/01/2013 12:00:00 AM,Syngenta,Aatrex Nine-O,100-585,,166.75,Atrazine,146.74,,,,,166.75,166.75
+12/01/2013 12:00:00 AM,Syngenta,Asana XL,352-515,1.65,,Esfenvalerate,1.09,,,,,23.43,23.43
+12/01/2013 12:00:00 AM,Syngenta,Callisto EUP,100-EUP-114,0.273,,Mesotrione,1.09,,,,,3.82,3.82
+12/01/2013 12:00:00 AM,Syngenta,Dual II Magnum,100-818,1.73,,S-metolachlor,13.2,,,,,11.1,11.1
+12/01/2013 12:00:00 AM,Syngenta,Force 3G,100-1075,,199.8,Tefluthrin,5.99,,,,,39.96,39.96
+12/01/2013 12:00:00 AM,Syngenta,Lannate,352-384,4.44,,Methomyl,10.66,,,,,23.7,23.7
+12/01/2013 12:00:00 AM,Syngenta,Lorsban,62719-591,81.69,,Chlorpyrifos,306.75,,,,,326.76,326.76
+12/01/2013 12:00:00 AM,Syngenta,Lumax EZ,100-1442,104.82,,S-metolachlor,261,Mesotrione,26.1,Atrazine,98.01,139.76,139.76
+12/01/2013 12:00:00 AM,Syngenta,Mustang,279-3126,3.91,,Zeta-Cypermethrin,5.87,,,,,166.84,166.84
+12/01/2013 12:00:00 AM,Syngenta,Permethrin,34074-873,4.41,,Permethrin,14.11,,,,,94.06,94.06
+12/01/2013 12:00:00 AM,Syngenta,Voliam Xpress,100-1320,8.68,,Lambda-cyhalothrin,3.62,Chlorantraniliprole,7.25,,,123.39,123.39
+12/01/2013 12:00:00 AM,Syngenta,Warrior II,100-1295,1.95,,Lambda-cyhalothrin,4.06,,,,,131.5,131.5
+12/01/2013 12:00:00 AM,BASF Plant Science,Warrior II w/Zeon tech.,100-1295,0.72,,Lambda-cyhalothrin 22.8%,5.28,,,,,48,19
+12/01/2013 12:00:00 AM,BASF Plant Science,Baythroid XL,264-840,0.22,,"Beta-cyfluthrin Cyano(4-fluoro-3-phenoxyphenyl)methyl-3-(-2,2-dimethyl-cyclopropanecarboxylate 12.70%",0.22,,,,,10,10
+12/01/2013 12:00:00 AM,BASF Plant Science,Lorsban Advanced,62719-591,1.25,,"Chlorpyrifos:O,O-diethyl-O-(3,5,6-trichloro-2-pyridinyl)phosphorothioate 40.2%",4.69,,,,,5,5
+12/01/2013 12:00:00 AM,Dow AgroSciences,Asana XL,352-515,0.12,,Estenvalerate,0.08,,,,,1.7,1.7
+12/01/2013 12:00:00 AM,Dow AgroSciences,Atrazine 4L,66222-36,4.4,,Atrazine,17.6,,,,,8.8,8.8
+12/01/2013 12:00:00 AM,Dow AgroSciences,Cobalt Advanced,62719-615,66.15,,Chlorpyrifos,165.56,Lambda-cyhalothrin,8.53,,,241.9,229.15
+12/01/2013 12:00:00 AM,Dow AgroSciences,Coragen,352-729,12.31,,Chlorantraniliprole,20.56,,,,,313.9,298.8
+12/01/2013 12:00:00 AM,Dow AgroSciences,Dual II Magnum,100-818,1.95,,S-metolachlor,14.88,,,,,7.8,7.8
+12/01/2013 12:00:00 AM,Dow AgroSciences,Gramoxone 2.0 SL,100-1431,23.4,,Paraquat-dichloride,46.8,,,,,131.15,131.15
+12/01/2013 12:00:00 AM,Dow AgroSciences,Intrro,524-314,3.81,,Alachlor,15.25,,,,,6.1,6.1
+12/01/2013 12:00:00 AM,Dow AgroSciences,Lumax,100-1152,6.06,,Mesotrione,1.62,Atrazine,6.06,S-metachlor,16.25,9.7,9.7
+12/01/2013 12:00:00 AM,Dow AgroSciences,Permethrin,34704-873,9.07,,Permethrin,29.02,,,,,145.1,141.05
+12/01/2013 12:00:00 AM,Dow AgroSciences,Warrior II,100-1295,0.08,,Lambda-cyhalothrin,0.17,,,,,6.9,6.9
+12/01/2013 12:00:00 AM,DuPont Pioneer,Gramoxone SL,100-1217,2.89,,Paraquat dicloride,5.78,,,,,11.54,11.54
+12/01/2013 12:00:00 AM,DuPont Pioneer,Permethrin,34704-873,8.17,,Permethrin,26.144,,,,,174.33,174.33
+12/01/2013 12:00:00 AM,DuPont Pioneer,Baythroid XL,264-840,0.01,,Beta-cyfluthrin,0.01,,,,,0.35,0.35
+12/01/2013 12:00:00 AM,DuPont Pioneer,Dual II Magnum,100-818,14.16,,S-metolachlor,108.1824,,,,,87.29,87.29
+12/01/2013 12:00:00 AM,DuPont Pioneer,Force 3G,100-1075,,13.39,Tefluthrin,0.4017,,,,,3.73,3.73
+12/01/2013 12:00:00 AM,DuPont Pioneer,Intrro,524-314,4.59,,Alachlor,18.36,,,,,10.73,10.73
+12/01/2013 12:00:00 AM,DuPont Pioneer,Mustang,279-3126,0.51,,Zeta-cypermethrin,0.765,,,,,15.29,15.29
+12/01/2013 12:00:00 AM,DuPont Pioneer,Mustang Max,279-3249,6.51,,Zeta-cypermethrin,5.208,,,,,252.07,237.3
+12/01/2013 12:00:00 AM,DuPont Pioneer,Asana XL,352-515,1.67,,Esfenvalerate,1.1022,,,,,26.77,26.77
+12/01/2013 12:00:00 AM,DuPont Pioneer,Atrazine 4L,66222-36,1.9,,Atrazine,7.6,,,,,12.17,12.17
+12/01/2013 12:00:00 AM,DuPont Pioneer,Lannate LV,352-384,12.9,,Methomyl,30.96,,,,,103.23,103.23
+12/01/2013 12:00:00 AM,DuPont Pioneer,Lorsban Advanced,62719-591,9.2,,Chlorpyrifos,34.546,,,,,49.07,49.07
+12/01/2013 12:00:00 AM,DuPont Pioneer,Warrior II with Zeon Technology,100-1295,3.7,,Lambda-cyhalothrin,7.696,,,,,253.03,216.4
+01/01/2014 12:00:00 AM,BASF Plant Science,Baythroid XL,264-840,1.17,,"Beta-cyfluthrin Cyano(4-fluoro-3-phenoxyphenyl)methyl-3-(-2,2-dimethyl-cyclopropanecarboxylate 12.70%",1.7,,,,,50.5,22.5
+01/01/2014 12:00:00 AM,BASF Plant Science,Lannate LV,352-384,1.88,,Methomyl (S-methly-N-[(methylcarbamoly)oxy]thioacetimidate) 29%,4.51,,,,,10,10
+01/01/2014 12:00:00 AM,BASF Plant Science,Lorsban Advanced,62719-591,2.5,,"Chlorpyrifos:O,O-diethyl-O-(3,5,6-trichloro-2-pyridinyl)phosphorothioate 40.2%",9.38,,,,,10,10
+01/01/2014 12:00:00 AM,BASF Plant Science,Warrior II w/Zeon tech.,100-1295,0.13,,Lambda-cyhalothrin 22.8%,0.27,,,,,8.25,8
+01/01/2014 12:00:00 AM,Kaua'i Coffee Co. LLC,No RUP's used,,0,0,,0,,,,,0,0
+01/01/2014 12:00:00 AM,Dow AgroSciences,Asana XL,352-515,0.2,,Estenvalerate,0.1,,,,,2.9,2.9
+01/01/2014 12:00:00 AM,Dow AgroSciences,Atrazine 4L,66222-36,0.3,,Atrazine,1.2,,,,,0.6,0.6
+01/01/2014 12:00:00 AM,Dow AgroSciences,Baythroid XL,264-840,0.02,,Beta-cyfluthrin,0.02,,,,,0.8,0.8
+01/01/2014 12:00:00 AM,Dow AgroSciences,Cobalt Advanced,62719-615,14.3,,Chlorpyrifos,35.8,Lambda-cyhalothrin,1.9,,,58.2,58.2
+01/01/2014 12:00:00 AM,Dow AgroSciences,Coragen,352-729,4.9,,Chlorantraniliprole,8.2,,,,,146.5,142.9
+01/01/2014 12:00:00 AM,Dow AgroSciences,Dual II Magnum,100-818,2.5,,S-metolachlor,19.1,,,,,9.7,9.7
+01/01/2014 12:00:00 AM,Dow AgroSciences,Gramoxone 2.0 SL,100-1431,9.6,,Paraquat-dichloride,19.1,,,,,55.7,54.2
+01/01/2014 12:00:00 AM,Dow AgroSciences,Intrro,524-314,4.5,,Alachlor,18,,,,,7.2,7.2
+01/01/2014 12:00:00 AM,Dow AgroSciences,Lannate LV,352-384,5.9,,Methomyl,14.2,,,,,37.9,37.9
+01/01/2014 12:00:00 AM,Dow AgroSciences,Lorsban Advanced,62719-591,2.4,,Chlorpyrifos,8.9,,,,,9.5,9.5
+01/01/2014 12:00:00 AM,Dow AgroSciences,Permethrin,34704-873,3.4,,Permethrin,11,,,,,57,50.6
+01/01/2014 12:00:00 AM,Dow AgroSciences,Warrior II,100-1295,0.4,,Lambda-cyhalothrin,0.9,,,,,34.9,34.9
+01/01/2014 12:00:00 AM,DuPont Pioneer,Asana XL,352-515,5.83,,Esfenvalerate,3.8,,,,,93.33,93.33
+01/01/2014 12:00:00 AM,DuPont Pioneer,Atrazine 4L,66222-36,0.12,,Atrazine,0.5,,,,,0.56,0.56
+01/01/2014 12:00:00 AM,DuPont Pioneer,Lannate LV,352-384,10.03,,Methomyl,24.1,,,,,80.24,80.24
+01/01/2014 12:00:00 AM,DuPont Pioneer,Lorsban Advanced,62719-591,9.4,,Chlorpyrifos,35.3,,,,,49.62,41.04
+01/01/2014 12:00:00 AM,DuPont Pioneer,Mustang Max,279-3249,3.36,,Zeta-cypermethrin,2.7,,,,,125.3,121.58
+01/01/2014 12:00:00 AM,DuPont Pioneer,Warrior II with Zeon Technology,100-1295,2.7,,Lambda-cyhalothrin,5.6,,,,,182.05,147.33
+01/01/2014 12:00:00 AM,DuPont Pioneer,Coragen,352-729,0.47,,Chlorantraniliprole,0.8,,,,,12.05,12.05
+01/01/2014 12:00:00 AM,DuPont Pioneer,Dual II Magnum,100-818,0.56,,S-metolachlor,4.3,,,,,2.24,2.24
+01/01/2014 12:00:00 AM,DuPont Pioneer,Force 3G,100-1075,,4.71,Tefluthrin,0.14,,,,,1.43,1.43
+01/01/2014 12:00:00 AM,DuPont Pioneer,Gramoxone SL,100-1217,7.3,,Paraquat dichloride,14.6,,,,,29.21,29.21
+01/01/2014 12:00:00 AM,DuPont Pioneer,Intrro,524-314,0.91,,Alachlor,3.6,,,,,1.46,1.46
+01/01/2014 12:00:00 AM,DuPont Pioneer,Permethrin,34704-873,2.18,,Permethrin,7,,,,,46.44,46.44
+01/01/2014 12:00:00 AM,Syngenta,Aatrex Nine-O,100-585,,101.72,Atrazine,89.51,,,,,101.72,101.72
+01/01/2014 12:00:00 AM,Syngenta,Asana XL,352-515,2.08,,Esfenvalerate,1.37,,,,,29.51,29.51
+01/01/2014 12:00:00 AM,Syngenta,Callisto EUP,100-EUP-114,1.11,,Mesotrione,4.44,,,,,16.3,12.3
+01/01/2014 12:00:00 AM,Syngenta,Dual II Magnum,100-818,2.94,,S-metolachlor,22.46,,,,,18.8,18.8
+01/01/2014 12:00:00 AM,Syngenta,Lannate,352-384,25.97,,Methomyl,62.33,,,,,138.51,138.51
+01/01/2014 12:00:00 AM,Syngenta,Lorsban,62719-591,58.28,,Chlorpyrifos,218.84,,,,,233.1,228.8
+01/01/2014 12:00:00 AM,Syngenta,Lumax EZ,100-1442,26.1,,S-metolachlor,64.99,Mesotrione,6.5,Atrazine,24.4,34.8,34.8
+01/01/2014 12:00:00 AM,Syngenta,Mustang,279-3126,1.98,,Zeta-Cypermethrin,2.97,,,,,84.55,82.55
+01/01/2014 12:00:00 AM,Syngenta,Permethrin,34074-873,0.88,,Permethrin,2.82,,,,,18.8,18.8
+01/01/2014 12:00:00 AM,Syngenta,Voliam Xpress,100-1320,4.25,,Lambda-cyhalothrin,1.77,Chlorantraniliprole,3.55,,,60.42,60.42
+01/01/2014 12:00:00 AM,Syngenta,Warrior II,100-1295,2.59,,Lambda-cyhalothrin,5.39,,,,,174.61,174.61
+02/01/2014 12:00:00 AM,BASF Plant Science,Mustang,279-3126,1.6,,"S-Cyano (3-phenoxyphenyl)methyl(+-)cis/trans 3-(2,2-dichloroethenyl)-2,2 dimethylcyclopropane carboxylate 17.1%",2.4,,,,,51.25,20.25
+02/01/2014 12:00:00 AM,BASF Plant Science,Warrior II w/Zeon tech.,100-1295,0.01,,Lambda-cyhalothrin 22.8%,0.02,,,,,0.5,0.5
+02/01/2014 12:00:00 AM,Dow AgroSciences,Asana XL,352-515,2.1,,Estenvalerate,1.4,,,,,30.1,30.1
+02/01/2014 12:00:00 AM,Dow AgroSciences,Atrazine 4L,66222-36,12.5,,Atrazine,50,,,,,25,25
+02/01/2014 12:00:00 AM,Dow AgroSciences,Baythroid XL,264-840,0.2,,Beta-cyfluthrin,0.2,,,,,10.4,10.4
+02/01/2014 12:00:00 AM,Dow AgroSciences,Cobalt Advanced,62719-615,5.4,,Chlorpyrifos,13.6,Lambda-cyhalothrin,0.7,,,19.9,19.9
+02/01/2014 12:00:00 AM,Dow AgroSciences,Coragen,352-729,1.1,,Chlorantraniliprole,1.8,,,,,24.1,22.9
+02/01/2014 12:00:00 AM,Dow AgroSciences,Dual II Magnum,100-818,5.2,,S-metochlor,39.9,,,,,20.9,20.9
+02/01/2014 12:00:00 AM,Dow AgroSciences,Gramaxone 2.0 SL,100-1431,11.6,,Paraquat dichloride,23.1,,,,,66.2,66.2
+02/01/2014 12:00:00 AM,Dow AgroSciences,Intrro,524-314,11.1,,Alachlor,44.3,,,,,17.7,17.7
+02/01/2014 12:00:00 AM,Dow AgroSciences,Lannate LV,352-384,0.1,,Methomyl,0.2,,,,,0.6,0.6
+02/01/2014 12:00:00 AM,Dow AgroSciences,Lorsban Advanced,62719-591,3,,Chlorpyrifos,11.4,,,,,12.1,12.1
+02/01/2014 12:00:00 AM,Dow AgroSciences,Permethrin,34704-873,0.4,,Permethrin,1.2,,,,,6.2,6.2
+02/01/2014 12:00:00 AM,Dow AgroSciences,Warrior II,100-1295,0.03,,Lambda-cyhalothrin,0.06,,,,,2.5,2.5
+02/01/2014 12:00:00 AM,Syngenta,Aatrex Nine-O,100-585,,12.9,Atrazine,11.38,,,,,12.9,12.9
+02/01/2014 12:00:00 AM,Syngenta,Asana XL,352-515,5.15,,Esfenvalerate,3.4,,,,,73.25,54.15
+02/01/2014 12:00:00 AM,Syngenta,Baythroid XL,264-840,0.97,,Beta-Cyfluthrin,0.97,,,,,49.7,49.7
+02/01/2014 12:00:00 AM,Syngenta,Callisto EUP,100-EUP-114,0.28,,Mesotrione,1.12,,,,,6,6
+02/01/2014 12:00:00 AM,Syngenta,Force 3G,100-1075,,4.35,Tefluthrin,0.131,,,,,0.87,0.87
+02/01/2014 12:00:00 AM,Syngenta,Lannate,352-384,19.22,,Methomyl,46.13,,,,,102.51,102.51
+02/01/2014 12:00:00 AM,Syngenta,Lorsban,62719-591,11.63,,Chlorpyrifos,43.67,,,,,46.5,46.5
+02/01/2014 12:00:00 AM,Syngenta,Mustang,279-3126,0.9,,Zeta-Cypermethrin,1.35,,,,,38.32,38.32
+02/01/2014 12:00:00 AM,Syngenta,Permethrin,34074-873,1.01,,Permethrin,3.23,,,,,21.65,21.65
+02/01/2014 12:00:00 AM,Syngenta,Voliam Xpress,100-1320,0.54,,Lambda-cyhalothrin,0.23,Chlorantraniliprole,0.45,,,7.7,7.7
+02/01/2014 12:00:00 AM,Syngenta,Warrior II,100-1295,1.36,,Lambda-cyhalothrin,2.83,,,,,102.51,102.51
+02/01/2014 12:00:00 AM,Kaua'i Coffee Co. LLC,Gramoxone SL 2.0,100-1431,65.4,,Paraquat dichloride,130.8,,,,,161.2,161.2
+02/01/2014 12:00:00 AM,DuPont Pioneer,Lorsban Advanced,62719-591,19.117,,Chlorpyrifos,71.78,,,,,101.29,101.29
+02/01/2014 12:00:00 AM,DuPont Pioneer,Mustang Max,279-3249,1.969,,Zeta-cypermethrin,1.575,,,,,83.43,83.07
+02/01/2014 12:00:00 AM,DuPont Pioneer,Permethrin,34704-873,5.933,,Permethrin,18.99,,,,,126.57,81.71
+02/01/2014 12:00:00 AM,DuPont Pioneer,Warrior II with Zeon Technology,100-1295,1.557,,Lambda-cyhalothrin,3.239,,,,,104.89,81.71
+02/01/2014 12:00:00 AM,DuPont Pioneer,Asana XL,352-515,0.102,,Esfenvalerate,0.0673,,,,,1.48,1.48
+02/01/2014 12:00:00 AM,DuPont Pioneer,Dual II Magnum,100-818,0.8,,S-metolachlor,6.112,,,,,3.2,3.2
+02/01/2014 12:00:00 AM,DuPont Pioneer,Force 3G,100-1075,,14.6,Tefluthrin,0.438,,,,,4.06,4.06
+02/01/2014 12:00:00 AM,DuPont Pioneer,Gramoxone SL 2.0,100-1431,13.12,,Paraquat dichloride,26.24,,,,,52.47,52.47
+02/01/2014 12:00:00 AM,DuPont Pioneer,Intrro,524-314,4.392,,Alachlor,17.57,,,,,7.28,7.28
+03/01/2014 12:00:00 AM,BASF Plant Science,Bicep II Magnum,100-817,1,,"Atrazine (CAS No. 1912-24-9) 33.0%, Atrazine related compounds 0.7%, S-metolachlor (CAS No. 87392-12-9) 26.1%",3.1,,,,,3,3
+03/01/2014 12:00:00 AM,BASF Plant Science,Gramoxone Inteon,100-1217,3.75,,"Paraquat dichloride(1,1-dimethyl-4,4-bipyridinium dichloride) 30.1%",7.5,,,,,20,20
+03/01/2014 12:00:00 AM,BASF Plant Science,Warrior II w/Zeon tech.,100-1295,0.00375,,Lambda-cyhalothrin 22.8%,0.0078,,,,,0.25,0.25
+03/01/2014 12:00:00 AM,Dow AgroSciences,Asana XL,352-515,1,,Estenvalerate,0.6,,,,,12.8,12.8
+03/01/2014 12:00:00 AM,Dow AgroSciences,Baythroid XL,264-840,0.3,,Beta-cyfluthrin,0.3,,,,,13.8,8.4
+03/01/2014 12:00:00 AM,Dow AgroSciences,Cobalt Advanced,62719-615,1.1,,Chlorpyrifos,2.7,Lambda-cyhalothrin,0.1,,,4,4
+03/01/2014 12:00:00 AM,Dow AgroSciences,Coragen,352-729,0.2,,Chlorantraniliprole,0.3,,,,,4.3,3.2
+03/01/2014 12:00:00 AM,Dow AgroSciences,Dual II Magnum,100-818,2.7,,S-metolachlor,20.6,,,,,10.8,8.3
+03/01/2014 12:00:00 AM,Dow AgroSciences,Gramoxone 2.0 SL,100-1431,4.2,,Paraquat dichloride,8.5,,,,,24.6,24.6
+03/01/2014 12:00:00 AM,Dow AgroSciences,Intrro,524-314,1.8,,Alachlor,7.3,,,,,2.9,2.9
+03/01/2014 12:00:00 AM,Dow AgroSciences,Lorsban Advanced,62719-591,1.3,,Chlorpyrifos,4.8,,,,,5.1,5.1
+03/01/2014 12:00:00 AM,Dow AgroSciences,Permethrin,34704-873,0.6,,Permethrin,1.8,,,,,8.9,8.9
+03/01/2014 12:00:00 AM,Kaua'i Coffee Co. LLC,Gramoxone SL 2.0,100-1431,75.5,,Paraquat dichloride,151,,,,,177.82,177.82
+03/01/2014 12:00:00 AM,Syngenta,Aatrex Nine-O,100-585,,16,Atrazine,14.11,,,,,16,16
+03/01/2014 12:00:00 AM,Syngenta,Asana XL,352-515,4.28,,Esfenvalerate,2.83,,,,,60.83,39.7
+03/01/2014 12:00:00 AM,Syngenta,Callisto EUP,100-EUP-114,0.14,,Mesotrione,0.56,,,,,1.5,1.5
+03/01/2014 12:00:00 AM,Syngenta,Dual II Magnum,100-818,0.16,,S-metolachlor,1.2,,,,,1,1
+03/01/2014 12:00:00 AM,Syngenta,Force 3G,100-1075,,37.7,Tefluthrin,1.13,,,,,7.54,7.54
+03/01/2014 12:00:00 AM,Syngenta,Lannate,352-384,2.59,,Methomyl,6.23,,,,,13.8,13.8
+03/01/2014 12:00:00 AM,Syngenta,Lorsban,62719-591,5.09,,Chlorpyrifos,19.11,,,,,20.35,20.35
+03/01/2014 12:00:00 AM,Syngenta,Lorsban 15G,62719-34,,0.013,Chlorpyrifos,0.002,,,,,0.0026,0.0026
+03/01/2014 12:00:00 AM,Syngenta,Lumax EZ,100-1442,23.36,,S-metolachlor,58.17,Atrazine,21.84,Mesotrione,5.82,31.15,31.15
+03/01/2014 12:00:00 AM,Syngenta,Mustang,279-3126,0.25,,Zeta-Cypermethrin,0.38,,,,,10.58,10.58
+03/01/2014 12:00:00 AM,Syngenta,Permethrin,34074-873,0.16,,Permethrin,0.51,,,,,3.45,3.44
+03/01/2014 12:00:00 AM,Syngenta,Voliam Xpress,100-1320,1.24,,Lambda-cyhalothrin,0.52,Chlorantraniliprole,1.04,,,17.56,17.56
+03/01/2014 12:00:00 AM,Syngenta,Warrior II,100-1295,0.6,,Lambda-cyhalothrin,1.25,,,,,44.95,44.95
+03/01/2014 12:00:00 AM,DuPont Pioneer,Dual II Magnum,100-818,8.54,,S-metolachlor,65.227,,,,,43.75,43.75
+03/01/2014 12:00:00 AM,DuPont Pioneer,Force 3G,100-1075-5481,,57.2,Tefluthrin,1.716,,,,,15.01,15.01
+03/01/2014 12:00:00 AM,DuPont Pioneer,Intrro,524-314,10.005,,Alachlor,40.02,,,,,16.01,16.01
+03/01/2014 12:00:00 AM,DuPont Pioneer,Lorsban Advanced,62719-591,0.312,,Chlorpyrifos,1.1726,,,,,2.5,2.5
+03/01/2014 12:00:00 AM,DuPont Pioneer,Mustang Max,279-3249,0.63,,Zeta-cypermethrin,0.502,,,,,20.07,10.38
+03/01/2014 12:00:00 AM,DuPont Pioneer,Mustang Maxx,279-3426,0.5,,Zeta-cypermethrin,0.403,,,,,16.11,16.11
+03/01/2014 12:00:00 AM,DuPont Pioneer,Permethrin,34704-873,1.7,,Permethrin,5.427,,,,,35.68,31.89
+03/01/2014 12:00:00 AM,DuPont Pioneer,Gramoxone SL,100-1217,1,,Paraquat dichloride,2,,,,,4,4
+03/01/2014 12:00:00 AM,DuPont Pioneer,Warrior II with Zeon Technology,100-1295,0.008,,Lambda-cyhalothrin,0.0172,,,,,0.56,0.56
+04/01/2014 12:00:00 AM,BASF Plant Science,Atrazine 4L,34704-69,0.63,,Atrazine (2-chloro-4-ethylamino-6-isopropylamino-s-triazine)42.2%,2.5,,,,,2.5,2.5
+04/01/2014 12:00:00 AM,BASF Plant Science,Lannate LV Dupont,352-384,0.47,,Methomyl (S=methyl-N-[(methylcarbamoyl)0xy]thioacetimidate) 29%,1.13,,,,,2.5,2.5
+04/01/2014 12:00:00 AM,BASF Plant Science,Warrior II w/Zeon tech.,100-1295,0.13,,Lambda-cyhalothrin 22.8%,0.27,,,,,8.6,4.6
+04/01/2014 12:00:00 AM,BASF Plant Science,Lorsban Advanced,62719-591,1.68,,chlorpyrifos:0-0 diethyl-0-(3.5.6-trichloro-2-pyridinyl)phosphorothioate 40.18%,6.29,,,,,6.7,4.2
+04/01/2014 12:00:00 AM,Kaua'i Coffee Co. LLC,Gramoxone SL 2.0,100-1431,21.5,,Paraquat dichloride,43,,,,,63,63
+04/01/2014 12:00:00 AM,Syngenta,Aatrex Nine-O,100-585,,166.28,Atrazine,146.33,,,,,166.28,166.28
+04/01/2014 12:00:00 AM,Syngenta,Asana XL,352-515,1.12,,Esfenvalerate,0.74,,,,,15.92,15.42
+04/01/2014 12:00:00 AM,Syngenta,Gramoxone SL 2.0,100-1431,2,,Paraquat dicloride,4,,,,,8,8
+04/01/2014 12:00:00 AM,Syngenta,Lannate,352-384,5.93,,Methomyl,14.23,,,,,31.64,31.64
+04/01/2014 12:00:00 AM,Syngenta,Lorsban,62719-591,16.85,,Chlorpyrifos,63.27,,,,,67.4,51.34
+04/01/2014 12:00:00 AM,Syngenta,Lumax EZ ,100-1442,103.34,,S-metolachlor,257.32,Atrazine,96.62,Mesotrione,25.73,137.78,137.78
+04/01/2014 12:00:00 AM,Syngenta,Mustang,279-3126,3.76,,S-Cyano Methyl,5.64,,,,,160.44,145.04
+04/01/2014 12:00:00 AM,Syngenta,Voliam Xpress,100-1320,2.01,,Chlorantraniliprole,1.68,Lambda-cyhalothrin,0.84,,,28.6,28.6
+04/01/2014 12:00:00 AM,Syngenta,Warrior II,100-1295,2.37,,Lambda-cyhalothrin,4.93,,,,,178.42,166.72
+04/01/2014 12:00:00 AM,Dow AgroSciences,Asana XL,352-515,0.4,,Estenvalerate,0.3,,,,,5.8,5.8
+04/01/2014 12:00:00 AM,Dow AgroSciences,Atrazine 4L,66222-36,6,,Atrazine,24,,,,,12,12
+04/01/2014 12:00:00 AM,Dow AgroSciences,Baythroid XL,264-840,0.3,,Beta-cyfluthrin,0.3,,,,,15.5,15.5
+04/01/2014 12:00:00 AM,Dow AgroSciences,Cobalt Advanced,62719-615,1.7,,Chlorpyrifos,4.2,Lambda-cyhalothrin,0.2,,,6.1,6.1
+04/01/2014 12:00:00 AM,Dow AgroSciences,Coragen,352-729,0.6,,Chlorantraniliprole,0.9,,,,,14.3,10
+04/01/2014 12:00:00 AM,Dow AgroSciences,Dual II Magnum,100-818,1.9,,S-metochlor,14.3,,,,,7.5,7.5
+04/01/2014 12:00:00 AM,Dow AgroSciences,Gramoxone 2.0 SL,100-1431,12.4,,Paraquat dichloride,24.9,,,,,59.5,59.5
+04/01/2014 12:00:00 AM,Dow AgroSciences,Intrro,524-314,8.9,,Alachlor,35.5,,,,,14.2,14.2
+04/01/2014 12:00:00 AM,Dow AgroSciences,Lorsban Advanced,62719-591,1.3,,Chlorpyrifos,4.7,,,,,5,5
+04/01/2014 12:00:00 AM,Dow AgroSciences,Permethrin,34704-873,0.6,,Permethrin,1.9,,,,,9.4,9.4
+04/01/2014 12:00:00 AM,DuPont Pioneer,Atrazine 4L,66222-36,0.133,,Atrazine,0.53,,,,,0.53,0.53
+04/01/2014 12:00:00 AM,DuPont Pioneer,Baythroid XL,264-840,0.464,,Beta-cyfluthrin,0.464,,,,,23.77,23.77
+04/01/2014 12:00:00 AM,DuPont Pioneer,Dual II Magnum,100-818,10.84,,S-metolachlor,82.79,,,,,67.82,67.82
+04/01/2014 12:00:00 AM,DuPont Pioneer,Gramoxone SL 2.0,100-1431,4.125,,Paraquat dichloride,8.25,,,,,22,22
+04/01/2014 12:00:00 AM,DuPont Pioneer,Mustang Max,279-3249,0.0118,,Zeta-cypermethrin,0.00944,,,,,0.5,0.5
+04/01/2014 12:00:00 AM,DuPont Pioneer,Permethrin,34704-873,2.96,,Permethrin,9.461,,,,,63.07,63.07
+04/01/2014 12:00:00 AM,DuPont Pioneer,Coragen,352-729,0.229,,Chlorantraniliprole,0.383,,,,,5.86,5.86
+04/01/2014 12:00:00 AM,DuPont Pioneer,Force 3G,100-1075-5481,,33.82,Tefluthrin,1.015,,,,,8.87,8.87
+04/01/2014 12:00:00 AM,DuPont Pioneer,Intrro,524-314,3.178,,Alachlor,12.711,,,,,5.08,5.08
+04/01/2014 12:00:00 AM,DuPont Pioneer,Lorsban Advanced,62719-591,0.0944,,Chlorpyrifos,0.3544,,,,,0.5,0.5
+04/01/2014 12:00:00 AM,DuPont Pioneer,Mustang Maxx,279-3426,0.2185,,Zeta-cypermethrin,0.175,,,,,6.99,6.13
+05/01/2014 12:00:00 AM,BASF Plant Science,Atrazine 4L,34704-69,0.88,,Atrazine (2-chloro-4-ethylamino-6-isopropylamino-s-triazine)42.2%,3.52,,,,,3.5,3.5
+05/01/2014 12:00:00 AM,BASF Plant Science,Baythroid XL,264-840,0.088,,"Beta-cyfluthrin Cyano(4-fluoro-3-phenoxyphenyl)methyl-3-(2,2-dichloro-ethenyl)-2,2-dimethyl-cyclopropanecarboxylate 12.70%",0.088,,,,,4,4
+05/01/2014 12:00:00 AM,BASF Plant Science,Warrior II w/Zeon tech.,100-1295,0.06,,Lambda-cyhalothrin 22.8%,0.125,,,,,4,4
+05/01/2014 12:00:00 AM,Kaua'i Coffee Co. LLC,Gramoxone SL 2.0,100-1431,6,,Paraquat dichloride,12,,,,,19.76,19.76
+05/01/2014 12:00:00 AM,Dow AgroSciences,Asana XL,352-515,0.3,,Estenvalerate,0.2,,,,,3.7,3.7
+05/01/2014 12:00:00 AM,Dow AgroSciences,Atrazine 4L,66222-36,1.5,,Atrazine,5.8,,,,,2.9,2.9
+05/01/2014 12:00:00 AM,Dow AgroSciences,Baythroid XL,264-840,0.3,,Beta-cyfluthrin,0.3,,,,,13.1,13.1
+05/01/2014 12:00:00 AM,Dow AgroSciences,Bicep II Magnum,100-817,4.8,,Atrazine,14.7,S-metolachlor,11.4,,,11.7,11.7
+05/01/2014 12:00:00 AM,Dow AgroSciences,Cobalt Advanced,62719-615,4.5,,Chlorpyrifos,11.2,Lambda-cyhalothrin,0.6,,,16.3,16.3
+05/01/2014 12:00:00 AM,Dow AgroSciences,Coragen,352-729,0.6,,Chlorantraniliprole,1,,,,,15.1,13.4
+05/01/2014 12:00:00 AM,Dow AgroSciences,Dual II Magnum,100-818,2.9,,S-metolachlor,22.4,,,,,11.7,11.7
+05/01/2014 12:00:00 AM,Dow AgroSciences,Force 3G,100-1075,,2.5,Tefluthrin,0.1,,,,,10,10
+05/01/2014 12:00:00 AM,Dow AgroSciences,Gramoxone 2.0 SL,100-1431,1.1,,Paraquat dichloride,2.2,,,,,5.5,5.5
+05/01/2014 12:00:00 AM,Dow AgroSciences,Intrro,524-314,6.3,,Alachlor,25,,,,,10.1,10.1
+05/01/2014 12:00:00 AM,Dow AgroSciences,Permethrin,34704-873,0.1,,Permethrin,0.4,,,,,1.9,1.9
+05/01/2014 12:00:00 AM,DuPont Pioneer,Baythroid XL,264-840,1.53,,Beta-cyfluthrin,1.53,,,,,77.72,77.72
+05/01/2014 12:00:00 AM,DuPont Pioneer,Mustang Max,279-3249,1.33,,Zeta-cypermethrin,1.064,,,,,56.58,56.58
+05/01/2014 12:00:00 AM,DuPont Pioneer,Permethrin,34704-873,3.37,,Permethrin,10.784,,,,,71.15,71.15
+05/01/2014 12:00:00 AM,DuPont Pioneer,Dual II Magnum,100-818,7.625,,S-metolachlor,58.255,,,,,46.9,46.9
+05/01/2014 12:00:00 AM,DuPont Pioneer,Warrior II with Zeon Technology,100-1295,0.38,,Lambda-cyhalothrin,0.79,,,,,24.71,24.71
+05/01/2014 12:00:00 AM,DuPont Pioneer,Force 3G,100-1075-5481,,11.13,Tefluthrin,0.3339,,,,,2.92,2.92
+05/01/2014 12:00:00 AM,DuPont Pioneer,Intrro,524-314,1.83,,Alachlor,7.32,,,,,2.92,2.92
+05/01/2014 12:00:00 AM,DuPont Pioneer,Mustang Maxx,279-3426,0.52,,Zeta-cypermethrin,0.416,,,,,16.51,14.62
+05/01/2014 12:00:00 AM,Syngenta,Aatrex Nine-O,100-585,,122.33,Atrazine,107.65,,,,,122.33,122.33
+05/01/2014 12:00:00 AM,Syngenta,Asana XL,352-515,1.32,,Esfenvalerate,0.8712,,,,,18.84,17.84
+05/01/2014 12:00:00 AM,Syngenta,Besiege,100-1402,0.41,,Lambda-cyhalothrin,0.17,Chlorantraniliprole,0.34,,,5.3,5.3
+05/01/2014 12:00:00 AM,Syngenta,Dual II Magnum,100-818,1.31,,S-Metolachlor,10,,,,,10.5,10.5
+05/01/2014 12:00:00 AM,Syngenta,Force 3G,100-1075,,128.55,Tefluthrin,3.86,,,,,25.71,25.71
+05/01/2014 12:00:00 AM,Syngenta,Lannate LV,352-384,4.61,,Methomyl,11.052,,,,,24.56,24.56
+05/01/2014 12:00:00 AM,Syngenta,Lorsban Advanced,62719-591,18.69,,Chlorpyrifos,70.18,,,,,74.75,74.75
+05/01/2014 12:00:00 AM,Syngenta,Lumax EZ,100-1442,42.17,,S-Metolachlor,105,Atrazine,39.43,Mesotrione,10.5,56.229,56.229
+05/01/2014 12:00:00 AM,Syngenta,Mustang,279-3126,1.55,,S-Cyano Methyl,2.33,,,,,65.93,64.93
+05/01/2014 12:00:00 AM,Syngenta,Permethrin,34704-873,0.02,,Permethrin,0.06,,,,,0.4,0.2
+05/01/2014 12:00:00 AM,Syngenta,Voliam Xpress,100-1320,5.15,,Lambda-cyhalothrin,2.15,Chlorantraniliprole,4.3,,,73.3,73.3
+05/01/2014 12:00:00 AM,Syngenta,Warrior II,100-1295,1.17,,Lambda-cyhalothrin,2.43,,,,,87.789,87.789
+06/01/2014 12:00:00 AM,Syngenta,Aatrex Nine-O,100-585,,25.72,Atrazine,22.63,,,,,25.72,25.72
+06/01/2014 12:00:00 AM,Syngenta,Asana XL,352-515,1.98,,Esfenvalerate,1.31,,,,,28.09,28.09
+06/01/2014 12:00:00 AM,Syngenta,Besiege,100-1402,2.61,,Lambda-cyhalothrin,1.09,Chlorantraniliprole,2.18,,,33.42,33.42
+06/01/2014 12:00:00 AM,Syngenta,Lannate LV,352-384,13.31,,Methomyl,31.94,,,,,71,71
+06/01/2014 12:00:00 AM,Syngenta,Lorsban Advanced,62719-591,11.36,,Chlorpyrifos,42.66,,,,,45.44,45.44
+06/01/2014 12:00:00 AM,Syngenta,Lumax EZ,100-1442,22.36,,S-Metolachlor,55.68,Atrazine,20.91,Mesotrione,5.57,29.81,29.81
+06/01/2014 12:00:00 AM,Syngenta,Mustang,279-3126,1.85,,S-Cyano Methyl,2.78,,,,,79.1,54.27
+06/01/2014 12:00:00 AM,Syngenta,Warrior II,100-1295,1.5,,Lambda-cyhalothrin,3.12,,,,,112.89,112.89
+06/01/2014 12:00:00 AM,Kaua'i Coffee Co. LLC,Gramoxone SL 2.0,100-1431,46,,Paraquat dichloride,92,,,,,125.1,125.1
+06/01/2014 12:00:00 AM,BASF Plant Science,Baythroid XL,264-840,0.088,,"Beta-cyfluthrin Cyano(4-fluoro-3-phenoxyphenyl)methyl-3-(2,2-dichloro-ethenyl)-2,2-dimethyl-cyclopropanecarboxylate 12.70%",0.088,,,,,4,4
+06/01/2014 12:00:00 AM,BASF Plant Science,Lorsban Advanced,62719-591,1.12,,chlorpyrifos:0-0 diethyl-0-(3.5.6-trichloro-2-pyridinyl)phosphorothioate 40.18%,0.469,,,,,4.5,2.5
+06/01/2014 12:00:00 AM,BASF Plant Science,Mustang,279-3126,0.039,,"S-Cyano (3-phenoxyphenyl)methyl(+-)cis/trans 3-(2,2-dichloroethenyl)-2,2 dimethylcyclopropane carboxylate 17.1%",0.059,,,,,1.25,1.25
+06/01/2014 12:00:00 AM,Dow AgroSciences,Asana XL,352-515,0.5,,Estenvalerate,0.3,,,,,6.9,6.9
+06/01/2014 12:00:00 AM,Dow AgroSciences,Baythroid XL,264-840,0.04,,Beta-cyfluthrin,0.04,,,,,1.9,1.9
+06/01/2014 12:00:00 AM,Dow AgroSciences,Bicep II Magnum,100-817,51.2,,Atrazine,158.7,S-metolachlor,122.9,,,102.4,102.4
+06/01/2014 12:00:00 AM,Dow AgroSciences,Cobalt Advenced,62719-615,3.6,,Chlorpyrifos,9.1,Lambda-cyhalothrin,0.5,,,13.3,13.3
+06/01/2014 12:00:00 AM,Dow AgroSciences,Coragen,352-729,1,,Chlorantraniliprole,1.7,,,,,25.5,17.2
+06/01/2014 12:00:00 AM,Dow AgroSciences,Dual II Magnum,100-818,36.9,,S-metolachlor,281.9,,,,,147.6,147.6
+06/01/2014 12:00:00 AM,Dow AgroSciences,Force 3G,100-1075,,3.6,Tefluthrin,0.1,,,,,1.2,1.2
+06/01/2014 12:00:00 AM,Dow AgroSciences,Gramoxone 2.0 SL,100-1431,2.2,,Paraquat dichloride,4.5,,,,,8.9,8.9
+06/01/2014 12:00:00 AM,Dow AgroSciences,Intrro,524-314,25.2,,Alachlor,100.8,,,,,40.4,40.4
+06/01/2014 12:00:00 AM,Dow AgroSciences,Lorsban Advanced,62719-591,2.9,,Chlorpyrifos,10.7,,,,,11.4,11.4
+06/01/2014 12:00:00 AM,DuPont Pioneer,Baythroid XL,264-840,0.485,,Beta-cyfluthrin,0.485,,,,,24.81,24.81
+06/01/2014 12:00:00 AM,DuPont Pioneer,Dual II Magnum,100-818,8.57,,S-metolachlor,65.475,,,,,51.84,51.84
+06/01/2014 12:00:00 AM,DuPont Pioneer,Gramoxone SL,100-1217,0.7775,,Paraquat dichloride,1.555,,,,,3.11,3.11
+06/01/2014 12:00:00 AM,DuPont Pioneer,Lorsban Advanced,62719-591,8.156,,Chlorpyrifos,30.63,,,,,43.5,43.5
+06/01/2014 12:00:00 AM,DuPont Pioneer,Mustang Max,279-3249,1.868,,Zeta-cypermethrin,1.49,,,,,79.69,57.39
+06/01/2014 12:00:00 AM,DuPont Pioneer,Permethrin,34704-873,2.896,,Permethrin,9.267,,,,,61.79,61.79
+06/01/2014 12:00:00 AM,DuPont Pioneer,Warrior II with Zeon Technology,100-1295,2.068,,Lambda-cyhalothrin,4.3,,,,,139.3,98.99
+06/01/2014 12:00:00 AM,DuPont Pioneer,Force 3G,100-1075-5481,,17.06,Tefluthrin,0.5118,,,,,4.48,4.48
+06/01/2014 12:00:00 AM,DuPont Pioneer,Mustang Maxx,279-3426,0.0447,,Zeta-cypermethrin,0.0358,,,,,1.43,1.43
+06/01/2014 12:00:00 AM,DuPont Pioneer,Intrro,524-314,2.8,,Alachlor,11.2,,,,,4.48,4.48
+07/01/2014 12:00:00 AM,BASF Plant Science,Baythroid XL,264-840,0.109,,"Beta-cyfluthrin Cyano(4-fluoro-3-phenoxyphenyl)methyl-3-(2,2-dichloro-ethenyl)-2,2-dimethyl-cyclopropanecarboxylate 12.70%",0.109,,,,,5,2.5
+07/01/2014 12:00:00 AM,BASF Plant Science,Lannate LV,352-384,0.469,,Methomyl (S-methyl-N-[(methylcarbomoyl)oxy] thioacetimidate) 29%,1.126,,,,,2.5,2.5
+07/01/2014 12:00:00 AM,BASF Plant Science,Sniper,34704-858,0.002,,"Bifrenthrin: (2 methyl[1,1'-biphenyl]-3-yl) methyl 3-(2-chloro-3.3.3-trifluoro-1-propenyl)-2,2-dimethly-cyclopropanecarboxylate 25.0%",0.004,,,,,0.1,0.1
+07/01/2014 12:00:00 AM,BASF Plant Science,Warrior II w/zeon ,100-1295,0.062,,"Lambda-cyhalothrin 1,2 22.8%",0.129,,,,,4.45,4.35
+07/01/2014 12:00:00 AM,Kaua'i Coffee Co. LLC,Gramoxone SL 2.0,100-1431,34.5,,Paraquat dichloride,69,,,,,94.2,94.2
+07/01/2014 12:00:00 AM,Dow AgroSciences,Asana XL,352-515,0.8,,Estenvalerate,0.6,,,,,11.8,11.8
+07/01/2014 12:00:00 AM,Dow AgroSciences,Atrazine 4L,66222-36,8,,Atrazine,31.9,,,,,34.3,34.3
+07/01/2014 12:00:00 AM,Dow AgroSciences,Baythroid XL,264-840,0.6,,Beta-cyfluthrin,0.6,,,,,27,27
+07/01/2014 12:00:00 AM,Dow AgroSciences,Cobalt Advanced,62719-615,2.6,,Chlorpyrifos,6.4,Lambda-cyhalothrin,0.3,,,9.4,9.4
+07/01/2014 12:00:00 AM,Dow AgroSciences,Coragen,352-729,0.5,,Chlorantraniliprole,0.8,,,,,11.7,11.7
+07/01/2014 12:00:00 AM,Dow AgroSciences,Dual II Magnum,100-818,1.3,,S-metolachlor,9.6,,,,,2.5,2.5
+07/01/2014 12:00:00 AM,Dow AgroSciences,Gramoxone 2.0 SL,100-1431,11.8,,Paraquat dichloride,23.7,,,,,47.4,47.4
+07/01/2014 12:00:00 AM,Dow AgroSciences,Warrior II,100-1295,0.7,,Lambda-cyhalothrin,1.4,,,,,43.4,43.4
+07/01/2014 12:00:00 AM,DuPont Pioneer,Atrazine 4L,66222-36,0.195,,Atrazine,0.78,,,,,0.78,0.78
+07/01/2014 12:00:00 AM,DuPont Pioneer,Baythroid XL,264-840,1.57,,Beta-cyfluthrin,1.57,,,,,80.35,80.35
+07/01/2014 12:00:00 AM,DuPont Pioneer,Dual II Magnum,100-818,3.52,,S-metolachlor,26.9,,,,,15.34,15.34
+07/01/2014 12:00:00 AM,DuPont Pioneer,Lorsban Advanced,62719-591,5.175,,Chlorpyrifos,19.432,,,,,27.6,27.6
+07/01/2014 12:00:00 AM,DuPont Pioneer,Mustang Max,279-3249,0.3867,,Zeta-cypermethrin,0.31,,,,,16.5,16.5
+07/01/2014 12:00:00 AM,DuPont Pioneer,Mustang Maxx,279-3426,1.375,,Zeta-cypermethrin,1.1,,,,,53.6,49.25
+07/01/2014 12:00:00 AM,DuPont Pioneer,Permethrin,34704-873,0.272,,Permethrin,0.87,,,,,5.8,5.8
+07/01/2014 12:00:00 AM,DuPont Pioneer,Warrior II with Zeon Technology,100-1295,0.8,,Lambda-cyhalothrin,1.664,,,,,53.89,44.72
+07/01/2014 12:00:00 AM,DuPont Pioneer,Coragen,352-729,0.2748,,Chlorantraniliprole,0.459,,,,,7.034,6.283
+07/01/2014 12:00:00 AM,DuPont Pioneer,Force 3G,100-1075-5481,,49.7,Tefluthrin,1.491,,,,,13.04,13.04
+07/01/2014 12:00:00 AM,DuPont Pioneer,Gramoxone SL 2.0,100-1431,0.953,,Paraquat dichloride,1.907,,,,,5.084,5.084
+07/01/2014 12:00:00 AM,DuPont Pioneer,Intrro,524-314,8.15,,Alachlor,32.6,,,,,13.04,13.04
+07/01/2014 12:00:00 AM,Syngenta,Aatrex Nine-O,100-585,,9.72,Atrazine,8.55,,,,,9.72,9.72
+07/01/2014 12:00:00 AM,Syngenta,Asana XL,352-515,2.14,,Esfenvalerate,1.41,,,,,30.38,30.38
+07/01/2014 12:00:00 AM,Syngenta,Besiege,100-1402,2.46,,Lambda-cyhalorthrin,1.03,Chlorantraniliprole,2.05,,,31.46,31.46
+07/01/2014 12:00:00 AM,Syngenta,Dual II Magnum,100-818,0.47,,S-Metolachlor,3.59,,,,,3,3
+07/01/2014 12:00:00 AM,Syngenta,Lannate LV,352-384,2.06,,Methomyl,4.94,,,,,11,11
+07/01/2014 12:00:00 AM,Syngenta,Lorsban Advanced,62719-591,8.62,,Chlorpyrifos,32.36,,,,,34.47,32.97
+07/01/2014 12:00:00 AM,Syngenta,Lumax EZ,100-1442,33.64,,S-Metolachlor,83.76,Atrazine,31.45,Mesotrione,8.38,44.85,44.85
+07/01/2014 12:00:00 AM,Syngenta,Mustang,279-3126,1.1,,S-Cyano Methyl,1.65,,,,,46.72,42.02
+07/01/2014 12:00:00 AM,Syngenta,Permethrin,34704-873,0.14,,Permethrin,0.45,,,,,3.02,3.02
+07/01/2014 12:00:00 AM,Syngenta,Warrior II,100-1295,0.76,,Lambda-cyhalorthrin,1.58,,,,,56.85,56.85
+08/01/2014 12:00:00 AM,Syngenta,Aatrex Nine-O,100-585,,32.44,Atrazine,28.55,,,,,32.44,32.44
+08/01/2014 12:00:00 AM,Syngenta,Asana XL,352-515,0.61,,Efsenvalerate,0.4,,,,,8.63,8.63
+08/01/2014 12:00:00 AM,Syngenta,Besiege,100-1402,2.61,,Lambda-cyhalothrin,1.09,Chlorantraniliprole,2.18,,,33.4,33.4
+08/01/2014 12:00:00 AM,Syngenta,Lannate LV,352-384,3.11,,Methomyl,7.46,,,,,16.6,16.6
+08/01/2014 12:00:00 AM,Syngenta,Lorsban Advanced,62719-591,9.09,,Chlorpyrifos,34.13,,,,,36.38,36.38
+08/01/2014 12:00:00 AM,Syngenta,Lumax EZ,100-1442,34.25,,S-Metolachlor,85.28,Atrazine,32.02,Mesotrione,8.53,45.67,45.67
+08/01/2014 12:00:00 AM,Syngenta,Mustang,279-3126,1.13,,S-Cyano Methyl,1.7,,,,,48.24,41.18
+08/01/2014 12:00:00 AM,Syngenta,Warrior II,100-1295,0.83,,Lambda-cyhalothrin,1.73,,,,,62.27,62.27
+08/01/2014 12:00:00 AM,Kaua'i Coffee Co. LLC,Gramoxone SL 2.0,100-1431,29,,Paraquat dichloride,58,,,,,87,87
+08/01/2014 12:00:00 AM,Dow AgroSciences,Asana XL,352-515,5.777,,Estenvalerate,3.81,,,,,82.2,82.2
+08/01/2014 12:00:00 AM,Dow AgroSciences,Baythroid XL,264-840,1.258,,Beta-cyfluthrin,1.26,,,,,57.5,55
+08/01/2014 12:00:00 AM,Dow AgroSciences,Coragen,352-729,4.816,,Chlorantraniliprole,8.04,,,,,123.3,121.5
+08/01/2014 12:00:00 AM,Dow AgroSciences,Gramoxone 2.0 SL,100-1431,0.516,,Paraquat dichloride,1.03,,,,,3,3
+08/01/2014 12:00:00 AM,Dow AgroSciences,Lorsban Advanced,62719-591,16.244,,Chlorpyrifos,61.08,,,,,79.1,79.1
+08/01/2014 12:00:00 AM,Dow AgroSciences,Permethrin,34704-873,1.538,,Permethrin,4.92,,,,,28.6,28.6
+08/01/2014 12:00:00 AM,Dow AgroSciences,Warrior II,100-1295,0.348,,Lambda-cyhalothrin,0.72,,,,,23.2,23.2
+08/01/2014 12:00:00 AM,BASF Plant Science,Lorsban Advanced,62719-591,0.5,,Chlorpyrifos,1.8775,,,,,2.5,2.5
+08/01/2014 12:00:00 AM,BASF Plant Science,Mustang,279-3126,0.24,,"S-Cyano (3-phenoxyphenyl)methyl(+-) cis/trans 3-(2,2-dichloroethenyl)-2,2 dimethylcyclopropane carboxylate 17.1%",0.36,,,,,7.55,4.95
+08/01/2014 12:00:00 AM,BASF Plant Science,Sniper,34704-858,0.25,,"Bifrenthrin: (2 methyl[1,1'-biphenyl]-3-yl) methyl 3-(2-chloro-3.3.3-trifluoro-1-propenyl)-2,2-dimethly-cyclopropanecarboxylate 25.0%",0.5,,,,,0.1,0.1
+08/01/2014 12:00:00 AM,BASF Plant Science,Warrior II w/zeon ,100-1295,0.09,,"Lambda-cyhalothrin 1,2 22.8%",0.187,,,,,5.06,5.06
+08/01/2014 12:00:00 AM,DuPont Pioneer,Lorsban Advanced,62719-591,7.206,,Chlorpyrifos,27.06,,,,,38.43,38.43
+08/01/2014 12:00:00 AM,DuPont Pioneer,Mustang Max,279-3249,0.018,,Zeta-cypermethrin,0.0146,,,,,0.78,0.78
+08/01/2014 12:00:00 AM,DuPont Pioneer,Mustang Maxx,279-3426,1.24,,Zeta-cypermethrin,0.99,,,,,49.37,49.37
+08/01/2014 12:00:00 AM,DuPont Pioneer,Permethrin,34704-873,1.8,,Permethrin,5.76,,,,,38.43,38.43
+08/01/2014 12:00:00 AM,DuPont Pioneer,Warrior II with Zeon Technology,100-1295,1.15,,Lambda-cyhalothrin,2.392,,,,,77.64,39.21
+08/01/2014 12:00:00 AM,DuPont Pioneer,Gramoxone SL 2.0,100-1431,1.9,,Paraquat dichloride,3.81,,,,,8.35,8.35
+08/01/2014 12:00:00 AM,DuPont Pioneer,Force 3G,100-1075-5481,,12.71,Tefluthrin,0.3813,,,,,3.33,3.33
+08/01/2014 12:00:00 AM,DuPont Pioneer,Intrro,524-314,2.084,,Alachlor,8.336,,,,,3.33,3.33
+09/01/2014 12:00:00 AM,Syngenta,Aatrex Nine-O,100-585,,5.7,Atrazine,5.016,,,,,5.7,5.7
+09/01/2014 12:00:00 AM,Syngenta,Asana XL,352-515,1.01,,Esfenvalerate,0.67,,,,,14.34,14.34
+09/01/2014 12:00:00 AM,Syngenta,Baythroid XL,264-840,0.02,,B-Cyfluthrin,0.02,,,,,1.25,1.25
+09/01/2014 12:00:00 AM,Syngenta,Beseige,100-1402,3.78,,Lambda-Cyhalothrin,1.58,Chlorantraniliprole,3.16,,,48.39,48.39
+09/01/2014 12:00:00 AM,Syngenta,Dual II Magnum,100-818,0.49,,S-Metolachlor,3.74,,,,,3.12,3.12
+09/01/2014 12:00:00 AM,Syngenta,Lannate LV,352-384,2.89,,Methomyl,6.94,,,,,15.4,15.4
+09/01/2014 12:00:00 AM,Syngenta,Lorsban Advanced,62719-591,16.82,,Chlorpyrifos,63.16,,,,,67.26,45.66
+09/01/2014 12:00:00 AM,Syngenta,Lumax EZ,100-1442,18.94,,S-Metolachlor,47.16,Atrazine,17.71,Mesotrione,4.72,25.25,25.25
+09/01/2014 12:00:00 AM,Syngenta,Mustang,279-3126,1.06,,S-CyanoMethyl,1.59,,,,,45.33,38.75
+09/01/2014 12:00:00 AM,Syngenta,Permethrin,34707-873,0.15,,Permethrin,0.48,,,,,3.12,3.12
+09/01/2014 12:00:00 AM,Syngenta,Warrior II,100-1295,0.52,,Lambda-Cyhalothrin,1.08,,,,,39.4,39.4
+09/01/2014 12:00:00 AM,Kaua'i Coffee Co. LLC,No RUP's used,,0,0,,,,,,,,
+09/01/2014 12:00:00 AM,Dow AgroSciences,Asana XL,352-515,1.8,,Estenvalerate,1.2,,,,,25.6,25.6
+09/01/2014 12:00:00 AM,Dow AgroSciences,Cobalt Advanced,62719-615,1.5,,Chlorpyrifos,3.7,Lambda-cyhalothrin,0.2,,,5.4,5.4
+09/01/2014 12:00:00 AM,Dow AgroSciences,Coragen,352-729,1.9,,Chlorantraniliprole,3.2,,,,,49,25
+09/01/2014 12:00:00 AM,Dow AgroSciences,Dual II Magnum,100-818,0.5,,S-metolachlor,4,,,,,2.1,2.1
+09/01/2014 12:00:00 AM,Dow AgroSciences,Gramoxone 2.0 SL,100-1431,42.7,,Paraquat dichloride,85.4,,,,,246.8,217.7
+09/01/2014 12:00:00 AM,Dow AgroSciences,Lorsban Advanced,62719-591,9.7,,Chlorpyrifos,36.6,,,,,38.9,38.9
+09/01/2014 12:00:00 AM,Dow AgroSciences,Permethrin,34704-873,0.44,,Permethrin,0.1,,,,,0.7,0.7
+09/01/2014 12:00:00 AM,BASF Plant Science,Atrazine 4L,34704-69,0.63,,Atrazine (2-chloro-4-ethylamino-6-isopropylamino-s-triazine) 42.2%,2.5,,,,,2.5,2.5
+09/01/2014 12:00:00 AM,BASF Plant Science,Mustang,279-3126,0.17,,"S-Cyano (3-phenoxyphenyl)methyl(+-) cis/trans 3-(2,2-dichloroethenyl)-2,2 dimethylcyclopropane carboxylate 17.1%",0.25,,,,,5.3,3.95
+09/01/2014 12:00:00 AM,BASF Plant Science,Warrior II w/zeon ,100-1295,0.02,,"Lambda-cyhalothrin 1,2 22.8%",0.043,,,,,1.35,1.35
+09/01/2014 12:00:00 AM,DuPont Pioneer,Mustang Maxx,279-3426,0.0674,,Zeta-cypermethrin,0.0539,,,,,2.36,2.36
+09/01/2014 12:00:00 AM,DuPont Pioneer,Gramoxone SL 2.0,100-1431,0.422,,Paraquat dichloride,0.843,,,,,1.69,1.69
+09/01/2014 12:00:00 AM,DuPont Pioneer,Force 3G,100-1075-5481,,8.52,Tefluthrin,0.2556,,,,,2.06,2.06
+09/01/2014 12:00:00 AM,DuPont Pioneer,Dual II Magnum,100-818,0.7818,,S-metolachlor,5.9731,,,,,3.13,3.13
+09/01/2014 12:00:00 AM,DuPont Pioneer,Coragen,352-729,0.1965,,Chlorantraniliprole,0.328,,,,,6.29,6.29
+09/01/2014 12:00:00 AM,DuPont Pioneer,Mustang Max,279-3249,0.1284,,Zeta-cypermethrin,0.103,,,,,5.48,3.13
+09/01/2014 12:00:00 AM,DuPont Pioneer,Warrior II with Zeon Technology,100-1295,0.0349,,Lambda-cyhalothrin,0.0726,,,,,2.35,2.35
+09/01/2014 12:00:00 AM,DuPont Pioneer,Permethrin,34704-873,0.731,,Permethrin,2.339,,,,,15.6,15.6
+10/01/2014 12:00:00 AM,Kaua'i Coffee Co. LLC,Gramoxone SL 2.0,100-1431,33.5,,Paraquat dichloride,67,,,,,84,84
+10/01/2014 12:00:00 AM,Syngenta,Aatrex Nine-O,100-585,,15.09,Atrazine,13.28,,,,,15.09,15.09
+10/01/2014 12:00:00 AM,Syngenta,Asana XL,352-515,0.0007,,Esfenvalerate,0.00462,,,,,0.01,0.01
+10/01/2014 12:00:00 AM,Syngenta,Besiege,100-1402,0.59,,Lambda-Cyhalothrin,0.25,Chlorantraniliprole,0.49,,,7.5,7.5
+10/01/2014 12:00:00 AM,Syngenta,Callisto EUP,100-EUP-114,0.013,,Mesotrione,0.052,,,,,0.14,0.14
+10/01/2014 12:00:00 AM,Syngenta,Dual II Magnum,100-818,0.2,,S-metolachlor,1.53,,,,,1.3,1.3
+10/01/2014 12:00:00 AM,Syngenta,Lannate LV,352-384,4.8,,Methomyl,11.52,,,,,25.6,25.6
+10/01/2014 12:00:00 AM,Syngenta,Lorsban Advanced,62719-591,7.61,,Chlorpyrifos,28.58,,,,,30.45,30.45
+10/01/2014 12:00:00 AM,Syngenta,Lumax EZ,100-1442,160.88,,S-metolachlor,400.59,Atrazine,150.42,Mesotrione,40.06,214.5,214.5
+10/01/2014 12:00:00 AM,Syngenta,Mustang,279-3126,1.34,,S-Cyano Methyl,2.01,,,,,57.15,57.15
+10/01/2014 12:00:00 AM,Syngenta,Permethrin,34707-873,0.06,,Permethrin,0.19,,,,,1.3,1.3
+10/01/2014 12:00:00 AM,Syngenta,Warrior II,100-1295,3.2,,Lambda-Cyhalothrin,6.65,,,,,240.6,240.6
+10/01/2014 12:00:00 AM,Dow AgroSciences,Baythroid XL,264-840,0.07,,Beta-cyfluthrin,0.07,,,,,3.2,3.2
+10/01/2014 12:00:00 AM,Dow AgroSciences,Coragen,352-729,0.03,,Chlorantraniliprole,0.05,,,,,0.7,0.7
+10/01/2014 12:00:00 AM,Dow AgroSciences,Dual II Magnum,100-818,59.63,,S-metolachlor,455.54,,,,,238.5,238.5
+10/01/2014 12:00:00 AM,Dow AgroSciences,Gramoxone 2.0 SL,100-1431,79.34,,Paraquat dichloride,158.68,,,,,445.1,422
+10/01/2014 12:00:00 AM,Dow AgroSciences,Lumax,100-1152,30.19,,Mesotrione,8.09,Atrazine,30.19,S-metolachlor,80.9,48.3,48.3
+10/01/2014 12:00:00 AM,Dow AgroSciences,Permethrin,34704-873,0.008,,Permethrin,0.03,,,,,0.13,0.13
+10/01/2014 12:00:00 AM,BASF Plant Science,Atrazine 4L,34704-69,6.56,,Atrazine (2-chloro-4-ethylamino-6-isopropylamino-s-triazine) 42.2%,26.25,,,,,26.25,26.25
+10/01/2014 12:00:00 AM,BASF Plant Science,Intro,524-314,12.25,,"Alachlor, 2-chloro-2',6'-diethyl-N-(methoxymethyl)acetanilide 45.1%",49,,,,,23,23
+10/01/2014 12:00:00 AM,BASF Plant Science,Lorsban Advanced,62719-591,7.5,,"chlorpyrifos: O,O-diethyl-O-(3,5,6-trichloro-2-pyridinyl)phosphorothioate 40.2%",28.163,,,,,28,26.5
+10/01/2014 12:00:00 AM,BASF Plant Science,Mustang,279-3126,0.147,,"S-Cyano (3-phenoxyphenyl)methyl(+-) cis/trans 3-(2,2-dichloroethenyl)-2,2 dimethylcyclopropane carboxylate 17.1%",0.22,,,,,4.7,2.35
+10/01/2014 12:00:00 AM,BASF Plant Science,Sniper,34704-858,0.068,,"Bifenthrin: (2 methyl[1, 1'-biphenyl]-3-yl) methyl 3-(2-chloro-3,3,3-trifluoro-1-propenyl)-2,2-dimethyl-cyclopropanecarboxylate 25.0%",0.137,,,,,3.5,1.7
+10/01/2014 12:00:00 AM,BASF Plant Science,Warrior II w/zeon ,100-1295,0.045,,"Lambda-cyhalothrin 1,2 22.8%",0.094,,,,,3,3
+10/01/2014 12:00:00 AM,DuPont Pioneer,Dual II Magnum,100-818,4.8845,,S-metolachlor,37.3175,,,,,19.54,19.54
+10/01/2014 12:00:00 AM,DuPont Pioneer,Force 3G,100-1075-5481,,75.73,Tefluthrin,2.272,,,,,23.18,23.18
+10/01/2014 12:00:00 AM,DuPont Pioneer,Gramoxone SL 2.0,100-1431,0.431,,Paraquat dichloride,0.862,,,,,1.72,1.72
+10/01/2014 12:00:00 AM,DuPont Pioneer,Intrro,524-314,4.7968,,Alachlor,19.187,,,,,7.67,7.67
+10/01/2014 12:00:00 AM,DuPont Pioneer,Mustang Maxx,279-3426,0.3743,,Zeta-cypermethrin,0.2994,,,,,11.98,6.61
+10/01/2014 12:00:00 AM,DuPont Pioneer,Permethrin,34704-873,0.705,,Permethrin,2.2575,,,,,15.05,15.05
+10/01/2014 12:00:00 AM,DuPont Pioneer,Baythroid XL,264-840,0.128,,Beta-cyfluthrin,0.128,,,,,6.56,6.56
+10/01/2014 12:00:00 AM,DuPont Pioneer,Warrior II with Zeon Technology,100-1295,0.03525,,Lambda-cyhalothrin,0.07332,,,,,2.35,2.35
+11/01/2014 12:00:00 AM,Kaua'i Coffee Co. LLC,No RUP's used,,0,0,,0,,,,,0,0
+11/01/2014 12:00:00 AM,Dow AgroSciences,Asana XL,352-515,0.3,,Estenvalerate,0.2,,,,,4.6,4.6
+11/01/2014 12:00:00 AM,Dow AgroSciences,Atrazine 4L,34704-69,30.54,,Atrazine,122.15,,,,,69.9,69.9
+11/01/2014 12:00:00 AM,Dow AgroSciences,Baythroid XL,264-840,2.12,,Beta-cyfluthrin,2.12,,,,,96.9,84.9
+11/01/2014 12:00:00 AM,Dow AgroSciences,Cobalt Advanced,62719-615,3.77,,Chlorpyrifos,9.44,Lambda-cyhalothrin,0.49,,,13.8,13.8
+11/01/2014 12:00:00 AM,Dow AgroSciences,Coragen,352-729,0.72,,Chlorantraniliprole,1.2,,,,,18.4,16.1
+11/01/2014 12:00:00 AM,Dow AgroSciences,Dual II Magnum,100-818,37.23,,S-metolachlor,284.42,,,,,149.7,149.7
+11/01/2014 12:00:00 AM,Dow AgroSciences,Lorsban Advanced,62719-591,1.85,,Chlorpyrifos,6.96,,,,,7.4,7.4
+11/01/2014 12:00:00 AM,Dow AgroSciences,Lumax,100-1152,22.13,,Mesotrione,5.93,Atrazine,22.13,S-metolachlor,59.3,35.4,35.4
+11/01/2014 12:00:00 AM,Dow AgroSciences,Permethrin,34704-873,1.65,,Permethrin,5.28,,,,,26.4,26.4
+11/01/2014 12:00:00 AM,BASF Plant Science,Atrazine 4L,34704-69,8.8, ,Atrazine (2-chloro-4-ethylamino-6-isopropylamino-s-triazine) 42.2%,35.2,,,,,35.5,35.5
+11/01/2014 12:00:00 AM,BASF Plant Science,Baythroid XL,264-840,0.131,,"Beta-cyfluthrin Cyano(4-fluoro-3-phenoxyphenyl)methyl-3-(2,2-dichloro-ethenyl)-2,2-dimethyl-cyclopropanecarboxylate 12.70%",0.131,,,,,6,3
+11/01/2014 12:00:00 AM,BASF Plant Science,Lorsban Advanced,62719-591,4,,"chlorpyrifos: O,O-diethyl-O-(3,5,6-trichloro-2-pyridinyl)phosphorothioate 40.2%",15.02,,,,,16,16
+11/01/2014 12:00:00 AM,BASF Plant Science,Lannate LV,352-384,0.75,,Methomyl (S-methyl-N-[(methylcarbamoyl)oxy]thioacetimidate) 29%,1.8,,,,,4,4
+11/01/2014 12:00:00 AM,BASF Plant Science,Warrior II w/zeon ,100-1295,0.788,,"Lambda-cyhalothrin 1,2 22.8%",1.638,,,,,52.5,30
+11/01/2014 12:00:00 AM,Syngenta,Aatrex Nine O,100-585,,35.08,Atrazine,30.87,,,,,35.08,35.08
+11/01/2014 12:00:00 AM,Syngenta,Besiege,100-1402,5.87,,Lambda-Cyhalothrin,2.45,Chlorantraniliprole,4.9,,,75.1,75.1
+11/01/2014 12:00:00 AM,Syngenta,Callisto EUP,100-EUP-114,0.1,,Mesotrione,0.4,,,,,1.11,1.11
+11/01/2014 12:00:00 AM,Syngenta,Dual II Magnum,100-818,0.31,,S-Metolachlor,2.37,,,,,2,2
+11/01/2014 12:00:00 AM,Syngenta,Lannate LV,352-384,12,,Methomyl,28.8,,,,,64.05,64.05
+11/01/2014 12:00:00 AM,Syngenta,Lorsban Advanced,62719-591,19.13,,Chlorpyrifos,71.83,,,,,76.5,76.5
+11/01/2014 12:00:00 AM,Syngenta,Lumax EZ,100-1442,162.65,,S-Metolachlor,405,Atrazine,152.07,Mesotrione,40.5,216.86,216.86
+11/01/2014 12:00:00 AM,Syngenta,Mustang,279-3126,2.16,,S-Cyano Methyl,3.24,,,,,92.05,65.8
+11/01/2014 12:00:00 AM,Syngenta,Permethrin,34704-873,0.09,,Permethrin,0.29,,,,,2,2
+11/01/2014 12:00:00 AM,Syngenta,Warrior II,100-1295,3.73,,Lambda-Cyhalothrin,7.76,,,,,280.91,280.91
+11/01/2014 12:00:00 AM,DuPont Pioneer,Coragen,352-729,0.8,,Chlorantraniliprole,1.34,,,,,20.54,20.54
+11/01/2014 12:00:00 AM,DuPont Pioneer,Dual II Magnum,100-818,12.37,,S-metolachlor,94.5,,,,,49.46,49.46
+11/01/2014 12:00:00 AM,DuPont Pioneer,Force 3G,100-1075-5481,,167,Tefluthrin,5.01,,,,,51.12,51.12
+11/01/2014 12:00:00 AM,DuPont Pioneer,Permethrin,34704-873,2.221,,Permethrin,7.107,,,,,46.69,46.69
+11/01/2014 12:00:00 AM,DuPont Pioneer,Mustang Max,279-3249,0.08,,Zeta-cypermethrin,0.064,,,,,3.4,3.4
+11/01/2014 12:00:00 AM,DuPont Pioneer,Mustang Maxx,279-3426,0.582,,Zeta-cypermethrin,0.466,,,,,24.83,24.83
+11/01/2014 12:00:00 AM,DuPont Pioneer,Warrior II with Zeon Technology,100-1295,0.24,,Lambda-cyhalothrin,0.5,,,,,16.12,16.12
+12/01/2014 12:00:00 AM,BASF Plant Science,Atrazine 4L,34704-69,2.25, ,Atrazine (2-chloro-4-ethylamino-6-isopropylamino-s-triazine) 42.2%,9,,,,,9,9
+12/01/2014 12:00:00 AM,BASF Plant Science,Lorsban Advanced,62719-591,11.88,,"chlorpyrifos: O,O-diethyl-O-(3,5,6-trichloro-2-pyridinyl)phosphorothioate 40.2%",44.61,,,,,47.5,34
+12/01/2014 12:00:00 AM,BASF Plant Science,Mustang,279-3126,0.12,,"S-Cyano (3-phenoxyphenyl)methyl(+-) cis/trans 3-(2,2-dichloroethenyl)-2,2 dimethylcyclopropane carboxylate 17.1%",0.18,,,,,3.75,3.75
+12/01/2014 12:00:00 AM,BASF Plant Science,Warrior II w/zeon ,100-1295,0.62,,"Lambda-cyhalothrin 1,2 22.8%",1.29,,,,,41.5,34
+12/01/2014 12:00:00 AM,Kaua'i Coffee Co. LLC,No RUP's used,,0,0,,,,,,,0,0
+12/01/2014 12:00:00 AM,Syngenta,Aatrex Nine O,100-585,,113.12,Atrazine,99.55,,,,,113.12,113.12
+12/01/2014 12:00:00 AM,Syngenta,Asana XL,352-515,0.25,,Esfenvalerate,0.165,,,,,3.5,3.5
+12/01/2014 12:00:00 AM,Syngenta,Besiege,100-1402,2.83,,Lamdba-Cyhalothrin,1.18,Chlorantraniliprole,2.36,,,36.2,36.2
+12/01/2014 12:00:00 AM,Syngenta,Callisto EUP,100-EUP-114,0.12,,Mesotrione,0.48,,,,,2.5,2.5
+12/01/2014 12:00:00 AM,Syngenta,Dual II Magnum,100-818,0.61,,S-Metolachlor,4.66,,,,,3.9,3.9
+12/01/2014 12:00:00 AM,Syngenta,Lannate LV,352-384,19.83,,Methomyl,47.6,,,,,105.74,105.74
+12/01/2014 12:00:00 AM,Syngenta,Lorsban Advanced,62719-591,49.87,,Chlorpyrifos,187.26,,,,,199.48,184.94
+12/01/2014 12:00:00 AM,Syngenta,Lumax EZ,100-1442,30.01,,S-Metolachlor,74.72,Atrazine,28.06,Mesotrione,7.47,40.06,40.06
+12/01/2014 12:00:00 AM,Syngenta,Mustang,279-3126,4.21,,S-Cyano Methyl,6.32,,,,,179.78,179.78
+12/01/2014 12:00:00 AM,Syngenta,Permethrin,34704-873,1.35,,Permethrin,4.32,,,,,28.81,28.81
+12/01/2014 12:00:00 AM,Syngenta,Warrior II,100-1295,2.34,,Lamdba-Cyhalothrin,4.87,,,,,176.06,157.56
+12/01/2014 12:00:00 AM,DuPont Pioneer,Baythroid XL,264-840,0.785,,Beta-cyfluthrin,0.785,,,,,40.21,40.21
+12/01/2014 12:00:00 AM,DuPont Pioneer,Coragen,352-729,2.47,,Chlorantraniliprole,4.125,,,,,63.24,46.26
+12/01/2014 12:00:00 AM,DuPont Pioneer,Mustang Maxx,279-3426,1.23,,Zeta-cypermethrin,0.984,,,,,47.91,47.91
+12/01/2014 12:00:00 AM,DuPont Pioneer,Permethrin,34704-873,0.933,,Permethrin,2.985,,,,,19.9,19.9
+12/01/2014 12:00:00 AM,DuPont Pioneer,Warrior II with Zeon Technology,100-1295,0.676,,Lambda-cyhalothrin,1.406,,,,,45.07,45.07
+12/01/2014 12:00:00 AM,Dow AgroSciences ,Asana XL,352-515,0.12,,Estenvalerate,0.08,,,,,1.7,1.7
+12/01/2014 12:00:00 AM,Dow AgroSciences ,Atrazine 4L,66222-36,4.4,,Atrazine,17.6,,,,,8.8,8.8
+12/01/2014 12:00:00 AM,Dow AgroSciences ,Cobalt Advanced,62719-615,66.15,,Chlorpyrifos,165.56,Lambda-cyhalothrin,8.53,,,241.9,229.15
+12/01/2014 12:00:00 AM,Dow AgroSciences ,Coragen,352-729,12.31,,Chlorantraniliprole,20.56,,,,,313.9,298.8
+12/01/2014 12:00:00 AM,Dow AgroSciences ,Dual II Magnum,100-818,1.95,,S-metolachlor,14.88,,,,,7.8,7.8
+12/01/2014 12:00:00 AM,Dow AgroSciences ,Gramoxone 2.0 SL,100-1431,23.4,,Paraquat-dichloride,46.8,,,,,131.15,131.15
+12/01/2014 12:00:00 AM,Dow AgroSciences ,Intrro,524-314,3.81,,Alachlor,15.25,,,,,6.1,6.1
+12/01/2014 12:00:00 AM,Dow AgroSciences ,Lumax,100-1152,6.06,,Mesotrione,1.62,Atrazine,6.06,S-metachlor,16.25,9.7,9.7
+12/01/2014 12:00:00 AM,Dow AgroSciences ,Permethrin,34704-873,9.07,,Permethrin,29.02,,,,,145.1,141.05
+12/01/2014 12:00:00 AM,Dow AgroSciences ,Warrior II,100-1295,0.08,,Lambda-cyhalothrin,0.17,,,,,6.9,6.9
+01/01/2015 12:00:00 AM,Syngenta,Asana XL,352-515,5.92,,Esfenvalerate,3.91,,,,,84.25,84.25
+01/01/2015 12:00:00 AM,Syngenta,Baythroid XL,264-840,1.76,,B-Cyfluthrin,1.76,,,,,89.9,89.9
+01/01/2015 12:00:00 AM,Syngenta,Besiege,100-1402,7.1,,Lambda-Cyhalothrin,2.96,Chlorantraniliprole,5.93,,,90.82,90.82
+01/01/2015 12:00:00 AM,Syngenta,Dual II Magnum,100-818,0.31,,S-Metolachlor,2.37,,,,,2,2
+01/01/2015 12:00:00 AM,Syngenta,Force 3G,100-1075,,0.2,Tefluthrin,0.006,,,,,0.04,0.04
+01/01/2015 12:00:00 AM,Syngenta,Lorsban Advanced,62719-591,3.3,,Chlorpyrifos,12.39,,,,,13.2,13.2
+01/01/2015 12:00:00 AM,Syngenta,Mustang,279-3126,0.65,,S-Cyano Methyl,0.98,,,,,79.19,79.19
+01/01/2015 12:00:00 AM,Syngenta,Permethrin,34704-873,1.31,,Permethrin,4.19,,,,,27.9,27.9
+01/01/2015 12:00:00 AM,Syngenta,Warrior II,100-1295,0.04,,Lambda-Cyhalothrin,0.08,,,,,3.01,3.01
+01/01/2015 12:00:00 AM,Kaua'i Coffee Co. LLC,Gramoxone SL 2.0,100-1431,3.6,,Paraquat dichloride,7.2,,,,,11.5,11.5
+01/01/2015 12:00:00 AM,Dow AgroSciences,Asana XL,352-515,9.2,,Estenvalerate,6.1,,,,,131.2,105.9
+01/01/2015 12:00:00 AM,Dow AgroSciences,Atrazine 4L,66222-36,1,,Atrazine,4,,,,,2,2
+01/01/2015 12:00:00 AM,Dow AgroSciences,Baythroid XL,264-840,0.7,,Beta-cyfluthrin,0.7,,,,,30.1,26.5
+01/01/2015 12:00:00 AM,Dow AgroSciences,Cobalt Advanced,62719-615,9.9,,Chlorpyrifos,24.8,Lambda-cyhalothrin,1.3,,,36.3,36.3
+01/01/2015 12:00:00 AM,Dow AgroSciences,Coragen,352-729,6.4,,Chlorantraniliprole,10.7,,,,,163.4,118.1
+01/01/2015 12:00:00 AM,Dow AgroSciences,Dual II Magnum,100-818,0.5,,S-metolachlor,3.6,,,,,1.9,1.9
+01/01/2015 12:00:00 AM,Dow AgroSciences,Gramoxone 2.0 SL,100-1431,5.1,,Paraquat dichloride,10.2,,,,,27.2,27.2
+01/01/2015 12:00:00 AM,Dow AgroSciences,Lorsban Advanced,62719-591,7.8,,Chlorpyrifos,29.4,,,,,31.3,31.3
+01/01/2015 12:00:00 AM,Dow AgroSciences,Lumax,100-1152,2.1,,Mesotrione,0.6,Atrazine,2.1,S-metolachlor,5.5,3.3,3.3
+01/01/2015 12:00:00 AM,Dow AgroSciences,Permethrin,34704-873,4.2,,Permethrin,13.3,,,,,66.6,60.2
+01/01/2015 12:00:00 AM,BASF Plant Science,Baythroid XL,264-840,0.77,,"Beta-cyfluthrin Cyano(4-fluoro-3-phenoxyphenyl)methyl-3-(-2,2-dimethyl-cyclopropanecarboxylate 12.70%",0.77,,,,,35,35
+01/01/2015 12:00:00 AM,BASF Plant Science,Atrazine 4L,34704-69,0.38,,Atrazine (2-chloro-4-ethylamino-6-isopropylamino-2-triazine) 42.2%,1.5,,,,,1.5,1.5
+01/01/2015 12:00:00 AM,BASF Plant Science,Besiege,100-1402,0.05, ,Lambda-Cyhalothrin,0.021,Chlorantraniliprole,0.042,,,0.75,0.75
+01/01/2015 12:00:00 AM,DuPont Pioneer,Asana XL,352-515,1.82,,Esfenvalerate,1.2,,,,,29.13,29.13
+01/01/2015 12:00:00 AM,DuPont Pioneer,Baythroid XL,264-840,0.5755,,Beta-cyfluthrin,0.5755,,,,,41.25,33.91
+01/01/2015 12:00:00 AM,DuPont Pioneer,Lannate LV,352-384,3.718,,Methomyl,8.924,,,,,19.83,19.83
+01/01/2015 12:00:00 AM,DuPont Pioneer,Mustang Maxx,279-3426,0.5246,,Zeta-cypermethrin,0.4197,,,,,21.32,21.32
+01/01/2015 12:00:00 AM,DuPont Pioneer,Permethrin,34704-873,0.797,,Permethrin,2.55,,,,,16.23,16.23
+01/01/2015 12:00:00 AM,DuPont Pioneer,Warrior II with Zeon Technology,100-1295,1.029,,Lambda-cyhalothrin,2.1403,,,,,68.6,65.3
+01/01/2015 12:00:00 AM,DuPont Pioneer,Coragen,352-729,0.874,,Chlorantraniliprole,1.4596,,,,,22.38,22.38
+01/01/2015 12:00:00 AM,DuPont Pioneer,Dual II Magnum,100-818,0.366,,S-metolachlor,2.796,,,,,1.46,1.46
+01/01/2015 12:00:00 AM,DuPont Pioneer,Force 3G,100-1075-5481,,4.288,Tefluthrin,0.1286,,,,,1.31,1.31
+01/01/2015 12:00:00 AM,DuPont Pioneer,Gramoxone SL 2.0,100-1431,0.6773,,Paraquat dichloride,1.3546,,,,,2.71,2.71
+02/01/2015 12:00:00 AM,Kaua'i Coffee Co. LLC,Gramoxone SL 2.0,100-1431,20.6,,Paraquat dichloride,41.2,,,,,63.85,63.85
+02/01/2015 12:00:00 AM,BASF Plant Science,Lannate LV,352-384,0.28, ,Methomyl (S-methyl-N-[(methylcarbamoyl)oxy]thioacetimidate) 29%,0.68,,,,,1.5,0.5
+02/01/2015 12:00:00 AM,BASF Plant Science,Lorsban Advanced,62719-591,0.38,,"chlorpyrifos: O,O-diethyl-O-(3,5,6-trichloro-2-pyridinyl)phosphorothioate 40.2%",1.43,,,,,1.5,0.5
+02/01/2015 12:00:00 AM,BASF Plant Science,Warrior II w/Zeon Technology,100-1295,0.02,,"Lambda-cyhalothrin 1,2 22.8%",0.03,,,,,1,0.5
+02/01/2015 12:00:00 AM,Syngenta,Agri-Flex*,100-1350,0.001,,Abamectin,0.00027,Thiamethoxam,0.00127,,,0.04,0.04
+02/01/2015 12:00:00 AM,Syngenta,Agri-Mek,100-1351,0.001,,Abamectin,0.0007,,,,,0.04,0.04
+02/01/2015 12:00:00 AM,Syngenta,Asana XL,352-515,3.4,,Esfenvalerate,2.24,,,,,48.42,48.42
+02/01/2015 12:00:00 AM,Syngenta,Baythroid XL,264-840,0.06,,B-Cyfluthrin,0.06,,,,,3,3
+02/01/2015 12:00:00 AM,Syngenta,Force 3G,100-1075,,10.75,Tefluthrin,0.32,,,,,2.15,2.15
+02/01/2015 12:00:00 AM,Syngenta,Lorsban Advanced,62719-591,0.04,,Chloryrifos,0.15,,,,,0.16,0.16
+02/01/2015 12:00:00 AM,Syngenta,Lumax EZ,100-1442,8.66,,S-Metolachlor,21.56,Atrazine,8.09,Mesotrione,2.16,11.55,11.55
+02/01/2015 12:00:00 AM,Syngenta,Warrior II,100-1295,0.13,,Lambda-Cyahothrin,0.27,,,,,5.7,5.7
+02/01/2015 12:00:00 AM,Dow AgroSciences,Asana XL,352-515,4,,Estenvalerate,2.7,,,,,57.8,53.5
+02/01/2015 12:00:00 AM,Dow AgroSciences,Baythroid XL,264-840,0.3,,Beta-cyfluthrin,0.3,,,,,14.2,14.2
+02/01/2015 12:00:00 AM,Dow AgroSciences,Cobalt Advanced,62719-615,14.2,,Chlorpyrifos,35.6,Lambda-cyhalothrin,1.8,,,52.1,48.7
+02/01/2015 12:00:00 AM,Dow AgroSciences,Coragen,352-729,2.7,,Chlorantraniliprole,4.6,,,,,69.8,64.8
+02/01/2015 12:00:00 AM,Dow AgroSciences,Dual II Magnum,100-818,1.5,,S-metolachlor,11.7,,,,,6.1,6.1
+02/01/2015 12:00:00 AM,Dow AgroSciences,Gramoxone 2.0 SL,100-1431,0.188,,Paraquat dichloride,0.38,,,,,1,1
+02/01/2015 12:00:00 AM,Dow AgroSciences,Lannate LV,352-384,0.2,,Methomyl,0.4,,,,,1,1
+02/01/2015 12:00:00 AM,Dow AgroSciences,Lorsban Advanced,62719-591,7.8,,Chlorpyrifos,29.1,,,,,31,31
+02/01/2015 12:00:00 AM,Dow AgroSciences,Permethrin,34704-873,0.4,,Permethrin,1.4,,,,,7,7
+02/01/2015 12:00:00 AM,DuPont Pioneer,Dual II Magnum,100-818,1.53,,S-metolachlor,11.6892,,,,,6.04,6.04
+02/01/2015 12:00:00 AM,DuPont Pioneer,Force 3G,100-1075-5481,,3.246,Tefluthrin,0.0974,,,,,0.99,0.99
+02/01/2015 12:00:00 AM,DuPont Pioneer,Gramoxone SL 2.0,100-1431,4.45,,Paraquat dichloride,8.9,,,,,17.8,17.8
+02/01/2015 12:00:00 AM,DuPont Pioneer,Mustang Maxx,279-3426,0.08731,,Zeta-cypermethrin,0.06985,,,,,2.79,1.45
+02/01/2015 12:00:00 AM,DuPont Pioneer,Baythroid XL,264-840,0.349,,Beta-cyfluthrin,0.349,,,,,17.88,17.88
+02/01/2015 12:00:00 AM,DuPont Pioneer,Warrior II with Zeon Technology,100-1295,0.6677,,Lambda-cyhalothrin,1.3887,,,,,44.51,44.51
+03/01/2015 12:00:00 AM,Kaua'i Coffee Co. LLC,Gramoxone SL 2.0,100-1431,8.75,,Paraquat dichloride,17.5,,,,,24.21,24.21
+03/01/2015 12:00:00 AM,BASF Plant Science,Atrazine 4L,34704-69,0.5,,"Atrazine:(2-Chloro-4-ethylamino-6-isopropylamino-s-triazine 42.6, Related compounds 0.9%",2,,,,,2,2
+03/01/2015 12:00:00 AM,BASF Plant Science,Baythroid XL,264-840,0.03,,"Beta-cyfluthrin Cyano(4-fluoro-3-phenoxyphenyl)methyl-3-(2,2-dichloro-ethenyl)-2,2-dimethyl-cyclopropanecarboxylate 12.70%",0.03,,,,,1.5,0.5
+03/01/2015 12:00:00 AM,BASF Plant Science,Lannate LV,352-384,0.56, ,Methomyl (S-methyl-N-[(methylcarbamoyl)oxy]thioacetimidate) 29%,1.35,,,,,3,2.5
+03/01/2015 12:00:00 AM,BASF Plant Science,Lorsban Advanced,62719-591,0.5,,"chlorpyrifos: O,O-diethyl-O-(3,5,6-trichloro-2-pyridinyl)phosphorothioate 40.2%",1.88,,,,,2,2
+03/01/2015 12:00:00 AM,BASF Plant Science,Mustang,279-3126,0.05,,"S-Cyano (3-phenoxyphenyl)methyl(+-) cis/trans 3-(2,2-dichloroethenyl)-2,2 dimethylcyclopropane carboxylate 17.1%",0.8,,,,,1.7,1.1
+03/01/2015 12:00:00 AM,BASF Plant Science,Sniper,34704-858,0.023,,"Bifenthrin: (2 methyl[1, 1'-biphenyl]-3-yl) methyl 3-(2-chloro-3,3,3-trifluoro-1-propenyl)-2,2-dimethyl-cyclopropanecarboxylate 25.0%",0.047,,,,,1.2,1.2
+03/01/2015 12:00:00 AM,BASF Plant Science,Warrior II w/Zeon Technology,100-1295,0.059,,"Lambda-cyhalothrin 1,2 22.8%",0.123,,,,,3.95,3.5
+03/01/2015 12:00:00 AM,BASF Plant Science,Besiege,100-1402,0.04,,Lambda-Cyhalothrin,0.017,Chlorantraniliprole,0.033,,,0.5,0.5
+03/01/2015 12:00:00 AM,DuPont Pioneer,Coragen,352-729,0.244,,Chlorantraniliprole,0.407,,,,,6.22,6.22
+03/01/2015 12:00:00 AM,DuPont Pioneer,Dual II Magnum,100-818,7.73,,S-metolachlor,59.1,,,,,30.93,30.93
+03/01/2015 12:00:00 AM,DuPont Pioneer,Force 3G,100-1075-5481,,106.18,Tefluthrin,3.185,,,,,19.5,19.5
+03/01/2015 12:00:00 AM,DuPont Pioneer,Gramoxone SL 2.0,100-1431,1.614,,Paraquat dichloride,3.227,,,,,6.45,6.45
+03/01/2015 12:00:00 AM,DuPont Pioneer,Lannate LV,352-384,0.04889,,Methomyl,0.1173,,,,,0.26,0.26
+03/01/2015 12:00:00 AM,DuPont Pioneer,Lorsban Advanced,62719-591,1.62,,Chlorpyrifos,6.08,,,,,6.8,6.8
+03/01/2015 12:00:00 AM,DuPont Pioneer,Mustang Maxx,279-3426,0.24,,Zeta-cypermethrin,0.19,,,,,7.62,5.89
+03/01/2015 12:00:00 AM,DuPont Pioneer,Permethrin,34704-873,0.2,,Permethrin,0.65,,,,,4.35,2.3
+03/01/2015 12:00:00 AM,Syngenta,Aatrex Nine-O,100-585,,52.5,Atrazine,46.2,,,,,52.5,52.5
+03/01/2015 12:00:00 AM,Syngenta,Asana XL,352-515,0.21,,Esfenvalerate,0.14,,,,,2.99,2.99
+03/01/2015 12:00:00 AM,Syngenta,Baythroid XL,264-840,1.71,,B-cyfluthrin,1.71,,,,,87.79,87.79
+03/01/2015 12:00:00 AM,Syngenta,Beseige,100-1402,0.23,,Lambda-Cyhalothrin,0.1,Chlorantraniliprole,0.19,,,3,3
+03/01/2015 12:00:00 AM,Syngenta,Callisto EUP,100-EUP-114,0.09,,Mesotrione,0.36,,,,,1,1
+03/01/2015 12:00:00 AM,Syngenta,Dual II Magnum,100-818,0.16,,S-Metolachor,1.22,,,,,1,1
+03/01/2015 12:00:00 AM,Syngenta,Force 3G,100-1075,,51.85,Tefluthrin,1.56,,,,,10.37,10.37
+03/01/2015 12:00:00 AM,Syngenta,Gramoxone SL,100-1431,10,,Paraquat dichloride,20,,,,,40,40
+03/01/2015 12:00:00 AM,Syngenta,Lorsban Advanced,62719-591,14.63,,Chlorpyrifos,54.94,,,,,58.5,50.5
+03/01/2015 12:00:00 AM,Syngenta,Lumax EZ,100-1442,106.23,,S-Metolachor,264.5,Atrazine,99.32,Mesotrione,26.45,141.64,141.64
+03/01/2015 12:00:00 AM,Syngenta,Mustang,279-3126,0.12,,S-Cyano Methyl,0.18,,,,,5,5
+03/01/2015 12:00:00 AM,Syngenta,Mustang,279-3126,1.11,,Zeta-Cypermethrin,1.67,,,,,47.5,47.5
+03/01/2015 12:00:00 AM,Syngenta,Permethrin,34704-873,0.19,,Permethrin,0.61,,,,,4,4
+03/01/2015 12:00:00 AM,Syngenta,Warrior II,100-1295,1.77,,Lambda-Cyhalothrin,3.68,,,,,133.1,133.1
+03/01/2015 12:00:00 AM,Dow AgroSciences,Asana XL,352-515,0.9,,Estenvalerate,0.6,,,,,13.2,13.2
+03/01/2015 12:00:00 AM,Dow AgroSciences,Atrazine 4L,34704-69,3,,Atrazine,12,,,,,6,6
+03/01/2015 12:00:00 AM,Dow AgroSciences,Baythroid XL,264-840,0.2,,Beta-cyfluthrin,0.2,,,,,6.9,5.6
+03/01/2015 12:00:00 AM,Dow AgroSciences,Cobalt Advanced,62719-615,3.3,,Chlorpyrifos,8.3,Lambda-cyhalothrin,0.4,,,12.4,12.4
+03/01/2015 12:00:00 AM,Dow AgroSciences,Coragen,352-729,0.8,,Chlorantraniliprole,1.3,,,,,19.3,18.4
+03/01/2015 12:00:00 AM,Dow AgroSciences,Dual II Magnum,100-818,36.2,,S-metolachlor,276.6,,,,,144.8,144.8
+03/01/2015 12:00:00 AM,Dow AgroSciences,Gramoxone 2.0 SL,100-1431,0.67,,Paraquat dichloride,1.34,,,,,3.3,3.3
+03/01/2015 12:00:00 AM,Dow AgroSciences,Lannate LV,352-384,0.1,,Methomyl,0.3,,,,,0.6,0.6
+03/01/2015 12:00:00 AM,Dow AgroSciences,Lorsban Advanced,62719-591,10.9,,Chlorpyrifos,40.8,,,,,43.4,43.4
+03/01/2015 12:00:00 AM,Dow AgroSciences,Lumax EZ,100-1442,3.6,,Mesotrione,0.9,Atrazine,3.4,S-metolachlor,9,5.8,5.8
+03/01/2015 12:00:00 AM,Dow AgroSciences,Permethrin,34704-873,0.4,,Permethrin,1.2,,,,,6.2,4.9
+04/01/2015 12:00:00 AM,Kaua'i Coffee Co. LLC,Gramoxone SL 2.0,100-1431,3.75,,Paraquat dichloride,7.5,,,,,15.39,15.39
+04/01/2015 12:00:00 AM,Dow AgroSciences,Asana XL,352-515,0.4,,Estenvalerate,0.3,,,,,5.7,5.7
+04/01/2015 12:00:00 AM,Dow AgroSciences,Atrazine 4L,34704-69,82.3,,Atrazine,329.1,,,,,332.4,332.4
+04/01/2015 12:00:00 AM,Dow AgroSciences,Baythroid XL,264-840,0.3,,Beta-cyfluthrin,0.3,,,,,15.2,15.2
+04/01/2015 12:00:00 AM,Dow AgroSciences,Coragen,352-729,0.1,,Chlorantraniliprole,0.2,,,,,2.7,2.5
+04/01/2015 12:00:00 AM,Dow AgroSciences,Dual II Magnum,100-818,55.1,,S-metolachlor,420.9,,,,,223.4,223.4
+04/01/2015 12:00:00 AM,Dow AgroSciences,Force 3G,100-1075,,12,Tefluthrin,0.36,,,,,2.9,2.9
+04/01/2015 12:00:00 AM,Dow AgroSciences,Lorsban Advanced,62719-591,5.1,,Chlorpyrifos,19,,,,,20.2,20.2
+04/01/2015 12:00:00 AM,Dow AgroSciences,Permethrin,34704-873,4.8,,Permethrin,15.3,,,,,76.5,76.5
+04/01/2015 12:00:00 AM,Syngenta,Aatrex Nine-O,100-585,,120.44,Atrazine,105.98,,,,,120.44,120.44
+04/01/2015 12:00:00 AM,Syngenta,Atrazine 4L,34704-69,5.22,,Atrazine,20.88,,,,,20.89,20.89
+04/01/2015 12:00:00 AM,Syngenta,Asana XL,352-515,2.44,,Esfenvalerate,1.61,,,,,34.7,34.7
+04/01/2015 12:00:00 AM,Syngenta,Baythroid XL,264-840,2.35,,B-Cyfluthrin,2.35,,,,,120.12,120.12
+04/01/2015 12:00:00 AM,Syngenta,Besiege,100-1402,6.35,,Lambda-Cyhalothrin,2.65,Chlorantraniliprole,5.3,,,81.3,81.3
+04/01/2015 12:00:00 AM,Syngenta,Callisto EUP,100-EUP-114,0.09,,Mesotrione,0.36,,,,,2,2
+04/01/2015 12:00:00 AM,Syngenta,Force 3G,100-1075,,29,Tefluthrin,0.87,,,,,5.8,5.8
+04/01/2015 12:00:00 AM,Syngenta,Lorsban Advanced,62719-591,52.48,,Chlorpyrifos,197.06,,,,,209.9,147.6
+04/01/2015 12:00:00 AM,Syngenta,Lumax EZ,100-1442,90.41,,S-Metolachlor,225.12,Atrazine,84.53,Mesotrione,22.51,120.55,120.55
+04/01/2015 12:00:00 AM,Syngenta,Mustang,279-3126,0.02,,S-Cyano Methyl,0.03,,,,,1,1
+04/01/2015 12:00:00 AM,Syngenta,Mustang,279-3126,2.63,,Zeta-Cypermethrin,3.95,,,,,112.2,112.2
+04/01/2015 12:00:00 AM,Syngenta,Permethrin,34704-873,0.14,,Permethrin,0.45,,,,,3,3
+04/01/2015 12:00:00 AM,Syngenta,Warrior II,100-1295,2.62,,Lambda-Cyhalothrin,5.45,,,,,209.47,189.57
+04/01/2015 12:00:00 AM,BASF Plant Science,Atrazine 4L,34704-69,0.6,,"Atrazine:(2-Chloro-4-ethylamino-6-isopropylamino-s-triazine 42.6, Related compounds 0.9%",2.5,,,,,2.5,2.5
+04/01/2015 12:00:00 AM,BASF Plant Science,Baythroid XL,264-840,0.0109,,"Beta-cyfluthrin Cyano(4-fluoro-3-phenoxyphenyl)methyl-3-(2,2-dichloro-ethenyl)-2,2-dimethyl-cyclopropanecarboxylate 12.70%",0.0109,,,,,0.5,0.5
+04/01/2015 12:00:00 AM,BASF Plant Science,Lannate LV,352-384,0.75, ,Methomyl (S-methyl-N-[(methylcarbamoyl)oxy]thioacetimidate) 29%,1.8,,,,,2,2
+04/01/2015 12:00:00 AM,BASF Plant Science,Lorsban Advanced,62719-591,3,,"chlorpyrifos: O,O-diethyl-O-(3,5,6-trichloro-2-pyridinyl)phosphorothioate 40.2%",11.25,,,,,6,4
+04/01/2015 12:00:00 AM,BASF Plant Science,Mustang,279-3126,0.05,,"S-Cyano (3-phenoxyphenyl)methyl(+-) cis/trans 3-(2,2-dichloroethenyl)-2,2 dimethylcyclopropane carboxylate 17.1%",0.09,,,,,1.85,1.6
+04/01/2015 12:00:00 AM,BASF Plant Science,Besiege,100-1402,0.05,,Lambda-Cyhalothrin,0.021,Chlorantraniliprole,0.042,,,0.9,0.9
+04/01/2015 12:00:00 AM,DuPont Pioneer,Dual II Magnum,100-818,1.95,,S-metolachlor,14.898,,,,,7.8,7.8
+04/01/2015 12:00:00 AM,DuPont Pioneer,Force 3G,100-1075-5481,,48.677,Tefluthrin,1.4603,,,,,8.94,8.94
+04/01/2015 12:00:00 AM,DuPont Pioneer,Gramoxone SL 2.0,100-1431,0.9864,,Paraquat dichloride,1.9728,,,,,3.95,3.95
+04/01/2015 12:00:00 AM,DuPont Pioneer,Mustang Maxx,279-3426,0.2281,,Zeta-cypermethrin,0.1825,,,,,7.3,7.3
+05/01/2015 12:00:00 AM,BASF Plant Science,Atrazine 4L,34704-69,0.5,,"Atrazine:(2-Chloro-4-ethylamino-6-isopropylamino-s-triazine 42.6, Related compounds 0.9%",2,,,,,2,2
+05/01/2015 12:00:00 AM,BASF Plant Science,Besiege,100-1402,0.014,,Lambda-Cyhalothrin,0.006,Chlorantraniliprole,0.012,,,0.2,0.2
+05/01/2015 12:00:00 AM,Dow AgroSciences,Asana XL,352-515,8.1,,Esfenvalerate,5.4,,,,,115.4,115.4
+05/01/2015 12:00:00 AM,Dow AgroSciences,Atrazine 4L,34704-69,1.8,,Atrazine,7,,,,,7,7
+05/01/2015 12:00:00 AM,Dow AgroSciences,Baythroid XL,264-840,4.2,,Beta-cyfluthrin,4.2,,,,,193.2,193.2
+05/01/2015 12:00:00 AM,Dow AgroSciences,Cobalt Advanced,62719-615,2.6,,Chlorpyrifos,6.4,Lambda-cyhalothrin,0.3,,,9.4,9.4
+05/01/2015 12:00:00 AM,Dow AgroSciences,Coragen,352-729,8.5,,Chlorantraniliprole,14.3,,,,,217.4,217.4
+05/01/2015 12:00:00 AM,Dow AgroSciences,Dual II Magnum,100-818,13.2,,S-metolachlor,101,,,,,53.9,53.9
+05/01/2015 12:00:00 AM,Dow AgroSciences,Force 3G,100-1075,,34,Tefluthrin,1.02,,,,,8.5,8.5
+05/01/2015 12:00:00 AM,Dow AgroSciences,Lorsban Advanced,62719-591,0.5,,Chlorpyrifos,1.9,,,,,2.2,2.2
+05/01/2015 12:00:00 AM,Dow AgroSciences,Permethrin,34704-873,11.3,,Permethrin,36,,,,,180.1,180.1
+05/01/2015 12:00:00 AM,Syngenta,Aatrex Nine-O,100-585,,72.1,Atrazine,63.45,,,,,72.1,72.1
+05/01/2015 12:00:00 AM,Syngenta,Asana XL,352-515,1.89,,Esfenvalerate,1.25,,,,,26.9,26.9
+05/01/2015 12:00:00 AM,Syngenta,Baythroid XL,264-840,0.06,,B-Cyfluthrin,0.06,,,,,2.96,2.96
+05/01/2015 12:00:00 AM,Syngenta,Besiege,100-1402,1.93,,Lambda-Cyhalothrin,0.8,Chlorantraniliprole,1.61,,,24.68,24.68
+05/01/2015 12:00:00 AM,Syngenta,EUP Callisto,100-EUP-114,0.19,,Mesotrione,0.76,,,,,2,2
+05/01/2015 12:00:00 AM,Syngenta,EUP Callisto,100-EUP-114,0.05,,Mesotrione,0.2,,,,,1,1
+05/01/2015 12:00:00 AM,Syngenta,Dual II Magnum,100-818,0.7,,S-Metolachlor,5.35,,,,,4.5,4.5
+05/01/2015 12:00:00 AM,Syngenta,Force 3G,100-1075,,19.8,Tefluthrin,0.59,,,,,3.96,3.96
+05/01/2015 12:00:00 AM,Syngenta,Lorsban Advanced,62719-591,7.39,,Chlorpyrifos,27.75,,,,,29.55,29.55
+05/01/2015 12:00:00 AM,Syngenta,Lumax EZ,100-1442,35.72,,S-Metolachlor,88.94,Atrazine,33.4,Mesotrione,8.89,47.63,47.63
+05/01/2015 12:00:00 AM,Syngenta,Permethrin,34707-873,1.09,,Permethrin,3.49,,,,,23.35,23.35
+05/01/2015 12:00:00 AM,Syngenta,Warrior II,100-1295,0.82,,Lambda-Cyhalothrin,1.71,,,,,65.35,65.35
+05/01/2015 12:00:00 AM,Kaua'i Coffee Co. LLC,Gramoxone SL 2.0,100-1431,38.75,,Paraquat dichloride,77.5,,,,,129.72,129.72
+05/01/2015 12:00:00 AM,DuPont Pioneer,Dual II Magnum,100-818,1.08,,S-metolachlor,8.213,,,,,4.3,4.3
+05/01/2015 12:00:00 AM,DuPont Pioneer,Force 3G,100-1075-5481,,15.45,Tefluthrin,0.4635,,,,,2.84,2.84
+05/01/2015 12:00:00 AM,DuPont Pioneer,Mustang Maxx,279-3426,0.08,,Zeta-cypermethrin,0.067,,,,,2.68,2.68
+06/01/2015 12:00:00 AM,Syngenta,Aatrex Nine-O,100-585,,26.7,Atrazine,23.5,,,,,26.7,26.7
+06/01/2015 12:00:00 AM,Syngenta,Asana XL,352-515,0.65,,Esfenvalerate,0.43,,,,,9.3,9.3
+06/01/2015 12:00:00 AM,Syngenta,Atrazine 4L,34704-69,4.95,,Atrazine,19.8,,,,,19.8,19.8
+06/01/2015 12:00:00 AM,Syngenta,Baythroid XL,264-840,0.21,,B-Cyfluthrin,0.21,,,,,10.96,10.96
+06/01/2015 12:00:00 AM,Syngenta,Besiege,100-1402,2.91,,Lambda-Cyhalothrin,1.21,Chlorantraniliprole,2.43,,,37.2,37.2
+06/01/2015 12:00:00 AM,Syngenta,Callisto EUP,100-EUP-114,0.19,,Mesotrione,0.76,,,,,2,2
+06/01/2015 12:00:00 AM,Syngenta,Callisto EUP,100-EUP-114,0.05,,Mesotrione,0.2,,,,,1,1
+06/01/2015 12:00:00 AM,Syngenta,Dual II Magnum,100-818,0.49,,S-Metolachlor,3.74,,,,,3.11,3.11
+06/01/2015 12:00:00 AM,Syngenta,Lorsban Advanced,62719-591,2.75,,Chlorpyrifos,10.33,,,,,10.98,10.98
+06/01/2015 12:00:00 AM,Syngenta,Lumax EZ,100-1442,15.08,,S-Metolachlor,37.55,Atrazine,14.1,Mesotrione,3.75,20.1,20.1
+06/01/2015 12:00:00 AM,Syngenta,Mustang,279-3126,0.03,,S-Cyano Methyl,0.045,,,,,1.01,1.01
+06/01/2015 12:00:00 AM,Syngenta,Permethrin,34704-873,0.38,,Permethrin,1.22,,,,,8.11,8.11
+06/01/2015 12:00:00 AM,Syngenta,Warrior II,100-1295,0.33,,Lambda-Cyhalothrin,0.69,,,,,26.09,26.09
+06/01/2015 12:00:00 AM,Kaua'i Coffee Co. LLC,Gramoxone SL 2.0,100-1431,17.5,,Paraquat dichloride,35,,,,,46.54,46.54
+06/01/2015 12:00:00 AM,Dow AgroSciences,Asana XL,352-515,9,,Esfenvalerate,5.9,,,,,127.9,127.9
+06/01/2015 12:00:00 AM,Dow AgroSciences,Baythroid XL,264-840,0.8,,Beta-cyfluthrin,0.8,,,,,38.7,35.2
+06/01/2015 12:00:00 AM,Dow AgroSciences,Cobalt Advanced,62719-615,9.1,,Chlorpyrifos,22.7,Lambda-cyhalothrin,1.2,,,33.2,33.2
+06/01/2015 12:00:00 AM,Dow AgroSciences,Coragen,352-729,2.5,,Chlorantraniliprole,4.2,,,,,64.2,62
+06/01/2015 12:00:00 AM,Dow AgroSciences,Dual II Magnum,100-818,0.4,,S-metolachlor,2.9,,,,,1.5,1.5
+06/01/2015 12:00:00 AM,Dow AgroSciences,Force 3G,100-1075,,13.2,Tefluthrin,0.4,,,,,3.2,3.2
+06/01/2015 12:00:00 AM,Dow AgroSciences,Lorsban Advanced,62719-591,0.8,,Chlorpyrifos,3.1,,,,,3.3,3.3
+06/01/2015 12:00:00 AM,Dow AgroSciences,Mustang,279-3126,0.04,,Zeta-Cypermethrin,0.1,,,,,1.3,1.3
+06/01/2015 12:00:00 AM,Dow AgroSciences,Permethrin,34704-873,1.9,,Permethrin,5.9,,,,,29.7,27.9
+06/01/2015 12:00:00 AM,DuPont Pioneer,Coragen,352-729,0.1364,,Chlorantraniliprole,0.228,,,,,3.49,3.49
+06/01/2015 12:00:00 AM,DuPont Pioneer,Dual II Magnum,100-818,1.56,,S-metolachlor,11.92,,,,,6.46,6.46
+06/01/2015 12:00:00 AM,DuPont Pioneer,Force 3G,100-1075-5481,,39.46,Tefluthrin,1.1838,,,,,7.25,7.25
+06/01/2015 12:00:00 AM,DuPont Pioneer,Gramoxone SL 2.0,100-1431,2.2425,,Paraquat dichloride,4.485,,,,,8.97,8.97
+06/01/2015 12:00:00 AM,DuPont Pioneer,Permethrin,34704-873,0.0426,,Permethrin,0.136,,,,,0.8,0.8
+06/01/2015 12:00:00 AM,BASF Plant Science,Warrior II w/Zeon,100-1295,0.02,,"Lambda-cyhalothrin 1,2 22.8%",0.04,,,,,1.5,1.5
+07/01/2015 12:00:00 AM,Dow AgroSciences,Asana XL,352-515,2.8,,Esfenvalerate,1.9,,,,,40.2,38.1
+07/01/2015 12:00:00 AM,Dow AgroSciences,Baythroid XL,264-840,0.7,,Beta-cyfluthrin,0.7,,,,,29.9,29.9
+07/01/2015 12:00:00 AM,Dow AgroSciences,Coragen,352-729,1.3,,Chlorantraniliprole,2.1,,,,,32.1,32.1
+07/01/2015 12:00:00 AM,Dow AgroSciences,Gramoxone 2.0 SL,100-1431,0.188,,Paraquat dichloride,0.38,,,,,1,1
+07/01/2015 12:00:00 AM,Dow AgroSciences,Lorsban Advanced,62719-591,103.9,,Chlorpyrifos,390.8,,,,,415.7,415.7
+07/01/2015 12:00:00 AM,Dow AgroSciences,Permethrin,34704-873,0.1,,Permethrin,0.2,,,,,1,1
+07/01/2015 12:00:00 AM,Kaua'i Coffee Co. LLC,Gramoxone SL 2.0,100-1431,40.75,,Paraquat dichloride,81.5,,,,,133.1,133.1
+07/01/2015 12:00:00 AM,Syngenta,Aatrex Nine-O,100-585,,18,Atrazine,15.84,,,,,18,18
+07/01/2015 12:00:00 AM,Syngenta,Asana XL,352-515,1.44,,Esfenvalerate,0.95,,,,,20.51,20.51
+07/01/2015 12:00:00 AM,Syngenta,Atrazine 4L,34704-69,1,,Atrazine,4,,,,,4.01,4.01
+07/01/2015 12:00:00 AM,Syngenta,Baythroid XL,264-840,0.35,,B-Cyfluthrin,0.35,,,,,17.81,17.81
+07/01/2015 12:00:00 AM,Syngenta,Besiege,100-1402,1.09,,Lambda-Cyhalothrin,0.45,Chlorantraniliprole,0.91,,,14.01,14.01
+07/01/2015 12:00:00 AM,Syngenta,Callisto EUP,100-EUP-114,0.07,,Mesotrione,0.28,,,,,1.5,1.5
+07/01/2015 12:00:00 AM,Syngenta,Lorsban Advanced,62719-591,1.79,,Chlorpyrifos,6.72,,,,,7.16,7.16
+07/01/2015 12:00:00 AM,Syngenta,Lumax EZ,100-1442,17.6,,S-Metolachlor,43.82,Atrazine,16.46,Mesotrione,4.38,23.47,23.47
+07/01/2015 12:00:00 AM,Syngenta,Mustang,279-3126,1,,S-Cyano Methyl,1.5,,,,,32,32
+07/01/2015 12:00:00 AM,Syngenta,Permethrin,34704-873,0.34,,Permethrin,1.09,,,,,7.16,7.16
+07/01/2015 12:00:00 AM,Syngenta,Warrior II,100-1295,0.53,,Lambda-Cyhalothrin,1.1,,,,,42,42
+07/01/2015 12:00:00 AM,BASF Plant Science,Baythroid XL,264-840,0.088,,"Beta-cyfluthrin Cyano(4-fluoro-3-phenoxyphenyl)methyl-3-(2,2-dichloro-ethenyl)-2,2-dimethyl-cyclopropanecarboxylate 12.70%",0.088,,,,,4,2
+07/01/2015 12:00:00 AM,BASF Plant Science,Permethrin,34704-873,0.125,,"Permethrin 35.4%, (3-Phenoxyphenyl)methyl (+-) cis-trans 3 -(2,2-dichloroethenyl)-1-1dimethlycyclopropanecarboxylate",0.4,,,,,2,2
+08/01/2015 12:00:00 AM,BASF Plant Science,Sniper,34704-858,0.002,,"Bifenthrin: (2 methyl[1, 1'-biphenyl]-3-yl) methyl 3-(2-chloro-3,3,3-trifluoro-1-propenyl)-2,2-dimethyl-cyclopropanecarboxylate 25.0%",0.004,,,,,0.1,0.05
+08/01/2015 12:00:00 AM,BASF Plant Science,Mustang,279-3126,0.002,,"S-Cyano (3-phenoxyphenyl)methyl(+-) cis/trans 3-(2,2-dichloroethenyl)-2,2 dimethylcyclopropane carboxylate 17.1%",0.002,,,,,0.05,0.05
+08/01/2015 12:00:00 AM,Syngenta,Asana XL,352-515,0.14,,esfenvalerate,0.09,,,,,2,2
+08/01/2015 12:00:00 AM,Syngenta,ATRAZINE 4L HERBICIDE *,34704-69,5.86,,atrazine,23.44,,,,,23.45,23.45
+08/01/2015 12:00:00 AM,Syngenta,BAYTHROID XL *,264-840,0.54,,β-cyfluthrin,0.54,,,,,27.76,27.76
+08/01/2015 12:00:00 AM,Syngenta,BESIEGE INSECTICIDE *,100-1402,1.42,,Lambda-cyhalothrin,0.59,chlorantraniliprole,1.19,,,18.12,18.12
+08/01/2015 12:00:00 AM,Syngenta,GRAMOXONE SL 2.0 *,100-1431,13.5,,Paraquat dichloride,27,,,,,54,54
+08/01/2015 12:00:00 AM,Syngenta,LORSBAN ADVANCED*,62719-591,6.5,,chlorpyrifos,24.41,,,,,26,26
+08/01/2015 12:00:00 AM,Syngenta,LUMAX EZ HERBICIDE *,100-1442,5.72,,S-metolachlor,14.24,atrazine,5.35,mesotrione,1.42,7.63,7.63
+08/01/2015 12:00:00 AM,Syngenta,MUSTANG INSECTICIDE *,279-3126,0.07,,S-Cyano Methyl,0.11,,,,,2.1,2.1
+08/01/2015 12:00:00 AM,Syngenta,MUSTANG INSECTICIDE *,279-3126,0.28,,S-Cyano Methyl,0.42,,,,,12,12
+08/01/2015 12:00:00 AM,Syngenta,PERMETHRIN *,34704-873,0.19,,permethrin,0.61,,,,,4,4
+08/01/2015 12:00:00 AM,Syngenta,WARRIOR II WITH ZEON TECHNOLOGY *,100-1295,0.14,,Lambda-cyhalothrin,0.29,,,,,11.13,11.13
+08/01/2015 12:00:00 AM,Kaua'i Coffee Co. LLC,Gramoxone SL 2.0,100-1431,32.5,,Paraquat dichloride,65,,,,,102.08,102.08
+08/01/2015 12:00:00 AM,DuPont Pioneer,DUPONT CORAGEN INSECT CONTROL*,352-729,0.0937,,chlorantraniliprole,0.1565,,,,,2.4,2.4
+08/01/2015 12:00:00 AM,DuPont Pioneer,DUAL II MAGNUM *,100-818,0.653,,s-metolachlor,5,,,,,2.85,2.85
+08/01/2015 12:00:00 AM,DuPont Pioneer,FORCE 3G SMARTBOX INSECTICIDE *,100-1075-5481,,20.347,tefluthrin,0.61,,,,,3.74,3.74
+08/01/2015 12:00:00 AM,DuPont Pioneer,GRAMOXONE SL 2.0 *,100-1431,0.4,,paraquat dichloride,0.8,,,,,1.6,1.6
+08/01/2015 12:00:00 AM,DuPont Pioneer,MUSTANG MAXX INSECTICIDE *,279-3426,0.35,,zeta-cypermethrin,0.28,,,,,11.21,9.82
+08/01/2015 12:00:00 AM,DuPont Pioneer,PERMETHRIN *,34704-873,0.1817,,permethrin,0.5814,,,,,3.81,3.81
+08/01/2015 12:00:00 AM,Dow AgroSciences,DU PONT ASANA XL INSECTICIDE *,352-515,0.3,,esfenvalerate,0.2,,,,,4.2,4.2
+08/01/2015 12:00:00 AM,Dow AgroSciences,COBALT ADVANCED *,62719-615,0.4,,chlorpyrifos,1,lambda-cyhalothrin,0.1,,,1.5,1.5
+08/01/2015 12:00:00 AM,Dow AgroSciences,DUPONT CORAGEN INSECT CONTROL*,352-729,0.1,,chlorantraniliprole,0.3,,,,,3.8,3.8
+08/01/2015 12:00:00 AM,Dow AgroSciences,GRAMOXONE SL 2.0 *,100-1431,0.25,,paraquat dichloride,0.5,,,,,1,1
+08/01/2015 12:00:00 AM,Dow AgroSciences,LORSBAN ADVANCED*,62719-591,5.9,,chlorpyrifos,22.2,,,,,25.8,25.8
+09/01/2015 12:00:00 AM,Syngenta,AATREX NINE-O *,100-585,,0.5,atrazine,0.22,,,,,0.5,0.5
+09/01/2015 12:00:00 AM,Syngenta,DU PONT ASANA XL INSECTICIDE *,352-515,1.10,,esfenvalerate,0.73,,,,,15.59,15.59
+09/01/2015 12:00:00 AM,Syngenta,BAYTHROID XL *,264-840,0.02,,β-cyfluthrin,0.02,,,,,1,1
+09/01/2015 12:00:00 AM,Syngenta,BESIEGE INSECTICIDE *,100-1402,1.44,,lambda-cyhalothrin,0.6,chlorantraniliprole,1.2,,,18.42,18.42
+09/01/2015 12:00:00 AM,Syngenta,CALLISTO HERBICIDE (For Experimental Use Only) *,100-EUP-114,0.33,,mesotrione,1.32,,,,,3.5,3.5
+09/01/2015 12:00:00 AM,Syngenta,CALLISTO HERBICIDE (For Experimental Use Only) *,100-EUP-114,0.05,,mesotrione,0.2,,,,,1.05,1.05
+09/01/2015 12:00:00 AM,Syngenta,DUAL II MAGNUM *,100-818,2.35,,s-metolachlor,17.95,,,,,15.05,15.05
+09/01/2015 12:00:00 AM,Syngenta,LORSBAN ADVANCED*,62719-591,4.29,,chlorpyrifos,16.11,,,,,17.16,17.16
+09/01/2015 12:00:00 AM,Syngenta,MUSTANG INSECTICIDE *,279-3126,0.05,,zeta-cypermethrin,0.08,,,,,2,2
+09/01/2015 12:00:00 AM,Syngenta,MUSTANG INSECTICIDE *,279-3126,0.20,,zeta-cypermethrin,0.3,,,,,6.24,6.24
+09/01/2015 12:00:00 AM,Syngenta,PERMETHRIN *,34704-873,1.58,,permethrin,5.06,,,,,33.61,33.61
+09/01/2015 12:00:00 AM,Syngenta,WARRIOR II WITH ZEON TECHNOLOGY *,100-1295,0.03,,lambda-cyhalothrin,0.06,,,,,3.2,3.2
+09/01/2015 12:00:00 AM,Syngenta,WARRIOR II WITH ZEON TECHNOLOGY *,100-1295,0.06,,lambda-cyhalothrin,0.12,,,,,4.96,4.96
+09/01/2015 12:00:00 AM,BASF Plant Science,Mustang,279-3126,0.116,,zeta-cypermethrin,0.248,,,,,5.3,0.8
+09/01/2015 12:00:00 AM,BASF Plant Science,SNIPER *,34704-858,0.002,,bifenthrin,0.004,,,,,0.1,0.1
+09/01/2015 12:00:00 AM,Kaua'i Coffee Co. LLC,Gramoxone SL 2.0,100-1431,76.875,,Paraquat dichloride,153.75,,,,,239.78,239.78
+09/01/2015 12:00:00 AM,DuPont Pioneer,DUAL II MAGNUM *,100-818,0.3635,,s-metolachlor,2.777,,,,,1.45,1.45
+09/01/2015 12:00:00 AM,DuPont Pioneer,FORCE 3G SMARTBOX INSECTICIDE *,100-1075-5481,,6.825,tefluthrin,0.205,,,,,1.25,1.25
+09/01/2015 12:00:00 AM,DuPont Pioneer,MUSTANG MAXX INSECTICIDE *,279-3426,0.474,,zeta-cypermethrin,0.379,,,,,15.17,13.59
+09/01/2015 12:00:00 AM,DuPont Pioneer,PERMETHRIN *,34704-873,0.6257,,permethrin,2.002,,,,,13.35,7.78
+09/01/2015 12:00:00 AM,Dow AgroSciences,Dual II Magnum,100-818,1.9,,s-metolachlor,14.7,,,,,7.7,7.7
+09/01/2015 12:00:00 AM,Dow AgroSciences,Gramoxone 2.0 SL,100-1431,13.869,,paraquat dichloride,27.74,,,,,57.6,57.6
+09/01/2015 12:00:00 AM,Dow AgroSciences,Lorsban Advanced,62719-591,1.5,,chlorpyrifos,5.5,,,,,5.9,5.9
+10/01/2015 12:00:00 AM,Syngenta,AATREX NINE-O *,100-585,,66.55,atrazine,58.56,,,,,133.1,133.1
+10/01/2015 12:00:00 AM,Syngenta,ATRAZINE 4L HERBICIDE *,34704-69,1.43,,atrazine,5.72,,,,,5.7,5.7
+10/01/2015 12:00:00 AM,Syngenta,BAYTHROID XL *,264-840,1.1,,β-cyfluthrin,1.10,,,,,56.1,56.1
+10/01/2015 12:00:00 AM,Syngenta,BESIEGE INSECTICIDE *,100-1402,0.05,,lambda-cyhalothrin,0.02,chlorantraniliprole,0.04,,,0.6,0.6
+10/01/2015 12:00:00 AM,Syngenta,FORCE 3G INSECTICIDE *,100-1075,,58.75,tefluthrin,1.76,,,,,11.75,11.75
+10/01/2015 12:00:00 AM,Syngenta,LORSBAN ADVANCED*,62719-591,15.7,,chlorpyrifos,58.95,,,,,62.8,62.8
+10/01/2015 12:00:00 AM,Syngenta,LUMAX EZ HERBICIDE *,100-1442,203.55,,s-metolachlor,506.84,atrazine,190.32,mesotrine,50.68,271.4,271.4
+10/01/2015 12:00:00 AM,Syngenta,MUSTANG INSECTICIDE *,279-3126,0.94,,S-Cyano Methyl,1.41,,,,,30,30
+10/01/2015 12:00:00 AM,Syngenta,WARRIOR II WITH ZEON TECHNOLOGY *,100-1295,3.53,,lambda-cyhalothrin,7.34,,,,,282.71,282.71
+10/01/2015 12:00:00 AM,DuPont Pioneer,DUAL II MAGNUM *,100-818,6.208,,s-metolachlor,47.43,,,,,24.83,24.83
+10/01/2015 12:00:00 AM,DuPont Pioneer,FORCE 3G SMARTBOX INSECTICIDE *,100-1075-5481,,128.7,tefluthrin,3.861,,,,,23.64,23.64
+10/01/2015 12:00:00 AM,DuPont Pioneer,PERMETHRIN *,34704-873,0.317,,permethrin,1.015,,,,,5.08,5.08
+10/01/2015 12:00:00 AM,Kaua'i Coffee Co. LLC,Gramoxone SL 2.0,100-1431,68.75,,Paraquat dichloride,137.5,,,,,199.81,199.81
+10/01/2015 12:00:00 AM,BASF Plant Science,Atrazine 4L,34704-69,1.13,,atrazine,4.5,0,,0,,4.5,4.5
+10/01/2015 12:00:00 AM,BASF Plant Science,Lorsban Advanced,62719-591,0.91,,chlorpyrifos,3.4,0,,0,,7.25,7.25
+10/01/2015 12:00:00 AM,BASF Plant Science,Lumax,100-1152,1.88,,s-metolachlor,1.48,atrazine,0.21,mesotrione,0.01,3,3
+10/01/2015 12:00:00 AM,BASF Plant Science,Mustang,279-3126,0.0063,,zeta-cypermethrin,0.0094,0,,0,,0.2,0.1
+10/01/2015 12:00:00 AM,BASF Plant Science,Sniper,34704-858,0.001,,bifenthrin,0.002,0,,0,,0.05,0.05
+10/01/2015 12:00:00 AM,BASF Plant Science,Warrior II w/zeon Technology,100-1295,0.03,,lambda-cyhalothrin,0.0624,0,,0,,2,2
+10/01/2015 12:00:00 AM,Dow AgroSciences,Dual II Magnum,100-818,47.3,,S-metolachlor,361,,,,,189,189
+10/01/2015 12:00:00 AM,Dow AgroSciences,Force 3G,100-1075,,211,Tefluthrin,6.33,,,,,52.8,52.8
+10/01/2015 12:00:00 AM,Dow AgroSciences,Gramoxone 2.0 SL,100-1431,14.336,,Paraquat dichloride,28.67,,,,,64.3,64.3
+11/01/2015 12:00:00 AM,BASF Plant Science,Atrazine 4L,34704-69,4.19,,atrazine,16.76,0,,0,,16.75,16.75
+11/01/2015 12:00:00 AM,BASF Plant Science,Baythroid XL,264-840,0.33,,β-cyfluthrin,0.33,0,,0,,15.25,8.5
+11/01/2015 12:00:00 AM,BASF Plant Science,Lannate LV Dupont,352-384,1.88,,methomyl,2.808,0,,0,,6.25,6.25
+11/01/2015 12:00:00 AM,BASF Plant Science,Lorsban Advanced,62719-591,1.13,,chlorpyrifos,4.885,0,,0,,4.5,4.5
+11/01/2015 12:00:00 AM,BASF Plant Science,Mustang,279-3126,0.63,,zeta-cypermethrin,0.945,0,,0,,20.25,13
+11/01/2015 12:00:00 AM,BASF Plant Science,Sniper,34704-858,0.006,,bifenthrin,0.012,0,,0,,0.03,0.03
+11/01/2015 12:00:00 AM,BASF Plant Science,Warrior II w/zeon Technology,100-1295,0.225,,lambda-cyhalothrin,0.468,0,,0,,15.01,13.68
+11/01/2015 12:00:00 AM,Dow AgroSciences,ATRAZINE 4L HERBICIDE *,34704-69,15.8,,atrazine,63.1,0,,0,,62.4,59.3
+11/01/2015 12:00:00 AM,Dow AgroSciences,BAYTHROID XL *,264-840,1.7,,β-cyfluthrin,1.7,0,,0,,77.5,74.2
+11/01/2015 12:00:00 AM,Dow AgroSciences,DUPONT CORAGEN INSECT CONTROL*,352-729,0.2,,chlorantraniliprole,0.4,0,,0,,5.7,5.7
+11/01/2015 12:00:00 AM,Dow AgroSciences,DUAL II MAGNUM *,100-818,2.1,,s-metolachlor,16.4,0,,0,,8.6,8.6
+11/01/2015 12:00:00 AM,Dow AgroSciences,FORCE 3G INSECTICIDE *,100-1075,,44.1,tefluthrin,1.32,0,,0,,10.2,10.2
+11/01/2015 12:00:00 AM,Dow AgroSciences,GRAMOXONE SL 2.0 *,100-1431,2,,paraquat dichloride,4,0,,0,,8,8
+11/01/2015 12:00:00 AM,Dow AgroSciences,LORSBAN ADVANCED*,62719-591,24.6,,chlorpyrifos,92.4,0,,0,,98.3,97.2
+11/01/2015 12:00:00 AM,Dow AgroSciences,LUMAX EZ HERBICIDE *,100-1442,0.6,,s-metolachlor,1.6,atrazine,0.6,mesotrine,0.2,1.7,1.7
+11/01/2015 12:00:00 AM,Dow AgroSciences,PERMETHRIN *,34704-873,0.2,,permethrin,0.6,0,,0,,2.8,2.8
+11/01/2015 12:00:00 AM,DuPont Pioneer,DUPONT CORAGEN INSECT CONTROL*,352-729,0.3275,,chlorantraniliprole,0.547,0,,0,,8.38,8.38
+11/01/2015 12:00:00 AM,DuPont Pioneer,DUAL II MAGNUM *,100-818,8.89,,s-metolachlor,67.9,0,,0,,35.77,35.77
+11/01/2015 12:00:00 AM,DuPont Pioneer,FORCE 3G SMARTBOX INSECTICIDE *,100-1075-5481,,325.858,tefluthrin,9.776,0,,0,,59.85,59.85
+11/01/2015 12:00:00 AM,Kaua'i Coffee Co. LLC,GRAMOXONE SL 2.0 *,100-1431,8.75,,paraquat dichloride,,0,,0,,25.55,25.55
+11/01/2015 12:00:00 AM,Syngenta,AATREX NINE-O *,100-585,,32.05,atrazine,28.2,0,,0,,64.1,64.1
+11/01/2015 12:00:00 AM,Syngenta,AATREX NINE-O *,100-585,,74.7,atrazine,65.74,0,,0,,74.7,74.7
+11/01/2015 12:00:00 AM,Syngenta,DU PONT ASANA XL INSECTICIDE *,352-515,0.67,,esfenvalerate,0.44,0,,0,,9.5,9.5
+11/01/2015 12:00:00 AM,Syngenta,ATRAZINE 4L HERBICIDE *,34704-69,4.9,,atrazine,19.6,0,,0,,19.6,19.6
+11/01/2015 12:00:00 AM,Syngenta,BAYTHROID XL *,264-840,1.02,,β-cyfluthrin,1.02,0,,0,,52.15,52.15
+11/01/2015 12:00:00 AM,Syngenta,BESIEGE INSECTICIDE *,100-1402,5.63,,lambda-cyhalothrin,2.35,chlorantraniliprole,4.7,0,,72.1,72.1
+11/01/2015 12:00:00 AM,Syngenta,CALLISTO HERBICIDE (For Experimental Use Only) *,100-EUP-114,0.94,,mesotrione,3.76,0,,0,,5,5
+11/01/2015 12:00:00 AM,Syngenta,DUAL II MAGNUM *,100-818,0.78,,s-metolachlor,5.96,0,,0,,5,5
+11/01/2015 12:00:00 AM,Syngenta,DUAL II MAGNUM *,100-818,0.71,,s-metolachlor,5.42,0,,0,,11.32,11.32
+11/01/2015 12:00:00 AM,Syngenta,FORCE 3G INSECTICIDE *,100-1075,,163.65,tefluthrin,4.91,0,,0,,32.73,32.73
+11/01/2015 12:00:00 AM,Syngenta,GRAMOXONE SL 2.0 *,100-1431,7.5,,paraquat dichloride,15,0,,0,,30,30
+11/01/2015 12:00:00 AM,Syngenta,LORSBAN ADVANCED*,62719-591,22.13,,chlorpyrifos,83.1,0,,0,,88.5,88.5
+11/01/2015 12:00:00 AM,Syngenta,LUMAX EZ HERBICIDE *,100-1442,72.49,,s-metolachlor,180.5,atrazine,67.78,mesotrine,18.05,96.65,96.65
+11/01/2015 12:00:00 AM,Syngenta,MUSTANG INSECTICIDE *,279-3126,3.14,,zeta-cypermethrin,4.71,0,,0,,100.6,100.6
+11/01/2015 12:00:00 AM,Syngenta,PERMETHRIN *,34704-873,0.75,,permethrin,2.4,0,,0,,15.9,15.9
+11/01/2015 12:00:00 AM,Syngenta,WARRIOR II WITH ZEON TECHNOLOGY *,100-1295,1.24,,lambda-cyhalothrin,2.58,0,,0,,99.15,99.15
+12/01/2015 12:00:00 AM,BASF Plant Science,Baythroid XL,264-840,0.159,,β-cyfluthrin,0.159,0,,0,,7.25,7.25
+12/01/2015 12:00:00 AM,BASF Plant Science,Lorsban Advanced,62719-591,0.5,,chlorpyrifos,1.878,0,,0,,2,2
+12/01/2015 12:00:00 AM,BASF Plant Science,MUSTANG INSECTICIDE *,279-3126,0.469,,zeta-cypermethrin,0.704,0,,0,,15.01,15.01
+12/01/2015 12:00:00 AM,BASF Plant Science,WARRIOR II WITH ZEON TECHNOLOGY *,100-1295,0.052,,lambda-cyhalothrin,0.108,0,,0,,3.47,3.46
+12/01/2015 12:00:00 AM,Syngenta,AATREX NINE-O *,100-585,,10.85,atrazine,9.55,0,,0,,21.7,21.7
+12/01/2015 12:00:00 AM,Syngenta,AATREX NINE-O *,100-585,,20.5,atrazine,18.04,0,,0,,20.5,20.5
+12/01/2015 12:00:00 AM,Syngenta,ATRAZINE 4L HERBICIDE *,34704-69,16.76,,atrazine,67.04,0,,0,,67.05,67.05
+12/01/2015 12:00:00 AM,Syngenta,BAYTHROID XL *,264-840,0.03,,β-cyfluthrin,0.03,0,,0,,1.3,1.3
+12/01/2015 12:00:00 AM,Syngenta,BESIEGE INSECTICIDE *,100-1402,5.03,,lambda-cyhalothrin,2.1,chlorantraniliprole,4.2,0,,64.33,64.33
+12/01/2015 12:00:00 AM,Syngenta,CALLISTO HERBICIDE (For Experimental Use Only) *,100-EUP-114,0.56,,mesotrione,2.24,0,,0,,3,3
+12/01/2015 12:00:00 AM,Syngenta,DUAL II MAGNUM *,100-818,1.69,,s-metolachlor,12.91,0,,0,,27.03,27.03
+12/01/2015 12:00:00 AM,Syngenta,DUAL II MAGNUM *,100-818,1.88,,s-metolachlor,14.36,0,,0,,12.03,12.03
+12/01/2015 12:00:00 AM,Syngenta,FORCE 3G INSECTICIDE *,100-1075,,217.15,tefluthrin,6.51,0,,0,,43.43,43.43
+12/01/2015 12:00:00 AM,Syngenta,LORSBAN ADVANCED*,62719-591,20.39,,chlorpyrifos,76.56,0,,0,,81.56,79.4
+12/01/2015 12:00:00 AM,Syngenta,LUMAX EZ HERBICIDE *,100-1442,48.15,,s-metolachlor,119.9,atrazine,45.02,mesotrine,12,64.2,64.2
+12/01/2015 12:00:00 AM,Syngenta,MUSTANG INSECTICIDE *,279-3126,0.35,,zeta-cypermethrin,0.53,0,,0,,11.2,11.2
+12/01/2015 12:00:00 AM,Syngenta,PERMETHRIN *,34704-873,1.87,,permethrin,6,0,,0,,39.98,39.98
+12/01/2015 12:00:00 AM,Syngenta,WARRIOR II WITH ZEON TECHNOLOGY *,100-1295,0.97,,lambda-cyhalothrin,2,0,,0,,77.7,77.7
+12/01/2015 12:00:00 AM,DuPont Pioneer,DUPONT CORAGEN INSECT CONTROL*,352-729,0.307,,chlorantraniliprole,0.513,0,,0,,7.86,7.86
+12/01/2015 12:00:00 AM,DuPont Pioneer,DUAL II MAGNUM *,100-818,0.1578,,s-metolachlor,1.2057,0,,0,,0.63,0.63
+12/01/2015 12:00:00 AM,DuPont Pioneer,FORCE 3G SMARTBOX INSECTICIDE *,100-1075-5481,,19.487,tefluthrin,0.585,0,,0,,3.58,3.58
+12/01/2015 12:00:00 AM,Dow AgroSciences,DU PONT ASANA XL INSECTICIDE *,352-515,5.8,,esfenvalerate,3.9,0,,0,,85.5,81.5
+12/01/2015 12:00:00 AM,Dow AgroSciences,ATRAZINE 4L HERBICIDE *,34704-69,16.2,,atrazine,64.7,0,,0,,64.7,58.7
+12/01/2015 12:00:00 AM,Dow AgroSciences,BAYTHROID XL *,264-840,0.9,,β-cyfluthrin,0.9,0,,0,,41.2,41.2
+12/01/2015 12:00:00 AM,Dow AgroSciences,COBALT ADVANCED *,62719-615,7.5,,chlorpyrifos,18.7,lambda-cyhalothrin,1,0,,36.8,36.8
+12/01/2015 12:00:00 AM,Dow AgroSciences,DUPONT CORAGEN INSECT CONTROL*,352-729,5,,chlorantraniliprole,8.3,0,,0,,126.8,116
+12/01/2015 12:00:00 AM,Dow AgroSciences,LORSBAN ADVANCED*,62719-591,8.4,,chlorpyrifos,31.4,0,,0,,33.4,33.4
+12/01/2015 12:00:00 AM,Dow AgroSciences,PERMETHRIN *,34704-873,1.7,,permethrin,5.4,0,,0,,27,27
+12/01/2015 12:00:00 AM,Dow AgroSciences,WARRIOR II WITH ZEON TECHNOLOGY *,100-1295,0.3,,lambda-cyhalothrin,0.6,0,,0,,23.9,23.9
+12/01/2015 12:00:00 AM,Kaua'i Coffee Co. LLC,GRAMOXONE SL 2.0 *,100-1431,16,,paraquat dichloride,32,,,,,52.72,52.72
+01/01/2016 12:00:00 AM,BASF Plant Science,BAYTHROID XL *,264-840,0.328,0.328,β-cyfluthrin,,0,,0,,15,10
+01/01/2016 12:00:00 AM,BASF Plant Science,BESIEGE INSECTICIDE *,100-1402,0.014,,lambda-cyhalothrin,0.006,chlorantraniliprole,0.012,0,,0.2,0.2
+01/01/2016 12:00:00 AM,BASF Plant Science,MUSTANG INSECTICIDE *,279-3126,0.438,0.657,zeta-cypermethrin,,0,,0,,14.08,10.83
+01/01/2016 12:00:00 AM,BASF Plant Science,SNIPER *,34704-858,0.028,0.056,bifenthrin,,0,,0,,0.8,0.8
+01/01/2016 12:00:00 AM,BASF Plant Science,PERMETHRIN *,34704-873,0.234,0.749,permethrin,,0,,0,,5,5
+01/01/2016 12:00:00 AM,BASF Plant Science,WARRIOR II WITH ZEON TECHNOLOGY *,100-1295,0.017,0.354,lambda-cyhalothrin,,0,,0,,1.1,1.1
+01/01/2016 12:00:00 AM,Syngenta,AATREX NINE-O *,100-585,,0.6,atrazine,0.53,0,,0,,0.6,0.6
+01/01/2016 12:00:00 AM,Syngenta,BAYTHROID XL *,264-840,0.42,,β-cyfluthrin,0.42,0,,0,,21.3,21.3
+01/01/2016 12:00:00 AM,Syngenta,BESIEGE INSECTICIDE *,100-1402,4.72,,lambda-cyhalothrin,1.97,chlorantraniliprole,3.94,0,,60.37,60.37
+01/01/2016 12:00:00 AM,Syngenta,DUAL II MAGNUM *,100-818,0.47,,s-metolachlor,3.6,0,,0,,3,3
+01/01/2016 12:00:00 AM,Syngenta,DUAL II MAGNUM *,100-818,3.72,,s-metolachlor,28.4,0,,0,,59.51,59.51
+01/01/2016 12:00:00 AM,Syngenta,FORCE 3G INSECTICIDE *,100-1075,,7.8,tefluthrin,0.23,0,,0,,1.56,1.56
+01/01/2016 12:00:00 AM,Syngenta,LORSBAN ADVANCED*,62719-591,13.46,,chlorpyrifos,50.54,0,,0,,53.83,53.83
+01/01/2016 12:00:00 AM,Syngenta,LUMAX EZ HERBICIDE *,100-1442,3.23,,s-metolachlor,8.04,atrazine,3.02,mesotrine,0.8,4.3,4.3
+01/01/2016 12:00:00 AM,Syngenta,MUSTANG INSECTICIDE *,279-3126,1.27,,zeta-cypermethrin,1.9,0,,0,,40.59,40.59
+01/01/2016 12:00:00 AM,Syngenta,PERMETHRIN *,34704-873,2.62,,permethrin,8.4,0,,0,,55.83,55.83
+01/01/2016 12:00:00 AM,Syngenta,WARRIOR II WITH ZEON TECHNOLOGY *,100-1295,0.72,,lambda-cyhalothrin,1.5,0,,0,,57.83,57.83
+01/01/2016 12:00:00 AM,DuPont Pioneer,DUPONT CORAGEN INSECT CONTROL*,352-729,0.52,,chlorantraniliprole,0.87,0,,0,,16.66,16.66
+01/01/2016 12:00:00 AM,DuPont Pioneer,DUAL II MAGNUM *,100-818,0.63,,s-metolachlor,4.8,0,,0,,2.51,2.51
+01/01/2016 12:00:00 AM,DuPont Pioneer,GRAMOXONE SL 2.0 *,100-1431,1.14,,paraquat dichloride,2.28,0,,0,,4.57,4.57
+01/01/2016 12:00:00 AM,Dow AgroSciences,DU PONT ASANA XL INSECTICIDE *,352-515,5.8,,esfenvalerate,3.8,0,,0,,82.1,79.7
+01/01/2016 12:00:00 AM,Dow AgroSciences,ATRAZINE 4L HERBICIDE *,34704-69,2.1,,atrazine,8.4,0,,0,,8.4,8.4
+01/01/2016 12:00:00 AM,Dow AgroSciences,BAYTHROID XL *,264-840,1.7,,β-cyfluthrin,1.7,0,,0,,79.5,67.8
+01/01/2016 12:00:00 AM,Dow AgroSciences,COBALT ADVANCED *,62719-615,1.4,,chlorpyrifos,3.4,lambda-cyhalothrin,0.2,0,,5,5
+01/01/2016 12:00:00 AM,Dow AgroSciences,DUPONT CORAGEN INSECT CONTROL*,352-729,5.2,,chlorantraniliprole,8.8,0,,0,,138,133.3
+01/01/2016 12:00:00 AM,Dow AgroSciences,DU PONT LANNATE LV INSECTICIDE *,352-384,1,,methomyl,2.3,0,,0,,6.2,6.2
+01/01/2016 12:00:00 AM,Dow AgroSciences,LORSBAN ADVANCED*,62719-591,5.8,,chlorpyrifos,21.6,0,,0,,23,20.5
+01/01/2016 12:00:00 AM,Dow AgroSciences,PERMETHRIN *,34704-873,2.3,,permethrin,7.5,0,,0,,36.4,36.4
+01/01/2016 12:00:00 AM,Dow AgroSciences,WARRIOR II WITH ZEON TECHNOLOGY *,100-1295,0.5,,lambda-cyhalothrin,1,0,,0,,41.2,41.2
+01/01/2016 12:00:00 AM,Kaua'i Coffee Co. LLC,none,,0,0,,0,,0,,,0,0

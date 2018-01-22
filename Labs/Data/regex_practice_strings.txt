@@ -1,0 +1,76 @@
+* select all the letters
+* select only the numbers
+* select only the middle three characters
+
+abc123xyz
+123efg456
+
+* select all the tacocats
+* exclude the tacocat that ends with '.'
+* get only the tacocat in parentheses
+
+tacocat
+tacoca
+tacocat.
+(tacocat)
+Tacocat
+
+* Select the lines that contain whitespace
+1.   abc  
+2.  abc 
+3.           abc
+4.abc
+
+
+* Capture () anything that ends with .pdf
+
+file_record_transcript.pdf  
+file_record_transcript
+file_07241999.pdf
+file_07241999
+testfile_fake.pdf.tmp
+
+1. COUNTY CODES
+
+MA, 25, 001, Barnstable County, H1
+MA, 25, 003, Berkshire County, H4
+MA, 25, 005, Bristol County, H1
+MA, 25, 007, Dukes County, H1
+MA, 25, 009, Essex County, H4
+MA, 25, 011, Franklin County, H4 
+MA, 25, 013, Hampden County, H4
+MA, 25, 015, Hampshire County, H4
+MA, 25, 017, Middlesex County, H4
+MA, 25, 019, Nantucket County, H4
+MA, 25, 021, Norfolk County, H1
+MA, 25, 023, Plymouth County, H1
+MA, 25, 025, Suffolk County, H4
+MA, 25, 027, Worcester County, H4
+VA, 51, 193, Westmoreland County, H1
+VA, 51, 195, Wise County, H1
+VA, 51, 197, Wythe County, H1
+VA, 51, 199, York County, H1
+VA, 51, 510, Alexandria city, C7
+VA, 51, 515, Bedford city, C7
+VA, 51, 520, Bristol city, C7
+VA, 51, 530, Buena Vista city, C7
+VA, 51, 540, Charlottesville city, C7
+VA, 51, 550, Chesapeake city, C7
+VA, 51, 570, Colonial Heights city, C7
+
+
+2. DNA SEQUENCES
+
+ATG CAA TGG GGA AAT GGT ACC AGG TCC GAA CTT AAT GAG GTA AGA CAG ATT TAA
+A TGC AAT GGG GAA ATG TTA CCA GGT CCG AAC TTA TTG AGG TAA GAC AGA TTT AA
+AT GCA ATG GGG AAA TGT TAC CAG GTC CGA ACT TAT TAA GGT AAG ACA GAT TTA A
+
+
+3. SUPER CHALLENGE
+
+272_71.9333_33.9167 and 80.9_-161.533 are the latitude and longitude separated by 
+an underscore. Can you write a regular expression that highlights the latitude and 
+longitude?
+
+BARENTS_SEA_PERSEY_Nansen_surface_net_333_um_272_71.9333_33.9167
+POLAR_BASIN_DRIFTING_STATION_SEVERNYI_POLUS_2_Nansen_closing_net_333_um_mesh_3464_80.9_-161.533

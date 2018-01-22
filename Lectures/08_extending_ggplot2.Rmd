@@ -1,0 +1,397 @@
+---
+title: "Adding Dimensions to your Data Visualization"
+author: "Intro to Data Science for Biology"
+date: "February 17, 2016"
+output: html_document
+---
+
+We're going to work through a few principles of ggplot2 today to aid in viewing multivariate data sets and pursuing data excellence. Yesterday, we were introduced to two of the most common geometric representations of data - points and lines. We're going to focus on those here, but will introduce a few others in the homework. So let's start by loading up our plankton data set.
+
+For today, let's use the etherpad at https://etherpad.wikimedia.org/p/eA8ySHxdkW
+
+```{r, eval=FALSE}
+library(readxl)
+library(ggplot2)
+
+plankton <- read_excel("../Data/EST-PR-PlanktonChemTax.xls", sheet=2)
+```
+
+```{r, warning=FALSE, message=FALSE, echo=FALSE}
+library(readxl)
+library(ggplot2)
+
+capture.output(plankton <- read_excel("../Data/EST-PR-PlanktonChemTax.xls", sheet=2), file="/dev/null")
+```
+
+###What to look for?
+One element of exploratory graphics we didn't talk about it visualizing ALL THE DATA. Sometimes, you just want to look. Fortunately, R has a nice function for this - `pairs`.  As we don't want to look at the same relationships as Tuesday (that would be boring!), let's scan around for some others.  We'll start with the 11th column, as it's the first to have biological data, and go to the end of the data frame.
+
+```{r pairs}
+#which columns are biological information?
+names(plankton)
+
+#plot them
+pairs(plankton[,11:22])
+```
+
+
+Whoah!  That's a lot of information.  But, it looks like our best bet for a nice relationship is going to be...
+
+
+###Introducing Chlorophytes, Cyanobacteria, and Log Scales
+
+So, Chlrophytes are small unicellular green algae, and Cyanobacteria are tiny blue-green algae - bacteria really - and produce a LOT of the oxygen on this earth.  Important little guys.  Let's look at the relationship between the two of them for the next little while.
+
+But before we do - one of the great things about ggplot2 is that we build plots in steps. We can often take the same plot parameters, and put different data geoms, colors, scales, themes, and more on it. To avoid having to retype an ENTIRE plot over and over again, we can save a plot as an object, and add to it later.  So, let's make a basic scatterplot that we'll build from for today, and call it `base_plot`.
+
+```{r}
+base_plot <- ggplot(data=plankton, 
+                    aes(x=Chlorophytes, y=Cyanobacteria)) +
+  geom_point()
+
+#Putting in the name of the object
+#makes it display. You can also use
+#print(base_plot)
+base_plot
+```
+
+Fantastic. But, hrm. There's a lot of clustering at 0 on both axes and then the data spreads out at higher values. Remember, one way to collapse this sort of data is log transforms. Let's try one right now.
+
+```{r}
+base_plot <- base_plot +
+  scale_y_log10()
+
+base_plot
+```
+
+Hrm.  Thats weird and curvy. And while we have made the y-axis nicer to see, there's still that odd spreading problem along the x-axis.  The solution?  Log again! But this time on x.
+
+```{r}
+base_plot <- base_plot +
+  scale_x_log10()
+
+base_plot
+```
+
+Lovely.  
+
+Notice that each time we've implemented one of these scale transformations, we've saved over `base_plot` for easier use later.
+
+Now you try - try to change the scale - instead of `scale_y_log10` or it's counterpart, use `scale_y_continous` but with the trans argument (look at the helpfile) to try some different transformations.  Here's one:
+
+```{r}
+#arctangent? Why not.
+base_plot + 
+  scale_y_continuous(trans="atanh")
+```
+###Faceting - It's a Wrap!
+
+Great, so we can se a nice relationship between between these two plankters. But last time we learned that sometimes relationships change over space. Looking at the data, we see there is a `Site` column. Let's see how things change by `Site`.
+
+As we just want a different panel for each site, and have R optimize the panel layout, we'll use the `facet_wrap` function. It takes an column name preceeded by a `~` - more on that in a minute - to generate facets.
+
+```{r}
+base_plot +
+  facet_wrap(~Site)
+```
+
+Wow. That's a lot of sites. That was not a useful visualization.
+
+Yes, not all data viz examples are useful!
+
+###The World is not Discrete
+
+One thing that might be useful for faceting is different temperatures and salinities. But, oops, they are continuous. We cannot facet by a continuous variable (try it if you don't believe me!)
+
+Fortunately, there's a solution in `ggplot2` - the `cut_interval` function. Give it a continuous vector and the number of groups you want, and it will split your data into bins of equal sizes. Let's look at it with temperature.
+
+```{r}
+plankton$TempGroups <- cut_interval(plankton$Temp, 4)
+
+#Oh, it's a factor!
+levels(plankton$TempGroups)
+```
+
+Here you see a nice use of factors. We have ordered groups. I know, you may not like the actual factor levels - but string manipulation is a lesson for another time. So, how will this work as a visualization?
+
+
+Now we can see that at low temperatures, there's not much of either, and at high temperatures, we seem to pass some threshold for Chlorophytes.
+
+It's hard to see if the relationship changes, though, particularly at low temperatures, as we're seeing different pieces of the data - different ranges.  Maybe we want to free up those scales on the side. The facet functions have an answer for this with the `scale` argument which can be `free`, `free_x`, or `free_y`.
+
+Note: because I've updated the data, I'm going to have to remake my `base_plot` as it has no knowledge of the new variables.
+
+```{r}
+#remake the base plot with the updated data set
+base_plot <- ggplot(data=plankton, 
+                    aes(x=Chlorophytes, y=Cyanobacteria)) +
+  geom_point() + scale_x_log10() + scale_y_log10()
+
+base_plot + 
+  facet_wrap(~TempGroups, scale="free")
+```
+
+Now we can see that, even with different pieces of the data, there seems to be a consistent positive association. Maybe...
+
+Now, try the same thing with salinity. Make four salinity groups, and see if there's any variaiton there.
+
+
+```{r}
+plankton$SalGroups <- cut_interval(plankton$Salinity, 4)
+
+#remake the base plot with the updated data set
+base_plot <- ggplot(data=plankton, 
+                    aes(x=Chlorophytes, y=Cyanobacteria)) +
+  geom_point() + scale_x_log10() + scale_y_log10()
+
+base_plot + 
+  facet_wrap(~SalGroups)
+```
+
+###Life on the Grid
+
+Perhaps temperature is not enough? What if you want to look at how the relationship changes by temperature and salinity?  `facet_wrap` won't do it for you.  This is there the `~` comes in along with the `facet_grid` function. `facet_grid` allows you to use more than one grouping variable, and plot all combinations of two variables using a `ROW ~ COLUMN` format for it's first argument. If either the row or column designation is `.` it defaults back to `facet_wrap`.
+
+Let's try this with our temperature and salinity groups.
+
+```{r}
+base_plot + 
+  facet_grid(SalGroups ~ TempGroups)
+```
+
+What do you see here?
+
+###Mapping Color
+
+OK, faceting by groups is great, but sometimes we want a single panel and to represent continuous variation. One example is if we wanted to look at variation across the estuary on a map.
+
+Map you say? Introducing the `ggmap` package that let's us put a map under our ggplots.
+
+```{r, cache=TRUE}
+library(ggmap)
+pie <- get_map(location = c(lon = mean(plankton$Longitude),
+                            lat = mean(plankton$Latitude)), 
+               zoom=12)
+
+pie_ggmap <- ggmap(pie)
+
+pie_ggmap
+```
+
+We gave it the center of our points, the level of zoom we wanted (1 would be the entire planet), and boom! Map. From the internet. It's worth exploring the `get_map` helpfile, as there are a lot of map formats we could have used. My personal favorite it the watercolor map from the stamen source, but, let's stick with some basics.
+
+Note, one problem is that we are seeing too much of the area around the estuary. So, let's zoom in a bit by changing the limits of our x and y axis using two functions that let us control the zoom on our plots.
+
+```{r}
+pie_ggmap <- ggmap(pie) +
+  xlim(c(-70.9, -70.77)) +
+  ylim(c(42.69, 42.77))
+
+pie_ggmap
+```
+
+Much nicer.
+
+So, how do we put data on a map?  Let's look at salinity - there's a fresh to salt gradient here. We'll use the Latitude and Longitude in the data set, and have `Salinity` as our colour.
+
+```{r}
+salinity_pie <- 
+  pie_ggmap +
+  geom_point(data=plankton, 
+             mapping = aes(x=Longitude, 
+                           y=Latitude,
+                           color=Salinity), 
+             size=3) 
+salinity_pie
+```
+
+###Making your own colorful path
+
+This is pretty neat, but...it's hard to see some of the blues against the ocean, and the scale isn't totally that helpful.
+
+Maybe a different geom?  Try it with `geom_line`?
+
+Eh?  Perhaps we want to use our *own* colors. For that, we have a number of `scale_color_` functions. The first two for continous data - `scale_color_continuous` and `scale_color_gradient` work in the same way with a low and high end of a gradient.
+
+```{r}
+salinity_pie +
+  scale_color_continuous(low="darkblue", high="red")
+```
+
+```{r}
+salinity_pie +
+  scale_color_gradient(low="darkblue", high="red")
+```
+
+This is **much** better. But it's still hard to see the middle range of salinities.  For that, we have the `scale_gradient_2` function, which takes an argument for what the midpoint color should be, but then **you** have to specify the value for that midpoint. Let's just go with the mean of our salinity values.
+
+```{r}
+salinity_pie +
+  scale_color_gradient2(low="darkblue", mid="white", high="red",
+                        midpoint=mean(plankton$Salinity))
+```
+
+Wow, that is MUCH better. Still, one might want even more levels. For that, we have the `gradientn` function. We can feed it any arbitrary vector of colors - in hex even - and it will make a gradient scale. For example.
+
+```{r}
+salinity_pie +
+  scale_color_gradientn(colors=rainbow(7))
+```
+
+Well now we can really see the super low salinity zone, and see where there are some intermediate zones as well. This is a much richer presentation of information. 
+
+Note the `rainbow()` function. R comes with a few different color palatte functions (and see the `colors` helpfile for how to view all of the colors in R). For each palatte, we feed it a number of colors, and get a vector back. Using some code from the `rainbow` helpfile, here ar ethe default pallates.
+
+```{r, echo=FALSE}
+
+##------ Some palettes ------------
+demo.pal <-
+  function(n, border = if (n < 32) "light gray" else NA,
+           main = paste("color palettes;  n=", n),
+           ch.col = c("rainbow(n, start=.7, end=.1)", "heat.colors(n)",
+                      "terrain.colors(n)", "topo.colors(n)",
+                      "cm.colors(n)"))
+{
+    nt <- length(ch.col)
+    i <- 1:n; j <- n / nt; d <- j/6; dy <- 2*d
+    plot(i, i+d, type = "n", yaxt = "n", ylab = "", main = main)
+    for (k in 1:nt) {
+        rect(i-.5, (k-1)*j+ dy, i+.4, k*j,
+             col = eval(parse(text = ch.col[k])), border = border)
+        text(2*j,  k * j + dy/4, ch.col[k])
+    }
+}
+n <- if(.Device == "postscript") 64 else 16
+     # Since for screen, larger n may give color allocation problem
+demo.pal(n)
+
+```
+
+Try one, and see what it does to your map.
+
+###A Wild Brew
+
+There are of course a ton of packages with other pallates our there. One of the most popular, because it's color selection is based on research looking at color blindness, and how we see sequential or diverging palattes of color, is `RColorBrewer`. You can view a lot more about it at http://colorbrewer2.org/ - for now, let's take a gander at what it provides.
+
+```{r}
+#install.packages("RColorBrewer")
+library(RColorBrewer)
+
+display.brewer.all(n=10, exact.n=FALSE)
+```
+
+That's a lot. Which of these do you think is best for seeing our salinity gradient? Why?
+
+```{r}
+salinity_pie +
+  scale_color_gradientn(colors=brewer.pal(7, "BrBG"))
+```
+
+###I am not a continuous person
+
+One of the nice thing about `RColorBrewer` and others is that we can use the colors provided as discrete values. Maybe we want to revert back to our groups from before. Let's try building that plot!
+
+```{r, echo=FALSE}
+salinity_pie_group <- 
+  pie_ggmap +
+  geom_point(data=plankton, 
+             mapping = aes(x=Longitude, 
+                           y=Latitude,
+                           color=SalGroups), 
+             size=3) 
+```
+
+
+```{r, eval=FALSE}
+salinity_pie_group <- 
+  pie_ggmap +
+  geom_point(data=plankton, 
+             mapping = aes(x=Longitude, 
+                           y=Latitude,
+                           color=SalGroups), 
+             size=3) 
+
+salinity_pie_group +
+  scale_color_gradientn(colors=brewer.pal(7, "Dark2"))
+```
+Uh oh!  Wait. This scaling function only works for continous colors.  What if we hadn't used the gradient.
+
+```{r}
+salinity_pie_group
+```
+
+OK, nice groups....but how do we implement this with our own custom scale. Ggplot2 provides two options. The first is `scale_color_brewer` which uses `RColorBrewer` palattes to generate discrete scales.
+
+```{r}
+salinity_pie_group +
+  scale_color_brewer(palette="Dark2")
+```
+
+But maybe you don't want something so locked in. You want to specify your own palatte for these four groups.  Well, for that, there's the `scale_color_manual` that puts you in charge.
+
+```{r}
+salinity_pie_group +
+  scale_color_manual(values=c("red", "darkblue", "purple", "orange"))
+```
+
+There are many other options for color palatted - ways to change the pallate name, make it not display, and more. Check the help fule for much of that info.
+
+###Thematic Representation
+Last, what if we want to change the overall look of our plot. Let's go back to our `base_plot`. Ugh. Grey background. Weird white lines. Maybe we don't like the default.  Ggplot2 provides some alternatives wtih `theme` functions. Now, you can specify what you'd like to your heart's content, but, there are a few canned differnt themes that can be quite nice.
+
+```{r}
+base_plot +
+  theme_bw()
+
+#Look, Ma, no axes!
+base_plot +
+  theme_void()
+```
+
+There are a few others worth exploring, but there are also whole package of themes that are constantly being updated.  Want to make your figure look like it came from Excel, fivethirtyeight.com, or was made by Tufte himself?
+
+```{r}
+#install.packages("ggthemes")
+library(ggthemes)
+
+base_plot +
+  theme_excel()
+
+base_plot +
+  theme_fivethirtyeight()
+
+base_plot +
+  theme_tufte(base_size=17)
+```
+
+Note in the last, we're using the `base_size` argument to change font sizes. Excellent for plotting.
+
+You can get as flexible as you want with the `theme` function. Look at the helpfile. For each element of the plot, you can specify exactly how you want it to look. It's a very strict system, with `element` functions to specify a standard set of arguments about text, lines, etc. But once you get the hang of it, you can do a lot. For example, let's rotate our x-axis text.
+
+```{r}
+base_plot +
+  theme(axis.text.x=element_text(angle=-90))
+```
+
+###If you liked it you shoulda put a title on it
+
+Once you've got your plot locked in with colors, axes, etc., we may want to add a last few details. Here's a very fiddly example with a title, some plot annotation, relabeling of figure axes, and the title of the colorbar all in one. This is a lot, but it gives you an idea of the powerful flexibility of `ggplot2` to get things looking EXACTLY the way you want them.
+
+`ggtitle`, `xlab`, and `ylab` are perhaps the most common things you'll be using as you move away from the default column names. But guides often need some tending to as well. 
+
+Note also that a color is added on the fly by adding a new aesthetic.
+
+
+```{r}
+base_plot +
+  theme_bw(base_size=12) +
+  theme(axis.text.x=element_text(angle=-90)) +
+  aes(color=Salinity) +
+  scale_color_gradientn(colors=brewer.pal(7, "BrBG"),
+                      guide=guide_colorbar(title="Salinity (PSU)")) +
+  ggtitle("Plankton Covariation and Salinity") +
+  annotate(geom="text", x=0.03, y=1, label="P=0.04") +
+  xlab("Chlorophyte Concentration") +
+  ylab("Cyanobacteria Concentration")
+
+```
