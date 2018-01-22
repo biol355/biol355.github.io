@@ -17,7 +17,7 @@ knitr::opts_chunk$set(echo = TRUE)
 * [World Bank Datasets](https://data.worldbank.org/products/tools)  
 * [Data One](https://www.dataone.org/)  
 * [Knowledge Network for Biocomplexity](https://knb.ecoinformatics.org/)  
-
+ 
 ## Data Sets
 * [City of Boston Data Portal](https://data.boston.gov/)  
 * [Massachusetts Ocean Resource Information System](http://maps.massgis.state.ma.us/map_ol/moris.php)  
