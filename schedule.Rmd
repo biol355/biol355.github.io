@@ -98,8 +98,10 @@ __Biological Examples:__ The effects of testosterone on bird behavior. Jet-lag r
 `r datestring_1` and `r datestring`  
 __Readings:__  W&G on [Model Basics](http://r4ds.had.co.nz/model-basics.html) and [Model Building](http://r4ds.had.co.nz/model-building.html)  
 __Objective(s):__ Fit a linear regression using lm() in R through a bivariate scatterplot, Describe when to use nonlinear models/curves, Visualization of model outcomes  
-__Biological Examples:__ Seal life history variation. Mouse anti-fungal drug development.  
+__Biological Examples:__ Seal life history variation. Mouse anti-fungal drug development.   
+
 ### Week  15. Open Lab and Final Presentations
 ```{r next_date, echo=FALSE}
 ```
 `r datestring`  
+Prep your final talks! Data science party!
