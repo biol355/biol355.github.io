@@ -19,7 +19,7 @@ datestring <- paste(month(current_date), day(current_date), year(current_date), 
 `r datestring`  
 __Lecture:__ [Welcome!](./Lectures/01_intro.pdf)  
 __Readings:__ [W&G Introduction Chapter 1](http://r4ds.had.co.nz/introduction.html)  
-__Objective(s):__ Introduce the students to the course; understand what is data, discuss how we preserve information about data, view different examples of datasets from different disciplines.
+__Objective(s):__ Introduce the students to the course; understand what is data, discuss how we preserve information about data, view different examples of datasets from different disciplines.  
 __Lab:__ [Data Collection](./Labs/lab_1_data_collection.html)
 
 ### Week  2. Data Creation
@@ -90,7 +90,7 @@ __Biological Examples:__ Hemlock wooly adelgid distribution. CDC records of hear
 `r datestring_1` and `r datestring`  
 __Readings:__ [Cortina and Dunlop 1997](./Readings/cortina and Dunlop 1997 significance testing p value.pdf)  
 __Objective(s):__ Describe the basics of probability and p-values, Compare groups of data using T-tests and its extensions.  
-__Biological Examples:__ The effects of testosterone on bird behavior. Jet-lag recovery and circadian rhythms.  
+__Biological Examples:__ The effects of testosterone on bird behavior. Jet-lag recovery and circadian rhythms.   
 
 ### Week  13 & 14. Linear Regression 
 ```{r next_date_2, echo=FALSE}
