@@ -17,10 +17,11 @@ current_date <- current_date+ days(7)
 datestring <- paste(month(current_date), day(current_date), year(current_date), sep="/")
 ```
 `r datestring`  
-__Lecture:__ [Welcome!](./Lectures/01_intro.pdf)  
+__Lecture:__ [Welcome!](./Lectures/01_intro.pdf),  [Data Collection and Metadata](./Lectures/02_data_collection.pdf)  
 __Readings:__ [W&G Introduction Chapter 1](http://r4ds.had.co.nz/introduction.html)  
 __Objective(s):__ Introduce the students to the course; understand what is data, discuss how we preserve information about data, view different examples of datasets from different disciplines.  
-__Lab:__ [Data Collection](./Labs/lab_1_data_collection.html)
+__Lab:__ [Data Collection](./Labs/lab_1_data_collection.html)  
+__Etherpad:__ https://etherpad.wikimedia.org/p/355-metadata
 
 ### Week  2. Data Creation
 ```{r next_date, echo=FALSE}
