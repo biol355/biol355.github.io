@@ -29,16 +29,17 @@ __Etherpad:__ https://etherpad.wikimedia.org/p/355-metadata
 `r datestring`  
 __Readings:__ [Browman and Woo 2017](./Readings/Browman_and_Woo_Spreadsheets.pdf)  
 __Lectures:__  [Data Creation](./Lectures/03_data_creation.html)  
-__Lab:__ [DC Spreadsheet Ecology Lesson](http://www.datacarpentry.org/spreadsheet-ecology-lesson/)
+__Lab:__ [DC Spreadsheet Ecology Lesson](http://www.datacarpentry.org/spreadsheet-ecology-lesson/)  
 __Objective(s):__ Compare poor versus good practice in creating data. Differentiate between data recording and data entry. Develop a practical familiarity with data quality control. Discuss what is good metadata and current metadata standards.  
 __Biological Examples:__ Transgenic mouse experimentation. Bee genomics. Subtidal field surveys. Current data sharing archives in biology.  
-
+__Etherpad:__ https://etherpad.wikimedia.org/p/355-spreadsheets  
+  
 ### Week  3 & 4. Visualization & Introduction to R 
 ```{r next_date, echo=FALSE}
 ```
 `r datestring`  
 __Readings:__ W&G on [Data Visualization](http://r4ds.had.co.nz/data-visualisation.html), [Tibbles & Data Frames](http://r4ds.had.co.nz/tibbles.html) and [Data Import](http://r4ds.had.co.nz/data-import.html), DC Ecology [Intro to R](http://www.datacarpentry.org/R-ecology-lesson/01-intro-to-r.html) and [starting with data](http://www.datacarpentry.org/R-ecology-lesson/02-starting-with-data.html),  [Unwin 2008](./Readings/Unwin_2008_dataviz.pdf), [Choosing a Good Chart Cheat Sheet](./Readings/choosing-a-good-chart-09.pdf)  
-__Objective(s):__  Begin to learn the R computing language, develop understanding of graphical presentation best practices. Identify the syntax of an R function (name and arguments); Create an R project in RStudio; Read data into R using read.csv(); Use R as a basic calculator; Describe and create variables in R; Interpret the output of the str() function; Install packages in R; Create a scatterplot using ggplot();  
+__Objective(s):__  Begin to learn the R computing language, develop understanding of graphical presentation best practices. Identify the syntax of an R function (name and arguments); Create an R project in RStudio; Read data into R using read.csv(); Use R as a basic calculator; Describe and create variables in R; Interpret the output of the str() function; Install packages in R; Create a scatterplot using ggplot();    
 __Biological Examples:__ Human genome size. Plum Island LTER Plankton Distribution. HAD CRUT Global temperature anomaly over the past century.  
 
 ### Week  5&6. Data Reduction and Summarization
