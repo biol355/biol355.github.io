@@ -179,6 +179,13 @@ Top Level
 <div style="font-size:12pt; position:absolute; left:0; bottom:-100px">Browman and Woo 2017</div>
 
 
+## Warning: Dates
+![](./images/spreadsheets/iso_8601.png)  
+  
+- Use a Standard format  
+- But, a Day, Month, and Year column is not a bad idea  
+<div style="font-size:12pt; position:absolute; left:0;">https://xkcd.com/1179/</div>
+
 ## Tab for Recording Changes after Initial Entry
 ![](./images/spreadsheets/sheet_4.jpg)
 
