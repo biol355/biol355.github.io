@@ -21,7 +21,7 @@ __Lecture:__ [Welcome!](./Lectures/01_intro.pdf),  [Data Collection and Metadata
 __Readings:__ [W&G Introduction Chapter 1](http://r4ds.had.co.nz/introduction.html)  
 __Objective(s):__ Introduce the students to the course; understand what is data, discuss how we preserve information about data, view different examples of datasets from different disciplines.  
 __Lab:__ [Data Collection](./Labs/lab_1_data_collection.html)  
-__Etherpad:__ https://etherpad.wikimedia.org/p/355-metadata
+__Etherpad:__ https://etherpad.wikimedia.org/p/355-metadata  
 
 ### Week  2. Data Creation
 ```{r next_date, echo=FALSE}
@@ -30,6 +30,7 @@ __Etherpad:__ https://etherpad.wikimedia.org/p/355-metadata
 __Readings:__ [Browman and Woo 2017](./Readings/Browman_and_Woo_Spreadsheets.pdf)  
 __Lectures:__  [Data Creation](./Lectures/03_data_creation.html)  
 __Lab:__ [DC Spreadsheet Ecology Lesson](http://www.datacarpentry.org/spreadsheet-ecology-lesson/)  
+__Files:__ [Portal Data](https://ndownloader.figshare.com/files/2252083)  
 __Objective(s):__ Compare poor versus good practice in creating data. Differentiate between data recording and data entry. Develop a practical familiarity with data quality control. Discuss what is good metadata and current metadata standards.  
 __Biological Examples:__ Transgenic mouse experimentation. Bee genomics. Subtidal field surveys. Current data sharing archives in biology.  
 __Etherpad:__ https://etherpad.wikimedia.org/p/355-spreadsheets  
