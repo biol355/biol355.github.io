@@ -23,12 +23,12 @@ __Objective(s):__ Introduce the students to the course; understand what is data,
 __Lab:__ [Data Collection](./Labs/lab_1_data_collection.html)  
 __Etherpad:__ https://etherpad.wikimedia.org/p/355-metadata  
 
-### Week  2. Data Creation
+### Week  2. Data Creation, Spreadsheets, and intro to R  
 ```{r next_date, echo=FALSE}
 ```
 `r datestring`  
 __Readings:__ [Browman and Woo 2017](./Readings/Browman_and_Woo_Spreadsheets.pdf)  
-__Lectures:__  [Data Creation](./Lectures/03_data_creation.html)  
+__Lectures:__  [Data Creation](./Lectures/03_data_creation.html), [Intro to R](./Lectures/04_r_intro.html)  
 __Lab:__ [DC Spreadsheet Ecology Lesson](http://www.datacarpentry.org/spreadsheet-ecology-lesson/)  
 __Files:__ [Portal Data](https://ndownloader.figshare.com/files/2252083)  
 __Objective(s):__ Compare poor versus good practice in creating data. Differentiate between data recording and data entry. Develop a practical familiarity with data quality control. Discuss what is good metadata and current metadata standards.  
