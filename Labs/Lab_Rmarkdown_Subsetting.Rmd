@@ -1,0 +1,67 @@
+---
+title: "Your first dynamic report"
+output: html_document
+---
+
+--------------------------------------------------------------------------------
+
+###Learning objectives
+
+After today's lab you will be able to:
+
+1. Describe the difference between R and Rstudio and distinguish between the 
+   console and a script file
+
+2. Create an Rmarkdown document and describe and example of where you would use 
+   an Rmarkdown document.
+   
+3. Describe functions in R and identify the components of a function
+
+4. Describe the difference between [] and () (e.g., when and how to use these 
+   different brackets/parentheses)
+
+--------------------------------------------------------------------------------
+
+### Exercise
+
+Today we will create an Rmarkdown document to answer the following questions. 
+  You have learned that there are some datasets that are built into R. Today we 
+  we will play with the `iris` dataset. We will get more practice in familiarising 
+  ourselves with a new dataset and will practice subsetting as we have done We are also going to get some practice working 
+
+```{r, eval = FALSE}
+iris
+```
+
+1. What are the column names and data types of the different columns in iris?
+
+2. How many rows and columns does iris have?
+
+3. Create a single vector (a new object) called 'width' that is the Sepal.Width 
+   column of iris.
+
+4. What is the 100th value in your 'width' vector? 
+
+5. What is the last value in your 'width' vector? Can you write code that 
+   returns this value even if you don't know how long 'width' is? 
+
+6. Select rows 10 to 20, with all columns in the iris dataset.
+
+7. Select rows 10 to 20 with only the Species, Petal.Width and Petal.Length. Can 
+   you do this two different ways?
+
+8. Select rows 1 to 10, 20, and 100 in the iris dataset. 
+
+9. Select the first value in the Sepal.Length column of the iris 
+   dataset. Bonus - can you do this *three* different ways?
+
+10. Without running the following code in R, try to determine which of the 
+    following will return the first three rows of the Sepal.Length column in the 
+    iris data.frame? For each of the answers that *do not* work, see if you 
+    explain why!
+  + a) iris[c(1, 2, 3), 'Sepal.Length']
+  + b) iris[1, 2, 3, 'Sepal.Length']
+  + c) iris[(1, 2, 3), 'Sepal.Length']
+  + d) iris['Sepal.Length', c(1, 2, 3)]
+
+
