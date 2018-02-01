@@ -33,7 +33,7 @@ __Lab:__ [DC Spreadsheet Ecology Lesson](http://www.datacarpentry.org/spreadshee
 __Files:__ [Portal Data](https://ndownloader.figshare.com/files/2252083)  
 __Objective(s):__ Compare poor versus good practice in creating data. Differentiate between data recording and data entry. Develop a practical familiarity with data quality control. Discuss what is good metadata and current metadata standards.  
 __Biological Examples:__ Transgenic mouse experimentation. Bee genomics. Subtidal field surveys. Current data sharing archives in biology.  
-__Etherpad:__ https://etherpad.wikimedia.org/p/355-spreadsheets  
+__Etherpad:__ https://etherpad.wikimedia.org/p/355-spreadsheets and https://etherpad.wikimedia.org/p/biol355-r-intro    
   
 ### Week  3 & 4. Visualization & Introduction to R 
 ```{r next_date, echo=FALSE}
