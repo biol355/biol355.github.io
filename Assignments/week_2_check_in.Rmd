@@ -1,0 +1,22 @@
+---
+title: "week_2_check_in"
+author: "Isaac Rosenthal"
+date: "February 6, 2018"
+output: html_document
+---
+
+
+## Week 2 Objectives
+
+### By the end of week two, students should be able to:  
+
+* Define, compare, and contrast vectors, lists, matrices, and data frames.  
+
+* Create vectors, lists, matrices, and data frames.  
+
+* Use `$`, `[]`, and `[[]]` notation to index and retrieve desired values/entries/elements.
+
+* Create a well formatted R Markdown file that effectively delivers work done with R.  
+
+* Load a .csv and perform summary statistics on any given column. 
+    + This includes creating a well organized directory structure as well as setting your working directory within R!
