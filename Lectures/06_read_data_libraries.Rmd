@@ -65,6 +65,9 @@ Way more readable, no?  So, how do we save our file like this? Under the Save As
 
 Let's save this as `my_data.csv` (csv is a common file extension for comma separated files). Save it in your `data` directory for this project
 
+
+**Excercise** Download the two files from the website and put them into your working directory. Keep it neat and give them a data folder!  
+
 ###OK! Time to Load?
 
 YES!  Fire up R, and save the script file you will be working on in your `R` directory.  Now, it's just hop-skip-and-a-jump to loading?
@@ -106,10 +109,12 @@ head(my_data)
 ```
 
 ```{r, echo=FALSE}
-my_data <- read.csv("../Project/data/my_data.csv")
+my_data <- read.csv("../Data/my_data.csv")
 
 head(my_data)
 ```
+
+**Excercise** Go green when you have your data loaded!
 
 ###Factoring out our expectations
 
@@ -149,7 +154,7 @@ str(my_data)
 ```
 
 ```{r, echo=FALSE}
-my_data <- read.csv("../Project/data/my_data.csv", 
+my_data <- read.csv("../Data/my_data.csv", 
                     stringsAsFactors=FALSE)
 
 str(my_data)
@@ -182,6 +187,7 @@ Some additional helper packaged might be installed as well that your package req
 ```{r}
 library("readxl")
 ```
+**Excercise** Install and load the readxl library!
 
 Readxl has a function called `read_excel` which is going to be our main function of interest here. Take a look at it's help file.  Note, it takes a few arguments - a path to the file (which includes the file name) the sheet (because your spreadsheet might not be the first one in the workbook), as well as a few others about specifying information about the columns. It does have an argument for missing value specification - but it's just `na` not `na.strings`. You also have a skip argument.  That's it.  Let's take it for a spin.
 
@@ -192,7 +198,7 @@ str(my_data_excel)
 ```
 
 ```{r, echo=FALSE}
-my_data_excel <- read_excel("../Project/data/my_data.xlsx")
+my_data_excel <- read_excel("../data/my_data.xlsx")
 
 
 str(my_data_excel)
@@ -210,7 +216,39 @@ Better.
 
 Notice second, that there are no factors. Heck, `read_excel` doesn't even provide the option for factors! If you really want one, sure, you can create it later. But Hadley doesn't want you to mess with factors unless you know you need to.
 
+### Tibbles
+Remember earlier in the lesson when our data had the class "tbl_df"? Tibbles are a modern object class that has some advantages over the standard, base R data.frame. First, lets make one. 
 
+There are a group of packages called the Tidyverse - these share similar syntax and build off one another (and utilize tibbles!). Lets grab the `readr` package now and use it to read our data in again.
+
+**Excercise** Install and load the `readr` package.
+```{r}
+my_data_tibble <- readr::read_csv("../Data/my_data.csv") #read_csv is MUCH faster too.
+
+str(my_data_tibble)
+```
+Great - we now have our data in R, as a Tibble. Tibbles do a few things better than regular data frames. 
+First, they print more nicely.
+```{r}
+my_data
+my_data_tibble
+```
+
+Notice how it only displays what fits nicely in the console? 
+
+Second - remember how `read.csv()` changed our names from characters to factors? By default, tibbles created with `read_csv` do not convert strings to factors.
+```{r}
+str(my_data)
+str(my_data_tibble)
+```
+
+Tibbles have a number of under the hood advantages. For example, lets see what happens when we screw up.
+```{r, error = TRUE}
+my_data["Coolumn_1"]
+my_data_tibble["Coolumn_1"]
+```
+Tibble error messages tend to be more helpful.  
+All in all, working with tibbles feels almost identical as working with data frames - don't think of them any differently. All of your indexing/subsetting tools will still work (and will conventiently generate more tibbles!).
 ###A parting shot - a world without library
 
 Sometimes, we don't want to load a library and all that it entails. Because R is a wild and woolly ecosystem, folk often write packages that have function names that overlap.  To access a function within a package without loading the entire package itself we use `::` as follows
