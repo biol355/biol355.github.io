@@ -1,5 +1,5 @@
 ---
-title: "Your first dynamic report"
+title: "Your First Dynamic Report"
 output: html_document
 ---
 
@@ -15,19 +15,19 @@ After today's lab you will be able to:
 2. Create an Rmarkdown document and describe and example of where you would use 
    an Rmarkdown document.
    
-3. Describe functions in R and identify the components of a function
-
-4. Describe the difference between [] and () (e.g., when and how to use these 
+3. Describe the difference between [] and () (e.g., when and how to use these 
    different brackets/parentheses)
+   
+4. Use Google to troubleshoot/find useful functions.
 
 --------------------------------------------------------------------------------
 
 ### Exercise
 
-Today we will create an Rmarkdown document to answer the following questions. 
-  You have learned that there are some datasets that are built into R. Today we 
-  we will play with the `iris` dataset. We will get more practice in familiarising 
-  ourselves with a new dataset and will practice subsetting as we have done We are also going to get some practice working 
+Today we will create an Rmarkdown document to answer the following questions.  
+Use the `iris` dataset to answer the following questions.   
+Please submit the answers as a well-formatted RMD (headings, code chunks/inline code, etc) and include the knit HTML. Each question should have code + output along with any necessary written explanations. Feel free to check the source code for this page to get some RMD reference!
+
 
 ```{r, eval = FALSE}
 iris
@@ -43,7 +43,7 @@ iris
 4. What is the 100th value in your 'width' vector? 
 
 5. What is the last value in your 'width' vector? Can you write code that 
-   returns this value even if you don't know how long 'width' is? 
+   returns this value even if you don't know how long 'width' is? HINT: Google sis your friend when trying to fine new functions.
 
 6. Select rows 10 to 20, with all columns in the iris dataset.
 
@@ -63,5 +63,6 @@ iris
   + b) iris[1, 2, 3, 'Sepal.Length']
   + c) iris[(1, 2, 3), 'Sepal.Length']
   + d) iris['Sepal.Length', c(1, 2, 3)]
+  
 
 
