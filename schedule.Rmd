@@ -43,7 +43,8 @@ __Readings:__ W&G on [Data Visualization](http://r4ds.had.co.nz/data-visualisati
 __Objective(s):__  Begin to learn the R computing language, develop understanding of graphical presentation best practices. Identify the syntax of an R function (name and arguments); Create an R project in RStudio; Read data into R using read.csv(); Use R as a basic calculator; Describe and create variables in R; Interpret the output of the str() function; Install packages in R; Create a scatterplot using ggplot();    
 __Biological Examples:__ Human genome size. Plum Island LTER Plankton Distribution. HAD CRUT Global temperature anomaly over the past century.  
 __Lab:__ [R Markdown and Data Subsetting](./Labs/Lab_Rmarkdown_Subsetting.html)  
-__Excercises:__ [Warmup Excercises for Wednesday](./Labs/lab_2_warmup.html)
+__Excercises:__ [Warmup Excercises for Wednesday](./Labs/lab_2_warmup.html)  
+__RMD Cheat Sheet:__ https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf
 
 
 ### Week  5&6. Data Reduction and Summarization
