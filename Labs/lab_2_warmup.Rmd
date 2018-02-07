@@ -1,0 +1,20 @@
+---
+title: "Lab Warm Up Excercises"
+date: "February 7, 2018"
+output: html_document
+---
+```{r, echo = FALSE}
+my_list <- list(first_entry = c(1:5), second_entry = letters[1:5])
+```
+
+## Get in the zone
+
+1. Create a list consisting of a vector of numbers and a vector of strings.   
+2. Check it out with `str`, `names` and `summary` 
+3. Find the second element of the first entry of your list. One way to do this is:
+
+```{r}
+my_list$first_entry[2]
+```
+
+**Warmup Exercise:**What are *three* other ways you can do that?

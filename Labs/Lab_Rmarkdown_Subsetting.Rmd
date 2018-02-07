@@ -26,7 +26,7 @@ After today's lab you will be able to:
 
 Today we will create an Rmarkdown document to answer the following questions.  
 Use the `iris` dataset to answer the following questions.   
-Please submit the answers as a well-formatted RMD (headings, code chunks/inline code, etc) and include the knit HTML. Each question should have code + output along with any necessary written explanations. Feel free to check the source code for this page to get some RMD reference!
+Please submit the answers as a well-formatted RMD (headings, code chunks/inline code, etc) and include the knit HTML. Each question should have code + output along with any necessary written explanations. Feel free to check the source code for this page or [this cheatsheet](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf) for RMD references!
 
 
 ```{r, eval = FALSE}
