@@ -30,7 +30,7 @@ __Etherpad:__ https://etherpad.wikimedia.org/p/355-metadata
 __Readings:__ [Browman and Woo 2017](./Readings/Browman_and_Woo_Spreadsheets.pdf)  
 __Lectures:__  [Data Creation](./Lectures/03_data_creation.html), [Intro to R](./Lectures/04_r_intro.html)  
 __Lab:__ [DC Spreadsheet Ecology Lesson](http://www.datacarpentry.org/spreadsheet-ecology-lesson/)  
-__Files:__ [Portal Data](https://ndownloader.figshare.com/files/2252083)  
+__Files:__ [Portal Data](https://ndownloader.figshare.com/files/2252083) 
 __Objective(s):__ Compare poor versus good practice in creating data. Differentiate between data recording and data entry. Develop a practical familiarity with data quality control. Discuss what is good metadata and current metadata standards.  
 __Biological Examples:__ Transgenic mouse experimentation. Bee genomics. Subtidal field surveys. Current data sharing archives in biology.  
 __Etherpad:__ https://etherpad.wikimedia.org/p/355-spreadsheets and https://etherpad.wikimedia.org/p/biol355-r-intro    
@@ -44,8 +44,8 @@ __Objective(s):__  Begin to learn the R computing language, develop understandin
 __Biological Examples:__ Human genome size. Plum Island LTER Plankton Distribution. HAD CRUT Global temperature anomaly over the past century.  
 __Lab:__ [R Markdown and Data Subsetting](./Labs/Lab_Rmarkdown_Subsetting.html)  
 __Excercises:__ [Warmup Excercises for Wednesday](./Labs/lab_2_warmup.html)  
-__RMD Cheat Sheet:__ https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf
-
+__RMD Cheat Sheet:__ https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf  
+__Files:__ [Excel](./Data/my_data.xlsx) [CSV](./Data/my_data.csv) 
 
 ### Week  5&6. Data Reduction and Summarization
 ```{r next_date_2, echo=FALSE}
