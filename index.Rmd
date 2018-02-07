@@ -19,7 +19,7 @@ qplot(conc, density, data=DNase, geom=c("point", "line"), group=Run) +
 
 **TA:** Isaac Rosenthal
 
-**Email:** isaac.rosenthall001@umb.edu
+**Email:** isaac.rosenthal001@umb.edu
 
 **Where:** Wheatley 2-030  
 

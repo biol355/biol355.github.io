@@ -4,7 +4,7 @@
 
 <head>
 
-<meta charset="utf-8">
+<meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 
@@ -20,8 +20,8 @@
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<link href="site_libs/highlightjs-1.1/default.css" rel="stylesheet" />
-<script src="site_libs/highlightjs-1.1/highlight.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -30,10 +30,12 @@
   }
 </style>
 <script type="text/javascript">
-if (window.hljs && document.readyState && document.readyState === "complete") {
-   window.setTimeout(function() {
-      hljs.initHighlighting();
-   }, 0);
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
 }
 </script>
 
@@ -234,11 +236,12 @@ $(document).ready(function () {
 </div>
 
 
+<pre><code>## Warning: package &#39;ggplot2&#39; was built under R version 3.3.3</code></pre>
 <p><img src="index_files/figure-html/demoplot-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p><strong>Instructor:</strong> Jarrett Byrnes, PhD.</p>
 <p><strong>Email:</strong> <a href="mailto:jarrett.byrnes@umb.edu">jarrett.byrnes@umb.edu</a></p>
 <p><strong>TA:</strong> Isaac Rosenthal</p>
-<p><strong>Email:</strong> <a href="mailto:isaac.rosenthall001@umb.edu">isaac.rosenthall001@umb.edu</a></p>
+<p><strong>Email:</strong> <a href="mailto:isaac.rosenthal001@umb.edu">isaac.rosenthal001@umb.edu</a></p>
 <p><strong>Where:</strong> Wheatley 2-030</p>
 <p><strong>Weekly Schedule:</strong> Tuesday &amp; Thursday 9:30-12:00, Lab Wednesday 12:30-3:30</p>
 <p><strong>Office Hours:</strong> Prof. Byrnes will hold office hours Thursday from 2:30-4 in ISC 3130<br />
@@ -274,7 +277,7 @@ $(document).ready(function () {
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>
