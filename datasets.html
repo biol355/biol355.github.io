@@ -4,7 +4,7 @@
 
 <head>
 
-<meta charset="utf-8">
+<meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 
@@ -20,8 +20,8 @@
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<link href="site_libs/highlightjs-1.1/default.css" rel="stylesheet" />
-<script src="site_libs/highlightjs-1.1/highlight.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -30,10 +30,12 @@
   }
 </style>
 <script type="text/javascript">
-if (window.hljs && document.readyState && document.readyState === "complete") {
-   window.setTimeout(function() {
-      hljs.initHighlighting();
-   }, 0);
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
 }
 </script>
 
@@ -234,7 +236,7 @@ $(document).ready(function () {
 </div>
 
 
-<div id="search-engines" class="section level2">
+<section id="search-engines" class="level2">
 <h2>Search Engines</h2>
 <ul>
 <li><a href="http://data.gov">Data.gov</a><br />
@@ -255,10 +257,12 @@ $(document).ready(function () {
 </li>
 <li><a href="https://knb.ecoinformatics.org/">Knowledge Network for Biocomplexity</a><br />
 </li>
-<li><a href="https://www.re3data.org/">Registry of Research Data Repositories</a></li>
+<li><a href="https://www.re3data.org/">Registry of Research Data Repositories</a><br />
+</li>
+<li><a href="https://www.pangaea.de/">Pangea</a></li>
 </ul>
-</div>
-<div id="data-sets" class="section level2">
+</section>
+<section id="data-sets" class="level2">
 <h2>Data Sets</h2>
 <ul>
 <li><a href="https://data.boston.gov/">City of Boston Data Portal</a><br />
@@ -271,8 +275,8 @@ $(document).ready(function () {
 </li>
 <li><a href="https://www.gbif.org/">Global Biodiversity Information Facility</a></li>
 </ul>
-</div>
-<div id="data-sets-with-r-packages" class="section level2">
+</section>
+<section id="data-sets-with-r-packages" class="level2">
 <h2>Data Sets with R Packages</h2>
 <ul>
 <li><a href="https://github.com/ropensci/rebird">R EBird Interface</a><br />
@@ -296,9 +300,19 @@ $(document).ready(function () {
 </li>
 <li><a href="https://gist.github.com/zross/6f1b1569512be06f5fb571cc425202bc">R Sample Datasets</a><br />
 </li>
-<li><a href="https://cran.r-project.org/web/packages/fivethirtyeight/vignettes/fivethirtyeight.html">Fivethirtyeight - very heterogeneous!</a></li>
+<li><a href="https://cran.r-project.org/web/packages/fivethirtyeight/vignettes/fivethirtyeight.html">Fivethirtyeight - very heterogeneous!</a><br />
+</li>
+<li><a href="https://walkerke.github.io/tidycensus/">tidycensus</a> - Interface for US Census data that returns tidy data frames<br />
+</li>
+<li><a href="https://github.com/ropensci/ots">A Few Biological Marine Timeseries</a><br />
+</li>
+<li><a href="https://github.com/ropensci/pangaear">Interface with PANGEA database</a> - many varied datasets<br />
+</li>
+<li><a href="https://github.com/ropensci/rbison">Biodiversity Information Serving Our Nation</a><br />
+</li>
+<li><a href="https://github.com/ropensci/rnpn">R National Phenology Network interface</a></li>
 </ul>
-</div>
+</section>
 
 
 
@@ -323,7 +337,7 @@ $(document).ready(function () {
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>
