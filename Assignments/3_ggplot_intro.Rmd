@@ -1,0 +1,55 @@
+---
+title: "Homework: I love it when a Plot comes together"
+date: "February 17, 2018"
+output: html_document
+---
+
+<br><br><br>
+1. We've spent a lot of time with the plankton data set, and learned much. Let's learn a bit more!
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1A. Load up the plankton data, and generate a scatterplot of the relationship between `Chlorophytes` and `TotalChlA`.  Is there more Chlorophyll when there are more Chlorophytes?
+   
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   1B. While we have been looking at salinity a lot, we also know that there are other processes that covary with salinity as one moves up the estuary, such as vegetation, and the community of Zooplankton. Perhaps distance from mouth - `Distance` - is a better predictor of changes in relationships?  Can you see any pattern of how distance alters this relationship (from 2A) by coloring the points by Distance? Use something other than the default color scale.
+   
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   1C. Or - what if we made a discrete variable out of distance using `cut_interval` and used `facet_wrap` to see its influence. What patterns do you see?
+   
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   1D. As the estuary was sampled at times of year where temperature varied, and distance from mouth might have a different effect under cold v. warm temperatures, let's look at both variables together as facets. What do you see if you create a discrete variable from `Temp` using `cut_interval` and then make a `facet_grid` plot?
+   
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   1E. Last, are your answers from A-D made clearer or not by changing the scale of the x and y axes with log10 or any other transformation (see the handout)? Why or why not does this transformation help
+```{r, eval=FALSE, echo=FALSE}
+library(ggplot2)
+
+plankton <- read_excel("../Data/EST-PR-PlanktonChemTax.xls", sheet=2)
+
+plankton$Cyan <- cut_interval(plankton$Cyanobacteria, 4)
+plankton$Dino <- cut_interval(plankton$Dinoflagellates, 4)
+plankton$Dist <- cut_interval(plankton$Distance, 4)
+plankton$TempGroup <- cut_interval(plankton$Temp, 4)
+
+ggplot(plankton, aes(x=Chlorophytes, y=TotalChlA)) +
+  geom_point() + 
+#  scale_x_log10() +
+ # scale_y_log10() +
+  facet_grid(Dist ~ TempGroup)
+
+
+```
+
+<br><br><br>
+2. Let's make this plot look good! Choose one of the plots that you worked on in this assignment.
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  2A. Give it a title with `ggtitle()`. Change the x and y axis names with `xlab()` and `ylab()`. 
+  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  2B. Now, let's make it look very nice. Install the `ggthemes` package and look through the theme options it gives you. Choose one, and implement it (e.g., add `theme_bw(base_size=12)`) to your plot. Why did you choose this theme? What about it aids in your visualization?
+  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2C. Extra credit - look at the `theme` help file. Customize your plot even more using `theme()` and justify your choices.
+
+
+<br><br><br>
+3. What is your favorite data visualization. Grab a jpg of it and put it into this RMarkdown document (you'll need look at how to get images into RMarkdown documents and you'll need to email it to us along with the homework so we can compile the document).
+
+  Now tell us *why* this is your favorite example of a data visualization.
+  
+  
+<br><br><br>
+4. It's time to start thinking about your final project. Either use your own data or find something in the [datasets I've assembled for you](../datasets.html). Find one dataset that you think might be interesting. Briefly describe it and make one plot from the data you can download.
