@@ -41,11 +41,11 @@ __Etherpad:__ https://etherpad.wikimedia.org/p/355-spreadsheets and https://ethe
 `r datestring`  
 __Readings:__ W&G on [Tibbles & Data Frames](http://r4ds.had.co.nz/tibbles.html) and [Data Import](http://r4ds.had.co.nz/data-import.html), DC Ecology [Intro to R](http://www.datacarpentry.org/R-ecology-lesson/01-intro-to-r.html) and [starting with data](http://www.datacarpentry.org/R-ecology-lesson/02-starting-with-data.html)  
 __Objective(s):__  Begin to learn the R computing language. Identify the syntax of an R function (name and arguments); Create an R project in RStudio; Read data into R using read.csv(); Use R as a basic calculator; Describe and create variables in R; Interpret the output of the str() function; Install packages in R;  
-__Biological Examples:__ Human genome size. 
+__Biological Examples:__ Human genome size.   
 __Lab:__ [R Markdown and Data Subsetting](./Labs/Lab_Rmarkdown_Subsetting.html)  
 __Excercises:__ [Warmup Excercises for Wednesday](./Labs/lab_2_warmup.html)  
 __Cheat Sheets:__ [RMarkdown](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf), [Data Import](https://github.com/rstudio/cheatsheets/raw/master/data-import.pdf)  
-__Files:__ [Excel](./Data/my_data.xlsx) [CSV](./Data/my_data.csv) 
+__Files:__ [Excel](./Data/my_data.xlsx), [CSV](./Data/my_data.csv)     
 __Homework:__ [Data frames!](./Assignments/2_data_frames.html)  
 
 ### Week 4. Visualization 
@@ -53,7 +53,7 @@ __Homework:__ [Data frames!](./Assignments/2_data_frames.html)
 ```
 `r datestring`  
 __Readings:__ W&G on [Data Visualization](http://r4ds.had.co.nz/data-visualisation.html),  [Unwin 2008](./Readings/Unwin_2008_dataviz.pdf), [Choosing a Good Chart Cheat Sheet](./Readings/choosing-a-good-chart-09.pdf)  
-__Lectures:__ [Principles of Data Visualization](./Lectures/07_data_viz_principles.pdf)
+__Lectures:__ [Principles of Data Visualization](./Lectures/07_data_viz_principles.pdf)  
 __Objective(s):__  Develop understanding of graphical presentation best practices. Create a scatterplot using ggplot(); Learn how to add data to a simple map    
 __Biological Examples:__ Human genome size. Plum Island LTER Plankton Distribution. HAD CRUT Global temperature anomaly over the past century.  
 __Cheat Sheets:__ [Data visualization](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf), [Mapping with ggmap](https://www.nceas.ucsb.edu/~frazier/RSpatialGuides/ggmap/ggmapCheatsheet.pdf)  
