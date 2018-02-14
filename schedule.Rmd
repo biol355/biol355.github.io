@@ -40,26 +40,31 @@ __Etherpad:__ https://etherpad.wikimedia.org/p/355-spreadsheets and https://ethe
 ```
 `r datestring`  
 __Readings:__ W&G on [Tibbles & Data Frames](http://r4ds.had.co.nz/tibbles.html) and [Data Import](http://r4ds.had.co.nz/data-import.html), DC Ecology [Intro to R](http://www.datacarpentry.org/R-ecology-lesson/01-intro-to-r.html) and [starting with data](http://www.datacarpentry.org/R-ecology-lesson/02-starting-with-data.html)  
+__Lectures:__[Intro to vectors, lists, matrices, and data frames](./Lectures/05_r_intro_list_matrix_df.html), [Data import and package installation](./Lectures/06_read_data_libraries.html)  
 __Objective(s):__  Begin to learn the R computing language. Identify the syntax of an R function (name and arguments); Create an R project in RStudio; Read data into R using read.csv(); Use R as a basic calculator; Describe and create variables in R; Interpret the output of the str() function; Install packages in R;  
-__Biological Examples:__ Human genome size. 
+__Biological Examples:__ Human genome size.   
 __Lab:__ [R Markdown and Data Subsetting](./Labs/Lab_Rmarkdown_Subsetting.html)  
 __Excercises:__ [Warmup Excercises for Wednesday](./Labs/lab_2_warmup.html)  
 __Cheat Sheets:__ [RMarkdown](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf), [Data Import](https://github.com/rstudio/cheatsheets/raw/master/data-import.pdf)  
-__Files:__ [Excel](./Data/my_data.xlsx) [CSV](./Data/my_data.csv) 
-__Homework:__ [Data frames!](./Assignments/2_data_frames.html)  
+__Files:__ [Excel](./Data/my_data.xlsx), [CSV](./Data/my_data.csv)     
+__Homework:__ [Data frames!](./Assignments/2_data_frames.html), submit [here!](https://www.dropbox.com/request/e8pfG6vDPn47TsIIa0sS)    
 
 ### Week 4. Visualization 
 ```{r next_date, echo=FALSE}
 ```
 `r datestring`  
 __Readings:__ W&G on [Data Visualization](http://r4ds.had.co.nz/data-visualisation.html),  [Unwin 2008](./Readings/Unwin_2008_dataviz.pdf), [Choosing a Good Chart Cheat Sheet](./Readings/choosing-a-good-chart-09.pdf)  
+<<<<<<< HEAD
 __Lectures:__ [Principles of Data Visualization](./Lectures/07_data_viz_principles.pdf), [Intro to ggplot2](./Lectures/08_ggplot_intro.html)  
+=======
+__Lectures:__ [Principles of Data Visualization](./Lectures/07_data_viz_principles.pdf)    
+>>>>>>> 19a23cbea3bf117e841bd774e0dd636b7d7ad5f1
 __Objective(s):__  Develop understanding of graphical presentation best practices. Create a scatterplot using ggplot(); Learn how to add data to a simple map    
 __Biological Examples:__ Human genome size. Plum Island LTER Plankton Distribution. [HAD CRUT Global temperature anomaly over the past century](./Lectures/data/hadcrut_temp_anomoly_1850_2015.csv)  
 __Cheat Sheets:__ [Data visualization](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf), [Mapping with ggmap](https://www.nceas.ucsb.edu/~frazier/RSpatialGuides/ggmap/ggmapCheatsheet.pdf)  
 __Other References:__[ggplot2 references](http://ggplot2.tidyverse.org/reference/), [Fundamentals of Data Visualization](http://serialmentor.com/dataviz/), [colors for data viz](https://lisacharlotterost.github.io/2016/04/22/Colors-for-DataVis/)  
 __Etherpad:__ https://etherpad.wikimedia.org/p/355-dataviz  
-__Homework:__ [Plotapalooza](./Assignments/3_ggplot_intro.html)
+__Homework:__ [Plotapalooza](./Assignments/3_ggplot_intro.html), submit [here!](https://www.dropbox.com/request/9whCDDUB8TNByJ5KbkoP)
 
 ### Week  5&6. Data Reduction and Summarization
 ```{r next_date_2, echo=FALSE}

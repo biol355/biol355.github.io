@@ -239,7 +239,7 @@ $(document).ready(function () {
 <p>While the topics covered are broad, each week will feature different examples from genetics, ecology, molecular, and evolutionary biology highlighting uses of each individual set of techniques.</p>
 <p>This course will be a mixture of lecture, live-code demonstrations, and opportunities for in class work. Lecture days will have small exercises for students at the end of class. We will conduct lectures and labs in a computer lab in order for students to be able to follow along and try out new concepts once described and demonstrated in lecture, enabling rapid feedback between students and faculty.</p>
 <p>W&amp;G = <a href="http://r4ds.had.co.nz">Wickham &amp; Grolemund</a>, DC = Data Carpentry Lesson, U/P for linked pdfs = biol355</p>
-<section id="week-1." class="level3">
+<div id="week-1." class="section level3">
 <h3>Week 1.</h3>
 <p>1/23/2018<br />
 <strong>Lecture:</strong> <a href="./Lectures/01_intro.pdf">Welcome!</a>, <a href="./Lectures/02_data_collection.pdf">Data Collection and Metadata</a><br />
@@ -247,8 +247,8 @@ $(document).ready(function () {
 <strong>Objective(s):</strong> Introduce the students to the course; understand what is data, discuss how we preserve information about data, view different examples of datasets from different disciplines.<br />
 <strong>Lab:</strong> <a href="./Labs/lab_1_data_collection.html">Data Collection</a><br />
 <strong>Etherpad:</strong> <a href="https://etherpad.wikimedia.org/p/355-metadata" class="uri">https://etherpad.wikimedia.org/p/355-metadata</a></p>
-</section>
-<section id="week-2.-data-creation-spreadsheets-and-intro-to-r" class="level3">
+</div>
+<div id="week-2.-data-creation-spreadsheets-and-intro-to-r" class="section level3">
 <h3>Week 2. Data Creation, Spreadsheets, and intro to R</h3>
 <p>1/30/2018<br />
 <strong>Readings:</strong> <a href="./Readings/Browman_and_Woo_Spreadsheets.pdf">Browman and Woo 2017</a><br />
@@ -257,51 +257,60 @@ $(document).ready(function () {
 <strong>Files:</strong> <a href="https://ndownloader.figshare.com/files/2252083">Portal Data</a> <strong>Objective(s):</strong> Compare poor versus good practice in creating data. Differentiate between data recording and data entry. Develop a practical familiarity with data quality control. Discuss what is good metadata and current metadata standards.<br />
 <strong>Biological Examples:</strong> Transgenic mouse experimentation. Bee genomics. Subtidal field surveys. Current data sharing archives in biology.<br />
 <strong>Etherpad:</strong> <a href="https://etherpad.wikimedia.org/p/355-spreadsheets" class="uri">https://etherpad.wikimedia.org/p/355-spreadsheets</a> and <a href="https://etherpad.wikimedia.org/p/biol355-r-intro" class="uri">https://etherpad.wikimedia.org/p/biol355-r-intro</a></p>
-</section>
-<section id="week-3-introduction-to-r" class="level3">
+</div>
+<div id="week-3-introduction-to-r" class="section level3">
 <h3>Week 3 Introduction to R</h3>
 <p>2/6/2018<br />
 <strong>Readings:</strong> W&amp;G on <a href="http://r4ds.had.co.nz/tibbles.html">Tibbles &amp; Data Frames</a> and <a href="http://r4ds.had.co.nz/data-import.html">Data Import</a>, DC Ecology <a href="http://www.datacarpentry.org/R-ecology-lesson/01-intro-to-r.html">Intro to R</a> and <a href="http://www.datacarpentry.org/R-ecology-lesson/02-starting-with-data.html">starting with data</a><br />
+<strong>Lectures:</strong><a href="./Lectures/05_r_intro_list_matrix_df.html">Intro to vectors, lists, matrices, and data frames</a>, <a href="./Lectures/06_read_data_libraries.html">Data import and package installation</a><br />
 <strong>Objective(s):</strong> Begin to learn the R computing language. Identify the syntax of an R function (name and arguments); Create an R project in RStudio; Read data into R using read.csv(); Use R as a basic calculator; Describe and create variables in R; Interpret the output of the str() function; Install packages in R;<br />
-<strong>Biological Examples:</strong> Human genome size. <strong>Lab:</strong> <a href="./Labs/Lab_Rmarkdown_Subsetting.html">R Markdown and Data Subsetting</a><br />
+<strong>Biological Examples:</strong> Human genome size.<br />
+<strong>Lab:</strong> <a href="./Labs/Lab_Rmarkdown_Subsetting.html">R Markdown and Data Subsetting</a><br />
 <strong>Excercises:</strong> <a href="./Labs/lab_2_warmup.html">Warmup Excercises for Wednesday</a><br />
 <strong>Cheat Sheets:</strong> <a href="https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf">RMarkdown</a>, <a href="https://github.com/rstudio/cheatsheets/raw/master/data-import.pdf">Data Import</a><br />
-<strong>Files:</strong> <a href="./Data/my_data.xlsx">Excel</a> <a href="./Data/my_data.csv">CSV</a> <strong>Homework:</strong> <a href="./Assignments/2_data_frames.html">Data frames!</a></p>
-</section>
-<section id="week-4.-visualization" class="level3">
+<strong>Files:</strong> <a href="./Data/my_data.xlsx">Excel</a>, <a href="./Data/my_data.csv">CSV</a><br />
+<strong>Homework:</strong> <a href="./Assignments/2_data_frames.html">Data frames!</a>, submit <a href="https://www.dropbox.com/request/e8pfG6vDPn47TsIIa0sS">here!</a></p>
+</div>
+<div id="week-4.-visualization" class="section level3">
 <h3>Week 4. Visualization</h3>
 <p>2/13/2018<br />
 <strong>Readings:</strong> W&amp;G on <a href="http://r4ds.had.co.nz/data-visualisation.html">Data Visualization</a>, <a href="./Readings/Unwin_2008_dataviz.pdf">Unwin 2008</a>, <a href="./Readings/choosing-a-good-chart-09.pdf">Choosing a Good Chart Cheat Sheet</a><br />
+<<<<<<< HEAD
 <strong>Lectures:</strong> <a href="./Lectures/07_data_viz_principles.pdf">Principles of Data Visualization</a>, <a href="./Lectures/08_ggplot_intro.html">Intro to ggplot2</a><br />
 <strong>Objective(s):</strong> Develop understanding of graphical presentation best practices. Create a scatterplot using ggplot(); Learn how to add data to a simple map<br />
 <strong>Biological Examples:</strong> Human genome size. Plum Island LTER Plankton Distribution. <a href="./Lectures/data/hadcrut_temp_anomoly_1850_2015.csv">HAD CRUT Global temperature anomaly over the past century</a><br />
+=======
+<strong>Lectures:</strong> <a href="./Lectures/07_data_viz_principles.pdf">Principles of Data Visualization</a><br />
+<strong>Objective(s):</strong> Develop understanding of graphical presentation best practices. Create a scatterplot using ggplot(); Learn how to add data to a simple map<br />
+<strong>Biological Examples:</strong> Human genome size. Plum Island LTER Plankton Distribution. HAD CRUT Global temperature anomaly over the past century.<br />
+>>>>>>> 19a23cbea3bf117e841bd774e0dd636b7d7ad5f1
 <strong>Cheat Sheets:</strong> <a href="https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf">Data visualization</a>, <a href="https://www.nceas.ucsb.edu/~frazier/RSpatialGuides/ggmap/ggmapCheatsheet.pdf">Mapping with ggmap</a><br />
 <strong>Other References:</strong><a href="http://ggplot2.tidyverse.org/reference/">ggplot2 references</a>, <a href="http://serialmentor.com/dataviz/">Fundamentals of Data Visualization</a>, <a href="https://lisacharlotterost.github.io/2016/04/22/Colors-for-DataVis/">colors for data viz</a><br />
 <strong>Etherpad:</strong> <a href="https://etherpad.wikimedia.org/p/355-dataviz" class="uri">https://etherpad.wikimedia.org/p/355-dataviz</a><br />
-<strong>Homework:</strong> <a href="./Assignments/3_ggplot_intro.html">Plotapalooza</a></p>
-</section>
-<section id="week-56.-data-reduction-and-summarization" class="level3">
+<strong>Homework:</strong> <a href="./Assignments/3_ggplot_intro.html">Plotapalooza</a>, submit <a href="https://www.dropbox.com/request/9whCDDUB8TNByJ5KbkoP">here!</a></p>
+</div>
+<div id="week-56.-data-reduction-and-summarization" class="section level3">
 <h3>Week 5&amp;6. Data Reduction and Summarization</h3>
 <p>2/20/2018 and 2/27/2018<br />
 <strong>Readings:</strong> W&amp;G on <a href="http://r4ds.had.co.nz/transform.html">Data Transformation</a>, <a href="http://r4ds.had.co.nz/exploratory-data-analysis.html">Exploratory Data Analysis</a>, and <a href="http://r4ds.had.co.nz/pipes.html">Pipes</a>, DC Ecology Lesson on <a href="http://www.datacarpentry.org/R-ecology-lesson/03-dplyr.html">Data Aggregation</a><br />
 <strong>Objective(s):</strong> Describe the meaning and identify applications of the following summary/descriptive statistics: mean, mode, median, standard deviation; Describe the split-apply-combine strategy of data reduction and summarization; Use group_by() and summarise() to calculate summary statistics for groupings within a dataset; Subset data using filter()<br />
 <strong>Biological Examples:</strong> Human genome size. Sockeye salmon life history.</p>
-</section>
-<section id="week-7.-tidy-data-and-data-cleaning" class="level3">
+</div>
+<div id="week-7.-tidy-data-and-data-cleaning" class="section level3">
 <h3>Week 7. Tidy Data and Data Cleaning</h3>
 <p>3/6/2018<br />
 <strong>Readings:</strong> W&amp;G Chapters on <a href="http://r4ds.had.co.nz/tidy-data.html">Tidy Data</a>, <a href="http://r4ds.had.co.nz/strings.html">Strings</a>, and <a href="http://r4ds.had.co.nz/factors.html">Factors</a><br />
-<strong>Objective(s):</strong> Understand how to reshape and manipulate data. Describe the difference between the two fundamental forms of data – long versus wide, Use the tidyr package in R to convert between long and wide data; Use unite and separate to create tidy data (where each column is a variable). Understand how to manipulate string data<br />
+<strong>Objective(s):</strong> Understand how to reshape and manipulate data. Describe the difference between the two fundamental forms of data â long versus wide, Use the tidyr package in R to convert between long and wide data; Use unite and separate to create tidy data (where each column is a variable). Understand how to manipulate string data<br />
 <strong>Biological Examples:</strong> Axoltl limb regeneration. Mammal taxonomic records.</p>
-</section>
-<section id="week-8.-functions" class="level3">
+</div>
+<div id="week-8.-functions" class="section level3">
 <h3>Week 8. Functions</h3>
 <p>3/13/2018<br />
 <strong>Readings:</strong> W&amp;G Chapters on <a href="http://r4ds.had.co.nz/functions.html">Functions</a> and <a href="http://r4ds.had.co.nz/iteration.html">Iteration</a><br />
 <strong>Objective(s):</strong> Learn the benefits of reusable code, Understand the structure of a function, Discover debugging and making functions fail usefully, Apply conditional logic to build flexible code, Derive principles to make functions that are easy to understand and apply to multiple data sets.<br />
 <strong>Biological Examples:</strong> NOAA buoy data.</p>
-</section>
-<section id="week-9-10.-data-mashups-and-geospatial-data" class="level3">
+</div>
+<div id="week-9-10.-data-mashups-and-geospatial-data" class="section level3">
 <h3>Week 9 &amp; 10. Data “Mashups” and Geospatial Data</h3>
 <p>3/27/2018 and 4/3/2018<br />
 <strong>Readings:</strong> W&amp;G Chapter on <a href="http://r4ds.had.co.nz/relational-data.html">Relational Data</a>, Selected readings from DC <a href="http://www.datacarpentry.org/R-spatial-raster-vector-lesson/">Geospatial Introduction</a><br />
@@ -314,26 +323,26 @@ To install on a Windows PC<br />
 1) Install OSGEO4W <a href="https://trac.osgeo.org/osgeo4w/wiki" class="uri">https://trac.osgeo.org/osgeo4w/wiki</a><br />
 2) Use it to install gdal</p>
 <p><strong>Biological Examples:</strong> Hemlock wooly adelgid distribution. CDC records of heart disease across counties of the US. Change in coastal sea surface temperature since 1850.</p>
-</section>
-<section id="week-11-12.-t-tests-and-p-values" class="level3">
+</div>
+<div id="week-11-12.-t-tests-and-p-values" class="section level3">
 <h3>Week 11 &amp; 12. T-Tests and P-Values</h3>
 <p>4/10/2018 and 4/17/2018<br />
 <strong>Readings:</strong> <a href="./Readings/cortina%20and%20Dunlop%201997%20significance%20testing%20p%20value.pdf">Cortina and Dunlop 1997</a><br />
 <strong>Objective(s):</strong> Describe the basics of probability and p-values, Compare groups of data using T-tests and its extensions.<br />
 <strong>Biological Examples:</strong> The effects of testosterone on bird behavior. Jet-lag recovery and circadian rhythms.</p>
-</section>
-<section id="week-13-14.-linear-regression" class="level3">
+</div>
+<div id="week-13-14.-linear-regression" class="section level3">
 <h3>Week 13 &amp; 14. Linear Regression</h3>
 <p>4/24/2018 and 5/1/2018<br />
 <strong>Readings:</strong> W&amp;G on <a href="http://r4ds.had.co.nz/model-basics.html">Model Basics</a> and <a href="http://r4ds.had.co.nz/model-building.html">Model Building</a><br />
 <strong>Objective(s):</strong> Fit a linear regression using lm() in R through a bivariate scatterplot, Describe when to use nonlinear models/curves, Visualization of model outcomes<br />
 <strong>Biological Examples:</strong> Seal life history variation. Mouse anti-fungal drug development.</p>
-</section>
-<section id="week-15.-open-lab-and-final-presentations" class="level3">
+</div>
+<div id="week-15.-open-lab-and-final-presentations" class="section level3">
 <h3>Week 15. Open Lab and Final Presentations</h3>
 <p>5/8/2018<br />
 Prep your final talks! Data science party!</p>
-</section>
+</div>
 
 
 
