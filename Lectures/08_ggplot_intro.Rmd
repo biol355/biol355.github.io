@@ -169,8 +169,9 @@ had_plot_base +
 
 #### 2.4 Exercise: Boxplot, Violins, and stacking.
 This is all well and good, but, eyeballing is not the same as some solid information on the distribution of the data. Let's try some of the 2D ways of visualizing data. 
-1. Try out the following geoms - `geom_boxplot()`, `geom_violin()`, `geom_pointrange()`. Which do you prefer?  
-2. If you want to get saucy, install `ggridges`. You'll have to swap x and y in your mapping, but, try out `geom_density_ridges()`
+1. Try out the following geoms - `geom_boxplot()`, `geom_violin()`, `stat_summary()`. Which do you prefer?  
+2. Try adding multiple geoms together. Does order matter?
+3. If you want to get saucy, install `ggridges`. You'll have to swap x and y in your mapping, but, try out `geom_density_ridges()`
 
 ```{r ridges, echo=FALSE, message=FALSE}
 library(ggridges)
@@ -289,7 +290,8 @@ That's a lot. Which of these do you think is best for seeing differences between
 
 ```{r brewer1}
 had_lines +
-  scale_color_gradientn(colors=brewer.pal(7, "BrBG"))
+  scale_color_gradientn(colors=brewer.pal(n = 7, 
+                                          name = "BrBG"))
 ```
 
 #### 4.4 More Color Packages
@@ -309,9 +311,9 @@ had_lines +
 
 1. What happens to our histogram if we add a fill argument. Try `fill = month` and `fill = factor(year)` (note that without the factor, nothing happens!). You might also want to remove the guide with `+ guides(fill = "none")`.
 
-2. Returning to our line plot of year by anomoly, try coloring *also* by anomoly. First use the default palatte, and then try a blue-white-red.
+2. Create a line plot of year on the x and anomoly on the y. Try coloring *also* by anomoly. First use the default palatte, and then try a blue-white-red.
 
-3. Now color by month. Try at least two different palettes either of your own devising or from an additional package. Note, if you use `month_name`, you'll be mucking about with `scale_color_manual`. Or you can use RColorBrewer which handles discrete groups easily using `scale_color_brewer()`. 
+3. Now color that line plot by month. Try at least two different palettes either of your own devising or from an additional package. Note, if you use `month_name`, you'll be mucking about with `scale_color_manual`. Or you can use RColorBrewer which handles discrete groups easily using `scale_color_brewer()`. 
 
 
 ### 5. Facets to see grouped information
