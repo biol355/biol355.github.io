@@ -1,0 +1,14 @@
+site_ID,side_of_island,flow_age,site_elevation_m,approx_annual_rainfall_mm,approx_mean_annual_temp_deg_C,flow_type
+w100y,Wet,Young,100,3900,22.2,pahoehoe
+w100o,Wet,Old,100,3900,22.2,pahoehoe
+w700y,Wet,Young,700,5500,18.9,pahoehoe
+w700o,Wet,Old,700,5500,18.9,pahoehoe
+w1100y,Wet,Young,1100,4000,17.2,pahoehoe
+w1100o,Wet,Old,1100,4000,17.2,pahoehoe
+w1800y,Wet,Young,1800,2200,13.9,pahoehoe
+w1800o,Wet,Old,1800,2200,13.9,pahoehoe
+w2400y,Wet,Young,2400,1000,10.6,pahoehoe
+w2400o,Wet,Old,2400,1000,10.6,pahoehoe
+d700y,Dry,Young,700,500,18.9,pahoehoe
+d700o,Dry,Old,700,500,18.9,aa
+d1700y,Dry,Young,1700,550,14.4,aa
