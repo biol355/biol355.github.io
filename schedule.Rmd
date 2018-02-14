@@ -47,7 +47,7 @@ __Lab:__ [R Markdown and Data Subsetting](./Labs/Lab_Rmarkdown_Subsetting.html)
 __Excercises:__ [Warmup Excercises for Wednesday](./Labs/lab_2_warmup.html)  
 __Cheat Sheets:__ [RMarkdown](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf), [Data Import](https://github.com/rstudio/cheatsheets/raw/master/data-import.pdf)  
 __Files:__ [Excel](./Data/my_data.xlsx), [CSV](./Data/my_data.csv)     
-__Homework:__ [Data frames!](./Assignments/2_data_frames.html)  
+__Homework:__ [Data frames!](./Assignments/2_data_frames.html), submit [here!](https://www.dropbox.com/request/e8pfG6vDPn47TsIIa0sS)    
 
 ### Week 4. Visualization 
 ```{r next_date, echo=FALSE}
@@ -60,7 +60,7 @@ __Biological Examples:__ Human genome size. Plum Island LTER Plankton Distributi
 __Cheat Sheets:__ [Data visualization](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf), [Mapping with ggmap](https://www.nceas.ucsb.edu/~frazier/RSpatialGuides/ggmap/ggmapCheatsheet.pdf)  
 __Other References:__[ggplot2 references](http://ggplot2.tidyverse.org/reference/), [Fundamentals of Data Visualization](http://serialmentor.com/dataviz/), [colors for data viz](https://lisacharlotterost.github.io/2016/04/22/Colors-for-DataVis/)  
 __Etherpad:__ https://etherpad.wikimedia.org/p/355-dataviz  
-__Homework:__ [Plotapalooza](./Assignments/3_ggplot_intro.html)
+__Homework:__ [Plotapalooza](./Assignments/3_ggplot_intro.html), submit [here!](https://www.dropbox.com/request/9whCDDUB8TNByJ5KbkoP)
 
 ### Week  5&6. Data Reduction and Summarization
 ```{r next_date_2, echo=FALSE}
