@@ -5,7 +5,7 @@ output: html_document
 ---
 
 <br><br><br>
-1. This week, we'll work with a dataset from sampling plankton in the Plum Island Estuary by the PIE Long Term Ecological Research site. This dataset is in an excel file with both metadata and data. There's a lot of information in it, and we'll come back to this dataset a few times through the semester.  
+1. This week, we'll work with a dataset from sampling plankton in the Plum Island Estuary by the [PIE Long Term Ecological Research site](http://pie-lter.ecosystems.mbl.edu/). This dataset is in an excel file with both metadata and data. There's a lot of information in it, and we'll come back to this dataset a few times through the semester.  
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1A. Load up the plankton data using the `readxl` library, and generate a scatterplot of the relationship between `Chlorophytes` and `TotalChlA`.  Is there more Chlorophyll when there are more Chlorophytes?
    

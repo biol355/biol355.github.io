@@ -309,7 +309,7 @@ $(document).ready(function () {
 </div>
 
 
-<p><br><br><br> 1. This week, we’ll work with a dataset from sampling plankton in the Plum Island Estuary by the PIE Long Term Ecological Research site. This dataset is in an excel file with both metadata and data. There’s a lot of information in it, and we’ll come back to this dataset a few times through the semester.</p>
+<p><br><br><br> 1. This week, we’ll work with a dataset from sampling plankton in the Plum Island Estuary by the <a href="http://pie-lter.ecosystems.mbl.edu/">PIE Long Term Ecological Research site</a>. This dataset is in an excel file with both metadata and data. There’s a lot of information in it, and we’ll come back to this dataset a few times through the semester.</p>
 <p>        1A. Load up the plankton data using the <code>readxl</code> library, and generate a scatterplot of the relationship between <code>Chlorophytes</code> and <code>TotalChlA</code>. Is there more Chlorophyll when there are more Chlorophytes?</p>
 <p>        1B. Many processes can modify this relationship. They all tend to covary with distance from the mouth of the estuary, where it empties into the ocean and is highly saline. Maybe distance from estuary mouth - <code>Distance</code> - affects the relationship between Chlorophytes and total chlorophyll? Can you see any pattern of how distance alters this relationship by coloring the points by Distance? Use something other than the default color scale.</p>
 <p>        1C. As distance is continuous, any patterns might still be hard to see. What if we made a discrete variable out of distance using <code>cut_interval</code> and used <code>facet_wrap</code> to see its influence. What patterns do you see?</p>
