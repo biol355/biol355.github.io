@@ -5,17 +5,17 @@ output: html_document
 ---
 
 <br><br><br>
-1. We've spent a lot of time with the plankton data set, and learned much. Let's learn a bit more!
+1. This week, we'll work with a dataset from sampling plankton in the Plum Island Estuary by the PIE Long Term Ecological Research site. This dataset is in an excel file with both metadata and data. There's a lot of information in it, and we'll come back to this dataset a few times through the semester.  
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1A. Load up the plankton data, and generate a scatterplot of the relationship between `Chlorophytes` and `TotalChlA`.  Is there more Chlorophyll when there are more Chlorophytes?
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1A. Load up the plankton data using the `readxl` library, and generate a scatterplot of the relationship between `Chlorophytes` and `TotalChlA`.  Is there more Chlorophyll when there are more Chlorophytes?
    
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   1B. While we have been looking at salinity a lot, we also know that there are other processes that covary with salinity as one moves up the estuary, such as vegetation, and the community of Zooplankton. Perhaps distance from mouth - `Distance` - is a better predictor of changes in relationships?  Can you see any pattern of how distance alters this relationship (from 2A) by coloring the points by Distance? Use something other than the default color scale.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   1B. Many processes can modify this relationship. They all tend to covary with distance from the mouth of the estuary, where it empties into the ocean and is highly saline. Maybe distance from estuary mouth - `Distance` - affects the relationship between Chlorophytes and total chlorophyll?  Can you see any pattern of how distance alters this relationship by coloring the points by Distance? Use something other than the default color scale.
    
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   1C. Or - what if we made a discrete variable out of distance using `cut_interval` and used `facet_wrap` to see its influence. What patterns do you see?
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   1C. As distance is continuous, any patterns might still be hard to see. What if we made a discrete variable out of distance using `cut_interval` and used `facet_wrap` to see its influence. What patterns do you see?
    
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   1D. As the estuary was sampled at times of year where temperature varied, and distance from mouth might have a different effect under cold v. warm temperatures, let's look at both variables together as facets. What do you see if you create a discrete variable from `Temp` using `cut_interval` and then make a `facet_grid` plot?
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   1D. As the estuary was sampled at times of year where temperature varied, and distance from mouth might have a different effect under cold v. warm temperatures, let's look at whether temperature and distance act in concert using facets. What do you see if you create a discrete variable from `Temp` using `cut_interval` and then make a `facet_grid` plot looking at the effects of both temperature and distance from mouth?
    
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   1E. Last, are your answers from A-D made clearer or not by changing the scale of the x and y axes with log10 or any other transformation (see the handout)? Why or why not does this transformation help
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   1E. Last, are your answers from A-D made clearer or not by changing the scale of the x and y axes with log10 or any other transformation of x or why axes? Why or why not does a transformation help?
 ```{r, eval=FALSE, echo=FALSE}
 library(ggplot2)
 
@@ -36,11 +36,11 @@ ggplot(plankton, aes(x=Chlorophytes, y=TotalChlA)) +
 ```
 
 <br><br><br>
-2. Let's make this plot look good! Choose one of the plots that you worked on in this assignment.
+2. Let's make this plot look good! Choose one of the plots that you worked on in part 1.
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  2A. Give it a title with `ggtitle()`. Change the x and y axis names with `xlab()` and `ylab()`. 
   
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  2B. Now, let's make it look very nice. Install the `ggthemes` package and look through the theme options it gives you. Choose one, and implement it (e.g., add `theme_bw(base_size=12)`) to your plot. Why did you choose this theme? What about it aids in your visualization?
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  2B. Now, let's theme it using the `ggthemes` package. Look through the theme options it gives you. Choose one, and implement it (e.g., add `theme_bw(base_size=12)`) to your plot. Why did you choose this theme? What about it aids in your visualization?
   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2C. Extra credit - look at the `theme` help file. Customize your plot even more using `theme()` and justify your choices.
 
