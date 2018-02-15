@@ -311,7 +311,7 @@ had_lines +
 
 1. What happens to our histogram if we add a fill argument. Try `fill = month` and `fill = factor(year)` (note that without the factor, nothing happens!). You might also want to remove the guide with `+ guides(fill = "none")`.
 
-2. Create a line plot of year on the x and anomoly on the y. Include month as a group. Try coloring *also* by anomoly. First use the default palatte, and then try a blue-white-red.
+2. Create a line plot of year on the x and anomoly on the y. Include month as a group. Try coloring by anomoly as well. First use the default palatte, and then try a blue-white-red.
 
 3. Now color that line plot by month. Try at least two different palettes either of your own devising or from an additional package. Note, if you use `month_name`, you'll be mucking about with `scale_color_manual`. Or you can use RColorBrewer which handles discrete groups easily using `scale_color_brewer()`. 
 

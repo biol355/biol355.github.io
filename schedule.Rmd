@@ -60,6 +60,7 @@ __Biological Examples:__  [Plum Island LTER Plankton Distribution](./Lectures/da
 __Cheat Sheets:__ [Data visualization](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf), [Mapping with ggmap](https://www.nceas.ucsb.edu/~frazier/RSpatialGuides/ggmap/ggmapCheatsheet.pdf)  
 __Other References:__[ggplot2 references](http://ggplot2.tidyverse.org/reference/), [Fundamentals of Data Visualization](http://serialmentor.com/dataviz/), [colors for data viz](https://lisacharlotterost.github.io/2016/04/22/Colors-for-DataVis/)  
 __Etherpad:__ https://etherpad.wikimedia.org/p/355-dataviz  
+__In Class Files:__ [ggplot and hadcrut](./in_class_files/2018/scripts/hadcrut_ggplot.R)  
 __Homework:__ [Plotapalooza](./Assignments/3_ggplot_intro.html), submit [here!](https://www.dropbox.com/request/9whCDDUB8TNByJ5KbkoP)
 
 ### Week  5&6. Data Reduction and Summarization
