@@ -46,7 +46,7 @@ ggplot(plankton, aes(x=Chlorophytes, y=TotalChlA)) +
 
 
 <br><br><br>
-3. What is your favorite data visualization. Grab a jpg of it and put it into this RMarkdown document (you'll need look at how to get images into RMarkdown documents and you'll need to email it to us along with the homework so we can compile the document).
+3. What is your favorite data visualization. Grab a jpg of it and put it into this RMarkdown document (you'll need look at how to get images into RMarkdown documents and you'll need to submit it to us along with the homework so we can compile the document). Bonus point if you archive (think zip files) the RMD and JPEGs and submit them together!
 
   Now tell us *why* this is your favorite example of a data visualization.
   
