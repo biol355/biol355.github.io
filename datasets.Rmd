@@ -45,4 +45,7 @@ knitr::opts_chunk$set(echo = TRUE)
 * [A Few Biological Marine Timeseries](https://github.com/ropensci/ots)  
 * [Interface with PANGEA database](https://github.com/ropensci/pangaear) - many varied datasets  
 * [Biodiversity Information Serving Our Nation](https://github.com/ropensci/rbison)  
-* [R National Phenology Network interface](https://github.com/ropensci/rnpn)  
+* [R National Phenology Network interface](https://github.com/ropensci/rnpn) 
+* [Weather data from Environment and Climate Change Canada](https://github.com/ropensci/weathercan)  
+* [nomisr - Bemographic and Census data from the UK](https://github.com/EvanOdell/nomisr)  
+* [fingertipsR - Public heath data from England](https://cran.rstudio.com/web/packages/fingertipsR/)  
