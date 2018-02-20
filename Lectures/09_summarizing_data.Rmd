@@ -36,6 +36,37 @@ salmon %<>% mutate(river = rep(letters[1:6],nrow(salmon)/6),
                    mass_class = cut_interval(mass, 6))
 ```
 
+## First, some fun!
+<a href="https://twitter.com/dataandme/status/965785338227712000?ref_src=twsrc%5Etfw">
+![](./Images/summarizing_data/ggpom.jpg)
+</a>
+
+
+## First, some fun!
+```{r pom, echo=TRUE, eval=FALSE}
+#devtools::install_github("gadenbuie/ggpomological")
+library(ggpomological)
+
+ggplot(iris, aes(x=Petal.Length, y = Petal.Width, color=Species)) +
+  geom_point(size=3) +
+  theme_pomological(base_family = 'Homemade Apple', base_size=16) +
+  scale_color_pomological()
+
+```
+
+## First, some fun!
+```{r pom, echo=FALSE, eval=TRUE, warning=FALSE}
+```
+
+## First, some fun!
+```{r pom2, echo=FALSE, eval=TRUE, warning=FALSE}
+ggplot(iris, aes(x=Petal.Length,  fill=Species)) +
+  geom_histogram(position="stack", bins=30, color=NA) +
+  theme_pomological(base_family = 'Homemade Apple', base_size=16) +
+  scale_color_pomological() +
+  scale_fill_pomological()
+```
+
 ## Where are we going?
 ![](./Images/summarizing_data/legodata_www.mydigitalfootprint.com.png)
 
