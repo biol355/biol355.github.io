@@ -66,6 +66,7 @@ ggplot(iris, aes(x=Petal.Length,  fill=Species)) +
   scale_color_pomological() +
   scale_fill_pomological()
 ```
+See also https://github.com/cttobin/ggthemr
 
 ## Where are we going?
 ![](./Images/summarizing_data/legodata_www.mydigitalfootprint.com.png)
