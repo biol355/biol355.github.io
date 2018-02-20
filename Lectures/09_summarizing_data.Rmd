@@ -12,7 +12,7 @@ output:
     lib_dir: libs
 ---
 
-## {data-background="./images/summarizing_data/many_salmon.png" opacity="0.4"}
+## {data-background="./Images/summarizing_data/many_salmon.png" opacity="0.4"}
 <Br><br><br><br><br><Br><br><br><br><br>
 <h2 style="position: absolute; top:50%;  text-align: center; color:white">
 <center>Making Data Tell its Story</center></h2>
@@ -37,7 +37,7 @@ salmon %<>% mutate(river = rep(letters[1:6],nrow(salmon)/6),
 ```
 
 ## Where are we going?
-![](./images/summarizing_data/legodata_www.mydigitalfootprint.com.png)
+![](./Images/summarizing_data/legodata_www.mydigitalfootprint.com.png)
 
 ## Objectives
 1. Think about how sampling influences data structure  
@@ -49,25 +49,25 @@ salmon %<>% mutate(river = rep(letters[1:6],nrow(salmon)/6),
 4. The split-apply-combine philosophy  
 
 ## How much does one salmon weigh?
-![](./images/summarizing_data/salmon.png){width="75%"}
+![](./Images/summarizing_data/salmon.png){width="75%"}
 
 Weight: 3.09kg
 
 
 ## How much do these salmon weigh?
-![](./images/summarizing_data/many_salmon.png){width="75%"}
+![](./Images/summarizing_data/many_salmon.png){width="75%"}
 
 `r salmon$mass[1:10]`
 
 ## What can we say about the weights of all of these salmon?
-![](./images/summarizing_data/salmon_population.png){width="75%"}
+![](./Images/summarizing_data/salmon_population.png){width="75%"}
 
 Pair up with someone and come up all of the information you can think of that would summarize this population.
 
 ## Population versus Sample
 |   |   |
 |:-:|:-:|
-| ![](./images/summarizing_data/salmon_population.png) | ![](./images/summarizing_data/many_salmon.png) |
+| ![](./Images/summarizing_data/salmon_population.png) | ![](./Images/summarizing_data/many_salmon.png) |
 
 
 ## What is a population?
@@ -148,7 +148,7 @@ Can incorporate multiple gradients
 ## Different Sampling for Different Populations
 |   |   |
 |:-:|:-:|
-| ![](./images/summarizing_data/alaska_rivers.png){width="50%"} | ![](./images/summarizing_data/salmon_population.png){width="50%"} |
+| ![](./Images/summarizing_data/alaska_rivers.png){width="50%"} | ![](./Images/summarizing_data/salmon_population.png){width="50%"} |
 <p align="left">
 Consider each scenario and in pairs design a sampling schema:  
 1. Population = All salmon across all rivers  
@@ -167,7 +167,7 @@ Consider each scenario and in pairs design a sampling schema:
 
 ## Our Data
 ```{r hist, fig.height=7}
-img <- png::readPNG("./images/summarizing_data/salmon_population.png")
+img <- png::readPNG("./Images/summarizing_data/salmon_population.png")
 g <- grid::rasterGrob(img, interpolate=TRUE)
 
 p <- ggplot(data = salmon, aes(x = mass)) + 
@@ -189,7 +189,7 @@ p_all
 - Larger Samples = Better Estimators
 
 ## Accuracy versus Precision
-![](./images/summarizing_data/accurate-precise1.jpg)
+![](./Images/summarizing_data/accurate-precise1.jpg)
 <br><br><br>
 <div class="small">https://bobchoat.files.wordpress.com/2014/01/accurate-precise1.jpg</div>
 
@@ -301,7 +301,7 @@ quantile(salmon$mass)
 </div>
 
 ## Boxplots
-![](./images/summarizing_data/EDA-boxplot.png)
+![](./Images/summarizing_data/EDA-boxplot.png)
 
 ## Boxplot of One Population
 ```{r boxplot}
@@ -310,7 +310,7 @@ qplot(x=1, mass, data = salmon, geom="boxplot")
 
 ## Boxplot of Many Populations
 ```{r boxplot_many}
-img_ak <- png::readPNG("./images/summarizing_data/alaska_rivers.png")
+img_ak <- png::readPNG("./Images/summarizing_data/alaska_rivers.png")
 g_ak <- grid::rasterGrob(img_ak, interpolate=TRUE)
 
 qplot(x=river, mass, data = salmon, geom="boxplot") +
@@ -346,7 +346,7 @@ salmon
 
 ## Our Hero...
 
-![](./images/summarizing_data/hex-dplyr.jpg)
+![](./Images/summarizing_data/hex-dplyr.jpg)
 
 ## Filtering
 ```{r filter, message=FALSE, warning=FALSE, echo=TRUE}
@@ -363,7 +363,7 @@ filter(salmon, river == "a")
 ```
 
 ## Logical Operators
-![](./images/summarizing_data/transform-logical.png)
+![](./Images/summarizing_data/transform-logical.png)
 
 ## Many Filters
 ```{r filter3, message=FALSE, warning=FALSE, echo=TRUE}
@@ -391,7 +391,7 @@ filter(salmon, river == "b" & mass > 3) %>%
 4. <font color="red">The split-apply-combine philosophy</font>  
 
 ## Where are we going?
-![](./images/summarizing_data/legodata_www.mydigitalfootprint.com.png)
+![](./Images/summarizing_data/legodata_www.mydigitalfootprint.com.png)
 
 ## Split-Apply-Combine
 - Filtering and working with one chunk of the data is not enough  
@@ -399,7 +399,7 @@ filter(salmon, river == "b" & mass > 3) %>%
 - We often want to summarize information about many groups  
 
 ## Split-Apply-Combine
-![](./images/summarizing_data/split_apply_combine.png)
+![](./Images/summarizing_data/split_apply_combine.png)
 
 ## Think-Pair-Share
 1. What are things you want to know about different rivers in the salmon data?  
