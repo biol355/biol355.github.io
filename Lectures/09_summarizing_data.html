@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title>09_summarizing_data.utf8</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="libs/reveal.js-3.3.0.1/css/reveal.css"/>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="libs/reveal.js-3.3.0.1/css/theme/white.css" id="theme">
+
+
+  <!-- some tweaks to reveal css -->
+  <style type="text/css">
+    .reveal h1 { font-size: 2.0em; }
+    .reveal h2 { font-size: 1.5em;  }
+    .reveal h3 { font-size: 1.25em;	}
+    .reveal h4 { font-size: 1em;	}
+
+    .reveal .slides>section,
+    .reveal .slides>section>section {
+      padding: 0px 0px;
+    }
+
+
+
+    .reveal table {
+      border-width: 1px;
+      border-spacing: 2px;
+      border-style: dotted;
+      border-color: gray;
+      border-collapse: collapse;
+      font-size: 0.7em;
+    }
+
+    .reveal table th {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      font-weight: bold;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+    .reveal table td {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+
+  </style>
+
+    <style type="text/css">code{white-space: pre;}</style>
+
+    <link rel="stylesheet" href="style.css"/>
+
+<!-- Printing and PDF exports -->
+<script id="paper-css" type="application/dynamic-css">
+
+/* Default Print Stylesheet Template
+   by Rob Glazebrook of CSSnewbie.com
+   Last Updated: June 4, 2008
+
+   Feel free (nay, compelled) to edit, append, and
+   manipulate this file as you see fit. */
+
+
+@media print {
+
+	/* SECTION 1: Set default width, margin, float, and
+	   background. This prevents elements from extending
+	   beyond the edge of the printed page, and prevents
+	   unnecessary background images from printing */
+	html {
+		background: #fff;
+		width: auto;
+		height: auto;
+		overflow: visible;
+	}
+	body {
+		background: #fff;
+		font-size: 20pt;
+		width: auto;
+		height: auto;
+		border: 0;
+		margin: 0 5%;
+		padding: 0;
+		overflow: visible;
+		float: none !important;
+	}
+
+	/* SECTION 2: Remove any elements not needed in print.
+	   This would include navigation, ads, sidebars, etc. */
+	.nestedarrow,
+	.controls,
+	.fork-reveal,
+	.share-reveal,
+	.state-background,
+	.reveal .progress,
+	.reveal .backgrounds {
+		display: none !important;
+	}
+
+	/* SECTION 3: Set body font face, size, and color.
+	   Consider using a serif font for readability. */
+	body, p, td, li, div {
+		font-size: 20pt!important;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		color: #000;
+	}
+
+	/* SECTION 4: Set heading font face, sizes, and color.
+	   Differentiate your headings from your body text.
+	   Perhaps use a large sans-serif for distinction. */
+	h1,h2,h3,h4,h5,h6 {
+		color: #000!important;
+		height: auto;
+		line-height: normal;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		text-shadow: 0 0 0 #000 !important;
+		text-align: left;
+		letter-spacing: normal;
+	}
+	/* Need to reduce the size of the fonts for printing */
+	h1 { font-size: 28pt !important;  }
+	h2 { font-size: 24pt !important; }
+	h3 { font-size: 22pt !important; }
+	h4 { font-size: 22pt !important; font-variant: small-caps; }
+	h5 { font-size: 21pt !important; }
+	h6 { font-size: 20pt !important; font-style: italic; }
+
+	/* SECTION 5: Make hyperlinks more usable.
+	   Ensure links are underlined, and consider appending
+	   the URL to the end of the link for usability. */
+	a:link,
+	a:visited {
+		color: #000 !important;
+		font-weight: bold;
+		text-decoration: underline;
+	}
+	/*
+	.reveal a:link:after,
+	.reveal a:visited:after {
+		content: " (" attr(href) ") ";
+		color: #222 !important;
+		font-size: 90%;
+	}
+	*/
+
+
+	/* SECTION 6: more reveal.js specific additions by @skypanther */
+	ul, ol, div, p {
+		visibility: visible;
+		position: static;
+		width: auto;
+		height: auto;
+		display: block;
+		overflow: visible;
+		margin: 0;
+		text-align: left !important;
+	}
+	.reveal pre,
+	.reveal table {
+		margin-left: 0;
+		margin-right: 0;
+	}
+	.reveal pre code {
+		padding: 20px;
+		border: 1px solid #ddd;
+	}
+	.reveal blockquote {
+		margin: 20px 0;
+	}
+	.reveal .slides {
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 0 !important;
+		zoom: 1 !important;
+
+		overflow: visible !important;
+		display: block !important;
+
+		text-align: left !important;
+		-webkit-perspective: none;
+		   -moz-perspective: none;
+		    -ms-perspective: none;
+		        perspective: none;
+
+		-webkit-perspective-origin: 50% 50%;
+		   -moz-perspective-origin: 50% 50%;
+		    -ms-perspective-origin: 50% 50%;
+		        perspective-origin: 50% 50%;
+	}
+	.reveal .slides section {
+		visibility: visible !important;
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+		display: block !important;
+		overflow: visible !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 60px 20px !important;
+		z-index: auto !important;
+
+		opacity: 1 !important;
+
+		page-break-after: always !important;
+
+		-webkit-transform-style: flat !important;
+		   -moz-transform-style: flat !important;
+		    -ms-transform-style: flat !important;
+		        transform-style: flat !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+
+		-webkit-transition: none !important;
+		   -moz-transition: none !important;
+		    -ms-transition: none !important;
+		        transition: none !important;
+	}
+	.reveal .slides section.stack {
+		padding: 0 !important;
+	}
+	.reveal section:last-of-type {
+		page-break-after: avoid !important;
+	}
+	.reveal section .fragment {
+		opacity: 1 !important;
+		visibility: visible !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+	}
+	.reveal section img {
+		display: block;
+		margin: 15px 0px;
+		background: rgba(255,255,255,1);
+		border: 1px solid #666;
+		box-shadow: none;
+	}
+
+	.reveal section small {
+		font-size: 0.8em;
+	}
+
+}  
+</script>
+
+
+<script id="pdf-css" type="application/dynamic-css">
+    
+/**
+ * This stylesheet is used to print reveal.js
+ * presentations to PDF.
+ *
+ * https://github.com/hakimel/reveal.js#pdf-export
+ */
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+
+body {
+	margin: 0 auto !important;
+	border: 0;
+	padding: 0;
+	float: none !important;
+	overflow: visible;
+}
+
+html {
+	width: 100%;
+	height: 100%;
+	overflow: visible;
+}
+
+/* Remove any elements not needed in print. */
+.nestedarrow,
+.reveal .controls,
+.reveal .progress,
+.reveal .playback,
+.reveal.overview,
+.fork-reveal,
+.share-reveal,
+.state-background {
+	display: none !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	text-shadow: 0 0 0 #000 !important;
+}
+
+.reveal pre code {
+	overflow: hidden !important;
+	font-family: Courier, 'Courier New', monospace !important;
+}
+
+ul, ol, div, p {
+	visibility: visible;
+	position: static;
+	width: auto;
+	height: auto;
+	display: block;
+	overflow: visible;
+	margin: auto;
+}
+.reveal {
+	width: auto !important;
+	height: auto !important;
+	overflow: hidden !important;
+}
+.reveal .slides {
+	position: static;
+	width: 100%;
+	height: auto;
+
+	left: auto;
+	top: auto;
+	margin: 0 !important;
+	padding: 0 !important;
+
+	overflow: visible;
+	display: block;
+
+	-webkit-perspective: none;
+	   -moz-perspective: none;
+	    -ms-perspective: none;
+	        perspective: none;
+
+	-webkit-perspective-origin: 50% 50%; /* there isn't a none/auto value but 50-50 is the default */
+	   -moz-perspective-origin: 50% 50%;
+	    -ms-perspective-origin: 50% 50%;
+	        perspective-origin: 50% 50%;
+}
+
+.reveal .slides section {
+	page-break-after: always !important;
+
+	visibility: visible !important;
+	position: relative !important;
+	display: block !important;
+	position: relative !important;
+
+	margin: 0 !important;
+	padding: 0 !important;
+	box-sizing: border-box !important;
+	min-height: 1px;
+
+	opacity: 1 !important;
+
+	-webkit-transform-style: flat !important;
+	   -moz-transform-style: flat !important;
+	    -ms-transform-style: flat !important;
+	        transform-style: flat !important;
+
+	-webkit-transform: none !important;
+	   -moz-transform: none !important;
+	    -ms-transform: none !important;
+	        transform: none !important;
+}
+
+.reveal section.stack {
+	margin: 0 !important;
+	padding: 0 !important;
+	page-break-after: avoid !important;
+	height: auto !important;
+	min-height: auto !important;
+}
+
+.reveal img {
+	box-shadow: none;
+}
+
+.reveal .roll {
+	overflow: visible;
+	line-height: 1em;
+}
+
+/* Slide backgrounds are placed inside of their slide when exporting to PDF */
+.reveal section .slide-background {
+	display: block !important;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: -1;
+}
+
+/* All elements should be above the slide-background */
+.reveal section>* {
+	position: relative;
+	z-index: 1;
+}
+
+/* Display slide speaker notes when 'showNotes' is enabled */
+.reveal .speaker-notes-pdf {
+	display: block;
+	width: 100%;
+	max-height: none;
+	left: auto;
+	top: auto;
+	z-index: 100;
+}
+
+/* Display slide numbers when 'slideNumber' is enabled */
+.reveal .slide-number-pdf {
+	display: block;
+	position: absolute;
+	font-size: 14px;
+}
+
+</script>
+
+
+<script>
+var style = document.createElement( 'style' );
+style.type = 'text/css';
+var style_script_id = window.location.search.match( /print-pdf/gi ) ? 'pdf-css' : 'paper-css';
+var style_script = document.getElementById(style_script_id).text;
+style.innerHTML = style_script;
+document.getElementsByTagName('head')[0].appendChild(style);
+</script>
+
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+
+<section id="section" class="slide level2" data-background="./images/summarizing_data/many_salmon.png" data-opacity="0.4">
+<h2></h2>
+<Br><br><br><br><br><Br><br><br><br><br>
+<h2 style="position: absolute; top:50%;  text-align: center; color:white">
+<center>
+Making Data Tell its Story
+</center>
+</h2>
+</section>
+<section id="where-are-we-going" class="slide level2">
+<h2>Where are we going?</h2>
+<p><img data-src="./images/summarizing_data/legodata_www.mydigitalfootprint.com.png" /></p>
+</section>
+<section id="objectives" class="slide level2">
+<h2>Objectives</h2>
+<ol type="1">
+<li><p>Think about how sampling influences data structure</p></li>
+<li><p>Consider how we summarize our data</p></li>
+<li><p>A little bit o’ Boolean</p></li>
+<li><p>The split-apply-combine philosophy</p></li>
+</ol>
+</section>
+<section id="how-much-does-one-salmon-weigh" class="slide level2">
+<h2>How much does one salmon weigh?</h2>
+<p><img data-src="./images/summarizing_data/salmon.png" style="width:75.0%" /></p>
+<p>Weight: 3.09kg</p>
+</section>
+<section id="how-much-do-these-salmon-weigh" class="slide level2">
+<h2>How much do these salmon weigh?</h2>
+<p><img data-src="./images/summarizing_data/many_salmon.png" style="width:75.0%" /></p>
+<p>3.09, 2.91, 3.06, 2.69, 2.88, 2.98, 1.61, 2.16, 1.56, 1.76</p>
+</section>
+<section id="what-can-we-say-about-the-weights-of-all-of-these-salmon" class="slide level2">
+<h2>What can we say about the weights of all of these salmon?</h2>
+<p><img data-src="./images/summarizing_data/salmon_population.png" style="width:75.0%" /></p>
+<p>Pair up with someone and come up all of the information you can think of that would summarize this population.</p>
+</section>
+<section id="population-versus-sample" class="slide level2">
+<h2>Population versus Sample</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><img data-src="./images/summarizing_data/salmon_population.png" /></td>
+<td style="text-align: center;"><img data-src="./images/summarizing_data/many_salmon.png" /></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="what-is-a-population" class="slide level2">
+<h2>What is a population?</h2>
+<img src="09_summarizing_data_files/figure-revealjs/population-1.jpeg" width="576" />
+<div class="fragment">
+ <br />
+Population = All Individuals
+</div>
+</section>
+<section id="what-is-a-sample" class="slide level2">
+<h2>What is a sample?</h2>
+<img src="09_summarizing_data_files/figure-revealjs/sample-1.jpeg" width="576" />
+<div class="fragment">
+A <b>sample</b> of individuals in a randomly distributed population.
+</div>
+</section>
+<section id="what-are-the-properties-of-a-good-sample" class="slide level2">
+<h2>What are the properties of a good sample?</h2>
+<div style="font-size:32pt; text-align:left">
+<ul>
+<li class="fragment">Sample is <strong>representative</strong></li>
+</ul>
+<ul>
+<li class="fragment">Replicates have an <strong>equal chance</strong> of being sampled</li>
+</ul>
+<ul>
+<li class="fragment">Replicates are <strong>independent</strong></li>
+</ul>
+</div>
+</section>
+<section id="bias-from-unequal-representation" class="slide level2">
+<h2>Bias from Unequal Representation</h2>
+<p><img src="09_summarizing_data_files/figure-revealjs/colorSize-1.jpeg" width="576" /> If you only chose one color, you would only get one range of sizes.</p>
+</section>
+<section id="bias-from-unequal-change-of-sampling" class="slide level2">
+<h2>Bias from Unequal Change of Sampling</h2>
+<p><img src="09_summarizing_data_files/figure-revealjs/spatialBias-1.jpeg" width="576" /> <span class="fragment">Spatial gradient in size</span></p>
+</section>
+<section id="bias-from-unequal-change-of-sampling-1" class="slide level2">
+<h2>Bias from Unequal Change of Sampling</h2>
+<p><img src="09_summarizing_data_files/figure-revealjs/spatialSample-1.jpeg" width="576" /> Oh, I’ll just grab those individuals closest to me…</p>
+</section>
+<section id="good-sampling-schemes-stratified-sampling" class="slide level2">
+<h2>Good Sampling Schemes: <strong>Stratified</strong> Sampling</h2>
+<p><img src="09_summarizing_data_files/figure-revealjs/stratified-1.jpeg" width="576" /> Sample over a known gradient, aka <strong>cluster sampling</strong></p>
+<p>Can incorporate multiple gradients</p>
+</section>
+<section id="good-sampling-schemes-random-sampling" class="slide level2">
+<h2>Good Sampling Schemes: Random Sampling</h2>
+<img src="09_summarizing_data_files/figure-revealjs/spatialSample2-1.jpeg" width="576" />
+<div id="fragment">
+Two sampling schemes:
+</div>
+<ul>
+<li class="fragment">Random - samples chosen using random numbers<br />
+</li>
+<li class="fragment">Haphazard - samples chosen without any system (careful!)</li>
+</ul>
+</section>
+<section id="stratified-or-random" class="slide level2">
+<h2>Stratified or Random?</h2>
+<ul>
+<li><p>How is your population defined?</p></li>
+<li><p>What is the scale of your inference?</p></li>
+<li><p>What might influence the inclusion of a replicate?</p></li>
+<li><p>How important are external factors you know about?</p></li>
+<li><p>How important are external factors you cannot assess?</p></li>
+</ul>
+</section>
+<section id="different-sampling-for-different-populations" class="slide level2">
+<h2>Different Sampling for Different Populations</h2>
+<table>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;"><img data-src="./images/summarizing_data/alaska_rivers.png" style="width:50.0%" /></td>
+<td style="text-align: center;"><img data-src="./images/summarizing_data/salmon_population.png" style="width:50.0%" /></td>
+</tr>
+</tbody>
+</table>
+<p align="left">
+Consider each scenario and in pairs design a sampling schema:<br />
+1. Population = All salmon across all rivers<br />
+2. Population = Salmon in one river
+</p>
+</section>
+<section id="objectives-1" class="slide level2">
+<h2>Objectives</h2>
+<ol type="1">
+<li><p>Think about how sampling influences data structure</p></li>
+<li><p><font color="red">Consider how we summarize our data</font></p></li>
+<li><p>A little bit o’ Boolean</p></li>
+<li><p>The split-apply-combine philosophy</p></li>
+</ol>
+</section>
+<section id="our-data" class="slide level2">
+<h2>Our Data</h2>
+<p><img src="09_summarizing_data_files/figure-revealjs/hist-1.jpeg" width="672" /></p>
+</section>
+<section id="sample-versus-population-summarization" class="slide level2">
+<h2>Sample versus Population Summarization</h2>
+<ul>
+<li><p>We assume a sample is representative of a population</p></li>
+<li><p>Therefore, sample statistics are estimates of population statistics</p></li>
+<li><p>Larger Samples = Better Estimators</p></li>
+</ul>
+</section>
+<section id="accuracy-versus-precision" class="slide level2">
+<h2>Accuracy versus Precision</h2>
+<img data-src="./images/summarizing_data/accurate-precise1.jpg" /> <br><br><br>
+<div class="small">
+<a href="https://bobchoat.files.wordpress.com/2014/01/accurate-precise1.jpg" class="uri">https://bobchoat.files.wordpress.com/2014/01/accurate-precise1.jpg</a>
+</div>
+</section>
+<section id="central-tendancy-mean" class="slide level2 bigger">
+<h2>Central Tendancy: Mean</h2>
+ <br />
+ <br />
+
+<center>
+<span class="math inline">\(\bar{Y} = \frac{ \displaystyle \sum_{i=1}^{n}{y_{i}} }{n}\)</span>
+</center>
+<p><span class="math inline">\(\large \bar{Y}\)</span> - The average value of a sample<br />
+<span class="math inline">\(y_{i}\)</span> - The value of a measurement for a single individual<br />
+n - The number of individuals in a sample<br />
+ <br />
+<span class="math inline">\(\mu\)</span> - The average value of a population<br />
+(Greek = population, Latin = Sample)</p>
+</section>
+<section id="median---dead-center" class="slide level2">
+<h2>Median - Dead Center</h2>
+<pre><code> [1] 1.56 1.61 1.76 2.16 2.69 2.88 2.91 2.98 3.06 3.09</code></pre>
+<Br><br>
+<div class="fragment">
+Middle Value = 50th Percentile = 0.5 Quantile = Median<Br>good for non-normal data
+</div>
+<br><br>
+<div class="fragment">
+<pre><code>[1] 1.855</code></pre>
+</div>
+</section>
+<section id="central-tendancies" class="slide level2">
+<h2>Central Tendancies</h2>
+<p><img src="09_summarizing_data_files/figure-revealjs/central1-1.jpeg" width="672" /></p>
+<p><font color="blue">mean</font>, <font color="red">median</font></p>
+</section>
+<section id="what-about-population-level-variability" class="slide level2">
+<h2>What about population-level variability?</h2>
+<p><img src="09_summarizing_data_files/figure-revealjs/central_var1-1.jpeg" width="672" /></p>
+<div class="fragment">
+What is the range of 2/3 of the population?
+</div>
+</section>
+<section id="what-about-population-level-variability-1" class="slide level2">
+<h2>What about population-level variability?</h2>
+<p><img src="09_summarizing_data_files/figure-revealjs/central_var2-1.jpeg" width="672" /></p>
+<p>What is the range of 2/3 of the population?</p>
+</section>
+<section id="sample-properties-variance" class="slide level2">
+<h2>Sample Properties: Variance</h2>
+<p>How variable was that population? <span class="math display">\[\large s^2=  \frac{\displaystyle \sum_{i=1}^{n}{(Y_i - \bar{Y})^2}} {n-1}\]</span></p>
+<ul>
+<li>Sums of Squares over n-1<br />
+</li>
+<li>n-1 corrects for both sample size and sample bias<br />
+</li>
+<li><span class="math inline">\(\sigma^2\)</span> if describing the population</li>
+<li>Units in square of measurement…</li>
+</ul>
+</section>
+<section id="sample-properties-standard-deviation" class="slide level2">
+<h2>Sample Properties: Standard Deviation</h2>
+<p><span class="math display">\[ \large s = \sqrt{s^2}\]</span></p>
+<ul>
+<li>Units the same as the measurement</li>
+<li>If distribution is normal, 67% of data within 1 SD</li>
+<li>95% within 2 SD</li>
+<li><span class="math inline">\(\sigma\)</span> if describing the population</li>
+</ul>
+</section>
+<section id="what-about-population-level-variability-2" class="slide level2">
+<h2>What about population-level variability?</h2>
+<p><img src="09_summarizing_data_files/figure-revealjs/central-1.jpeg" width="672" /></p>
+</section>
+<section id="variability-quantiles-and-quartiles" class="slide level2">
+<h2>Variability: Quantiles and Quartiles</h2>
+<pre><code> [1] 1.56 1.61 1.76 2.16 2.69 2.88 2.91 2.98 3.06 3.09</code></pre>
+<br><br>
+<div class="fragment">
+<p>Quantiles:</p>
+<pre><code>    5%    10%    50%    90%    95% 
+1.4270 1.5300 1.8550 2.9430 3.0865 </code></pre>
+</div>
+<br><br>
+<div class="fragment">
+<p>Quartiles (quarter-quantiles):</p>
+<pre><code>    0%    25%    50%    75%   100% 
+1.1800 1.6400 1.8550 2.2675 3.5300 </code></pre>
+</div>
+</section>
+<section id="boxplots" class="slide level2">
+<h2>Boxplots</h2>
+<p><img data-src="./images/summarizing_data/EDA-boxplot.png" /></p>
+</section>
+<section id="boxplot-of-one-population" class="slide level2">
+<h2>Boxplot of One Population</h2>
+<p><img src="09_summarizing_data_files/figure-revealjs/boxplot-1.jpeg" width="672" /></p>
+</section>
+<section id="boxplot-of-many-populations" class="slide level2">
+<h2>Boxplot of Many Populations</h2>
+<p><img src="09_summarizing_data_files/figure-revealjs/boxplot_many-1.jpeg" width="672" /></p>
+</section>
+<section id="meh-i-still-like-ridgelines" class="slide level2">
+<h2>Meh, I still like ridgelines</h2>
+<p><img src="09_summarizing_data_files/figure-revealjs/ridgeplot-1.jpeg" width="672" /></p>
+</section>
+<section id="objectives-2" class="slide level2">
+<h2>Objectives</h2>
+<ol type="1">
+<li><p>Think about how sampling influences data structure</p></li>
+<li><p>Consider how we summarize our data</p></li>
+<li><p><font color="red">A little bit o’ Boolean</font></p></li>
+<li><p>The split-apply-combine philosophy</p></li>
+</ol>
+</section>
+<section id="what-do-we-want-to-see" class="slide level2">
+<h2>What do we want to see?</h2>
+<pre><code># A tibble: 228 x 3
+    mass river mass_class 
+   &lt;dbl&gt; &lt;chr&gt; &lt;fct&gt;      
+ 1  3.09 a     (2.75,3.14]
+ 2  2.91 b     (2.75,3.14]
+ 3  3.06 c     (2.75,3.14]
+ 4  2.69 d     (2.35,2.75]
+ 5  2.88 e     (2.75,3.14]
+ 6  2.98 f     (2.75,3.14]
+ 7  1.61 a     (1.57,1.96]
+ 8  2.16 b     (1.96,2.35]
+ 9  1.56 c     [1.18,1.57]
+10  1.76 d     (1.57,1.96]
+# ... with 218 more rows</code></pre>
+</section>
+<section id="our-hero" class="slide level2">
+<h2>Our Hero…</h2>
+<p><img data-src="./images/summarizing_data/hex-dplyr.jpg" /></p>
+</section>
+<section id="filtering" class="slide level2">
+<h2>Filtering</h2>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw">library</span>(dplyr)</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="kw">filter</span>(salmon, mass <span class="op">&gt;</span><span class="st"> </span><span class="dv">2</span>)</a></code></pre></div>
+<pre><code># A tibble: 74 x 3
+    mass river mass_class 
+   &lt;dbl&gt; &lt;chr&gt; &lt;fct&gt;      
+ 1  3.09 a     (2.75,3.14]
+ 2  2.91 b     (2.75,3.14]
+ 3  3.06 c     (2.75,3.14]
+ 4  2.69 d     (2.35,2.75]
+ 5  2.88 e     (2.75,3.14]
+ 6  2.98 f     (2.75,3.14]
+ 7  2.16 b     (1.96,2.35]
+ 8  3.30 f     (3.14,3.53]
+ 9  3.25 e     (3.14,3.53]
+10  2.18 f     (1.96,2.35]
+# ... with 64 more rows</code></pre>
+</section>
+<section id="filtering-1" class="slide level2">
+<h2>Filtering</h2>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">filter</span>(salmon, river <span class="op">==</span><span class="st"> &quot;a&quot;</span>)</a></code></pre></div>
+<pre><code># A tibble: 38 x 3
+    mass river mass_class 
+   &lt;dbl&gt; &lt;chr&gt; &lt;fct&gt;      
+ 1  3.09 a     (2.75,3.14]
+ 2  1.61 a     (1.57,1.96]
+ 3  1.91 a     (1.57,1.96]
+ 4  2.13 a     (1.96,2.35]
+ 5  1.53 a     [1.18,1.57]
+ 6  1.75 a     (1.57,1.96]
+ 7  1.76 a     (1.57,1.96]
+ 8  1.72 a     (1.57,1.96]
+ 9  2.29 a     (1.96,2.35]
+10  1.74 a     (1.57,1.96]
+# ... with 28 more rows</code></pre>
+</section>
+<section id="logical-operators" class="slide level2">
+<h2>Logical Operators</h2>
+<p><img data-src="./images/summarizing_data/transform-logical.png" /></p>
+</section>
+<section id="many-filters" class="slide level2">
+<h2>Many Filters</h2>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw">filter</span>(salmon, river <span class="op">==</span><span class="st"> &quot;a&quot;</span> <span class="op">&amp;</span><span class="st"> </span>mass <span class="op">&gt;</span><span class="st"> </span><span class="dv">3</span>)</a></code></pre></div>
+<pre><code># A tibble: 4 x 3
+   mass river mass_class 
+  &lt;dbl&gt; &lt;chr&gt; &lt;fct&gt;      
+1  3.09 a     (2.75,3.14]
+2  3.04 a     (2.75,3.14]
+3  3.11 a     (2.75,3.14]
+4  3.05 a     (2.75,3.14]</code></pre>
+</section>
+<section id="many-filters-1" class="slide level2">
+<h2>Many Filters</h2>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw">filter</span>(salmon, river <span class="op">==</span><span class="st"> &quot;a&quot;</span> <span class="op">&amp;</span><span class="st"> </span>mass <span class="op">&gt;</span><span class="st"> </span><span class="dv">3</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb13-2" data-line-number="2"><span class="st">  </span>count</a></code></pre></div>
+<pre><code># A tibble: 1 x 1
+      n
+  &lt;int&gt;
+1     4</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw">filter</span>(salmon, river <span class="op">==</span><span class="st"> &quot;b&quot;</span> <span class="op">&amp;</span><span class="st"> </span>mass <span class="op">&gt;</span><span class="st"> </span><span class="dv">3</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb15-2" data-line-number="2"><span class="st">  </span>count</a></code></pre></div>
+<pre><code># A tibble: 1 x 1
+      n
+  &lt;int&gt;
+1     4</code></pre>
+</section>
+<section id="objectives-3" class="slide level2">
+<h2>Objectives</h2>
+<ol type="1">
+<li><p>Think about how sampling influences data structure</p></li>
+<li><p>Consider how we summarize our data</p></li>
+<li><p>A little bit o’ Boolean</p></li>
+<li><p><font color="red">The split-apply-combine philosophy</font></p></li>
+</ol>
+</section>
+<section id="where-are-we-going-1" class="slide level2">
+<h2>Where are we going?</h2>
+<p><img data-src="./images/summarizing_data/legodata_www.mydigitalfootprint.com.png" /></p>
+</section>
+<section id="split-apply-combine" class="slide level2">
+<h2>Split-Apply-Combine</h2>
+<ul>
+<li><p>Filtering and working with one chunk of the data is not enough</p></li>
+<li><p>We often want to summarize information about many groups</p></li>
+</ul>
+</section>
+<section id="split-apply-combine-1" class="slide level2">
+<h2>Split-Apply-Combine</h2>
+<p><img data-src="./images/summarizing_data/split_apply_combine.png" /></p>
+</section>
+<section id="think-pair-share" class="slide level2">
+<h2>Think-Pair-Share</h2>
+<ol type="1">
+<li><p>What are things you want to know about different rivers in the salmon data?</p></li>
+<li><p>What are things you want to know about different size classes in the salmon data?</p></li>
+</ol>
+</section>
+<section id="grouping-by-river" class="slide level2">
+<h2>Grouping by River</h2>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1">salmon_rivers &lt;-<span class="st"> </span>salmon <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb17-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb17-3" data-line-number="3"><span class="st">  </span><span class="kw">group_by</span>(river) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb17-4" data-line-number="4"><span class="st">  </span></a>
+<a class="sourceLine" id="cb17-5" data-line-number="5"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">mean_mass =</span> <span class="kw">mean</span>(mass),</a>
+<a class="sourceLine" id="cb17-6" data-line-number="6">            <span class="dt">sd_mass =</span> <span class="kw">sd</span>(mass))</a></code></pre></div>
+</section>
+<section id="what-can-we-do-with-this" class="slide level2">
+<h2>What can we do with this?</h2>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="kw">arrange</span>(salmon_rivers, mean_mass)</a></code></pre></div>
+<pre><code># A tibble: 6 x 3
+  river mean_mass sd_mass
+  &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+1 d          1.89   0.450
+2 e          1.98   0.491
+3 c          2.04   0.548
+4 f          2.04   0.612
+5 b          2.10   0.608
+6 a          2.11   0.511</code></pre>
+</section>
+<section id="what-can-we-do-with-this-1" class="slide level2">
+<h2>What can we do with this?</h2>
+<p><img src="09_summarizing_data_files/figure-revealjs/plot_groups-1.jpeg" width="672" /></p>
+</section>
+<section id="custom-counts" class="slide level2">
+<h2>Custom Counts</h2>
+<p><img src="09_summarizing_data_files/figure-revealjs/counts-1.jpeg" width="672" /></p>
+</section>
+    </div>
+  </div>
+
+  <script src="libs/reveal.js-3.3.0.1/lib/js/head.min.js"></script>
+  <script src="libs/reveal.js-3.3.0.1/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Display the page number of the current slide
+        slideNumber: true,
+        // Push each slide change to the browser history
+        history: true,
+        // Vertical centering of slides
+        center: false,
+        // Opens links in an iframe preview overlay
+        previewLinks: true,
+        // Transition style
+        transition: 'fade', // none/fade/slide/convex/concave/zoom
+        // Transition style for full page slide backgrounds
+        backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
+
+
+
+        // Optional reveal.js plugins
+        dependencies: [
+        ]
+      });
+    </script>
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
+<script>
+  (function() {
+    if (window.jQuery) {
+      Reveal.addEventListener( 'slidechanged', function(event) {  
+        window.jQuery(event.previousSlide).trigger('hidden');
+        window.jQuery(event.currentSlide).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+
+  </body>
+</html>
