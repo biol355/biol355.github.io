@@ -77,6 +77,7 @@ __Lab:__ [Gapminder and Dplyr](https://swcarpentry.github.io/r-novice-gapminder/
 __Cheat Sheets:__ [Data Wrangling Cheat Sheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)  
 __Objective(s):__ Describe the meaning and identify applications of the following summary/descriptive statistics: mean, mode, median, standard deviation; Describe the split-apply-combine strategy of data reduction and summarization; Use group_by() and summarise() to calculate summary statistics for groupings within a dataset; Subset data using filter()  
 __Biological Examples:__ Human genome size. [Sockeye salmon sizes](./Lectures/data/salmon_rivers.csv).   
+__In Class Files:__ [gapminder and dplyr](./in_class_files/2018/scripts/dplyr_lab.R)  
 __Etherpad:__ https://etherpad.wikimedia.org/p/355-dplyr  
 
 ### Week  7. Tidy Data and Data Cleaning
