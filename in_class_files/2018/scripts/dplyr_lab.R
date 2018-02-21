@@ -181,7 +181,28 @@ billionminder_dplyr_wealth <- billionminder_dplyr %>%
 ## Exercise: grab a continent, any continent!
 ## 1. Make a plot that shows the timeseries of life expectancy
 ## through time for it's countries separating countries using color,
-## facet by gdp per capita split into 5 equal bins
+## facet by gdpPercap split into 5 equal bins (but make those bins
+## part of the data frame, rather than cutting at the last second!
 ##
-## 2. Now, make a timeseries plot of each continents average life expectancy over time
+## 2. Now, make a timeseries plot of each continent's average life expectancy over time
 
+
+##1. making a modified data frame from gapminder
+lifeminder <- gapminder %>%
+  
+  ### a. grab a continent (subset)
+  filter(continent == "Europe") %>%
+  
+  ### b. make bins by gdpPercap
+  mutate(gdpBins = cut_number(gdpPercap, n=5))
+
+## 2. Make a plot with that modified frame
+### set it up with time = x, lifeExp = y, country = color
+ggplot(lifeminder,
+       aes(x = year, y = lifeExp, color = country)) +
+
+  ### add a geom of some sort
+  geom_line()+ 
+  
+  ### facet by my gpBins
+  facet_wrap(~gdpBins)
