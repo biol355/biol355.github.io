@@ -89,6 +89,7 @@ __Lecture:__ [Dplyr Faded Example Practice](./Lectures/dplyr_faded_examples.html
 __Lab:__ [Regular Expressions]()  
 __Cheat Sheets:__ [Work with Strings Cheat Sheet](https://github.com/rstudio/cheatsheets/raw/master/strings.pdf)  
 __Objective(s):__ Understand how strings differ from numbers. Learn the basics of string manipulation. Describe the different strategies to clean data full of errors with minimal effort. Process and understand the concept of regular expression matching. Manipulate different date formats and work them into a data map reduce workflow.  
+__Files:__ [Portal Mammal Data with String Problems](./Lectures/data/poral_messy_regexp.xlsx)  
 __Etherpad:__ https://etherpad.wikimedia.org/p/355-strings  
 
 
