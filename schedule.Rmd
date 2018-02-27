@@ -70,6 +70,7 @@ __Homework:__ [Plotapalooza](./Assignments/3_ggplot_intro.html), submit [here!](
 `r datestring`  
 __Readings:__ W&G on [Data Transformation](http://r4ds.had.co.nz/transform.html), [Exploratory Data Analysis](http://r4ds.had.co.nz/exploratory-data-analysis.html), and [Pipes](http://r4ds.had.co.nz/pipes.html), DC Ecology Lesson on [Data Aggregation](http://www.datacarpentry.org/R-ecology-lesson/03-dplyr.html)  
 __Lecture:__ [Organizing Data to Tell a Story](./Lectures/09_summarizing_data.html), [Data for Exploratory Data Analysis of Mortality and Natality with dplyr and ggplot2](./Labs/freeform_dplyr.zip)  
+__Classwork:__ [Submit here!](https://www.dropbox.com/request/cNqOhHN02iYpldf7KVnQ)  
 __Lab:__ [Gapminder and Dplyr](https://swcarpentry.github.io/r-novice-gapminder/13-dplyr/)  
 __Cheat Sheets:__ [Data Wrangling Cheat Sheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)  
 __Objective(s):__ Describe the meaning and identify applications of the following summary/descriptive statistics: mean, mode, median, standard deviation; Describe the split-apply-combine strategy of data reduction and summarization; Use group_by() and summarise() to calculate summary statistics for groupings within a dataset; Subset data using filter()  
