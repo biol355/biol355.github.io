@@ -1,0 +1,377 @@
+---
+title:
+css: style.css
+output:
+  revealjs::revealjs_presentation:
+    reveal_options:
+      slideNumber: true
+      previewLinks: true
+    theme: white
+    center: false
+    transition: fade
+    self_contained: false
+    lib_dir: libs
+---
+
+## Faded Examples and Dplyr Hurricanes
+```{r prep, include=FALSE, warning=FALSE, message=FALSE}
+library(knitr)
+opts_chunk$set(fig.height=5, fig.width=7, comment=NA, 
+               warning=FALSE, message=FALSE, 
+               dev="jpeg")
+
+library(rrricanesdata)
+library(lubridate)
+library(magrittr)
+library(dplyr)
+library(ggplot2)
+states_map <- map_data("world")
+theme_set(theme_bw(base_size = 14))
+  
+adv_tmp <- adv %>%
+  mutate(
+  Year = year(Date),
+  Month = month(Date),
+  Day = day(Date),
+  Decade = round(Year/10)*10
+)
+```
+
+
+
+```{r show_rrricanes, fig.width=11, echo=FALSE, warning=FALSE, fig.height=3}
+ggplot(adv_tmp, aes(x=Lon, y=Lat)) + 
+  facet_wrap(~Decade) + 
+  geom_line(mapping=aes(alpha=Wind, group=Name, color=Name), lwd=0.1) +
+  guides(color="none") +
+  geom_path(data = states_map, mapping=aes(x=long, y=lat, group = group)) +
+  coord_cartesian(xlim=c(-150,0), ylim=c(8,50))
+
+```
+
+## Libraries for today
+```{r libraries, message=FALSE, warning=FALSE}
+library(rrricanesdata)
+library(lubridate)
+library(magrittr)
+library(dplyr)
+library(ggplot2)
+```
+
+Install any you don't have
+
+## Faded Examples...
+
+```{r eval=FALSE}
+obj <- old_obj %>%
+  ____(newcol = oldcol + 1)
+```
+
+## The rrricanesdata
+```{r echo=FALSE}
+adv
+```
+
+## Max Gusts per Storm
+```{r max_per_storm}
+adv_strength <- adv %>%
+  group_by(Name) %>%
+  filter(Gust == max(Gust)) %>%
+  ungroup()
+```
+
+<div id="fragment">The `ungroup()` is only needed if there is no `summarize()`</div>
+
+## Max Forward Speed per Storm
+```{r, eval=FALSE}
+adv_fwd <- adv %>%
+  ____(Name) %>%
+  filter(FwdSpeed == ___(FwdSpeed)) %>%
+  ungroup() 
+```  
+
+```{r, include=FALSE}
+adv_fwd <- adv %>%
+  group_by(Name) %>%
+  filter(FwdSpeed == max(FwdSpeed)) %>%
+  ungroup() 
+```  
+
+## Minimum Pressure per Storm
+```{r eval=FALSE}
+adv_min_pressure <- adv %>%
+  ___(____) %>%
+  ____(Pressure == ____(Pressure)) %>%
+  ungroup()
+```
+
+```{r include=FALSE}
+adv_mean_pressure <- adv %>%
+  group_by(Name) %>%
+  filter(Pressure == min(Pressure)) %>%
+  ungroup()
+```
+
+## Maximum Latitude per Storm Type
+```{r eval=FALSE}
+adv_max_lat <- adv %>%
+  ____(____) %>%
+  ____(Lat == ____(____)) %>%
+  ____()
+```
+
+```{r include=FALSE}
+adv_max_lat <- adv %>%
+  group_by(Status) %>%
+  filter(Lat == max(Lat)) %>%
+  ungroup()
+```
+
+##
+<br><br><br>
+<h1> Grouping and summarizing</h1>
+
+## Average Gust per Status Only
+```{r}
+adv_gust_status <- adv %>%
+  group_by(Status) %>%
+  summarize(Mean_Gust = mean(Gust, na.rm=TRUE))
+```
+
+<div class="fragment">How many rows?</div>
+
+## Average Forward Speed by Storm
+```{r eval=FALSE}
+avg_forward_speed <- adv %>%
+  ____(Name) %>%
+  summarize(Mean_FwdSpeed = mean(FwdSpeed, na.rm=____))
+```
+
+```{r include=FALSE}
+avg_forward_speed <- adv %>%
+  group_by(Name) %>%
+  summarize(Mean_FwdSpeed = mean(FwdSpeed, na.rm=TRUE))
+```
+
+## Averge Pressure by Status
+```{r eval=FALSE}
+avg_pressure_status <- adv %>%
+  ____(____) %>%
+  ____(Mean_Pressure = ____(Pressure, ____=____))
+```
+
+```{r include=FALSE}
+avg_pressure_status <- adv %>%
+  group_by(Status) %>%
+  summarise(Mean_Pressure = mean(Pressure, na.rm=TRUE))
+```
+
+
+##
+
+<br><br><br>
+<h2>A little mutate</h2>
+
+## Add "Quarter"
+```{r, message=FALSE, warning=FALSE, echo=TRUE}
+#a library for dates
+#(more on thursday!)
+library(lubridate)
+
+adv <- adv %>%
+  mutate(Quarter = quarter(Date))
+```
+
+## What is Quarter?
+```{r echo=FALSE, fig.height=6, fig.width=6}
+qplot(month(Date), Quarter, data=adv)
+```
+
+## Testing before overwriting
+
+```{r, echo=TRUE}
+adv_test <- adv %>%
+  mutate(Quarter = quarter(Date))
+```
+
+## Testing before overwriting
+```{r, echo=TRUE}
+adv_test$Quarter[1:100]
+```
+
+## Testing before overwriting
+```{r, echo=TRUE}
+qplot(month(Date), Quarter, data=adv_test)
+```
+
+## Testing before overwriting
+```{r, echo=TRUE}
+unique(adv_test$Quarter)
+```
+
+## Now I feel comfortable
+```{r eval=FALSE, echo=TRUE}
+adv <- adv %>%
+  mutate(Quarter = quarter(Date))
+```
+
+## Add month, day, and year
+
+```{r, eval=FALSE}
+adv <- adv %>%
+  ____(Month = month(____),
+         Day = day(____),
+         Year = year(____)
+         )
+```
+
+```{r, include=FALSE}
+adv <- adv %>%
+  mutate(Month = month(Date),
+         Day = day(Date),
+         Year = year(Date)
+         )
+```
+
+## Challenge: add decades
+```{r, eval=FALSE}
+adv <- adv %>%
+  ____(Decade = ____(____/____)*____
+         )
+```
+
+Hint: you might need a nice round function...
+
+```{r, include=FALSE}
+adv <- adv %>%
+  mutate(Decade = round(Year/10)*10
+         )
+```
+
+## Plot Average of Max Gusts per Year by Status
+```{r eval=FALSE}
+adv_gust_status <- adv %>%
+  ____(Status, Year) %>%
+  ____(Max_Gust = ____(____, ____ = ____))
+
+ggplot(adv_gust_status, mapping=aes(x = ____,
+                                    y = ____,
+                                    color = ____)) +
+  geom_line()
+```
+
+```{r maxgust, include=FALSE, eval=FALSE}
+adv_gust_status <- adv %>%
+  
+  group_by(Status, Year) %>%
+  summarize(Max_Gust = max(Gust, na.rm=T))
+
+ggplot(adv_gust_status, mapping=aes(x = Year,
+                                    y = Max_Gust,
+                                    color = Status)) +
+  geom_line()
+```
+
+## Plot Average of Max Gusts per Year by Status
+```{r maxgust, echo=FALSE, warning=FALSE}
+```
+
+
+## 
+<Br><br><br>
+<h1>Some more complex workflows</h1>
+
+## Plot of Average Monthly Max Gusts per Decade
+```{r decadalgust, eval=FALSE}
+adv_decadal_monthly_max_gust <- adv %>%
+  
+  group_by(Decade, Year, Month) %>%
+  summarize(Max_Gust = max(Gust, na.rm=TRUE)) %>%
+  
+  group_by(Decade, Month) %>%
+  summarize(Mean_Max_Gust = mean(Max_Gust))
+
+
+#plot it!
+ggplot(adv_decadal_monthly_max_gust, mapping = aes(x = Month,
+                                           y = Mean_Max_Gust,
+                                           color = factor(Decade))) +
+  geom_line()
+```
+
+## Plot of Average Monthly Max Gusts per Decade
+```{r decadalgust, echo=FALSE}
+```
+
+## Plot Average Maximum Storm Windspeeds by Year
+```{r eval=FALSE}
+adv_storm_annual <- adv %>%
+
+  ____(Name, Year) %>%
+  summarize(Max_Wind = max(Wind, na.rm=TRUE)) %>%
+  
+  ____(Year) %>%
+  summarize(Max_Wind_Mean = ____(Max_Wind))
+
+
+#plot it!
+ggplot(adv_storm_annual, aes(x=Year, 
+                             y = ____)) +
+  geom_line()
+```
+
+```{r stormplot, include=FALSE}
+adv_storm_annual <- adv %>%
+
+  group_by(Name, Year) %>%
+  summarize(Max_Wind = max(Wind, na.rm=TRUE)) %>%
+  
+  group_by(Year) %>%
+  summarize(Max_Wind_Mean = mean(Max_Wind))
+
+ggplot(adv_storm_annual, aes(x=Year, 
+                             y = Max_Wind_Mean)) +
+  geom_line()
+```
+
+## Plot Average Maximum Storm Windspeeds by Year
+```{r stormplot, echo=FALSE, warning=FALSE}
+```
+
+
+## Plot the Rank Order Distribution of Gusts by Decade
+```{r eval=FALSE}
+adv_orders <- adv %>%
+  ____(____, Name) %>%
+  ____(Max_Gust = max(Gust, ____=____)) %>%
+
+  ____(Decade) %>%
+  ____(Rank = rank(desc(Max_Gust))) %>%
+  ungroup()
+
+
+#plot it!
+ggplot(adv_orders, mapping=aes(x=____, 
+                               y = ____,
+                               color=factor(____))) +
+  geom_line()
+```
+
+```{r rankstorms, include=FALSE}
+adv_orders <- adv %>%
+  group_by(Decade, Name) %>%
+  summarize(Max_Gust = max(Gust, na.rm = TRUE)) %>%
+
+  group_by(Decade) %>%
+  mutate(Rank = rank(desc(Max_Gust))) %>%
+  ungroup()
+
+ggplot(adv_orders, mapping=aes(x= Rank, 
+                               y = Max_Gust,
+                               color=factor(Decade))) +
+  geom_line()
+```
+
+## Plot the Rank Order Distribution of Gusts by Decade
+```{r rankstorms, echo=FALSE}
+```

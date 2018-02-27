@@ -63,14 +63,11 @@ __Etherpad:__ https://etherpad.wikimedia.org/p/355-dataviz
 __In Class Files:__ [ggplot and hadcrut](./in_class_files/2018/scripts/hadcrut_ggplot.R)  
 __Homework:__ [Plotapalooza](./Assignments/3_ggplot_intro.html), submit [here!](https://www.dropbox.com/request/9whCDDUB8TNByJ5KbkoP)
 
-### Week  5&6. Data Reduction and Summarization
-```{r next_date_2, echo=FALSE}
-current_date <- current_date + days(7)
-datestring_1 <- paste(month(current_date), day(current_date), year(current_date), sep="/")
-current_date <- current_date + days(7)
-datestring <- paste(month(current_date), day(current_date), year(current_date), sep="/")
+### Week  5. Data Reduction and Summarization
+```{r next_date, echo=FALSE}
 ```
-`r datestring_1` and `r datestring`  
+
+`r datestring`  
 __Readings:__ W&G on [Data Transformation](http://r4ds.had.co.nz/transform.html), [Exploratory Data Analysis](http://r4ds.had.co.nz/exploratory-data-analysis.html), and [Pipes](http://r4ds.had.co.nz/pipes.html), DC Ecology Lesson on [Data Aggregation](http://www.datacarpentry.org/R-ecology-lesson/03-dplyr.html)  
 __Lecture:__ [Organizing Data to Tell a Story](./Lectures/09_summarizing_data.html), [Data for Exploratory Data Analysis of Mortality and Natality with dplyr and ggplot2](./Labs/freeform_dplyr.zip)  
 __Lab:__ [Gapminder and Dplyr](https://swcarpentry.github.io/r-novice-gapminder/13-dplyr/)  
@@ -80,15 +77,31 @@ __Biological Examples:__ Human genome size. [Sockeye salmon sizes](./Lectures/da
 __In Class Files:__ [gapminder and dplyr](./in_class_files/2018/scripts/dplyr_lab.R)  
 __Etherpad:__ https://etherpad.wikimedia.org/p/355-dplyr  
 
+
+### Week  6. Date Cleaning: Strings, Factors, and Dates
+```{r next_date, echo=FALSE}
+```
+
+`r datestring`  
+__Readings:__ W&G on [Strings](http://r4ds.had.co.nz/strings.html), [Dates and Times](http://r4ds.had.co.nz/dates-and-times.html), and [Factors](http://r4ds.had.co.nz/factors.html) 
+__Lecture:__ [Dplyr Faded Example Practice](./Lectures/dplyr_faded_examples.html) 
+__Lab:__ [Regular Expressions]() 
+__Cheat Sheets:__ [Work with Strings Cheat Sheet](https://github.com/rstudio/cheatsheets/raw/master/strings.pdf)  
+__Objective(s):__ Understand how strings differ from numbers. Learn the basics of string manipulation. Describe the different strategies to clean data full of errors with minimal effort. Process and understand the concept of regular expression matching. Manipulate different date formats and work them into a data map reduce workflow.  
+__Etherpad:__ https://etherpad.wikimedia.org/p/355-strings  
+
+
 ### Week  7. Tidy Data and Data Cleaning
 ```{r next_date, echo=FALSE}
 ```
 `r datestring`  
-__Readings:__ W&G Chapters on [Tidy Data](http://r4ds.had.co.nz/tidy-data.html), [Strings](http://r4ds.had.co.nz/strings.html), and [Factors](http://r4ds.had.co.nz/factors.html)  
+__Readings:__ W&G Chapters on [Tidy Data](http://r4ds.had.co.nz/tidy-data.html) 
 __Objective(s):__ Understand how to reshape and manipulate data. Describe the difference between the two fundamental forms of data – long versus wide, Use the tidyr package in R to convert between long and wide data; Use unite and separate to create tidy data (where each column is a variable). Understand how to manipulate string data  
 __Biological Examples:__ Axoltl limb regeneration. Mammal taxonomic records.  
 
 ### Week  8. Functions 
+```{r next_date, echo=FALSE}
+```
 ```{r next_date, echo=FALSE}
 ```
 `r datestring`  
@@ -97,9 +110,12 @@ __Objective(s):__ Learn the benefits of reusable code, Understand the structure 
 __Biological Examples:__ NOAA buoy data.  
 
 ### Week  9 & 10. Data "Mashups" and Geospatial Data
-```{r next_date, echo=FALSE}
-```
+
 ```{r next_date_2, echo=FALSE}
+current_date <- current_date + days(7)
+datestring_1 <- paste(month(current_date), day(current_date), year(current_date), sep="/")
+current_date <- current_date + days(7)
+datestring <- paste(month(current_date), day(current_date), year(current_date), sep="/")
 ```
 `r datestring_1` and `r datestring`  
 __Readings:__  W&G Chapter on [Relational Data](http://r4ds.had.co.nz/relational-data.html), Selected readings from DC [Geospatial Introduction](http://www.datacarpentry.org/R-spatial-raster-vector-lesson/)  
