@@ -366,7 +366,7 @@ str_view(words, "^[aeiou]")
 ## Solutions
 ```{r}
 #End with ed, but not eed
-str_view(words, "[^e]ed", match=TRUE)
+str_view(words, "[^e]ed$", match=TRUE)
 ```
 
 ## Solutions
@@ -431,5 +431,5 @@ str_view(words, "([aeiou][^aeiou]){2,}", match=TRUE)
 ## Solutions
 ```{r}
 #That only contain consonants.
-str_view(words, "(^[^aeiou])+$", match=TRUE)
+str_view(words, "^[^aeiou]+$", match=TRUE)
 ```

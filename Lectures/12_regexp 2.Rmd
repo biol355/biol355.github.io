@@ -15,7 +15,7 @@ output:
 ## 
 <Br><Br><br><br>
 <h2><center>Wrangling and Cleaning Strings Parte Deux</center></h2>
-![](./Images/regexp/perl_problems.png)
+![](./images/regexp/perl_problems.png)
 
 
 ```{r prep, echo=FALSE, cache=FALSE, message=FALSE, warning=FALSE}
