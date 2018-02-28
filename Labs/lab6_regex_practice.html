@@ -320,6 +320,7 @@ $(document).ready(function () {
 <h4>Setup</h4>
 <p>Below is the code to get you setup. You can copy and paste these dataframes into your code to create the dataframes you will need.</p>
 <pre class="r"><code>library(dplyr)
+library(stringr)
 
 # Note that I'm using data_frame() from the dplyr package to make my data.frame!
 counties &lt;- data_frame(counties = c('MA, 25, 001, Barnstable County, H1', 
@@ -357,16 +358,12 @@ dna_seqs &lt;- data_frame(seq =c('ATG CAA TGG GGA AAT GGT ACC AGG TCC GAA CTT AA
 <section id="questions" class="level4">
 <h4>Questions</h4>
 <ol type="1">
-<li><p>Using str_detect and filter select the massachusetts counties that contain the letter ‘h’ in their county name.</p></li>
-<li><p>Using str_detect and filter select the massachusetts counties that contain the number 2 in their three digit county code.</p></li>
-<li><p>Using str_sub, remove the word ‘County’ or ‘city’ and the trailing white space after the county name.</p></li>
-<li><p>Open reading frames (ORF) are sections of DNA that have the potential to code for a peptide/protein. They occur between a start codon ATG and a stop codon (TAA, TAG, or TGA) on the DNA. Write the regular expression that selects the ORF of the DNA sequences provided.</p></li>
+<li><p>Using str_detect and filter, create a data frame with the massachusetts counties that contain the letter ‘h’ in their county name.</p></li>
+<li><p>Using str_detect and filter, create a data frame with the massachusetts counties that contain the number 2 in their three digit county code.</p></li>
+<li><p>Using str_replace, remove the word ‘County’ or ‘city’ and the trailing white space after the county name.</p></li>
+<li><p>Open reading frames (ORF) are sections of DNA that have the potential to code for a peptide/protein. They occur between a start codon ATG and a stop codon (TAA, TAG, or TGA) on the DNA. Write the regular expression that selects the ORF of the DNA sequences provided and returns them and ONLY them (nothing before or after) with str_replace. Note, each row has only one ORF.</p></li>
 </ol>
 <hr />
-<p><strong>Bonus questions</strong> 5. Super challenge: 272_71.9333_33.9167 and 80.9_-161.533 are the latitude and longitude separated by an underscore. Can you write a regular expression that highlights the latitude and longitude? Use str_view to verify</p>
-<ol start="6" type="1">
-<li>For number 4, use R to extract the open reading frames into a new vector/dataframe.</li>
-</ol>
 </section>
 
 
