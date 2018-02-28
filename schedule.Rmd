@@ -85,7 +85,7 @@ __Etherpad:__ https://etherpad.wikimedia.org/p/355-dplyr
 
 `r datestring`  
 __Readings:__ W&G on [Strings](http://r4ds.had.co.nz/strings.html), [Dates and Times](http://r4ds.had.co.nz/dates-and-times.html), and [Factors](http://r4ds.had.co.nz/factors.html)  
-__Lecture:__ [Dplyr Faded Example Practice](./Lectures/dplyr_faded_examples.html), [Strings and Regular Expressions 1](./Lectures/12_regexp.html), [Strings and Regular Expressions 2](./Lectures/12_regexp_2.html)    
+__Lecture:__ [Dplyr Faded Example Practice](./Lectures/dplyr_faded_examples.html), [Strings and Regular Expressions 1](./Lectures/11_regexp.html), [Strings and Regular Expressions 2](./Lectures/12_regexp_2.html)    
 __Lab:__ [Regular Expressions](./Labs/lab6_regex_practice.html)  
 __Cheat Sheets:__ [Work with Strings Cheat Sheet](https://github.com/rstudio/cheatsheets/raw/master/strings.pdf)  
 __Objective(s):__ Understand how strings differ from numbers. Learn the basics of string manipulation. Describe the different strategies to clean data full of errors with minimal effort. Process and understand the concept of regular expression matching. Manipulate different date formats and work them into a data map reduce workflow.  

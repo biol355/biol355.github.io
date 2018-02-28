@@ -68,7 +68,7 @@ str(portal)
      - string matching  
      - Basic regular expressions  
   
-4. Remove errand line spaces and other cruft
+4. Remove errant line spaces and other cruft
      - More advanced regular expressions  
   
 5. Fix names
@@ -121,7 +121,7 @@ BUT! Also not useful if we find that NA information is in other column
      - string matching  
      - Basic regular expressions  
   
-4. Remove errand line spaces and other cruft
+4. Remove errant line spaces and other cruft
      - More advanced regular expressions  
   
 5. Fix names
@@ -179,7 +179,7 @@ which(is.na(bad_weight))
      - string matching  
      - Basic regular expressions</font>  
   
-4. Remove errand line spaces and other cruft
+4. Remove errant line spaces and other cruft
      - More advanced regular expressions  
   
 5. Fix names
