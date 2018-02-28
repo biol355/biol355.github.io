@@ -90,7 +90,7 @@ This can be a horrible idea if NAs are real
 
 ## Or, filter, if NA rows are not useful
 ```{r filter_na}
-portal <- portal %>%
+portal_test <- portal %>%
   filter(!is.na(Weight))
 ```
 
@@ -259,14 +259,20 @@ str_view(x, "e$", match=TRUE)
 ```
 
 ## Exercise
+<p align="left">
 Given the corpus of common words in `stringr::words`, create regular expressions that find all words that:
-
+</p>
+  
+<p align="left">
 1. Start with “y”.  
 2. End with “x”  
 3. Are exactly three letters long. 
 4. Have seven letters or more.  
-
-Since these list relong, you might want to use the `match=TRUE` argument to `str_view()` to show only the matching or non-matching words.``
+</p>
+  
+<p align="left">
+Since these list are long, you might want to use the `match=TRUE` argument to `str_view()` to show only the matching or non-matching words.
+</p>
 
 ## Solutions
 ```{r}
@@ -294,9 +300,9 @@ str_view(words, ".......", match=TRUE)
 
 
 ## Exercise
-
+<p align="left">
 Come up with regexprs that will show you problems in Species and Weight
-
+</p>
 
 ## Solutions
 ```{r}
@@ -341,13 +347,15 @@ str_view(c("grey", "gray"), "(ey|ay)")
 ```
 
 ## Exercises
+<p align="left">
 Create regular expressions to find all `stringr::words` that:  
-  
+  <br>
 1. Start with a vowel.  
-  
+  <br>
 2. End with ed, but not with eed.  
-  
+  <br>
 3. End with ing or ise.  
+</p>
 
 ## Solutions
 ```{r}
@@ -369,8 +377,8 @@ str_view(words, "(ing|ise)$", match=TRUE)
 
 ## Greedy Matching
 - ? - 0 or 1  
-- + - 1 or more  
-- * - 0 or more  
+- `+` - 1 or more  
+- `*` - 0 or more  
 - {n} - exactly n  
 - {n,} - n or more  
 - {,m} - at most m  
@@ -392,7 +400,9 @@ str_view(x, "([a-z])\\1")
 ```
 
 ## Exercise
-Create regular expressions to find all words that:
+<p align="left">
+Create regular expressions to find all words that:</p>
+<br>
 
 1. Start with three consonants.
 2. Have three or more vowels in a row.
