@@ -1,0 +1,514 @@
+---
+title:
+css: style.css
+output:
+  revealjs::revealjs_presentation:
+    reveal_options:
+      slideNumber: true
+      previewLinks: true
+    theme: white
+    center: false
+    transition: fade
+    self_contained: false
+    lib_dir: libs
+---
+## 
+<Br><Br><br><br>
+<h2><center>Wrangling and Cleaning Strings Parte Deux</center></h2>
+![](./Images/regexp/perl_problems.png)
+
+
+```{r prep, echo=FALSE, cache=FALSE, message=FALSE, warning=FALSE}
+library(knitr)
+library(tidyverse)
+library(stringr)
+library(ggplot2)
+theme_set(theme_bw(base_size=16))
+
+opts_chunk$set(fig.height=5, fig.width=7, comment=NA, 
+               warning=FALSE, message=FALSE, 
+               dev="jpeg")
+
+library(readxl)
+portal <- read_excel("./data/portal_messy_regexp.xlsx")
+```
+
+## Just Another Day Loading Data...
+```{r read_data, eval=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(readxl)
+library(visdat)
+
+portal <- read_excel("./data/portal_messy_regexp.xlsx")
+vis_dat(portal) +
+  theme(text = element_text(size=13))
+
+```
+
+
+## The Nigtmare Scenario
+```{r read_data, echo=FALSE}
+```
+
+
+## What to Do?
+1. Deal with NA Values  
+     - na handlers and filter
+
+2. Diagnose remaining problems  
+  
+3. Remove unneeded characters  
+     - string matching  
+     - Basic regular expressions  
+  
+4. Remove errant line spaces and other cruft
+     - More advanced regular expressions  
+  
+5. Fix names
+
+## Detecting Problems
+- `str_subset()` returns your matches  
+     - Analagous to `grep()`    
+    
+- `str_detect()` gives you TRUE or FALSE for matches  
+     - Analagous to `grepl()` for those who have used it before
+     
+## Words with 3 Consonants at the beginning
+```{r}
+str_subset(words, "^([^aeiou]){3}")
+```
+
+
+<div class="fragment">
+Or, how many?
+
+```{r}
+sum(str_detect(words, "^([^aeiou]){3}"))
+```
+</div>
+
+## Words with the letter r and q
+- Tricky because order cannot matter  
+- BUT - we can match sequentially  
+- Pipes work here!  
+
+```{r}
+str_subset(words, "r") %>%
+  str_subset("q")
+```
+
+## Weaponizing str_detect with filter()
+
+```{r filter_portal}
+library(dplyr)
+
+#extract anything without a male or female sex
+filter(portal, str_detect(Sex, "[fmFM]"))
+```
+
+## Exercises
+1. Find all `stringr::words` that start or end with x.   
+  
+2. How many words start with a vowel and end with a consonant.  
+  
+3. Are there any words that contain at least one of each different vowel?  
+
+## Solutions
+```{r}
+# all words that start with x
+str_subset(words, "(^x|x$)")
+```
+
+
+## Solutions
+```{r}
+# How many words start with a vowel and end with a consonant?
+vow_cons <- str_detect(words, "^[aeiou].*[^aeiou]$")
+
+sum(vow_cons)
+```
+
+## Solutions
+```{r}
+# Words that contain one of each vowel
+str_subset(words, "a") %>%
+  str_subset("i") %>%
+  str_subset("o") %>%
+  str_subset("u")
+```
+
+## Exercise
+Which Weights are bad?
+
+<div class="fragment">
+```{r plots}
+portal$Weight %>%
+  str_subset("[^0-9]")
+```
+
+</div>
+
+## Finding and filtering is all well and good...
+- We want to change values  
+  
+- Many helper functions for standard changes  
+     - e.g. `str_to_lower()`    
+       
+- Or use `str_replace()` and `str_replace_all`  
+     - like `gsub()` in base R  
+
+
+## Easy fixes that work with mutate
+Uppercase
+```{r}
+str_to_upper(sentences[1:4])
+```
+
+## Easy fixes that work with mutate
+Lowercase
+```{r}
+str_to_lower(sentences[1:4])
+```
+
+## Easy fixes that work with mutate
+Title
+```{r}
+str_to_title(sentences[1:4])
+```
+
+## str_replace: more generic replacements
+Remove first vowel from words
+```{r}
+str_replace(words, "[aeiou]", "")[1:10]
+```
+
+## str_replace_all: the big fix
+Remove first vowel from words
+```{r}
+str_replace_all(words, "[aeiou]", "")[1:10]
+```
+
+## Moving Pieces
+abc -> cab
+
+```{r}
+sentences[1]
+```
+
+<div class="fragment">
+```{r}
+str_replace_all(sentences[1], "(birch)(.*)(smooth)", "\\3\\2\\1")
+```
+</div>
+
+## Exercises
+
+1. Replace the word "the" or "The" with "Cat" in stringr::sentences
+
+2. Switch the first and last letters in words. Bonus: Use `intersect` to find out which of those strings are still words?  
+
+3. Use `mutate` to remove g and the other cruft from weights and then make numeric
+
+
+## Solutions
+```{r}
+#Replace the word "the" with "cat" in stringr::sentences
+
+str_replace_all(sentences, "[tT]he", "cat")[1:10]
+
+```
+
+## Solutions
+```{r}
+# switch letters and see if we still have words
+words2 <- str_replace_all(words, "(^.)(.*)(.$)", "\\3\\2\\1")
+```
+
+## Solutions
+```{r}
+#who still works?
+intersect(words, words2)
+```
+
+## Editing our data
+```{r}
+portal_test <- portal %>%
+  mutate(Weight = str_replace_all(Weight, "[^0-9]", ""))
+```
+
+## Did it work?
+```{r}
+str_subset(portal_test$Weight, "[^0-9]")
+```
+
+<div class="fragment">
+```{r}
+unique(portal_test$Weight)
+```
+</div>
+
+<div class="fragment">Oh no! Weird spaces!</div>
+
+## There is no shame in many mutates
+\\s = whitespace
+
+```{r}
+portal_test <- portal %>%
+    mutate(Weight = str_replace_all(Weight, "[^0-9]", ""),
+           
+           Weight = str_replace_all(Weight, "\\s", "")
+         )
+```
+
+## Did it work?
+```{r}
+str_subset(portal_test$Weight, "[^0-9]")
+```
+
+<div class="fragment">YES!</div>
+
+## Now fix the data
+```{r portal_fix}
+portal <- portal %>%
+    mutate(Weight = str_replace_all(Weight, "[^0-9]", ""),
+      
+           Weight = str_replace_all(Weight, "\\s", ""),
+           
+           Weight = as.numeric(Weight)
+         )
+```
+
+## Let's see it!
+```{r echo=FALSE}
+vis_dat(portal)
+```
+
+## Fix plot
+- Is it *really* a string?  
+  
+- Make any needed fixes (if any!)  
+  
+- Make it numeric
+
+## Solution
+```{r}
+str_subset(portal$Plot, "[^0-9]")
+```
+
+<div class="fragment">
+```{r}
+portal <- portal %>%
+  mutate(Plot = as.numeric(Plot))
+```
+
+## Almost there
+```{r}
+vis_dat(portal)
+```
+
+
+## What to Do?
+1. Deal with NA Values  
+     - na handlers and filter
+
+2. Diagnose remaining problems  
+  
+3. Remove unneeded characters  
+     - string matching  
+     - Basic regular expressions  
+  
+4. Remove errant line spaces and other cruft
+     - More advanced regular expressions  
+  
+5. <font color="red">Fix names</font>
+
+## The problems with species
+```{r species}
+unique(portal$Species)
+```
+
+## Some Initial Fixes
+1. Capitalize!
+```{r}
+portal <- mutate(portal, Species = str_to_upper(Species))
+```
+
+2. Make NA NA
+```{r}
+portal <- portal %>%
+  mutate(Species = ifelse(Species=="NA", NA, Species))
+
+unique(portal$Species)
+```
+
+## But what about those Species_Sex combos?
+1. `str_split()` makes splits  
+  
+2. `str_c()` combines
+
+## Combining
+This is the one of the most common things I do:  
+- Variable names  
+- Combining different columns  
+- Adding units
+
+```{r}
+str_c("a", "b", "c", sep=",")
+```
+
+## Adding to a Vector
+
+<div class="fragment">
+```{r}
+str_c(portal$Weight, "g", sep="")
+```
+
+</div>
+
+## Collapsing a Vector
+
+```{r}
+#sep
+str_c(c("a", "b", "c"), sep = ",")
+
+#collapse
+str_c(c("a", "b", "c"), collapse = ",")
+```
+
+## Collapsing a Vector
+```{r}
+str_c(na.omit(portal$Weight), "g", 
+      sep="", collapse = ", ")
+```
+
+## Splitting Strings
+That "DM_F" problem!
+
+```{r}
+str_split(c("hello_goodbye", "purple_orange"), 
+          pattern = "_")
+```
+
+- Can use any regexp for the pattern  
+- Can recombine results as needed
+
+## Splitting Strings Simply
+That "DM_F" problem!
+
+```{r}
+str_split(c("hello_goodbye", "purple_orange"), 
+          pattern = "_", simplify=TRUE)
+```
+
+## Modifying our data
+1. Split out sex from species and put it in its own column  
+  
+2. Fix Species  
+  
+3. Add new entries where needed to Sex  
+  
+4. Clean up (and make it real)
+
+## Modifying our data
+1. Split out sex from species and put it in its own column  
+
+```{r}
+portal_test <- portal %>%
+  mutate(Split_Sex = str_split(Species, 
+                               pattern="_", 
+                               simplify=TRUE)[,2])
+```
+
+## Did it work?
+```{r}
+portal_test$Split_Sex
+```
+
+## Modifying Our data
+2. Fix Species  
+
+```{r}
+portal_test <- portal %>%
+  mutate(Split_Sex = str_split(Species, 
+                               pattern="_", 
+                               simplify=TRUE)[,2],
+         
+         Species = str_split(Species, 
+                               pattern="_", 
+                               simplify=TRUE)[,1])
+```
+
+Other options here?
+
+## Did it work?
+```{r}
+unique(portal_test$Species)
+```
+
+## Modifying Our data
+3. Add new entries where needed to Sex  
+
+```{r}
+portal_test <- portal %>%
+  mutate(Split_Sex = str_split(Species, 
+                               pattern="_", 
+                               simplify=TRUE)[,2],
+         
+         Species = str_split(Species, 
+                               pattern="_", 
+                               simplify=TRUE)[,1],
+         
+         Sex = ifelse(Split_Sex=="", Sex, Split_Sex))
+```
+
+## Did it work?
+```{r}
+portal_test$Sex
+```
+
+## Modifying Our data
+4. Clean up (and make it real)
+
+```{r}
+#now using portal, not a test!
+
+portal <- portal %>%
+  mutate(Split_Sex = str_split(Species, 
+                               pattern="_", 
+                               simplify=TRUE)[,2],
+         
+         Species = str_split(Species, 
+                               pattern="_", 
+                               simplify=TRUE)[,1],
+         
+         Sex = ifelse(Split_Sex=="", Sex, Split_Sex),
+         
+         Sex = str_to_upper(Sex)) %>%
+  
+  select(-Split_Sex)
+```
+
+
+## Exercises
+1. Combine words separating them by "-" into one long string.  
+
+2. Split up a string like "apples, pears, and bananas" into individual words with no spacing around them. Use `as.vector()` and `str_detect` to make it into a seamless vector with no "".
+
+3. What does splitting with an empty string ("") do? Experiment, and then read the documentation.
+
+## Solutions
+1. Combine words separating them by "-" into one long string.  
+
+```{r}
+str_c(words, collapse="-")
+```
+
+## Solutions
+2. Split up a string like "apples, pears, and bananas" into individual words
+```{r}
+vec <- str_split("apples, pears, and bananas", pattern = ",", simplify=TRUE) %>%
+  str_split(pattern = " ", simplify=TRUE) %>%
+  as.vector
+
+vec[str_detect(vec, "[a-z]")]
+```
