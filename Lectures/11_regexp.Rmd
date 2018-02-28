@@ -15,7 +15,7 @@ output:
 ## 
 <Br><Br><br><br>
 <h2><center>Wrangling and Cleaning Strings</center></h2>
-![](./Images/regexp/regular-expressions.jpg)
+![](./images/regexp/regular-expressions.jpg)
 
 
 ```{r prep, echo=FALSE, cache=FALSE, message=FALSE, warning=FALSE}
@@ -34,7 +34,7 @@ portal <- read_excel("./data/portal_messy_regexp.xlsx")
 ```
 
 ##
-![](./Images/regexp/regular_expressions_xkcd.png)
+![](./images/regexp/regular_expressions_xkcd.png)
 
 ## Just Another Day Loading Data...
 ```{r read_data, eval=FALSE, message=FALSE, warning=FALSE}
