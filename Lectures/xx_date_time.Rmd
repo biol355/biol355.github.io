@@ -1,0 +1,273 @@
+---
+title: "Dates and Times with Lubridate"
+author: "Intro to Data Science for Biology"
+output: html_document
+---
+
+At this point we've talked about dates a few times now and the overall consensus has been that they're hard to work with. Can anyone remind us why they're problomatic?
+
+* Months have differing numbers of days
+* Time zones are an artificial construct.
+* Leap years and daylight savings can complicate things.
+     + Quickly, was 1984 a leap year?
+* We even have leap seconds to account for slowing of the earth
+    + Since 1972, we have had 27 leap seconds with the last one on          December 31, 2016 at 23:59:60 UTC
+
+
+None of these are impossible to deal with, but they add up. Furthermore, we want our code and data products to theoretically be useful forever, so things like leap seconds will add up!    
+
+Enter the `date` class and the `lubridate` package.  
+
+```{r Load packages, message = FALSE}
+library(dplyr)
+library(lubridate)
+library(ggplot2)
+```
+
+ We will work with dates and date-times. Base R does not do time on its own, but the `hms` package will get you where you need to go.  
+
+Try it out. 
+
+```{r Find today}
+#can find the date
+today()
+
+#or the date and time
+
+now()
+```
+*Excercise* Can anyone tell me how these outputs are different? What classes are they?  
+
+This is one way to get dates, but ultimately not useful for most data analysis. How do we convert data we already have into dates?  
+
+
+##Converting Strings to Dates
+
+Converting strings to dates/date-times is very straightforward. the `ymd` family of functions take strings and make dates.  
+
+```{r ymd and co.}
+#lubridate can handle strings in any order as long as you tell it what to look for
+# ymd, mdy, dmy all work.  
+
+ymd("1991-05-12")
+mdy("May 12 1991")  
+
+#raw numbers also work
+ymd(19910512)
+```
+Note that is is a pretty smart group of functions - they can handle month abbreviations and ordinal suffixes (ie the st in 1st) without a problem.
+
+*Excercise* Make a `date` object out of your birthday. Do it in 3 ways.  
+
+##Date-Times  
+Depending on your dataset, time of day might be important too. `lubridate` can also create date-times in the same way it creates dates.  
+```{r date-times}
+ymd_hms("1991-05-12 19:27:22")
+```
+A couple things here. First, note the function - you can add hms (or any combination) to add hours and/or minutes and/or seconds to your date-time object, The syntax is date-date-date time:time:time. Note the default time zone - more on this later.   
+
+*Excercise* Make a date-time object
+
+##Vectors to Dates
+What if you stored your date/time information across multiple columns? Many datasets have a separate column for year, month, and day. `make_datetime()` to the rescue!
+
+```{r date and dataframes}
+#load up the nyc flights dataset
+library(nycflights13)
+
+flights_summary <- flights %>% 
+  select(year, month, day, hour, minute) %>% 
+  mutate(departure_date = make_datetime(year, month, day, hour, minute))
+```
+
+*Excercise* create a column that contains only the dates of departure. HINT: `datetime()` might not be exactly what you want.  
+
+##Datetimes to dates  
+It's easy to convert between dates and datetimes. You might want to strip the time componant from some of your data without losing the structure of the `date` object, or yo(u might want to add timezone information on to a date. use `as_date()` or `as_datetime()` to go back and forth
+
+```{r datetimes to dates}
+as_date(now())
+```
+
+
+*Excecise* What happens when it goes wrong? Create a vector of date objects and include some nonsense strings. How is this different from most of the problems you've faced so far?   
+
+```{r bad dates, echo = FALSE, results = FALSE, message = FALSE}
+bad_dates <- ymd(c("2010-10-10", "20010-10-10", "bananas"))
+```
+
+
+How does everyone feel about this so far? Any questions before we get into more applied examples?  
+
+##Separating out the bits
+
+It's great that we can store all this information in one place, but what if we don't actually need all of it all at once? `lubridate` has a function for all occasions here.   
+* `year()`   
+* `month()`  
+* `mday()`: Day of the month  
+* `yday()` :Julien day  
+* `wday()`:Day of the week  
+* `hour()`  
+* `minute()`  
+* `second()`  
+
+*Excercise:* Try it out! Ty out a few of these functions and then make a column in your `flights` dataframe that contains the day of the week.  
+
+```{r a few tricks}
+#use label = TRUE to get month/day names,, and then abbr = TRUE or FALSE to abbreviate as you see fit.
+wday(today(), label = TRUE, abbr = FALSE)
+```
+We can throw all of this into a very readable histogram to get some basic info at a glance!
+```{r departure histogram, echo = FALSE}
+flights_summary %>% 
+  mutate(wday = wday(departure_date, label = TRUE)) %>% 
+  ggplot(aes(x = wday)) +
+    geom_bar()
+```
+
+
+
+Ok, now we can:
+1. Convert a string to a date
+2. Combine vectors of date componants into a vector of dates
+3. Convert a date into it's individual componants  
+
+This is all great, but now lets get into what makes a `date` object more useful than just a fancy number. 
+
+##Time zones
+Time zones can be a pain. There are more than you would expect due to many years of policy/border changes.  Lubridate defaults to UTC, but allows us to futz around with them if we need to.
+
+To start,  just check your computer's time zone with `Sys.timezone()`.  You can see all possible time zones with `OlsenNames()`.   
+
+When creating a date-time object, you can specify the time zone with the `tz` argument to `ymd_hms()`
+
+````{r time zones}
+tz_1 <- ymd_hms("2018-2-28 13:00:00", tz = "America/New_York")
+tz_2 <- ymd_hms("2018-2-28 13:00:00", tz = "America/Los_Angeles")
+```
+
+##Side Note: Date Arithmatic
+
+One of the advantages of the `date` class is that it contains information necessary to add and subtract dates properly, without creating meaningless outputs (think February 31st).  
+
+We can use `difftime` to find the amount of time in between two time points.
+```{r date diff time}
+difftime(tz_1, tz_2, units =  "weeks")
+#wrap this in an as.numeric to clean it up!
+as.numeric(difftime(tz_1, tz_2, units =  "weeks"))
+```
+
+We can also add and subtract a specified amount of time. We can't simply add a number to a time point without specifiying a unit, so we need to use `years()`, `months()`, `days()`, etc.
+
+```{r add time}
+tz_1 + years(1) + minutes(25)
+```
+*Excercise* How many days have you been alive for?
+
+```{r bday example, echo = FALSE, results= FALSE}
+bday <- ymd("1991-05-12")
+today()-bday
+```
+
+Note on changing time zones: First of all, be careful here. If you do this backwards you can make your data completely wrong, but not in a way that will throw an error. 
+
+`with_tz` converts a moment in time to display in a different time zone but **does not change the actual moment**.
+
+```{r convert time zones}
+#lets convert EST to PST
+tz_1a <- with_tz(tz_1, "America/Los_Angeles")
+tz_1a
+#sanity check yourself that they are the same!
+difftime(tz_1, tz_1a)
+```
+
+Lets say you entered all of your data as date-times, but realized you used the wrong time zone (there are 592 of them after all!) We can use `force_tz` to change the time zone without converting the written time.
+
+```{r correct a time zone}
+tz_fixed <- force_tz(tz_1, tz = "America/Los_Angeles")
+tz_fixed
+
+difftime(tz_1, tz_fixed)
+```
+
+
+##Intervals
+Often when working with dates we are interested in changes over time and we have to work with periods of time rather than discrete moments. There are three types of time spans:
+* Durations  
+  * A time span measured in seconds with no start date/time  
+* Intervals  
+  * Elapsed time in seconds between two time points  
+* Periods  
+  * Used for time spans longer than seconds. Useful for working with time spans of months or years, periods take differing month/year lengths into account.  
+  
+Lets start with intervals as we first need an interval in order to calculate duration/period.
+
+```{r}
+tz_1 <- ymd_hms("2016-1-15 13:00:00", tz = "America/New_York")
+tz_2 <- ymd_hms("2016-3-22 13:00:00", tz = "America/New_York")
+
+
+
+first_interval <- as.interval(tz_1, tz_2)
+first_interval
+#note alternate syntax:
+#first_interval <- tz_1 %--% tz_2
+```
+
+You'll notice a few things here. First: the basic structure of an interval is start date followed by end date. Second, note the time zone change. This is because this interval includes daylight savings time, so it automatically converts the second date-time to account for this.  if we do `str(first_interval)` we see that it contains three things: total elapsed time in seconds, a start date-time, and a time zone.  
+
+Creating a duration is simple:
+```{r}
+first_duration <- as.duration(first_interval)
+first_duration
+```   
+If we do `str(duration)` we see that the total elaspsed number of seconds. This is useful, but what if we want to use this information for planning purposes? It's hard for humans to think in seconds. Treating this as a period might be more useful.  
+
+```{r}
+first_period <- as.period(first_interval)
+first_period
+```  
+Now with `str(first_period)` We can see that these time points are 2 months and 7 days apart. Much more useful!  
+
+We can use these intervals to derive many different useful things. One example is finding overlap between two intervals.  
+Say I am going on vacation from March 9th to March 18th, and Jarrett is at a conference from March 1st to March 12th. We can use `int_overlaps()` and `intersect` to find out whether or not our absences overlap, and if they do, when!
+```{r}
+isaac_gone <- interval(ymd("2018-3-9"), ymd("2018-3-18"))
+jarrett_gone <- interval(ymd("2018-3-1"), ymd("2018-3-12"))
+
+int_overlaps(isaac_gone, jarrett_gone) #returns logical 
+intersect(isaac_gone, jarrett_gone)
+```
+Looks like our absences overlap from March 9-12 and we actually planned this out - there are no class days without a teacher!  
+
+**NOTE** `intersect()` is a base R function, not just lubridate. Many functions work well with lubridate and allow us to play with date/time ranges created in lubridate. Give `int_start`, `int_end`, `int_flip`, `int_shift`, `int_aligns`, `union`, `intersect`, `setdiff`, and `%within%` a try!  
+
+##Rounding
+We can use `round_date`  to round to the nearest unit. This will default to rounding up if you are halfway between units, so we can use  `floor_date` to round down, and `ceiling_date` to round up if we want more control.
+
+```{r date rounding}
+#note the difference
+floor_date(today(), unit =  "month")
+ceiling_date(today(), unit =  "month")
+```
+
+We can also set our own unit intervals, such as a decade. Using the same syntax as above, we can set our specified unit to be a chunk of years (in this case 10) instead of the nearest single year.
+```{r round by decade}
+floor_date(today(), unit = years(10))
+
+
+```
+
+*Excercise:* Load the rrricanes data and summarise max gust by decade, but this time parse out your decades using `lubridate` instead of just mathing it out!
+
+```{r rrricanes decade, echo = FALSE, results = FALSE, message=FALSE}
+library(rrricanesdata)
+
+adv_sum <- adv %>%
+    mutate(decade = floor_date(Date, unit = years(10))) %>%
+    group_by(decade) %>%
+    summarise(max_gust = max(Gust, na.rm = TRUE))
+adv_sum
+```
+
+
