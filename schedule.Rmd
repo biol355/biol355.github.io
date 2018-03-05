@@ -97,22 +97,16 @@ __Etherpad:__ https://etherpad.wikimedia.org/p/355-strings
 ```{r next_date, echo=FALSE}
 ```
 `r datestring`  
-__Readings:__ W&G Chapters on [Tidy Data](http://r4ds.had.co.nz/tidy-data.html) 
-__Objective(s):__ Understand how to reshape and manipulate data. Describe the difference between the two fundamental forms of data – long versus wide, Use the tidyr package in R to convert between long and wide data; Use unite and separate to create tidy data (where each column is a variable). Understand how to manipulate string data  
-__Biological Examples:__ Axoltl limb regeneration. Mammal taxonomic records.  
+__Readings:__ W&G Chapters on [Tidy Data](http://r4ds.had.co.nz/tidy-data.html)  
+__Lecture:__ [Tidy Data](./Lectures/13_data_tidy.html), [tidy faded examples]()  
+__Objective(s):__ Understand how to reshape and manipulate data. Describe the difference between the two fundamental forms of data – long versus wide, Use the tidyr package in R to convert between long and wide data; Use unite and separate to create tidy data (where each column is a variable). 
+__Biological Examples:__ [Axoltl limb regeneration](./Lectures/data/ALM assay statistics.xlsx). [Mammal taxonomic records](./Lectures/data/mammals.R).  
+__Etherpad:__ https://etherpad.wikimedia.org/p/355-tidy  
+  
 
-### Week  8. Functions 
+### Week  8 & 9. Data "Mashups" and Geospatial Data
 ```{r next_date, echo=FALSE}
 ```
-```{r next_date, echo=FALSE}
-```
-`r datestring`  
-__Readings:__ W&G Chapters on [Functions](http://r4ds.had.co.nz/functions.html) and [Iteration](http://r4ds.had.co.nz/iteration.html)  
-__Objective(s):__ Learn the benefits of reusable code, Understand the structure of a function, Discover debugging and making functions fail usefully, Apply conditional logic to build flexible code, Derive principles to make functions that are easy to understand and apply to multiple data sets.  
-__Biological Examples:__ NOAA buoy data.  
-
-### Week  9 & 10. Data "Mashups" and Geospatial Data
-
 ```{r next_date_2, echo=FALSE}
 current_date <- current_date + days(7)
 datestring_1 <- paste(month(current_date), day(current_date), year(current_date), sep="/")
@@ -120,17 +114,28 @@ current_date <- current_date + days(7)
 datestring <- paste(month(current_date), day(current_date), year(current_date), sep="/")
 ```
 `r datestring_1` and `r datestring`  
-__Readings:__  W&G Chapter on [Relational Data](http://r4ds.had.co.nz/relational-data.html), Selected readings from DC [Geospatial Introduction](http://www.datacarpentry.org/R-spatial-raster-vector-lesson/)  
+__Before Class:__ Install `rgdal` (you'll need to install gdal first - see below), `sf`, `sp`, `raster`, and `rgeos`.  
+__Readings:__  W&G Chapter on [Relational Data](http://r4ds.had.co.nz/relational-data.html),  [Data Carpentry Geospatial Introduction](http://www.datacarpentry.org/R-spatial-raster-vector-lesson/)  
 __Objective(s):__ Know when and where to use different types of joins, Understand how to merge survey data with geospatial information to get a geographic understanding of epidemiological patterns  
-Note: To install gdal on a mac, there are two steps  
+__Biological Examples:__ Hemlock wooly adelgid distribution. CDC records of heart disease across counties of the US. Change in coastal sea surface temperature since 1850.  
+
+**To install gdal on a mac, there are two steps**  
 1) Install Homebrew from http://brew.sh/ (this is an awesome thing to have anyway)  
 2) in Terminal type  
 `brew install gdal`  
-To install on a Windows PC  
+  
+**To install on a Windows PC**  
 1) Install OSGEO4W https://trac.osgeo.org/osgeo4w/wiki  
 2) Use it to install gdal  
 
-__Biological Examples:__ Hemlock wooly adelgid distribution. CDC records of heart disease across counties of the US. Change in coastal sea surface temperature since 1850.  
+### Week  8. Functions 
+```{r next_date, echo=FALSE}
+```
+`r datestring`  
+__Readings:__ W&G Chapters on [Functions](http://r4ds.had.co.nz/functions.html) and [Iteration](http://r4ds.had.co.nz/iteration.html)  
+__Objective(s):__ Learn the benefits of reusable code, Understand the structure of a function, Discover debugging and making functions fail usefully, Apply conditional logic to build flexible code, Derive principles to make functions that are easy to understand and apply to multiple data sets.  
+__Biological Examples:__ NOAA buoy data.  
+
 
 ### Week  11 & 12. T-Tests and P-Values 
 ```{r next_date_2, echo=FALSE}
