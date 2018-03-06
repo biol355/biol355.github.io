@@ -1,7 +1,6 @@
 ---
 title: "Reshaping and Tidying Data"
 author: "Intro to Data Science for Biology"
-date: "March 10, 2016"
 output: html_document
 ---
 
@@ -205,6 +204,7 @@ qplot(density, height, data=mamh_long,
   stat_smooth(method="lm", fill=NA)
 ```
 
-OK, to make sure you got `separate` and `unite` down, first, separate the taxon into two columns - Genus and species (taxon is currently a latin binomial).
-
-Then, add four columns to the original mammals frame. Now use any technique above (which may or may not involve unite) to fill in 0s for all four columns. 
+#### Exercises  
+1. OK, to make sure you got `separate` and `unite` down, first, separate the taxon into two columns - Genus and species (taxon is currently a latin binomial).  
+  
+2. Add four columns to the original mammals frame. Now use any technique above (which may or may not involve unite) to fill in 0s for all four columns. There are many different ways to solve this. How few lines of code can you write?
