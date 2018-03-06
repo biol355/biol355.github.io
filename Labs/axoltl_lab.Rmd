@@ -20,7 +20,7 @@ Today, we're going to look at a data set that looks not unlike something you mig
 
 ### The data
 
-The data we're going to work with is from the [McCusker lab](https://www.umb.edu/mccuskerlab. It's a beautiful piece of work looking at limb regeneration in [Axoltls](https://en.wikipedia.org/wiki/Axolotl). These amphibians have incredible limb regeneration abilities. In essence, the idea of this experiment was to see if with some application of different compounds, different kinds of limb regrowth could be stimulated.
+The data we're going to work with is from the [McCusker lab](https://www.umb.edu/mccuskerlab). It's a beautiful piece of work looking at limb regeneration in [Axoltls](https://en.wikipedia.org/wiki/Axolotl). These amphibians have incredible limb regeneration abilities. In essence, the idea of this experiment was to see if with some application of different compounds, different kinds of limb regrowth could be stimulated.
 
 ![](./images/axoltl/biology.jpg)
 
