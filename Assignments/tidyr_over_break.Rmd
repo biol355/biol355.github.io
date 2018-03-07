@@ -3,10 +3,10 @@
 
 
 ##Exercise 1
-Load up the raw hadcrut data, [link here](./Data/hadcrut_temp_anomoly_wide_1850_2015.csv). We've been using this in a long format, but it actually is supplied as wide data. Use your skills with Tidyr to make it look like the long data we've been using in class!
+Load up the raw hadcrut data, [link here](../Data/hadcrut_temp_anomoly_wide_1850_2015.csv). We've been using this in a long format, but it actually is supplied as wide data. Use your skills with Tidyr to make it look like the long data we've been using in class!
 
 ##Exercise 2
-Download the messy weather dataset from class today (3/7/2018) [link here](./Data/weather_messy.csv). Go through the cleanup steps required to go from this raw data to a cleaned up dataframe in the long format. This dataframe should have separate columns for year, month, day, and each measurement type. 
+Download the messy weather dataset from class today (3/7/2018) [link here](../Data/weather_messy.csv). Go through the cleanup steps required to go from this raw data to a cleaned up dataframe in the long format. This dataframe should have separate columns for year, month, day, and each measurement type. 
 
 **Suggested workflow:**  
 1. Read in data.   
