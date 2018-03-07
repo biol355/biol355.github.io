@@ -101,7 +101,7 @@ __Readings:__ W&G Chapters on [Tidy Data](http://r4ds.had.co.nz/tidy-data.html)
 __Lecture:__ [Tidy Data](./Lectures/13_data_tidy.html), [tidy faded examples]()  
 __Lab:__ [Axoltl Data Cleaning](./Labs/axoltl_lab.html)  
 __Objective(s):__ Understand how to reshape and manipulate data. Describe the difference between the two fundamental forms of data – long versus wide, Use the tidyr package in R to convert between long and wide data; Use unite and separate to create tidy data (where each column is a variable). 
-__Biological Examples:__ [Axoltl limb regeneration](./Lectures/data/ALM assay statistics.xlsx). [Mammal taxonomic records](./Lectures/data/mammals.R).  [Weather data](./Data/weather_messy.csv).  
+__Biological Examples:__ [Axoltl limb regeneration](./Lectures/data/ALM assay statistics.xlsx). [Mammal taxonomic records](./Lectures/data/mammals.R).  [Weather data](./Data/weather_messy.csv).  [Sale prices for homework](./Data/Sale_Prices_City.csv).    
 __Etherpad:__ https://etherpad.wikimedia.org/p/355-tidy  
 __Homework__: [Weather Data Cleaning](./Assignments/tidyr_over_break.html)  
   

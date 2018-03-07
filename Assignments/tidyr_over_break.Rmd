@@ -1,34 +1,84 @@
 #Data cleanup with Tidyr
 *Due March 22 2018*
 
+###Warmup with some Faded Examples!  
+Grab `Sale_Prices_City.csv` and bring it in to R, [link to data here](../Data/Sale_Prices_City.csv).
 
-##Exercise 1
+First, convert it from long to wide, with a column for each year/month
+```{r gather, error = TRUE, eval=FALSE}
+sales_long <- sales %>%
+    ______(___ = time_point, 
+           _____ = sale_price, 
+           -_________, -_________, -________, -________)
+```
+
+
+Drop the NAs
+```{r drop NA, error = TRUE, eval=FALSE}
+sales_long <- sales_long %>%
+    ______(______(sale_price))
+```
+
+Split up year and month into two columns
+```{r split date, error = TRUE, eval=FALSE}
+sales_long <- sales_long %>%
+    ________(time_point, c("year", ______), ___ = "-")
+```
+
+Make the following string:
+```{r make string}
+my_string <- "Some people, when confronted with a problem, think 'I know, I'll use regular expressions.' Now they have two problems."
+```
+Make it all uppercase
+```{r uppercase, error = TRUE, eval=FALSE}
+__________(my_string)
+```
+Remove all instances of the letter e
+```{r goodbyeee, error = TRUE, eval=FALSE}
+______________(my_string, ______ = "e", replacement = ___)
+```
+Split this string into a vector of individual words
+```{r split TRUE, eval=FALSE}
+split_string <- __________(my_string, pattern = ___, simplify = ______)
+```
+
+
+Find the words that start with consonants.
+```{r TRUE, eval=FALSE}
+str_view(split_string, "___________")
+
+```
+
+###Exercise 1
 Load up the raw hadcrut data, [link here](../Data/hadcrut_temp_anomoly_wide_1850_2015.csv). We've been using this in a long format, but it actually is supplied as wide data. Use your skills with Tidyr to make it look like the long data we've been using in class!
 
-##Exercise 2
-Download the messy weather dataset from class today (3/7/2018) [link here](../Data/weather_messy.csv). Go through the cleanup steps required to go from this raw data to a cleaned up dataframe in the long format. This dataframe should have separate columns for year, month, day, and each measurement type. 
+###Exercise 2
+Download the messy weather dataset from class today (3/7/2018) [link here](../Data/weather_messy.csv). This is a dataset that contains some weather measurements but structured in an...interesting way. Go through the cleanup steps required to go from this raw data to a cleaned up dataframe in the long format. This dataframe should have separate columns for year, month, day, and each measurement type. 
 
 **Suggested workflow:**  
 1. Read in data.   
-2. Deal with any extraneous cells and redudant columns.  
-3. fix column names.  
-4. fill in missing dates.  
-5. put date info into one column (optional but may help you grock what's happening).  
-6. Start playing with wide vs long. HINT: this dataset requires both `gather` and `spread` to get it to its final form.  
-7. Deal with NAs and other data-entry issues. HINT: to avoid deleting most of the datset, let NA values remain in the events column.  
-8. Final tweaks: make sure numbers are numbers, characters are characters.  
-9. If you combined date columns before, separate them back out again.
+2. Deal with any extraneous blank spaces and redundant columns.  
+3. Fix column names (Hint:beyond the first three columns, each column represents a day of the month. )  
+4. Fill in missing year/months.  
+5. OPTIONAL: Combine date info into one column (you don't need to do this, but it might help you reduce the load on your brain and better grock what's happening).  
+6. Start playing with wide vs long. HINT: This dataset is one of those that we mentioned which has characteristics of both long and wide data: both `gather` and `spread` might be needed to get it to its final form.  
+7. Deal with NAs and other data-entry issues. HINT: to avoid deleting most of the datset, let NA values remain in the "events" column.  
+8. Final tweaks: make sure numbers are numeric and characters are characters.  
+9. If you combined date columns before, separate them back out again so you have one for year, one for month, and one for day. 
+10. Give me a plot, any plot! Be sure to make it look nice!
 
 
 **Function Toolbox**
 If you get stuck, consider using the following functions:
-`gather`, `spread`, `unite`, `separate`, `vis_dat`, `str`, `filter`, `select`, `names`, and `fill`.
+`gather`, `spread`, `unite`, `separate`, `vis_dat`, `str`, `filter`, `select`, `names`, and `fill`. Remember, if you want to know more about a function just type it into the console with a ? in front.  
 
 ##Please submit the following as an RMD as well as the knitted HTML:
 
-1. Excercise 1: Code required for loading data, converting to long format, and then use `head()` to display the first five lines
+Faded Examples: One example per chunk.
 
-2. Because we are going over the bulk of this workflow in class, please submit a well-formatted write up in which each step is explained in english. Be sure to include steps where you check your work with `str` and `vis_dat` and explain the relavent parts of what you see! Feel free to do this in comments. an example of this could be:
+Excercise 1: Code required for loading data, converting to long format, and then use `head()` to display the first five lines
+
+Excercise 2: Because we are going over the bulk of this workflow in class, please submit a well-formatted write up in which each step is explained in english. Be sure to include steps where you check your work with `str` and `vis_dat` and explain the relavent parts of what you see! Feel free to do this in comments. an example of this could be:
 
 ```{r}
 #First I will create a vector of 100 random numbers between 0 and 1 using runif

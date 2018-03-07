@@ -124,36 +124,60 @@ $(document).ready(function () {
 <div id="data-cleanup-with-tidyr" class="section level1">
 <h1>Data cleanup with Tidyr</h1>
 <p><em>Due March 22 2018</em></p>
-<div id="exercise-1" class="section level2">
-<h2>Exercise 1</h2>
+<div id="warmup-with-some-faded-examples" class="section level3">
+<h3>Warmup with some Faded Examples!</h3>
+<p>Grab <code>Sale_Prices_City.csv</code> and bring it in to R, <a href="../Data/Sale_Prices_City.csv">link to data here</a>.</p>
+<p>First, convert it from long to wide, with a column for each year/month</p>
+<pre class="r"><code>sales_long &lt;- sales %&gt;%
+    ______(___ = time_point, 
+           _____ = sale_price, 
+           -_________, -_________, -________, -________)</code></pre>
+<p>Drop the NAs</p>
+<pre class="r"><code>sales_long &lt;- sales_long %&gt;%
+    ______(______(sale_price))</code></pre>
+<p>Split up year and month into two columns</p>
+<pre class="r"><code>sales_long &lt;- sales_long %&gt;%
+    ________(time_point, c(&quot;year&quot;, ______), ___ = &quot;-&quot;)</code></pre>
+<p>Make the following string:</p>
+<pre class="r"><code>my_string &lt;- &quot;Some people, when confronted with a problem, think 'I know, I'll use regular expressions.' Now they have two problems.&quot;</code></pre>
+<p>Make it all uppercase</p>
+<pre class="r"><code>__________(my_string)</code></pre>
+<p>Remove all instances of the letter e</p>
+<pre class="r"><code>______________(my_string, ______ = &quot;e&quot;, replacement = ___)</code></pre>
+<p>Split this string into a vector of individual words</p>
+<pre class="r"><code>split_string &lt;- __________(my_string, pattern = ___, simplify = ______)</code></pre>
+<p>Find the words that start with consonants.</p>
+<pre class="r"><code>str_view(split_string, &quot;___________&quot;)</code></pre>
+</div>
+<div id="exercise-1" class="section level3">
+<h3>Exercise 1</h3>
 <p>Load up the raw hadcrut data, <a href="../Data/hadcrut_temp_anomoly_wide_1850_2015.csv">link here</a>. We’ve been using this in a long format, but it actually is supplied as wide data. Use your skills with Tidyr to make it look like the long data we’ve been using in class!</p>
 </div>
-<div id="exercise-2" class="section level2">
-<h2>Exercise 2</h2>
-<p>Download the messy weather dataset from class today (3/7/2018) <a href="../Data/weather_messy.csv">link here</a>. Go through the cleanup steps required to go from this raw data to a cleaned up dataframe in the long format. This dataframe should have separate columns for year, month, day, and each measurement type.</p>
+<div id="exercise-2" class="section level3">
+<h3>Exercise 2</h3>
+<p>Download the messy weather dataset from class today (3/7/2018) <a href="../Data/weather_messy.csv">link here</a>. This is a dataset that contains some weather measurements but structured in an…interesting way. Go through the cleanup steps required to go from this raw data to a cleaned up dataframe in the long format. This dataframe should have separate columns for year, month, day, and each measurement type.</p>
 <p><strong>Suggested workflow:</strong><br />
 1. Read in data.<br />
-2. Deal with any extraneous cells and redudant columns.<br />
-3. fix column names.<br />
-4. fill in missing dates.<br />
-5. put date info into one column (optional but may help you grock what’s happening).<br />
-6. Start playing with wide vs long. HINT: this dataset requires both <code>gather</code> and <code>spread</code> to get it to its final form.<br />
-7. Deal with NAs and other data-entry issues. HINT: to avoid deleting most of the datset, let NA values remain in the events column.<br />
-8. Final tweaks: make sure numbers are numbers, characters are characters.<br />
-9. If you combined date columns before, separate them back out again.</p>
-<p><strong>Function Toolbox</strong> If you get stuck, consider using the following functions: <code>gather</code>, <code>spread</code>, <code>unite</code>, <code>separate</code>, <code>vis_dat</code>, <code>str</code>, <code>filter</code>, <code>select</code>, <code>names</code>, and <code>fill</code>.</p>
+2. Deal with any extraneous blank spaces and redundant columns.<br />
+3. Fix column names (Hint:beyond the first three columns, each column represents a day of the month. )<br />
+4. Fill in missing year/months.<br />
+5. OPTIONAL: Combine date info into one column (you don’t need to do this, but it might help you reduce the load on your brain and better grock what’s happening).<br />
+6. Start playing with wide vs long. HINT: This dataset is one of those that we mentioned which has characteristics of both long and wide data: both <code>gather</code> and <code>spread</code> might be needed to get it to its final form.<br />
+7. Deal with NAs and other data-entry issues. HINT: to avoid deleting most of the datset, let NA values remain in the “events” column.<br />
+8. Final tweaks: make sure numbers are numeric and characters are characters.<br />
+9. If you combined date columns before, separate them back out again so you have one for year, one for month, and one for day. 10. Give me a plot, any plot! Be sure to make it look nice!</p>
+<p><strong>Function Toolbox</strong> If you get stuck, consider using the following functions: <code>gather</code>, <code>spread</code>, <code>unite</code>, <code>separate</code>, <code>vis_dat</code>, <code>str</code>, <code>filter</code>, <code>select</code>, <code>names</code>, and <code>fill</code>. Remember, if you want to know more about a function just type it into the console with a ? in front.</p>
 </div>
 <div id="please-submit-the-following-as-an-rmd-as-well-as-the-knitted-html" class="section level2">
 <h2>Please submit the following as an RMD as well as the knitted HTML:</h2>
-<ol style="list-style-type: decimal">
-<li><p>Excercise 1: Code required for loading data, converting to long format, and then use <code>head()</code> to display the first five lines</p></li>
-<li><p>Because we are going over the bulk of this workflow in class, please submit a well-formatted write up in which each step is explained in english. Be sure to include steps where you check your work with <code>str</code> and <code>vis_dat</code> and explain the relavent parts of what you see! Feel free to do this in comments. an example of this could be:</p></li>
-</ol>
+<p>Faded Examples: One example per chunk.</p>
+<p>Excercise 1: Code required for loading data, converting to long format, and then use <code>head()</code> to display the first five lines</p>
+<p>Excercise 2: Because we are going over the bulk of this workflow in class, please submit a well-formatted write up in which each step is explained in english. Be sure to include steps where you check your work with <code>str</code> and <code>vis_dat</code> and explain the relavent parts of what you see! Feel free to do this in comments. an example of this could be:</p>
 <pre class="r"><code>#First I will create a vector of 100 random numbers between 0 and 1 using runif
 x &lt;- runif(100)
 #I will then use mean to find the average of this vector
 mean(x)</code></pre>
-<pre><code>## [1] 0.5374977</code></pre>
+<pre><code>## [1] 0.5365788</code></pre>
 <p>I want to know that you know what your code is doing!</p>
 </div>
 </div>
