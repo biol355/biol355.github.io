@@ -1,0 +1,40 @@
+#Data cleanup with Tidyr
+*Due March 22 2018*
+
+
+##Exercise 1
+Load up the raw hadcrut data, [link here](biol355.github.io/Data/hadcrut_temp_anomoly_wide_1850_2015.csv). We've been using this in a long format, but it actually is supplied as wide data. Use your skills with Tidyr to make it look like the long data we've been using in class!
+
+##Exercise 2
+Download the messy weather dataset from class today (3/7/2018) [link here](biol355.github.io/Data/weather_messy.csv). Go through the cleanup steps required to go from this raw data to a cleaned up dataframe in the long format. This dataframe should have separate columns for year, month, day, and each measurement type. 
+
+**Suggested workflow:**  
+1. Read in data.   
+2. Deal with any extraneous cells and redudant columns.  
+3. fix column names.  
+4. fill in missing dates.  
+5. put date info into one column (optional but may help you grock what's happening).  
+6. Start playing with wide vs long. HINT: this dataset requires both `gather` and `spread` to get it to its final form.  
+7. Deal with NAs and other data-entry issues. HINT: to avoid deleting most of the datset, let NA values remain in the events column.  
+8. Final tweaks: make sure numbers are numbers, characters are characters.  
+9. If you combined date columns before, separate them back out again.
+
+
+**Function Toolbox**
+If you get stuck, consider using the following functions:
+`gather`, `spread`, `unite`, `separate`, `vis_dat`, `str`, `filter`, `select`, `names`, and `fill`.
+
+##Please submit the following as an RMD as well as the knitted HTML:
+
+1. Excercise 1: Code required for loading data, converting to long format, and then use `head()` to display the first five lines
+
+2. Because we are going over the bulk of this workflow in class, please submit a well-formatted write up in which each step is explained in english. Be sure to include steps where you check your work with `str` and `vis_dat` and explain the relavent parts of what you see! Feel free to do this in comments. an example of this could be:
+
+```{r}
+#First I will create a vector of 100 random numbers between 0 and 1 using runif
+x <- runif(100)
+#I will then use mean to find the average of this vector
+mean(x)
+```
+
+I want to know that you know what your code is doing!
