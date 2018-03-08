@@ -1,7 +1,11 @@
-#Data cleanup with Tidyr
+# Data cleanup with Tidyr
 *Due March 22 2018*
 
-###Warmup with some Faded Examples!  
+#### Please submit the following as an RMD as well as the knitted HTML file.
+
+### 1. Warmup with some Faded Examples!  
+Please provide one example per chunk in your RMD file.
+
 Grab `Sale_Prices_City.csv` and bring it in to R, [link to data here](../Data/Sale_Prices_City.csv).
 
 First, convert it from long to wide, with a column for each year/month
@@ -49,14 +53,10 @@ str_view(split_string, "___________")
 
 ```
 
-###Exercise 1
+### 2. Tidying the HadCrut Data
 Load up the raw hadcrut data, [link here](../Data/hadcrut_temp_anomoly_wide_1850_2015.csv). We've been using this in a long format, but it actually is supplied as wide data. Use your skills with Tidyr to make it look like the long data we've been using in class!
 
-##Please submit the following as an RMD as well as the knitted HTML:
-
-Faded Examples: One example per chunk.
-
-Excercise 1: Code required for loading data, converting to long format, and then use `head()` to display the first five lines.Be sure to include steps where you check your work with `str` and and explain the relavent parts of what you see! Feel free to do this in comments. an example of this could be:
+Make sure in this exercise you submit: Code required for loading data, converting to long format, and then use `head()` to display the first five lines.Be sure to include steps where you check your work with `str` and and explain the relavent parts of what you see! Feel free to do this in comments. an example of this could be:
 
 ```{r}
 #First I will create a vector of 100 random numbers between 0 and 1 using runif
@@ -66,3 +66,12 @@ mean(x)
 ```
 
 I want to know that you know what your code is doing!
+
+### 3. Make a proposal for your final project
+OK, rubber is hitting the road, people! We've looked at some initial visualizations, but, I'd like you to give us a proposal for your final project so we can make any adjustments. Bear in mind that over the next few weeks you will also be learning geospatial visualization (maps), basic statistical modeling, and some skills on automating repeated tasks (writing functions). Please provide the following information in your answer:  
+  
+1. What is the question you are interested in asking?  
+2. What dataset will you be using to answer it? Describe the data and how it was acquired.  
+3. How do you plan to use this data to address your question? This could be a little vague at this point. But what analyses, visuzliations, etc. will you do? What packages do you think you'll need?   
+4. Do you anticipate any problems - either in data cleaning, or in skills you feel you lack. Are there any packages you've heard about, but have not yet learned?  
+Extra credit: Any visualizations of the data already?
