@@ -98,7 +98,7 @@ __Etherpad:__ https://etherpad.wikimedia.org/p/355-strings
 ```
 `r datestring`  
 __Readings:__ W&G Chapters on [Tidy Data](http://r4ds.had.co.nz/tidy-data.html)  
-__Lecture:__ [Tidy Data](./Lectures/13_data_tidy.html), [tidy faded examples]()  
+__Lecture:__ [Tidy Data](./Lectures/13_data_tidy.html)  
 __Lab:__ [Axoltl Data Cleaning](./Labs/axoltl_lab.html)  
 __Objective(s):__ Understand how to reshape and manipulate data. Describe the difference between the two fundamental forms of data – long versus wide, Use the tidyr package in R to convert between long and wide data; Use unite and separate to create tidy data (where each column is a variable). 
 __Biological Examples:__ [Axoltl limb regeneration](./Lectures/data/ALM assay statistics.xlsx). [Mammal taxonomic records](./Lectures/data/mammals.R).  [Weather data](./Data/weather_messy.csv).  [Sale prices for homework](./Data/Sale_Prices_City.csv).    
@@ -120,8 +120,9 @@ __Before Class:__ Install `rgdal` (you'll need to install gdal first - see below
 __Readings:__  W&G Chapter on [Relational Data](http://r4ds.had.co.nz/relational-data.html),  [Data Carpentry Geospatial Introduction](http://www.datacarpentry.org/R-spatial-raster-vector-lesson/)  
 __Objective(s):__ Know when and where to use different types of joins, Understand how to merge survey data with geospatial information to get a geographic understanding of epidemiological patterns  
 __Biological Examples:__ Hemlock wooly adelgid distribution. CDC records of heart disease across counties of the US. Change in coastal sea surface temperature since 1850.  
-__Lectures:__ [Joins](./Lectures/15_joins.pptx)
-__Data:__ [Hemlock](../Data/hemlock.xlsx), [hemlock_densities](../Data/hemlock_densities.xlsx)
+__Lectures:__ [Joins](./Lectures/15_joins.pptx)  
+__Files:__   [Hemlock](../Data/hemlock.xlsx), [hemlock_densities](../Data/hemlock_densities.xlsx) 
+
 **To install gdal on a mac, there are two steps**  
 1) Install Homebrew from http://brew.sh/ (this is an awesome thing to have anyway)  
 2) in Terminal type  
