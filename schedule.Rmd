@@ -121,7 +121,7 @@ __Readings:__  W&G Chapter on [Relational Data](http://r4ds.had.co.nz/relational
 __Objective(s):__ Know when and where to use different types of joins, Understand how to merge survey data with geospatial information to get a geographic understanding of epidemiological patterns  
 __Biological Examples:__ Hemlock wooly adelgid distribution. CDC records of heart disease across counties of the US. Change in coastal sea surface temperature since 1850.  
 __Lectures:__ [Joins](./Lectures/15_joins.pptx)
-__Data:__[Hemlock](../Data/hemlock.xlsx), [hemlock_densities(../Data/hemlock_densities.xlsx)
+__Data:__[Hemlock](../Data/hemlock.xlsx), [hemlock_densities](../Data/hemlock_densities.xlsx)
 **To install gdal on a mac, there are two steps**  
 1) Install Homebrew from http://brew.sh/ (this is an awesome thing to have anyway)  
 2) in Terminal type  
