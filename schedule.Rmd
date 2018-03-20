@@ -106,7 +106,7 @@ __Etherpad:__ https://etherpad.wikimedia.org/p/355-tidy
 __Homework__: [Weather Data Cleaning](./Assignments/tidyr_over_break_shortened.html)  
   
 
-### Week  8 & 9. Data "Mashups" and Geospatial Data
+### Week  8. Data "Mashups" and Geospatial Data
 ```{r next_date, echo=FALSE}
 ```
 ```{r next_date_2, echo=FALSE}
@@ -120,7 +120,8 @@ __Before Class:__ Install `rgdal` (you'll need to install gdal first - see below
 __Readings:__  W&G Chapter on [Relational Data](http://r4ds.had.co.nz/relational-data.html),  [Data Carpentry Geospatial Introduction](http://www.datacarpentry.org/R-spatial-raster-vector-lesson/)  
 __Objective(s):__ Know when and where to use different types of joins, Understand how to merge survey data with geospatial information to get a geographic understanding of epidemiological patterns  
 __Biological Examples:__ Hemlock wooly adelgid distribution. CDC records of heart disease across counties of the US. Change in coastal sea surface temperature since 1850.  
-
+__Lectures:__ [Joins](./Lectures/15_joins.pptx)
+__Data:__[Hemlock](../Data/hemlock.xlsx), [hemlock_densities(../Data/hemlock_densities.xlsx)
 **To install gdal on a mac, there are two steps**  
 1) Install Homebrew from http://brew.sh/ (this is an awesome thing to have anyway)  
 2) in Terminal type  
