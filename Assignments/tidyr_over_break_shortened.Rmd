@@ -8,7 +8,7 @@ Please provide one example per chunk in your RMD file.
 
 Grab `Sale_Prices_City.csv` and bring it in to R, [link to data here](../Data/Sale_Prices_City.csv).
 
-First, convert it from long to wide, with a column for each year/month
+First, convert it from wide to long, with a column for year/month called time_point.
 ```{r gather, error = TRUE, eval=FALSE}
 sales_long <- sales %>%
     ______(___ = time_point, 
