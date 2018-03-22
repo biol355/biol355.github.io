@@ -89,7 +89,7 @@ __Lecture:__ [Dplyr Faded Example Practice](./Lectures/dplyr_faded_examples.html
 __Cheat Sheets:__ [Work with Strings Cheat Sheet](https://github.com/rstudio/cheatsheets/raw/master/strings.pdf)  
 __Objective(s):__ Understand how strings differ from numbers. Learn the basics of string manipulation. Describe the different strategies to clean data full of errors with minimal effort. Process and understand the concept of regular expression matching. Manipulate different date formats and work them into a data map reduce workflow.  
 __Files:__ [Portal Mammal Data with String Problems](./Lectures/data/portal_messy_regexp.xlsx)  
-__Homework:__ [Regular Expressions](./Labs/lab6_regex_practice.html)  
+__Homework:__ [Regular Expressions](./Labs/lab6_regex_practice.html), [submit here](https://www.dropbox.com/request/yCcQ3gZQ73M9A2WGdrWi)   
 __Etherpad:__ https://etherpad.wikimedia.org/p/355-strings  
 
 
@@ -103,7 +103,7 @@ __Lab:__ [Axoltl Data Cleaning](./Labs/axoltl_lab.html)
 __Objective(s):__ Understand how to reshape and manipulate data. Describe the difference between the two fundamental forms of data – long versus wide, Use the tidyr package in R to convert between long and wide data; Use unite and separate to create tidy data (where each column is a variable). 
 __Biological Examples:__ [Axoltl limb regeneration](./Lectures/data/ALM assay statistics.xlsx). [Mammal taxonomic records](./Lectures/data/mammals.R).  [Weather data](./Data/weather_messy.csv).  [Sale prices for homework](./Data/Sale_Prices_City.csv).    
 __Etherpad:__ https://etherpad.wikimedia.org/p/355-tidy  
-__Homework__: [Weather Data Cleaning](./Assignments/tidyr_over_break_shortened.html)  
+__Homework__: [Weather Data Cleaning](./Assignments/tidyr_over_break_shortened.html), [submit here](https://www.dropbox.com/request/ruza0zXvyvnJgllJXqJ4)    
   
 
 ### Week  8. Data "Mashups" and Geospatial Data
