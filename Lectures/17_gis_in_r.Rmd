@@ -269,14 +269,14 @@ ggplot(data=heart_disease_map_data,
 
 
 ## Analysis of Spatial Patterns
-|![](./images/gis/crime.png)   |![](./images/gis/crimecenter.png)   |
+|![](./Images/gis/crime.png)   |![](./Images/gis/crimecenter.png)   |
 |:-:|:-:|
 
 <br><br>
 http://rspatial.org/analysis/rst/8-pointpat.html
 
 ## Analysis of Spatial Patterns
-|![](./images/gis/crime.png)   |![](./images/gis/crimegrid.png)   |
+|![](./Images/gis/crime.png)   |![](./Images/gis/crimegrid.png)   |
 |:-:|:-:|
 
 <br><br>
@@ -284,7 +284,7 @@ http://rspatial.org/analysis/rst/8-pointpat.html
 
 
 ## Analysis of Spatial Patterns
-|![](./images/gis/crime.png)   |![](./images/gis/crimedensity.png)   |
+|![](./Images/gis/crime.png)   |![](./Images/gis/crimedensity.png)   |
 |:-:|:-:|
 
 <br><br>
@@ -342,7 +342,7 @@ grid.arrange(bplot1, bplot_k, ncol=2)
 
 
 ## Determining Ranges: Bigfoot
-|![](./images/gis/bfmap.png)   |![](./images/gis/bfrange.png)   |
+|![](./Images/gis/bfmap.png)   |![](./Images/gis/bfrange.png)   |
 |:-:|:-:|
 
 <br><br>
