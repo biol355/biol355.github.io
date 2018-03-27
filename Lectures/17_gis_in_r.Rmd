@@ -1,0 +1,490 @@
+---
+title:
+css: style.css
+output:
+  revealjs::revealjs_presentation:
+    reveal_options:
+      slideNumber: true
+      previewLinks: true
+    theme: white
+    center: false
+    transition: fade
+    self_contained: false
+    lib_dir: libs
+---
+## 
+<br>
+<h2><center>GIS and R</center></h2>
+![](./images/gis/deforestation-rates-v2a1.png)
+
+
+```{r prep, echo=FALSE, cache=FALSE, message=FALSE, warning=FALSE}
+library(knitr)
+library(tidyverse)
+library(sp)
+library(raster)
+library(spdplyr)
+library(ggmap)
+library(ggplot2)
+library(readxl)
+library(viridis)
+library(broom)
+theme_set(theme_bw(base_size=16))
+
+#register with goog api
+#https://developers.google.com/maps/documentation/geocoding/get-api-key
+#register_google(key = "AIzaSyBdT4uT8Wj6N9rU5WesKQIOhboQ2zqic5g")
+
+opts_chunk$set(fig.height=5, fig.width=7, comment=NA, 
+               warning=FALSE, message=FALSE, 
+               dev="jpeg", echo=FALSE)
+
+
+heart_disease <- read_excel("./data/hd_all.xlsx", 
+                            na="Insufficient Data")
+
+
+```
+
+## A Disclaimer
+![](./images/gis/we-will-teach.jpg){width=60%}
+
+## That Plankton Data...
+```{r}
+plank <- read_excel("./data/EST-PR-PlanktonChemTax.xls", 
+                    sheet=2, na="NA")
+plank
+```
+
+## Trends only tell us so much
+```{r}
+ggplot(plank, aes(x=Salinity, y = TotalChlA)) +
+  geom_point()
+```
+
+## Trends only tell us so much
+```{r}
+ggplot(plank, aes(x=Distance, y = Salinity)) +
+  geom_point()
+```
+
+## You're starting to see something spatial...
+```{r}
+ggplot(plank, aes(x=Distance, y = Salinity, color=TotalChlA, size=TotalChlA)) +
+  geom_point() +
+  scale_color_viridis(option="D")
+```
+
+## Often within Relationships is a Pattern
+```{r underly, echo=FALSE}
+ggplot(plank, aes(Longitude, Latitude, color=Salinity, size=TotalChlA)) +
+  geom_point() +
+  scale_color_viridis(option="B")
+```
+<div class="fragment">What do you learn from this that is new?</div>
+
+## Context!
+```{r ggmap, echo=FALSE, cache=TRUE}
+pie_map <- get_googlemap(center=c(-70.823316, 42.728316), zoom = 12)
+
+ggmap(pie_map) +
+  geom_point(data = plank, 
+             mapping = aes(Longitude, Latitude, color=Salinity, size=TotalChlA)) +
+  scale_color_viridis(option="B")
+
+```
+<div class="fragment">What do you learn from this that is new?</div>
+
+
+## What does this tell you that a bar plot would not?
+```{r hartmap}
+#from http://rspatial.r-forge.r-project.org/gallery/
+# library(maptools)
+# nc <- readShapePoly(system.file("shapes/sids.shp", package="maptools")[1], proj4string=CRS("+proj=longlat +datum=NAD27"))
+# 
+# spplot(nc, c("SID74", "SID79"), names.attr = c("1974","1979"),
+#     colorkey=list(space="bottom"), scales = list(draw = TRUE),
+#     main = "SIDS (sudden infant death syndrome) in North Carolina", 
+#     as.table = TRUE)
+
+countymap <- map_data("county")
+
+countymap <- countymap %>%
+  rename(State = region,
+         County = subregion)
+
+heart_disease <- heart_disease %>%
+  dplyr::mutate(State = tolower(State), 
+         County = tolower(County))
+
+heart_disease_map_data <- inner_join(heart_disease, countymap)
+
+
+ggplot(data=heart_disease_map_data, 
+       mapping = aes(x = long, y = lat, group = group,
+                     fill = Death_Rate)) +
+  geom_polygon() +
+  scale_fill_gradient(low = "white", high = "red") 
+
+```
+
+## What does this tell you that a bar plot would not?
+![](./images/gis/kale_to_bacon.jpg){width=70%}
+
+## Objectives
+
+1. What is spatial data?  
+2. What is unique/new about spatial data?  
+3. Spatial data in R  
+4. Mashing Up Spatial and Non-Spatial Data
+
+## Types of Spatial Data
+![](./images/gis/types of spatial data.png)
+
+## Points are Coordinates
+```{r points, echo=FALSE}
+ggplot(plank, aes(Longitude, Latitude)) +
+  geom_point() 
+```
+
+## Properties of Coordinates
+- An x and y value  
+- A Projection  
+- An extent (minimum and maximum)  
+- Additional Information
+
+## Projections and Coordinate Reference Systems
+![](./images/gis/projections_1.gif){width=125%}
+
+
+## Projections and Coordinate Reference Systems
+![](./images/gis/map_diff_proj.jpg)
+
+## Additional Information in Points!
+```{r points_colors, echo=FALSE}
+ggplot(plank, aes(Longitude, Latitude, color=Salinity, Size = TotalChlA)) +
+  geom_point() +
+  scale_color_viridis(option="B")
+```
+
+## Lines (Paths)
+```{r lines, echo=FALSE}
+ggplot(plank, aes(Longitude, Latitude)) +
+  geom_line() 
+```
+
+## Lines Can Also Contain Information
+```{r lines_color, echo=FALSE}
+ggplot(plank, aes(Longitude, Latitude, color=Salinity, lwd = TotalChlA)) +
+  geom_line() +
+  scale_color_viridis(option="B")
+```
+
+## One Polygon
+
+```{r one_polygon}
+
+ggplot(data=heart_disease_map_data %>% filter(group==1), 
+       mapping = aes(x = long, y = lat, group=group)) +
+  geom_polygon(fill=NA, color="black") 
+```
+
+## Two Polygons
+
+```{r two_polygon}
+
+ggplot(data=heart_disease_map_data %>% filter(group %in% c(1,2)), 
+       mapping = aes(x = long, y = lat, group=group)) +
+  geom_polygon(fill=NA, color="black") 
+```
+
+## Many Polygons
+
+```{r many_polygon}
+
+ggplot(data=heart_disease_map_data %>% filter(group %in% c(1,2,5,7,9,12)), 
+       mapping = aes(x = long, y = lat, group=group)) +
+  geom_polygon(fill=NA, color="black") 
+```
+
+## Many Polygons
+
+```{r all_polygon_nocolor}
+ggplot(data=heart_disease_map_data, 
+       mapping = aes(x = long, y = lat, group=group)) +
+  geom_polygon(fill=NA, color="black") 
+```
+
+## Polygons can Also have data!
+```{r all_polygon, fig.height=6, fig.width=7}
+ggplot(data=heart_disease_map_data, 
+       mapping = aes(x = long, y = lat, group=group,
+                     fill = Death_Rate)) +
+  geom_polygon() + 
+  scale_fill_viridis(option="B")
+```
+
+## Vector Data
+![](./images/gis/geosptypes.png)
+
+## Many Ways of Representing the Same Data
+![](./images/gis/Data layer types.jpg)
+
+## Rasters
+
+![](./images/gis/raster_intro.png){width=75%}
+
+## Rasters versus Vector Files
+
+![](./images/gis/raster_vector.jpg)
+
+
+## Rasters versus Vector Files
+
+![](./images/gis/raster_vector_types.png){width=90%}
+
+## Raster Stacks/Bricks
+
+![](./images/gis/multiband_raster_neon.png)
+
+## Why Rasters Versus Vector Formats
+<p align="left">
+**Filesize**: Advantage Vector (smaller!)  
+  
+**Depth of Detail**: Advantage Raster  
+  
+**Ease of Use in Analysis**: Advantage Raster  
+  
+**Ease of Reprojection/Scaling**: Advantage Vector  
+  
+**Ease of Creation**: Advantage Raster
+</p>
+
+## Objectives
+
+1. What is spatial data?  
+2. <font color="red">What is unique/new about spatial data?</font>  
+3. Spatial data in R  
+4. Mashing Up Spatial and Non-Spatial Data
+
+
+## Analysis of Spatial Patterns
+|![](images/gis/crime.png)   |![](images/gis/crimecenter.png)   |
+|:-:|:-:|
+
+<br><br>
+http://rspatial.org/analysis/rst/8-pointpat.html
+
+## Analysis of Spatial Patterns
+|![](images/gis/crime.png)   |![](images/gis/crimegrid.png)   |
+|:-:|:-:|
+
+<br><br>
+http://rspatial.org/analysis/rst/8-pointpat.html
+
+
+## Analysis of Spatial Patterns
+|![](images/gis/crime.png)   |![](images/gis/crimedensity.png)   |
+|:-:|:-:|
+
+<br><br>
+http://rspatial.org/analysis/rst/8-pointpat.html
+
+## Understanding Autocorrelation
+```{r boreal_variogram}
+library(gstat)
+boreal <- read_csv("./data/boreal.csv")
+bplot1 <- ggplot(as.data.frame(boreal), aes(x,y,color=NDVI))+
+  geom_point() +
+  scale_color_viridis()
+
+bplot1
+```
+
+## Understanding Autocorrelation
+```{r boreal}
+library(gstat)
+coordinates(boreal) = ~x+y
+
+#make and fit a variogram
+v <- variogram(NDVI~1, boreal)
+#plot(v)
+v_fit <- fve <- fit.variogram(v, vgm("Exp"))
+plot(variogramLine(v_fit, 2000), type="l")
+points(v[,2:3], pch=20, col='red')
+```
+
+## Interpolation: Kriging
+```{r krig, cache=TRUE, messages=FALSE, fig.width=11}
+
+#make grid
+boreal_grid <- makegrid(boreal, n=10000)
+boreal_grid <- SpatialPoints(boreal_grid)
+
+#crop grid
+boreal_hull <- rgeos::gConvexHull(boreal)
+boreal_grid <- crop(boreal_grid, boreal_hull)
+
+##krige!
+ndvi_kriged <- krige(NDVI ~ 1, boreal, boreal_grid, model=v_fit)
+
+## plot
+bplot_k <- ggplot(as.data.frame(ndvi_kriged), aes(x1,x2,
+                                       fill=var1.pred)) +
+  geom_tile() +
+  scale_fill_viridis() +
+  xlab("x") + ylab("y")
+
+library(gridExtra)
+grid.arrange(bplot1, bplot_k, ncol=2)
+
+```
+
+
+## Determining Ranges: Bigfoot
+|![](images/gis/bfmap.png)   |![](images/gis/bfrange.png)   |
+|:-:|:-:|
+
+<br><br>
+http://rspatial.org/analysis/rst/5-global_regression.html
+
+## Extracting Information
+```{r, messages=FALSE, cache=TRUE, results="hide"}
+library(getCRUCLdata)
+
+CRU_stack <- get_CRU_stack(
+                           tmp = TRUE,
+                           )
+
+cru <- calc(CRU_stack[[1]], mean)
+
+pts <- data.frame(x=runif(100, -150,150), y = runif(100, -100, 100))
+coordinates(pts) <- ~x+y
+
+plot(cru)
+plot(pts, add=TRUE, pch=4)
+```
+
+## Objectives
+
+1. What is spatial data?  
+2. What is unique/new about spatial data?  
+3. <font color="red">Spatial data in R</font>  
+4. Mashing Up Spatial and Non-Spatial Data
+
+## SO MANY LIBRARIES!
+```{r eval=FALSE, echo=TRUE}
+library(sp)
+library(raster)
+library(spdplyr)
+library(rgdal)
+library(gstat)
+library(rgeos)
+library(ggmap)
+library(mapdata)
+library(leaflet)
+
+...
+```
+
+## Vector Types with sp
+- SpatialLines  
+- SpatialPoints  
+- SpatialPolygons  
+- SpatialGrid  
+
+## Vector Types using Datawith sp
+- SpatialLinesDataFrame  
+- SpatialPointsDataFrame  
+- SpatialPolygonsDataFrame  
+- SpatialGridDataFrame  
+
+## A SpatialPointDataFrame
+```{r echo=TRUE}
+library(sp)
+data(meuse)
+
+coordinates(meuse) <- ~x+y
+
+class(meuse)
+```
+
+## A SpatialPointDataFrame
+```{r echo=TRUE}
+plot(meuse)
+```
+
+## The Innards of a SPDF
+```{r echo=TRUE}
+meuse
+```
+
+## Data is Tricky as it's an S4 Object
+```{r echo=TRUE}
+head(meuse@data)
+```
+
+## But it works OK
+```{r echo=TRUE}
+head(meuse$copper)
+```
+
+## To use dplyr tools, use spdplyr
+```{r echo=TRUE}
+library(spdplyr)
+
+meuse %>% 
+  filter(landuse=="W") %>%
+  plot
+```
+
+## But we cannot ggplot...
+```{r, echo=TRUE, eval=FALSE}
+> ggplot(meuse, aes(color=copper)) +
+     geom_point()
+
+Error: ggplot2 doesn't know how to deal with data of class
+SpatialPointsDataFrame
+```
+
+
+## Converting Spatial to Nonspatial
+```{r echo=TRUE, warning=FALSE}
+library(broom)
+
+meuse_tidy <- tidy(meuse)
+```
+
+## And now...
+```{r, echo=TRUE}
+ggplot(meuse_tidy, aes(x,y, color=copper)) +
+  geom_point() +
+  scale_color_viridis(option="B")
+```
+
+## Rasters
+```{r, echo=TRUE, message=FALSE}
+library(raster)
+library(rgdal)
+
+DSM_HARV <- raster("./data/HARV_dsmCrop.tif")
+```
+
+## What's in here?
+```{r echo=TRUE}
+DSM_HARV
+```
+
+## The Raster
+```{r echo=TRUE, cache=TRUE, echo=TRUE}
+plot(DSM_HARV)
+```
+
+## Need rasterVis for ggplot
+```{r rasterVis, cache=TRUE, echo=TRUE}
+library(rasterVis)
+
+gplot(DSM_HARV) +  
+  geom_tile(aes(fill=value)) +
+  scale_fill_viridis()
+```
