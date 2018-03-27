@@ -15,7 +15,7 @@ output:
 ## 
 <br>
 <h2><center>GIS and R</center></h2>
-![](./images/gis/deforestation-rates-v2a1.png)
+![](./Images/gis/deforestation-rates-v2a1.png)
 
 
 ```{r prep, echo=FALSE, cache=FALSE, message=FALSE, warning=FALSE}
@@ -47,7 +47,7 @@ heart_disease <- read_excel("./data/hd_all.xlsx",
 ```
 
 ## A Disclaimer
-![](./images/gis/we-will-teach.jpg){width=60%}
+![](./Images/gis/we-will-teach.jpg){width=60%}
 
 ## That Plankton Data...
 ```{r}
@@ -129,7 +129,7 @@ ggplot(data=heart_disease_map_data,
 ```
 
 ## What does this tell you that a bar plot would not?
-![](./images/gis/kale_to_bacon.jpg){width=70%}
+![](./Images/gis/kale_to_bacon.jpg){width=70%}
 
 ## Objectives
 
@@ -139,7 +139,7 @@ ggplot(data=heart_disease_map_data,
 4. Mashing Up Spatial and Non-Spatial Data
 
 ## Types of Spatial Data
-![](./images/gis/types of spatial data.png)
+![](./Images/gis/types of spatial data.png)
 
 ## Points are Coordinates
 ```{r points, echo=FALSE}
@@ -154,11 +154,11 @@ ggplot(plank, aes(Longitude, Latitude)) +
 - Additional Information
 
 ## Projections and Coordinate Reference Systems
-![](./images/gis/projections_1.gif){width=125%}
+![](./Images/gis/projections_1.gif){width=125%}
 
 
 ## Projections and Coordinate Reference Systems
-![](./images/gis/map_diff_proj.jpg)
+![](./Images/gis/map_diff_proj.jpg)
 
 ## Additional Information in Points!
 ```{r points_colors, echo=FALSE}
@@ -225,27 +225,27 @@ ggplot(data=heart_disease_map_data,
 ```
 
 ## Vector Data
-![](./images/gis/geosptypes.png)
+![](./Images/gis/geosptypes.png)
 
 ## Many Ways of Representing the Same Data
-![](./images/gis/Data layer types.jpg)
+![](./Images/gis/Data layer types.jpg)
 
 ## Rasters
 
-![](./images/gis/raster_intro.png){width=75%}
+![](./Images/gis/raster_intro.png){width=75%}
 
 ## Rasters versus Vector Files
 
-![](./images/gis/raster_vector.jpg)
+![](./Images/gis/raster_vector.jpg)
 
 
 ## Rasters versus Vector Files
 
-![](./images/gis/raster_vector_types.png){width=90%}
+![](./Images/gis/raster_vector_types.png){width=90%}
 
 ## Raster Stacks/Bricks
 
-![](./images/gis/multiband_raster_neon.png)
+![](./Images/gis/multiband_raster_neon.png)
 
 ## Why Rasters Versus Vector Formats
 <p align="left">
