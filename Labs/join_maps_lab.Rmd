@@ -1,0 +1,520 @@
+---
+title: "Joins and Geospatial Data"
+author: "Intro to Data Science for Biology"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(rgdal)
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### Map maker, map maper, make me a map!
+
+Today we're going to look at how we can use joins and geospatial data more explicitly to make maps. Maps are among the first data visualizations that ever occured. And some of the most powerful. They're also one of the places where joins become incredibly important, as to put data on a map we have to join our data with a geospatial description of the map we want.
+
+### Death from Heart Disease
+
+Today's data set that we'll be using is a data set of heart disease mortality from the CDC
+
+```{r}
+#load the data and prep
+#for some data manipulation
+library(readxl)
+library(dplyr)
+
+heart_disease <- read_excel("./data/hd_all.xlsx", 
+                            na="Insufficient Data")
+
+head(heart_disease)
+```
+
+OK, we see that we have state, county, and information on death. FIPS codes, FYI, are standardized county codes. We'll be ignoring them.
+
+### Introducing: Maps
+
+There are a LOT of ways to get map data into R. We're going to begin with the simplest - grabbing it from an R package. `ggplot2` works in tandem with the `maps` package to provide a few standardized sets of maps for easy plotting. Let's take a look at one of counties in the U.S. lower 48.
+
+```{r}
+#install the mapdata library if you
+#don't have it
+library(ggplot2)
+
+#map_data gets us one of the select maps
+map_df <- map_data("county")
+
+head(map_df)
+```
+
+OK, we have latitude and longitude of county borders, a group (each county has one group), and both a region and subregion. Note we don't have states and counties - this map is a bit broader than that. It includes cities and US Territories. Also note that capitalization is wonky - it's all lower case.
+
+To show you how we would use this data
+
+```{r}
+ggplot(data=map_df, mapping = aes(x = long, y = lat, group = group)) +
+geom_polygon()
+```
+
+`geom_polygon` is our newest friend, and it creates polygons from the lat/long paths above. There are other ways to use this map, but it's the clearest.
+
+### Getting ready to join maps and data
+
+OK, so, we want to see how death from heart disease varies by county! To do this, we'll need to join the two data frames. Note, the number of rows in `map_df` is YUGE compared to those in our data set, as they define county borders. So we're going to be merging one data point to many rows in the `map_df` data frame. But, we need to do some prep work first.
+
+First, we need to fix up the columns in our `heart_disease` data set to not be capitalized, and we need to rename those columns in our map data frame.
+
+```{r}
+map_df <- map_df %>%
+  rename(State = region,
+         County = subregion)
+
+heart_disease <- heart_disease %>%
+  mutate(State = tolower(State), 
+         County = tolower(County))
+```
+
+Now let's test out the join! Before we do the big join, let's look at mismatch. This is the perfect job for `anti_join`
+
+```{r}
+bad_match <- anti_join(heart_disease, map_df)
+
+nrow(bad_match)
+
+head(bad_match)
+```
+
+Uh oh! 112 rows of bad matches!  Why?  Well, we can see one of the reasons quickly - the US Virgin Islands. They are not in the map data set. Second, though, we can see `st. croix` - indeed, the map data frame has no . or ' characters in it, so, we should filter those out of heart_disease and then re-check.
+
+```{r}
+heart_disease <- heart_disease %>%
+  mutate(County = gsub("\\.", "", County)) %>%
+  mutate(County = gsub("\\'", "", County))
+
+bad_match2 <- anti_join(heart_disease, map_df)
+
+nrow(bad_match2)
+
+bad_match2
+```
+
+OK, much better - down to 82. And looking at what's left, those are cities, not counties, so, should not affect our map making.
+
+Are we good the other way?
+
+```{r}
+bad_match3 <- anti_join(map_df, heart_disease)
+
+#because we get a data frame return
+length(unique(bad_match3$County))
+
+unique(bad_match3$County)
+```
+
+Only 8. Were we trying to make this perfect, we'd try and figure out why, but, for now, let's soldier on. 8 is acceptable.
+
+### Joining maps and data
+
+So we know that there are some territories and cities left in the heart disease data, and we don't want to worry about them for the moment. Given that we've got some mismatch on both sides, we want to use an `inner_join` - although we could also `outer_join` so that the entire map is retained, and thus see what counties we have missing data for. Try it both ways.
+
+```{r}
+heart_disease_map_data <- inner_join(heart_disease, map_df)
+```
+
+And now - let's plot it!
+
+```{r}
+heart_map <- ggplot(data=heart_disease_map_data, 
+       mapping = aes(x = long, y = lat, group = group,
+                     fill = Death_Rate)) +
+  geom_polygon() 
+
+heart_map
+```
+
+### Making pretty choropleths
+
+So, this is a choropleth map. There are some issues - the scale is hard to resolve, and everything is hard to see. There are a lot of ways we could rectify it. Here are a few tricks.
+
+First, a better scale. Maybe a gradient?
+
+```{r}
+heart_map +
+  scale_fill_gradient(low = "white", high = "red")
+```
+
+OK, not bad! Not great, but much better. Are there gradients you'd prefer?
+
+However, the bigger problem is that we have a huge range to cover. One common way to make choropleths is to bin data into categories and go from there. Binning in combination with a nice color scale - say via Color Brewer  - cab be great. Remember Color Brewer? http://colorbrewer2.org/ actually uses maps as it's demo! And there's a `scale_fill_brewer` function in ggplot2.
+
+So let's make bins and plot that instead!
+
+```{r}
+heart_map_binned <- ggplot(data=heart_disease_map_data, 
+       mapping = aes(x = long, y = lat, group = group,
+                     fill = cut_interval(Death_Rate, 5))) +
+  geom_polygon() 
+
+heart_map_binned +
+    scale_fill_brewer(palette="Reds")
+```
+
+MUCH nicer. Now we can really start to see some hot spots.
+
+### Faded Examples
+For our faded examples, today we're going to look at data on TB incidence from the World Health organization. This look at TB for the entire planet at the country level. Let's take a look
+
+```{r who_load, message=FALSE}
+library(readr)
+
+tb_world <- read_csv("./data/who_tb_data.csv")
+
+tb_world
+
+```
+
+There's a lot going on here - in particular let's focus on estimated insidences, incidences per 100K people, and mortality. `upr` and `lwr` denote upper and lower bounds to estimates.
+
+So, a simple map of 2015.
+
+```{r first_fade}
+#get a map
+worldmap <- map_data("world")
+
+#filter to 2015
+tb_2015 <- tb_world %>% filter(year == 2015)
+
+#join
+incidence_df <- left_join(worldmap, tb_2015, by = c("region" = "country"))
+
+#plot
+ggplot(incidence_df, aes(x = long, y = lat, 
+                         group = group, fill=est_incidences)) +
+  geom_polygon() +
+  scale_fill_gradient(low = "blue", high = "red")
+
+
+```
+
+Huh - not everything joins well, but we'll ignore that for now.
+
+Let's look at mortality in 2000
+
+```{r eval=FALSE}
+#get a map
+worldmap <- map_data("____")
+
+
+#filter to 2015
+tb_2000 <- tb_world %>% filter(year == ____)
+
+#join
+incidence_df_2000 <- left_join(worldmap, ____, by = c("region" = "country"))
+
+#plot
+ggplot(incidence_df_2000, aes(x = ____, y = ____, 
+                         group = group, fill=est_mortality)) +
+  geom_polygon() +
+  scale_fill_gradient(____)
+```
+
+```{r second_fade, eval=FALSE, echo=FALSE}
+#get a map
+worldmap <- map_data("world")
+
+
+#filter to 2000
+tb_2000 <- tb_world %>% filter(year == 2000)
+
+#join
+incidence_df_2000 <- left_join(worldmap, tb_2000, by = c("region" = "country"))
+
+#plot
+ggplot(incidence_df_2000, aes(x = long, y = lat, 
+                         group = group, fill=est_mortality)) +
+  geom_polygon() +
+  scale_fill_gradient(low = "blue", high = "red")
+```
+
+Now let's look at incidence per 100K, but, only by interval, in 2016 - feel free to do something difference with the fill
+
+```{r, eval=FALSE}
+#get a map
+worldmap <- ____("____")
+
+
+#filter to 2016
+tb_2016 <- tb_world %>% ____(year == ____)
+
+#join
+incidence_df_2016 <- left_join(worldmap, ____, by = c("region" = "country"))
+
+#plot
+ggplot(incidence_df_2016, aes(x = ____, y = ____, 
+                         group = ____, 
+                         fill=____(est_incidences_per_100K_people,5))) +
+  ____() +
+  scale_fill_brewer(palette = "YlOrBr",
+                    guide = guide_legend("Incidences per 100K"))
+```
+
+
+```{r third_fade, eval=FALSE, echo=FALSE}
+#get a map
+worldmap <- map_data("world")
+
+
+#filter to 2016
+tb_2016 <- tb_world %>% filter(year == 2016)
+
+#join
+incidence_df_2016 <- left_join(worldmap, tb_2016, by = c("region" = "country"))
+
+#plot
+ggplot(incidence_df_2016, aes(x = long, y = lat, 
+                         group = group, 
+                         fill=cut_interval(est_incidences_per_100K_people,5))) +
+  geom_polygon() +
+  scale_fill_brewer(palette = "YlOrBr",
+                    guide = guide_legend("Incidences per 100K"))
+```
+
+### Exercises
+
+1. What does not join well? Can you fix any of them via changes in the tb or worldmap dataset?  
+
+2. Can you make a map showing change in mortality over four years (filter to four years, and then use `facet_wrap`)?
+
+
+### Is all map data available via packages?
+
+Most map data comes from separate files from R. You'll see *shapefiles* most commonly as files that define borders. Shapefiles are funky things. Let's take a look at the shapefile for a common classification of marine ecoregions of the world. These are coastal regions binned by biogeographic boundaries. To load them, we'll need the sp and rgdal libraries. These might take some doing to install properly, but, it's worth it.
+
+```{r, message=FALSE}
+library(sp)
+library(rgdal)
+ecoregions <- readOGR("./data/MEOW-TNC/meow_ecos.shp", layer="meow_ecos")
+
+plot(ecoregions)
+```
+
+Neat - these kinds of files can be plotted on their own! But, we're going to take this a bit further.
+
+### Looking under the hood of a shapefile
+
+So, if we dig into this object, what do we see.
+
+```{r}
+class(ecoregions)
+
+#It's an S4 object
+slotNames(ecoregions)
+```
+
+So, it's a SpatialPolygonsDataFrame. Weird. And it has all of these pieces to it - called slots - as it is what we call an S4 object. More on that another time, but, suffice to say, instead of the `$` notation we use an `@` notation to access pieces of it.  Such as
+
+```{r}
+head(ecoregions@data)
+```
+
+Here we see the ecoregion names and some other properties of them. Other slots are filled with information that defines polygons, etc.
+
+### Using joins to make ecoregion data frame for plotting
+
+So, to make this into a data frame for mapping, we have to work a little bit of magic. 
+
+First, we need to turn those polygons into a data frame of points. There's a function for this in broom called `tidy`. We need to tell it what column we are using to separate regions
+
+```{r}
+library(broom)
+ecoregions_points = tidy(ecoregions, region="ECOREGION")
+
+head(ecoregions_points)
+```
+
+And now the last step - a join! We need to join the original data defining names of ecoregions with the data defining their borders.
+
+```{r}
+ecoregions_df = inner_join(ecoregions_points, ecoregions@data, 
+                           by=c("id" = "ECOREGION")) %>%
+  rename(ECOREGION = id)
+```
+
+Voila! We have ecoregions in a data frame format! Now let's plot it. Note, I'm using group here, as group fixes problems with the map wrapping round both sides of the screen. Try ECOREGION if you don't believe me.
+
+```{r}
+ggplot(data=ecoregions_df, 
+       mapping = aes(x = long, y = lat, group = group)) +
+geom_polygon()
+```
+
+### Enter Regional Temperature Information
+
+OK, we have some polygons - now what are we going to do with them? One use is to visualize climate change over time.  I've been working on a project to look at climate change in Ecoregions that contain kelp. So, for each Ecoregion, I've gotten all of the temperature data from 1950 - the present from http://www.metoffice.gov.uk/hadobs/hadisst/data/download.html - a great source for SST data.
+
+```{r}
+sst_data <- read.csv("./data/hadsst_regions.csv",
+                     stringsAsFactors=FALSE)
+
+head(sst_data)
+```
+
+How can we use this data to see climate change on a map? There are a lot of methods. One simple one is to visualize change by decade. First, we have to use a quick trick to calculate decades - divide by ten, round to a whole number, and then multiple by ten.
+
+```{r}
+sst_decadal <- sst_data %>%
+  mutate(Decade = round(Year/10)*10) %>%
+  group_by(ECOREGION, Decade) %>%
+  summarise(tempC = mean(tempC, na.rm=T)) %>%
+  ungroup()
+
+```
+
+Now, we can look at temperature by decade, but, we can't just look at raw temperature. The color palatte would be too spread out, and we couldn't compare, say, change in the tropics to change in the Arctic. One way that scientists have gotten around this is to look at temperature *anomoly* - that is, deviation from a long-term mean. So let's calculate the decadal deviation from the long-term average for each ecoregion.
+
+```{r}
+sst_decadal <- sst_decadal %>%
+  group_by(ECOREGION) %>%
+  mutate(tempC_anomoly = tempC - mean(tempC)) %>%
+  ungroup()
+```
+
+OK, now we've got something worth plotting!
+
+### Visualizing Climate Change
+
+There are a lot of ways we can visualize this. We can look at long-term trends, of course, and even look at each region as a single data point to get average long-term trends
+
+```{r}
+ggplot(data=sst_decadal, mapping=aes(x=Decade, y=tempC_anomoly)) +
+  geom_line(mapping=aes(group=ECOREGION), colour="grey") +
+  theme_bw() +
+  stat_smooth(method="lm", color="red", fill=NA) +
+  ylab("Decadal Temperature Anomoly")
+```
+
+But how do we put this information on a map so that we can truly see it?
+
+As we did with states, we can join the temperature data to the marine ecoregion data.
+
+```{r}
+sst_map_data <- inner_join(sst_decadal, ecoregions_df)
+```
+
+Once that is done, we can use this decadal anomoly as a fill, with facets to show different decades.
+
+```{r, cache = TRUE, fig.height=10, fig.width=15}
+ggplot(data=sst_map_data, 
+       mapping = aes(x = long, y = lat, 
+                     group = group, fill = tempC_anomoly)) +
+  borders("world", lwd=0.1, colour="black") +
+  geom_polygon(alpha=0.9) +
+  facet_wrap(~Decade) +
+  scale_fill_gradient(low = "blue", high = "red") +
+  theme_bw(base_size=14) +
+  coord_equal()
+```
+
+It's a different way of looking at the same data. But what do you see? What are things we can do to make it clearer?
+
+### Faded Examples
+
+Let's go back to our Tb data. Here, we're going to use a shapefile of international borders.
+
+```{r borders}
+world_shapefile <- readOGR("./data/TM_WORLD_BORDERS_SIMPL-0.3")
+```
+
+What's inside?
+```{r show_borders}
+plot(world_shapefile)
+
+head(world_shapefile@data)
+```
+
+Oh neat! Notice the ISO2 and ISO3 columns? Those are designed to match the standardized columns from the `tb_world` data! Once we turn this into a data frame, should be a snap to merge! Let's make the same plot as we did previously, but now with shapefile.
+
+
+So, TB in 2015!
+
+```{r first_fade_shapefile}
+#get a map
+worldmap_shp <- tidy(world_shapefile, region="NAME")
+
+worldmap_shp_df <- left_join(worldmap_shp, world_shapefile@data,
+                          by = c("id" = "NAME")) %>%
+  rename(iso2 = ISO2, iso3 = ISO3)
+
+#filter to 2015
+tb_2015 <- tb_world %>% filter(year == 2015)
+
+#join
+incidence_df <- left_join(worldmap_shp_df, tb_2015)
+
+#plot
+ggplot(incidence_df, aes(x = long, y = lat, 
+                         group = group, fill=est_incidences)) +
+  geom_polygon() +
+  scale_fill_gradient(low = "blue", high = "red")
+
+
+```
+
+
+Let's look at mortality in 2000
+
+```{r eval=FALSE}
+#get a map
+worldmap_shp <- tidy(world_shapefile, region="NAME")
+
+worldmap_shp_df <- ____(worldmap_shp, world_shapefile@data,
+                          by = c("id" = "NAME")) %>%
+  rename(iso2 = ISO2, iso3 = ISO3)
+
+#filter to 2000
+tb_2000 <- tb_world %>% filter(year == ____)
+
+#join
+incidence_df_2000 <- left_join(____, ____)
+
+#plot
+ggplot(incidence_df_2000, aes(x = ____, y = ____, 
+                         group = group, fill=est_mortality)) +
+  geom_polygon() +
+  scale_fill_gradient(____)
+```
+
+Now let's look at incidence per 100K, but, only by interval, in 2016 - feel free to do something difference with the fill
+
+```{r, eval=FALSE}
+#get a map
+worldmap_shp <- ____(____, ____="NAME")
+
+worldmap_shp_df <- ____(____, world_shapefile@____,
+                          by = c("id" = "NAME")) %>%
+  rename(iso2 = ISO2, iso3 = ISO3)
+
+#filter to 2016
+tb_2016 <- tb_world %>% ____(year == ____)
+
+#join
+incidence_df_2016 <- left_join(____, ____, by = c("region" = "country"))
+
+#plot
+ggplot(incidence_df_2016, aes(x = ____, y = ____, 
+                         group = ____, 
+                         fill=____(est_incidences_per_100K_people,5))) +
+  ____() +
+  scale_fill_brewer(____ = "YlOrBr",
+                    ____ = guide_legend("Incidences per 100K"))
+```
+
+### Exercises
+
+Use the shapefile maps for this.
+
+1. Make maps that compare total incidence to incidence per 100K averaged across all years.  
+
+2. Do you see different trends in invidence over time?
