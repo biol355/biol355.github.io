@@ -1,0 +1,228 @@
+---
+title: "Interactive Maps!"
+author: "Intro to Data Science for Biology"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+### From static maps to dynamic maps
+
+So,  we saw how we could plot shapefiles in ggplot2. This is great! But, oddly, sometimes static. What if you want to no only put shapefiles on a map, but add other information (say, sites), and then make the whole thing interactive - like a google map!  You can!
+
+### Interactive maps with leaflet
+
+Leaflet is a javascript library for making interactive maps. You've probablys een them around before. But there is a nice [r package](https://rstudio.github.io/leaflet/) for them as well that allows you to do a lot! And it works well with the tidyverse
+
+```{r leaflet, message=FALSE}
+library(tidyverse)
+library(leaflet)
+
+leaflet() %>%
+  addTiles()
+
+```
+
+Whoah! Interactive worldmap! With tiles from the OpenStreetMap project! Zoom around and try it. And definitely bookmark https://rstudio.github.io/leaflet/ for a ton of options!
+
+
+### What about our shapefiles?
+
+Let's revisit the heart disease mortality data, but this time with a shapefile.  Here I've grabbed the 2016 US census county borders from https://www.census.gov/geo/maps-data/data/cbf/cbf_counties.html - let's look at them!
+
+```{r shapefile, message=FALSE}
+library(rgdal)
+
+counties <- readOGR("./data/cb_2013_us_county_500k")
+```
+
+What's great is that we can make county borders into a leaflet map in a snap!
+
+```{r leaflet_shapefile, cache=TRUE}
+leaflet(counties) %>%
+  addPolygons(color="black", fillColor = "white", weight=0.1)
+```
+
+We can even add some more detail so we know what we're mousing over
+```{r mouseover, cache=TRUE}
+leaflet(counties) %>%
+  addPolygons(color="black", fillColor = "white", weight=0.1,
+              highlightOptions = highlightOptions(color = "blue", weight = 2,
+              bringToFront = TRUE))
+```
+
+We can even put this back into the context of a world map
+
+```{r mouseover2}
+leaflet(counties) %>%
+  addTiles() %>%
+  addPolygons(color="black", fillColor = "white", weight=0.1,
+              highlightOptions = highlightOptions(color = "blue", weight = 2,
+              bringToFront = TRUE))
+```
+
+
+### Adding heart disease fill data to shapefiles
+Let's load in our heart disease mortality data, and see how it matches with the data in our shapefile.
+
+```{r load_heart, message=FALSE}
+library(readxl)
+
+heart <- read_excel("./data/hd_all.xlsx",
+                    na = "Insufficient Data")
+head(heart)
+
+head(counties@data)
+```
+
+So, no column names in common. NAME and County **might** match. Let's see!
+
+```{r anti}
+bad_match <- anti_join(heart, counties@data,
+                       by = c("County" = "NAME"))
+
+nrow(bad_match)
+
+bad_match
+```
+
+Not bad! It's just cities! And a few odd counties and the USVI. Works for a join! What's different here is that we're going to join our data INTO the SpatialPolygonsDataFrame.
+
+```{r join}
+counties@data <- left_join(counties@data, heart,
+                           by = c("NAME" = "County"))
+```
+
+So, now we have to plot this. Leaflet has some funky plotting syntax for colors. We need to specify a palette function and use a ~ to say it's being evaluated. I'm also taking away border stroking here.
+
+```{r fill, cache=TRUE, cache=TRUE}
+leaflet(counties) %>%
+  addTiles %>%
+  addPolygons(stroke=FALSE,
+             fillColor = ~colorNumeric("magma", Death_Rate)(Death_Rate)) 
+
+```
+
+I find it's a little easier to define my palette before plotting
+
+```{r fill2, cache=TRUE, cache=TRUE}
+pal <- colorNumeric("magma", 
+                    domain = counties@data$Death_Rate)
+
+leaflet(counties) %>%
+  addTiles %>%
+  addPolygons(stroke=FALSE, color = ~pal(Death_Rate)) 
+
+```
+
+
+What does this mean? Well, we want a legend! Fortunately, there's an `addLegend` function!
+
+```{r legend, cache=TRUE}
+leaflet(counties) %>%
+  addTiles %>%
+  addPolygons(stroke=FALSE, color = ~pal(Death_Rate))  %>%
+  addLegend(pal = pal, 
+            values = ~Death_Rate)
+
+```
+
+This might not be specific enough, so we can add an interactive popup function!
+```{r popup, cache=TRUE}
+leaflet(counties) %>%
+  addTiles %>%
+  addPolygons(stroke=FALSE, color = ~pal(Death_Rate),
+              popup = ~str_c("Death Rate:", Death_Rate, sep=" "))  %>%
+  addLegend(pal = pal, 
+            values = ~Death_Rate)
+
+```
+
+### Popup Points!
+As a side note, leaflet is also great for points. For example, let's make 200 random locations and put them on a map.
+
+```{r points}
+loc_df <- data.frame(x=runif(200, -180, 180), y = runif(200, -100, 100))
+
+leaflet(loc_df) %>%
+  addTiles() %>%
+  addCircleMarkers(lng = ~x, lat = ~y)
+```
+
+There are of course a million options to customize these circles that are similar to polygons. And other similar functions. Try `addMarkers` for fun. Pretty great!
+
+### Exercise
+
+Try and make your own heart disease maps with different palettes and color scales. For reference, here' are the color functions, but see their help files for more details:
+
+- colorNumeric is a simple linear mapping from continuous numeric data to an interpolated palette.
+
+- colorBin also maps continuous numeric data, but performs binning based on value (see the cut function).
+
+- colorQuantile similarly bins numeric data, but via the quantile function.
+
+Each takes a `palette` argument which can be any one of the following:
+The palette argument can be any of the following:
+
+1. A character vector of RGB or named colors. Examples: palette(), c("#000000", "#0000FF", "#FFFFFF"), topo.colors(10)
+
+2. The name of an RColorBrewer palette, e.g. "BuPu" or "Greens".
+
+3. The full name of a viridis palette: "viridis", "magma", "inferno", or "plasma".
+
+4. A function that receives a single value between 0 and 1 and returns a color. Examples: colorRamp(c("#000000", "#FFFFFF"), interpolate="spline").
+
+
+
+#### Rasters
+
+This is great, but what about adding rasters? No problem! Leaflet has you covered with `addRasterImage` - it even reprojects your raster if its in the wrong projection before adding it!
+
+```{r rast, cache=TRUE, message=FALSE}
+library(raster)
+rast <- raster("./data/HARV_dsmCrop.tif")
+
+rpal <- colorNumeric("viridis", 
+                    values(rast),
+                    na.color = "transparent")
+
+leaflet() %>% 
+  addTiles() %>%
+  addRasterImage(rast,  colors = rpal, opacity = 0.8) %>%
+   addLegend(pal = rpal, values = values(rast))
+```
+
+### Exercise
+Let's take a look at the distribution of global SST anomalies. I've grabbed last week's data from http://www.cpc.ncep.noaa.gov/products/GIS/GIS_DATA/sst_oiv2/sst-anom.php (download it from this site [here](./data/sst_anom.bin.20180318.tif) and I'd like you to load it, and the [marine ecoregions of the world](./data/MEOW-TNC.zip) in order to make a map where we can explore how that temperature anomoly varies by ecoregion. This means you will be layering polygons from a shapefile on top of a raster using leaflet. Feel free to play with color palettes and any other property you'd care to examine!
+
+Note, you'll need to supply the polygons name as the "data" to `leaflet` and supply the raster separately. `fillOpacity = 0` will also make them transparent
+
+Also, include the following line to take out land, etc.
+```{r, eval=FALSE}
+values(sst)[values(sst)>100] <- NA
+```
+
+This sets all of those big values to NA
+
+It should look something like...
+
+```{r test, echo=FALSE, message=FALSE, cache=TRUE}
+library(raster)
+
+sst <- raster("./data/sst_anom.bin.20180318.tif")
+values(sst)[values(sst)>100] <- NA
+
+meow <- readOGR("./data/MEOW-TNC")
+
+sstpal <- colorNumeric("RdBu", 
+                    values(sst),
+                    na.color = "transparent")
+
+leaflet(meow) %>%
+  addRasterImage(sst, colors = sstpal) %>%
+  addPolygons(weight = 1, color="black", fillOpacity = 0)%>%
+   addLegend(pal = sstpal, values = values(sst))
+
+```
