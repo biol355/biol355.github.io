@@ -1,0 +1,599 @@
+---
+title:
+css: style.css
+output:
+  revealjs::revealjs_presentation:
+    reveal_options:
+      slideNumber: true
+      previewLinks: true
+    theme: white
+    center: false
+    transition: fade
+    self_contained: false
+    lib_dir: libs
+---
+## 
+<br>
+<h2><center>Writing Reusable Code with Functions</center></h2>
+![](./Images/functions/function.png)
+
+```{r prep, echo=FALSE, cache=FALSE, message=FALSE, warning=FALSE}
+library(knitr)
+library(tidyverse)
+library(readr)
+library(ggplot2)
+theme_set(theme_bw(base_size=16))
+
+opts_chunk$set(fig.height=5, fig.width=7, comment=NA, 
+               warning=FALSE, message=FALSE, 
+               dev="jpeg", echo=FALSE)
+
+
+
+
+```
+
+## Let's say you want to do this...
+
+```{r all_buoy, cache=TRUE}
+make_buoy_data <- function(a_year){
+  #Read in a file based on year
+  buoy_data <- read_buoy(a_year)
+
+  #Standardize file format 
+  #for between year differences
+  buoy_data <- standardize_buoy(buoy_data )
+
+  #Take that data frame and format it
+  buoy_data <- format_buoy(buoy_data )
+
+  #Return formatted data frame
+  return(buoy_data)
+}
+
+read_buoy <- function(a_year){
+  
+  #make a filename
+  filename <- paste0("./data/buoydata/44013_",
+								 a_year, ".csv")
+
+  #read in the file with that name
+  a_buoy <- read.csv(filename, 
+					na.strings = c("99", "999"))
+
+  #return the resulting data frame
+  return(a_buoy)
+  
+}
+
+standardize_buoy <- function(buoydata){
+    
+  #make sure the year column is called YY
+  names(buoydata) <- gsub("X.YY", "YY", names(buoydata))
+  names(buoydata) <- gsub("YYYY", "YY", names(buoydata))
+
+  #If the year > 2005, remove the second row 
+  if(as.numeric(buoydata$YY[1])>2005) buoydata <- buoydata[-1,]
+  
+  #Make sure our columns of interest are numeric
+  buoydata <- buoydata %>% 
+    mutate(YY = as.numeric(YY),
+           MM = as.numeric(MM),
+           DD = as.numeric(DD),
+           WTMP = as.numeric(WTMP),
+           WVHT = as.numeric(WVHT))
+
+  #make sure the years all are in the thousands
+  if(buoydata$YY[1]<1999) buoydata$YY <- buoydata$YY + 1900
+
+  return(buoydata)
+}
+
+format_buoy <- function(buoydata){
+  buoydata <- buoydata %>%
+    select(YY, MM, DD, WVHT, WTMP) %>%
+    rename(Year = YY,
+         Month = MM,
+         Day = DD,
+         Wave_Height = WVHT,
+         Temperature_c = WTMP) %>%
+    group_by(Year, Month, Day) %>%
+    summarise(Wave_Height = mean(Wave_Height, na.rm=T),
+            Temperature_c = mean(Temperature_c, na.rm=T)) %>%
+    ungroup()
+
+  return(buoydata)
+}
+
+buoys <- make_buoy_data(1986)
+
+for(one_year in 1987:2013){
+  	buoys <- rbind(buoys, 	
+				make_buoy_data(one_year))
+
+}
+
+buoys_annual <- buoys %>%
+ filter(Year > 1980) %>%
+  group_by(Year) %>%
+  summarize(Wave_Height = mean(Wave_Height, na.rm=T),
+            Temperature_c = mean(Temperature_c, na.rm=T)) 
+  
+
+
+buoys_monthly <- buoys %>%
+ filter(Year > 1980) %>%
+  group_by(Year, Month) %>%
+  summarize(Wave_Height = mean(Wave_Height, na.rm=T),
+            Temperature_c = mean(Temperature_c, na.rm=T)) %>%
+  mutate(Date = lubridate::parse_date_time(str_c(Month, Year, sep="-"), orders="my"))
+  
+
+ggplot(buoys_annual, 
+       aes(x=Year, y=Wave_Height)) +
+  geom_line()
+
+monthly_waves <- ggplot(buoys_monthly, 
+       aes(x=Date, y=Wave_Height)) +
+  geom_line()
+
+monthly_temp <- ggplot(buoys_monthly, 
+       aes(x=Date, y=Temperature_c)) +
+  geom_line()
+
+```
+
+## But what you have is...
+![](./Images/functions/buoyfiles.jpg)
+
+## Worse...
+```{r read_show, echo=FALSE, message=FALSE, warning=FALSE}
+head(read_csv("./data/buoydata/44013_1986.csv"))
+head(read_csv("./data/buoydata/44013_1999.csv"))
+```
+
+## Worse...
+```{r read_show2, echo=FALSE, message=FALSE, warning=FALSE}
+head(read_csv("./data/buoydata/44013_2012.csv"))
+```
+
+
+## 
+
+<br><br><br><h2>Solutions?</h2>
+
+## Solutions
+1. Write code for each individual file  
+    - Lots of copy-paste
+2. Write code that row-binds all data and clean from there  
+     - Only good once - what about next year?  
+3. FUNCTIONS!
+
+## A Funcitonal Outline
+1. Intro to Functions  
+     
+2. Modular Programming
+
+## When to write a function
+<p align="left"><br><br>
+"You should consider writing a function whenever you’ve copied and pasted a block of code more than twice" <Br> <br>- H. Wickham
+</p>
+
+## Ugh...
+```{r eval=FALSE, echo=TRUE}
+df <- tibble::tibble(
+  a = rnorm(10),
+  b = rnorm(10),
+  c = rnorm(10),
+  d = rnorm(10)
+)
+
+df$a <- (df$a - min(df$a, na.rm = TRUE)) / 
+  (max(df$a, na.rm = TRUE) - min(df$a, na.rm = TRUE))
+df$b <- (df$b - min(df$b, na.rm = TRUE)) / 
+  (max(df$b, na.rm = TRUE) - min(df$a, na.rm = TRUE))
+df$c <- (df$c - min(df$c, na.rm = TRUE)) / 
+  (max(df$c, na.rm = TRUE) - min(df$c, na.rm = TRUE))
+df$d <- (df$d - min(df$d, na.rm = TRUE)) / 
+  (max(df$d, na.rm = TRUE) - min(df$d, na.rm = TRUE))
+```
+
+## What is a function?
+
+```{r eval=FALSE, echo=TRUE}
+my_cool_function <- function(arguments){
+  
+  something_to_give_back <- do_things(arguments)
+  
+  return(something_to_give_back)
+}
+```
+
+## What is a function?
+1. A new object  
+2. A call identifying this as a function  
+3. One or more arguments  
+4. The body of the function  
+5. A return statement that gives something back to the user (if needed)
+
+## What is a function?
+```{r fun, echo=TRUE}
+
+add_one <- function(x){
+  
+  ret_value <- x + 1
+  
+  return(x)
+  
+}
+
+```
+
+## What is a function?
+```{r fun2, echo=TRUE}
+
+add_one <- function(x){
+  
+  ret_value <- x + 1
+  
+  return(ret_value)
+  
+}
+
+add_one(3)
+```
+
+## Simpler ways of writing functions
+```{r addone_simpler, echo=TRUE}
+add_one <- function(x){
+  return(x+1)
+}
+```
+
+<div class = "fragment"><p align="left">Super short!</p>
+```{r addone_simpler2, echo=TRUE}
+add_one <- function(x) x+1
+```
+
+</div>
+
+## Let's write some functions
+```{r fun2, echo=TRUE}
+```
+
+## Let's write some functions
+```{r fun2_blank, echo=TRUE, eval=FALSE}
+
+square_root <- function(___){
+  
+  ret_value <- sqrt(___)
+  
+  return(___)
+  
+}
+
+square_root(16)
+```
+
+Should return 4
+
+## Let's write some functions
+```{r fun3, echo=TRUE, eval=FALSE}
+
+max_minus_min <- _______(___){
+  
+  ret_value <- ___(___) - ___(___)
+  
+  ___(___)
+  
+}
+
+max_minus_min(c(4,7,1,6,8))
+```
+
+```{r run3_good, echo=FALSE}
+max_minus_min <- function(a_vector){
+  
+  ret_value <- max(a_vector, na.rm=T) - min(a_vector, na.rm=T)
+  
+  return(ret_value)
+  
+}
+
+max_minus_min(c(4,7,1,6,8))
+```
+
+## On arguments
+Functions can take many arguments:
+
+```{r eval=FALSE, echo=TRUE}
+my_function <- function(x, y, z, q)
+```
+
+These can be of any object type
+
+## Arguments can have default values
+
+```{r echo=TRUE}
+add_values <- function(x, y=0){
+
+  return(x+y)
+
+}
+
+add_values(3)
+```
+
+## You can have ... to pass many arguments
+```{r echo=TRUE}
+make_mean <- function(a_vector, ...){
+  
+  sum_vector <- sum(a_vector, ...)
+  
+  n <- length(a_vector)
+  
+  return(sum_vector/n)
+  
+  }
+
+make_mean(c(4,5,6), na.rm=TRUE)
+
+```
+
+## Exercises
+Write a function and paste it into the etherpad that
+
+1. Takes a vector and sums it up after it squares it  
+     - use `c(4,5,6)` to test  
+2. Takes a number and combine it into a string with the word "elephants".  
+     - 1 elephants, 2 elephants, 15 elephants  
+3. Takes a number, a string, and a separator and combines them
+     - "3 - hello"
+4. Write a function that takes a year and reads in and returns one of the buoy data files. Test it on multiple files to make sure it handles NAs properly.
+
+## One Reading Function
+```{r read, echo=TRUE}
+read_buoy <- function(a_year, buoy_number = 44013, 
+                      buoy_dir = "./data/buoydata/"){
+
+  #make a file name
+  buoy_file <- str_c(buoy_dir, buoy_number, "_", a_year, ".csv")
+  
+  #read in the file
+  one_buoy <- read_csv(buoy_file, 
+                       na = c("99", "999"))
+  
+  #return the file
+  return(one_buoy)
+  
+}
+```
+
+## How did I build that function?
+1. OK, what's *normally* going to change 
+     - The year!  
+     
+2. BUT - what could change under some circumstances?
+     - buoy number, directory, separator
+
+3. Write some test code
+
+## Test Code
+
+```{r test, echo=TRUE, eval=TRUE}
+#define a year
+
+#make a filename
+
+# read in a file
+```
+
+## Test Code
+
+```{r test2, echo=TRUE, eval=TRUE, message=FALSE}
+#define a year
+a_year <- 2013
+
+#make a filename
+buoy_file <- str_c("./data/buoydata/44013_", a_year, ".csv")
+
+# read in a file
+read_csv(buoy_file, na = c("99", "999"))
+
+```
+
+## More testing
+```{r}
+read_csv(buoy_file, na = c("99", "999"))
+```
+
+<div class="fragment">Tested against a few years to figure out NAs, vis_dat helped</div>
+<Br>
+<div class="fragment">Now ask, what more can be generalized for arguments?</div>
+
+## One Reading Function
+```{r read, echo=TRUE}
+```
+
+
+## Our conundrum
+
+```{r, message=FALSE}
+read_buoy(1986)
+```
+
+```{r, message=FALSE}
+read_buoy(1999)
+```
+
+
+## Our conundrum
+
+```{r, message=FALSE}
+read_buoy(1986)
+```
+
+```{r, message=FALSE}
+read_buoy(2012)
+```
+
+## A Funcitonal Outline
+1. Intro to Functions  
+     
+2. <font color="red">Modular Programming</font>
+
+## Problems with Buoys
+1. Names for year are nonstandard
+     - X.YY, YY, and YYYY
+     
+2. Some years are listed with only two digits
+     - Typically, but maybe not always, < 1999  
+     - Or has YY as column name
+     
+3. Need to eliminate rows that start with `#yr`
+  
+4. When columns are combined, they all come out as characters
+
+## What to do? 
+```{r, message=FALSE, echo=TRUE}
+one_buoy <- read_buoy(2012)
+
+names(one_buoy)
+```
+
+## What to do? Stringr! 
+```{r, echo=TRUE}
+names(one_buoy) <- names(one_buoy) %>%
+  str_replace("^YY$", "YYYY") %>%
+  str_replace("X\\.YY", "YYYY")
+
+names(one_buoy)
+
+````
+
+## Now, make it a function!
+```{r, echo=TRUE}
+#bad names
+fix_year_names <- function(a_buoy_df){
+  
+  names(a_buoy_df) <- names(a_buoy_df) %>%
+  str_replace("^YY$", "YYYY") %>%
+  str_replace("X\\.YY", "YYYY")
+  
+  return(a_buoy_df)
+}
+```
+
+## What to do about character line?
+```{r, echo=TRUE}
+one_buoy
+```
+
+## What to do? if, subset, mutate_all
+
+```{r, echo=TRUE}
+if(is.character(one_buoy$MM[1])){
+  
+  one_buoy <- one_buoy[-1,] %>% 
+    mutate_all(as.numeric)
+  
+}
+
+one_buoy
+
+```
+
+## Now, make it a function!
+
+```{r, echo=TRUE}
+fix_bad_rows <- function(a_buoy_df){
+  if(is.character(a_buoy_df$MM[1])){
+    
+    a_buoy_df <- a_buoy_df[-1,] %>% 
+      mutate_all(as.numeric)
+
+    }
+
+    return(a_buoy_df)
+}
+```
+
+
+## What to do? 
+```{r, message=FALSE, echo=TRUE}
+one_buoy <- read_buoy(1998) %>%
+  fix_year_names
+
+one_buoy$YYYY[1:5]
+
+```
+
+## What to do? Dplyr!
+```{r, message=FALSE, echo=TRUE}
+one_buoy <- one_buoy %>%
+  mutate(YYYY = ifelse(YYYY < 1900, YYYY+1900, YYYY))
+
+one_buoy$YYYY[1:5]
+```
+
+
+## Now, make a function!
+```{r, echo=TRUE}
+#bad years
+fix_bad_years <- function(a_buoy_df){
+  return(a_buoy_df %>%
+           mutate(YYYY = ifelse(YYYY < 1900, YYYY+1900, YYYY)))
+}
+```
+
+## And a wrapper function?
+```{r wrapper, echo=TRUE}
+format_buoy <- function(a_buoy_df){
+  
+  a_buoy_df <- a_buoy_df %>%
+    fix_year_names %>%
+    fix_bad_rows %>%
+    fix_bad_years
+  
+  return(a_buoy_df)
+}
+```
+
+##
+![](./Images/functions/functions_meme.jpg)
+
+## Wait, what is this modular madness?
+- Our code is now composed of modular pieces  
+  
+- This means each modular function can be used in other contexts
+     - Enhances code flexibility and future reuse  
+  
+- It also means it is easier to find where our code has gone wrong  
+     - Easier to test and debug
+  
+- AND - we don't get lost writing one honking single function
+one_buoy <- one_buoy %>%
+  
+## How to write complex functions/piplines
+1. Start with a wrapper   
+     - Write out the steps of what you want to do in comments  
+     - Pair those with functions using "snake case" `clean_data`  
+     - Use `%>%` for efficiency/readability!  
+        
+2. Write the subfunctions  
+     - Repeat the toplevel comments anf functions  
+     
+3. Continue until you have the lowest level atomized functions  
+     
+4. Test THOSE functions. Then test up the chain....
+
+## Reality Check
+<br><br><br>
+Yes, sometimes you will write long functions - as long as they are simple and readable, meh
+
+## Final Exercises
+1. Write a function that will get monthly summaries of wave height and temperature only
+     - Make the returned column names for all values nice and readable  
+         
+2. Write a master wrapper function that you give a year, and it returns a monthy summarized well names data frame
+
