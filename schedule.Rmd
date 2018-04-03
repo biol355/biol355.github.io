@@ -143,6 +143,8 @@ __Readings:__ W&G Chapters on [Functions](http://r4ds.had.co.nz/functions.html) 
 __Lectures:__ [Intro to Functions](./Lectures/19_functions_intro.html)  
 __Objective(s):__ Learn the benefits of reusable code, Understand the structure of a function, Discover debugging and making functions fail usefully, Apply conditional logic to build flexible code, Derive principles to make functions that are easy to understand and apply to multiple data sets.  
 __Biological Examples:__ NOAA buoy data.  
+__Files:__   [NOAA buoy data from Boston Harbor](./Lectures/data/buoydata.zip)  
+__Etherpad:__ https://etherpad.wikimedia.org/p/355-functions  
 
 
 ### Week  11 & 12. T-Tests and P-Values 
