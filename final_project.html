@@ -4,7 +4,7 @@
 
 <head>
 
-<meta charset="utf-8">
+<meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 
@@ -21,8 +21,8 @@
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<link href="site_libs/highlightjs-1.1/default.css" rel="stylesheet" />
-<script src="site_libs/highlightjs-1.1/highlight.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -31,10 +31,12 @@
   }
 </style>
 <script type="text/javascript">
-if (window.hljs && document.readyState && document.readyState === "complete") {
-   window.setTimeout(function() {
-      hljs.initHighlighting();
-   }, 0);
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
 }
 </script>
 
@@ -189,7 +191,7 @@ $(document).ready(function () {
   <a href="error.html">R Errors</a>
 </li>
 <li>
-  <a href="final.html">Final</a>
+  <a href="final_project.html">Final</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -237,16 +239,16 @@ $(document).ready(function () {
 </div>
 
 
-<div id="putting-it-all-together" class="section level3">
+<section id="putting-it-all-together" class="level3">
 <h3>Putting it all together</h3>
 <p>For your final proejct, I’m asking you to conduct an analysis of a full data set. I’d like you to write up the full project using RMarkdown so that I can not only see the answers to the question you pose, but how you answered them. Remember, I’m looking for quality well commented, well thought-out, well styled code in addition to gorgeous visualizations that convery a message and unambiguous analyses (where possible). Before I dig into the Sections you should use to organize your report, here’s my general rubric.</p>
-<table style="width:100%;">
+<table>
 <colgroup>
-<col width="18%" />
-<col width="18%" />
-<col width="22%" />
-<col width="20%" />
-<col width="18%" />
+<col style="width: 18%" />
+<col style="width: 18%" />
+<col style="width: 23%" />
+<col style="width: 20%" />
+<col style="width: 18%" />
 </colgroup>
 <thead>
 <tr class="header">
@@ -318,42 +320,15 @@ $(document).ready(function () {
 </table>
 <p>So, each section of the rubric is out of 4.</p>
 <p>Note: Using libraries not taught in class will be +1 point per library. Please note when this is a new library for you.</p>
-</div>
-<div id="organizational-structure-of-the-paper" class="section level2">
+</section>
+<section id="organizational-structure-of-the-paper" class="level2">
 <h2>Organizational Structure of the Paper</h2>
 <p>The final paper should be broken up into something along the lines of the following sections. You may feel free to adapt this flexibly given your unique data set and set of problems and questions. But this is a general guide, particularly if you are lost.</p>
-<div id="introduction" class="section level3">
-<h3>1) Introduction</h3>
-<ul>
-<li>What is the dataset you are using? +Describe the dataset in detail +Visualize summary information about the data</li>
-<li>Based on the data, what questions do you want to ask?</li>
-</ul>
-</div>
-<div id="methods" class="section level3">
-<h3>2) Methods</h3>
-<ul>
-<li>Based on the data and question, what is the workflow you put together to answer your question? Feel free to write it out step-by-step</li>
-<li>How did you prepare and manupulate the data to get it ready for analysis?</li>
-<li>What are the different steps you need to take? Why are they they the right thing to do?</li>
-<li>What are the visualizations and analyses that would answer your questions?</li>
-<li>What are the underlying models you are going to use - what is your data generating process and your error generating process?</li>
-<li>What statistical tests will you use, if any?</li>
-<li>How will you validate your tests?</li>
-</ul>
-</div>
-<div id="results" class="section level3">
-<h3>3) Results</h3>
-<p><em>In this section, show the analyses and visualizations as well as code that generates them that answer your question. </em> For each analysis, be sure to walk through the entire process of model creation, evaluation of assumptions, and evaluation of any statistical tests. Feel free to show when and where you revise your models</p>
-</div>
-<div id="discussion" class="section level3">
-<h3>4) Discussion</h3>
-<ul>
-<li>What do your results say? Put it all together.</li>
-<li>Do your results suggest additional visualizations/analyses? Feel free to conduct them here.</li>
-<li>What final conclusion can you draw about your data set?</li>
-</ul>
-</div>
-</div>
+<p>###1) Introduction * What is the dataset you are using? +Describe the dataset in detail +Visualize summary information about the data * Based on the data, what questions do you want to ask?</p>
+<p>###2) Methods * Based on the data and question, what is the workflow you put together to answer your question? Feel free to write it out step-by-step * How did you prepare and manupulate the data to get it ready for analysis? * What are the different steps you need to take? Why are they they the right thing to do? * What are the visualizations and analyses that would answer your questions? + What are the underlying models you are going to use - what is your data generating process and your error generating process? + What statistical tests will you use, if any? + How will you validate your tests?</p>
+<p>###3) Results <em>In this section, show the analyses and visualizations as well as code that generates them that answer your question. </em> For each analysis, be sure to walk through the entire process of model creation, evaluation of assumptions, and evaluation of any statistical tests. Feel free to show when and where you revise your models</p>
+<p>###4) Discussion * What do your results say? Put it all together. * Do your results suggest additional visualizations/analyses? Feel free to conduct them here. * What final conclusion can you draw about your data set?</p>
+</section>
 
 
 
@@ -378,7 +353,7 @@ $(document).ready(function () {
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>
