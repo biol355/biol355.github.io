@@ -132,6 +132,15 @@ make_monthly_buoy <- function(a_buoy_df){
 }
 ```
 
+## Reading in a file of functions
+<p align="left">Often, we want to have a file with just all of our functions, so we don't junk up our working file. This eventually extends to writing packages, but, that's another class...  
+  
+    
+    
+```{r}
+source("./get_buoy.R")
+```
+
 ## This works great for one year!
 ```{r, message=FALSE}
 get_buoy(2012)

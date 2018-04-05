@@ -613,9 +613,15 @@ Iteration
 <a class="sourceLine" id="cb7-13" data-line-number="13">  <span class="kw">return</span>(buoydata)</a>
 <a class="sourceLine" id="cb7-14" data-line-number="14">}</a></code></pre></div>
 </section>
+<section id="reading-in-a-file-of-functions" class="slide level2">
+<h2>Reading in a file of functions</h2>
+<p align="left">
+<p>Often, we want to have a file with just all of our functions, so we don’t junk up our working file. This eventually extends to writing packages, but, that’s another class…</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">source</span>(<span class="st">&quot;./get_buoy.R&quot;</span>)</a></code></pre></div>
+</section>
 <section id="this-works-great-for-one-year" class="slide level2">
 <h2>This works great for one year!</h2>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">get_buoy</span>(<span class="dv">2012</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">get_buoy</span>(<span class="dv">2012</span>)</a></code></pre></div>
 <pre><code># A tibble: 7 x 4
    Year Month Wave_Height Temperature_c
   &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt;         &lt;dbl&gt;
@@ -638,10 +644,10 @@ Iteration
 <section id="how-do-we-get-to-there-from-here" class="slide level2">
 <h2>How do we get to there from here?</h2>
 <p>One solution:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">buoys &lt;-<span class="st"> </span><span class="kw">rbind</span>(<span class="kw">get_buoy</span>(<span class="dv">1986</span>),</a>
-<a class="sourceLine" id="cb10-2" data-line-number="2">               <span class="kw">get_buoy</span>(<span class="dv">1987</span>),</a>
-<a class="sourceLine" id="cb10-3" data-line-number="3">               <span class="kw">get_buoy</span>(<span class="dv">1988</span>)..........</a>
-<a class="sourceLine" id="cb10-4" data-line-number="4">)</a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">buoys &lt;-<span class="st"> </span><span class="kw">rbind</span>(<span class="kw">get_buoy</span>(<span class="dv">1986</span>),</a>
+<a class="sourceLine" id="cb11-2" data-line-number="2">               <span class="kw">get_buoy</span>(<span class="dv">1987</span>),</a>
+<a class="sourceLine" id="cb11-3" data-line-number="3">               <span class="kw">get_buoy</span>(<span class="dv">1988</span>)..........</a>
+<a class="sourceLine" id="cb11-4" data-line-number="4">)</a></code></pre></div>
 <div class="fragment">
 <h2>
 NO!
@@ -654,15 +660,15 @@ NO!
 </section>
 <section id="the-old-school-way" class="slide level2">
 <h2>The old school way</h2>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="co">#create a tibble</span></a>
-<a class="sourceLine" id="cb11-2" data-line-number="2">buoys &lt;-<span class="st"> </span><span class="kw">get_buoy</span>(<span class="dv">1986</span>)</a>
-<a class="sourceLine" id="cb11-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb11-4" data-line-number="4"><span class="co">#now iterate over the remaining years and rbind</span></a>
-<a class="sourceLine" id="cb11-5" data-line-number="5"><span class="cf">for</span>(one_year <span class="cf">in</span> <span class="dv">1987</span><span class="op">:</span><span class="dv">2013</span>){</a>
-<a class="sourceLine" id="cb11-6" data-line-number="6">  </a>
-<a class="sourceLine" id="cb11-7" data-line-number="7">  buoys &lt;-<span class="st"> </span><span class="kw">rbind</span>(buoys, <span class="kw">get_buoy</span>(<span class="dv">1986</span>))</a>
-<a class="sourceLine" id="cb11-8" data-line-number="8">  </a>
-<a class="sourceLine" id="cb11-9" data-line-number="9">}</a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="co">#create a tibble</span></a>
+<a class="sourceLine" id="cb12-2" data-line-number="2">buoys &lt;-<span class="st"> </span><span class="kw">get_buoy</span>(<span class="dv">1986</span>)</a>
+<a class="sourceLine" id="cb12-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb12-4" data-line-number="4"><span class="co">#now iterate over the remaining years and rbind</span></a>
+<a class="sourceLine" id="cb12-5" data-line-number="5"><span class="cf">for</span>(one_year <span class="cf">in</span> <span class="dv">1987</span><span class="op">:</span><span class="dv">2013</span>){</a>
+<a class="sourceLine" id="cb12-6" data-line-number="6">  </a>
+<a class="sourceLine" id="cb12-7" data-line-number="7">  buoys &lt;-<span class="st"> </span><span class="kw">rbind</span>(buoys, <span class="kw">get_buoy</span>(<span class="dv">1986</span>))</a>
+<a class="sourceLine" id="cb12-8" data-line-number="8">  </a>
+<a class="sourceLine" id="cb12-9" data-line-number="9">}</a></code></pre></div>
 </section>
 <section id="the-map-paradigm" class="slide level2">
 <h2>The Map Paradigm</h2>
@@ -682,19 +688,19 @@ NO!
 </section>
 <section id="median-example" class="slide level2">
 <h2>Median Example</h2>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">df &lt;-<span class="st"> </span><span class="kw">tibble</span>(</a>
-<a class="sourceLine" id="cb12-2" data-line-number="2">  <span class="dt">a =</span> <span class="kw">rnorm</span>(<span class="dv">10</span>),</a>
-<a class="sourceLine" id="cb12-3" data-line-number="3">  <span class="dt">b =</span> <span class="kw">rnorm</span>(<span class="dv">10</span>),</a>
-<a class="sourceLine" id="cb12-4" data-line-number="4">  <span class="dt">c =</span> <span class="kw">rnorm</span>(<span class="dv">10</span>),</a>
-<a class="sourceLine" id="cb12-5" data-line-number="5">  <span class="dt">d =</span> <span class="kw">rnorm</span>(<span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb12-6" data-line-number="6">)</a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">df &lt;-<span class="st"> </span><span class="kw">tibble</span>(</a>
+<a class="sourceLine" id="cb13-2" data-line-number="2">  <span class="dt">a =</span> <span class="kw">rnorm</span>(<span class="dv">10</span>),</a>
+<a class="sourceLine" id="cb13-3" data-line-number="3">  <span class="dt">b =</span> <span class="kw">rnorm</span>(<span class="dv">10</span>),</a>
+<a class="sourceLine" id="cb13-4" data-line-number="4">  <span class="dt">c =</span> <span class="kw">rnorm</span>(<span class="dv">10</span>),</a>
+<a class="sourceLine" id="cb13-5" data-line-number="5">  <span class="dt">d =</span> <span class="kw">rnorm</span>(<span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb13-6" data-line-number="6">)</a></code></pre></div>
 </section>
 <section id="median-example-1" class="slide level2">
 <h2>Median Example</h2>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="co">#This actually already loaded with tidyverse</span></a>
-<a class="sourceLine" id="cb13-2" data-line-number="2"><span class="kw">library</span>(purrr) </a>
-<a class="sourceLine" id="cb13-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb13-4" data-line-number="4"><span class="kw">map</span>(df, median)</a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="co">#This actually already loaded with tidyverse</span></a>
+<a class="sourceLine" id="cb14-2" data-line-number="2"><span class="kw">library</span>(purrr) </a>
+<a class="sourceLine" id="cb14-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb14-4" data-line-number="4"><span class="kw">map</span>(df, median)</a></code></pre></div>
 <pre><code>$a
 [1] -0.1427377
 
@@ -728,13 +734,13 @@ $d
 </section>
 <section id="more-medians" class="slide level2">
 <h2>More medians</h2>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw">map_dbl</span>(df, median)</a></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw">map_dbl</span>(df, median)</a></code></pre></div>
 <pre><code>          a           b           c           d 
 -0.14273773  0.11475855 -0.04557728 -0.19449852 </code></pre>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw">map_chr</span>(df, median)</a></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="kw">map_chr</span>(df, median)</a></code></pre></div>
 <pre><code>          a           b           c           d 
 &quot;-0.142738&quot;  &quot;0.114759&quot; &quot;-0.045577&quot; &quot;-0.194499&quot; </code></pre>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1"><span class="kw">map_df</span>(df, median)</a></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="kw">map_df</span>(df, median)</a></code></pre></div>
 <pre><code># A tibble: 1 x 4
        a     b       c      d
    &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;
@@ -742,15 +748,15 @@ $d
 </section>
 <section id="what-if-i-have-more-than-one-argument" class="slide level2">
 <h2>What if I have more than one argument?</h2>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1"><span class="co">#add extra arguments at the end</span></a>
-<a class="sourceLine" id="cb21-2" data-line-number="2"><span class="kw">map_dbl</span>(df, median, <span class="dt">na.rm=</span>T)</a></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="co">#add extra arguments at the end</span></a>
+<a class="sourceLine" id="cb22-2" data-line-number="2"><span class="kw">map_dbl</span>(df, median, <span class="dt">na.rm=</span>T)</a></code></pre></div>
 <pre><code>          a           b           c           d 
 -0.14273773  0.11475855 -0.04557728 -0.19449852 </code></pre>
 </section>
 <section id="what-if-i-have-more-than-one-argument-1" class="slide level2">
 <h2>What if I have more than one argument?</h2>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="co">#using ~ and .</span></a>
-<a class="sourceLine" id="cb23-2" data-line-number="2"><span class="kw">map_dbl</span>(df, <span class="op">~</span><span class="kw">median</span>(., <span class="dt">na.rm=</span>T))</a></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1"><span class="co">#using ~ and .</span></a>
+<a class="sourceLine" id="cb24-2" data-line-number="2"><span class="kw">map_dbl</span>(df, <span class="op">~</span><span class="kw">median</span>(., <span class="dt">na.rm=</span>T))</a></code></pre></div>
 <pre><code>          a           b           c           d 
 -0.14273773  0.11475855 -0.04557728 -0.19449852 </code></pre>
 </section>
@@ -779,7 +785,7 @@ $d
 </section>
 <section id="one-line-to-rule-them-all" class="slide level2">
 <h2>One Line to rule them all</h2>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1">all_buoys &lt;-<span class="st"> </span><span class="kw">map_df</span>(<span class="dv">1986</span><span class="op">:</span><span class="dv">2013</span>, get_buoy)</a></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1">all_buoys &lt;-<span class="st"> </span><span class="kw">map_df</span>(<span class="dv">1986</span><span class="op">:</span><span class="dv">2013</span>, get_buoy)</a></code></pre></div>
 <div class="fragment">
 <pre><code># A tibble: 331 x 4
     Year Month Wave_Height Temperature_c
@@ -799,16 +805,16 @@ $d
 </section>
 <section id="a-standard-workflow" class="slide level2">
 <h2>A Standard Workflow</h2>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1"><span class="co">#Annual Means</span></a>
-<a class="sourceLine" id="cb27-2" data-line-number="2">annual_buoys &lt;-<span class="st"> </span>all_buoys <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb27-3" data-line-number="3"><span class="st">  </span><span class="kw">group_by</span>(Year) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb27-4" data-line-number="4"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">Wave_Height =</span> <span class="kw">mean</span>(Wave_Height, <span class="dt">na.rm=</span>T),</a>
-<a class="sourceLine" id="cb27-5" data-line-number="5">            <span class="dt">Temperature_c =</span> <span class="kw">mean</span>(Temperature_c, <span class="dt">na.rm=</span>T))</a>
-<a class="sourceLine" id="cb27-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb27-7" data-line-number="7"><span class="co">#Plot!</span></a>
-<a class="sourceLine" id="cb27-8" data-line-number="8"><span class="kw">ggplot</span>(annual_buoys, </a>
-<a class="sourceLine" id="cb27-9" data-line-number="9">       <span class="kw">aes</span>(<span class="dt">x=</span>Year, <span class="dt">y=</span>Wave_Height)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb27-10" data-line-number="10"><span class="st">  </span><span class="kw">geom_line</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1"><span class="co">#Annual Means</span></a>
+<a class="sourceLine" id="cb28-2" data-line-number="2">annual_buoys &lt;-<span class="st"> </span>all_buoys <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb28-3" data-line-number="3"><span class="st">  </span><span class="kw">group_by</span>(Year) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb28-4" data-line-number="4"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">Wave_Height =</span> <span class="kw">mean</span>(Wave_Height, <span class="dt">na.rm=</span>T),</a>
+<a class="sourceLine" id="cb28-5" data-line-number="5">            <span class="dt">Temperature_c =</span> <span class="kw">mean</span>(Temperature_c, <span class="dt">na.rm=</span>T))</a>
+<a class="sourceLine" id="cb28-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb28-7" data-line-number="7"><span class="co">#Plot!</span></a>
+<a class="sourceLine" id="cb28-8" data-line-number="8"><span class="kw">ggplot</span>(annual_buoys, </a>
+<a class="sourceLine" id="cb28-9" data-line-number="9">       <span class="kw">aes</span>(<span class="dt">x=</span>Year, <span class="dt">y=</span>Wave_Height)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb28-10" data-line-number="10"><span class="st">  </span><span class="kw">geom_line</span>()</a></code></pre></div>
 </section>
 <section id="our-plot" class="slide level2">
 <h2>Our Plot</h2>
