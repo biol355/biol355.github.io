@@ -140,7 +140,7 @@ __Before Class:__ Install `rgdal` (you'll need to install gdal first - see below
 ```
 `r datestring`  
 __Readings:__ W&G Chapters on [Functions](http://r4ds.had.co.nz/functions.html) and [Iteration](http://r4ds.had.co.nz/iteration.html)  
-__Lectures:__ [Intro to Functions](./Lectures/19_functions_intro.html)  
+__Lectures:__ [Intro to Functions](./Lectures/19_functions_intro.html), [Iteration with purrr](./Lectures/20_iteration.html)  
 __Lab:__ [Functions lab](./Labs/function_lab.html)  
 __Objective(s):__ Learn the benefits of reusable code, Understand the structure of a function, Discover debugging and making functions fail usefully, Apply conditional logic to build flexible code, Derive principles to make functions that are easy to understand and apply to multiple data sets.  
 __Biological Examples:__ NOAA buoy data.  
