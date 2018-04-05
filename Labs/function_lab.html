@@ -345,12 +345,12 @@ $(document).ready(function () {
 <li>What parts are different?</li>
 <li>What is the output that you want your function to return?</li>
 </ul>
-<pre class="r"><code>buoy_1987 &lt;- read_csv('./buoydata/44013_1987.csv', na = c(&quot;99&quot;, &quot;999&quot;))
-buoy_1988 &lt;- read_csv('./buoydata/44013_1988.csv', na = c(&quot;99&quot;, &quot;999&quot;))
-buoy_1989 &lt;- read_csv('./buoydata/44013_1989.csv', na = c(&quot;99&quot;, &quot;999&quot;))
-buoy_1990 &lt;- read_csv('./buoydata/44013_1990.csv', na = c(&quot;99&quot;, &quot;999&quot;))</code></pre>
-<p>2b. Use the str_c() function to write the the filename for each year. I’ve given you an example below.</p>
-<pre class="r"><code>str_c('./data/buoydata/44013_', 1986, '.csv', sep = '')</code></pre>
+<pre class="r"><code>buoy_1987 &lt;- read_csv('./data/buoydata/44013_1987.csv', na = c(&quot;99&quot;, &quot;999&quot;))
+buoy_1988 &lt;- read_csv('./data/buoydata/44013_1988.csv', na = c(&quot;99&quot;, &quot;999&quot;))
+buoy_1989 &lt;- read_csv('./data/buoydata/44013_1989.csv', na = c(&quot;99&quot;, &quot;999&quot;))
+buoy_1990 &lt;- read_csv('./data/buoydata/44013_1990.csv', na = c(&quot;99&quot;, &quot;999&quot;))</code></pre>
+<p>2b. Use the str_c() function to write a function that creates the filename for each year. I’ve given you an example below if we were using str_c for just 1986. Consider this your starting point to build out a function.</p>
+<pre class="r"><code>str_c(&quot;./data/buoydata/44013_&quot;, 1986, &quot;.csv&quot;, sep = &quot;&quot;)</code></pre>
 <pre><code>## [1] &quot;./data/buoydata/44013_1986.csv&quot;</code></pre>
 <p>2c. Complete the skeleton of this function based on the work that you have done up to now. Describe, in words, what is happening in every step.</p>
 <pre class="r"><code>read_buoy &lt;- function(_________){
