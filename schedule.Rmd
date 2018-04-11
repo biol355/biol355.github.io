@@ -148,15 +148,26 @@ __Files:__   [NOAA buoy data from Boston Harbor](./Lectures/data/buoydata.zip), 
 __Etherpad:__ https://etherpad.wikimedia.org/p/355-functions  
 
 
-### Week  11 & 12. T-Tests and P-Values 
-```{r next_date_2, echo=FALSE}
+### Week  11. T-Tests and P-Values 
+```{r next_date, echo=FALSE}
 ```
-`r datestring_1` and `r datestring`  
+`r datestring`  
 __Readings:__ [Cortina and Dunlop 1997](./Readings/cortina and Dunlop 1997 significance testing p value.pdf)  
+__Lectures:__ [Introduction to Frequentist Hypothesis Tests](./Lectures/21_testing_hypotheses_p.pdf), [T-Tests](./Lectures/22_t.pdf)  
 __Objective(s):__ Describe the basics of probability and p-values, Compare groups of data using T-tests and its extensions.  
-__Biological Examples:__ The effects of testosterone on bird behavior. Jet-lag recovery and circadian rhythms.   
+__Biological Examples:__ The effects of testosterone on bird behavior.  
+__Lab:__ [T-Tests](./Labs/lab_9_t.html)  
+__Files:__ [Blackbird Testosterone Implants](./Labs/data/12e2BlackbirdTestosterone.csv), [Survivorship of Salmon and Trout](./Labs/data/12e4BrookTrout.csv)  
 
-### Week  13 & 14. Linear Regression 
+### Week 12. Analysis of Variance 
+```{r next_date, echo=FALSE}
+```
+ `r datestring`  
+__Lectures:__ [Introduction to Frequentist Hypothesis Tests](./Lectures/21_testing_hypotheses_p.pdf)  
+__Objective(s):__ Describe the basics of probability and p-values, Compare groups of data using T-tests and its extensions.  
+__Biological Examples:__ The effects of testosterone on bird behavior. Jet-lag recovery and circadian rhythms.  
+
+### Week  13 & 14. Linear Regression, General and Generalized Linear Models  
 ```{r next_date_2, echo=FALSE}
 ```
 `r datestring_1` and `r datestring`  
