@@ -158,21 +158,22 @@ __Objective(s):__ Describe the basics of probability and p-values, Compare group
 __Biological Examples:__ The effects of testosterone on bird behavior.  
 __Lab:__ [T-Tests](./Labs/lab_9_t.html)  
 __Files:__ [Blackbird Testosterone Implants](./Labs/data/12e2BlackbirdTestosterone.csv), [Survivorship of Salmon and Trout](./Labs/data/12e4BrookTrout.csv)  
-
-### Week 12. Analysis of Variance 
+Homework: [Functions and t-tests](./assignments/7_functions_tidyr.html), [Marmoset data](./assignments/monkey_weights.xlsx)  
+  
+### Week 12. Analysis of Variance and the Linear Model
 ```{r next_date, echo=FALSE}
 ```
  `r datestring`  
-__Lectures:__ [Introduction to Frequentist Hypothesis Tests](./Lectures/21_testing_hypotheses_p.pdf)  
-__Objective(s):__ Describe the basics of probability and p-values, Compare groups of data using T-tests and its extensions.  
-__Biological Examples:__ The effects of testosterone on bird behavior. Jet-lag recovery and circadian rhythms.  
+__Lectures:__ [Analysis of Variance](./Lectures/23_anova.html)  
+__Objective(s):__ Analyze the differences between multiple means.  Fit a linear regression using lm() in R through a bivariate scatterplot. Evaluate assumptions of a linear model with normal error   
+__Biological Examples:__  Jet-lag recovery and circadian rhythms. Seal life history variation  
 
-### Week  13 & 14. Linear Regression, General and Generalized Linear Models  
+### Week  13 & 14. General and Generalized Linear Models, Multiple Predictors  
 ```{r next_date_2, echo=FALSE}
 ```
 `r datestring_1` and `r datestring`  
 __Readings:__  W&G on [Model Basics](http://r4ds.had.co.nz/model-basics.html) and [Model Building](http://r4ds.had.co.nz/model-building.html)  
-__Objective(s):__ Fit a linear regression using lm() in R through a bivariate scatterplot, Describe when to use nonlinear models/curves, Visualization of model outcomes  
+__Objective(s):__ Describe when to use nonlinear models/curves, Comparing and Contrasting models, Visualization of model outcomes  
 __Biological Examples:__ Seal life history variation. Mouse anti-fungal drug development.   
 
 ### Week  15. Open Lab and Final Presentations
