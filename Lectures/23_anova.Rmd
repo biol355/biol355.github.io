@@ -9,15 +9,15 @@ output:
     center: false
     transition: fade
     self_contained: false
-    background-image: ./images/anova/anova.jpg
+    background-image: ./Images/anova/anova.jpg
 
 ---
 
-## {data-background="./images/anova/anova.jpg"}
+## {data-background="./Images/anova/anova.jpg"}
 <Br>
 <h1 style="background:white;">Analysis of Multiple Groups with ANOVA</h1>
 
-## <font color="white">Fighting Jet Lag</font>{data-background="./images/anova/airport_2349324a-large.jpg"}
+## <font color="white">Fighting Jet Lag</font>{data-background="./Images/anova/airport_2349324a-large.jpg"}
 ```{r load_prep, echo=FALSE, warning=FALSE, message=FALSE}
 library(dplyr)
 library(ggplot2)
@@ -27,7 +27,7 @@ opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE,
 ```
 
 ## The Knee's The Thing!
-![](./images/anova/_47947_knee300.jpg) <br><br>
+![](./Images/anova/_47947_knee300.jpg) <br><br>
 
 * Test if shining light behind knees or on eyes helped jet lag
 * Also a control group with no light
@@ -45,7 +45,7 @@ opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE,
 ## What question would you ask of this data?
 
 ```{r}
-jetlag <- read.csv("./images/anova/15e1KneesWhoSayNight.csv") %>%
+jetlag <- read.csv("./Images/anova/15e1KneesWhoSayNight.csv") %>%
   group_by(treatment) %>%
   mutate(mean_shift = mean(shift),
          resid_shift = shift - mean_shift,
@@ -263,7 +263,7 @@ ggplot(data=jetlag, mapping=aes(x=Treatment, y=shift)) +
 
 ## This analysis
 ```{r, eval=FALSE, echo=TRUE}
-jetlag <- read.csv("./images/anova/15e1KneesWhoSayNight.csv")
+jetlag <- read.csv("./Images/anova/15e1KneesWhoSayNight.csv")
 
 #fit
 jetlag_mod <- lm(shift ~ treatment, data=jetlag)
@@ -282,7 +282,7 @@ ggplot(data = jetlag, mapping=aes(x=treatment, y=shift)) +
 
 ## Nematode Lifespans!
 ```{r, eval=FALSE, echo=TRUE}
-nemetodes <- read.csv("./images/anova/15q19NematodeLifespan.csv")
+nemetodes <- read.csv("./Images/anova/15q19NematodeLifespan.csv")
 
 #fit
 nem_mod <- lm(_______ ~ _______, data=nemetodes)
@@ -301,7 +301,7 @@ ggplot(data = nemetodes, mapping=aes(x=_______, y=_______)) +
 
 ##  Eelgrass Genotypes
 ```{r, eval=FALSE, echo=TRUE}
-eelgrass <- read.csv("./images/anova/EelgrassGenotypes.csv")
+eelgrass <- read.csv("./Images/anova/EelgrassGenotypes.csv")
 
 #fit
 eelgrass_mod <- lm(_______, ______)
