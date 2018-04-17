@@ -25,7 +25,7 @@ qplot(conc, density, data=DNase, geom=c("point", "line"), group=Run) +
 
 **Weekly Schedule:** Tuesday & Thursday 9:30-12:00, Lab Wednesday 12:30-3:30
 
-**Office Hours:** Prof. Byrnes will hold office hours Thursday from 2:30-4 in ISC 3130  
+**Office Hours:** Prof. Byrnes will hold office hours Thursday from 11:30-1 in ISC 3130  
 &nbsp; &nbsp; TA Rosenthal will hold office hours Tuesday & Wednesday 11-12 at the tables outside of ISC 3100.
 
 **Source for this Website:** https://github.com/biol355/biol355.github.io/

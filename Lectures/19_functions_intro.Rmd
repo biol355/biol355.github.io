@@ -223,7 +223,7 @@ add_one <- function(x){
   
   ret_value <- x + 1
   
-  return(x)
+  return(ret_value)
   
 }
 
@@ -344,11 +344,11 @@ make_mean(c(4,5,6), na.rm=TRUE)
 Write a function and paste it into the etherpad that
 
 1. Takes a vector and sums it up after it squares it  
-     - use `c(4,5,6)` to test  
+     - use `c(4,5,6)` to test (= 77)  
 2. Takes a number and combine it into a string with the word "elephants".  
      - 1 elephants, 2 elephants, 15 elephants  
 3. Takes a number, a string, and a separator and combines them
-     - "3 - hello"
+     - my_function(3, "hello", "-") makes "3 - hello"
 4. Write a function that takes a year and reads in and returns one of the buoy data files. Test it on multiple files to make sure it handles NAs properly.
 
 ## One Reading Function

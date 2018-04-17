@@ -1,0 +1,227 @@
+---
+title: "Function lab exercises"
+output: html_document
+---
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+```
+
+
+Function template:  
+
+```{r, eval = FALSE}
+func_name <- function(arg1, arg2, ...) {
+  
+  func_code_here
+
+  return(object_to_return)
+
+}
+```
+
+In this template:
+
+* **function_name** is what you decide to call your function. This is usually a verb that describes what the function does; e.g., 'get_max_diff', 'get_first_year', ...
+
+* **arg1** this is the name of an argument (again you decide what the name is). This is what you will call the input when you are within the body of the function code
+
+* **function_code_here** is where you write the code. This is where you transform your inputs into the output
+
+Remember that a function takes input (which could be multiple things), does something to that input, and then returns some kind of output. 
+
+--------------------------------------------------------------------------------
+
+### Exercises
+
+1. This may be a type of function you are more familiar with. It is an equation that converts Celsius to Farenheit. A previous student of mine was basically Farenheit-illiterate; she never know what the weather is going to be like. Given this equation, can you write a function that converts a temperature value in Farenheit to Celsius for her?
+
+* C = (F  -  32)  x  5/9 
+
+Take your function for a spin, does it return the correct values?  
+
+* 32 F  = 0 C
+
+* 50 F  = 10 C
+
+* 61 F  = 16.11 C
+
+* 212 F = 100 C
+
+* -40 F = -40 C
+
+
+2a. Given the following code chunk for reading buoy data files in for each year, describe the following: 
+
+* What parts of your code are consistent across every line/code chunk? 
+* What parts are different? 
+* What is the output that you want your function to return?
+
+
+```{r, eval = FALSE}
+buoy_1987 <- read_csv('./data/buoydata/44013_1987.csv', na = c("99", "999"))
+buoy_1988 <- read_csv('./data/buoydata/44013_1988.csv', na = c("99", "999"))
+buoy_1989 <- read_csv('./data/buoydata/44013_1989.csv', na = c("99", "999"))
+buoy_1990 <- read_csv('./data/buoydata/44013_1990.csv', na = c("99", "999"))
+```
+
+2b. Use the str_c() function to write a function that creates the filename for each year. I've given you an example below if we were using str_c for just 1986. Consider this your starting point to build out a function.
+
+```{r}
+str_c("./data/buoydata/44013_", 1986, ".csv", sep = "")
+```
+
+2c. Complete the skeleton of this function based on the work that you have done up to now. Describe, in words, what is happening in every step.  
+
+```{r, eval = FALSE}
+read_buoy <- function(_________){
+  
+  filename <- ___________________________
+  
+  a_buoy <- read_csv(________________, ____________________)
+  
+  return(___________)
+
+}
+```
+
+2d. Amend the process_buoy function to allow for a variable buoy number (currently we are using data from buoy 44013, but there are many other numbers/names that could be used!), directory location of the file, *and* year. 
+
+2e. Apply the workflow that you used in 2a - 2c to create a function to clean up the data using a dplyr workflow. Have it generate daily averaged wave heights and temperatures as well as renaming all of the columns to something understandable. Begin by writing a dplyr workflow for one data frame. Then generalize it. Remember to ask yourself the following questions: 
+
+* What parts of your code are consistent across every line/code chunk? 
+* What parts are different? 
+* What is the output that you want your function to return?
+
+If you are not sure of some of these things, remember to run the code chunks bit by bit, putting in test values (e.g., one year of data) to ensure that you know what you are working with, what each line is doing, and what the final returned value is. 
+
+```{r, eval=FALSE, echo=FALSE}
+#Now the data transformations
+buoy_1986 <- buoy_1986 %>%
+  select(YY, MM, DD, WVHT, WTMP) %>%
+  rename(Year = YY,
+         Month = MM,
+         Day = DD,
+         Wave_Height = WVHT,
+         Temperature_c = WTMP) %>%
+  group_by(Year, Month, Day) %>%
+  summarise(Wave_Height = mean(Wave_Height, na.rm=T),
+            Temperature_c = mean(Temperature_c, na.rm=T)) %>%
+    ungroup()
+
+#1987
+buoy_1987 <- read.csv("./buoydata/44013_1987.csv", na.strings="99")
+
+#Now the data transformations
+buoy_1987 <- buoy_1987 %>%
+  select(YY, MM, DD, WVHT, WTMP) %>%
+  rename(Year = YY,
+         Month = MM,
+         Day = DD,
+         Wave_Height = WVHT,
+         Temperature_c = WTMP) %>%
+  group_by(Year, Month, Day) %>%
+  summarise(Wave_Height = mean(Wave_Height, na.rm=T),
+            Temperature_c = mean(Temperature_c, na.rm=T)) %>%
+    ungroup()
+
+buoydata <- rbind(buoy_1986, buoy_1987)
+```
+
+--------------------------------------------------------------------------------
+
+### Using conditionals! 
+
+--------------------------------------------------------------------------------
+
+#### Logical Operators
+See - [http://www.statmethods.net/management/operators.html](http://www.statmethods.net/management/operators.html)
+
+|   Operator   | Description              |
+|:------------:|--------------------------|
+|      <       | less than                |
+|     <=       | less than or equal to    |
+|      >       | greater than             |
+|     >=       | greater than or equal to |
+|     ==       | exactly equal to         |
+|     !=       | not equal to             |
+|     !x       | Not x                    |
+|    x | y     | x OR y                   |
+|    x & y     | x AND y                  |
+|   isTRUE(x)  | test if X is TRUE        |
+
+
+#### If statement structure: 
+See [http://www.programiz.com/r-programming/if-else-statement](http://www.programiz.com/r-programming/if-else-statement) for a good tutorial on if/else statements.
+
+```{r, eval = FALSE}
+
+if (test_expression) {
+   statement
+}
+
+```
+
+### If ... else ... statement structure: 
+```{r, eval = FALSE}
+
+if (test_expression) {
+   statement1
+} else {
+   statement2
+}
+
+```
+
+Let's introduce condition statements/tests. These are if, then else, statements. 
+
+```{r}
+x <- 4 == 3
+x
+```
+
+```{r}
+### If statement
+x <- 5
+if (x > 0) {
+   print("Positive number")
+} 
+
+### If/else statement
+x <- -5
+if(x > 0){
+   print("Non-negative number")
+} else {
+   print("Negative number")
+}
+
+### But that doesn't account for zero!
+x <- 0
+if(x > 0){
+   print("Non-negative number")
+} else {
+   print("Negative number")
+}
+
+x <- 0
+if (x > 0) {
+   print("Non-negative number")
+} else {
+   print("Negative number")
+}
+
+```
+
+
+3. My student came from 'tropical Canada'. She don't like the cold but she **really** didn't like it when it's hot. Although she wanted to know what the temperature is in Celsius when the US weather channel reported it t in Farenheit, there are certain points at which it was just too cold or too hot for to to care about the exact value. Modify the f_to_c function below to print the following:
+
+* If the temperature is less than -20 C, print "Don't bother going out."
+
+* If the temperature is greater than 30, print "I'm moving back to Canada."
+
+```{r}
+f_to_c <- function(farenheit) {
+  celsius <- (farenheit -  32)  *  5 / 9 
+  return(celsius)
+}
+```

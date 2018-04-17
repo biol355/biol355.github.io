@@ -140,27 +140,41 @@ __Before Class:__ Install `rgdal` (you'll need to install gdal first - see below
 ```
 `r datestring`  
 __Readings:__ W&G Chapters on [Functions](http://r4ds.had.co.nz/functions.html) and [Iteration](http://r4ds.had.co.nz/iteration.html)  
-__Lectures:__ [Intro to Functions](./Lectures/19_functions_intro.html)  
+__Lectures:__ [Intro to Functions](./Lectures/19_functions_intro.html), [Iteration with purrr](./Lectures/20_iteration.html)  
+__Lab:__ [Functions lab](./Labs/function_lab.html)  
 __Objective(s):__ Learn the benefits of reusable code, Understand the structure of a function, Discover debugging and making functions fail usefully, Apply conditional logic to build flexible code, Derive principles to make functions that are easy to understand and apply to multiple data sets.  
 __Biological Examples:__ NOAA buoy data.  
-__Files:__   [NOAA buoy data from Boston Harbor](./Lectures/data/buoydata.zip)  
+__Files:__   [NOAA buoy data from Boston Harbor](./Lectures/data/buoydata.zip), [get_buoy.R](./Lectures/get_buoy.R)  
 __Etherpad:__ https://etherpad.wikimedia.org/p/355-functions  
 
 
-### Week  11 & 12. T-Tests and P-Values 
-```{r next_date_2, echo=FALSE}
+### Week  11. T-Tests and P-Values 
+```{r next_date, echo=FALSE}
 ```
-`r datestring_1` and `r datestring`  
+`r datestring`  
 __Readings:__ [Cortina and Dunlop 1997](./Readings/cortina and Dunlop 1997 significance testing p value.pdf)  
+__Lectures:__ [Introduction to Frequentist Hypothesis Tests](./Lectures/21_testing_hypotheses_p.pdf), [T-Tests](./Lectures/22_t.pdf)  
 __Objective(s):__ Describe the basics of probability and p-values, Compare groups of data using T-tests and its extensions.  
-__Biological Examples:__ The effects of testosterone on bird behavior. Jet-lag recovery and circadian rhythms.   
+__Biological Examples:__ The effects of testosterone on bird behavior.  
+__Lab:__ [T-Tests](./Labs/lab_9_t.html)  
+__Files:__ [Blackbird Testosterone Implants](./Labs/data/12e2BlackbirdTestosterone.csv), [Survivorship of Salmon and Trout](./Labs/data/12e4BrookTrout.csv)  
+__Homework:__ [Functions and t-tests](./assignments/7_functions_tidyr.html), [Marmoset data](./assignments/monkey_weights.xlsx)  
+  
+### Week 12. Analysis of Variance and the Linear Model
+```{r next_date, echo=FALSE}
+```
+ `r datestring`  
+__Lectures:__ [Analysis of Variance](./Lectures/23_anova.html)  
+__Objective(s):__ Analyze the differences between multiple means.  Fit a linear regression using lm() in R through a bivariate scatterplot. Evaluate assumptions of a linear model with normal error   
+__Biological Examples:__  Jet-lag recovery and circadian rhythms. Seal life history variation  
+__Etherpad:__ https://etherpad.wikimedia.org/p/355-anova   
 
-### Week  13 & 14. Linear Regression 
+### Week  13 & 14. General and Generalized Linear Models, Multiple Predictors  
 ```{r next_date_2, echo=FALSE}
 ```
 `r datestring_1` and `r datestring`  
 __Readings:__  W&G on [Model Basics](http://r4ds.had.co.nz/model-basics.html) and [Model Building](http://r4ds.had.co.nz/model-building.html)  
-__Objective(s):__ Fit a linear regression using lm() in R through a bivariate scatterplot, Describe when to use nonlinear models/curves, Visualization of model outcomes  
+__Objective(s):__ Describe when to use nonlinear models/curves, Comparing and Contrasting models, Visualization of model outcomes  
 __Biological Examples:__ Seal life history variation. Mouse anti-fungal drug development.   
 
 ### Week  15. Open Lab and Final Presentations

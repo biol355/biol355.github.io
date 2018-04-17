@@ -1,0 +1,313 @@
+---
+title:
+css: style.css
+output:
+  revealjs::revealjs_presentation:
+    reveal_options:
+      slideNumber: true
+      previewLinks: true
+    theme: white
+    center: false
+    transition: fade
+    self_contained: false
+    lib_dir: libs
+---
+## {data-background="./Images/iteration/maxresdefault.jpg"}
+
+<br><br><br>
+<h1 style="background-color:white; font-size: 300%;"><center>Iteration</center></h2>
+
+```{r prep, echo=FALSE, cache=FALSE, message=FALSE, warning=FALSE}
+library(knitr)
+library(tidyverse)
+library(readr)
+library(ggplot2)
+theme_set(theme_bw(base_size=16))
+
+opts_chunk$set(fig.height=5, fig.width=7, comment=NA, 
+               warning=FALSE, message=FALSE, 
+               dev="jpeg", echo=TRUE)
+
+
+```
+
+## We've done good!
+Our wrapper
+```{r}
+library(tidyverse)
+library(readr)
+
+get_buoy <- function(a_year){
+  one_buoy <- read_buoy(a_year) %>%
+    format_buoy %>%
+    make_monthly_buoy 
+  
+  return(one_buoy)
+}
+```
+
+## Our Reading Function
+```{r}
+read_buoy <- function(a_year, buoy_number = 44013, 
+                      buoy_dir = "./data/buoydata/"){
+
+  #make a file name
+  buoy_file <- str_c(buoy_dir, buoy_number, "_", a_year, ".csv")
+  
+  #read in the file
+  one_buoy <- read_csv(buoy_file, 
+                       na = c("99", "999", 
+                              "99.00", "9999.00",
+                              "99.0", "9999.0",
+                              "999.0"))
+  
+  #return the file
+  return(one_buoy)
+  
+}
+```
+
+## Our Formatting Function
+```{r}
+format_buoy <- function(a_buoy_df){
+  
+  a_buoy_df <- a_buoy_df %>%
+    fix_year_names %>%
+    fix_bad_rows %>%
+    fix_bad_years
+  
+  return(a_buoy_df)
+}
+```
+
+## With lots of subfunctions
+```{r, echo=TRUE}
+#bad names
+fix_year_names <- function(a_buoy_df){
+  
+  names(a_buoy_df) <- names(a_buoy_df) %>%
+  str_replace("^YY$", "YYYY") %>%
+  str_replace("X\\.YY", "YYYY")
+  
+  return(a_buoy_df)
+}
+```
+
+```{r, echo=TRUE}
+fix_bad_rows <- function(a_buoy_df){
+  if(is.character(a_buoy_df$MM[1])){
+    
+    a_buoy_df <- a_buoy_df[-1,] %>% 
+      mutate_all(as.numeric)
+
+    }
+
+    return(a_buoy_df)
+}
+```
+
+```{r, echo=TRUE}
+#bad years
+fix_bad_years <- function(a_buoy_df){
+  return(a_buoy_df %>%
+           mutate(YYYY = ifelse(YYYY < 1900, YYYY+1900, YYYY)))
+}
+```
+
+## Our monthly summarize
+```{r}
+make_monthly_buoy <- function(a_buoy_df){
+  buoydata <- a_buoy_df %>%
+    select(YYYY, MM, WVHT, WTMP) %>%
+    rename(Year = YYYY,
+         Month = MM,
+         Wave_Height = WVHT,
+         Temperature_c = WTMP) %>%
+    group_by(Year, Month) %>%
+    summarise(Wave_Height = mean(Wave_Height, na.rm=T),
+            Temperature_c = mean(Temperature_c, na.rm=T)) %>%
+    ungroup()
+
+  return(buoydata)
+}
+```
+
+## Reading in a file of functions
+<p align="left">Often, we want to have a file with just all of our functions, so we don't junk up our working file. This eventually extends to writing packages, but, that's another class...  
+  
+    
+    
+```{r}
+source("./get_buoy.R")
+```
+
+## This works great for one year!
+```{r, message=FALSE}
+get_buoy(2012)
+```
+
+## But we want...
+```{r plottry, message=FALSE, echo=FALSE, cache=TRUE}
+all_buoys <- map_df(1986:2013, get_buoy)
+
+annual_buoys <- all_buoys %>%
+  group_by(Year) %>%
+  summarize(Wave_Height = mean(Wave_Height, na.rm=T),
+            Temperature_c = mean(Temperature_c, na.rm=T))
+
+
+ggplot(annual_buoys, 
+       aes(x=Year, y=Wave_Height)) +
+  geom_line()
+```
+
+## You can load one year, but...
+![](./Images/functions/buoyfiles.jpg)
+
+## How do we get to there from here?
+
+One solution:
+
+```{r, eval=FALSE}
+
+buoys <- rbind(get_buoy(1986),
+               get_buoy(1987),
+               get_buoy(1988)..........
+)
+```
+
+<div class="fragment"><h2>NO!</h2></div>
+
+## Isn't this what computers/robots are all about?
+<Br><br>
+![](./Images/iteration/assembly_line.gif)
+
+## The old school way
+```{r for, eval=FALSE}
+#create a tibble
+buoys <- get_buoy(1986)
+
+#now iterate over the remaining years and rbind
+for(one_year in 1987:2013){
+  
+  buoys <- rbind(buoys, get_buoy(1986))
+  
+}
+```
+
+## The Map Paradigm
+![](./Images/iteration/map.png)
+
+## 
+![](./Images/iteration/purrr.png){width=60%}
+
+## Map functions
+- Take a list or vector as input  
+     
+- Apply a function to each elment of the list/vector  
+     
+- Return the corresponding object, bound together into a prespecified type
+
+## Median Example
+```{r purrr}
+df <- tibble(
+  a = rnorm(10),
+  b = rnorm(10),
+  c = rnorm(10),
+  d = rnorm(10)
+)
+```
+
+## Median Example
+```{r}
+#This actually already loaded with tidyverse
+library(purrr) 
+
+map(df, median)
+```
+
+## The Map Paradigm
+![](./Images/iteration/map.png)
+
+## What if I don't want a list
+![](./Images/iteration/meowtini.jpg)
+
+## The world of maps
+- `map()` makes a list.
+- `map_df()` makes a tibble/data frame.
+- `map_lgl()` makes a logical vector.
+- `map_int()` makes an integer vector.
+- `map_dbl()` makes a double vector.
+- `map_chr()` makes a character vector.
+
+## More medians
+```{r}
+map_dbl(df, median)
+
+map_chr(df, median)
+
+map_df(df, median)
+```
+
+## What if I have more than one argument?
+```{r}
+#add extra arguments at the end
+map_dbl(df, median, na.rm=T)
+
+```
+
+
+## What if I have more than one argument?
+```{r}
+#using ~ and .
+map_dbl(df, ~median(., na.rm=T))
+```
+## You try!
+1. What does `map(-2:2, rnorm, n = 5)` do? How is it different from `map_dbl(-2:2, rnorm, n = 5)`?  
+     
+2. Get the mean of each column of `df`  
+     
+3. Compute the number of unique values in each column of `iris` (hint, you'll need length and unique)!
+
+## Now, what about our data problem?
+- We have a lot of years  
+     
+- These years can be put into a vector - 1986:2013, so....
+
+## Your turn again!
+- Make one big tibble using `map_df()`, a vector of years, and `get_buoy`  
+     
+- Get the annual mean of wave height  
+
+- Plot
+
+## One Line to rule them all
+```{r, message=FALSE, echo=TRUE, eval=FALSE}
+all_buoys <- map_df(1986:2013, get_buoy)
+```
+<div class="fragment">
+```{r echo=FALSE}
+all_buoys
+```
+</div>
+
+## A Standard Workflow
+```{r plot2, echo=TRUE, eval=FALSE}
+#Annual Means
+annual_buoys <- all_buoys %>%
+  group_by(Year) %>%
+  summarize(Wave_Height = mean(Wave_Height, na.rm=T),
+            Temperature_c = mean(Temperature_c, na.rm=T))
+
+#Plot!
+ggplot(annual_buoys, 
+       aes(x=Year, y=Wave_Height)) +
+  geom_line()
+```
+
+## Our Plot
+```{r plot2,  echo=FALSE, eval=TRUE}
+```
+
+##
+![](./Images/iteration/to_purr_or_not.jpg)

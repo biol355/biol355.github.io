@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title>20_iteration.utf8</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="libs/reveal.js-3.3.0.1/css/reveal.css"/>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="libs/reveal.js-3.3.0.1/css/theme/white.css" id="theme">
+
+
+  <!-- some tweaks to reveal css -->
+  <style type="text/css">
+    .reveal h1 { font-size: 2.0em; }
+    .reveal h2 { font-size: 1.5em;  }
+    .reveal h3 { font-size: 1.25em;	}
+    .reveal h4 { font-size: 1em;	}
+
+    .reveal .slides>section,
+    .reveal .slides>section>section {
+      padding: 0px 0px;
+    }
+
+
+
+    .reveal table {
+      border-width: 1px;
+      border-spacing: 2px;
+      border-style: dotted;
+      border-color: gray;
+      border-collapse: collapse;
+      font-size: 0.7em;
+    }
+
+    .reveal table th {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      font-weight: bold;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+    .reveal table td {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+
+  </style>
+
+    <style type="text/css">code{white-space: pre;}</style>
+
+    <link rel="stylesheet" href="style.css"/>
+
+<!-- Printing and PDF exports -->
+<script id="paper-css" type="application/dynamic-css">
+
+/* Default Print Stylesheet Template
+   by Rob Glazebrook of CSSnewbie.com
+   Last Updated: June 4, 2008
+
+   Feel free (nay, compelled) to edit, append, and
+   manipulate this file as you see fit. */
+
+
+@media print {
+
+	/* SECTION 1: Set default width, margin, float, and
+	   background. This prevents elements from extending
+	   beyond the edge of the printed page, and prevents
+	   unnecessary background images from printing */
+	html {
+		background: #fff;
+		width: auto;
+		height: auto;
+		overflow: visible;
+	}
+	body {
+		background: #fff;
+		font-size: 20pt;
+		width: auto;
+		height: auto;
+		border: 0;
+		margin: 0 5%;
+		padding: 0;
+		overflow: visible;
+		float: none !important;
+	}
+
+	/* SECTION 2: Remove any elements not needed in print.
+	   This would include navigation, ads, sidebars, etc. */
+	.nestedarrow,
+	.controls,
+	.fork-reveal,
+	.share-reveal,
+	.state-background,
+	.reveal .progress,
+	.reveal .backgrounds {
+		display: none !important;
+	}
+
+	/* SECTION 3: Set body font face, size, and color.
+	   Consider using a serif font for readability. */
+	body, p, td, li, div {
+		font-size: 20pt!important;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		color: #000;
+	}
+
+	/* SECTION 4: Set heading font face, sizes, and color.
+	   Differentiate your headings from your body text.
+	   Perhaps use a large sans-serif for distinction. */
+	h1,h2,h3,h4,h5,h6 {
+		color: #000!important;
+		height: auto;
+		line-height: normal;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		text-shadow: 0 0 0 #000 !important;
+		text-align: left;
+		letter-spacing: normal;
+	}
+	/* Need to reduce the size of the fonts for printing */
+	h1 { font-size: 28pt !important;  }
+	h2 { font-size: 24pt !important; }
+	h3 { font-size: 22pt !important; }
+	h4 { font-size: 22pt !important; font-variant: small-caps; }
+	h5 { font-size: 21pt !important; }
+	h6 { font-size: 20pt !important; font-style: italic; }
+
+	/* SECTION 5: Make hyperlinks more usable.
+	   Ensure links are underlined, and consider appending
+	   the URL to the end of the link for usability. */
+	a:link,
+	a:visited {
+		color: #000 !important;
+		font-weight: bold;
+		text-decoration: underline;
+	}
+	/*
+	.reveal a:link:after,
+	.reveal a:visited:after {
+		content: " (" attr(href) ") ";
+		color: #222 !important;
+		font-size: 90%;
+	}
+	*/
+
+
+	/* SECTION 6: more reveal.js specific additions by @skypanther */
+	ul, ol, div, p {
+		visibility: visible;
+		position: static;
+		width: auto;
+		height: auto;
+		display: block;
+		overflow: visible;
+		margin: 0;
+		text-align: left !important;
+	}
+	.reveal pre,
+	.reveal table {
+		margin-left: 0;
+		margin-right: 0;
+	}
+	.reveal pre code {
+		padding: 20px;
+		border: 1px solid #ddd;
+	}
+	.reveal blockquote {
+		margin: 20px 0;
+	}
+	.reveal .slides {
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 0 !important;
+		zoom: 1 !important;
+
+		overflow: visible !important;
+		display: block !important;
+
+		text-align: left !important;
+		-webkit-perspective: none;
+		   -moz-perspective: none;
+		    -ms-perspective: none;
+		        perspective: none;
+
+		-webkit-perspective-origin: 50% 50%;
+		   -moz-perspective-origin: 50% 50%;
+		    -ms-perspective-origin: 50% 50%;
+		        perspective-origin: 50% 50%;
+	}
+	.reveal .slides section {
+		visibility: visible !important;
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+		display: block !important;
+		overflow: visible !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 60px 20px !important;
+		z-index: auto !important;
+
+		opacity: 1 !important;
+
+		page-break-after: always !important;
+
+		-webkit-transform-style: flat !important;
+		   -moz-transform-style: flat !important;
+		    -ms-transform-style: flat !important;
+		        transform-style: flat !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+
+		-webkit-transition: none !important;
+		   -moz-transition: none !important;
+		    -ms-transition: none !important;
+		        transition: none !important;
+	}
+	.reveal .slides section.stack {
+		padding: 0 !important;
+	}
+	.reveal section:last-of-type {
+		page-break-after: avoid !important;
+	}
+	.reveal section .fragment {
+		opacity: 1 !important;
+		visibility: visible !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+	}
+	.reveal section img {
+		display: block;
+		margin: 15px 0px;
+		background: rgba(255,255,255,1);
+		border: 1px solid #666;
+		box-shadow: none;
+	}
+
+	.reveal section small {
+		font-size: 0.8em;
+	}
+
+}  
+</script>
+
+
+<script id="pdf-css" type="application/dynamic-css">
+    
+/**
+ * This stylesheet is used to print reveal.js
+ * presentations to PDF.
+ *
+ * https://github.com/hakimel/reveal.js#pdf-export
+ */
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+
+body {
+	margin: 0 auto !important;
+	border: 0;
+	padding: 0;
+	float: none !important;
+	overflow: visible;
+}
+
+html {
+	width: 100%;
+	height: 100%;
+	overflow: visible;
+}
+
+/* Remove any elements not needed in print. */
+.nestedarrow,
+.reveal .controls,
+.reveal .progress,
+.reveal .playback,
+.reveal.overview,
+.fork-reveal,
+.share-reveal,
+.state-background {
+	display: none !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	text-shadow: 0 0 0 #000 !important;
+}
+
+.reveal pre code {
+	overflow: hidden !important;
+	font-family: Courier, 'Courier New', monospace !important;
+}
+
+ul, ol, div, p {
+	visibility: visible;
+	position: static;
+	width: auto;
+	height: auto;
+	display: block;
+	overflow: visible;
+	margin: auto;
+}
+.reveal {
+	width: auto !important;
+	height: auto !important;
+	overflow: hidden !important;
+}
+.reveal .slides {
+	position: static;
+	width: 100%;
+	height: auto;
+
+	left: auto;
+	top: auto;
+	margin: 0 !important;
+	padding: 0 !important;
+
+	overflow: visible;
+	display: block;
+
+	-webkit-perspective: none;
+	   -moz-perspective: none;
+	    -ms-perspective: none;
+	        perspective: none;
+
+	-webkit-perspective-origin: 50% 50%; /* there isn't a none/auto value but 50-50 is the default */
+	   -moz-perspective-origin: 50% 50%;
+	    -ms-perspective-origin: 50% 50%;
+	        perspective-origin: 50% 50%;
+}
+
+.reveal .slides section {
+	page-break-after: always !important;
+
+	visibility: visible !important;
+	position: relative !important;
+	display: block !important;
+	position: relative !important;
+
+	margin: 0 !important;
+	padding: 0 !important;
+	box-sizing: border-box !important;
+	min-height: 1px;
+
+	opacity: 1 !important;
+
+	-webkit-transform-style: flat !important;
+	   -moz-transform-style: flat !important;
+	    -ms-transform-style: flat !important;
+	        transform-style: flat !important;
+
+	-webkit-transform: none !important;
+	   -moz-transform: none !important;
+	    -ms-transform: none !important;
+	        transform: none !important;
+}
+
+.reveal section.stack {
+	margin: 0 !important;
+	padding: 0 !important;
+	page-break-after: avoid !important;
+	height: auto !important;
+	min-height: auto !important;
+}
+
+.reveal img {
+	box-shadow: none;
+}
+
+.reveal .roll {
+	overflow: visible;
+	line-height: 1em;
+}
+
+/* Slide backgrounds are placed inside of their slide when exporting to PDF */
+.reveal section .slide-background {
+	display: block !important;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: -1;
+}
+
+/* All elements should be above the slide-background */
+.reveal section>* {
+	position: relative;
+	z-index: 1;
+}
+
+/* Display slide speaker notes when 'showNotes' is enabled */
+.reveal .speaker-notes-pdf {
+	display: block;
+	width: 100%;
+	max-height: none;
+	left: auto;
+	top: auto;
+	z-index: 100;
+}
+
+/* Display slide numbers when 'slideNumber' is enabled */
+.reveal .slide-number-pdf {
+	display: block;
+	position: absolute;
+	font-size: 14px;
+}
+
+</script>
+
+
+<script>
+var style = document.createElement( 'style' );
+style.type = 'text/css';
+var style_script_id = window.location.search.match( /print-pdf/gi ) ? 'pdf-css' : 'paper-css';
+var style_script = document.getElementById(style_script_id).text;
+style.innerHTML = style_script;
+document.getElementsByTagName('head')[0].appendChild(style);
+</script>
+
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+
+<section id="section" class="slide level2" data-background="./Images/iteration/maxresdefault.jpg">
+<h2></h2>
+<br><br><br>
+<h1 style="background-color:white; font-size: 300%;">
+<center>
+Iteration
+</center>
+</h2>
+</section>
+<section id="weve-done-good" class="slide level2">
+<h2>We’ve done good!</h2>
+<p>Our wrapper</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(tidyverse)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">library</span>(readr)</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4">get_buoy &lt;-<span class="st"> </span><span class="cf">function</span>(a_year){</a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">  one_buoy &lt;-<span class="st"> </span><span class="kw">read_buoy</span>(a_year) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1-6" data-line-number="6"><span class="st">    </span>format_buoy <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb1-7" data-line-number="7"><span class="st">    </span>make_monthly_buoy </a>
+<a class="sourceLine" id="cb1-8" data-line-number="8">  </a>
+<a class="sourceLine" id="cb1-9" data-line-number="9">  <span class="kw">return</span>(one_buoy)</a>
+<a class="sourceLine" id="cb1-10" data-line-number="10">}</a></code></pre></div>
+</section>
+<section id="our-reading-function" class="slide level2">
+<h2>Our Reading Function</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">read_buoy &lt;-<span class="st"> </span><span class="cf">function</span>(a_year, <span class="dt">buoy_number =</span> <span class="dv">44013</span>, </a>
+<a class="sourceLine" id="cb2-2" data-line-number="2">                      <span class="dt">buoy_dir =</span> <span class="st">&quot;./data/buoydata/&quot;</span>){</a>
+<a class="sourceLine" id="cb2-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb2-4" data-line-number="4">  <span class="co">#make a file name</span></a>
+<a class="sourceLine" id="cb2-5" data-line-number="5">  buoy_file &lt;-<span class="st"> </span><span class="kw">str_c</span>(buoy_dir, buoy_number, <span class="st">&quot;_&quot;</span>, a_year, <span class="st">&quot;.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb2-6" data-line-number="6">  </a>
+<a class="sourceLine" id="cb2-7" data-line-number="7">  <span class="co">#read in the file</span></a>
+<a class="sourceLine" id="cb2-8" data-line-number="8">  one_buoy &lt;-<span class="st"> </span><span class="kw">read_csv</span>(buoy_file, </a>
+<a class="sourceLine" id="cb2-9" data-line-number="9">                       <span class="dt">na =</span> <span class="kw">c</span>(<span class="st">&quot;99&quot;</span>, <span class="st">&quot;999&quot;</span>, </a>
+<a class="sourceLine" id="cb2-10" data-line-number="10">                              <span class="st">&quot;99.00&quot;</span>, <span class="st">&quot;9999.00&quot;</span>,</a>
+<a class="sourceLine" id="cb2-11" data-line-number="11">                              <span class="st">&quot;99.0&quot;</span>, <span class="st">&quot;9999.0&quot;</span>,</a>
+<a class="sourceLine" id="cb2-12" data-line-number="12">                              <span class="st">&quot;999.0&quot;</span>))</a>
+<a class="sourceLine" id="cb2-13" data-line-number="13">  </a>
+<a class="sourceLine" id="cb2-14" data-line-number="14">  <span class="co">#return the file</span></a>
+<a class="sourceLine" id="cb2-15" data-line-number="15">  <span class="kw">return</span>(one_buoy)</a>
+<a class="sourceLine" id="cb2-16" data-line-number="16">  </a>
+<a class="sourceLine" id="cb2-17" data-line-number="17">}</a></code></pre></div>
+</section>
+<section id="our-formatting-function" class="slide level2">
+<h2>Our Formatting Function</h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">format_buoy &lt;-<span class="st"> </span><span class="cf">function</span>(a_buoy_df){</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">  </a>
+<a class="sourceLine" id="cb3-3" data-line-number="3">  a_buoy_df &lt;-<span class="st"> </span>a_buoy_df <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="st">    </span>fix_year_names <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="st">    </span>fix_bad_rows <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="st">    </span>fix_bad_years</a>
+<a class="sourceLine" id="cb3-7" data-line-number="7">  </a>
+<a class="sourceLine" id="cb3-8" data-line-number="8">  <span class="kw">return</span>(a_buoy_df)</a>
+<a class="sourceLine" id="cb3-9" data-line-number="9">}</a></code></pre></div>
+</section>
+<section id="with-lots-of-subfunctions" class="slide level2">
+<h2>With lots of subfunctions</h2>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="co">#bad names</span></a>
+<a class="sourceLine" id="cb4-2" data-line-number="2">fix_year_names &lt;-<span class="st"> </span><span class="cf">function</span>(a_buoy_df){</a>
+<a class="sourceLine" id="cb4-3" data-line-number="3">  </a>
+<a class="sourceLine" id="cb4-4" data-line-number="4">  <span class="kw">names</span>(a_buoy_df) &lt;-<span class="st"> </span><span class="kw">names</span>(a_buoy_df) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="st">  </span><span class="kw">str_replace</span>(<span class="st">&quot;^YY$&quot;</span>, <span class="st">&quot;YYYY&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="st">  </span><span class="kw">str_replace</span>(<span class="st">&quot;X</span><span class="ch">\\</span><span class="st">.YY&quot;</span>, <span class="st">&quot;YYYY&quot;</span>)</a>
+<a class="sourceLine" id="cb4-7" data-line-number="7">  </a>
+<a class="sourceLine" id="cb4-8" data-line-number="8">  <span class="kw">return</span>(a_buoy_df)</a>
+<a class="sourceLine" id="cb4-9" data-line-number="9">}</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">fix_bad_rows &lt;-<span class="st"> </span><span class="cf">function</span>(a_buoy_df){</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">  <span class="cf">if</span>(<span class="kw">is.character</span>(a_buoy_df<span class="op">$</span>MM[<span class="dv">1</span>])){</a>
+<a class="sourceLine" id="cb5-3" data-line-number="3">    </a>
+<a class="sourceLine" id="cb5-4" data-line-number="4">    a_buoy_df &lt;-<span class="st"> </span>a_buoy_df[<span class="op">-</span><span class="dv">1</span>,] <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="st">      </span><span class="kw">mutate_all</span>(as.numeric)</a>
+<a class="sourceLine" id="cb5-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb5-7" data-line-number="7">    }</a>
+<a class="sourceLine" id="cb5-8" data-line-number="8"></a>
+<a class="sourceLine" id="cb5-9" data-line-number="9">    <span class="kw">return</span>(a_buoy_df)</a>
+<a class="sourceLine" id="cb5-10" data-line-number="10">}</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="co">#bad years</span></a>
+<a class="sourceLine" id="cb6-2" data-line-number="2">fix_bad_years &lt;-<span class="st"> </span><span class="cf">function</span>(a_buoy_df){</a>
+<a class="sourceLine" id="cb6-3" data-line-number="3">  <span class="kw">return</span>(a_buoy_df <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="st">           </span><span class="kw">mutate</span>(<span class="dt">YYYY =</span> <span class="kw">ifelse</span>(YYYY <span class="op">&lt;</span><span class="st"> </span><span class="dv">1900</span>, YYYY<span class="op">+</span><span class="dv">1900</span>, YYYY)))</a>
+<a class="sourceLine" id="cb6-5" data-line-number="5">}</a></code></pre></div>
+</section>
+<section id="our-monthly-summarize" class="slide level2">
+<h2>Our monthly summarize</h2>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">make_monthly_buoy &lt;-<span class="st"> </span><span class="cf">function</span>(a_buoy_df){</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">  buoydata &lt;-<span class="st"> </span>a_buoy_df <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="st">    </span><span class="kw">select</span>(YYYY, MM, WVHT, WTMP) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="st">    </span><span class="kw">rename</span>(<span class="dt">Year =</span> YYYY,</a>
+<a class="sourceLine" id="cb7-5" data-line-number="5">         <span class="dt">Month =</span> MM,</a>
+<a class="sourceLine" id="cb7-6" data-line-number="6">         <span class="dt">Wave_Height =</span> WVHT,</a>
+<a class="sourceLine" id="cb7-7" data-line-number="7">         <span class="dt">Temperature_c =</span> WTMP) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="st">    </span><span class="kw">group_by</span>(Year, Month) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb7-9" data-line-number="9"><span class="st">    </span><span class="kw">summarise</span>(<span class="dt">Wave_Height =</span> <span class="kw">mean</span>(Wave_Height, <span class="dt">na.rm=</span>T),</a>
+<a class="sourceLine" id="cb7-10" data-line-number="10">            <span class="dt">Temperature_c =</span> <span class="kw">mean</span>(Temperature_c, <span class="dt">na.rm=</span>T)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb7-11" data-line-number="11"><span class="st">    </span><span class="kw">ungroup</span>()</a>
+<a class="sourceLine" id="cb7-12" data-line-number="12"></a>
+<a class="sourceLine" id="cb7-13" data-line-number="13">  <span class="kw">return</span>(buoydata)</a>
+<a class="sourceLine" id="cb7-14" data-line-number="14">}</a></code></pre></div>
+</section>
+<section id="reading-in-a-file-of-functions" class="slide level2">
+<h2>Reading in a file of functions</h2>
+<p align="left">
+<p>Often, we want to have a file with just all of our functions, so we don’t junk up our working file. This eventually extends to writing packages, but, that’s another class…</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">source</span>(<span class="st">&quot;./get_buoy.R&quot;</span>)</a></code></pre></div>
+</section>
+<section id="this-works-great-for-one-year" class="slide level2">
+<h2>This works great for one year!</h2>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">get_buoy</span>(<span class="dv">2012</span>)</a></code></pre></div>
+<pre><code># A tibble: 7 x 4
+   Year Month Wave_Height Temperature_c
+  &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt;         &lt;dbl&gt;
+1  2012  6.00       0.520         18.2 
+2  2012  7.00       0.407         20.1 
+3  2012  8.00       0.393         20.4 
+4  2012  9.00       0.768         16.4 
+5  2012 10.0        0.890         13.7 
+6  2012 11.0        1.17          10.7 
+7  2012 12.0        1.23           8.74</code></pre>
+</section>
+<section id="but-we-want" class="slide level2">
+<h2>But we want…</h2>
+<p><img src="20_iteration_files/figure-revealjs/plottry-1.jpeg" width="672" /></p>
+</section>
+<section id="you-can-load-one-year-but" class="slide level2">
+<h2>You can load one year, but…</h2>
+<p><img data-src="./Images/functions/buoyfiles.jpg" /></p>
+</section>
+<section id="how-do-we-get-to-there-from-here" class="slide level2">
+<h2>How do we get to there from here?</h2>
+<p>One solution:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">buoys &lt;-<span class="st"> </span><span class="kw">rbind</span>(<span class="kw">get_buoy</span>(<span class="dv">1986</span>),</a>
+<a class="sourceLine" id="cb11-2" data-line-number="2">               <span class="kw">get_buoy</span>(<span class="dv">1987</span>),</a>
+<a class="sourceLine" id="cb11-3" data-line-number="3">               <span class="kw">get_buoy</span>(<span class="dv">1988</span>)..........</a>
+<a class="sourceLine" id="cb11-4" data-line-number="4">)</a></code></pre></div>
+<div class="fragment">
+<h2>
+NO!
+</h2>
+</div>
+</section>
+<section id="isnt-this-what-computersrobots-are-all-about" class="slide level2">
+<h2>Isn’t this what computers/robots are all about?</h2>
+<p><Br><br> <img data-src="./Images/iteration/assembly_line.gif" /></p>
+</section>
+<section id="the-old-school-way" class="slide level2">
+<h2>The old school way</h2>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="co">#create a tibble</span></a>
+<a class="sourceLine" id="cb12-2" data-line-number="2">buoys &lt;-<span class="st"> </span><span class="kw">get_buoy</span>(<span class="dv">1986</span>)</a>
+<a class="sourceLine" id="cb12-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb12-4" data-line-number="4"><span class="co">#now iterate over the remaining years and rbind</span></a>
+<a class="sourceLine" id="cb12-5" data-line-number="5"><span class="cf">for</span>(one_year <span class="cf">in</span> <span class="dv">1987</span><span class="op">:</span><span class="dv">2013</span>){</a>
+<a class="sourceLine" id="cb12-6" data-line-number="6">  </a>
+<a class="sourceLine" id="cb12-7" data-line-number="7">  buoys &lt;-<span class="st"> </span><span class="kw">rbind</span>(buoys, <span class="kw">get_buoy</span>(<span class="dv">1986</span>))</a>
+<a class="sourceLine" id="cb12-8" data-line-number="8">  </a>
+<a class="sourceLine" id="cb12-9" data-line-number="9">}</a></code></pre></div>
+</section>
+<section id="the-map-paradigm" class="slide level2">
+<h2>The Map Paradigm</h2>
+<p><img data-src="./Images/iteration/map.png" /></p>
+</section>
+<section id="section-1" class="slide level2">
+<h2></h2>
+<p><img data-src="./Images/iteration/purrr.png" style="width:60.0%" /></p>
+</section>
+<section id="map-functions" class="slide level2">
+<h2>Map functions</h2>
+<ul>
+<li><p>Take a list or vector as input</p></li>
+<li><p>Apply a function to each elment of the list/vector</p></li>
+<li><p>Return the corresponding object, bound together into a prespecified type</p></li>
+</ul>
+</section>
+<section id="median-example" class="slide level2">
+<h2>Median Example</h2>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">df &lt;-<span class="st"> </span><span class="kw">tibble</span>(</a>
+<a class="sourceLine" id="cb13-2" data-line-number="2">  <span class="dt">a =</span> <span class="kw">rnorm</span>(<span class="dv">10</span>),</a>
+<a class="sourceLine" id="cb13-3" data-line-number="3">  <span class="dt">b =</span> <span class="kw">rnorm</span>(<span class="dv">10</span>),</a>
+<a class="sourceLine" id="cb13-4" data-line-number="4">  <span class="dt">c =</span> <span class="kw">rnorm</span>(<span class="dv">10</span>),</a>
+<a class="sourceLine" id="cb13-5" data-line-number="5">  <span class="dt">d =</span> <span class="kw">rnorm</span>(<span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb13-6" data-line-number="6">)</a></code></pre></div>
+</section>
+<section id="median-example-1" class="slide level2">
+<h2>Median Example</h2>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="co">#This actually already loaded with tidyverse</span></a>
+<a class="sourceLine" id="cb14-2" data-line-number="2"><span class="kw">library</span>(purrr) </a>
+<a class="sourceLine" id="cb14-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb14-4" data-line-number="4"><span class="kw">map</span>(df, median)</a></code></pre></div>
+<pre><code>$a
+[1] -0.1427377
+
+$b
+[1] 0.1147585
+
+$c
+[1] -0.04557728
+
+$d
+[1] -0.1944985</code></pre>
+</section>
+<section id="the-map-paradigm-1" class="slide level2">
+<h2>The Map Paradigm</h2>
+<p><img data-src="./Images/iteration/map.png" /></p>
+</section>
+<section id="what-if-i-dont-want-a-list" class="slide level2">
+<h2>What if I don’t want a list</h2>
+<p><img data-src="./Images/iteration/meowtini.jpg" /></p>
+</section>
+<section id="the-world-of-maps" class="slide level2">
+<h2>The world of maps</h2>
+<ul>
+<li><code>map()</code> makes a list.</li>
+<li><code>map_df()</code> makes a tibble/data frame.</li>
+<li><code>map_lgl()</code> makes a logical vector.</li>
+<li><code>map_int()</code> makes an integer vector.</li>
+<li><code>map_dbl()</code> makes a double vector.</li>
+<li><code>map_chr()</code> makes a character vector.</li>
+</ul>
+</section>
+<section id="more-medians" class="slide level2">
+<h2>More medians</h2>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw">map_dbl</span>(df, median)</a></code></pre></div>
+<pre><code>          a           b           c           d 
+-0.14273773  0.11475855 -0.04557728 -0.19449852 </code></pre>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="kw">map_chr</span>(df, median)</a></code></pre></div>
+<pre><code>          a           b           c           d 
+&quot;-0.142738&quot;  &quot;0.114759&quot; &quot;-0.045577&quot; &quot;-0.194499&quot; </code></pre>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="kw">map_df</span>(df, median)</a></code></pre></div>
+<pre><code># A tibble: 1 x 4
+       a     b       c      d
+   &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;
+1 -0.143 0.115 -0.0456 -0.194</code></pre>
+</section>
+<section id="what-if-i-have-more-than-one-argument" class="slide level2">
+<h2>What if I have more than one argument?</h2>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="co">#add extra arguments at the end</span></a>
+<a class="sourceLine" id="cb22-2" data-line-number="2"><span class="kw">map_dbl</span>(df, median, <span class="dt">na.rm=</span>T)</a></code></pre></div>
+<pre><code>          a           b           c           d 
+-0.14273773  0.11475855 -0.04557728 -0.19449852 </code></pre>
+</section>
+<section id="what-if-i-have-more-than-one-argument-1" class="slide level2">
+<h2>What if I have more than one argument?</h2>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1"><span class="co">#using ~ and .</span></a>
+<a class="sourceLine" id="cb24-2" data-line-number="2"><span class="kw">map_dbl</span>(df, <span class="op">~</span><span class="kw">median</span>(., <span class="dt">na.rm=</span>T))</a></code></pre></div>
+<pre><code>          a           b           c           d 
+-0.14273773  0.11475855 -0.04557728 -0.19449852 </code></pre>
+</section>
+<section id="you-try" class="slide level2">
+<h2>You try!</h2>
+<ol type="1">
+<li><p>What does <code>map(-2:2, rnorm, n = 5)</code> do? How is it different from <code>map_dbl(-2:2, rnorm, n = 5)</code>?</p></li>
+<li><p>Get the mean of each column of <code>df</code></p></li>
+<li><p>Compute the number of unique values in each column of <code>iris</code> (hint, you’ll need length and unique)!</p></li>
+</ol>
+</section>
+<section id="now-what-about-our-data-problem" class="slide level2">
+<h2>Now, what about our data problem?</h2>
+<ul>
+<li><p>We have a lot of years</p></li>
+<li><p>These years can be put into a vector - 1986:2013, so….</p></li>
+</ul>
+</section>
+<section id="your-turn-again" class="slide level2">
+<h2>Your turn again!</h2>
+<ul>
+<li><p>Make one big tibble using <code>map_df()</code>, a vector of years, and <code>get_buoy</code></p></li>
+<li><p>Get the annual mean of wave height</p></li>
+<li><p>Plot</p></li>
+</ul>
+</section>
+<section id="one-line-to-rule-them-all" class="slide level2">
+<h2>One Line to rule them all</h2>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1">all_buoys &lt;-<span class="st"> </span><span class="kw">map_df</span>(<span class="dv">1986</span><span class="op">:</span><span class="dv">2013</span>, get_buoy)</a></code></pre></div>
+<div class="fragment">
+<pre><code># A tibble: 331 x 4
+    Year Month Wave_Height Temperature_c
+   &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt;         &lt;dbl&gt;
+ 1  1986  1.00          NA          3.62
+ 2  1986  2.00          NA          2.68
+ 3  1986  3.00          NA          3.04
+ 4  1986  4.00          NA          6.42
+ 5  1986  5.00          NA         10.5 
+ 6  1986  6.00          NA         13.7 
+ 7  1986  7.00          NA         17.1 
+ 8  1986  8.00          NA         18.1 
+ 9  1986  9.00          NA         14.9 
+10  1986 10.0           NA         12.8 
+# ... with 321 more rows</code></pre>
+</div>
+</section>
+<section id="a-standard-workflow" class="slide level2">
+<h2>A Standard Workflow</h2>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1"><span class="co">#Annual Means</span></a>
+<a class="sourceLine" id="cb28-2" data-line-number="2">annual_buoys &lt;-<span class="st"> </span>all_buoys <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb28-3" data-line-number="3"><span class="st">  </span><span class="kw">group_by</span>(Year) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb28-4" data-line-number="4"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">Wave_Height =</span> <span class="kw">mean</span>(Wave_Height, <span class="dt">na.rm=</span>T),</a>
+<a class="sourceLine" id="cb28-5" data-line-number="5">            <span class="dt">Temperature_c =</span> <span class="kw">mean</span>(Temperature_c, <span class="dt">na.rm=</span>T))</a>
+<a class="sourceLine" id="cb28-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb28-7" data-line-number="7"><span class="co">#Plot!</span></a>
+<a class="sourceLine" id="cb28-8" data-line-number="8"><span class="kw">ggplot</span>(annual_buoys, </a>
+<a class="sourceLine" id="cb28-9" data-line-number="9">       <span class="kw">aes</span>(<span class="dt">x=</span>Year, <span class="dt">y=</span>Wave_Height)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb28-10" data-line-number="10"><span class="st">  </span><span class="kw">geom_line</span>()</a></code></pre></div>
+</section>
+<section id="our-plot" class="slide level2">
+<h2>Our Plot</h2>
+<p><img src="20_iteration_files/figure-revealjs/plot2-1.jpeg" width="672" /></p>
+</section>
+<section id="section-2" class="slide level2">
+<h2></h2>
+<p><img data-src="./Images/iteration/to_purr_or_not.jpg" /></p>
+</section>
+    </div>
+  </div>
+
+  <script src="libs/reveal.js-3.3.0.1/lib/js/head.min.js"></script>
+  <script src="libs/reveal.js-3.3.0.1/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Display the page number of the current slide
+        slideNumber: true,
+        // Push each slide change to the browser history
+        history: true,
+        // Vertical centering of slides
+        center: false,
+        // Opens links in an iframe preview overlay
+        previewLinks: true,
+        // Transition style
+        transition: 'fade', // none/fade/slide/convex/concave/zoom
+        // Transition style for full page slide backgrounds
+        backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
+
+
+
+        // Optional reveal.js plugins
+        dependencies: [
+        ]
+      });
+    </script>
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
+<script>
+  (function() {
+    if (window.jQuery) {
+      Reveal.addEventListener( 'slidechanged', function(event) {  
+        window.jQuery(event.previousSlide).trigger('hidden');
+        window.jQuery(event.currentSlide).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+
+  </body>
+</html>

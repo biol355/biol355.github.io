@@ -1,0 +1,273 @@
+---
+title: "Monkeying Around with Functions and Tidyr"
+author: "Intro to Data Science for Biology"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+```
+
+## Marmosets
+
+Today, this is your subject:
+
+<center>![](./marmoset.jpg)</center>
+
+That's right, it's a data set on the effects of different diets on marmosets. You have been handed an excel file with a number of sheets of the same experiment done in different years, and you are expected to answer the following question:
+
+How do different diets affect different species of Marmosets?
+
+## 1) That's UGLY!
+
+Let's begin by looking at the data. What are the features of the data that are, shall we say, less than tidy? What are the different things we will have to do to clean individual sheets?
+
+## 2) Just one sheet
+
+Now, let's walk through the different steps of just loading up the first worksheet. Let's begin by noticing that the first few lines do not contain the actual column names. Let's look at what happens if we just load the first sheet
+
+```{r}
+library(readxl)
+marmoset_1987 <- read_excel("./monkey_weights.xlsx")
+
+head(marmoset_1987)
+```
+
+### 2a) Meta-data
+Yuck. We can see the column headers are bad. But, there's some nice meta-data in there as well. Line 2 has a year. Line 3 has some rainfall information in cm. And if we look at line 2 in general...
+
+```{r}
+as.data.frame(marmoset_1987[2,])
+```
+
+In column 4, there's a start body condition.  So, loading this isn't all bad. Let's begin by saving those three values: Year, Rainfall (which is always in cm), and Body condition into variables. You'll need to use regular expressions with `gsub` to strip out the actual numbers in rainfall and just the actual status of the body condition. You'll have to use *row,column* notation for this as well to get the values.
+
+```{r echo=FALSE}
+year <- marmoset_1987[1,1]
+rainfall <- gsub("[A-Z,a-z,\\:, ]", "", marmoset_1987[2,1])
+body_condition <- gsub("Start Body Condition: ", "", marmoset_1987[2,4])
+```
+
+### 2b) Loading in a sensible data frame
+
+Now that we have the metadata saved in variables, we can reload the data, but now skipping all of those bad lines.  Load it up and show me that you've loaded it properly.
+
+```{r echo=FALSE}
+marmoset_1987 <- read_excel("./monkey_weights.xlsx", skip=3)
+marmoset_1987 <- marmoset_1987 %>%
+  filter(!is.na(Diet))
+```
+
+Notice that last line keeps loading, despite being NA (go look).  Huh. Get rid of it or any line for which the Diet is NA
+
+### 2c) Problem 1: Someone doesn't know how to spell genus
+
+Oops! One of your data entry people screwed and misspelled "Genus". Fix it.
+
+```{r echo=FALSE}
+names(marmoset_1987) <- gsub("Gebus", "Genus", names(marmoset_1987))
+```
+
+### 2d) Problem 2: Genus and species stop short
+
+Oops! One of your data entry people screwed and misspelled didn't fill the species all the way down. Fix it!
+
+```{r echo=FALSE}
+marmoset_1987 <- marmoset_1987 %>%
+  fill(Genus, species, .direction="down")
+```
+
+### 2e) Problem 3: Unique subject IDs
+
+Uh oh - each subject doesn't have a unique ID number! Give them one. It should be a unique ID that contains the year, as there will be other years. You might need to do some `paste`-ing here. And it might be easier to use ye olde `$` notation rather than mutate (although do it any way you want.) For example, I created IDs like `46_1987`
+
+```{r echo=FALSE}
+marmoset_1987$Subject_ID <- paste(1:nrow(marmoset_1987), year, sep="_")
+```
+
+### 2f) Problem 4: Shape of the data
+
+To plot a time series, you're going to want to have a long, not wide, format of weight gain. You also need to track individual subjects.  So, first, gather up the data of weight gain for individual weeks. Perhaps call the key column `Week` and the values `Gain`. You also have a lot of columns to exclude, so the `:` operator might come in handy, although it's not necessary. 
+
+```{r echo=FALSE}
+marmoset_1987 <- marmoset_1987 %>%
+  gather(Week, Gain, -c(Genus:Diet), -Subject_ID)
+```
+
+### 2g) Problem 5: mg and ug? What?
+So, the gain column has measurement units in it.  Yuck. Use `separate` to split it into two columns - the actual Gain column and a units column. You'll need to mutate your Gain column to make it `as.numeric`.
+
+```{r echo=FALSE}
+marmoset_1987 <- marmoset_1987 %>%
+  separate(Gain, into = c("Gain", "Units"), sep=" ") %>%
+  mutate(Gain = as.numeric(Gain))
+```
+
+Once that's done, we need to recognize that 1 mg = 0.001g and 1ug = 0.0001g. Quite different. We need to convert the Gain column all into the same units - miligrams!  There are a lot of ways to do this (some we'll cover next week). For now, let's make a function that takes a vector of unit types ("ug" or "mg"). For every "ug" it swaps it with 0.1. For every "mg" it swaps it with 1. Then it turns the output vector into a numeric vector and returns it. What's great is that unknown measurements will be returned as NAs
+
+```{r echo=FALSE}
+unit_fun <- function(unit_vec){
+  unit_vec <- gsub("mg", 1, unit_vec)
+  unit_vec <- gsub("ug", 0.1, unit_vec)
+  unit_vec <- gsub("cg", 10, unit_vec)
+  
+  return(as.numeric(unit_vec))
+}
+
+#unit_fun(c("mg", "mg", "ug", "dg"))
+#unit_fun("ug")
+#unit_fun("cg")
+```
+
+Once you've done that, you can use mutate with your function to divide gain by whatever output value comes from your function to get a standardized weight change in mg. After you do that, use `select` to get rid of the unsightly Units column.
+
+```{r echo=FALSE}
+marmoset_1987 <- marmoset_1987 %>%
+  mutate(Gain = Gain * unit_fun(Units)) %>%
+  dplyr::select(-Units)
+```
+
+### 2h) Problem 6: The week column is awfully big
+
+Hrm. All of that `Weight Gain After \\d week` stuff in the Week column has got to go!
+
+```{r echo=FALSE}
+marmoset_1987 <- marmoset_1987 %>%
+  mutate(Week = gsub("[A-Z, a-z, ]", "", Week))
+```
+
+### 2i) Problem 7: Where did that meta-data go?
+
+OK, the last bit - remember when we saved year, body status, and rainfall? Add those in as columns to this new data set! (You'll likely need to use `$` )
+
+```{r echo=FALSE}
+marmoset_1987$Year <- as.numeric(year)
+marmoset_1987$Rainfall <- rainfall
+marmoset_1987$Body_Condition <- body_condition
+```
+
+## 3) See the fruits of your labors
+
+OK, now that you've made this happen, what can we do here? Why not visualize the time-series of weight gain for individuals, highlighting species (or even taxon where you paste genus and species) and Diet. Can you draw any conclusions? 
+
+```{r echo=FALSE, eval=FALSE}
+library(ggplot2)
+
+ggplot(data=marmoset_1987, aes(x=Week, y=Gain, group=Subject_ID)) +
+  facet_grid(species ~ Diet, scale="free_y") +
+  geom_line()
+```
+
+## 4) Generalize it!
+
+OK, now that you have your `tidyr` mojo going, make a generalized function that can read in any sheet. Test it on each of the four - do you need to modify anything from your specific use-case above? You can do this in one big function, or perhaps try and split it into smaller sub-functions. Remember - when it doubt, THINK - pseudo-code out the workflow, make sub-functions, etc.
+
+And, hey, maybe there are some other units in here (remember, centi- is .01g, or, 10mg, so you might have to futz with your unit function)
+
+```{r echo=FALSE}
+
+
+process_marmoset <- function(sheet) {
+  marmoset <- read_excel("./monkey_weights.xlsx", sheet = sheet)
+  
+  year <- marmoset[1, 1]
+  rainfall <- gsub("[A-Z,a-z,\\:, ]", "", marmoset[2, 1])
+  body_condition <- gsub("Start Body Condition: ", "", marmoset[2, 4])
+  
+  marmoset <- read_excel("./monkey_weights.xlsx", skip = 3, sheet=sheet)
+  marmoset <- marmoset %>%
+    filter(!is.na(Diet))
+  
+  names(marmoset) <- gsub("Gebus", "Genus", names(marmoset))
+  
+  marmoset <- marmoset %>%
+    fill(Genus, species, .direction = "down")
+  
+  marmoset$Subject_ID <- paste(1:nrow(marmoset), year, sep = "_")
+  
+  marmoset <- marmoset %>%
+    gather(Week, Gain,-c(Genus:Diet),-Subject_ID)
+  
+  marmoset <- marmoset %>%
+    separate(Gain, into = c("Gain", "Units"), sep = " ") %>%
+    mutate(Gain = as.numeric(Gain))
+  
+  marmoset <- marmoset %>%
+  mutate(Week = gsub("[A-Z, a-z, ]", "", Week))
+  
+  marmoset$Year <- as.numeric(year)
+  marmoset$Rainfall <- rainfall
+  marmoset$Body_Condition <- body_condition
+  
+  marmoset
+}
+
+```
+### 4a) Make the mega-data set
+
+With a for loop to generate a master data set using the function(s) you have just written.
+
+```{r echo=FALSE}
+#initialize a data frame
+marmoset <- process_marmoset(1)
+
+#loop
+for(i in 2:4){
+  marmoset <- rbind(marmoset, process_marmoset(i))
+}
+```
+## 5) Visualize!
+
+With your mega-data set, make a similar plot to that above (species and diet) but add some color for one of the other columsn - Year, Rainfall, and/or Body Condition. See anything? You are the analyst. Using tools at your disposal like summarize, etc., how would you create a visualizatio that tells us something about how diet affected monkies? There are a lot of answers here, so have fun!
+
+```{r echo=FALSE, eval=FALSE}
+
+ggplot(data=marmoset, aes(x=Week, y=Gain, group=Subject_ID, color=as.factor(Year))) +
+  facet_grid(species ~ Diet, scale="free_y") +
+  geom_line()
+
+marmoset_summary <- marmoset %>%
+  group_by(Genus, species, Year, Diet, Body_Condition, Week) %>%
+  summarize(Gain = mean(Gain)) %>%
+  mutate(id = paste0(Year,Genus,species, sep="_"))
+
+
+ggplot(data=marmoset_summary, aes(x=Week, y=Gain, group = id, color=species)) +
+  facet_grid(Body_Condition ~ Diet, scale="free_y") +
+  geom_line()
+
+```
+
+## 6) T-tests!
+
+OK, now that you have your data all combined, let's look at whether diet **really** mattered. Filter your data to week 4, and then for each species, run a t-test comparing Mixed Fruit versus Bananna (you'll have to filter out the experimental diet!) and visualize the difference. Are there any general trends?
+
+For extra credit, see http://www.machinegurning.com/rstats/iterating/ and/or https://drsimonj.svbtle.com/running-a-model-on-separate-groups about how to do this in a `dplyr` and `purrr` context and automate the whole thing. Warning: your jaw will drop
+
+```{r, echo=FALSE}
+library(purrr)
+marmoset_filter <- marmoset %>%
+  filter(Diet != "Diet 5013x") %>%
+  filter(Week==4)
+
+marmoset_filter %>%
+  group_by(Genus, species) %>%
+  nest() %>%
+  mutate(t_results = map(data, ~broom::tidy(t.test(Gain ~ Diet, data = .)))) %>%
+  unnest(t_results)
+
+marm_t <- marmoset_filter %>%
+  mutate(sp = paste(Genus, species)) %>%
+  split(.$sp) %>%
+  map(~t.test(Gain ~ Diet, data = .)) %>%
+  map(~broom::tidy(.)) %>%
+  bind_rows(.id = 'species')
+
+ggplot(marm_t, aes(x=species, y=estimate, 
+                   ymin=conf.low, ymax=conf.high)) +
+  geom_pointrange() +
+  ylab("Difference between Bananna and Mixed Fruit")
+```

@@ -12,7 +12,7 @@ navbar:
   - text: "R Errors"
     href: error.html
   - text: "Final"
-    href: final.html
+    href: final_project.html
   - text: "Syllabus"
     menu:
        - text: "Lecture"
