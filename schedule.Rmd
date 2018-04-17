@@ -166,7 +166,7 @@ __Homework:__ [Functions and t-tests](./assignments/7_functions_tidyr.html), [Ma
  `r datestring`  
 __Lectures:__ [Analysis of Variance](./Lectures/23_anova.html)  
 __Objective(s):__ Analyze the differences between multiple means.  Fit a linear regression using lm() in R through a bivariate scatterplot. Evaluate assumptions of a linear model with normal error   
-__Biological Examples:__  Jet-lag recovery and circadian rhythms. Seal life history variation  
+__Biological Examples:__  Jet-lag recovery and circadian rhythms. Seal life history variation  [files](./Lectures/data/anova.zip)  
 __Etherpad:__ https://etherpad.wikimedia.org/p/355-anova   
 
 ### Week  13 & 14. General and Generalized Linear Models, Multiple Predictors  
