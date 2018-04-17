@@ -158,7 +158,7 @@ __Objective(s):__ Describe the basics of probability and p-values, Compare group
 __Biological Examples:__ The effects of testosterone on bird behavior.  
 __Lab:__ [T-Tests](./Labs/lab_9_t.html)  
 __Files:__ [Blackbird Testosterone Implants](./Labs/data/12e2BlackbirdTestosterone.csv), [Survivorship of Salmon and Trout](./Labs/data/12e4BrookTrout.csv)  
-Homework: [Functions and t-tests](./assignments/7_functions_tidyr.html), [Marmoset data](./assignments/monkey_weights.xlsx)  
+__Homework:__ [Functions and t-tests](./assignments/7_functions_tidyr.html), [Marmoset data](./assignments/monkey_weights.xlsx)  
   
 ### Week 12. Analysis of Variance and the Linear Model
 ```{r next_date, echo=FALSE}
@@ -167,6 +167,7 @@ Homework: [Functions and t-tests](./assignments/7_functions_tidyr.html), [Marmos
 __Lectures:__ [Analysis of Variance](./Lectures/23_anova.html)  
 __Objective(s):__ Analyze the differences between multiple means.  Fit a linear regression using lm() in R through a bivariate scatterplot. Evaluate assumptions of a linear model with normal error   
 __Biological Examples:__  Jet-lag recovery and circadian rhythms. Seal life history variation  
+__Etherpad:__ https://etherpad.wikimedia.org/p/355-anova   
 
 ### Week  13 & 14. General and Generalized Linear Models, Multiple Predictors  
 ```{r next_date_2, echo=FALSE}
