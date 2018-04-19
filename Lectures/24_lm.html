@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title>24_lm.utf8</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="24_lm_files/reveal.js-3.3.0.1/css/reveal.css"/>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; position: absolute; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; }
+pre.numberSource a.sourceLine:empty
+  { position: absolute; }
+pre.numberSource a.sourceLine::before
+  { content: attr(data-line-number);
+    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="24_lm_files/reveal.js-3.3.0.1/css/theme/white.css" id="theme">
+
+
+  <!-- some tweaks to reveal css -->
+  <style type="text/css">
+    .reveal h1 { font-size: 2.0em; }
+    .reveal h2 { font-size: 1.5em;  }
+    .reveal h3 { font-size: 1.25em;	}
+    .reveal h4 { font-size: 1em;	}
+
+    .reveal .slides>section,
+    .reveal .slides>section>section {
+      padding: 0px 0px;
+    }
+
+
+
+    .reveal table {
+      border-width: 1px;
+      border-spacing: 2px;
+      border-style: dotted;
+      border-color: gray;
+      border-collapse: collapse;
+      font-size: 0.7em;
+    }
+
+    .reveal table th {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      font-weight: bold;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+    .reveal table td {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+
+  </style>
+
+    <style type="text/css">code{white-space: pre;}</style>
+
+
+<!-- Printing and PDF exports -->
+<script id="paper-css" type="application/dynamic-css">
+
+/* Default Print Stylesheet Template
+   by Rob Glazebrook of CSSnewbie.com
+   Last Updated: June 4, 2008
+
+   Feel free (nay, compelled) to edit, append, and
+   manipulate this file as you see fit. */
+
+
+@media print {
+
+	/* SECTION 1: Set default width, margin, float, and
+	   background. This prevents elements from extending
+	   beyond the edge of the printed page, and prevents
+	   unnecessary background images from printing */
+	html {
+		background: #fff;
+		width: auto;
+		height: auto;
+		overflow: visible;
+	}
+	body {
+		background: #fff;
+		font-size: 20pt;
+		width: auto;
+		height: auto;
+		border: 0;
+		margin: 0 5%;
+		padding: 0;
+		overflow: visible;
+		float: none !important;
+	}
+
+	/* SECTION 2: Remove any elements not needed in print.
+	   This would include navigation, ads, sidebars, etc. */
+	.nestedarrow,
+	.controls,
+	.fork-reveal,
+	.share-reveal,
+	.state-background,
+	.reveal .progress,
+	.reveal .backgrounds {
+		display: none !important;
+	}
+
+	/* SECTION 3: Set body font face, size, and color.
+	   Consider using a serif font for readability. */
+	body, p, td, li, div {
+		font-size: 20pt!important;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		color: #000;
+	}
+
+	/* SECTION 4: Set heading font face, sizes, and color.
+	   Differentiate your headings from your body text.
+	   Perhaps use a large sans-serif for distinction. */
+	h1,h2,h3,h4,h5,h6 {
+		color: #000!important;
+		height: auto;
+		line-height: normal;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		text-shadow: 0 0 0 #000 !important;
+		text-align: left;
+		letter-spacing: normal;
+	}
+	/* Need to reduce the size of the fonts for printing */
+	h1 { font-size: 28pt !important;  }
+	h2 { font-size: 24pt !important; }
+	h3 { font-size: 22pt !important; }
+	h4 { font-size: 22pt !important; font-variant: small-caps; }
+	h5 { font-size: 21pt !important; }
+	h6 { font-size: 20pt !important; font-style: italic; }
+
+	/* SECTION 5: Make hyperlinks more usable.
+	   Ensure links are underlined, and consider appending
+	   the URL to the end of the link for usability. */
+	a:link,
+	a:visited {
+		color: #000 !important;
+		font-weight: bold;
+		text-decoration: underline;
+	}
+	/*
+	.reveal a:link:after,
+	.reveal a:visited:after {
+		content: " (" attr(href) ") ";
+		color: #222 !important;
+		font-size: 90%;
+	}
+	*/
+
+
+	/* SECTION 6: more reveal.js specific additions by @skypanther */
+	ul, ol, div, p {
+		visibility: visible;
+		position: static;
+		width: auto;
+		height: auto;
+		display: block;
+		overflow: visible;
+		margin: 0;
+		text-align: left !important;
+	}
+	.reveal pre,
+	.reveal table {
+		margin-left: 0;
+		margin-right: 0;
+	}
+	.reveal pre code {
+		padding: 20px;
+		border: 1px solid #ddd;
+	}
+	.reveal blockquote {
+		margin: 20px 0;
+	}
+	.reveal .slides {
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 0 !important;
+		zoom: 1 !important;
+
+		overflow: visible !important;
+		display: block !important;
+
+		text-align: left !important;
+		-webkit-perspective: none;
+		   -moz-perspective: none;
+		    -ms-perspective: none;
+		        perspective: none;
+
+		-webkit-perspective-origin: 50% 50%;
+		   -moz-perspective-origin: 50% 50%;
+		    -ms-perspective-origin: 50% 50%;
+		        perspective-origin: 50% 50%;
+	}
+	.reveal .slides section {
+		visibility: visible !important;
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+		display: block !important;
+		overflow: visible !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 60px 20px !important;
+		z-index: auto !important;
+
+		opacity: 1 !important;
+
+		page-break-after: always !important;
+
+		-webkit-transform-style: flat !important;
+		   -moz-transform-style: flat !important;
+		    -ms-transform-style: flat !important;
+		        transform-style: flat !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+
+		-webkit-transition: none !important;
+		   -moz-transition: none !important;
+		    -ms-transition: none !important;
+		        transition: none !important;
+	}
+	.reveal .slides section.stack {
+		padding: 0 !important;
+	}
+	.reveal section:last-of-type {
+		page-break-after: avoid !important;
+	}
+	.reveal section .fragment {
+		opacity: 1 !important;
+		visibility: visible !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+	}
+	.reveal section img {
+		display: block;
+		margin: 15px 0px;
+		background: rgba(255,255,255,1);
+		border: 1px solid #666;
+		box-shadow: none;
+	}
+
+	.reveal section small {
+		font-size: 0.8em;
+	}
+
+}  
+</script>
+
+
+<script id="pdf-css" type="application/dynamic-css">
+    
+/**
+ * This stylesheet is used to print reveal.js
+ * presentations to PDF.
+ *
+ * https://github.com/hakimel/reveal.js#pdf-export
+ */
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+
+body {
+	margin: 0 auto !important;
+	border: 0;
+	padding: 0;
+	float: none !important;
+	overflow: visible;
+}
+
+html {
+	width: 100%;
+	height: 100%;
+	overflow: visible;
+}
+
+/* Remove any elements not needed in print. */
+.nestedarrow,
+.reveal .controls,
+.reveal .progress,
+.reveal .playback,
+.reveal.overview,
+.fork-reveal,
+.share-reveal,
+.state-background {
+	display: none !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	text-shadow: 0 0 0 #000 !important;
+}
+
+.reveal pre code {
+	overflow: hidden !important;
+	font-family: Courier, 'Courier New', monospace !important;
+}
+
+ul, ol, div, p {
+	visibility: visible;
+	position: static;
+	width: auto;
+	height: auto;
+	display: block;
+	overflow: visible;
+	margin: auto;
+}
+.reveal {
+	width: auto !important;
+	height: auto !important;
+	overflow: hidden !important;
+}
+.reveal .slides {
+	position: static;
+	width: 100%;
+	height: auto;
+
+	left: auto;
+	top: auto;
+	margin: 0 !important;
+	padding: 0 !important;
+
+	overflow: visible;
+	display: block;
+
+	-webkit-perspective: none;
+	   -moz-perspective: none;
+	    -ms-perspective: none;
+	        perspective: none;
+
+	-webkit-perspective-origin: 50% 50%; /* there isn't a none/auto value but 50-50 is the default */
+	   -moz-perspective-origin: 50% 50%;
+	    -ms-perspective-origin: 50% 50%;
+	        perspective-origin: 50% 50%;
+}
+
+.reveal .slides section {
+	page-break-after: always !important;
+
+	visibility: visible !important;
+	position: relative !important;
+	display: block !important;
+	position: relative !important;
+
+	margin: 0 !important;
+	padding: 0 !important;
+	box-sizing: border-box !important;
+	min-height: 1px;
+
+	opacity: 1 !important;
+
+	-webkit-transform-style: flat !important;
+	   -moz-transform-style: flat !important;
+	    -ms-transform-style: flat !important;
+	        transform-style: flat !important;
+
+	-webkit-transform: none !important;
+	   -moz-transform: none !important;
+	    -ms-transform: none !important;
+	        transform: none !important;
+}
+
+.reveal section.stack {
+	margin: 0 !important;
+	padding: 0 !important;
+	page-break-after: avoid !important;
+	height: auto !important;
+	min-height: auto !important;
+}
+
+.reveal img {
+	box-shadow: none;
+}
+
+.reveal .roll {
+	overflow: visible;
+	line-height: 1em;
+}
+
+/* Slide backgrounds are placed inside of their slide when exporting to PDF */
+.reveal section .slide-background {
+	display: block !important;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: -1;
+}
+
+/* All elements should be above the slide-background */
+.reveal section>* {
+	position: relative;
+	z-index: 1;
+}
+
+/* Display slide speaker notes when 'showNotes' is enabled */
+.reveal .speaker-notes-pdf {
+	display: block;
+	width: 100%;
+	max-height: none;
+	left: auto;
+	top: auto;
+	z-index: 100;
+}
+
+/* Display slide numbers when 'slideNumber' is enabled */
+.reveal .slide-number-pdf {
+	display: block;
+	position: absolute;
+	font-size: 14px;
+}
+
+</script>
+
+
+<script>
+var style = document.createElement( 'style' );
+style.type = 'text/css';
+var style_script_id = window.location.search.match( /print-pdf/gi ) ? 'pdf-css' : 'paper-css';
+var style_script = document.getElementById(style_script_id).text;
+style.innerHTML = style_script;
+document.getElementsByTagName('head')[0].appendChild(style);
+</script>
+
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+
+<section id="diving-into-the-linear-model" class="slide level2">
+<h2>Diving into the Linear Model</h2>
+<p><img data-src="./Images/lm/linear_regression_love.gif" style="width:50.0%" /></p>
+</section>
+<section id="deeper-into-the-world-of-linear-models" class="slide level2">
+<h2>Deeper into the World of Linear Models</h2>
+<ol type="1">
+<li><p>Are groups different: T, F, and Multiple Comparisons</p></li>
+<li><p>Linear Regression</p></li>
+<li><p>Nonlinear Regression</p></li>
+</ol>
+</section>
+<section id="the-knees-the-thing" class="slide level2">
+<h2>The Knee’s The Thing!</h2>
+<p><img data-src="./Images/anova/_47947_knee300.jpg" /> <br><br></p>
+<ul>
+<li>Test if shining light behind knees or on eyes helped jet lag</li>
+<li>Also a control group with no light</li>
+<li>n=7</li>
+</ul>
+</section>
+<section id="many-questions" class="slide level2">
+<h2>Many Questions</h2>
+<ol type="1">
+<li class="fragment">Are groups different from 0?<br><br></li>
+<li class="fragment">Are groups different from each other?<br><br></li>
+<li class="fragment">Are groups a meaningful explanatory variable?</li>
+</ol>
+</section>
+<section id="which-of-these-groups-differ-a-job-for-t" class="slide level2">
+<h2>Which of these Groups Differ: A Job for T</h2>
+<p><img src="24_lm_files/figure-revealjs/unnamed-chunk-1-1.png" width="672" /></p>
+</section>
+<section id="the-problem-of-multiple-comparisons" class="slide level2">
+<h2>The Problem of Multiple Comparisons</h2>
+<p><img src="multcomp.gif"></p>
+</section>
+<section id="solutions-to-multiple-comparisons" class="slide level2">
+<h2>Solutions to Multiple Comparisons?</h2>
+<ol type="1">
+<li class="fragment">Ignore it - a test is a test<br>
+<ul>
+<li class="fragment">Least Squares Difference test<br><br></li>
+</ul></li>
+<li class="fragment">Lower your <span class="math inline">\(\alpha\)</span> given m = # of comparisons <br>
+<ul>
+<li class="fragment">Bonferroni <span class="math inline">\(\alpha/m\)</span><br></li>
+<li class="fragment">False Discovery Rate <span class="math inline">\(k\alpha/m\)</span> where k is rank of test<br><br></li>
+</ul></li>
+<li class="fragment">Other multiple comparinson correction<Br>
+<ul>
+<li class="fragment">Tukey’s Honestly Significant Difference</li>
+</ul></li>
+</ol>
+</section>
+<section id="no-correction" class="slide level2">
+<h2>No Correction</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(emmeans)</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">mod &lt;-<span class="st"> </span><span class="kw">lm</span>(shift <span class="op">~</span><span class="st"> </span>treatment, <span class="dt">data =</span> jetlag)</a>
+<a class="sourceLine" id="cb1-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="kw">contrast</span>(<span class="kw">emmeans</span>(mod, <span class="dt">specs =</span> <span class="st">&quot;treatment&quot;</span>),</a>
+<a class="sourceLine" id="cb1-5" data-line-number="5">         <span class="dt">method =</span> <span class="st">&quot;pairwise&quot;</span>, <span class="dt">adjust =</span> <span class="st">&quot;none&quot;</span>)</a></code></pre></div>
+<pre><code>##  contrast          estimate        SE df t.ratio p.value
+##  control - eyes  1.24267857 0.3643283 19   3.411  0.0029
+##  control - knee  0.02696429 0.3643283 19   0.074  0.9418
+##  eyes - knee    -1.21571429 0.3762767 19  -3.231  0.0044</code></pre>
+</section>
+<section id="bonferroni-corrections" class="slide level2">
+<h2>Bonferroni Corrections</h2>
+<p>p = min(1, p*m)<br />
+m = # of comparisons</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">contrast</span>(<span class="kw">emmeans</span>(mod, <span class="dt">specs =</span> <span class="st">&quot;treatment&quot;</span>),</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">         <span class="dt">method =</span> <span class="st">&quot;pairwise&quot;</span>, <span class="dt">adjust =</span> <span class="st">&quot;bonferroni&quot;</span>)</a></code></pre></div>
+<pre><code>##  contrast          estimate        SE df t.ratio p.value
+##  control - eyes  1.24267857 0.3643283 19   3.411  0.0088
+##  control - knee  0.02696429 0.3643283 19   0.074  1.0000
+##  eyes - knee    -1.21571429 0.3762767 19  -3.231  0.0132
+## 
+## P value adjustment: bonferroni method for 3 tests</code></pre>
+</section>
+<section id="fdr" class="slide level2">
+<h2>FDR</h2>
+<p>p = min(1, m/k * p)<br />
+m = # of comparisons<br />
+k = rank of comparison</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">contrast</span>(<span class="kw">emmeans</span>(mod, <span class="dt">specs =</span> <span class="st">&quot;treatment&quot;</span>),</a>
+<a class="sourceLine" id="cb5-2" data-line-number="2">         <span class="dt">method =</span> <span class="st">&quot;pairwise&quot;</span>, <span class="dt">adjust =</span> <span class="st">&quot;fdr&quot;</span>)</a></code></pre></div>
+<pre><code>##  contrast          estimate        SE df t.ratio p.value
+##  control - eyes  1.24267857 0.3643283 19   3.411  0.0066
+##  control - knee  0.02696429 0.3643283 19   0.074  0.9418
+##  eyes - knee    -1.21571429 0.3762767 19  -3.231  0.0066
+## 
+## P value adjustment: fdr method for 3 tests</code></pre>
+</section>
+<section id="tukey-test" class="slide level2">
+<h2>Tukey Test</h2>
+<p>p drawn from studentized range distribution based on miminum and maximum mean<br />
+Test statistic: q = <span class="math inline">\((\mu_a - \mu_b)/SE\)</span> where <span class="math inline">\(\mu_a\)</span> is larger</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">tuk &lt;-<span class="st"> </span><span class="kw">contrast</span>(<span class="kw">emmeans</span>(mod, <span class="dt">specs =</span> <span class="st">&quot;treatment&quot;</span>),</a>
+<a class="sourceLine" id="cb7-2" data-line-number="2">         <span class="dt">method =</span> <span class="st">&quot;pairwise&quot;</span>, <span class="dt">adjust =</span> <span class="st">&quot;tukey&quot;</span>)</a>
+<a class="sourceLine" id="cb7-3" data-line-number="3">tuk</a></code></pre></div>
+<pre><code>##  contrast          estimate        SE df t.ratio p.value
+##  control - eyes  1.24267857 0.3643283 19   3.411  0.0079
+##  control - knee  0.02696429 0.3643283 19   0.074  0.9970
+##  eyes - knee    -1.21571429 0.3762767 19  -3.231  0.0117
+## 
+## P value adjustment: tukey method for comparing a family of 3 estimates</code></pre>
+</section>
+<section id="visualizing-comparisons" class="slide level2">
+<h2>Visualizing Comparisons</h2>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">plot</span>(tuk)</a></code></pre></div>
+<p><img src="24_lm_files/figure-revealjs/tukey-viz-1.png" width="672" /></p>
+</section>
+<section id="deeper-into-the-world-of-linear-models-1" class="slide level2">
+<h2>Deeper into the World of Linear Models</h2>
+<ol type="1">
+<li>Are groups different: T, F, and Multiple Comparisons <br><br></li>
+<li><font color="red">Linear Regression</font> <br><br></li>
+<li>Nonlinear Regression</li>
+</ol>
+</section>
+<section id="aging-seals" class="slide level2" data-background="./lm/three-seals-on-the-beach.jpg">
+<h2><font color="white">Aging Seals</font></h2>
+</section>
+<section id="are-older-seals-bigger" class="slide level2">
+<h2>Are Older Seals Bigger?</h2>
+<p><img src="24_lm_files/figure-revealjs/unnamed-chunk-2-1.png" width="672" /></p>
+</section>
+<section id="are-older-seals-bigger-1" class="slide level2">
+<h2>Are Older Seals Bigger?</h2>
+<p><img src="24_lm_files/figure-revealjs/unnamed-chunk-3-1.png" width="672" /></p>
+</section>
+<section id="we-could-just-look-at-correlation" class="slide level2">
+<h2>We could just look at correlation</h2>
+<ul>
+<li class="fragment">The porportion change in standard deviations of variable x per change in 1 SD of variable y
+<ul>
+<li class="fragment">Clear, right?<br />
+</li>
+<li class="fragment">And that’s just for normal, linear variables<br />
+<br />
+</li>
+</ul></li>
+<li class="fragment">Assesses the degree of association between two variables<br />
+<br />
+</li>
+<li class="fragment">But, unitless (sort of)
+<ul>
+<li class="fragment">Between -1 and 1</li>
+</ul></li>
+</ul>
+</section>
+<section id="calculating-correlation-start-with-covariance" class="slide level2">
+<h2>Calculating Correlation: Start with Covariance</h2>
+<p align="left">
+Describes the relationship between two variables. Not scaled.
+</p>
+<div class="fragment">
+<p><span class="math inline">\(\sigma_{xy}\)</span> = population level covariance<br />
+<span class="math inline">\(s_{xy}\)</span> = covariance in your sample</p>
+</div>
+<div id="left">
+<div class="fragment">
+<p><br><br><br> <span class="math display">\[\sigma_{XY} = \frac{\sum (X-\bar{X})(y-\bar{Y})}{n-1}\]</span></p>
+</div>
+</div>
+<div id="right">
+<div class="fragment" style="vertical-align: text-top;">
+<p><img src="24_lm_files/figure-revealjs/rnormPlot_cov-1.png" width="480" /></p>
+</div>
+</div>
+</section>
+<section id="pearson-correlation" class="slide level2">
+<h2>Pearson Correlation</h2>
+Describes the relationship between two variables.<br />
+Scaled between -1 and 1.<br />
+<br />
+<span class="math inline">\(\rho_{xy}\)</span> = population level correlation, <span class="math inline">\(r_{xy}\)</span> = correlation in your sample
+<div id="left" class="fragment">
+<p><br><br><br> <span class="math display">\[\Large\rho_{xy} = \frac{\sigma_{xy}}{\sigma_{x}\sigma_{y}}\]</span></p>
+</div>
+<div id="right" class="fragment">
+<p><img src="24_lm_files/figure-revealjs/rnormPlot_cor-1.png" width="480" /></p>
+</div>
+</section>
+<section id="get-r-in-your-bones" class="slide level2">
+<h2>Get r in your bones…</h2>
+<br><br><br>
+<center>
+<a href="http://guessthecorrelation.com/" class="uri">http://guessthecorrelation.com/</a>
+</center>
+</section>
+<section id="seals-and-correlation" class="slide level2">
+<h2>Seals and correlation</h2>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw">cor</span>(seals<span class="op">$</span>age.days, seals<span class="op">$</span>length.cm)</a></code></pre></div>
+<pre><code>## [1] 0.4750255</code></pre>
+</section>
+<section id="the-steps-of-statistical-modeling" class="slide level2">
+<h2>The Steps of Statistical Modeling</h2>
+<ol type="1">
+<li class="fragment">What is your question?</li>
+<li class="fragment">What model of the world matches your question?</li>
+<li class="fragment">Build a test</li>
+<li class="fragment">Evaluate test assumptions</li>
+<li class="fragment">Evaluate test results</li>
+<li class="fragment">Visualize</li>
+</ol>
+</section>
+<section id="our-question-and-model" class="slide level2">
+<h2>Our Question and Model</h2>
+<div class="fragment">
+<p><strong>Question 1</strong>: Are older seals bigger? </fragment></p>
+<div class="fragment">
+<strong>Question 2</strong>: How much do seals grow per day? </fragment> <br><br>
+<div class="fragment">
+<p><span class="math display">\[Length_i = \beta_0 + \beta_{1}Age_i + \epsilon_i\]</span></fragment></p>
+</section>
+<section id="more-linear-models" class="slide level2">
+<h2>More Linear Models</h2>
+<p><br><br> <span class="math display">\[Length_i = \beta_0 + \beta_{1}Age_i + \epsilon_i\]</span> <br><br></p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">seal_mod_linear &lt;-<span class="st"> </span><span class="kw">lm</span>(length.cm <span class="op">~</span><span class="st"> </span>age.days, <span class="dt">data=</span>seals)</a></code></pre></div>
+</section>
+<section id="was-this-linear-fitted-versus-residuals" class="slide level2">
+<h2>Was this Linear? Fitted Versus Residuals</h2>
+<p><img src="24_lm_files/figure-revealjs/unnamed-chunk-6-1.png" width="672" /></p>
+</section>
+<section id="testing-our-error-generating-process" class="slide level2">
+<h2>Testing our Error Generating Process</h2>
+<p><img src="24_lm_files/figure-revealjs/unnamed-chunk-7-1.png" width="672" /></p>
+</section>
+<section id="qqs-everywhere" class="slide level2">
+<h2>QQs Everywhere</h2>
+<p><img src="24_lm_files/figure-revealjs/unnamed-chunk-8-1.png" width="672" /></p>
+</section>
+<section id="is-our-model-any-good-f-that" class="slide level2">
+<h2>Is Our Model Any Good? F-that!</h2>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="kw">anova</span>(seal_mod_linear)</a></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th style="text-align: right;">Df</th>
+<th style="text-align: right;">Sum Sq</th>
+<th style="text-align: right;">Mean Sq</th>
+<th style="text-align: right;">F value</th>
+<th style="text-align: right;">Pr(&gt;F)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>age.days</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">90861.81</td>
+<td style="text-align: right;">90861.80648</td>
+<td style="text-align: right;">2815.841</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td>Residuals</td>
+<td style="text-align: right;">9663</td>
+<td style="text-align: right;">311806.52</td>
+<td style="text-align: right;">32.26809</td>
+<td style="text-align: right;">NA</td>
+<td style="text-align: right;">NA</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="t-for-coefficients" class="slide level2">
+<h2>T for Coefficients</h2>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw">summary</span>(seal_mod_linear)</a></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th style="text-align: right;">Estimate</th>
+<th style="text-align: right;">Std. Error</th>
+<th style="text-align: right;">t value</th>
+<th style="text-align: right;">Pr(&gt;|t|)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>(Intercept)</td>
+<td style="text-align: right;">115.7667505</td>
+<td style="text-align: right;">0.1763751</td>
+<td style="text-align: right;">656.3668</td>
+<td style="text-align: right;">0</td>
+</tr>
+<tr class="even">
+<td>age.days</td>
+<td style="text-align: right;">0.0023706</td>
+<td style="text-align: right;">0.0000447</td>
+<td style="text-align: right;">53.0645</td>
+<td style="text-align: right;">0</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="how-much-variation-does-our-model-explain" class="slide level2">
+<h2>How Much Variation does our Model Explain?</h2>
+<p><br><br></p>
+<p><span class="math display">\[1-Var_{residual}/Var_{total}\]</span> <br><br> <span class="math inline">\(R^2\)</span> = 0.2256493</p>
+</section>
+<section id="visualization" class="slide level2">
+<h2>Visualization</h2>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1">seal_base &lt;-<span class="st"> </span><span class="kw">ggplot</span>(seals, <span class="kw">aes</span>(<span class="dt">x=</span>age.days, <span class="dt">y=</span>length.cm)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb15-2" data-line-number="2"><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb15-3" data-line-number="3"><span class="st">  </span><span class="kw">theme_grey</span>(<span class="dt">base_size=</span><span class="dv">14</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb15-4" data-line-number="4"><span class="st">  </span><span class="kw">stat_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>)</a></code></pre></div>
+</section>
+<section id="visualization-1" class="slide level2">
+<h2>Visualization</h2>
+<p><img src="24_lm_files/figure-revealjs/unnamed-chunk-14-1.png" width="672" /></p>
+</section>
+<section id="deeper-into-the-world-of-linear-models-2" class="slide level2">
+<h2>Deeper into the World of Linear Models</h2>
+<ol type="1">
+<li>Are groups different: T, F, and Multiple Comparisons <br><br></li>
+<li>Linear Regression <br><br></li>
+<li><font color="red">Nonlinear Regression</font></li>
+</ol>
+</section>
+<section id="residuals-v.-fitted-fishy" class="slide level2">
+<h2>Residuals v. Fitted Fishy…</h2>
+<p><img src="24_lm_files/figure-revealjs/unnamed-chunk-15-1.png" width="672" /></p>
+</section>
+<section id="a-different-data-generating-process" class="slide level2">
+<h2>A Different Data Generating Process?</h2>
+<p><img src="24_lm_files/figure-revealjs/unnamed-chunk-16-1.png" width="672" /></p>
+</section>
+<section id="possible-nonlinear-data-generating-processes" class="slide level2">
+<h2>Possible Nonlinear Data Generating Processes</h2>
+<p><img src="24_lm_files/figure-revealjs/square-1.png" width="672" /></p>
+</section>
+<section id="what-shape-is-the-data-generating-process" class="slide level2">
+<h2>What Shape is the Data Generating Process?</h2>
+<p><img src="24_lm_files/figure-revealjs/unnamed-chunk-17-1.png" width="672" /></p>
+</section>
+<section id="a-new-model" class="slide level2">
+<h2>A New Model</h2>
+<span class="math display">\[y = \beta_0 + \beta_{1}log(x) + \epsilon\]</span>
+<div class="fragment">
+
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1">seal_mod_log &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="kw">log</span>(length.cm) <span class="op">~</span><span class="st"> </span><span class="kw">I</span>(<span class="kw">log</span>(age.days)), <span class="dt">data=</span>seals)</a></code></pre></div>
+<div>
+
+</section>
+<section id="did-it-fix-the-residuals-problem" class="slide level2">
+<h2>Did it Fix the Residuals Problem?</h2>
+<p><img src="24_lm_files/figure-revealjs/unnamed-chunk-19-1.png" width="672" /></p>
+</section>
+<section id="still-must-evaluate-error-generating-process" class="slide level2">
+<h2>Still Must Evaluate Error Generating Process</h2>
+<p><img src="24_lm_files/figure-revealjs/unnamed-chunk-20-1.png" width="672" /></p>
+</section>
+<section id="how-much-variation-does-our-model-explain-1" class="slide level2">
+<h2>How Much Variation does our Model Explain?</h2>
+<p><span class="math display">\[1-Var_{residual}/Var_{total}\]</span></p>
+<p><span class="math inline">\(R^2\)</span> = 0.2500709</p>
+</section>
+<section id="visualization-2" class="slide level2">
+<h2>Visualization</h2>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1">seal_base <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb17-2" data-line-number="2"><span class="st">  </span><span class="kw">stat_smooth</span>(<span class="dt">method=</span><span class="st">&quot;lm&quot;</span>, <span class="dt">formula=</span>y <span class="op">~</span><span class="st"> </span><span class="kw">I</span>(<span class="kw">log</span>(x)))</a></code></pre></div>
+<p><img src="24_lm_files/figure-revealjs/unnamed-chunk-21-1.png" width="672" /></p>
+</section>
+    </div>
+  </div>
+
+  <script src="24_lm_files/reveal.js-3.3.0.1/lib/js/head.min.js"></script>
+  <script src="24_lm_files/reveal.js-3.3.0.1/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Display the page number of the current slide
+        slideNumber: true,
+        // Push each slide change to the browser history
+        history: true,
+        // Vertical centering of slides
+        center: false,
+        // Opens links in an iframe preview overlay
+        previewLinks: true,
+        // Transition style
+        transition: 'fade', // none/fade/slide/convex/concave/zoom
+        // Transition style for full page slide backgrounds
+        backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
+
+
+
+        // Optional reveal.js plugins
+        dependencies: [
+        ]
+      });
+    </script>
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
+<script>
+  (function() {
+    if (window.jQuery) {
+      Reveal.addEventListener( 'slidechanged', function(event) {  
+        window.jQuery(event.previousSlide).trigger('hidden');
+        window.jQuery(event.currentSlide).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+
+  </body>
+</html>
