@@ -1,0 +1,392 @@
+---
+title: ""
+output:
+  revealjs::revealjs_presentation:
+    reveal_options:
+      slideNumber: true
+      previewLinks: true
+    theme: white
+    center: false
+    transition: fade
+    self_contained: false
+---
+
+## 
+![](./Images/glm/whalberg_assumptions.jpg)  
+  
+    
+<h2>Generalized Linear Models</h2>
+
+```{r setup, include=FALSE}
+library(knitr)
+library(readr)
+library(tidyverse)
+library(ggplot2)
+library(car)
+theme_set(theme_bw(base_size=17))
+opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE,
+               fig.width=7, fig.height=5)
+```
+
+## Surival in the Zoo
+|![](./Images/glm/lion-zoo.jpg)   |![](./Images/glm/red-tailed-lemur.jpg)   |
+|---|---|
+
+## Survival Data is often nonlinear and not normal
+```{r, warning=FALSE, message = FALSE}
+zoo <- read.csv("./data/17q02ZooMortality Clubb and Mason 2003 replica.csv")
+home <- ggplot(zoo, aes(x=mortality, y=homerange)) + geom_point()
+home
+```
+
+## We can transform...
+```{r}
+home +
+  scale_y_continuous(trans="log") +
+  stat_smooth(method="lm") 
+```
+
+## But non-normal error generating process are also common
+```{r}
+home +
+  stat_smooth(method="glm", method.args=list(family=gaussian(link="log")))
+```
+
+## The General Linear Model
+
+$$\Large \boldsymbol{Y_i} = \boldsymbol{\beta X_i} + \boldsymbol{\epsilon} $$ 
+\
+\
+\
+\
+\
+\
+$$\Large \epsilon \sim \mathcal{N}(0,\sigma^{2})$$
+
+## The General(ized) Linear Model
+
+$$\Large \boldsymbol{\hat{Y}_{i}} = \boldsymbol{\beta X_i} $$ 
+\
+\
+\
+\
+\
+\
+$$\Large Y_i \sim \mathcal{N}(\hat{Y_i},\sigma^{2})$$
+  
+## The General(ized) Linear Model
+
+$$\Large \boldsymbol{\eta_{i}} = \boldsymbol{\beta X_i} $$ 
+\
+\
+$$\Large \hat{Y_i} = \eta_{i}$$
+<span class="fragment"><font color="red">Identity Link Function</font></span>
+\
+\
+$$\Large Y_i \sim \mathcal{N}(\hat{Y_i},\sigma^{2})$$
+    
+## A Generalized Linear Model
+
+$$\Large \boldsymbol{\eta_{i}} = \boldsymbol{\beta X_i} $$ 
+\
+\
+$$\Large Log(\hat{Y_i}) = \eta_{i}$$
+<span class="fragment"><font color="red">Log Link Function</font></span>
+\
+\
+$$\Large Y_i \sim \mathcal{N}(\hat{Y_i},\sigma^{2})$$
+    
+
+## Generalized Linear Models Errors
+Error Generating Proces | Common Use | Typical Data Generating Process Shape|
+------------------------|------------|------------------|
+Log-Linear              | Error accumulates additively, and then is exponentiated | Exponential|
+Poisson                 | Count data | Exponential |
+Binomial                | Frequency, probability data | Logistic |
+Gamma                   | Waiting times | Inverse or exponential|
+
+## Connections Between Errors
+![](./Images/glm/all_dists.jpg){width=75%}
+
+## Generalized Linear Models Errors
+Error Generating Proces | Common Use | Typical Data Generating Process Shape|
+------------------------|------------|------------------|
+<font color="red">Log-Linear</font>              | Error accumulates additively, and then is exponentiated | Exponential|
+Poisson                 | Count data | Exponential |
+Binomial                | Frequency, probability data | Logistic |
+Gamma                   | Waiting times | Inverse or exponential|
+
+## Log-Normal Distributions
+$$ Y_i \sim LN(\mu, \sigma^2)$$
+
+> * Used for data whose error is additive, but from multiplicative process<br><br>
+> * $Y_i = e^X + e^{\epsilon_i}, \epsilon_i \sim  N(0, \sigma^2)$  
+>        - Error is additive  
+>        - E.g. variance is from external sources, happens to be LN<br><br>
+> * This is **very** different form a log transform<br><br>
+> * $Y_i = e^{x}e^{\epsilon_i}$  
+>        - Error is multiplicative  
+>        - E.g., variance is something that accumulates over time
+
+## The GLM
+```{r, echo=TRUE}
+zoo_mod <- glm(homerange ~ mortality, data=zoo,
+               family=gaussian(link="log"))
+```
+
+## Our two big questions
+1. Does our model explain more variation in the data than a null model?
+<br><br>
+2. Are the parameters different from 0?
+
+## Evaluating the DGP: $\chi^2$ Likelihood Ratios
+> * We fit GLMs using different techniques<br><br>
+> * A model has a Likelihood of the model given the data<br><br>
+> * The ratio of the likelihood of the model versus the likelihood of a null model is $\chi^2$ distributed<br><br>
+> * It's like an F test, but with Likelihoods instead of Mean Squares<br><br>
+
+
+## $\chi^2$ Likelihood Ratios
+```{r, echo=TRUE}
+library(car)
+Anova(zoo_mod)
+```
+
+## Plotting with stat_smooth and glms
+```{r, echo=TRUE, eval=FALSE}
+home +
+  stat_smooth(method="glm", 
+              method.args=list(family=gaussian(link="log")))
+
+```
+
+## Plotting with stat_smooth and glms
+```{r}
+home +
+  stat_smooth(method="glm", 
+              method.args=list(family=gaussian(link="log")))
+```
+
+## Generalized Linear Models Errors
+Error Generating Proces | Common Use | Typical Data Generating Process Shape|
+------------------------|------------|------------------|
+Log-Linear              | Error accumulates additively, and then is exponentiated | Exponential|
+<font color="red">Poisson</font>                 | Count data | Exponential |
+Binomial                | Frequency, probability data | Logistic |
+Gamma                   | Waiting times | Inverse or exponential|
+
+## Does Size of Holdfast Matter?
+<center><img src="./Images/glm/postelsia_holdfast.sized.jpg"></center>
+
+* Kelps are held to rock by holdfasts
+* Older kelps have bigger holdfasts
+* Does size of holdfast influence number of stipes from kelp?
+
+## Does Size of Holdfast Matter?
+```{r}
+kelp <- read.csv("./data/giant_kelp_all_years_20110921_clean.csv") %>%
+  filter(HLD_DIAM<200)
+
+kelp_plot <- ggplot(kelp, aes(x=HLD_DIAM, y=FRONDS)) +
+  geom_point()
+kelp_plot
+```
+
+## Poisson Distributions
+$$Y_i \sim P(\lambda)$$
+
+> * Discrete Distribution<br><br>
+> * Used for **count data**<br><br>
+> * $\lambda$ = mean<br><br>
+> * Variance increases linearly with mean<br><br>
+
+
+## The GLM
+```{r, echo=TRUE}
+kelp_mod <- glm(FRONDS ~ HLD_DIAM, data=kelp,
+               family=poisson(link="log"))
+```
+
+## Fit
+```{r, echo=TRUE, eval=FALSE}
+kelp_plot +
+  stat_smooth(method="glm", method.args=(family=poisson))
+```
+
+## Generalized Linear Models Errors
+Error Generating Proces | Common Use | Typical Data Generating Process Shape|
+------------------------|------------|------------------|
+Log-Linear              | Error accumulates additively, and then is exponentiated | Exponential|
+Poisson                 | Count data | Exponential |
+<font color="red">Binomial</font>                | Frequency, probability data | Logistic |
+Gamma                   | Waiting times | Inverse or exponential|
+
+## {data-background="./Images/glm/cryptosporidiosis-cryptosporidium-hominis.jpeg"}
+
+## {data-background="./Images/glm/mouseinject.jpg"}
+
+## Cryptosporidum Infection Rates
+```{r crypto_data}
+crypto <- read.csv("./data/cryptoDATA.csv") %>%
+  mutate(success=Y/N)
+```
+
+```{r crypto_plot}
+cryptoPlot <- qplot(Dose, success, data=crypto) +
+  ylab("Fraction of Mice Infected")
+
+cryptoPlot
+```
+
+## Binomial Distribution
+$$ Y_i \sim B(prob, size) $$
+
+> * Discrete Distribution<br><br>
+> * prob = probability of something happening<br><br>
+> * size = # of discrete trials<br><br>
+> * Used for frequency or probability data<br><br>
+> * We estimate coefficients that influence prob<br><br>
+
+## Generalized Linear Model with a Logit Link
+
+$$\Large \boldsymbol{\eta_{i}} = \boldsymbol{\beta X_i} $$ 
+\
+\
+<span class="fragment">$$\Large Logit(\hat{Y_i}) = \eta_{i}$$</span>
+<span class="fragment"><font color="red">Logit Link Function</font></span>
+\
+\
+<span class="fragment">$$\Large Y_i \sim \mathcal{B}(\hat{Y_i}, size)$$<span class="fragment">
+
+## Logit Link
+![](./Images/glm/logit_conversion.jpg)
+
+<p align="left"><font size=-1>McElreath's Statistical Rethinking</font></p>
+
+## Logitistic Regression
+```{r crypto_logit}
+cryptoPlot+
+  stat_smooth(method="glm", aes(weight=N), 
+              method.args=list(family=binomial()),  col="red", lwd=2) 
+
+```
+
+## Generalized Linear Model with Logit Link
+```{r glm_crypto, echo=TRUE}
+crypto_glm <- glm(Y/N ~ Dose,
+                  weight=N,
+                  family=binomial(link="logit"),
+                  data=crypto)
+```
+
+OR, with Success and Failures
+
+```{r glm_crypto2, echo=TRUE, eval=FALSE}
+crypto_glm <- glm(cbind(Y, Y-N) ~ Dose,
+                  family=binomial(link="logit"),
+                  data=crypto)
+```
+
+## Outputs
+```{r crypto_out}
+knitr::kable(Anova(crypto_glm))
+```
+
+And logit coefficients
+```{r crypto_out2}
+knitr::kable(broom::tidy(crypto_glm))
+```
+
+
+## Generalized Linear Models Errors
+Error Generating Proces | Common Use | Typical Data Generating Process Shape|
+------------------------|------------|------------------|
+Log-Linear              | Error accumulates additively, and then is exponentiated | Exponential|
+Poisson                 | Count data | Exponential |
+Binomial                | Frequency, probability data | Logistic |
+<font color="red">Gamma </font>                  | Waiting times | Inverse or exponential|
+
+## How long should you fish?
+![](./Images/glm/many_cod_dave_lewis.jpg){width=65%}
+
+<font size="-1">Example from http://seananderson.ca/2014/04/08/gamma-glms/</font>
+
+## Mo' Fish = Mo' Variance
+```{r, message=FALSE}
+fish <- read_csv("./data/fishing_time.csv")
+fish_plot <- ggplot(fish,
+                    aes(x=time_fishing, y = catch)) +
+  geom_point()
+
+fish_plot
+```
+
+## The Gamma Distribution
+$$Y_i \sim Gamma(shape, scale)$$
+
+> * Continuous Distribution, bounded at 0<br><br>
+> * Used for **time data**<br><br>
+> * $shape$ = number of events waiting for<br><br>
+> * $scale$ = time for one event<br><br>
+> * Variance increases with square mean<br><br>
+
+
+## The Gamma Distribution: Rate = 1
+```{r}
+crossing(x = seq(0.01, 10, length.out=100), shape = 1:5) %>%
+  mutate(prob = dgamma(x, shape = shape, scale = 1)) %>%
+  ggplot(aes(x,prob, color=factor(shape))) +
+  geom_line() +
+  guides(color = guide_legend("Shape"))
+```
+
+## The Gamma Distribution: Shape = 5
+```{r}
+crossing(x = seq(0.01, 50, length.out=100), scale = 1:5, shape=5) %>%
+  mutate(prob = dgamma(x, shape = shape, scale = scale)) %>%
+  ggplot(aes(x,prob, color=factor(scale))) +
+  geom_line() +
+  guides(color = guide_legend("Rate"))
+```
+
+
+## The Gamma Distribution in Terms of Fit
+$$Y_i \sim Gamma(shape, scale)$$
+
+For a fit value $\hat{Y_i}$:
+
+- $shape = \frac{\hat{Y_i}}{scale}$<br><br>
+- $scale = \frac{\hat{Y_i}}{shape}$<br><br>
+- Variance = $shape \cdot scale^2$
+
+## The Gamma Fit with a Log Link
+```{r}
+fish_fit <- glm(catch ~ time_fishing,
+                data = fish,
+                family=Gamma(link="log"))
+
+knitr::kable(car::Anova(fish_fit))
+```
+  
+  <br><br>  
+```{r}
+knitr::kable(round(summary(fish_fit)$coefficients,4))
+```
+
+
+## Gamma Fit on a Plot
+```{r echo=TRUE}
+fish_plot +
+  stat_smooth(method = "glm", 
+              method.args=list(family=Gamma(link="log")),  
+              col="red", lwd=2) 
+```
+
+## How to Choose Among GLMs
+
+> 1. Is your data continuous or count<br><br>
+> 2. How does the variance scale with the mean?<br><br>
+> 3. What is the shape of your relationship from the DGP?<br><br>
+  
+    
+<div class="fragment">There are many distributions. Be Not Afraid!</div>
