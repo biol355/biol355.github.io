@@ -1,0 +1,683 @@
+---
+title:
+output:
+  revealjs::revealjs_presentation:
+    reveal_options:
+      slideNumber: true
+      previewLinks: true
+    theme: white
+    center: false
+    transition: fade
+    self_contained: false
+    lib_dir: libs
+    css: style.css
+---
+
+## 
+```{r prep, echo=FALSE, cache=FALSE, message=FALSE, warning=FALSE}
+library(knitr)
+opts_chunk$set(fig.height=4.5, comment=NA, 
+               warning=FALSE, message=FALSE, 
+               dev="jpeg", echo=FALSE)
+library(dplyr)
+library(tidyr)
+library(broom)
+library(ggplot2)
+library(car)
+library(visreg)
+library(emmeans)
+
+theme_set(theme_bw(base_size=17))
+
+```
+![](Images/mlr/wonka_mult_regression.jpg)
+<h2> Multiple Predictor Variables in General Linear Models</h2>
+
+##
+\ 
+\
+\
+<h3>https://etherpad.wikimedia.org/p/355-mlr</h3>
+
+## Data Generating Processes Until Now
+
+-   One predictor with one response\
+    \
+
+-   Except...ANOVA had multiple possible treatment levels
+
+## The General Linear Model
+
+$$\Large \boldsymbol{Y} = \boldsymbol{\beta X} + \boldsymbol{\epsilon} $$  
+
+-   This equation is huge. X can be anything - categorical,
+    continuous, squared, sine, etc.
+
+-   There can be straight additivity, or interactions
+
+-   So far, the only model we've used with >1 predictor is ANOVA
+
+
+## Models with Many Predictors
+
+0.   ANOVA
+
+1.   ANCOVA
+
+2.   Multiple Linear Regression
+
+3.   MLR with Interactions
+
+
+## Analysis of Covariance
+
+$$\Large \boldsymbol{Y} = \boldsymbol{\beta X} + \boldsymbol{\epsilon}$$  
+\
+\
+$$Y = \beta_0 + \beta_{1}x  + \sum_{i=2}^{k}\beta_i + \epsilon$$  
+
+
+## Analysis of Covariance
+
+$$Y = \beta_0 + \beta_{1}x  + \sum_{i=2}^{k}\beta_i + \epsilon$$  
+
+
+-   ANOVA + a continuous predictor\
+\
+-   Often used to correct for a gradient or some continuous variable affecting outcome\
+\
+-   OR used to correct a regression due to additional groups that may throw off slope estimates\
+      - e.g. Simpson's Paradox: A positive relationship between test scores and academic performance can be masked by gender differences
+
+
+
+## Neanderthals and ANCOVA
+
+![image](./Images/mlr/neanlooking.jpeg){width="60.00000%"}
+
+Who had a bigger brain: Neanderthals or us?
+
+
+
+
+
+## The Means Look the Same...
+
+```{r neand_boxplot}
+neand <- read.csv("./data/18q09NeanderthalBrainSize.csv")
+neand_plot_box <- qplot(species, lnbrain, data=neand, fill=species, geom="boxplot") 
+
+neand_plot_box
+```
+
+
+
+## But there appears to be a Relationship Between Body and Brain Mass
+
+```{r neand_plot}
+neand_plot <- qplot(lnmass, lnbrain, data=neand, color=species, size=I(3))  
+
+neand_plot
+```
+
+
+
+## And Mean Body Mass is Different
+
+```{r neand_boxplot2}
+neand_plot_box2 <- qplot(species, lnmass, data=neand, fill=species, geom="boxplot") 
+
+neand_plot_box2
+```
+
+## 
+\
+\
+![](Images/mlr/redo_analysis.jpg)
+
+## Analysis of Covariance
+
+Evaluate a categorical effect(s), controlling for a *covariate* (parallel lines)\
+
+```{r neand_model, echo=FALSE}
+neand_lm <- lm(lnbrain ~ species + lnmass, data=neand)
+
+```
+
+
+```{r neand_plot_fit, fig.height=5, fig.width=7}
+neand <- cbind(neand, predict(neand_lm, interval="confidence"))
+
+neand_plot +
+  geom_line(data=neand, aes(y=fit)) + 
+  geom_ribbon(data=neand, aes(ymin=lwr, 
+                              ymax=upr, group=species), 
+              fill="lightgrey", color=NA,
+              alpha=0.5) 
+```
+
+ 
+Groups modify the *intercept*.
+
+
+## The Steps of Statistical Modeling
+1. What is your question?
+2. What model of the world matches your question?
+3. Build a test
+4. Evaluate test assumptions
+5. Evaluate test results
+6. Visualize
+
+
+## Assumptions of Multiway ANCOVA
+-   Independence of data points
+
+-   Normality and homoscedacticity within groups (of residuals)
+
+-   No relationship between fitted and residual values
+
+-   Additivity of Treatment and Covariate (Parallel Slopes)
+
+
+## The Usual Suspects of Assumptions
+```{r zoop_assumptions}
+par(mfrow=c(1,2))
+plot(neand_lm, which=c(1,2), cex.lab=1.4)
+par(mfrow=c(1,1))
+```
+
+## Look at Residuals by Predictor
+```{r zoop_group_assumptions, fig.height=7}
+residualPlots(neand_lm, cex.lab=1.4, test=FALSE)
+```
+
+## Test for Parallel Slopes
+We test a model where
+$$Y = \beta_0 + \beta_{1}x  + \sum_{i=2}^{k}\beta_i + \sum_{j=k+2}^{2k+2}\beta_{j}x + \epsilon$$
+<div class="fragment">
+
+```{r parallel_slopes}
+neand_lm_int <- lm(lnbrain ~ species * lnmass, data=neand)
+knitr::kable(Anova(neand_lm_int))
+```
+
+</div>
+\
+<div class="fragment">If you have an interaction, welp, that's a different model - slopes vary by group!</div>
+
+## Ye Olde F-Test
+```{r F_ANCOVA, echo=TRUE}
+Anova(neand_lm)
+```
+
+## Vsualizing Result
+```{r neand_plot_fit, fig.height=6}
+```
+
+## Parcelling Out Covariate
+
+```{r cr_ancova, echo=TRUE}
+crPlots(neand_lm)
+```
+
+## Parcelling Out Covariate with PostHocs & Least Square Menas
+```{r cr_lsmanes, echo=TRUE}
+library(emmeans)
+em <- emmeans(neand_lm, specs="species", 
+        by = "lnmass")
+
+em
+
+contrast(em, "pairwise")
+```
+
+Evluated at mean of covariate
+
+
+## Models with Many Predictors
+
+0.   ANOVA
+
+1.   ANCOVA
+
+2.   <font color="red">Multiple Linear Regression</font>
+
+3.   MLR with Interactions
+
+## One-Way ANOVA Graphically
+
+![image](./Images/mlr/anova.png){width="60.00000%"}
+
+
+
+## Multiple Linear Regression?
+
+![image](./Images/mlr/regression1.png){width="60.00000%"}
+
+
+<div style="text-align:left">Note no connection between predictors, as in ANOVA. This is ONLY true ifwe have manipulated variables so that there is no relationship between
+the two. This is not often the case!</div>
+
+
+
+## Multiple Linear Regression
+
+![image](./Images/mlr/regression2.png){width="60.00000%"}
+
+
+<div style="text-align:left">Curved double-headed arrow indicates COVARIANCE between predictors that we must account for.  
+\
+MLR controls for the correlation - estimates unique contribution of each predictor.
+</div>
+
+
+##  {data-background="Images/mlr/fires.jpg"}
+<div style="bottom:100%; text-align:left; background:goldenrod"><h4>Five year study of wildfires & recovery in Southern California shur- blands in 1993. 90 plots (20 x 50m)</h4>
+(data from Jon Keeley et al.)</div>
+
+
+
+## What causes species richness?
+
+- Distance from fire patch 
+- Elevation
+- Abiotic index
+- Patch age
+- Patch heterogeneity
+- Severity of last fire
+- Plant cover
+
+## Many Things may Influence Species Richness
+
+```{r keeley_pairs}
+keeley <- read.csv("data/Keeley_rawdata_select4.csv")
+pairs(keeley)
+```
+
+## Our Model
+\
+\
+$$Richness_i =\beta_{0} + \beta_{1} cover +\beta_{2} firesev + \beta_{3}hetero +\epsilon_i$$
+\
+\
+<div class="fragment">
+
+```{r mlr, echo=TRUE}
+
+klm <- lm(rich ~ cover + firesev + hetero, data=keeley)
+```
+</div>
+
+## Testing Assumptions
+> - Data Generating Process: Linearity \
+\
+> - Error Generating Process: Normality & homoscedasticity of residuals  
+\
+> - Data: Outliers not influencing residuals  
+\
+> - Predictors: Minimal multicollinearity
+
+## 
+![](./Images/mlr/gosling_multicollinearity.jpg)
+
+## Checking for Multicollinearity: Correlation Matrices
+
+```{r klm_cor, size="normalsize"}
+with(keeley, cor(cbind(cover, firesev, hetero)))
+``` 
+
+<div style="text-align:left">Correlations over 0.4 can
+be problematic, but, they may be OK even as high as 0.8. \
+\
+Beyond this, are you getting unique information from each variable?</div>
+
+
+
+## Checking for Multicollinearity: Variance Inflation Factor
+
+> - Consider $y_i = \beta_{0} + \beta_{1}x_{1i}  + \beta_{2}x_{2i} + \epsilon_i$ \
+\
+> - Now what about $x_{1j} = \alpha_{0} + \alpha_{2}x_{2j} + \epsilon_j$ \
+\
+\
+<span class="fragment">$$VIF = \frac{1}{1-R^2_{1}}$$ </span>
+
+## Checking for Multicollinearity: Variance Inflation Factor
+$$VIF_1 = \frac{1}{1-R^2_{1}}$$ 
+
+
+```{r klm_vif}
+vif(klm)
+``` 
+
+<div style="text-align:left">VIF $>$ 5 or 10 can be problematic and indicate an unstable solution. \
+\
+Solution: evaluate correlation and drop a predictor
+</div>
+
+
+## Other Diagnostics as Usual!
+
+```{r klm_diag, fig.height=6}
+par(mfrow=c(1,2))
+plot(klm, which=c(1,2))
+par(mfrow=c(1,1))
+```
+
+
+
+## Examine Residuals With Respect to Each Predictor
+
+```{r klm_diag2, echo=TRUE}
+residualPlots(klm, test=FALSE)
+```
+
+
+
+## Which Variables Explained Variation
+
+```{r keeley_anova, size="normalsize", echo=TRUE}
+Anova(klm)
+``` 
+
+
+
+
+
+## The coefficients
+
+```{r keeley_coe}
+summary(klm)
+``` 
+
+R<sup>2</sup> = `r summary(klm)$r.square`
+
+
+
+## Visualization of 4-D Multivariate Models is Difficult!
+
+```{r klm_see_effects}
+
+qplot(cover, rich, data=keeley, colour=firesev, size=firesev^2) +
+  theme_bw(base_size=14) + 
+  scale_color_gradient(low="yellow", high="purple") +
+  scale_size_continuous(range=c(1,10))
+```
+
+
+
+## Component-Residual Plots Aid in Visualization
+
+```{r klm_crplot, size="normalsize"}
+crPlots(klm, smoother=F)
+```
+
+Takes effect of predictor + residual of response
+
+
+## Or Show Regression at Median of Other Variables
+
+```{r klm_visreg, fig.height=6}
+par(mfrow=c(2,2))
+visreg(klm, cex.lab=1.3)
+par(mfrow=c(1,1))
+``` 
+
+## Or Show Predictions Overlaid on Data
+
+```{r crazy}
+pred_info <- crossing(cover = seq(0,1.5, length.out=100),
+                      firesev=c(2,5,8)) %>%
+  crossing(hetero=c(0.5, 0.8)) %>%
+  modelr::add_predictions(klm, var="rich") %>%
+  dplyr::mutate(hetero_split = hetero)
+
+ggplot(pred_info, mapping=aes(x=cover, y=rich)) +
+  geom_line(lwd=1.5, mapping=aes(color=factor(firesev), group=paste(firesev, hetero))) +
+    facet_wrap(~hetero_split) +
+  geom_point(data=keeley %>% 
+               dplyr::mutate(hetero_split = ifelse(hetero<mean(hetero), 0.5, 0.8))) +
+  theme_bw(base_size=14)
+
+
+```
+
+
+## Models with Many Predictors
+
+0.   ANOVA
+
+1.   ANCOVA
+
+2.   Multiple Linear Regression
+
+3.   <font color="red">MLR with Interactions</font>
+
+
+
+## Problem: What if Continuous Predictors are Not Additive?
+
+```{r keeley_int_plot3d, fig.height=6, fig.width=7}
+source("./3dplotting.R")
+with(keeley, scatterPlot3d(age,elev,firesev, 
+                           col="black", xlab="age", ylab="elev", zlab="firesev",
+                           phi=20, theta=-25))
+
+```
+
+
+
+
+## Problem: What if Continuous Predictors are Not Additive?
+
+```{r keeley_int_plot}
+keeley$egroup <- keeley$elev<600
+k_plot <- qplot(age, firesev, data=keeley, color=elev, size=elev)  + theme_bw() +
+  scale_color_continuous(low="blue", high="red")
+k_plot 
+```
+
+
+## Problem: What if Continuous Predictors are Not Additive?
+
+```{r keeley_int_plot2}
+k_plot + stat_smooth(method="lm", aes(group=egroup))
+```
+
+##
+\
+\
+![](./Images/mlr/regression_depression.jpg)
+
+## Model For Age Interacting with Elevation to Influence Fire Severity
+$$y = \beta_0 + \beta_{1}x_{1} + \beta_{2}x_{2}+ \beta_{3}x_{1}x_{2}$$
+\
+\
+```{r keeley_mod_int, echo=TRUE}
+keeley_lm_int <- lm(firesev ~ age*elev, data=keeley)
+```
+
+## Testing Assumptions
+> - Data Generating Process: Linearity \
+\
+> - Error Generating Process: Normality & homoscedasticity of residuals  
+\
+> - Data: Outliers not influencing residuals  \
+\
+> - Predictors: Minimal collinearity
+
+## Other Diagnostics as Usual!
+
+```{r klm_diag_int}
+par(mfrow=c(1,2))
+plot(keeley_lm_int, which=c(1,2))
+par(mfrow=c(1,1))
+```
+
+
+
+## Examine Residuals With Respect to Each Predictor
+
+```{r klm_diag2_int}
+residualPlots(keeley_lm_int, test=FALSE)
+```
+
+
+## Interactions, VIF, and Centering
+```{r int_vif, echo=TRUE}
+vif(keeley_lm_int)
+```
+\
+<div style="text-align:left" class="fragment">
+This isn't that bad. But it can be. \
+\
+</div>
+<div style="text-align:left" class="fragment">
+Often, interactions or nonlinear derived predictors are collinear with one or more of their predictors. \
+\
+</div>
+<div style="text-align:left" class="fragment">
+To remove, this, we **center** predictors - i.e., $X_i - mean(X)$
+</div>
+
+## Interpretation of Centered Coefficients
+$$\huge X_i - \bar{X}$$
+
+
+> - Additive coefficients are the effect of a predictor at the mean value of the other predictors \
+\
+> -   Intercepts are at the mean value of all predictors \
+\
+> -   Visualization will keep you from getting confused! \
+
+## Interactions, VIF, and Centering
+$$y = \beta_0 + \beta_{1}(x_{1}-\bar{x_{1}}) + \beta_{2}(x_{2}-\bar{x_{2}})+ \beta_{3}(x_{1}-\bar{x_{1}})(x_{2}-\bar{x_{2}})$$
+
+\
+\
+<p align="left">Variance Inflation Factors for Centered Model:</p>
+```{r keeley_vif_cent}
+keeley <- keeley %>%
+  mutate(age_c = age-mean(age),
+         elev_c = elev - mean(elev))
+
+keeley_lm_int_cent <- lm(firesev ~ age_c*elev_c, data=keeley)
+
+vif(keeley_lm_int_cent)
+```
+
+## F-Tests to Evaluate Model
+```{r int_anova}
+Anova(keeley_lm_int)
+```
+
+
+## Coefficients!
+```{r int_coef}
+knitr::kable(coef(summary(keeley_lm_int)))
+```
+
+\
+\
+R<sup>2</sup> = `r summary(keeley_lm_int)$r.square`\
+\
+Note that additive coefficients signify the effect of one predictor in the abscence of all others.
+
+## Centered Coefficients!
+```{r int_coef_cent}
+knitr::kable(coef(summary(keeley_lm_int_cent)))
+```
+
+\
+\
+R<sup>2</sup> = `r summary(keeley_lm_int_cent)$r.square`\
+\
+Note that additive coefficients signify the effect of one predictor at the average level of all others.
+
+## Interpretation
+> - What the heck does an interaction effect mean?\
+\
+> - We can look at the effect of one variable at different levels of the other\
+\
+> - We can look at a surface \
+\
+> - We can construct *counterfactual* plots showing how changing both variables influences our outcome
+
+## Age at Different Levels of Elevation
+```{r int_visreg}
+visreg(keeley_lm_int, "age", by="elev", gg=TRUE)
+
+# ggplot(keeley,
+#        aes(x=age, y = firesev)) +
+#   geom_point() +
+#   stat_smooth(method="lm") +
+#   facet_wrap(~cut_number(elev, 3))
+
+```
+
+## Elevation at Different Levels of Age
+```{r int_visreg_2}
+visreg(keeley_lm_int, "elev", by="age", gg=TRUE)
+# ggplot(keeley,
+#        aes(x=elev, y = firesev)) +
+#   geom_point() +
+#   stat_smooth(method="lm") +
+#   facet_wrap(~cut_number(age, 3))
+```
+
+## Surfaces and Other 3d Objects
+```{r surf_int, fig.height=8, fig.width=10}
+abcSurf(keeley_lm_int, phi=20, theta=-65, col="lightblue") -> p 
+
+with(keeley, scatterPlot3d(age,elev,firesev, add=T, background=p, col="black", alpha=0.4))
+```
+
+## Or all in one plot
+```{r keeley_int_pred, warning=FALSE}
+library(modelr)
+add_predictions <- function (data, model, var = "pred", ...) {
+  fit <- as_tibble(stats::predict(model, data, ...)$fit)
+  names(fit)[1] <- var  
+  bind_cols(data, fit)
+}
+
+k_pred <- keeley %>%
+  data_grid(age = seq_range(age, 4), elev = seq_range(elev, 100)) %>%
+  add_predictions(keeley_lm_int, var="firesev", se.fit=TRUE, interval="confidence")
+
+ggplot() +
+  geom_point(keeley, mapping=aes(x=elev, y=firesev, color=age, size=age)) +
+  geom_line(data=k_pred, mapping=aes(x=elev, y=firesev, color=age, group=age)) +
+  scale_color_continuous(low="blue", high="red") +
+  theme_bw(base_size=17)
+```
+
+## Without Data and Including CIs
+```{r keeley_int_pred_nodata, warning=FALSE}
+
+ggplot() +
+  geom_ribbon(data=k_pred, mapping=aes(x=elev, y=firesev, group=age, ymin = lwr, ymax=upr),
+              alpha=0.1) +
+  geom_line(data=k_pred, mapping=aes(x=elev, y=firesev, color=age, group=age)) +
+  scale_color_continuous(low="blue", high="red") +
+  theme_bw(base_size=17)
+```
+
+## A Heatmap Approach
+```{r int_heatmap}
+k_pred_grid <- crossing(elev = 100:1200, age = 3:60) %>%
+  modelr::add_predictions(keeley_lm_int, var="firesev")
+
+ggplot(k_pred_grid, mapping=aes(x=age, y=elev, colour=firesev)) +
+  geom_tile() +
+#  scale_color_continuous(low="lightblue", high="red")
+  scale_color_gradient2(low = "blue", high="red", mid="white", midpoint=5)
+```
+
+## 
+\
+\
+![](Images/mlr/matrix_regression.jpg)
+\
+<span class="fragment">We can do a *lot* with the general linear model!<br></span>
+<span class="fragment">You are only limited by the biological models you can imagine.</span>

@@ -175,7 +175,7 @@ __Etherpad:__ https://etherpad.wikimedia.org/p/355-anova
 ```
 `r datestring_1` and `r datestring`  
 __Readings:__  W&G on [Model Basics](http://r4ds.had.co.nz/model-basics.html) and [Model Building](http://r4ds.had.co.nz/model-building.html)  
-__Lectures:__ [Generalized Linear Models](./Lectures/25_glm.html)  
+__Lectures:__ [The General Linear Model (ANCOVA, multiple regression)](./Lectures/26_ancova_mulltreg.html), [Generalized Linear Models](./Lectures/25_glm.html)  
 __Objective(s):__ Describe when to use nonlinear models/curves, Comparing and Contrasting models, Visualization of model outcomes  
 __Biological Examples:__ Seal life history variation. Mouse anti-fungal drug development.   
 
