@@ -518,8 +518,9 @@ head(model_averaged_predictions)</code></pre>
 <p>Let’s try a few of these analyses where the goal is to create a model set, evaluate it, and draw conclusions based on either a single model or the ensemble. <a href="/Labs/data/mmi_data.zip">Here are a few example files from the rethinking package</a></p>
 <p>First, the relationship where we ask if neocortex quality is a predictor of milk quality in primates.</p>
 <pre class="r"><code>#Load and visualize the data
+library(GGally)
 milk &lt;- read_csv(&quot;./data/milk.csv&quot;)
-pairs(milk)
+ggpairs(milk %&gt;% select(-species))
 
 #build a candidate set of models
 mod1 &lt;- lm(kcal.per.g ~ neocortex + clade + log(mass),

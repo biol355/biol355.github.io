@@ -222,8 +222,9 @@ First, the relationship where we ask if neocortex quality is a predictor of milk
 
 ```{r, eval=FALSE}
 #Load and visualize the data
+library(GGally)
 milk <- read_csv("./data/milk.csv")
-pairs(milk)
+ggpairs(milk %>% select(-species))
 
 #build a candidate set of models
 mod1 <- lm(kcal.per.g ~ neocortex + clade + log(mass),
