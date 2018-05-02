@@ -275,7 +275,7 @@ Let's try something with language diversity!
 ```{r, eval=FALSE}
 #Load and visualize the data
 nettle <- read_csv("./data/nettle.csv")
-pairs(_________)
+pairs(nettle %>% select(-country)) #get rid of country
 
 # build a candidate set of models
 # looking at number of languages as predicted by 

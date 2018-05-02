@@ -566,7 +566,7 @@ ggplot(preddata,
 <p>Let’s try something with language diversity!</p>
 <pre class="r"><code>#Load and visualize the data
 nettle &lt;- read_csv(&quot;./data/nettle.csv&quot;)
-pairs(_________)
+pairs(nettle %&gt;% select(-country)) #get rid of country
 
 # build a candidate set of models
 # looking at number of languages as predicted by 
