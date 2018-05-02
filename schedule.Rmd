@@ -170,17 +170,28 @@ __Objective(s):__ Analyze the differences between multiple means.  Fit a linear 
 __Biological Examples:__  Jet-lag recovery and circadian rhythms. Seal life history variation  [files](./Lectures/data/anova.zip)  
 __Etherpad:__ https://etherpad.wikimedia.org/p/355-anova   
 
-### Week  13 & 14. General and Generalized Linear Models, Multiple Predictors  
+### Week  13  General and Generalized Linear Models, Multiple Predictors  
 ```{r next_date_2, echo=FALSE}
 ```
-`r datestring_1` and `r datestring`  
-__Readings:__  W&G on [Model Basics](http://r4ds.had.co.nz/model-basics.html) and [Model Building](http://r4ds.had.co.nz/model-building.html)  
+`r datestring_1`  
+__Readings:__  W&G on [Model Basics](http://r4ds.had.co.nz/model-basics.html)   
 __Lectures:__ [The General Linear Model (ANCOVA, multiple regression)](./Lectures/26_ancova_mulltreg.html), [Generalized Linear Models](./Lectures/25_glm.html), [AIC and Multimodel Comparisons](./Lectures/27_mmi.html)  
 __Lab:__ [Linear Models](./Labs/lab10_lm.html)  
 __Objective(s):__ Describe when to use nonlinear models/curves, Comparing and Contrasting models, Visualization of model outcomes  
 __Biological Examples:__ Seal life history variation. Mouse anti-fungal drug development. Neanderthal brain size. Fire severity in California.   
 __Files:__[Files for lab](./Labs/data/lm_data.zip)  
 __Etherpad:__ https://etherpad.wikimedia.org/p/355-mlr
+
+### Week  14 Multiple Predictors Part 2  
+`r datestring`  
+__Readings:__  W&G on [Model Building](http://r4ds.had.co.nz/model-building.html)  
+__Lectures:__  [AIC and Multimodel Comparisons](./Lectures/27_mmi.html)  
+__Lab:__ [AIC and Multimodel Inference in R](./Labs/lab11_mmi.html)  
+__Objective(s):__  Comparing and Contrasting models, Visualization of model outcomes when many models are fit  
+__Biological Examples:__ Fire severity in California. Brain size and natal investment in primates. Linguistic diversity and cultural characteristics.   
+__Files:__ [Files for lab](./Labs/data/mmi_data.zip)  
+__Etherpad:__ https://etherpad.wikimedia.org/p/355-aic
+
 
 ### Week  15. Open Lab and Final Presentations
 ```{r next_date, echo=FALSE}

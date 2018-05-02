@@ -1,0 +1,327 @@
+---
+title: "Multimodel Inference"
+author: "Biol 355"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+### 1 Fire Severity
+Let's begin today with our fire severity dataset
+
+```{r, warning=FALSE, message=FALSE}
+library(tidyverse)
+library(readr)
+
+keeley <- read_csv("./data/Keeley_rawdata_select4.csv")
+```
+
+To show that many variables have a relationship with plant richness, we can reshape the data a bit and plot it
+
+```{r}
+keeley %>% select(rich, abiotic, firesev, cover) %>%
+  gather(variable, value, -rich) %>%
+  ggplot(mapping=aes(x=value, y=rich)) +
+  facet_wrap(~variable, strip.position="bottom", scale="free_x") +
+  geom_point() +
+  stat_smooth(method = "lm", color="red") +
+  xlab("") +
+  theme_bw(base_size=17)
+```
+
+Or we can look at everything
+
+```{r}
+pairs(keeley)
+```
+
+OK, what's the right way to go?
+
+### 2 Implementing AIC
+
+We can start with fitting a few basic models
+
+```{r keeley_mods, echo=TRUE}
+k_abiotic <- lm(rich ~ abiotic, data=keeley)
+  
+k_firesev <- lm(rich ~ firesev, data=keeley)
+  
+k_cover <- lm(rich ~ cover, data=keeley)
+```
+
+Any one of these models has a log likelhood
+
+```{r}
+logLik(k_abiotic)
+```
+
+and from that we can get it's AIC
+
+```{r}
+AIC(k_abiotic)
+```
+
+Simple, no?
+
+```{r linear_compare, echo=TRUE}
+AIC(k_abiotic)
+
+AIC(k_firesev)
+
+AIC(k_cover)
+```
+
+OK, so, `k_abiotic` has the lowest AIC.  But what if we want more - and AICc or to more formally compare them? For that, we have the `AICcmodavg` library
+
+```{r}
+library(AICcmodavg)
+
+AICc(k_abiotic)
+AICc(k_firesev)
+AICc(k_cover)
+```
+
+Note that the AICc doesn't change our conclusions here.  If we want a larger analysis, we can get an AIC table using `aictab`
+
+```{r aictab}
+aictab(list(k_abiotic, k_firesev, k_cover),
+       modnames = c("abiotic", "firesev", "cover"))
+```
+
+We we have more information - weights, delta AICcs, and more.  
+  
+Note, if you want to see how this differs from BIC results
+```{r}
+bictab(list(k_abiotic, k_firesev, k_cover),
+       modnames = c("abiotic", "firesev", "cover"))
+```
+
+## 3 Model Averaged Coefficients
+
+Consider the following set of alternate models
+
+```{r}
+
+keeley_soil_fire <- lm(rich ~ elev + abiotic + hetero +
+                          distance + firesev,
+                  data = keeley)
+
+keeley_plant_fire <- lm(rich ~  distance + firesev + 
+                          age + cover,
+                  data = keeley)
+
+keeley_soil_plant <- lm(rich ~  elev + abiotic + hetero +
+                          age + cover,
+                  data = keeley)
+```
+
+For use in the next set of following functions, giving the list names so they will be used later.
+
+```{r}
+mods <- list(soil_fire = keeley_soil_fire,
+             plant_fire = keeley_plant_fire,
+             soil_plant = keeley_soil_plant)
+
+aictab(mods)
+```
+
+Note how the names got subbed in without us having to use them. Nice, no?
+
+To look at the importance of any one variable, we can use the `importance()` function which will give us the relative variable importance across all models.
+
+```{r, error=TRUE}
+importance(mods, "firesev")
+```
+
+And this gives us important lesson - to calculate variable importance we need a balanced model set. We can resolve it in this case by adding a null model, but, this does make one think much more carefully about the models used.
+
+```{r}
+keeley_null <- lm(rich ~ 1, data = keeley)
+
+mods <- list(soil_fire = keeley_soil_fire,
+             plant_fire = keeley_plant_fire,
+             soil_plant = keeley_soil_plant,
+             null = keeley_null)
+
+importance(mods, "firesev")
+```
+
+So, a variable importance of 88%.
+
+To get the model averaged coefficient
+
+```{r}
+modavgShrink(mods, parm="firesev")
+```
+
+## 4 Ensemble Predictions
+
+To get predictions, we again use our candidate set and their weightings with `modavgPred()`. However, remember, because we have an ensemble dataset, we need to account for all predictors. For the sake of examination, let's look at the relationship between fire severity and richness holding all of our other predictors at their median value.
+
+```{r}
+library(modelr)
+new_data <- keeley %>% data_grid(distance = median(distance),
+                      elev = median(elev),
+                      abiotic = median(abiotic),
+                      age = median(age),
+                      hetero = median(hetero),
+                      firesev = seq_range(firesev, 100),
+                      cover=median(cover))
+
+model_averaged_predictions <- modavgPred(mods, newdata = new_data)
+```
+
+This unfortunately produces a super ugly list, but we can turn it into a data frame
+
+```{r}
+model_averaged_predictions <- as.data.frame(model_averaged_predictions)
+
+head(model_averaged_predictions)
+
+model_averaged_predictions <- model_averaged_predictions %>%
+  bind_cols(new_data)
+```
+
+So, how much does model averaging change things? Let's compare the results to the best fit model.
+
+```{r}
+best_fit_predictions <- predict(keeley_soil_fire, newdata = new_data,
+                                interval = "confidence")  %>%
+  as.data.frame() %>%
+  bind_cols(new_data)
+```
+
+Now let's plot to see the results
+
+```{r}
+ggplot() +
+  geom_point(data = keeley, mapping = aes(x=firesev, y=rich)) +
+  geom_line(data = model_averaged_predictions, 
+            mapping = aes(x=firesev, y = mod.avg.pred)) +
+  geom_ribbon(data = model_averaged_predictions, 
+            mapping = aes(x=firesev, y = mod.avg.pred,
+                          ymin = lower.CL, ymax = upper.CL),
+            alpha = 0.3) +
+  geom_line(data = best_fit_predictions, 
+            mapping = aes(x=firesev, y = fit), color="red") +
+  geom_ribbon(data = best_fit_predictions, 
+            mapping = aes(x=firesev, y = fit,
+                          ymin = lwr, ymax = upr),
+            alpha = 0.2, fill = "red") +
+  theme_bw(base_size=17)
+```
+
+## 5 Faded Examples
+
+Let's try a few of these analyses where the goal is to create a model set, evaluate it, and draw conclusions based on either a single model or the ensemble.
+
+First, the relationship where we ask if neocortex quality is a predictor of milk quality in primates.
+
+```{r, eval=FALSE}
+#Load and visualize the data
+milk <- read_csv("./data/milk.csv")
+pairs(milk)
+
+#build a candidate set of models
+mod1 <- lm(kcal.per.g ~ neocortex + clade + log(mass),
+           data = milk)
+
+mod2 <- lm(kcal.per.g ~ neocortex + clade ,
+           data = milk)
+
+mod3 <- lm(kcal.per.g ~ clade + log(mass),
+           data = milk)
+
+mod4 <- lm(kcal.per.g ~ clade,
+           data = milk)
+
+#make a list of models
+modList <- list(all = mod1, brain_clade = mod2, 
+                mass_clade = mod3, clade_only = mod4)
+
+#evaluate the models
+aictab(modList)
+
+#look at the importance of one predictor
+importance(modList, "neocortex")
+modavgShrink(modList, parm="neocortex")
+
+#look at all coefficients
+map(modList, car::Anova)
+map(modList, broom::tidy)
+
+#evalute the predictor in context
+preddata <- data_grid(milk, 
+                      clade = unique(clade),
+                      neocortex = seq_range(neocortex, 100),
+                      mass = mean(mass)) %>%
+  bind_cols(as.data.frame(modavgPred(modList, newdata = .)))
+
+ggplot(preddata,
+       aes(x=neocortex, y=mod.avg.pred, color=clade,
+           ymin = lower.CL, ymax = upper.CL, group=clade)) +
+  geom_line() +
+  geom_ribbon(alpha=0.1, color=NA)
+```
+
+Whew - that's a lot, but, hey, it's MMI!
+
+Let's try something with language diversity!
+
+```{r, eval=FALSE}
+#Load and visualize the data
+nettle <- read_csv("./data/nettle.csv")
+pairs(_________)
+
+# build a candidate set of models
+# looking at number of languages as predicted by 
+# population size, and the average and variability of growing season
+#for funsies, feel free to try a glm with a poisson error and log link
+_________
+_________
+_________
+_________
+
+
+#make a list of models
+modList <- list(_________)
+
+#evaluate the models
+aictab(_________)
+
+#look at the importance of one predictor
+importance(_________, "_________")
+modavgShrink(_________, parm="_________")
+
+#look at all coefficients
+_________(modList, car::Anova)
+_________(modList, broom::tidy)
+
+#evalute the predictor in context
+#note, might be many things in _________
+preddata <- data_grid(nettle, 
+                      _________) %>%
+  bind_cols(as.data.frame(modavgPred(modList, newdata = .)))
+
+ggplot(preddata,
+       aes(x=_________, y=mod.avg.pred,
+           ymin = lower.CL, ymax = upper.CL)) +
+  geom_line() +
+  geom_ribbon(alpha=0.1)
+```
+
+OK, now that you've got that down, use the following workflow on the rugged dataset - a dataset that looks at log_gdp (`rgdppc_2000` in the data) as a function of many predictors. Clasically, the hypothesis has been that landscape ruggedness is a predictor. But, there are others.
+
+Note, if you want to look at something a bit sillier, installl the rethinking package `devtools::install_github('mcelreath/rethinking')` and look at `rethinking::WaffleDivorce` - what elements of society predict the number of Waffle Houses?
+
+As for the workflow
+
+ Load the data and visualize the relationships to decide if you are using a `lm` or `glm` approach.  
+2. Fit a set of candidate models and make a list.  
+3. Evaluate the candidate set using AIC, AICc, or BIC.  
+4. Look at the importance and coefficient value for one predictor of interest.  
+5. Look at all coefficients across all models.  
+6. Based on this exploration, decide if you want to view the fit result for one model or the entire ensemble. Visualize with respect to one predictor.  
