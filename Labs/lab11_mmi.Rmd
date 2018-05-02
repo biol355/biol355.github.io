@@ -10,7 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 
 ### 1 Fire Severity
-Let's begin today with our fire severity dataset
+Let's begin today with our fire severity dataset [from before](/Labs/data/lm_data.zip).
 
 ```{r, warning=FALSE, message=FALSE}
 library(tidyverse)
@@ -216,7 +216,7 @@ ggplot() +
 
 ## 5 Faded Examples
 
-Let's try a few of these analyses where the goal is to create a model set, evaluate it, and draw conclusions based on either a single model or the ensemble.
+Let's try a few of these analyses where the goal is to create a model set, evaluate it, and draw conclusions based on either a single model or the ensemble. [Here are a few example files from the rethinking package](/Labs/data/mmi_data.zip)
 
 First, the relationship where we ask if neocortex quality is a predictor of milk quality in primates.
 
@@ -319,7 +319,7 @@ Note, if you want to look at something a bit sillier, installl the rethinking pa
 
 As for the workflow
 
- Load the data and visualize the relationships to decide if you are using a `lm` or `glm` approach.  
+1. Load the data and visualize the relationships to decide if you are using a `lm` or `glm` approach.  
 2. Fit a set of candidate models and make a list.  
 3. Evaluate the candidate set using AIC, AICc, or BIC.  
 4. Look at the importance and coefficient value for one predictor of interest.  

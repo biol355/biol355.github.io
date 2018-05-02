@@ -311,7 +311,7 @@ $(document).ready(function () {
 
 <div id="fire-severity" class="section level3">
 <h3>1 Fire Severity</h3>
-<p>Let’s begin today with our fire severity dataset</p>
+<p>Let’s begin today with our fire severity dataset <a href="/Labs/data/lm_data.zip">from before</a>.</p>
 <pre class="r"><code>library(tidyverse)
 library(readr)
 
@@ -515,7 +515,7 @@ head(model_averaged_predictions)</code></pre>
 </div>
 <div id="faded-examples" class="section level2">
 <h2>5 Faded Examples</h2>
-<p>Let’s try a few of these analyses where the goal is to create a model set, evaluate it, and draw conclusions based on either a single model or the ensemble.</p>
+<p>Let’s try a few of these analyses where the goal is to create a model set, evaluate it, and draw conclusions based on either a single model or the ensemble. <a href="/Labs/data/mmi_data.zip">Here are a few example files from the rethinking package</a></p>
 <p>First, the relationship where we ask if neocortex quality is a predictor of milk quality in primates.</p>
 <pre class="r"><code>#Load and visualize the data
 milk &lt;- read_csv(&quot;./data/milk.csv&quot;)
@@ -605,12 +605,19 @@ ggplot(preddata,
 <p>OK, now that you’ve got that down, use the following workflow on the rugged dataset - a dataset that looks at log_gdp (<code>rgdppc_2000</code> in the data) as a function of many predictors. Clasically, the hypothesis has been that landscape ruggedness is a predictor. But, there are others.</p>
 <p>Note, if you want to look at something a bit sillier, installl the rethinking package <code>devtools::install_github('mcelreath/rethinking')</code> and look at <code>rethinking::WaffleDivorce</code> - what elements of society predict the number of Waffle Houses?</p>
 <p>As for the workflow</p>
-<p>Load the data and visualize the relationships to decide if you are using a <code>lm</code> or <code>glm</code> approach.<br />
-2. Fit a set of candidate models and make a list.<br />
-3. Evaluate the candidate set using AIC, AICc, or BIC.<br />
-4. Look at the importance and coefficient value for one predictor of interest.<br />
-5. Look at all coefficients across all models.<br />
-6. Based on this exploration, decide if you want to view the fit result for one model or the entire ensemble. Visualize with respect to one predictor.</p>
+<ol style="list-style-type: decimal">
+<li>Load the data and visualize the relationships to decide if you are using a <code>lm</code> or <code>glm</code> approach.<br />
+</li>
+<li>Fit a set of candidate models and make a list.<br />
+</li>
+<li>Evaluate the candidate set using AIC, AICc, or BIC.<br />
+</li>
+<li>Look at the importance and coefficient value for one predictor of interest.<br />
+</li>
+<li>Look at all coefficients across all models.<br />
+</li>
+<li>Based on this exploration, decide if you want to view the fit result for one model or the entire ensemble. Visualize with respect to one predictor.</li>
+</ol>
 </div>
 
 
