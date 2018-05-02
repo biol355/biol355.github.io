@@ -604,7 +604,7 @@ ggplot(preddata,
   geom_line() +
   geom_ribbon(alpha=0.1)</code></pre>
 <p>OK, now that you’ve got that down, use the following workflow on the rugged dataset - a dataset that looks at log_gdp (<code>rgdppc_2000</code> in the data) as a function of many predictors. Clasically, the hypothesis has been that landscape ruggedness is a predictor. But, there are others.</p>
-<p>Note, if you want to look at something a bit sillier, installl the rethinking package <code>devtools::install_github('mcelreath/rethinking')</code> and look at <code>rethinking::WaffleDivorce</code> - what elements of society predict the number of Waffle Houses?</p>
+<p>Note, if you want to look at something a bit sillier, installl the rethinking package <code>devtools::install_github('rmcelreath/rethinking')</code> and look at <code>library(rethinking); data(WaffleDivorce)</code> - what elements of society predict the number of Waffle Houses?</p>
 <p>As for the workflow</p>
 <ol style="list-style-type: decimal">
 <li>Load the data and visualize the relationships to decide if you are using a <code>lm</code> or <code>glm</code> approach.<br />
