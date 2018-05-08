@@ -9,8 +9,49 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-### Putting it all together
-For your final proejct, I'm asking you to conduct an analysis of a full data set.  I'd like you to write up the full project using RMarkdown so that I can not only see the answers to the question you pose, but how you answered them.  Remember, I'm looking for quality well commented, well thought-out, well styled code in addition to gorgeous visualizations that convery a message and unambiguous analyses (where possible).  Before I dig into the Sections you should use to organize your report, here's my general rubric.
+
+
+# Putting it all together
+For your final proejct, I'm asking you to conduct an analysis of a full data set.  I'd like you to write up the full project using RMarkdown so that I can not only see the answers to the question you pose, but how you answered them. I'd also like you to give a short presentation to class before your paper is due in which you outline your project. This might not be complete
+
+## The Presentation  
+Your presentation should present 1) the dataset you are looking at, 2) the question you are asking, 3) your approach, 4) cool preliminary results - includign both analysis and visualization, and 5) any questions you have for further directions you will be taking it in the paper. The presentation should be written in markdown.  Here's an [example](./final_project/slides_example.html).  
+
+
+## The Paper  
+
+## Organizational Structure 
+
+The final paper should be broken up into something along the lines of the following sections. You may feel free to adapt this flexibly given your unique data set and set of problems and questions. But this is a general guide, particularly if you are lost.
+
+### 1) Introduction
+* What is the dataset you are using?
+  +Describe the dataset in detail
+  +Visualize summary information about the data
+* Based on the data, what questions do you want to ask?
+
+### 2) Methods
+* Based on the data and question, what is the workflow you put together to answer your question? Feel free to write it out step-by-step
+* How did you prepare and manupulate the data to get it ready for analysis?
+* What are the different steps you need to take? Why are they they the right thing to do?
+* What are the visualizations and analyses that would answer your questions?
+  + What are the underlying models you are going to use - what is your data generating process and your error generating process?
+  + What statistical tests will you use, if any?
+  + How will you validate your tests?
+  
+### 3) Results
+*In this section, show the analyses and visualizations as well as code that generates them that answer your question.
+* For each analysis, be sure to walk through the entire process of model creation, evaluation of assumptions, and evaluation of any statistical tests. Feel free to show when and where you revise your models
+
+
+### 4) Discussion
+* What do your results say? Put it all together.
+* Do your results suggest additional visualizations/analyses? Feel free to conduct them here.
+* What final conclusion can you draw about your data set?
+
+### Grading of the Paper
+
+Remember, I'm looking for quality well commented, well thought-out, well styled code in addition to gorgeous visualizations that convery a message and unambiguous analyses (where possible).  As a guide to the whole paper, here's my rubric. Once you finish your paper, assess yourself. Heck, if you even want to write a short section where you assess yourself against this rubric and justify why we should give you a certain grade according to this rubric, feel free!
 
 Exepectations | 4 (Exemplary) | 3 (Accomplished) | 2 (Developing) | 1 (Beginning) |
 ------------- | ------------- | ---------------- | -------------- | ------------- |
@@ -27,31 +68,6 @@ So, each section of the rubric is out of 4.
 
 Note: Using libraries not taught in class will be +1 point per library. Please note when this is a new library for you.
 
-## Organizational Structure of the Paper
+## An example from the past
+This needs a bit more organizational cohesion, and it was written in bullet points, which got big points off (write! and write well!) but overall, [not a bad paper](./final_project/FinalProject_paper_example.html)  
 
-The final paper should be broken up into something along the lines of the following sections. You may feel free to adapt this flexibly given your unique data set and set of problems and questions. But this is a general guide, particularly if you are lost.
-
-###1) Introduction
-* What is the dataset you are using?
-  +Describe the dataset in detail
-  +Visualize summary information about the data
-* Based on the data, what questions do you want to ask?
-
-###2) Methods
-* Based on the data and question, what is the workflow you put together to answer your question? Feel free to write it out step-by-step
-* How did you prepare and manupulate the data to get it ready for analysis?
-* What are the different steps you need to take? Why are they they the right thing to do?
-* What are the visualizations and analyses that would answer your questions?
-  + What are the underlying models you are going to use - what is your data generating process and your error generating process?
-  + What statistical tests will you use, if any?
-  + How will you validate your tests?
-  
-###3) Results
-*In this section, show the analyses and visualizations as well as code that generates them that answer your question.
-* For each analysis, be sure to walk through the entire process of model creation, evaluation of assumptions, and evaluation of any statistical tests. Feel free to show when and where you revise your models
-
-
-###4) Discussion
-* What do your results say? Put it all together.
-* Do your results suggest additional visualizations/analyses? Feel free to conduct them here.
-* What final conclusion can you draw about your data set?
