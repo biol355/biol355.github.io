@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title></title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="libs/reveal.js-3.3.0.1/css/reveal.css"/>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="libs/reveal.js-3.3.0.1/css/theme/white.css" id="theme">
+
+
+  <!-- some tweaks to reveal css -->
+  <style type="text/css">
+    .reveal h1 { font-size: 2.0em; }
+    .reveal h2 { font-size: 1.5em;  }
+    .reveal h3 { font-size: 1.25em;	}
+    .reveal h4 { font-size: 1em;	}
+
+    .reveal .slides>section,
+    .reveal .slides>section>section {
+      padding: 0px 0px;
+    }
+
+
+
+    .reveal table {
+      border-width: 1px;
+      border-spacing: 2px;
+      border-style: dotted;
+      border-color: gray;
+      border-collapse: collapse;
+      font-size: 0.7em;
+    }
+
+    .reveal table th {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      font-weight: bold;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+    .reveal table td {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+
+  </style>
+
+    <style type="text/css">code{white-space: pre;}</style>
+
+    <link rel="stylesheet" href="style.css"/>
+
+<!-- Printing and PDF exports -->
+<script id="paper-css" type="application/dynamic-css">
+
+/* Default Print Stylesheet Template
+   by Rob Glazebrook of CSSnewbie.com
+   Last Updated: June 4, 2008
+
+   Feel free (nay, compelled) to edit, append, and
+   manipulate this file as you see fit. */
+
+
+@media print {
+
+	/* SECTION 1: Set default width, margin, float, and
+	   background. This prevents elements from extending
+	   beyond the edge of the printed page, and prevents
+	   unnecessary background images from printing */
+	html {
+		background: #fff;
+		width: auto;
+		height: auto;
+		overflow: visible;
+	}
+	body {
+		background: #fff;
+		font-size: 20pt;
+		width: auto;
+		height: auto;
+		border: 0;
+		margin: 0 5%;
+		padding: 0;
+		overflow: visible;
+		float: none !important;
+	}
+
+	/* SECTION 2: Remove any elements not needed in print.
+	   This would include navigation, ads, sidebars, etc. */
+	.nestedarrow,
+	.controls,
+	.fork-reveal,
+	.share-reveal,
+	.state-background,
+	.reveal .progress,
+	.reveal .backgrounds {
+		display: none !important;
+	}
+
+	/* SECTION 3: Set body font face, size, and color.
+	   Consider using a serif font for readability. */
+	body, p, td, li, div {
+		font-size: 20pt!important;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		color: #000;
+	}
+
+	/* SECTION 4: Set heading font face, sizes, and color.
+	   Differentiate your headings from your body text.
+	   Perhaps use a large sans-serif for distinction. */
+	h1,h2,h3,h4,h5,h6 {
+		color: #000!important;
+		height: auto;
+		line-height: normal;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		text-shadow: 0 0 0 #000 !important;
+		text-align: left;
+		letter-spacing: normal;
+	}
+	/* Need to reduce the size of the fonts for printing */
+	h1 { font-size: 28pt !important;  }
+	h2 { font-size: 24pt !important; }
+	h3 { font-size: 22pt !important; }
+	h4 { font-size: 22pt !important; font-variant: small-caps; }
+	h5 { font-size: 21pt !important; }
+	h6 { font-size: 20pt !important; font-style: italic; }
+
+	/* SECTION 5: Make hyperlinks more usable.
+	   Ensure links are underlined, and consider appending
+	   the URL to the end of the link for usability. */
+	a:link,
+	a:visited {
+		color: #000 !important;
+		font-weight: bold;
+		text-decoration: underline;
+	}
+	/*
+	.reveal a:link:after,
+	.reveal a:visited:after {
+		content: " (" attr(href) ") ";
+		color: #222 !important;
+		font-size: 90%;
+	}
+	*/
+
+
+	/* SECTION 6: more reveal.js specific additions by @skypanther */
+	ul, ol, div, p {
+		visibility: visible;
+		position: static;
+		width: auto;
+		height: auto;
+		display: block;
+		overflow: visible;
+		margin: 0;
+		text-align: left !important;
+	}
+	.reveal pre,
+	.reveal table {
+		margin-left: 0;
+		margin-right: 0;
+	}
+	.reveal pre code {
+		padding: 20px;
+		border: 1px solid #ddd;
+	}
+	.reveal blockquote {
+		margin: 20px 0;
+	}
+	.reveal .slides {
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 0 !important;
+		zoom: 1 !important;
+
+		overflow: visible !important;
+		display: block !important;
+
+		text-align: left !important;
+		-webkit-perspective: none;
+		   -moz-perspective: none;
+		    -ms-perspective: none;
+		        perspective: none;
+
+		-webkit-perspective-origin: 50% 50%;
+		   -moz-perspective-origin: 50% 50%;
+		    -ms-perspective-origin: 50% 50%;
+		        perspective-origin: 50% 50%;
+	}
+	.reveal .slides section {
+		visibility: visible !important;
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+		display: block !important;
+		overflow: visible !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 60px 20px !important;
+		z-index: auto !important;
+
+		opacity: 1 !important;
+
+		page-break-after: always !important;
+
+		-webkit-transform-style: flat !important;
+		   -moz-transform-style: flat !important;
+		    -ms-transform-style: flat !important;
+		        transform-style: flat !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+
+		-webkit-transition: none !important;
+		   -moz-transition: none !important;
+		    -ms-transition: none !important;
+		        transition: none !important;
+	}
+	.reveal .slides section.stack {
+		padding: 0 !important;
+	}
+	.reveal section:last-of-type {
+		page-break-after: avoid !important;
+	}
+	.reveal section .fragment {
+		opacity: 1 !important;
+		visibility: visible !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+	}
+	.reveal section img {
+		display: block;
+		margin: 15px 0px;
+		background: rgba(255,255,255,1);
+		border: 1px solid #666;
+		box-shadow: none;
+	}
+
+	.reveal section small {
+		font-size: 0.8em;
+	}
+
+}  
+</script>
+
+
+<script id="pdf-css" type="application/dynamic-css">
+    
+/**
+ * This stylesheet is used to print reveal.js
+ * presentations to PDF.
+ *
+ * https://github.com/hakimel/reveal.js#pdf-export
+ */
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+
+body {
+	margin: 0 auto !important;
+	border: 0;
+	padding: 0;
+	float: none !important;
+	overflow: visible;
+}
+
+html {
+	width: 100%;
+	height: 100%;
+	overflow: visible;
+}
+
+/* Remove any elements not needed in print. */
+.nestedarrow,
+.reveal .controls,
+.reveal .progress,
+.reveal .playback,
+.reveal.overview,
+.fork-reveal,
+.share-reveal,
+.state-background {
+	display: none !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	text-shadow: 0 0 0 #000 !important;
+}
+
+.reveal pre code {
+	overflow: hidden !important;
+	font-family: Courier, 'Courier New', monospace !important;
+}
+
+ul, ol, div, p {
+	visibility: visible;
+	position: static;
+	width: auto;
+	height: auto;
+	display: block;
+	overflow: visible;
+	margin: auto;
+}
+.reveal {
+	width: auto !important;
+	height: auto !important;
+	overflow: hidden !important;
+}
+.reveal .slides {
+	position: static;
+	width: 100%;
+	height: auto;
+
+	left: auto;
+	top: auto;
+	margin: 0 !important;
+	padding: 0 !important;
+
+	overflow: visible;
+	display: block;
+
+	-webkit-perspective: none;
+	   -moz-perspective: none;
+	    -ms-perspective: none;
+	        perspective: none;
+
+	-webkit-perspective-origin: 50% 50%; /* there isn't a none/auto value but 50-50 is the default */
+	   -moz-perspective-origin: 50% 50%;
+	    -ms-perspective-origin: 50% 50%;
+	        perspective-origin: 50% 50%;
+}
+
+.reveal .slides section {
+	page-break-after: always !important;
+
+	visibility: visible !important;
+	position: relative !important;
+	display: block !important;
+	position: relative !important;
+
+	margin: 0 !important;
+	padding: 0 !important;
+	box-sizing: border-box !important;
+	min-height: 1px;
+
+	opacity: 1 !important;
+
+	-webkit-transform-style: flat !important;
+	   -moz-transform-style: flat !important;
+	    -ms-transform-style: flat !important;
+	        transform-style: flat !important;
+
+	-webkit-transform: none !important;
+	   -moz-transform: none !important;
+	    -ms-transform: none !important;
+	        transform: none !important;
+}
+
+.reveal section.stack {
+	margin: 0 !important;
+	padding: 0 !important;
+	page-break-after: avoid !important;
+	height: auto !important;
+	min-height: auto !important;
+}
+
+.reveal img {
+	box-shadow: none;
+}
+
+.reveal .roll {
+	overflow: visible;
+	line-height: 1em;
+}
+
+/* Slide backgrounds are placed inside of their slide when exporting to PDF */
+.reveal section .slide-background {
+	display: block !important;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: -1;
+}
+
+/* All elements should be above the slide-background */
+.reveal section>* {
+	position: relative;
+	z-index: 1;
+}
+
+/* Display slide speaker notes when 'showNotes' is enabled */
+.reveal .speaker-notes-pdf {
+	display: block;
+	width: 100%;
+	max-height: none;
+	left: auto;
+	top: auto;
+	z-index: 100;
+}
+
+/* Display slide numbers when 'slideNumber' is enabled */
+.reveal .slide-number-pdf {
+	display: block;
+	position: absolute;
+	font-size: 14px;
+}
+
+</script>
+
+
+<script>
+var style = document.createElement( 'style' );
+style.type = 'text/css';
+var style_script_id = window.location.search.match( /print-pdf/gi ) ? 'pdf-css' : 'paper-css';
+var style_script = document.getElementById(style_script_id).text;
+style.innerHTML = style_script;
+document.getElementsByTagName('head')[0].appendChild(style);
+</script>
+
+    <script src="libs/htmlwidgets-1.2/htmlwidgets.js"></script>
+    <link href="libs/jsoneditor-5.5.5/jsoneditor.min.css" rel="stylesheet" />
+    <script src="libs/jsoneditor-5.5.5/jsoneditor.min.js"></script>
+    <script src="libs/jsonedit-binding-2.0.0/jsonedit.js"></script>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+
+<section id="section" class="slide level2">
+<h2></h2>
+<Br><Br><br><br>
+<h2>
+<center>
+Make your code purrr
+</center>
+</h2>
+</section>
+<section id="load-some-packages" class="slide level2">
+<h2>load some packages</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">library</span>(repurrrsive)
+<span class="kw">library</span>(listviewer)</code></pre></div>
+<ol type="1">
+<li><p><code>purrr</code> is the star today, but it’s part of the tidyverse package. If you want to load it alone, <code>library(purrr)</code> does the trick.</p></li>
+<li><p><code>repurrrsive</code> contains example datasets.</p></li>
+<li><p><code>listviewer</code> is similar to <code>visdat</code>. It makes an interactive widget to explore lists, which can be more tricky to grok than the average dataframe.</p></li>
+</ol>
+</section>
+<section id="explore-lists-interactively-with-listviewer" class="slide level2">
+<h2>Explore lists interactively with listviewer</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">listviewer<span class="op">::</span><span class="kw">jsonedit</span>(got_chars, <span class="dt">mode =</span> <span class="st">&quot;view&quot;</span>)</code></pre></div>
+<p><div id="htmlwidget-3343891fecc05a60aa23" style="width:672px;height:480px;" class="jsonedit html-widget"></div>
+<script type="application/json" data-for="htmlwidget-3343891fecc05a60aa23">{"x":{"data":[{"url":"https://www.anapioficeandfire.com/api/characters/1022","id":1022,"name":"Theon Greyjoy","gender":"Male","culture":"Ironborn","born":"In 278 AC or 279 AC, at Pyke","died":"","alive":true,"titles":["Prince of Winterfell","Captain of Sea Bitch","Lord of the Iron Islands (by law of the green lands)"],"aliases":["Prince of Fools","Theon Turncloak","Reek","Theon Kinslayer"],"father":"","mother":"","spouse":"","allegiances":"House Greyjoy of Pyke","books":["A Game of Thrones","A Storm of Swords","A Feast for Crows"],"povBooks":["A Clash of Kings","A Dance with Dragons"],"tvSeries":["Season 1","Season 2","Season 3","Season 4","Season 5","Season 6"],"playedBy":"Alfie Allen"},{"url":"https://www.anapioficeandfire.com/api/characters/1052","id":1052,"name":"Tyrion Lannister","gender":"Male","culture":"","born":"In 273 AC, at Casterly Rock","died":"","alive":true,"titles":["Acting Hand of the King (former)","Master of Coin (former)"],"aliases":["The Imp","Halfman","The boyman","Giant of Lannister","Lord Tywin's Doom","Lord Tywin's Bane","Yollo","Hugor Hill","No-Nose","Freak","Dwarf"],"father":"","mother":"","spouse":"https://www.anapioficeandfire.com/api/characters/2044","allegiances":"House Lannister of Casterly Rock","books":["A Feast for Crows","The World of Ice and Fire"],"povBooks":["A Game of Thrones","A Clash of Kings","A Storm of Swords","A Dance with Dragons"],"tvSeries":["Season 1","Season 2","Season 3","Season 4","Season 5","Season 6"],"playedBy":"Peter Dinklage"},{"url":"https://www.anapioficeandfire.com/api/characters/1074","id":1074,"name":"Victarion Greyjoy","gender":"Male","culture":"Ironborn","born":"In 268 AC or before, at Pyke","died":"","alive":true,"titles":["Lord Captain of the Iron Fleet","Master of the Iron Victory"],"aliases":"The Iron Captain","father":"","mother":"","spouse":"","allegiances":"House Greyjoy of Pyke","books":["A Game of Thrones","A Clash of Kings","A Storm of Swords"],"povBooks":["A Feast for Crows","A Dance with Dragons"],"tvSeries":"","playedBy":""},{"url":"https://www.anapioficeandfire.com/api/characters/1109","id":1109,"name":"Will","gender":"Male","culture":"","born":"","died":"In 297 AC, at Haunted Forest","alive":false,"titles":"","aliases":"","father":"","mother":"","spouse":"","allegiances":[],"books":"A Clash of Kings","povBooks":"A Game of Thrones","tvSeries":"","playedBy":"Bronson Webb"},{"url":"https://www.anapioficeandfire.com/api/characters/1166","id":1166,"name":"Areo Hotah","gender":"Male","culture":"Norvoshi","born":"In 257 AC or before, at Norvos","died":"","alive":true,"titles":"Captain of the Guard at Sunspear","aliases":"","father":"","mother":"","spouse":"","allegiances":"House Nymeros Martell of Sunspear","books":["A Game of Thrones","A Clash of Kings","A Storm of Swords"],"povBooks":["A Feast for Crows","A Dance with Dragons"],"tvSeries":["Season 5","Season 6"],"playedBy":"DeObia Oparei"},{"url":"https://www.anapioficeandfire.com/api/characters/1267","id":1267,"name":"Chett","gender":"Male","culture":"","born":"At Hag's Mire","died":"In 299 AC, at Fist of the First Men","alive":false,"titles":"","aliases":"","father":"","mother":"","spouse":"","allegiances":[],"books":["A Game of Thrones","A Clash of Kings"],"povBooks":"A Storm of Swords","tvSeries":"","playedBy":""},{"url":"https://www.anapioficeandfire.com/api/characters/1295","id":1295,"name":"Cressen","gender":"Male","culture":"","born":"In 219 AC or 220 AC","died":"In 299 AC, at Dragonstone","alive":false,"titles":"Maester","aliases":"","father":"","mother":"","spouse":"","allegiances":[],"books":["A Storm of Swords","A Feast for Crows"],"povBooks":"A Clash of Kings","tvSeries":"Season 2","playedBy":"Oliver Ford"},{"url":"https://www.anapioficeandfire.com/api/characters/130","id":130,"name":"Arianne Martell","gender":"Female","culture":"Dornish","born":"In 276 AC, at Sunspear","died":"","alive":true,"titles":"Princess of Dorne","aliases":"","father":"","mother":"","spouse":"","allegiances":"House Nymeros Martell of Sunspear","books":["A Game of Thrones","A Clash of Kings","A Storm of Swords","A Dance with Dragons"],"povBooks":"A Feast for Crows","tvSeries":"","playedBy":""},{"url":"https://www.anapioficeandfire.com/api/characters/1303","id":1303,"name":"Daenerys Targaryen","gender":"Female","culture":"Valyrian","born":"In 284 AC, at Dragonstone","died":"","alive":true,"titles":["Queen of the Andals and the Rhoynar and the First Men, Lord of the Seven Kingdoms","Khaleesi of the Great Grass Sea","Breaker of Shackles/Chains","Queen of Meereen","Princess of Dragonstone"],"aliases":["Dany","Daenerys Stormborn","The Unburnt","Mother of Dragons","Mother","Mhysa","The Silver Queen","Silver Lady","Dragonmother","The Dragon Queen","The Mad King's daughter"],"father":"","mother":"","spouse":"https://www.anapioficeandfire.com/api/characters/1346","allegiances":"House Targaryen of King's Landing","books":"A Feast for Crows","povBooks":["A Game of Thrones","A Clash of Kings","A Storm of Swords","A Dance with Dragons"],"tvSeries":["Season 1","Season 2","Season 3","Season 4","Season 5","Season 6"],"playedBy":"Emilia Clarke"},{"url":"https://www.anapioficeandfire.com/api/characters/1319","id":1319,"name":"Davos Seaworth","gender":"Male","culture":"Westeros","born":"In 260 AC or before, at King's Landing","died":"","alive":true,"titles":["Ser","Lord of the Rainwood","Admiral of the Narrow Sea","Hand of the King"],"aliases":["Onion Knight","Davos Shorthand","Ser Onions","Onion Lord","Smuggler"],"father":"","mother":"","spouse":"https://www.anapioficeandfire.com/api/characters/1676","allegiances":["House Baratheon of Dragonstone","House Seaworth of Cape Wrath"],"books":"A Feast for Crows","povBooks":["A Clash of Kings","A Storm of Swords","A Dance with Dragons"],"tvSeries":["Season 2","Season 3","Season 4","Season 5","Season 6"],"playedBy":"Liam Cunningham"},{"url":"https://www.anapioficeandfire.com/api/characters/148","id":148,"name":"Arya Stark","gender":"Female","culture":"Northmen","born":"In 289 AC, at Winterfell","died":"","alive":true,"titles":"Princess","aliases":["Arya Horseface","Arya Underfoot","Arry","Lumpyface","Lumpyhead","Stickboy","Weasel","Nymeria","Squan","Saltb","Cat of the Canaly","Bets","The Blind Girh","The Ugly Little Girl","Mercedenl","Mercye"],"father":"","mother":"","spouse":"","allegiances":"House Stark of Winterfell","books":[],"povBooks":["A Game of Thrones","A Clash of Kings","A Storm of Swords","A Feast for Crows","A Dance with Dragons"],"tvSeries":["Season 1","Season 2","Season 3","Season 4","Season 5","Season 6"],"playedBy":"Maisie Williams"},{"url":"https://www.anapioficeandfire.com/api/characters/149","id":149,"name":"Arys Oakheart","gender":"Male","culture":"Reach","born":"At Old Oak","died":"In 300 AC, at the Greenblood","alive":false,"titles":"Ser","aliases":"","father":"","mother":"","spouse":"","allegiances":"House Oakheart of Old Oak","books":["A Game of Thrones","A Clash of Kings","A Storm of Swords","A Dance with Dragons"],"povBooks":"A Feast for Crows","tvSeries":"","playedBy":""},{"url":"https://www.anapioficeandfire.com/api/characters/150","id":150,"name":"Asha Greyjoy","gender":"Female","culture":"Ironborn","born":"In 275 AC or 276 AC, at Pyke","died":"","alive":true,"titles":["Princess","Captain of the Black Wind","Conqueror of Deepwood Motte"],"aliases":["Esgred","The Kraken's Daughter"],"father":"","mother":"","spouse":"https://www.anapioficeandfire.com/api/characters/1372","allegiances":["House Greyjoy of Pyke","House Ironmaker"],"books":["A Game of Thrones","A Clash of Kings"],"povBooks":["A Feast for Crows","A Dance with Dragons"],"tvSeries":["Season 2","Season 3","Season 4"],"playedBy":"Gemma Whelan"},{"url":"https://www.anapioficeandfire.com/api/characters/168","id":168,"name":"Barristan Selmy","gender":"Male","culture":"Westeros","born":"In 237 AC","died":"","alive":true,"titles":["Ser","Hand of the Queen"],"aliases":["Barristan the Bold","Arstan Whitebeard","Ser Grandfather","Barristan the Old","Old Ser"],"father":"","mother":"","spouse":"","allegiances":["House Selmy of Harvest Hall","House Targaryen of King's Landing"],"books":["A Game of Thrones","A Clash of Kings","A Storm of Swords","A Feast for Crows","The World of Ice and Fire"],"povBooks":"A Dance with Dragons","tvSeries":["Season 1","Season 3","Season 4","Season 5"],"playedBy":"Ian McElhinney"},{"url":"https://www.anapioficeandfire.com/api/characters/2066","id":2066,"name":"Varamyr","gender":"Male","culture":"Free Folk","born":"At a village Beyond the Wall","died":"In 300 AC, at a village Beyond the Wall","alive":false,"titles":"","aliases":["Varamyr Sixskins","Haggon","Lump"],"father":"","mother":"","spouse":"","allegiances":[],"books":"A Storm of Swords","povBooks":"A Dance with Dragons","tvSeries":"","playedBy":""},{"url":"https://www.anapioficeandfire.com/api/characters/208","id":208,"name":"Brandon Stark","gender":"Male","culture":"Northmen","born":"In 290 AC, at Winterfell","died":"","alive":true,"titles":"Prince of Winterfell","aliases":["Bran","Bran the Broken","The Winged Wolf"],"father":"","mother":"","spouse":"","allegiances":"House Stark of Winterfell","books":"A Feast for Crows","povBooks":["A Game of Thrones","A Clash of Kings","A Storm of Swords","A Dance with Dragons"],"tvSeries":["Season 1","Season 2","Season 3","Season 4","Season 6"],"playedBy":"Isaac Hempstead-Wright"},{"url":"https://www.anapioficeandfire.com/api/characters/216","id":216,"name":"Brienne of Tarth","gender":"Female","culture":"","born":"In 280 AC","died":"","alive":true,"titles":"","aliases":["The Maid of Tarth","Brienne the Beauty","Brienne the Blue"],"father":"","mother":"","spouse":"","allegiances":["House Baratheon of Storm's End","House Stark of Winterfell","House Tarth of Evenfall Hall"],"books":["A Clash of Kings","A Storm of Swords","A Dance with Dragons"],"povBooks":"A Feast for Crows","tvSeries":["Season 2","Season 3","Season 4","Season 5","Season 6"],"playedBy":"Gwendoline Christie"},{"url":"https://www.anapioficeandfire.com/api/characters/232","id":232,"name":"Catelyn Stark","gender":"Female","culture":"Rivermen","born":"In 264 AC, at Riverrun","died":"In 299 AC, at the Twins","alive":false,"titles":"Lady of Winterfell","aliases":["Catelyn Tully","Lady Stoneheart","The Silent Sistet","Mother Mercilesr","The Hangwomans"],"father":"","mother":"","spouse":"https://www.anapioficeandfire.com/api/characters/339","allegiances":["House Stark of Winterfell","House Tully of Riverrun"],"books":["A Feast for Crows","A Dance with Dragons"],"povBooks":["A Game of Thrones","A Clash of Kings","A Storm of Swords"],"tvSeries":["Season 1","Season 2","Season 3"],"playedBy":"Michelle Fairley"},{"url":"https://www.anapioficeandfire.com/api/characters/238","id":238,"name":"Cersei Lannister","gender":"Female","culture":"Westerman","born":"In 266 AC, at Casterly Rock","died":"","alive":true,"titles":["Light of the West","Queen Dowager","Protector of the Realm","Lady of Casterly Rock","Queen Regent"],"aliases":[],"father":"","mother":"","spouse":"https://www.anapioficeandfire.com/api/characters/901","allegiances":"House Lannister of Casterly Rock","books":["A Game of Thrones","A Clash of Kings","A Storm of Swords"],"povBooks":["A Feast for Crows","A Dance with Dragons"],"tvSeries":["Season 1","Season 2","Season 3","Season 4","Season 5","Season 6"],"playedBy":"Lena Headey"},{"url":"https://www.anapioficeandfire.com/api/characters/339","id":339,"name":"Eddard Stark","gender":"Male","culture":"Northmen","born":"In 263 AC, at Winterfell","died":"In 299 AC, at Great Sept of Baelor in King's Landing","alive":false,"titles":["Lord of Winterfell","Warden of the North","Hand of the King","Protector of the Realm","Regent"],"aliases":["Ned","The Ned","The Quiet Wolf"],"father":"","mother":"","spouse":"https://www.anapioficeandfire.com/api/characters/232","allegiances":"House Stark of Winterfell","books":["A Clash of Kings","A Storm of Swords","A Feast for Crows","A Dance with Dragons","The World of Ice and Fire"],"povBooks":"A Game of Thrones","tvSeries":["Season 1","Season 6"],"playedBy":["Sean Bean","Sebastian Croft","Robert Aramayo"]},{"url":"https://www.anapioficeandfire.com/api/characters/529","id":529,"name":"Jaime Lannister","gender":"Male","culture":"Westerlands","born":"In 266 AC, at Casterly Rock","died":"","alive":true,"titles":["Ser","Lord Commander of the Kingsguard","Warden of the East (formerly)"],"aliases":["The Kingslayer","The Lion of Lannister","The Young Lion","Cripple"],"father":"","mother":"","spouse":"","allegiances":"House Lannister of Casterly Rock","books":["A Game of Thrones","A Clash of Kings"],"povBooks":["A Storm of Swords","A Feast for Crows","A Dance with Dragons"],"tvSeries":["Season 1","Season 2","Season 3","Season 4","Season 5"],"playedBy":"Nikolaj Coster-Waldau"},{"url":"https://www.anapioficeandfire.com/api/characters/576","id":576,"name":"Jon Connington","gender":"Male","culture":"Stormlands","born":"In or between 263 AC and 265 AC","died":"","alive":true,"titles":["Lord of Griffin's Roost","Hand of the King","Hand of the True King"],"aliases":"Griffthe Mad King's Hand","father":"","mother":"","spouse":"","allegiances":["House Connington of Griffin's Roost","House Targaryen of King's Landing"],"books":["A Storm of Swords","A Feast for Crows","The World of Ice and Fire"],"povBooks":"A Dance with Dragons","tvSeries":"","playedBy":""},{"url":"https://www.anapioficeandfire.com/api/characters/583","id":583,"name":"Jon Snow","gender":"Male","culture":"Northmen","born":"In 283 AC","died":"","alive":true,"titles":"Lord Commander of the Night's Watch","aliases":["Lord Snow","Ned Stark's Bastard","The Snow of Winterfell","The Crow-Come-Over","The 998th Lord Commander of the Night's Watch","The Bastard of Winterfell","The Black Bastard of the Wall","Lord Crow"],"father":"","mother":"","spouse":"","allegiances":"House Stark of Winterfell","books":"A Feast for Crows","povBooks":["A Game of Thrones","A Clash of Kings","A Storm of Swords","A Dance with Dragons"],"tvSeries":["Season 1","Season 2","Season 3","Season 4","Season 5","Season 6"],"playedBy":"Kit Harington"},{"url":"https://www.anapioficeandfire.com/api/characters/60","id":60,"name":"Aeron Greyjoy","gender":"Male","culture":"Ironborn","born":"In or between 269 AC and 273 AC, at Pyke","died":"","alive":true,"titles":["Priest of the Drowned God","Captain of the Golden Storm (formerly)"],"aliases":["The Damphair","Aeron Damphair"],"father":"","mother":"","spouse":"","allegiances":"House Greyjoy of Pyke","books":["A Game of Thrones","A Clash of Kings","A Storm of Swords","A Dance with Dragons"],"povBooks":"A Feast for Crows","tvSeries":"Season 6","playedBy":"Michael Feast"},{"url":"https://www.anapioficeandfire.com/api/characters/605","id":605,"name":"Kevan Lannister","gender":"Male","culture":"","born":"In 244 AC","died":"In 300 AC, at King's Landing","alive":false,"titles":["Ser","Master of laws","Lord Regent","Protector of the Realm"],"aliases":"","father":"","mother":"","spouse":"https://www.anapioficeandfire.com/api/characters/327","allegiances":"House Lannister of Casterly Rock","books":["A Game of Thrones","A Clash of Kings","A Storm of Swords","A Feast for Crows"],"povBooks":"A Dance with Dragons","tvSeries":["Season 1","Season 2","Season 5","Season 6"],"playedBy":"Ian Gelder"},{"url":"https://www.anapioficeandfire.com/api/characters/743","id":743,"name":"Melisandre","gender":"Female","culture":"Asshai","born":"At Unknown","died":"","alive":true,"titles":"","aliases":["The Red Priestess","The Red Woman","The King's Red Shadow","Lady Red","Lot Seven"],"father":"","mother":"","spouse":"","allegiances":[],"books":["A Clash of Kings","A Storm of Swords","A Feast for Crows"],"povBooks":"A Dance with Dragons","tvSeries":["Season 2","Season 3","Season 4","Season 5","Season 6"],"playedBy":"Carice van Houten"},{"url":"https://www.anapioficeandfire.com/api/characters/751","id":751,"name":"Merrett Frey","gender":"Male","culture":"Rivermen","born":"In 262 AC","died":"In 300 AC, at Near Oldstones","alive":false,"titles":"","aliases":"Merrett Muttonhead","father":"","mother":"","spouse":"https://www.anapioficeandfire.com/api/characters/712","allegiances":"House Frey of the Crossing","books":["A Game of Thrones","A Clash of Kings","A Feast for Crows","A Dance with Dragons"],"povBooks":"A Storm of Swords","tvSeries":"","playedBy":""},{"url":"https://www.anapioficeandfire.com/api/characters/844","id":844,"name":"Quentyn Martell","gender":"Male","culture":"Dornish","born":"In 281 AC, at Sunspear, Dorne","died":"In 300 AC, at Meereen","alive":false,"titles":"Prince","aliases":["Frog","Prince Frog","The prince who came too late","The Dragonrider"],"father":"","mother":"","spouse":"","allegiances":"House Nymeros Martell of Sunspear","books":["A Game of Thrones","A Clash of Kings","A Storm of Swords","A Feast for Crows"],"povBooks":"A Dance with Dragons","tvSeries":"","playedBy":""},{"url":"https://www.anapioficeandfire.com/api/characters/954","id":954,"name":"Samwell Tarly","gender":"Male","culture":"Andal","born":"In 283 AC, at Horn Hill","died":"","alive":true,"titles":"","aliases":["Sam","Ser Piggy","Prince Pork-chop","Lady Piggy","Sam the Slayer","Black Sam","Lord of Ham"],"father":"","mother":"","spouse":"","allegiances":"House Tarly of Horn Hill","books":["A Game of Thrones","A Clash of Kings","A Dance with Dragons"],"povBooks":["A Storm of Swords","A Feast for Crows"],"tvSeries":["Season 1","Season 2","Season 3","Season 4","Season 5","Season 6"],"playedBy":"John Bradley-West"},{"url":"https://www.anapioficeandfire.com/api/characters/957","id":957,"name":"Sansa Stark","gender":"Female","culture":"Northmen","born":"In 286 AC, at Winterfell","died":"","alive":true,"titles":"Princess","aliases":["Little bird","Alayne Stone","Jonquil"],"father":"","mother":"","spouse":"https://www.anapioficeandfire.com/api/characters/1052","allegiances":["House Baelish of Harrenhal","House Stark of Winterfell"],"books":"A Dance with Dragons","povBooks":["A Game of Thrones","A Clash of Kings","A Storm of Swords","A Feast for Crows"],"tvSeries":["Season 1","Season 2","Season 3","Season 4","Season 5","Season 6"],"playedBy":"Sophie Turner"}],"options":{"mode":"view","modes":["code","form","text","tree","view"]}},"evals":[],"jsHooks":[]}</script> Note: how pretty this is depends on the underlying structure of the list.</p>
+</section>
+<section id="so-whats-the-deal-with-lists" class="slide level2">
+<h2>So what’s the deal with lists?</h2>
+<p>Most of the functions we’ve worked with so far are vectorized. They work extremely well on vectors (remember - each column of a dataframe is a vector).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sqrt</span>(<span class="kw">c</span>(<span class="dv">9</span>, <span class="dv">16</span>, <span class="dv">25</span>))</code></pre></div>
+<pre><code>[1] 3 4 5</code></pre>
+<p>However, they break when you try to run them on a list.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dv">9</span>, <span class="dv">16</span>, <span class="dv">25</span>)
+<span class="kw">sqrt</span>(a)</code></pre></div>
+<pre><code>Error in sqrt(a): non-numeric argument to mathematical function</code></pre>
+</section>
+<section id="map-it-out" class="slide level2">
+<h2>Map it out!</h2>
+<p>If you want to apply a function across a list, use <code>map(list, function)</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">map</span>(a, sqrt)</code></pre></div>
+<pre><code>[[1]]
+[1] 3
+
+[[2]]
+[1] 4
+
+[[3]]
+[1] 5</code></pre>
+<p>Note: this works on atomic vectors as well, but the output will be a list.</p>
+</section>
+<section id="lists-can-get-biiiiig" class="slide level2">
+<h2>Lists can get biiiiig</h2>
+<p><code>got_char</code> is a list included in the <code>repurrrsive</code> package. It has data on all PoV characters from A Song of Ice and Fire.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># str is, as always, a good place to start.</span>
+<span class="co">#give str additional arguments in order to manage large lists</span>
+<span class="kw">str</span>(got_chars, <span class="dt">list.len =</span> <span class="dv">3</span>, <span class="dt">max.level =</span> <span class="dv">2</span>)</code></pre></div>
+<pre><code>List of 30
+ $ :List of 18
+  ..$ url        : chr &quot;https://www.anapioficeandfire.com/api/characters/1022&quot;
+  ..$ id         : int 1022
+  ..$ name       : chr &quot;Theon Greyjoy&quot;
+  .. [list output truncated]
+ $ :List of 18
+  ..$ url        : chr &quot;https://www.anapioficeandfire.com/api/characters/1052&quot;
+  ..$ id         : int 1052
+  ..$ name       : chr &quot;Tyrion Lannister&quot;
+  .. [list output truncated]
+ $ :List of 18
+  ..$ url        : chr &quot;https://www.anapioficeandfire.com/api/characters/1074&quot;
+  ..$ id         : int 1074
+  ..$ name       : chr &quot;Victarion Greyjoy&quot;
+  .. [list output truncated]
+  [list output truncated]</code></pre>
+</section>
+<section id="dust-off-your-index-fu" class="slide level2">
+<h2>Dust off your index-fu</h2>
+<p>Find some data about a single character</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">got_chars[[<span class="dv">1</span>]][<span class="kw">c</span>(<span class="st">&quot;name&quot;</span>, <span class="st">&quot;culture&quot;</span>, <span class="st">&quot;gender&quot;</span>, <span class="st">&quot;born&quot;</span>)]</code></pre></div>
+<pre><code>$name
+[1] &quot;Theon Greyjoy&quot;
+
+$culture
+[1] &quot;Ironborn&quot;
+
+$gender
+[1] &quot;Male&quot;
+
+$born
+[1] &quot;In 278 AC or 279 AC, at Pyke&quot;</code></pre>
+<p>Exercise: Who is the last entry in this dataset, and where were they born?</p>
+</section>
+<section id="exercise-who-is-the-last-entry-in-this-dataset-and-where-were-they-born" class="slide level2">
+<h2>Exercise: Who is the last entry in this dataset, and where were they born?</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">got_chars[[<span class="kw">length</span>(got_chars)]][<span class="kw">c</span>(<span class="st">&quot;name&quot;</span>,<span class="st">&quot;born&quot;</span>)]</code></pre></div>
+<pre><code>$name
+[1] &quot;Sansa Stark&quot;
+
+$born
+[1] &quot;In 286 AC, at Winterfell&quot;</code></pre>
+</section>
+<section id="what-if-we-want-this-info-for-all-characters-at-once" class="slide level2">
+<h2>What if we want this info for all characters at once?</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">map</span>(got_chars, <span class="st">`</span><span class="dt">[</span><span class="st">`</span>, <span class="kw">c</span>(<span class="st">&quot;name&quot;</span>, <span class="st">&quot;culture&quot;</span>, <span class="st">&quot;gender&quot;</span>, <span class="st">&quot;born&quot;</span>))
+<span class="kw">str</span>(x[<span class="dv">1</span>]) </code></pre></div>
+<pre><code>List of 1
+ $ :List of 4
+  ..$ name   : chr &quot;Theon Greyjoy&quot;
+  ..$ culture: chr &quot;Ironborn&quot;
+  ..$ gender : chr &quot;Male&quot;
+  ..$ born   : chr &quot;In 278 AC or 279 AC, at Pyke&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#In english: take the got_chars list. </span>
+<span class="co">#apply the [] function, aka extract() to the entire list. </span>
+<span class="co">#Only spit out name, culture, gender, and birth info.</span></code></pre></div>
+<p>Note: If [ grinds your gears, you can use magrittr’s <code>extract()</code>.</p>
+</section>
+<section id="exercise" class="slide level2">
+<h2>Exercise</h2>
+<p>Pull out the names and titles of each character</p>
+</section>
+<section id="exercise-1" class="slide level2">
+<h2>Exercise</h2>
+<p>Pull out the names and titles of each character</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">y &lt;-<span class="st"> </span><span class="kw">map</span>(got_chars, <span class="st">`</span><span class="dt">[</span><span class="st">`</span>, <span class="kw">c</span>(<span class="st">&quot;name&quot;</span>, <span class="st">&quot;titles&quot;</span>))
+<span class="kw">str</span>(y[<span class="dv">1</span>])</code></pre></div>
+<pre><code>List of 1
+ $ :List of 2
+  ..$ name  : chr &quot;Theon Greyjoy&quot;
+  ..$ titles: chr [1:3] &quot;Prince of Winterfell&quot; &quot;Captain of Sea Bitch&quot; &quot;Lord of the Iron Islands (by law of the green lands)&quot;</code></pre>
+</section>
+<section id="exercise-2" class="slide level2">
+<h2>Exercise</h2>
+<p>Pull out the names and titles of each character</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">y &lt;-<span class="st"> </span><span class="kw">map</span>(got_chars, <span class="st">`</span><span class="dt">[</span><span class="st">`</span>, <span class="kw">c</span>(<span class="st">&quot;name&quot;</span>, <span class="st">&quot;titles&quot;</span>))
+<span class="kw">str</span>(y[<span class="dv">1</span>])</code></pre></div>
+<pre><code>List of 1
+ $ :List of 2
+  ..$ name  : chr &quot;Theon Greyjoy&quot;
+  ..$ titles: chr [1:3] &quot;Prince of Winterfell&quot; &quot;Captain of Sea Bitch&quot; &quot;Lord of the Iron Islands (by law of the green lands)&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">y[[<span class="dv">1</span>]]<span class="op">$</span>titles</code></pre></div>
+<pre><code>[1] &quot;Prince of Winterfell&quot;                                
+[2] &quot;Captain of Sea Bitch&quot;                                
+[3] &quot;Lord of the Iron Islands (by law of the green lands)&quot;</code></pre>
+</section>
+<section id="the-toolbox" class="slide level2">
+<h2>The toolbox</h2>
+<ol type="1">
+<li>map</li>
+<li>map2</li>
+<li>pmap</li>
+<li>map_chr and friends</li>
+<li>map_df</li>
+<li>safely()</li>
+</ol>
+</section>
+<section id="map" class="slide level2">
+<h2>map</h2>
+<p>Lets take a look at map with some numbers.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">100</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span>  <span class="dv">1</span>)
+b &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">100</span>, <span class="dt">mean =</span> <span class="dv">5</span>, <span class="dt">sd =</span>  <span class="dv">1</span>)
+c &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">100</span>, <span class="dt">mean =</span> <span class="dv">10</span>, <span class="dt">sd =</span>  <span class="dv">1</span>)
+d &lt;-<span class="st"> </span><span class="kw">list</span>(a, b, c)
+
+<span class="kw">map</span>(d, mean)</code></pre></div>
+<pre><code>[[1]]
+[1] 0.09859151
+
+[[2]]
+[1] 5.011665
+
+[[3]]
+[1] 10.10864</code></pre>
+</section>
+<section id="map2" class="slide level2">
+<h2>map2</h2>
+<p>If you have two input lists, use map2.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>)
+b&lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dv">10</span>, <span class="dv">11</span>,<span class="dv">12</span>)
+<span class="co">#map also works with formulas</span>
+<span class="kw">map2</span>(a, b, <span class="op">~</span><span class="st"> </span>.x <span class="op">+</span><span class="st"> </span>.y)</code></pre></div>
+<pre><code>[[1]]
+[1] 11
+
+[[2]]
+[1] 13
+
+[[3]]
+[1] 15</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#take two lists (a and b) </span>
+<span class="co">#add the corresponding elements together</span></code></pre></div>
+</section>
+<section id="pmap" class="slide level2">
+<h2>pmap</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">c &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dv">100</span>, <span class="dv">101</span>,<span class="dv">102</span>)
+d &lt;-<span class="st"> </span><span class="kw">list</span>(a, b, c)
+
+<span class="kw">pmap</span>(d, sum)</code></pre></div>
+<pre><code>[[1]]
+[1] 111
+
+[[2]]
+[1] 114
+
+[[3]]
+[1] 117</code></pre>
+</section>
+<section id="simple-outputs" class="slide level2">
+<h2>Simple Outputs</h2>
+<p><code>map()</code> will ALWAYS return a list. If you want a simple vector as output, use the appropriate <code>map</code> varient from the following list: 1. <code>map_lgl()</code> returns a logical (<code>TRUE</code>/<code>FALSE</code>) vector 2. <code>map_int()</code>returns an integer vector 3. <code>map_dbl()</code> returns a double vector 4. <code>map_chr()</code> returns a character vetor *</p>
+<p>NOTE: <code>purrr</code> is <em>extremely</em> picky about object type, so be aware of <code>int</code> vs <code>dbl</code>.</p>
+</section>
+<section id="simple-outputs-1" class="slide level2">
+<h2>Simple Outputs</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">map</span>(got_chars, <span class="st">`</span><span class="dt">[</span><span class="st">`</span>, <span class="st">&quot;name&quot;</span>)
+x[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]</code></pre></div>
+<pre><code>[[1]]
+[[1]]$name
+[1] &quot;Theon Greyjoy&quot;
+
+
+[[2]]
+[[2]]$name
+[1] &quot;Tyrion Lannister&quot;</code></pre>
+<p>Versus</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">y &lt;-<span class="st"> </span><span class="kw">map_chr</span>(got_chars,  <span class="op">~</span>.x[[<span class="st">&quot;name&quot;</span>]])
+<span class="kw">head</span>(y)</code></pre></div>
+<pre><code>[1] &quot;Theon Greyjoy&quot;     &quot;Tyrion Lannister&quot;  &quot;Victarion Greyjoy&quot;
+[4] &quot;Will&quot;              &quot;Areo Hotah&quot;        &quot;Chett&quot;            </code></pre>
+</section>
+<section id="simple-outputs-2" class="slide level2">
+<h2>Simple Outputs</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">100</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span>  <span class="dv">1</span>)
+b &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">100</span>, <span class="dt">mean =</span> <span class="dv">5</span>, <span class="dt">sd =</span>  <span class="dv">1</span>)
+d &lt;-<span class="st"> </span><span class="kw">list</span>(a, b)
+<span class="kw">map</span>(d, mean)</code></pre></div>
+<pre><code>[[1]]
+[1] -0.003691062
+
+[[2]]
+[1] 5.157056</code></pre>
+<p>versus</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">100</span>, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span>  <span class="dv">1</span>)
+b &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">100</span>, <span class="dt">mean =</span> <span class="dv">5</span>, <span class="dt">sd =</span>  <span class="dv">1</span>)
+d &lt;-<span class="st"> </span><span class="kw">list</span>(a, b)
+
+<span class="kw">map_dbl</span>(d, mean)</code></pre></div>
+<pre><code>[1] 0.1212718 5.2080247</code></pre>
+</section>
+<section id="map_df" class="slide level2">
+<h2>map_df</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">got_df &lt;-<span class="kw">map_df</span>(got_chars, <span class="st">`</span><span class="dt">[</span><span class="st">`</span>, 
+                <span class="kw">c</span>(<span class="st">&quot;name&quot;</span>, <span class="st">&quot;culture&quot;</span>, <span class="st">&quot;gender&quot;</span>, <span class="st">&quot;id&quot;</span>, <span class="st">&quot;alive&quot;</span>))
+<span class="kw">head</span>(got_df)</code></pre></div>
+<pre><code># A tibble: 6 x 5
+  name              culture  gender    id alive
+  &lt;chr&gt;             &lt;chr&gt;    &lt;chr&gt;  &lt;int&gt; &lt;lgl&gt;
+1 Theon Greyjoy     Ironborn Male    1022 TRUE 
+2 Tyrion Lannister  &quot;&quot;       Male    1052 TRUE 
+3 Victarion Greyjoy Ironborn Male    1074 TRUE 
+4 Will              &quot;&quot;       Male    1109 FALSE
+5 Areo Hotah        Norvoshi Male    1166 TRUE 
+6 Chett             &quot;&quot;       Male    1267 FALSE</code></pre>
+<p>Note: Keep an eye on your data types. When in doubt, use simpler <code>map</code> functions to build your final dataframe.</p>
+</section>
+<section id="safely" class="slide level2">
+<h2>Safely</h2>
+<p>Troubleshooting vectorized functions can be a pain.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">numbers &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)
+<span class="kw">map_dbl</span>(numbers, sqrt)</code></pre></div>
+<pre><code> [1] 1.000000 1.414214 1.732051 2.000000 2.236068 2.449490 2.645751
+ [8] 2.828427 3.000000 3.162278</code></pre>
+<p>Pretend this is actually 1.5 million data points: incorrect values aren’t going to be something you can eyeball.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">numbers_bad &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="st">&quot;Tyrion Lannister&quot;</span>,<span class="dv">7</span>, <span class="dv">8</span>, <span class="dv">9</span>)
+<span class="kw">map_dbl</span>(numbers_bad, sqrt)</code></pre></div>
+<pre><code>Error in sqrt(x = x): non-numeric argument to mathematical function</code></pre>
+</section>
+<section id="safely-1" class="slide level2">
+<h2>Safely</h2>
+<p>Purrr adds a family of functions under <code>safely()</code> that make troubleshooting these a breeze.</p>
+<p>1.<code>safely</code> returns a list with <code>result</code> and <code>error</code><br />
+2.<code>quietly</code> returns a list with <code>result</code>,<code>output</code>, <code>messages</code>, and <code>warnings</code><br />
+3.<code>possibly</code> will fill any errors with a specified value.</p>
+</section>
+<section id="safely-2" class="slide level2">
+<h2>Safely</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">numbers_bad &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dv">1</span>,<span class="st">&quot;Tyrion Lannister&quot;</span>,<span class="dv">3</span>)
+safe_sqrt &lt;-<span class="st"> </span><span class="kw">safely</span>(sqrt)
+
+<span class="kw">map</span>(numbers_bad, safe_sqrt)</code></pre></div>
+<pre><code>[[1]]
+[[1]]$result
+[1] 1
+
+[[1]]$error
+NULL
+
+
+[[2]]
+[[2]]$result
+NULL
+
+[[2]]$error
+&lt;simpleError in sqrt(x = x): non-numeric argument to mathematical function&gt;
+
+
+[[3]]
+[[3]]$result
+[1] 1.732051
+
+[[3]]$error
+NULL</code></pre>
+</section>
+<section id="possibly" class="slide level2">
+<h2>Possibly</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">numbers_bad &lt;-<span class="st"> </span><span class="kw">list</span>(<span class="dv">1</span>,<span class="st">&quot;Tyrion Lannister&quot;</span>,<span class="dv">3</span>)
+possible_sqrt &lt;-<span class="st"> </span><span class="kw">possibly</span>(sqrt, <span class="dt">otherwise =</span> <span class="ot">NA</span>)
+
+<span class="kw">map_dbl</span>(numbers_bad, possible_sqrt)</code></pre></div>
+<pre><code>[1] 1.000000       NA 1.732051</code></pre>
+</section>
+<section id="loading-data" class="slide level2">
+<h2>loading data</h2>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(readr)
+<span class="co">#make a list of all files in a directory</span>
+files &lt;-<span class="st"> </span><span class="kw">list.files</span>(<span class="st">&quot;./data/mtls/&quot;</span>)
+<span class="co">#add file path info</span>
+files &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;./data/mtls/&quot;</span>, files)
+<span class="co">#map it!</span>
+data &lt;-<span class="st"> </span><span class="kw">map</span>(files, read_table )
+data[[<span class="dv">1</span>]]</code></pre></div>
+<pre><code># A tibble: 206 x 1
+   `GROUP = L1_METADATA_FILE`                                 
+   &lt;chr&gt;                                                      
+ 1 GROUP = METADATA_FILE_INFO                                 
+ 2 &quot;ORIGIN = \&quot;Image courtesy of the U.S. Geological Survey\&quot;&quot;
+ 3 &quot;REQUEST_ID = \&quot;0601501153667_00009\&quot;&quot;                     
+ 4 &quot;LANDSAT_SCENE_ID = \&quot;LC80400372013110LGN01\&quot;&quot;             
+ 5 FILE_DATE = 2015-01-15T21:43:51Z                           
+ 6 &quot;STATION_ID = \&quot;LGN\&quot;&quot;                                     
+ 7 &quot;PROCESSING_SOFTWARE_VERSION = \&quot;LPGS_2.4.0\&quot;&quot;             
+ 8 END_GROUP = METADATA_FILE_INFO                             
+ 9 GROUP = PRODUCT_METADATA                                   
+10 &quot;DATA_TYPE = \&quot;L1T\&quot;&quot;                                      
+# ... with 196 more rows</code></pre>
+</section>
+<section id="multiple-models" class="slide level2">
+<h2>Multiple Models</h2>
+<p>lets take the gapminder dataset. First we have to structure the data.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(gapminder)
+by_country &lt;-<span class="st"> </span>gapminder <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">group_by</span>(country, continent) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">nest</span>()
+<span class="co">#sanity check it&#39;s still all there</span>
+<span class="kw">head</span>(by_country<span class="op">$</span>data[[<span class="dv">1</span>]])</code></pre></div>
+<pre><code># A tibble: 6 x 4
+   year lifeExp      pop gdpPercap
+  &lt;int&gt;   &lt;dbl&gt;    &lt;int&gt;     &lt;dbl&gt;
+1  1952    28.8  8425333      779.
+2  1957    30.3  9240934      821.
+3  1962    32.0 10267083      853.
+4  1967    34.0 11537966      836.
+5  1972    36.1 13079460      740.
+6  1977    38.4 14880372      786.</code></pre>
+</section>
+<section id="multiple-models-1" class="slide level2">
+<h2>Multiple Models</h2>
+<p>Our model. Note that we’re wrapping this inside a function so that it plays nicely with <code>map</code></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">country_model &lt;-<span class="st"> </span><span class="cf">function</span>(df) {
+  <span class="kw">lm</span>(lifeExp <span class="op">~</span><span class="st"> </span>year, <span class="dt">data =</span> df)
+}</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">by_country &lt;-<span class="st"> </span>by_country <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="co">#now add a column that contains the fit models</span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">model =</span> <span class="kw">map</span>(data, country_model))
+<span class="kw">head</span>(by_country, <span class="dt">n =</span> <span class="dv">3</span>)</code></pre></div>
+<pre><code># A tibble: 3 x 4
+  country     continent data              model   
+  &lt;fct&gt;       &lt;fct&gt;     &lt;list&gt;            &lt;list&gt;  
+1 Afghanistan Asia      &lt;tibble [12 x 4]&gt; &lt;S3: lm&gt;
+2 Albania     Europe    &lt;tibble [12 x 4]&gt; &lt;S3: lm&gt;
+3 Algeria     Africa    &lt;tibble [12 x 4]&gt; &lt;S3: lm&gt;</code></pre>
+<p>This is awesome! It’s still a dataframe, so all of our <code>dplyr</code>, <code>tidyr</code>, and <code>purrr</code> magic works just fine!</p>
+</section>
+<section id="multiple-models-2" class="slide level2">
+<h2>Multiple Models</h2>
+<p>Challenge: Add a column to this dataframe that contains the residuals.</p>
+</section>
+<section id="multiple-models-3" class="slide level2">
+<h2>Multiple Models</h2>
+<p>Challenge: Add a column to this dataframe that contains the residuals.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">by_country &lt;-<span class="st"> </span>by_country <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(
+    <span class="dt">resids =</span> <span class="kw">map2</span>(data, model, add_residuals)
+  )</code></pre></div>
+</section>
+<section id="multiple-models-4" class="slide level2">
+<h2>Multiple Models</h2>
+<p>Now we just have to unnest, and you’re off to the races! Note: the nested dataframe is the most useful base to work from. create task oriented dataframes for things like plotting residuals.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#in this case, we&#39;re dropping our models</span>
+resids &lt;-<span class="st"> </span><span class="kw">unnest</span>(by_country, resids)</code></pre></div>
+</section>
+<section id="multiple-models-5" class="slide level2">
+<h2>Multiple Models</h2>
+<p>Lets take a look at our residuals.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">resids <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">ggplot</span>(<span class="kw">aes</span>(year, resid, <span class="dt">group =</span> country)) <span class="op">+</span>
+<span class="st">    </span><span class="kw">geom_line</span>(<span class="dt">alpha =</span> <span class="dv">1</span> <span class="op">/</span><span class="st"> </span><span class="dv">3</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">    </span><span class="kw">facet_wrap</span>(<span class="op">~</span>continent)</code></pre></div>
+<p><img src="purrr_files/figure-revealjs/plot%20residuals-1.jpeg" width="672" /></p>
+</section>
+    </div>
+  </div>
+
+  <script src="libs/reveal.js-3.3.0.1/lib/js/head.min.js"></script>
+  <script src="libs/reveal.js-3.3.0.1/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Display the page number of the current slide
+        slideNumber: true,
+        // Push each slide change to the browser history
+        history: true,
+        // Vertical centering of slides
+        center: false,
+        // Opens links in an iframe preview overlay
+        previewLinks: true,
+        // Transition style
+        transition: 'fade', // none/fade/slide/convex/concave/zoom
+        // Transition style for full page slide backgrounds
+        backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
+
+
+
+        // Optional reveal.js plugins
+        dependencies: [
+        ]
+      });
+    </script>
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
+<script>
+  (function() {
+    if (window.jQuery) {
+      Reveal.addEventListener( 'slidechanged', function(event) {  
+        window.jQuery(event.previousSlide).trigger('hidden');
+        window.jQuery(event.currentSlide).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+
+  </body>
+</html>

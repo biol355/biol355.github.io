@@ -1,0 +1,319 @@
+---
+title:
+output:
+  revealjs::revealjs_presentation:
+    reveal_options:
+      slideNumber: true
+      previewLinks: true
+    theme: white
+    center: false
+    transition: fade
+    self_contained: false
+    lib_dir: libs
+    css: style.css
+---
+
+
+
+
+## 
+<Br><Br><br><br>
+<h2><center>Make your code purrr</center></h2>
+
+
+```{r prep, echo=FALSE, cache=FALSE, message=FALSE, warning=FALSE}
+library(knitr)
+library(tidyverse)
+library(stringr)
+library(ggplot2)
+library(modelr)
+theme_set(theme_bw(base_size=16))
+
+opts_chunk$set(fig.height=5, fig.width=7, comment=NA, 
+               warning=FALSE, message=FALSE, 
+               dev="jpeg")
+
+library(readxl)
+library(repurrrsive)
+library(listviewer)
+```
+
+## load some packages
+```{r read_data, eval=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(repurrrsive)
+library(listviewer)
+```
+
+1. `purrr` is the star today, but it's part of the tidyverse package. If you want to load it alone, `library(purrr)` does the trick.  
+
+2. `repurrrsive` contains example datasets.  
+
+3. `listviewer` is similar to `visdat`. It makes an interactive widget to explore lists, which can be more tricky to grok than the average dataframe.
+
+
+
+
+##Explore lists interactively with listviewer
+
+```{r listviewer}
+listviewer::jsonedit(got_chars, mode = "view")
+```  
+Note: how pretty this is depends on the underlying structure of the list. 
+
+##So what's the deal with lists?  
+
+Most of the functions we've worked with so far are vectorized. They work extremely well on vectors (remember - each column of a dataframe is a vector). 
+
+```{r sqrt}
+sqrt(c(9, 16, 25))
+```  
+However, they break when you try to run them on a list.
+```{r sqrt list,  error = TRUE}
+a <- list(9, 16, 25)
+sqrt(a)
+```
+## Map it out!  
+
+If you want to apply a function across a list, use `map(list, function)`.
+
+```{r sqrt map}
+map(a, sqrt)
+```
+
+Note: this works on atomic vectors as well, but the output will be a list. 
+
+##Lists can get biiiiig
+`got_char` is a list included in the `repurrrsive` package. It has data on all PoV characters from A Song of Ice and Fire.  
+
+```{r list str}
+# str is, as always, a good place to start.
+#give str additional arguments in order to manage large lists
+str(got_chars, list.len = 3, max.level = 2)
+```
+
+##Dust off your index-fu
+
+Find some data about a single character
+```{r one}
+got_chars[[1]][c("name", "culture", "gender", "born")]
+```
+Exercise: Who is the last entry in this dataset, and where were they born?  
+
+##Exercise: Who is the last entry in this dataset, and where were they born?
+```{r last}
+got_chars[[length(got_chars)]][c("name","born")]
+```
+
+
+
+##What if we want this info for all characters at once? 
+
+```{r []}
+x <- map(got_chars, `[`, c("name", "culture", "gender", "born"))
+str(x[1]) 
+#In english: take the got_chars list. 
+#apply the [] function, aka extract() to the entire list. 
+#Only spit out name, culture, gender, and birth info.
+```
+Note: If [ grinds your gears, you can use magrittr's `extract()`.
+
+## Exercise
+Pull out the names and titles of each character
+
+## Exercise
+Pull out the names and titles of each character
+```{r}
+y <- map(got_chars, `[`, c("name", "titles"))
+str(y[1])
+``` 
+
+## Exercise
+Pull out the names and titles of each character
+```{r}
+y <- map(got_chars, `[`, c("name", "titles"))
+str(y[1])
+y[[1]]$titles
+```
+
+## The toolbox
+1. map
+2. map2
+3. pmap
+4. map_chr and friends
+5. map_df
+6. safely()
+
+##map
+Lets take a look at map with some numbers.
+```{r more map}
+a <- rnorm(n = 100, mean = 0, sd =  1)
+b <- rnorm(n = 100, mean = 5, sd =  1)
+c <- rnorm(n = 100, mean = 10, sd =  1)
+d <- list(a, b, c)
+
+map(d, mean)
+```
+
+## map2 
+
+If you have two input lists, use map2. 
+```{r map2}
+a <- list(1, 2, 3)
+b<- list(10, 11,12)
+#map also works with formulas
+map2(a, b, ~ .x + .y)
+#take two lists (a and b) 
+#add the corresponding elements together
+```
+
+##pmap
+```{r pmap}
+c <- list(100, 101,102)
+d <- list(a, b, c)
+
+pmap(d, sum)
+```
+##Simple Outputs
+`map()` will ALWAYS return a list. If you want a simple vector as output, use the appropriate `map` varient from the following list:
+1. `map_lgl()` returns a logical (`TRUE`/`FALSE`) vector
+2. `map_int()`returns an integer vector
+3. `map_dbl()` returns a double vector
+4. `map_chr()` returns a character vetor  *
+
+NOTE: `purrr` is *extremely* picky about object type, so be aware of `int` vs `dbl`.
+
+##Simple Outputs
+```{r map_chr1}
+
+x <- map(got_chars, `[`, "name")
+x[1:2]
+```
+Versus
+```{r map_chr2}
+y <- map_chr(got_chars,  ~.x[["name"]])
+head(y)
+```
+
+##Simple Outputs
+```{r map_dbl1}
+a <- rnorm(n = 100, mean = 0, sd =  1)
+b <- rnorm(n = 100, mean = 5, sd =  1)
+d <- list(a, b)
+map(d, mean)
+```
+versus
+```{r map_dbl2}
+a <- rnorm(n = 100, mean = 0, sd =  1)
+b <- rnorm(n = 100, mean = 5, sd =  1)
+d <- list(a, b)
+
+map_dbl(d, mean)
+```
+##map_df
+
+```{r map_df}
+got_df <-map_df(got_chars, `[`, 
+                c("name", "culture", "gender", "id", "alive"))
+head(got_df)
+```
+Note: Keep an eye on your data types. When in doubt, use simpler `map` functions to build your final dataframe.
+
+##Safely
+Troubleshooting vectorized functions can be a pain.
+```{r safely}
+numbers <- c(1:10)
+map_dbl(numbers, sqrt)
+```  
+Pretend this is actually 1.5 million data points: incorrect values aren't going to be something you can eyeball.  
+```{r safely2, error = TRUE}
+numbers_bad <- c(1, 2, 3, 4, 5, "Tyrion Lannister",7, 8, 9)
+map_dbl(numbers_bad, sqrt)
+
+```
+##Safely
+Purrr adds a family of functions under `safely()` that make troubleshooting these a breeze. 
+
+1.`safely` returns a list with `result` and `error`  
+2.`quietly` returns a list with `result`,`output`, `messages`, and `warnings`    
+3.`possibly` will fill any errors with a specified value.
+
+##Safely
+```{r safely4}
+numbers_bad <- list(1,"Tyrion Lannister",3)
+safe_sqrt <- safely(sqrt)
+
+map(numbers_bad, safe_sqrt)
+```
+##Possibly
+```{r possibly}
+numbers_bad <- list(1,"Tyrion Lannister",3)
+possible_sqrt <- possibly(sqrt, otherwise = NA)
+
+map_dbl(numbers_bad, possible_sqrt)
+```
+
+##loading data
+```{r data}
+library(readr)
+#make a list of all files in a directory
+files <- list.files("./data/mtls/")
+#add file path info
+files <- paste0("./data/mtls/", files)
+#map it!
+data <- map(files, read_table )
+data[[1]]
+```
+##Multiple Models
+lets take the gapminder dataset. First we have to structure the data. 
+```{r gapminder}
+library(gapminder)
+by_country <- gapminder %>% 
+  group_by(country, continent) %>% 
+  nest()
+#sanity check it's still all there
+head(by_country$data[[1]])
+```
+
+##Multiple Models
+Our model. Note that we're wrapping this inside a function so that it plays nicely with `map`
+```{r model}
+country_model <- function(df) {
+  lm(lifeExp ~ year, data = df)
+}
+```
+```{r fit}
+by_country <- by_country %>% 
+  #now add a column that contains the fit models
+  mutate(model = map(data, country_model))
+head(by_country, n = 3)
+```  
+This is awesome! It's still a dataframe, so all of our `dplyr`, `tidyr`, and `purrr` magic works just fine!  
+
+##Multiple Models
+Challenge: Add a column to this dataframe that contains the residuals.
+
+##Multiple Models
+Challenge: Add a column to this dataframe that contains the residuals.
+```{r challenge answer}
+by_country <- by_country %>% 
+  mutate(
+    resids = map2(data, model, add_residuals)
+  )
+```
+
+##Multiple Models
+Now we just have to unnest, and you're off to the races!
+Note: the nested dataframe is the most useful base to work from. create task oriented dataframes for things like plotting residuals.
+```{r unnest}
+#in this case, we're dropping our models
+resids <- unnest(by_country, resids)
+```
+##Multiple Models
+Lets take a look at our residuals.
+```{r plot residuals}
+resids %>% 
+  ggplot(aes(year, resid, group = country)) +
+    geom_line(alpha = 1 / 3) + 
+    facet_wrap(~continent)
+```
