@@ -241,26 +241,31 @@ $(document).ready(function () {
 
 <div id="putting-it-all-together" class="section level1">
 <h1>Putting it all together</h1>
-<p>For your final proejct, I’m asking you to conduct an analysis of a full data set. I’d like you to write up the full project using RMarkdown so that I can not only see the answers to the question you pose, but how you answered them. I’d also like you to give a short presentation to class before your paper is due in which you outline your project. This might not be complete</p>
+<p>For your final proejct, I’m asking you to conduct an analysis of a full data set. I’d like you to write up the full project using RMarkdown so that I can not only see the answers to the question you pose, but how you answered them. I’d also like you to give a short presentation to class before your paper is due in which you outline your project. This might not be complete - you may have some questions or need some feedback. That’s fine. It’s what we’re here for before you dive into the final!</p>
+<div id="some-markdown-notes-for-both-the-presentation-and-paper" class="section level2">
+<h2>Some Markdown Notes for both the presentation and paper</h2>
+<p>As a quick note, you might want to massage you <a href="https://rmarkdown.rstudio.com/lesson-3.html">code chunks</a> a bit in your presentation so we don’t see code, error messages, warnings, etc. Remember <code>warning=FALSE</code>, <code>message=FALSE</code>, <code>echo=FALSE</code>, and more are all your friends. For more - including how to resize graphs and such - see <a href="https://yihui.name/knitr/options/">here</a>.</p>
+<p>If you want to output your statistical results as a table, use <a href="https://rmarkdown.rstudio.com/lesson-7.html">knitr::kable</a> or <a href="https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html">kabelExtra</a>. If you want to build tables that you fill in with text, I recommend this <a href="https://www.tablesgenerator.com/markdown_tables">markdown table generator</a> as <a href="http://fletcher.github.io/MultiMarkdown-5/tables.html">markdown tables</a> can be tricky.</p>
+<p>Last, here’s a <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">markdown cheatsheet</a> - although Rstudio’s help has a good set of materials as well.</p>
+</div>
 <div id="the-presentation" class="section level2">
 <h2>The Presentation</h2>
-<p>Your presentation should present 1) the dataset you are looking at, 2) the question you are asking, 3) your approach, 4) cool preliminary results - includign both analysis and visualization, and 5) any questions you have for further directions you will be taking it in the paper. The presentation should be written in markdown. Here’s an <a href="./final_project/slides_example.html">example</a>.</p>
+<p>Your presentation should present 1) the dataset you are looking at, 2) the question you are asking, 3) your approach, 4) cool preliminary results - includign both analysis and visualization, and 5) any questions you have for further directions you will be taking it in the paper. The presentation should be written in markdown. Here’s an <a href="./final_project/slides_example.html">example</a>. For how to do presentations with R markdown, see the slidy, ioslides, or reveal.js tutorials at the <a href="https://rmarkdown.rstudio.com/formats.html">rmarkdown formats site</a>.</p>
 </div>
 <div id="the-paper" class="section level2">
 <h2>The Paper</h2>
-</div>
-<div id="organizational-structure" class="section level2">
-<h2>Organizational Structure</h2>
+<div id="organizational-structure" class="section level3">
+<h3>Organizational Structure</h3>
 <p>The final paper should be broken up into something along the lines of the following sections. You may feel free to adapt this flexibly given your unique data set and set of problems and questions. But this is a general guide, particularly if you are lost.</p>
-<div id="introduction" class="section level3">
-<h3>1) Introduction</h3>
+<div id="introduction" class="section level4">
+<h4>1) Introduction</h4>
 <ul>
 <li>What is the dataset you are using? +Describe the dataset in detail +Visualize summary information about the data</li>
 <li>Based on the data, what questions do you want to ask?</li>
 </ul>
 </div>
-<div id="methods" class="section level3">
-<h3>2) Methods</h3>
+<div id="methods" class="section level4">
+<h4>2) Methods</h4>
 <ul>
 <li>Based on the data and question, what is the workflow you put together to answer your question? Feel free to write it out step-by-step</li>
 <li>How did you prepare and manupulate the data to get it ready for analysis?</li>
@@ -273,20 +278,20 @@ $(document).ready(function () {
 </ul></li>
 </ul>
 </div>
-<div id="results" class="section level3">
-<h3>3) Results</h3>
+<div id="results" class="section level4">
+<h4>3) Results</h4>
 <p><em>In this section, show the analyses and visualizations as well as code that generates them that answer your question. </em> For each analysis, be sure to walk through the entire process of model creation, evaluation of assumptions, and evaluation of any statistical tests. Feel free to show when and where you revise your models</p>
 </div>
-<div id="discussion" class="section level3">
-<h3>4) Discussion</h3>
+<div id="discussion" class="section level4">
+<h4>4) Discussion</h4>
 <ul>
 <li>What do your results say? Put it all together.</li>
 <li>Do your results suggest additional visualizations/analyses? Feel free to conduct them here.</li>
 <li>What final conclusion can you draw about your data set?</li>
 </ul>
 </div>
-<div id="grading-of-the-paper" class="section level3">
-<h3>Grading of the Paper</h3>
+<div id="grading-of-the-paper" class="section level4">
+<h4>Grading of the Paper</h4>
 <p>Remember, I’m looking for quality well commented, well thought-out, well styled code in addition to gorgeous visualizations that convery a message and unambiguous analyses (where possible). As a guide to the whole paper, here’s my rubric. Once you finish your paper, assess yourself. Heck, if you even want to write a short section where you assess yourself against this rubric and justify why we should give you a certain grade according to this rubric, feel free!</p>
 <table>
 <colgroup>
@@ -368,9 +373,10 @@ $(document).ready(function () {
 <p>Note: Using libraries not taught in class will be +1 point per library. Please note when this is a new library for you.</p>
 </div>
 </div>
-<div id="an-example-from-the-past" class="section level2">
-<h2>An example from the past</h2>
+<div id="an-example-from-the-past" class="section level3">
+<h3>An example from the past</h3>
 <p>This needs a bit more organizational cohesion, and it was written in bullet points, which got big points off (write! and write well!) but overall, <a href="./final_project/FinalProject_paper_example.html">not a bad paper</a></p>
+</div>
 </div>
 </div>
 
