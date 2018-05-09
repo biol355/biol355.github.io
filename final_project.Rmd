@@ -1,7 +1,7 @@
 ---
 title: 'Final Project'
 author: "Intro to Data Science for Biology"
-date: "Due May 14, 2018"
+date: "Presentations May 15, 2018, Paper Due May 18, 2018"
 output: html_document
 ---
 
