@@ -9,7 +9,9 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-
+# Submission links
+Submit presentations [here](https://www.dropbox.com/request/BqNgX2Zw0dJglnMkFoPE)  
+Submit papers [here](https://www.dropbox.com/request/fCXWXpZdkJPsgZCwh2Hw)
 
 # Putting it all together
 For your final proejct, I'm asking you to conduct an analysis of a full data set.  I'd like you to write up the full project using RMarkdown so that I can not only see the answers to the question you pose, but how you answered them. I'd also like you to give a short presentation to class before your paper is due in which you outline your project. This might not be complete - you may have some questions or need some feedback. That's fine. It's what we're here for before you dive into the final!  
