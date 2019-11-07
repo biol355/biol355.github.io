@@ -13,6 +13,8 @@ qplot(conc, density, data=DNase, geom=c("point", "line"), group=Run) +
   ggtitle("Elisa assay of DNase")
 ```
 
+**What:** Biol 381 & 382 Section 01  
+  
 **Instructor:** Jarrett Byrnes, PhD.
 
 **Email:** jarrett.byrnes@umb.edu
@@ -21,9 +23,9 @@ qplot(conc, density, data=DNase, geom=c("point", "line"), group=Run) +
 
 **Email:** isaac.rosenth001@umb.edu
 
-**Where:** Wheatley 2-030  
+**Where:** Healey 03-0009F Blue Lab  
 
-**Weekly Schedule:** Tuesday & Thursday 9:30-12:00, Lab Wednesday 12:30-3:30
+**Weekly Schedule:** Tuesday & Thursday 12:30-1:45, Lab Friday 11:30-2:00
 
 **Office Hours:** Prof. Byrnes will hold office hours Thursday from 11:30-1 in ISC 3130  
 &nbsp; &nbsp; TA Rosenthal will hold office hours Tuesday & Wednesday 11-12 at the tables outside of ISC 3100.
