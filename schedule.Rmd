@@ -9,7 +9,7 @@ W&G = [Wickham & Grolemund](http://r4ds.had.co.nz), DC = Data Carpentry Lesson, 
     
 ```{r dates, echo=FALSE, message=FALSE, warning=FALSE}
 library(lubridate)
-current_date = parse_date_time("2018-01-23", orders="ymd")-days(7)
+current_date = parse_date_time("2020-01-27", orders="ymd")-days(7)
 ```
 ### Week 1.  
 ```{r next_date, echo=FALSE }
@@ -185,7 +185,7 @@ __Etherpad:__ https://etherpad.wikimedia.org/p/355-mlr
 ### Week  14 Multiple Predictors Part 2  
 `r datestring`  
 __Readings:__  W&G on [Model Building](http://r4ds.had.co.nz/model-building.html)  
-__Lectures:__  [AIC and Multimodel Comparisons](./Lectures/27_mmi.html)  
+__Lectures:__  [AIC and Multimodel Comparisons](./Lectures/27_mmi.html), [purrr](./Lectures/purrr.html).    
 __Lab:__ [AIC and Multimodel Inference in R](./Labs/lab11_mmi.html)  
 __Objective(s):__  Comparing and Contrasting models, Visualization of model outcomes when many models are fit  
 __Biological Examples:__ Fire severity in California. Brain size and natal investment in primates. Linguistic diversity and cultural characteristics.   

@@ -7,6 +7,7 @@
 <meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 
@@ -69,9 +70,7 @@ h6 {
 </style>
 
 
-</head>
 
-<body>
 
 <style type = "text/css">
 .main-container {
@@ -85,13 +84,18 @@ code {
 }
 img {
   max-width:100%;
-  height: auto;
 }
 .tabbed-pane {
   padding-top: 12px;
 }
+.html-widget {
+  margin-bottom: 20px;
+}
 button.code-folding-btn:focus {
   outline: none;
+}
+summary {
+  display: list-item;
 }
 </style>
 
@@ -107,7 +111,6 @@ body {
   padding-top: 65px;
   margin-top: -65px;
 }
-
 .section h2 {
   padding-top: 65px;
   margin-top: -65px;
@@ -127,6 +130,43 @@ body {
 .section h6 {
   padding-top: 65px;
   margin-top: -65px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
 }
 </style>
 
@@ -148,19 +188,73 @@ $(document).ready(function () {
 });
 </script>
 
-
-<div class="container-fluid main-container">
-
 <!-- tabsets -->
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-</script>
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
 
 <!-- code folding -->
 
 
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
 
 
 
@@ -241,7 +335,7 @@ $(document).ready(function () {
 <p>W&amp;G = <a href="http://r4ds.had.co.nz">Wickham &amp; Grolemund</a>, DC = Data Carpentry Lesson, U/P for linked pdfs = biol355</p>
 <div id="week-1." class="section level3">
 <h3>Week 1.</h3>
-<p>1/23/2018<br />
+<p>1/27/2020<br />
 <strong>Lecture:</strong> <a href="./Lectures/01_intro.pdf">Welcome!</a>, <a href="./Lectures/02_data_collection.pdf">Data Collection and Metadata</a><br />
 <strong>Readings:</strong> <a href="http://r4ds.had.co.nz/introduction.html">W&amp;G Introduction Chapter 1</a><br />
 <strong>Objective(s):</strong> Introduce the students to the course; understand what is data, discuss how we preserve information about data, view different examples of datasets from different disciplines.<br />
@@ -250,7 +344,7 @@ $(document).ready(function () {
 </div>
 <div id="week-2.-data-creation-spreadsheets-and-intro-to-r" class="section level3">
 <h3>Week 2. Data Creation, Spreadsheets, and intro to R</h3>
-<p>1/30/2018<br />
+<p>2/3/2020<br />
 <strong>Readings:</strong> <a href="./Readings/Browman_and_Woo_Spreadsheets.pdf">Browman and Woo 2017</a><br />
 <strong>Lectures:</strong> <a href="./Lectures/03_data_creation.html">Data Creation</a>, <a href="./Lectures/04_r_intro.html">Intro to R</a><br />
 <strong>Lab:</strong> <a href="http://www.datacarpentry.org/spreadsheet-ecology-lesson/">DC Spreadsheet Ecology Lesson</a><br />
@@ -260,7 +354,7 @@ $(document).ready(function () {
 </div>
 <div id="week-3-introduction-to-r" class="section level3">
 <h3>Week 3 Introduction to R</h3>
-<p>2/6/2018<br />
+<p>2/10/2020<br />
 <strong>Readings:</strong> W&amp;G on <a href="http://r4ds.had.co.nz/tibbles.html">Tibbles &amp; Data Frames</a> and <a href="http://r4ds.had.co.nz/data-import.html">Data Import</a>, DC Ecology <a href="http://www.datacarpentry.org/R-ecology-lesson/01-intro-to-r.html">Intro to R</a> and <a href="http://www.datacarpentry.org/R-ecology-lesson/02-starting-with-data.html">starting with data</a><br />
 <strong>Lectures:</strong><a href="./Lectures/05_r_intro_list_matrix_df.html">Intro to vectors, lists, matrices, and data frames</a>, <a href="./Lectures/06_read_data_libraries.html">Data import and package installation</a><br />
 <strong>Objective(s):</strong> Begin to learn the R computing language. Identify the syntax of an R function (name and arguments); Create an R project in RStudio; Read data into R using read.csv(); Use R as a basic calculator; Describe and create variables in R; Interpret the output of the str() function; Install packages in R;<br />
@@ -273,7 +367,7 @@ $(document).ready(function () {
 </div>
 <div id="week-4.-visualization" class="section level3">
 <h3>Week 4. Visualization</h3>
-<p>2/13/2018<br />
+<p>2/17/2020<br />
 <strong>Readings:</strong> W&amp;G on <a href="http://r4ds.had.co.nz/data-visualisation.html">Data Visualization</a>, <a href="./Readings/Unwin_2008_dataviz.pdf">Unwin 2008</a>, <a href="./Readings/choosing-a-good-chart-09.pdf">Choosing a Good Chart Cheat Sheet</a><br />
 <strong>Lectures:</strong> <a href="./Lectures/07_data_viz_principles.pdf">Principles of Data Visualization</a>, <a href="./Lectures/08_ggplot_intro.html">Intro to ggplot2</a><br />
 <strong>Objective(s):</strong> Develop understanding of graphical presentation best practices. Create a scatterplot using ggplot(); Learn how to add data to a simple map<br />
@@ -286,7 +380,7 @@ $(document).ready(function () {
 </div>
 <div id="week-5.-data-reduction-and-summarization" class="section level3">
 <h3>Week 5. Data Reduction and Summarization</h3>
-<p>2/20/2018<br />
+<p>2/24/2020<br />
 <strong>Readings:</strong> W&amp;G on <a href="http://r4ds.had.co.nz/transform.html">Data Transformation</a>, <a href="http://r4ds.had.co.nz/exploratory-data-analysis.html">Exploratory Data Analysis</a>, and <a href="http://r4ds.had.co.nz/pipes.html">Pipes</a>, DC Ecology Lesson on <a href="http://www.datacarpentry.org/R-ecology-lesson/03-dplyr.html">Data Aggregation</a><br />
 <strong>Lecture:</strong> <a href="./Lectures/09_summarizing_data.html">Organizing Data to Tell a Story</a>, <a href="./Labs/freeform_dplyr.zip">Data for Exploratory Data Analysis of Mortality and Natality with dplyr and ggplot2</a><br />
 <strong>Classwork:</strong> <a href="https://www.dropbox.com/request/cNqOhHN02iYpldf7KVnQ">Submit here!</a><br />
@@ -299,7 +393,7 @@ $(document).ready(function () {
 </div>
 <div id="week-6.-date-cleaning-strings-factors-and-dates" class="section level3">
 <h3>Week 6. Date Cleaning: Strings, Factors, and Dates</h3>
-<p>2/27/2018<br />
+<p>3/2/2020<br />
 <strong>Readings:</strong> W&amp;G on <a href="http://r4ds.had.co.nz/strings.html">Strings</a>, <a href="http://r4ds.had.co.nz/dates-and-times.html">Dates and Times</a>, and <a href="http://r4ds.had.co.nz/factors.html">Factors</a><br />
 <strong>Lecture:</strong> <a href="./Lectures/dplyr_faded_examples.html">Dplyr Faded Example Practice</a>, <a href="./Lectures/11_regexp.html">Strings and Regular Expressions 1</a>, <a href="./Lectures/12_regexp_2.html">Strings and Regular Expressions 2</a><br />
 <strong>Cheat Sheets:</strong> <a href="https://github.com/rstudio/cheatsheets/raw/master/strings.pdf">Work with Strings Cheat Sheet</a><br />
@@ -310,7 +404,7 @@ $(document).ready(function () {
 </div>
 <div id="week-7.-tidy-data-and-data-cleaning" class="section level3">
 <h3>Week 7. Tidy Data and Data Cleaning</h3>
-<p>3/6/2018<br />
+<p>3/9/2020<br />
 <strong>Readings:</strong> W&amp;G Chapters on <a href="http://r4ds.had.co.nz/tidy-data.html">Tidy Data</a><br />
 <strong>Lecture:</strong> <a href="./Lectures/13_data_tidy.html">Tidy Data</a><br />
 <strong>Lab:</strong> <a href="./Labs/axoltl_lab.html">Axoltl Data Cleaning</a><br />
@@ -320,7 +414,7 @@ $(document).ready(function () {
 </div>
 <div id="week-8-9.-data-mashups-and-geospatial-data" class="section level3">
 <h3>Week 8 &amp; 9. Data “Mashups” and Geospatial Data</h3>
-<p>3/20/2018 and 3/27/2018<br />
+<p>3/23/2020 and 3/30/2020<br />
 <strong>Readings:</strong> W&amp;G Chapter on <a href="http://r4ds.had.co.nz/relational-data.html">Relational Data</a>, <a href="http://www.datacarpentry.org/R-spatial-raster-vector-lesson/">Data Carpentry Geospatial Introduction</a><br />
 <strong>Lectures:</strong> <a href="./Lectures/15_joins.pptx">Joins</a>, <a href="./Lectures/16_raster_gis_intro.html">Rasters</a>, <a href="./Lectures/17_gis_in_r.html">Intro to GIS and R</a>, <a href="./Lectures/18_interactive_maps.Rmd">Interactive Maps</a><br />
 <strong>Labs:</strong> <a href="./Labs/join_maps_lab.html">Joins and Geospatial Data</a><br />
@@ -340,7 +434,7 @@ $(document).ready(function () {
 </div>
 <div id="week-10.-functions" class="section level3">
 <h3>Week 10. Functions</h3>
-<p>4/3/2018<br />
+<p>4/6/2020<br />
 <strong>Readings:</strong> W&amp;G Chapters on <a href="http://r4ds.had.co.nz/functions.html">Functions</a> and <a href="http://r4ds.had.co.nz/iteration.html">Iteration</a><br />
 <strong>Lectures:</strong> <a href="./Lectures/19_functions_intro.html">Intro to Functions</a>, <a href="./Lectures/20_iteration.html">Iteration with purrr</a><br />
 <strong>Lab:</strong> <a href="./Labs/function_lab.html">Functions lab</a><br />
@@ -351,7 +445,7 @@ $(document).ready(function () {
 </div>
 <div id="week-11.-t-tests-and-p-values" class="section level3">
 <h3>Week 11. T-Tests and P-Values</h3>
-<p>4/10/2018<br />
+<p>4/13/2020<br />
 <strong>Readings:</strong> <a href="./Readings/cortina%20and%20Dunlop%201997%20significance%20testing%20p%20value.pdf">Cortina and Dunlop 1997</a><br />
 <strong>Lectures:</strong> <a href="./Lectures/21_testing_hypotheses_p.pdf">Introduction to Frequentist Hypothesis Tests</a>, <a href="./Lectures/22_t.pdf">T-Tests</a><br />
 <strong>Objective(s):</strong> Describe the basics of probability and p-values, Compare groups of data using T-tests and its extensions.<br />
@@ -362,7 +456,7 @@ $(document).ready(function () {
 </div>
 <div id="week-12.-analysis-of-variance-and-the-linear-model" class="section level3">
 <h3>Week 12. Analysis of Variance and the Linear Model</h3>
-<p>4/17/2018<br />
+<p>4/20/2020<br />
 <strong>Lectures:</strong> <a href="./Lectures/23_anova.html">Analysis of Variance</a>, <a href="./Lectures/24_lm.html">Linear Models</a><br />
 <strong>Lab:</strong> <a href="https://biol607.github.io/lab/10_anova.html">So Many ANOVA!</a>, <a href="https://biol607.github.io/lab/data_10.zip">data files for lab</a>, <a href="./in_class_files/2018/scripts/anova_lab.R">In Class File</a><br />
 <strong>Objective(s):</strong> Analyze the differences between multiple means. Fit a linear regression using lm() in R through a bivariate scatterplot. Evaluate assumptions of a linear model with normal error<br />
@@ -371,7 +465,7 @@ $(document).ready(function () {
 </div>
 <div id="week-13-general-and-generalized-linear-models-multiple-predictors" class="section level3">
 <h3>Week 13 General and Generalized Linear Models, Multiple Predictors</h3>
-<p>4/24/2018<br />
+<p>4/27/2020<br />
 <strong>Readings:</strong> W&amp;G on <a href="http://r4ds.had.co.nz/model-basics.html">Model Basics</a><br />
 <strong>Lectures:</strong> <a href="./Lectures/26_ancova_mulltreg.html">The General Linear Model (ANCOVA, multiple regression)</a>, <a href="./Lectures/25_glm.html">Generalized Linear Models</a>, <a href="./Lectures/27_mmi.html">AIC and Multimodel Comparisons</a><br />
 <strong>Lab:</strong> <a href="./Labs/lab10_lm.html">Linear Models</a><br />
@@ -382,9 +476,9 @@ $(document).ready(function () {
 </div>
 <div id="week-14-multiple-predictors-part-2" class="section level3">
 <h3>Week 14 Multiple Predictors Part 2</h3>
-<p>5/1/2018<br />
+<p>5/4/2020<br />
 <strong>Readings:</strong> W&amp;G on <a href="http://r4ds.had.co.nz/model-building.html">Model Building</a><br />
-<strong>Lectures:</strong> <a href="./Lectures/27_mmi.html">AIC and Multimodel Comparisons</a><br />
+<strong>Lectures:</strong> <a href="./Lectures/27_mmi.html">AIC and Multimodel Comparisons</a>, <a href="./Lectures/purrr.html">purrr</a>.<br />
 <strong>Lab:</strong> <a href="./Labs/lab11_mmi.html">AIC and Multimodel Inference in R</a><br />
 <strong>Objective(s):</strong> Comparing and Contrasting models, Visualization of model outcomes when many models are fit<br />
 <strong>Biological Examples:</strong> Fire severity in California. Brain size and natal investment in primates. Linguistic diversity and cultural characteristics.<br />
@@ -393,7 +487,7 @@ $(document).ready(function () {
 </div>
 <div id="week-15.-open-lab-and-final-presentations" class="section level3">
 <h3>Week 15. Open Lab and Final Presentations</h3>
-<p>5/8/2018<br />
+<p>5/11/2020<br />
 Prep your final talks! Data science party!</p>
 </div>
 
@@ -414,6 +508,23 @@ $(document).ready(function () {
 
 
 </script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

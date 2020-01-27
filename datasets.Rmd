@@ -8,6 +8,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ## Search Engines
+* [Google Data Search](https://datasetsearch.research.google.com/)
 * [Data.gov](http://data.gov)  
 * [Healthdata.gov](https://www.healthdata.gov/)  
 * [World Health Organization Data Repository](http://www.who.int/gho/database/en/)  
@@ -22,6 +23,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
  
 ## Data Sets
+* [Reef Check](http://data.reefcheck.us/)  
 * [City of Boston Data Portal](https://data.boston.gov/)  
 * [Massachusetts Ocean Resource Information System](http://maps.massgis.state.ma.us/map_ol/moris.php)  
 * [NOAA Fisheries Datasets](https://www.st.nmfs.noaa.gov/appstech/data-portals/index)  
