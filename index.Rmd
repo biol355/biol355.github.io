@@ -17,18 +17,22 @@ qplot(conc, density, data=DNase, geom=c("point", "line"), group=Run) +
   
 **Instructor:** Jarrett Byrnes, PhD.
 
-**Email:** jarrett.byrnes@umb.edu
+**Email:** jarrett.byrnes@umb.edu  
+  
+**Twitter:** [jebyrnes](http://twitter.com/jebyrnes)
 
-**TA:** Isaac Rosenthal
+**TA:** Rachel La Bella
 
-**Email:** isaac.rosenth001@umb.edu
+**Email:** rlabella@gmail.com  
+
+**Twitter:** [rach_labella](http://twitter.com/rach_labella)  
 
 **Where:** Healey 03-0009F Blue Lab  
 
 **Weekly Schedule:** Tuesday & Thursday 12:30-1:45, Lab Friday 11:30-2:00
 
-**Office Hours:** Prof. Byrnes will hold office hours Thursday from 11:30-1 in ISC 3130  
-&nbsp; &nbsp; TA Rosenthal will hold office hours Tuesday & Wednesday 11-12 at the tables outside of ISC 3100.
+**Student Hours:** Prof. Byrnes will hold student office hours Wednesday from 1-3 in ISC 3130 or by appointment  
+&nbsp; &nbsp; TA La Bella will hold student office hours Tuesday 10-11:30 or by appointment at the tables outside of ISC 3201.
 
 **Source for this Website:** https://github.com/biol355/biol355.github.io/
 &nbsp;  
@@ -36,4 +40,7 @@ qplot(conc, density, data=DNase, geom=c("point", "line"), group=Run) +
 &nbsp;  
 
 ## Course News:  
-*1/22/2018*  Welcome to the class! Please browse around the site or download the [lecture syllabus](./governance_syllabus/byrnes_355_datascience_lecture_1.docx) and [lab syllabus](./governance_syllabus/byrnes_356_datascience_lab_1.docx)!
+*1/23/2020*  Please join our class slack channel on the UMass Boston R User Group Slack by going to http://umbrug.slack.com, and, once joined, join the #biol355 channel.  
+
+
+*1/22/2020*  Welcome to the class! Please browse around the site or download the [lecture syllabus](./governance_syllabus/byrnes_355_datascience_lecture_4.docx) and [lab syllabus](./governance_syllabus/byrnes_356_datascience_lab_4.docx)!

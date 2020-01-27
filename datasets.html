@@ -7,6 +7,7 @@
 <meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 
@@ -69,9 +70,7 @@ h6 {
 </style>
 
 
-</head>
 
-<body>
 
 <style type = "text/css">
 .main-container {
@@ -85,13 +84,18 @@ code {
 }
 img {
   max-width:100%;
-  height: auto;
 }
 .tabbed-pane {
   padding-top: 12px;
 }
+.html-widget {
+  margin-bottom: 20px;
+}
 button.code-folding-btn:focus {
   outline: none;
+}
+summary {
+  display: list-item;
 }
 </style>
 
@@ -107,7 +111,6 @@ body {
   padding-top: 65px;
   margin-top: -65px;
 }
-
 .section h2 {
   padding-top: 65px;
   margin-top: -65px;
@@ -127,6 +130,43 @@ body {
 .section h6 {
   padding-top: 65px;
   margin-top: -65px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
 }
 </style>
 
@@ -148,19 +188,73 @@ $(document).ready(function () {
 });
 </script>
 
-
-<div class="container-fluid main-container">
-
 <!-- tabsets -->
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-</script>
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
 
 <!-- code folding -->
 
 
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
 
 
 
@@ -187,10 +281,10 @@ $(document).ready(function () {
   <a href="schedule.html">Schedule</a>
 </li>
 <li>
-  <a href="error.html">R Errors</a>
+  <a href="http://umbrug.slack.com">Course Slack</a>
 </li>
 <li>
-  <a href="final.html">Final</a>
+  <a href="final_project.html">Final</a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -200,10 +294,10 @@ $(document).ready(function () {
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="./governance_syllabus/byrnes_355_datascience_lecture_1.docx">Lecture</a>
+      <a href="./governance_syllabus/byrnes_355_datascience_lecture_4.docx">Lecture</a>
     </li>
     <li>
-      <a href="./governance_syllabus/byrnes_356_datascience_lab_1.docx">Lab</a>
+      <a href="./governance_syllabus/byrnes_356_datascience_lab_4.docx">Lab</a>
     </li>
   </ul>
 </li>
@@ -236,9 +330,10 @@ $(document).ready(function () {
 </div>
 
 
-<section id="search-engines" class="level2">
+<div id="search-engines" class="section level2">
 <h2>Search Engines</h2>
 <ul>
+<li><a href="https://datasetsearch.research.google.com/">Google Data Search</a></li>
 <li><a href="http://data.gov">Data.gov</a><br />
 </li>
 <li><a href="https://www.healthdata.gov/">Healthdata.gov</a><br />
@@ -261,10 +356,12 @@ $(document).ready(function () {
 </li>
 <li><a href="https://www.pangaea.de/">Pangea</a></li>
 </ul>
-</section>
-<section id="data-sets" class="level2">
+</div>
+<div id="data-sets" class="section level2">
 <h2>Data Sets</h2>
 <ul>
+<li><a href="http://data.reefcheck.us/">Reef Check</a><br />
+</li>
 <li><a href="https://data.boston.gov/">City of Boston Data Portal</a><br />
 </li>
 <li><a href="http://maps.massgis.state.ma.us/map_ol/moris.php">Massachusetts Ocean Resource Information System</a><br />
@@ -273,10 +370,12 @@ $(document).ready(function () {
 </li>
 <li><a href="https://www.neotomadb.org/">Neotoma Paleoecology Database</a><br />
 </li>
-<li><a href="https://www.gbif.org/">Global Biodiversity Information Facility</a></li>
+<li><a href="https://www.gbif.org/">Global Biodiversity Information Facility</a><br />
+</li>
+<li><a href="https://wonder.cdc.gov/">CDC Wonder Database</a></li>
 </ul>
-</section>
-<section id="data-sets-with-r-packages" class="level2">
+</div>
+<div id="data-sets-with-r-packages" class="section level2">
 <h2>Data Sets with R Packages</h2>
 <ul>
 <li><a href="https://github.com/ropensci/rebird">R EBird Interface</a><br />
@@ -320,7 +419,7 @@ $(document).ready(function () {
 </li>
 <li><a href="https://github.com/ropensci/rAvis">rAvis - citizen science bird counts in Spain</a></li>
 </ul>
-</section>
+</div>
 
 
 
@@ -339,6 +438,23 @@ $(document).ready(function () {
 
 
 </script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

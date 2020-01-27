@@ -9,16 +9,16 @@ navbar:
     href: overview.html
   - text: "Schedule"
     href: schedule.html
-  - text: "R Errors"
-    href: error.html
+  - text: "Course Slack"
+    href: http://umbrug.slack.com
   - text: "Final"
     href: final_project.html
   - text: "Syllabus"
     menu:
        - text: "Lecture"
-         href: ./governance_syllabus/byrnes_355_datascience_lecture_1.docx
+         href: ./governance_syllabus/byrnes_355_datascience_lecture_4.docx
        - text: "Lab"
-         href: ./governance_syllabus/byrnes_356_datascience_lab_1.docx
+         href: ./governance_syllabus/byrnes_356_datascience_lab_4.docx
   - text: "Datasets"
     href: datasets.html
   - text: "Resources"
