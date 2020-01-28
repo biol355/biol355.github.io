@@ -21,7 +21,7 @@ __Lecture:__ [Welcome!](./Lectures/01_intro.pdf),  [Data Collection and Metadata
 __Readings:__ [W&G Introduction Chapter 1](http://r4ds.had.co.nz/introduction.html)  
 __Objective(s):__ Introduce the students to the course; understand what is data, discuss how we preserve information about data, view different examples of datasets from different disciplines.  
 __Lab:__ [Data Collection](./Labs/lab_1_data_collection.html)  
-__Etherpad:__ https://etherpad.wikimedia.org/p/355-metadata  
+__Etherpad:__ https://etherpad.wikimedia.org/p/355-metadata-2020  
 
 ### Week  2. Data Creation, Spreadsheets, and intro to R  
 ```{r next_date, echo=FALSE}
@@ -33,7 +33,7 @@ __Lab:__ [DC Spreadsheet Ecology Lesson](http://www.datacarpentry.org/spreadshee
 __Files:__ [Portal Data](https://ndownloader.figshare.com/files/2252083) 
 __Objective(s):__ Compare poor versus good practice in creating data. Differentiate between data recording and data entry. Develop a practical familiarity with data quality control. Discuss what is good metadata and current metadata standards.  
 __Biological Examples:__ Transgenic mouse experimentation. Bee genomics. Subtidal field surveys. Current data sharing archives in biology.  
-__Etherpad:__ https://etherpad.wikimedia.org/p/355-spreadsheets and https://etherpad.wikimedia.org/p/biol355-r-intro    
+__Etherpad:__ https://etherpad.wikimedia.org/p/355-spreadsheets-2020 and https://etherpad.wikimedia.org/p/biol355-r-intro-2020    
   
 ### Week  3 Introduction to R 
 ```{r next_date, echo=FALSE}
@@ -59,7 +59,7 @@ __Objective(s):__  Develop understanding of graphical presentation best practice
 __Biological Examples:__  [Plum Island LTER Plankton Distribution](./Lectures/data/EST-PR-PlanktonChemTax.xls). [HAD CRUT Global temperature anomaly over the past century](./Lectures/data/hadcrut_temp_anomoly_1850_2015.csv)  
 __Cheat Sheets:__ [Data visualization](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf), [Mapping with ggmap](https://www.nceas.ucsb.edu/~frazier/RSpatialGuides/ggmap/ggmapCheatsheet.pdf)  
 __Other References:__[ggplot2 references](http://ggplot2.tidyverse.org/reference/), [Fundamentals of Data Visualization](http://serialmentor.com/dataviz/), [colors for data viz](https://lisacharlotterost.github.io/2016/04/22/Colors-for-DataVis/)  
-__Etherpad:__ https://etherpad.wikimedia.org/p/355-dataviz  
+__Etherpad:__ https://etherpad.wikimedia.org/p/355-dataviz-2020  
 __In Class Files:__ [ggplot and hadcrut](./in_class_files/2018/scripts/hadcrut_ggplot.R)  
 __Homework:__ [Plotapalooza](./Assignments/3_ggplot_intro.html), submit [here!](https://www.dropbox.com/request/9whCDDUB8TNByJ5KbkoP)
 
@@ -76,7 +76,7 @@ __Cheat Sheets:__ [Data Wrangling Cheat Sheet](https://www.rstudio.com/wp-conten
 __Objective(s):__ Describe the meaning and identify applications of the following summary/descriptive statistics: mean, mode, median, standard deviation; Describe the split-apply-combine strategy of data reduction and summarization; Use group_by() and summarise() to calculate summary statistics for groupings within a dataset; Subset data using filter()  
 __Biological Examples:__ Human genome size. [Sockeye salmon sizes](./Lectures/data/salmon_rivers.csv).   
 __In Class Files:__ [gapminder and dplyr](./in_class_files/2018/scripts/dplyr_lab.R)  
-__Etherpad:__ https://etherpad.wikimedia.org/p/355-dplyr  
+__Etherpad:__ https://etherpad.wikimedia.org/p/355-dplyr-2020  
 
 
 ### Week  6. Date Cleaning: Strings, Factors, and Dates
@@ -90,7 +90,7 @@ __Cheat Sheets:__ [Work with Strings Cheat Sheet](https://github.com/rstudio/che
 __Objective(s):__ Understand how strings differ from numbers. Learn the basics of string manipulation. Describe the different strategies to clean data full of errors with minimal effort. Process and understand the concept of regular expression matching. Manipulate different date formats and work them into a data map reduce workflow.  
 __Files:__ [Portal Mammal Data with String Problems](./Lectures/data/portal_messy_regexp.xlsx)  
 __Homework:__ [Regular Expressions](./Labs/lab6_regex_practice.html), [submit here](https://www.dropbox.com/request/yCcQ3gZQ73M9A2WGdrWi)   
-__Etherpad:__ https://etherpad.wikimedia.org/p/355-strings  
+__Etherpad:__ https://etherpad.wikimedia.org/p/355-strings-2020  
 
 
 ### Week  7. Tidy Data and Data Cleaning
@@ -102,7 +102,7 @@ __Lecture:__ [Tidy Data](./Lectures/13_data_tidy.html)
 __Lab:__ [Axoltl Data Cleaning](./Labs/axoltl_lab.html)  
 __Objective(s):__ Understand how to reshape and manipulate data. Describe the difference between the two fundamental forms of data – long versus wide, Use the tidyr package in R to convert between long and wide data; Use unite and separate to create tidy data (where each column is a variable). 
 __Biological Examples:__ [Axoltl limb regeneration](./Lectures/data/ALM assay statistics.xlsx). [Mammal taxonomic records](./Lectures/data/mammals.R).  [Weather data](./Data/weather_messy.csv).  [Sale prices for homework](./Data/Sale_Prices_City.csv).    
-__Etherpad:__ https://etherpad.wikimedia.org/p/355-tidy  
+__Etherpad:__ https://etherpad.wikimedia.org/p/355-tidy-2020  
 __Homework__: [Weather Data Cleaning](./Assignments/tidyr_over_break_shortened.html), [submit here](https://www.dropbox.com/request/ruza0zXvyvnJgllJXqJ4)    
   
 
@@ -122,7 +122,7 @@ __Labs:__ [Joins and Geospatial Data](./Labs/join_maps_lab.html)
 __Objective(s):__ Know when and where to use different types of joins, Understand how to merge survey data with geospatial information to get a geographic understanding of epidemiological patterns  
 __Biological Examples:__ Hemlock wooly adelgid distribution. CDC records of heart disease across counties of the US. Change in coastal sea surface temperature since 1850. Global TB mortality distribution.  
 __Files:__   [Hemlock](../Data/hemlock.xlsx), [hemlock_densities](../Data/hemlock_densities.xlsx), [Harvard elevation data](./Lectures/data/HARV_dsmCrop.tif), [Arctic Boreal Forest Vegetation](./Lectures/data/boreal.csv), [Heart Disease in America](./Lectures/data/hd_all.xlsx), [data for lab on gis](./Labs/data/joinmap_data.zip), [US County Borders in 2013](./Lectures/data/cb_2013_us_county_500k.zip), [March 18, 2018 SST Anomalies ](./Lectures/data/sst_anom.bin.20180318.tif)   
-__Etherpad:__ https://etherpad.wikimedia.org/p/355-gis  
+__Etherpad:__ https://etherpad.wikimedia.org/p/355-gis-2020  
 __Homework:__ [Map making!](./assignments/mapping_assignment.html)  
 __Before Class:__ Install `rgdal` (you'll need to install gdal first - see below), `sf`, `sp`, `raster`, `leaflet`, `maptools`, `mapdata`, and `rgeos`. 
 
@@ -145,7 +145,7 @@ __Lab:__ [Functions lab](./Labs/function_lab.html)
 __Objective(s):__ Learn the benefits of reusable code, Understand the structure of a function, Discover debugging and making functions fail usefully, Apply conditional logic to build flexible code, Derive principles to make functions that are easy to understand and apply to multiple data sets.  
 __Biological Examples:__ NOAA buoy data.  
 __Files:__   [NOAA buoy data from Boston Harbor](./Lectures/data/buoydata.zip), [get_buoy.R](./Lectures/get_buoy.R)  
-__Etherpad:__ https://etherpad.wikimedia.org/p/355-functions  
+__Etherpad:__ https://etherpad.wikimedia.org/p/355-functions-2020  
 
 
 ### Week  11. T-Tests and P-Values 
@@ -168,7 +168,7 @@ __Lectures:__ [Analysis of Variance](./Lectures/23_anova.html), [Linear Models](
 __Lab:__ [So Many ANOVA!](https://biol607.github.io/lab/10_anova.html), [data files for lab](https://biol607.github.io/lab/data_10.zip), [In Class File](./in_class_files/2018/scripts/anova_lab.R)  
 __Objective(s):__ Analyze the differences between multiple means.  Fit a linear regression using lm() in R through a bivariate scatterplot. Evaluate assumptions of a linear model with normal error   
 __Biological Examples:__  Jet-lag recovery and circadian rhythms. Seal life history variation  [files](./Lectures/data/anova.zip)  
-__Etherpad:__ https://etherpad.wikimedia.org/p/355-anova   
+__Etherpad:__ https://etherpad.wikimedia.org/p/355-anova-2020   
 
 ### Week  13  General and Generalized Linear Models, Multiple Predictors  
 ```{r next_date_2, echo=FALSE}
@@ -180,7 +180,7 @@ __Lab:__ [Linear Models](./Labs/lab10_lm.html)
 __Objective(s):__ Describe when to use nonlinear models/curves, Comparing and Contrasting models, Visualization of model outcomes  
 __Biological Examples:__ Seal life history variation. Mouse anti-fungal drug development. Neanderthal brain size. Fire severity in California.   
 __Files:__[Files for lab](./Labs/data/lm_data.zip)  
-__Etherpad:__ https://etherpad.wikimedia.org/p/355-mlr
+__Etherpad:__ https://etherpad.wikimedia.org/p/355-mlr-2020
 
 ### Week  14 Multiple Predictors Part 2  
 `r datestring`  
@@ -190,7 +190,7 @@ __Lab:__ [AIC and Multimodel Inference in R](./Labs/lab11_mmi.html)
 __Objective(s):__  Comparing and Contrasting models, Visualization of model outcomes when many models are fit  
 __Biological Examples:__ Fire severity in California. Brain size and natal investment in primates. Linguistic diversity and cultural characteristics.   
 __Files:__ [Files for lab](./Labs/data/mmi_data.zip)  
-__Etherpad:__ https://etherpad.wikimedia.org/p/355-aic
+__Etherpad:__ https://etherpad.wikimedia.org/p/355-aic-2020
 
 
 ### Week  15. Open Lab and Final Presentations
