@@ -12,7 +12,7 @@ output:
     self_contained: false
     lib_dir: libs
 ---
-## {data-background="./images/spreadsheets/o-THE-MATRIX-facebook.jpg" opacity="0.4"}
+## {data-background="./Images/spreadsheets/o-THE-MATRIX-facebook.jpg" opacity="0.4"}
 <Br><br><br><br><br><Br><br><br><br><br>
 <h2 style="position: absolute; top:50%;  text-align: center; color:white">
 <center>Getting your Data Into a Matrix</center></h2>
@@ -26,7 +26,7 @@ opts_chunk$set(fig.height=5, fig.width=7, comment=NA,
 ```
 
 ## You have collected your data - what now?
-![](./images/spreadsheets/breckie_data.png){width="85%"}
+![](./Images/spreadsheets/breckie_data.png){width="85%"}
 
 ## Building an Analysis
 1. Project Directory Structure  
@@ -45,16 +45,16 @@ opts_chunk$set(fig.height=5, fig.width=7, comment=NA,
 4. Provides natural project extensions
 
 ## Oh, the horror!
-![](./images/spreadsheets/total_mess.jpg)
+![](./Images/spreadsheets/total_mess.jpg)
 
 ## At least some versioning, but...
-![](./images/spreadsheets/mess_with_versioned_filenames.jpg)
+![](./Images/spreadsheets/mess_with_versioned_filenames.jpg)
 
 ## Getting there...
-![](./images/spreadsheets/semi_organized.jpg)
+![](./Images/spreadsheets/semi_organized.jpg)
 
 ## A Full Workflow for a Huge Project
-![](./images/spreadsheets/linear_project.jpg)
+![](./Images/spreadsheets/linear_project.jpg)
 
 ## A Good Project Structure
 <p align="left">
@@ -90,37 +90,37 @@ Top Level
      - Many measurement types are columns
 
 ## Wide and Long Data
-![](./images/spreadsheets/wide_long.png)
+![](./Images/spreadsheets/wide_long.png)
 
 ## Wide Data
-![](./images/spreadsheets/wide_data.png){width="80%"}
+![](./Images/spreadsheets/wide_data.png){width="80%"}
 
 - One Observation per row  
 - All data fields are columns
 
 ## Long Data
-![](./images/spreadsheets/long_data.png)
+![](./Images/spreadsheets/long_data.png)
 
 - Each measurement 1 row  
 - All information about measurement in row
 
 ## Hybrid Data
-![](./images/spreadsheets/hybrid_data.png)
+![](./Images/spreadsheets/hybrid_data.png)
 
 - Neither long nor wide
 - Each row has multiple measurements…but also some unique qualities
 - Each row is not a complete observation 
 
 ## Syncing Data Collection and Entry
-![](./images/spreadsheets/wide_data_sheet.png){width="75%"}
+![](./Images/spreadsheets/wide_data_sheet.png){width="75%"}
   
 <center>Wide or long?</center>
 
 ## Efficiency May Drive Data Sheet Design
-![](./images/spreadsheets/efficiency_drives_sheet_design_1.png)
+![](./Images/spreadsheets/efficiency_drives_sheet_design_1.png)
 
 ## Efficiency May Drive Data Sheet Design
-![](./images/spreadsheets/efficiency_drives_sheet_design_2.png)
+![](./Images/spreadsheets/efficiency_drives_sheet_design_2.png)
 
 ## Good Rules for Data Entry
 - Columns should have only 1 type of data  
@@ -143,54 +143,54 @@ Top Level
 - Date it  
 
 ## Initial Workbook Creation
-![](./images/spreadsheets/sheet_1.jpg)
+![](./Images/spreadsheets/sheet_1.jpg)
 
 ## Initial Workbook Creation
-![](./images/spreadsheets/make_it_square.jpg)
+![](./Images/spreadsheets/make_it_square.jpg)
 
 <center>Wide or long or hybrid - your call</center>
 <div style="font-size:12pt; position:absolute; left:0; bottom:-100px">Browman and Woo 2017</div>
 
 ## Can have multiple sheets with linked columns
-![](./images/spreadsheets/linked_squares.jpg)
+![](./Images/spreadsheets/linked_squares.jpg)
 
 <div style="font-size:12pt; position:absolute; left:0; bottom:-100px">Browman and Woo 2017</div>
 
 ## Just say no to blank cells
-![](./images/spreadsheets/no_blank_cells.jpg)
+![](./Images/spreadsheets/no_blank_cells.jpg)
 
 - Use NA, -, ., or something else **standard**
 
 <div style="font-size:12pt; position:absolute; left:0; bottom:-100px">Browman and Woo 2017</div>
 
 ## Metadata Tab
-![](./images/spreadsheets/sheet_2.jpg)
+![](./Images/spreadsheets/sheet_2.jpg)
 
 ## Can Get More Extensive with Metadata
-![](./images/spreadsheets/data_dictionary.jpg)
+![](./Images/spreadsheets/data_dictionary.jpg)
 <div style="font-size:12pt; position:absolute; left:0; bottom:-100px">Browman and Woo 2017</div>
 
 ## Tab for Controlled Vocabularies
-![](./images/spreadsheets/sheet_3.jpg)
+![](./Images/spreadsheets/sheet_3.jpg)
 
 
 ## Make Variable Names Simple
-![](./images/spreadsheets/variable_names.jpg)
+![](./Images/spreadsheets/variable_names.jpg)
 <div style="font-size:12pt; position:absolute; left:0; bottom:-100px">Browman and Woo 2017</div>
 
 
 ## Warning: Dates
-![](./images/spreadsheets/iso_8601.png)  
+![](./Images/spreadsheets/iso_8601.png)  
   
 - Use a Standard format  
 - But, a Day, Month, and Year column is not a bad idea  
 <div style="font-size:12pt; position:absolute; left:0;">https://xkcd.com/1179/</div>
 
 ## Tab for Recording Changes after Initial Entry
-![](./images/spreadsheets/sheet_4.jpg)
+![](./Images/spreadsheets/sheet_4.jpg)
 
 ## Do not use highlighting, formulae, etc
-![](./images/spreadsheets/highlighting_bad.jpg)
+![](./Images/spreadsheets/highlighting_bad.jpg)
 <div style="font-size:12pt; position:absolute; left:0; bottom:-100px">Browman and Woo 2017</div>
 
 ## Building an Analysis
@@ -201,17 +201,16 @@ Top Level
 3. <font color="red">Is this a good spreadsheet?</font>  
 
 ## Is this wide, long, other, or bad?
-![](./images/spreadsheets/bad_sheet_0.png)
+![](./Images/spreadsheets/bad_sheet_0.png)
 
 
 ## What is bad practice here?
-![](./images/spreadsheets/bad_sheet_3.png)
+![](./Images/spreadsheets/bad_sheet_3.png)
 
 
 ## What is wrong here?
-![](./images/spreadsheets/bad_sheet_2.png)
+![](./Images/spreadsheets/bad_sheet_2.png)
 
 
 ## What is bad practice here?
-![](./images/spreadsheets/bad_sheet_1.png){width="80%"}
-
+![](./Images/spreadsheets/bad_sheet_1.png){width="80%"}
