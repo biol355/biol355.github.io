@@ -263,7 +263,7 @@ ggplot(data=jetlag, mapping=aes(x=Treatment, y=shift)) +
 
 ## This analysis
 ```{r, eval=FALSE, echo=TRUE}
-jetlag <- read.csv("./Images/anova/15e1KneesWhoSayNight.csv")
+jetlag <- read.csv("./data/anova/15e1KneesWhoSayNight.csv")
 
 #fit
 jetlag_mod <- lm(shift ~ treatment, data=jetlag)
@@ -282,7 +282,7 @@ ggplot(data = jetlag, mapping=aes(x=treatment, y=shift)) +
 
 ## Nematode Lifespans!
 ```{r, eval=FALSE, echo=TRUE}
-nemetodes <- read.csv("./Images/anova/15q19NematodeLifespan.csv")
+nemetodes <- read.csv("./data/anova/15q19NematodeLifespan.csv")
 
 #fit
 nem_mod <- lm(_______ ~ _______, data=nemetodes)
@@ -301,7 +301,7 @@ ggplot(data = nemetodes, mapping=aes(x=_______, y=_______)) +
 
 ##  Eelgrass Genotypes
 ```{r, eval=FALSE, echo=TRUE}
-eelgrass <- read.csv("./Images/anova/EelgrassGenotypes.csv")
+eelgrass <- read.csv("./data/anova/EelgrassGenotypes.csv")
 
 #fit
 eelgrass_mod <- lm(_______, ______)

@@ -1,17 +1,4 @@
----
-title:
-css: style.css
-output:
-  revealjs::revealjs_presentation:
-    reveal_options:
-      slideNumber: true
-      previewLinks: true
-    theme: white
-    center: false
-    transition: fade
-    self_contained: false
-    lib_dir: libs
----
+
 ## 
 <Br><Br><br><br>
 <h2><center>Wrangling and Cleaning Strings Parte Deux</center></h2>

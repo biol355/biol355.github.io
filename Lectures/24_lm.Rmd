@@ -364,7 +364,12 @@ seal_base
 ```
 
 ## A New Model
-$$y = \beta_0 + \beta_{1}log(x) + \epsilon$$
+$$y_i = exp^{\beta_0 + \beta_{1}log(x_i) + \epsilon}$$
+  
+<div class="fragment">
+$$log(y_i) = \beta_0 + \beta_{1}log(x_i) + \epsilon$$
+</div>
+
 <div class="fragment">
 ```{r, echo=TRUE}
 seal_mod_log <- lm(log(length.cm) ~ I(log(age.days)), data=seals)
