@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title>02_data_creation.utf8.md</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="libs/reveal.js-3.3.0.1/css/reveal.css"/>
+
+
+
+<link rel="stylesheet" href="libs/reveal.js-3.3.0.1/css/theme/white.css" id="theme">
+
+
+  <!-- some tweaks to reveal css -->
+  <style type="text/css">
+    .reveal h1 { font-size: 2.0em; }
+    .reveal h2 { font-size: 1.5em;  }
+    .reveal h3 { font-size: 1.25em;	}
+    .reveal h4 { font-size: 1em;	}
+
+    .reveal .slides>section,
+    .reveal .slides>section>section {
+      padding: 0px 0px;
+    }
+
+
+
+    .reveal table {
+      border-width: 1px;
+      border-spacing: 2px;
+      border-style: dotted;
+      border-color: gray;
+      border-collapse: collapse;
+      font-size: 0.7em;
+    }
+
+    .reveal table th {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      font-weight: bold;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+    .reveal table td {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+
+  </style>
+
+    <style type="text/css">code{white-space: pre;}</style>
+
+    <link rel="stylesheet" href="style.css"/>
+
+<!-- Printing and PDF exports -->
+<script id="paper-css" type="application/dynamic-css">
+
+/* Default Print Stylesheet Template
+   by Rob Glazebrook of CSSnewbie.com
+   Last Updated: June 4, 2008
+
+   Feel free (nay, compelled) to edit, append, and
+   manipulate this file as you see fit. */
+
+
+@media print {
+
+	/* SECTION 1: Set default width, margin, float, and
+	   background. This prevents elements from extending
+	   beyond the edge of the printed page, and prevents
+	   unnecessary background images from printing */
+	html {
+		background: #fff;
+		width: auto;
+		height: auto;
+		overflow: visible;
+	}
+	body {
+		background: #fff;
+		font-size: 20pt;
+		width: auto;
+		height: auto;
+		border: 0;
+		margin: 0 5%;
+		padding: 0;
+		overflow: visible;
+		float: none !important;
+	}
+
+	/* SECTION 2: Remove any elements not needed in print.
+	   This would include navigation, ads, sidebars, etc. */
+	.nestedarrow,
+	.controls,
+	.fork-reveal,
+	.share-reveal,
+	.state-background,
+	.reveal .progress,
+	.reveal .backgrounds {
+		display: none !important;
+	}
+
+	/* SECTION 3: Set body font face, size, and color.
+	   Consider using a serif font for readability. */
+	body, p, td, li, div {
+		font-size: 20pt!important;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		color: #000;
+	}
+
+	/* SECTION 4: Set heading font face, sizes, and color.
+	   Differentiate your headings from your body text.
+	   Perhaps use a large sans-serif for distinction. */
+	h1,h2,h3,h4,h5,h6 {
+		color: #000!important;
+		height: auto;
+		line-height: normal;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		text-shadow: 0 0 0 #000 !important;
+		text-align: left;
+		letter-spacing: normal;
+	}
+	/* Need to reduce the size of the fonts for printing */
+	h1 { font-size: 28pt !important;  }
+	h2 { font-size: 24pt !important; }
+	h3 { font-size: 22pt !important; }
+	h4 { font-size: 22pt !important; font-variant: small-caps; }
+	h5 { font-size: 21pt !important; }
+	h6 { font-size: 20pt !important; font-style: italic; }
+
+	/* SECTION 5: Make hyperlinks more usable.
+	   Ensure links are underlined, and consider appending
+	   the URL to the end of the link for usability. */
+	a:link,
+	a:visited {
+		color: #000 !important;
+		font-weight: bold;
+		text-decoration: underline;
+	}
+	/*
+	.reveal a:link:after,
+	.reveal a:visited:after {
+		content: " (" attr(href) ") ";
+		color: #222 !important;
+		font-size: 90%;
+	}
+	*/
+
+
+	/* SECTION 6: more reveal.js specific additions by @skypanther */
+	ul, ol, div, p {
+		visibility: visible;
+		position: static;
+		width: auto;
+		height: auto;
+		display: block;
+		overflow: visible;
+		margin: 0;
+		text-align: left !important;
+	}
+	.reveal pre,
+	.reveal table {
+		margin-left: 0;
+		margin-right: 0;
+	}
+	.reveal pre code {
+		padding: 20px;
+		border: 1px solid #ddd;
+	}
+	.reveal blockquote {
+		margin: 20px 0;
+	}
+	.reveal .slides {
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 0 !important;
+		zoom: 1 !important;
+
+		overflow: visible !important;
+		display: block !important;
+
+		text-align: left !important;
+		-webkit-perspective: none;
+		   -moz-perspective: none;
+		    -ms-perspective: none;
+		        perspective: none;
+
+		-webkit-perspective-origin: 50% 50%;
+		   -moz-perspective-origin: 50% 50%;
+		    -ms-perspective-origin: 50% 50%;
+		        perspective-origin: 50% 50%;
+	}
+	.reveal .slides section {
+		visibility: visible !important;
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+		display: block !important;
+		overflow: visible !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 60px 20px !important;
+		z-index: auto !important;
+
+		opacity: 1 !important;
+
+		page-break-after: always !important;
+
+		-webkit-transform-style: flat !important;
+		   -moz-transform-style: flat !important;
+		    -ms-transform-style: flat !important;
+		        transform-style: flat !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+
+		-webkit-transition: none !important;
+		   -moz-transition: none !important;
+		    -ms-transition: none !important;
+		        transition: none !important;
+	}
+	.reveal .slides section.stack {
+		padding: 0 !important;
+	}
+	.reveal section:last-of-type {
+		page-break-after: avoid !important;
+	}
+	.reveal section .fragment {
+		opacity: 1 !important;
+		visibility: visible !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+	}
+	.reveal section img {
+		display: block;
+		margin: 15px 0px;
+		background: rgba(255,255,255,1);
+		border: 1px solid #666;
+		box-shadow: none;
+	}
+
+	.reveal section small {
+		font-size: 0.8em;
+	}
+
+}  
+</script>
+
+
+<script id="pdf-css" type="application/dynamic-css">
+    
+/**
+ * This stylesheet is used to print reveal.js
+ * presentations to PDF.
+ *
+ * https://github.com/hakimel/reveal.js#pdf-export
+ */
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+
+body {
+	margin: 0 auto !important;
+	border: 0;
+	padding: 0;
+	float: none !important;
+	overflow: visible;
+}
+
+html {
+	width: 100%;
+	height: 100%;
+	overflow: visible;
+}
+
+/* Remove any elements not needed in print. */
+.nestedarrow,
+.reveal .controls,
+.reveal .progress,
+.reveal .playback,
+.reveal.overview,
+.fork-reveal,
+.share-reveal,
+.state-background {
+	display: none !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	text-shadow: 0 0 0 #000 !important;
+}
+
+.reveal pre code {
+	overflow: hidden !important;
+	font-family: Courier, 'Courier New', monospace !important;
+}
+
+ul, ol, div, p {
+	visibility: visible;
+	position: static;
+	width: auto;
+	height: auto;
+	display: block;
+	overflow: visible;
+	margin: auto;
+}
+.reveal {
+	width: auto !important;
+	height: auto !important;
+	overflow: hidden !important;
+}
+.reveal .slides {
+	position: static;
+	width: 100%;
+	height: auto;
+
+	left: auto;
+	top: auto;
+	margin: 0 !important;
+	padding: 0 !important;
+
+	overflow: visible;
+	display: block;
+
+	-webkit-perspective: none;
+	   -moz-perspective: none;
+	    -ms-perspective: none;
+	        perspective: none;
+
+	-webkit-perspective-origin: 50% 50%; /* there isn't a none/auto value but 50-50 is the default */
+	   -moz-perspective-origin: 50% 50%;
+	    -ms-perspective-origin: 50% 50%;
+	        perspective-origin: 50% 50%;
+}
+
+.reveal .slides section {
+	page-break-after: always !important;
+
+	visibility: visible !important;
+	position: relative !important;
+	display: block !important;
+	position: relative !important;
+
+	margin: 0 !important;
+	padding: 0 !important;
+	box-sizing: border-box !important;
+	min-height: 1px;
+
+	opacity: 1 !important;
+
+	-webkit-transform-style: flat !important;
+	   -moz-transform-style: flat !important;
+	    -ms-transform-style: flat !important;
+	        transform-style: flat !important;
+
+	-webkit-transform: none !important;
+	   -moz-transform: none !important;
+	    -ms-transform: none !important;
+	        transform: none !important;
+}
+
+.reveal section.stack {
+	margin: 0 !important;
+	padding: 0 !important;
+	page-break-after: avoid !important;
+	height: auto !important;
+	min-height: auto !important;
+}
+
+.reveal img {
+	box-shadow: none;
+}
+
+.reveal .roll {
+	overflow: visible;
+	line-height: 1em;
+}
+
+/* Slide backgrounds are placed inside of their slide when exporting to PDF */
+.reveal section .slide-background {
+	display: block !important;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: -1;
+}
+
+/* All elements should be above the slide-background */
+.reveal section>* {
+	position: relative;
+	z-index: 1;
+}
+
+/* Display slide speaker notes when 'showNotes' is enabled */
+.reveal .speaker-notes-pdf {
+	display: block;
+	width: 100%;
+	max-height: none;
+	left: auto;
+	top: auto;
+	z-index: 100;
+}
+
+/* Display slide numbers when 'slideNumber' is enabled */
+.reveal .slide-number-pdf {
+	display: block;
+	position: absolute;
+	font-size: 14px;
+}
+
+</script>
+
+
+<script>
+var style = document.createElement( 'style' );
+style.type = 'text/css';
+var style_script_id = window.location.search.match( /print-pdf/gi ) ? 'pdf-css' : 'paper-css';
+var style_script = document.getElementById(style_script_id).text;
+style.innerHTML = style_script;
+document.getElementsByTagName('head')[0].appendChild(style);
+</script>
+
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+
+<section id="section" class="slide level2" data-background="./Images/spreadsheets/o-THE-MATRIX-facebook.jpg" data-opacity="0.4">
+<h2></h2>
+<Br><br><br><br><br><Br><br><br><br><br>
+<h2 style="position: absolute; top:50%;  text-align: center; color:white">
+<center>
+Getting your Data Into a Matrix
+</center>
+</h2>
+</section>
+<section id="you-have-collected-your-data---what-now" class="slide level2">
+<h2>You have collected your data - what now?</h2>
+<p><img data-src="./Images/spreadsheets/breckie_data.png" style="width:85.0%" /></p>
+</section>
+<section id="what-can-happen-to-data" class="slide level2">
+<h2>What Can Happen to Data</h2>
+<p><img data-src="./Images/spreadsheets/data_entropy.png" style="width:85.0%" /></p>
+</section>
+<section id="fighting-information-entropy" class="slide level2">
+<h2>Fighting Information Entropy</h2>
+<p><img data-src="./Images/spreadsheets/data_no_entropy.png" style="width:85.0%" /></p>
+</section>
+<section id="what-would-your-next-steps-be" class="slide level2">
+<h2>What Would Your Next Steps Be?</h2>
+<p><img data-src="./Images/spreadsheets/breckie_data.png" style="width:85.0%" /></p>
+</section>
+<section id="building-an-environment-for-data-storytelling" class="slide level2">
+<h2>Building an Environment for Data Storytelling</h2>
+<ol type="1">
+<li><p>Project Directory Structure</p></li>
+<li><p>Building of a good spreadsheet</p></li>
+<li><p>More than just data…</p></li>
+<li><p>Is this a good spreadsheet?</p></li>
+</ol>
+</section>
+<section id="you-after-recording-data" class="slide level2">
+<h2>You, After Recording Data</h2>
+<p><img data-src="./Images/spreadsheets/illuminati-movies-matrix-drone.jpg" /></p>
+</section>
+<section id="why-think-about-directory-structure" class="slide level2">
+<h2>Why Think About Directory Structure</h2>
+<ol type="1">
+<li><p>Directory structure organized your brain</p></li>
+<li><p>Easy to find what you need</p></li>
+<li><p>Makes versioning of files easier</p></li>
+<li><p>Provides natural project extensions</p></li>
+</ol>
+</section>
+<section id="oh-the-horror" class="slide level2">
+<h2>Oh, the horror!</h2>
+<p><img data-src="./Images/spreadsheets/total_mess.jpg" /></p>
+</section>
+<section id="at-least-some-versioning-but" class="slide level2">
+<h2>At least some versioning, but…</h2>
+<p><img data-src="./Images/spreadsheets/mess_with_versioned_filenames.jpg" /></p>
+</section>
+<section id="getting-there" class="slide level2">
+<h2>Getting there…</h2>
+<p><img data-src="./Images/spreadsheets/semi_organized.jpg" /></p>
+</section>
+<section id="a-full-workflow-for-a-huge-project" class="slide level2">
+<h2>A Full Workflow for a Huge Project</h2>
+<p><img data-src="./Images/spreadsheets/linear_project.jpg" /></p>
+</section>
+<section id="how-would-you-structure-your-environment" class="slide level2">
+<h2>How would you structure your environment?</h2>
+<ol type="1">
+<li>Pick a partner.<br />
+<br />
+</li>
+<li>Concoct a made-up data collection adventure.<br />
+<br />
+</li>
+<li>Decide what elements you would want to use to create a good structured environment for your data analysis project.</li>
+</ol>
+</section>
+<section id="a-good-project-structure" class="slide level2">
+<h2>A Good Project Structure</h2>
+<p align="left">
+Top Level<br />
+|<br />
+|— Data<br />
+
+<div class="fragment" style="text-align:left">
+<div class="line-block"></div>
+|— Scripts
+</div>
+<div class="fragment" style="text-align:left">
+<div class="line-block"></div>
+|— Derived_Data
+</div>
+<div class="fragment" style="text-align:left">
+<div class="line-block"></div>
+|— Figures
+</div>
+<div class="fragment" style="text-align:left">
+<div class="line-block"></div>
+|— Reports
+</div>
+</p>
+<div class="fragment">
+<center>
+Is this enough?
+</center>
+</div>
+</section>
+<section id="an-alternate-structure" class="slide level2">
+<h2>An alternate structure</h2>
+<img data-src="./Images/spreadsheets/proj_structure.png" style="width:60.0%" />
+<div class="fragment">
+<center>
+What is different here?
+</center>
+</div>
+</section>
+<section id="this-can-get-very-detailed" class="slide level2">
+<h2>This can get very detailed</h2>
+<p><img data-src="./Images/spreadsheets/project_detailed.png" /><br />
+<br />
+<a href="http://projecttemplate.net/" class="uri">http://projecttemplate.net/</a></p>
+</section>
+<section id="linking-structure-to-workflow" class="slide level2">
+<h2>Linking Structure to Workflow</h2>
+<p><img data-src="./Images/spreadsheets/proj_structure_2.jpeg" /></p>
+</section>
+<section id="in-general-lets-use-this" class="slide level2">
+<h2>In General, Let’s Use This</h2>
+<p align="left">
+Top Level<br />
+|<br />
+|— Data<br />
+|— Scripts<br />
+|— Derived_Data<br />
+|— Figures<br />
+|— Reports
+</p>
+</section>
+<section id="building-an-environment-for-data-storytelling-1" class="slide level2">
+<h2>Building an Environment for Data Storytelling</h2>
+<ol type="1">
+<li><p>Project Directory Structure</p></li>
+<li><p><font color="red">Building of a good spreadsheet</font></p></li>
+<li><p>More than just data…</p></li>
+<li><p>Is this a good spreadsheet?</p></li>
+</ol>
+</section>
+<section id="spreadsheets-make-the-wold-go-round" class="slide level2">
+<h2>Spreadsheets Make the Wold Go ’Round</h2>
+<p><img data-src="./Images/spreadsheets/1200px-Microsoft_Office_Excel_(2018–present).svg.png" /></p>
+</section>
+<section id="within-this-grid-is-power" class="slide level2">
+<h2>Within This Grid Is Power</h2>
+<p><img data-src="./Images/spreadsheets/maxresdefault.jpg" /></p>
+</section>
+<section id="two-main-styles-of-data" class="slide level2">
+<h2>Two Main Styles of Data</h2>
+<ul>
+<li>Long: Each row is a single measurement
+<ul>
+<li>Many measurements per observation<br />
+</li>
+<li>Multple columns describing specific observation and measurement<br />
+<br />
+<br />
+</li>
+</ul></li>
+<li>Wide: Each row is a complete observation
+<ul>
+<li>Many measurement types are columns</li>
+</ul></li>
+</ul>
+</section>
+<section id="wide-and-long-data" class="slide level2">
+<h2>Wide and Long Data</h2>
+<p><img data-src="./Images/spreadsheets/wide_long.png" /></p>
+</section>
+<section id="wide-data" class="slide level2">
+<h2>Wide Data</h2>
+<p><img data-src="./Images/spreadsheets/wide_data.png" style="width:80.0%" /></p>
+<ul>
+<li>One Observation per row<br />
+</li>
+<li>All data fields are columns</li>
+</ul>
+</section>
+<section id="long-data" class="slide level2">
+<h2>Long Data</h2>
+<p><img data-src="./Images/spreadsheets/long_data.png" /></p>
+<ul>
+<li>Each measurement 1 row<br />
+</li>
+<li>All information about measurement in row</li>
+</ul>
+</section>
+<section id="hybrid-data" class="slide level2">
+<h2>Hybrid Data</h2>
+<p><img data-src="./Images/spreadsheets/hybrid_data.png" /></p>
+<ul>
+<li>Neither long nor wide</li>
+<li>Each row has multiple measurements…but also some unique qualities</li>
+<li>Each row is not a complete observation</li>
+</ul>
+</section>
+<section id="efficiency-may-drive-data-sheet-design" class="slide level2">
+<h2>Efficiency May Drive Data Sheet Design</h2>
+<p><img data-src="./Images/spreadsheets/efficiency_drives_sheet_design_1.png" /></p>
+</section>
+<section id="efficiency-may-drive-data-sheet-design-1" class="slide level2">
+<h2>Efficiency May Drive Data Sheet Design</h2>
+<p><img data-src="./Images/spreadsheets/efficiency_drives_sheet_design_2.png" /></p>
+</section>
+<section id="syncing-data-collection-and-entry" class="slide level2">
+<h2>Syncing Data Collection and Entry</h2>
+<p><img data-src="./Images/spreadsheets/wide_data_sheet.png" style="width:75.0%" /></p>
+<center>
+Wide or long?
+</center>
+</section>
+<section id="good-rules-for-data-entry" class="slide level2">
+<h2>Good Rules for Data Entry</h2>
+<ul>
+<li><p>Columns should have only 1 type of data</p></li>
+<li><p>One thing per cell</p></li>
+<li><p>No bare space</p></li>
+<li><p>Consistent NA character</p></li>
+<li><p>See Browman and Woo 2017 for many others</p></li>
+</ul>
+</section>
+<section id="a-note-on-filenames" class="slide level2">
+<h2>A note on filenames</h2>
+<ul>
+<li><p>Be descriptive</p></li>
+<li><p>Make it machine readable (no spaces)</p></li>
+<li><p>Date it</p></li>
+</ul>
+</section>
+<section id="initial-workbook-creation" class="slide level2">
+<h2>Initial Workbook Creation</h2>
+<p><img data-src="./Images/spreadsheets/sheet_1.jpg" /></p>
+</section>
+<section id="initial-workbook-creation-1" class="slide level2">
+<h2>Initial Workbook Creation</h2>
+<p><img data-src="./Images/spreadsheets/make_it_square.jpg" /></p>
+<center>
+Wide or long or hybrid - your call
+</center>
+<div style="font-size:12pt; position:absolute; left:0; bottom:-100px">
+Browman and Woo 2017
+</div>
+</section>
+<section id="can-have-multiple-sheets-with-linked-columns" class="slide level2">
+<h2>Can have multiple sheets with linked columns</h2>
+<p><img data-src="./Images/spreadsheets/linked_squares.jpg" /></p>
+<div style="font-size:12pt; position:absolute; left:0; bottom:-100px">
+Browman and Woo 2017
+</div>
+</section>
+<section id="just-say-no-to-blank-cells" class="slide level2">
+<h2>Just say no to blank cells</h2>
+<p><img data-src="./Images/spreadsheets/no_blank_cells.jpg" /></p>
+<ul>
+<li>Use NA, -, ., or something else <strong>standard</strong></li>
+</ul>
+<div style="font-size:12pt; position:absolute; left:0; bottom:-100px">
+Browman and Woo 2017
+</div>
+</section>
+<section id="make-variable-names-simple" class="slide level2">
+<h2>Make Variable Names Simple</h2>
+<img data-src="./Images/spreadsheets/variable_names.jpg" />
+<div style="font-size:12pt; position:absolute; left:0; bottom:-100px">
+Browman and Woo 2017
+</div>
+</section>
+<section id="warning-dates" class="slide level2">
+<h2>Warning: Dates</h2>
+<p><img data-src="./Images/spreadsheets/iso_8601.png" /></p>
+<ul>
+<li>Use a Standard format<br />
+</li>
+<li>But, a Day, Month, and Year column is not a bad idea<br />
+
+<div style="font-size:12pt; position:absolute; left:0;">
+<a href="https://xkcd.com/1179/" class="uri">https://xkcd.com/1179/</a>
+</div></li>
+</ul>
+</section>
+<section id="do-not-use-highlighting-formulae-etc" class="slide level2">
+<h2>Do not use highlighting, formulae, etc</h2>
+<img data-src="./Images/spreadsheets/highlighting_bad.jpg" />
+<div style="font-size:12pt; position:absolute; left:0; bottom:-100px">
+Browman and Woo 2017
+</div>
+</section>
+<section id="section-1" class="slide level2">
+<h2></h2>
+<br />
+<br />
+
+<h1>
+OK, OK, I’ve Mastered Data Entry. Is that All?
+</h1>
+<br />
+<br />
+<br />
+
+<h1>
+Is Recording Data From a Sheet Enough?
+</h1>
+</section>
+<section id="building-an-environment-for-data-storytelling-2" class="slide level2">
+<h2>Building an Environment for Data Storytelling</h2>
+<ol type="1">
+<li><p>Project Directory Structure</p></li>
+<li><p>Building of a good spreadsheet</p></li>
+<li><p><font color="red">More than just data…</font></p></li>
+<li><p>Is this a good spreadsheet?</p></li>
+</ol>
+</section>
+<section id="managing-data-to-fight-information-entropy" class="slide level2">
+<h2>Managing Data to Fight Information Entropy</h2>
+<p><img data-src="./Images/spreadsheets/data_management.png" /> ## Metadata <img data-src="./Images/spreadsheets/metadata_wordcloud.png" /></p>
+</section>
+<section id="metadata-data-reporting" class="slide level2">
+<h2>Metadata: Data Reporting</h2>
+<ul>
+<li>WHO created the data?</li>
+<li>WHAT is the content of the data?</li>
+<li>WHEN were the data created?</li>
+<li>WHERE is it geographically?</li>
+<li>HOW were the data developed?</li>
+<li>WHY were the data developed?</li>
+</ul>
+</section>
+<section id="section-2" class="slide level2">
+<h2></h2>
+<p><img data-src="./Images/spreadsheets/killing_metadata.png" /></p>
+</section>
+<section id="section-3" class="slide level2">
+<h2></h2>
+<p><img data-src="./Images/spreadsheets/metadata_shirt.png" /></p>
+</section>
+<section id="metadata-tab" class="slide level2">
+<h2>Metadata Tab</h2>
+<p><img data-src="./Images/spreadsheets/sheet_2.jpg" /></p>
+</section>
+<section id="get-extensive-with-metadata" class="slide level2">
+<h2>Get Extensive with Metadata</h2>
+<img data-src="./Images/spreadsheets/data_dictionary.jpg" />
+<div style="font-size:12pt; position:absolute; left:0; bottom:-100px">
+Browman and Woo 2017
+</div>
+</section>
+<section id="a-simply-typology-of-metadata" class="slide level2">
+<h2>A Simply Typology of Metadata</h2>
+<ul>
+<li><p>Numerical - Continuous - Integers - Ordinal<br />
+</p></li>
+<li><p>Controlled Vocabulary - Certain defined words with defined meanings - Has a reference ‘dictionary’</p></li>
+<li><p>Dates/Times - Many formats – POSIX</p></li>
+<li><p>Raw Text</p></li>
+<li><p>Other Media</p></li>
+</ul>
+</section>
+<section id="tab-for-controlled-vocabularies" class="slide level2">
+<h2>Tab for Controlled Vocabularies</h2>
+<p><img data-src="./Images/spreadsheets/sheet_3.jpg" /></p>
+</section>
+<section id="tab-for-recording-changes-after-initial-entry" class="slide level2">
+<h2>Tab for Recording Changes after Initial Entry</h2>
+<p><img data-src="./Images/spreadsheets/sheet_4.jpg" /></p>
+</section>
+<section id="building-an-environment-for-data-storytelling-3" class="slide level2">
+<h2>Building an Environment for Data Storytelling</h2>
+<ol type="1">
+<li><p>Project Directory Structure</p></li>
+<li><p>Building of a good spreadsheet</p></li>
+<li><p>More than just data…</p></li>
+<li><p><font color="red">Is this a good spreadsheet?</font></p></li>
+</ol>
+</section>
+<section id="is-this-wide-long-other-or-bad" class="slide level2">
+<h2>Is this wide, long, other, or bad?</h2>
+<p><img data-src="./Images/spreadsheets/bad_sheet_0.png" /></p>
+</section>
+<section id="what-is-bad-practice-here" class="slide level2">
+<h2>What is bad practice here?</h2>
+<p><img data-src="./Images/spreadsheets/bad_sheet_3.png" /></p>
+</section>
+<section id="what-is-wrong-here" class="slide level2">
+<h2>What is wrong here?</h2>
+<p><img data-src="./Images/spreadsheets/bad_sheet_2.png" /></p>
+</section>
+<section id="what-is-bad-practice-here-1" class="slide level2">
+<h2>What is bad practice here?</h2>
+<p><img data-src="./Images/spreadsheets/bad_sheet_1.png" style="width:80.0%" /></p>
+</section>
+    </div>
+  </div>
+
+  <script src="libs/reveal.js-3.3.0.1/lib/js/head.min.js"></script>
+  <script src="libs/reveal.js-3.3.0.1/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Display the page number of the current slide
+        slideNumber: true,
+        // Push each slide change to the browser history
+        history: true,
+        // Vertical centering of slides
+        center: false,
+        // Opens links in an iframe preview overlay
+        previewLinks: true,
+        // Transition style
+        transition: 'fade', // none/fade/slide/convex/concave/zoom
+        // Transition style for full page slide backgrounds
+        backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
+
+
+
+        // Optional reveal.js plugins
+        dependencies: [
+        ]
+      });
+    </script>
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
+<script>
+  (function() {
+    if (window.jQuery) {
+      Reveal.addEventListener( 'slidechanged', function(event) {  
+        window.jQuery(event.previousSlide).trigger('hidden');
+        window.jQuery(event.currentSlide).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+
+  </body>
+</html>

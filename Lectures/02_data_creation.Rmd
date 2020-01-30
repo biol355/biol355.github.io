@@ -1,0 +1,337 @@
+---
+title:
+css: style.css
+output:
+  revealjs::revealjs_presentation:
+    reveal_options:
+      slideNumber: true
+      previewLinks: true
+    theme: white
+    center: false
+    transition: fade
+    self_contained: false
+    lib_dir: libs
+---
+## {data-background="./Images/spreadsheets/o-THE-MATRIX-facebook.jpg" opacity="0.4"}
+<Br><br><br><br><br><Br><br><br><br><br>
+<h2 style="position: absolute; top:50%;  text-align: center; color:white">
+<center>Getting your Data Into a Matrix</center></h2>
+
+
+  ```{r prep, echo=FALSE, cache=FALSE, message=FALSE, warning=FALSE}
+library(knitr)
+opts_chunk$set(fig.height=5, fig.width=7, comment=NA, 
+               warning=FALSE, message=FALSE, 
+               dev="jpeg", echo=FALSE)
+```
+
+## You have collected your data - what now?
+![](./Images/spreadsheets/breckie_data.png){width="85%"}
+
+## What Can Happen to Data
+![](./Images/spreadsheets/data_entropy.png){width="85%"}
+
+## Fighting Information Entropy
+![](./Images/spreadsheets/data_no_entropy.png){width="85%"}
+
+## What Would Your Next Steps Be?
+![](./Images/spreadsheets/breckie_data.png){width="85%"}
+
+## Building an Environment for Data Storytelling
+1. Project Directory Structure  
+  
+2. Building of a good spreadsheet  
+  
+3. More than just data...
+  
+4. Is this a good spreadsheet?
+
+##  You, After Recording Data
+![](./Images/spreadsheets/illuminati-movies-matrix-drone.jpg)
+
+## Why Think About Directory Structure
+1. Directory structure organized your brain  
+  
+2. Easy to find what you need  
+  
+3. Makes versioning of files easier  
+  
+4. Provides natural project extensions
+
+## Oh, the horror!
+![](./Images/spreadsheets/total_mess.jpg)
+
+## At least some versioning, but...
+![](./Images/spreadsheets/mess_with_versioned_filenames.jpg)
+
+## Getting there...
+![](./Images/spreadsheets/semi_organized.jpg)
+
+## A Full Workflow for a Huge Project
+![](./Images/spreadsheets/linear_project.jpg)
+
+## How would you structure your environment?
+
+1. Pick a partner.  
+\
+2. Concoct a made-up data collection adventure.  
+\
+3. Decide what elements you would want to use to create a good structured environment for your data analysis project.
+
+
+## A Good Project Structure
+<p align="left">
+Top Level  
+ |  
+ |--- Data  
+ <div class="fragment" style="text-align:left">|  
+ |--- Scripts</div>  
+ <div class="fragment" style="text-align:left">|  
+ |--- Derived_Data</div>  
+ <div class="fragment" style="text-align:left">|  
+ |--- Figures</div>  
+ <div class="fragment" style="text-align:left">|  
+ |--- Reports</div>  
+</p>
+
+<div class="fragment"><center>Is this enough?</center></div>
+
+## An alternate structure
+![](./Images/spreadsheets/proj_structure.png){width="60%"}
+<div class="fragment"><center>What is different here?</center></div>
+
+## This can get very detailed
+![](./Images/spreadsheets/project_detailed.png)
+\
+\
+http://projecttemplate.net/
+
+
+## Linking Structure to Workflow
+![](./Images/spreadsheets/proj_structure_2.jpeg)
+
+
+
+## In General, Let's Use This
+<p align="left">
+Top Level  
+ |  
+ |--- Data  
+ |--- Scripts  
+ |--- Derived_Data  
+ |--- Figures  
+ |--- Reports
+</p>
+
+
+## Building an Environment for Data Storytelling
+1. Project Directory Structure  
+  
+2. <font color="red">Building of a good spreadsheet</font>  
+  
+3. More than just data...
+  
+4. Is this a good spreadsheet?
+
+## Spreadsheets Make the Wold Go 'Round
+![](./Images/spreadsheets/1200px-Microsoft_Office_Excel_(2018–present).svg.png)
+
+
+## Within This Grid Is Power
+![](./Images/spreadsheets/maxresdefault.jpg)
+
+## Two Main Styles of Data
+- Long: Each row is a single measurement  
+     - Many measurements per observation  
+     - Multple columns describing specific observation and measurement  
+\
+\
+- Wide: Each row is a complete observation
+     - Many measurement types are columns
+
+## Wide and Long Data
+![](./Images/spreadsheets/wide_long.png)
+
+## Wide Data
+![](./Images/spreadsheets/wide_data.png){width="80%"}
+
+- One Observation per row  
+- All data fields are columns
+
+## Long Data
+![](./Images/spreadsheets/long_data.png)
+
+- Each measurement 1 row  
+- All information about measurement in row
+
+## Hybrid Data
+![](./Images/spreadsheets/hybrid_data.png)
+
+- Neither long nor wide
+- Each row has multiple measurements…but also some unique qualities
+- Each row is not a complete observation 
+
+## Efficiency May Drive Data Sheet Design
+![](./Images/spreadsheets/efficiency_drives_sheet_design_1.png)
+
+## Efficiency May Drive Data Sheet Design
+![](./Images/spreadsheets/efficiency_drives_sheet_design_2.png)
+
+## Syncing Data Collection and Entry
+![](./Images/spreadsheets/wide_data_sheet.png){width="75%"}
+  
+<center>Wide or long?</center>
+
+
+
+## Good Rules for Data Entry
+- Columns should have only 1 type of data  
+  
+- One thing per cell
+  
+- No bare space  
+  
+- Consistent NA character  
+   
+- See Browman and Woo 2017 for many others
+
+## A note on filenames
+- Be descriptive  
+  
+- Make it machine readable (no spaces)  
+  
+- Date it  
+
+## Initial Workbook Creation
+![](./Images/spreadsheets/sheet_1.jpg)
+
+## Initial Workbook Creation
+![](./Images/spreadsheets/make_it_square.jpg)
+
+<center>Wide or long or hybrid - your call</center>
+<div style="font-size:12pt; position:absolute; left:0; bottom:-100px">Browman and Woo 2017</div>
+
+## Can have multiple sheets with linked columns
+![](./Images/spreadsheets/linked_squares.jpg)
+
+<div style="font-size:12pt; position:absolute; left:0; bottom:-100px">Browman and Woo 2017</div>
+
+## Just say no to blank cells
+![](./Images/spreadsheets/no_blank_cells.jpg)
+
+- Use NA, -, ., or something else **standard**
+
+<div style="font-size:12pt; position:absolute; left:0; bottom:-100px">Browman and Woo 2017</div>
+
+
+## Make Variable Names Simple
+![](./Images/spreadsheets/variable_names.jpg)
+<div style="font-size:12pt; position:absolute; left:0; bottom:-100px">Browman and Woo 2017</div>
+
+
+## Warning: Dates
+![](./Images/spreadsheets/iso_8601.png)  
+  
+- Use a Standard format  
+- But, a Day, Month, and Year column is not a bad idea  
+<div style="font-size:12pt; position:absolute; left:0;">https://xkcd.com/1179/</div>
+
+## Do not use highlighting, formulae, etc
+![](./Images/spreadsheets/highlighting_bad.jpg)
+<div style="font-size:12pt; position:absolute; left:0; bottom:-100px">Browman and Woo 2017</div>
+
+## 
+\
+\
+<h1>OK, OK, I've Mastered Data Entry. Is that All?</h1>
+
+\
+\
+\
+<h1>Is Recording Data From a Sheet Enough?</h1>
+
+## Building an Environment for Data Storytelling
+1. Project Directory Structure  
+  
+2. Building of a good spreadsheet  
+  
+3.  <font color="red">More than just data...</font>  
+  
+4. Is this a good spreadsheet?
+
+## Managing Data to Fight Information Entropy
+![](./Images/spreadsheets/data_management.png)
+## Metadata
+![](./Images/spreadsheets/metadata_wordcloud.png)
+
+## Metadata: Data Reporting
+- WHO created the data?
+- WHAT is the content of the data?
+- WHEN were the data created?
+- WHERE is it geographically?
+- HOW were the data developed?
+- WHY were the data developed?
+
+## 
+![](./Images/spreadsheets/killing_metadata.png)
+
+## 
+![](./Images/spreadsheets/metadata_shirt.png)
+
+## Metadata Tab
+![](./Images/spreadsheets/sheet_2.jpg)
+
+##  Get Extensive with Metadata
+![](./Images/spreadsheets/data_dictionary.jpg)
+<div style="font-size:12pt; position:absolute; left:0; bottom:-100px">Browman and Woo 2017</div>
+
+## A Simply Typology of Metadata
+- Numerical
+      - Continuous
+      - Integers
+      - Ordinal
+\
+- Controlled Vocabulary
+      - Certain defined words with defined meanings
+      - Has a reference ‘dictionary’
+
+- Dates/Times
+      - Many formats – POSIX 
+
+- Raw Text
+
+- Other Media
+
+
+## Tab for Controlled Vocabularies
+![](./Images/spreadsheets/sheet_3.jpg)
+
+
+## Tab for Recording Changes after Initial Entry
+![](./Images/spreadsheets/sheet_4.jpg)
+
+
+
+## Building an Environment for Data Storytelling
+1. Project Directory Structure  
+  
+2. Building of a good spreadsheet  
+  
+3.  More than just data...  
+  
+4. <font color="red">Is this a good spreadsheet?</font>
+
+## Is this wide, long, other, or bad?
+![](./Images/spreadsheets/bad_sheet_0.png)
+
+
+## What is bad practice here?
+![](./Images/spreadsheets/bad_sheet_3.png)
+
+
+## What is wrong here?
+![](./Images/spreadsheets/bad_sheet_2.png)
+
+
+## What is bad practice here?
+![](./Images/spreadsheets/bad_sheet_1.png){width="80%"}
