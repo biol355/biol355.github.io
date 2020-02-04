@@ -24,31 +24,34 @@ __Lab:__ [DC Spreadsheet Ecology Lesson](http://www.datacarpentry.org/spreadshee
 __Files:__ [Portal Data](https://ndownloader.figshare.com/files/2252083)   
 __Etherpad:__ https://etherpad.wikimedia.org/p/355-spreadsheets-2020   
 
+<!--
 ### Week  2. Introduction to R and RMarkdown  
-```{r next_date, echo=FALSE}
-```
+
 `r datestring`  
 __Readings:__ W&G On [Workflow Basics](https://r4ds.had.co.nz/workflow-basics.html) and [Projects](https://r4ds.had.co.nz/workflow-projects.html)    
-__Lectures:__  [Intro to R](./Lectures/04_r_intro.html)  
+__Lectures:__  [Intro to R](./Lectures/04_r_intro.html), [Intro to vectors, lists, matrices, and data frames](./Lectures/05_r_intro_list_matrix_df.html), [Data import and package installation](./Lectures/06_read_data_libraries.html)    
 __Objective(s):__ Begin to learn the R computing language. Identify the syntax of an R function (name and arguments); Create an R project in RStudio.  
 __Biological Examples:__ Transgenic mouse experimentation. Bee genomics. Subtidal field surveys. Current data sharing archives in biology.
 __Etherpad:__  https://etherpad.wikimedia.org/p/biol355-r-intro-2020    
+
+-->
   
-### Week  3 Introduction to R 
+### Week 2 Introduction to R and RMarkdown
 ```{r next_date, echo=FALSE}
 ```
 `r datestring`  
-__Readings:__ W&G on [Tibbles & Data Frames](http://r4ds.had.co.nz/tibbles.html) and [Data Import](http://r4ds.had.co.nz/data-import.html), DC Ecology [Intro to R](http://www.datacarpentry.org/R-ecology-lesson/01-intro-to-r.html) and [starting with data](http://www.datacarpentry.org/R-ecology-lesson/02-starting-with-data.html)  
-__Lectures:__[Intro to vectors, lists, matrices, and data frames](./Lectures/05_r_intro_list_matrix_df.html), [Data import and package installation](./Lectures/06_read_data_libraries.html)  
-__Objective(s):__  Read data into R using read.csv(); Use R as a basic calculator; Describe and create variables in R; Interpret the output of the str() function; Install packages in R;  
+__Readings:__ W&G On [Workflow Basics](https://r4ds.had.co.nz/workflow-basics.html) and [Projects](https://r4ds.had.co.nz/workflow-projects.html), [Tibbles & Data Frames](http://r4ds.had.co.nz/tibbles.html) and [Data Import](http://r4ds.had.co.nz/data-import.html)
+__Lectures:__  DC Ecology [Intro to R](http://www.datacarpentry.org/R-ecology-lesson/01-intro-to-r.html) and [starting with data](http://www.datacarpentry.org/R-ecology-lesson/02-starting-with-data.html)   
+__Objective(s):__  Begin to learn the R computing language. Identify the syntax of an R function (name and arguments); Create an R project in RStudio. Read data into R using read.csv(); Use R as a basic calculator; Describe and create variables in R; Interpret the output of the str() function; Install packages in R;  
 __Biological Examples:__ Human genome size.   
 __Lab:__ [R Markdown and Data Subsetting](./Labs/Lab_Rmarkdown_Subsetting.html)  
-__Excercises:__ [Warmup Excercises for Wednesday](./Labs/lab_2_warmup.html)  
+__Excercises:__ [Warmup Excercises for Friday](./Labs/lab_2_warmup.html)  
 __Cheat Sheets:__ [RMarkdown](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf), [Data Import](https://github.com/rstudio/cheatsheets/raw/master/data-import.pdf)  
 __Files:__ [Excel](./Data/my_data.xlsx), [CSV](./Data/my_data.csv)     
-__Homework:__ [Data frames!](./Assignments/2_data_frames.html), submit [here!](https://www.dropbox.com/request/e8pfG6vDPn47TsIIa0sS)    
+__Homework:__ [Data frames!](./Assignments/2_data_frames.html) 
+__Etherpad:__  https://etherpad.wikimedia.org/p/biol355-r-intro-2020    
 
-### Week 4. Visualization 
+### Week 3. Visualization 
 ```{r next_date, echo=FALSE}
 ```
 `r datestring`  
@@ -62,7 +65,7 @@ __Etherpad:__ https://etherpad.wikimedia.org/p/355-dataviz-2020
 __In Class Files:__ [ggplot and hadcrut](./in_class_files/2018/scripts/hadcrut_ggplot.R)  
 __Homework:__ [Plotapalooza](./Assignments/3_ggplot_intro.html), submit [here!](https://www.dropbox.com/request/9whCDDUB8TNByJ5KbkoP)
 
-### Week  5. Data Reduction and Summarization
+### Week  4. Data Reduction and Summarization
 ```{r next_date, echo=FALSE}
 ```
 
@@ -78,7 +81,7 @@ __In Class Files:__ [gapminder and dplyr](./in_class_files/2018/scripts/dplyr_la
 __Etherpad:__ https://etherpad.wikimedia.org/p/355-dplyr-2020  
 
 
-### Week  6. Date Cleaning: Strings, Factors, and Dates
+### Week  5. Date Cleaning: Strings, Factors, and Dates
 ```{r next_date, echo=FALSE}
 ```
 
@@ -92,7 +95,7 @@ __Homework:__ [Regular Expressions](./Labs/lab6_regex_practice.html), [submit he
 __Etherpad:__ https://etherpad.wikimedia.org/p/355-strings-2020  
 
 
-### Week  7. Tidy Data and Data Cleaning
+### Week  6. Tidy Data and Data Cleaning
 ```{r next_date, echo=FALSE}
 ```
 `r datestring`  
@@ -105,13 +108,12 @@ __Etherpad:__ https://etherpad.wikimedia.org/p/355-tidy-2020
 __Homework__: [Weather Data Cleaning](./Assignments/tidyr_over_break_shortened.html), [submit here](https://www.dropbox.com/request/ruza0zXvyvnJgllJXqJ4)    
   
 
-### Week  8 & 9. Data "Mashups" and Geospatial Data
-```{r next_date, echo=FALSE}
-```
+### Week  7 & 8. Data "Mashups" and Geospatial Data
+
 ```{r next_date_2, echo=FALSE}
 current_date <- current_date + days(7)
 datestring_1 <- paste(month(current_date), day(current_date), year(current_date), sep="/")
-current_date <- current_date + days(7)
+current_date <- current_date + days(7)  + days(7) 
 datestring <- paste(month(current_date), day(current_date), year(current_date), sep="/")
 ```
 `r datestring_1` and `r datestring`  
@@ -134,9 +136,10 @@ __Before Class:__ Install `rgdal` (you'll need to install gdal first - see below
 1) Install OSGEO4W https://trac.osgeo.org/osgeo4w/wiki  
 2) Use it to install gdal  
 
-### Week  10. Functions 
+### Week  9 Functions 
 ```{r next_date, echo=FALSE}
 ```
+
 `r datestring`  
 __Readings:__ W&G Chapters on [Functions](http://r4ds.had.co.nz/functions.html) and [Iteration](http://r4ds.had.co.nz/iteration.html)  
 __Lectures:__ [Intro to Functions](./Lectures/19_functions_intro.html), [Iteration with purrr](./Lectures/20_iteration.html)  
@@ -145,6 +148,15 @@ __Objective(s):__ Learn the benefits of reusable code, Understand the structure 
 __Biological Examples:__ NOAA buoy data.  
 __Files:__   [NOAA buoy data from Boston Harbor](./Lectures/data/buoydata.zip), [get_buoy.R](./Lectures/get_buoy.R)  
 __Etherpad:__ https://etherpad.wikimedia.org/p/355-functions-2020  
+
+### Week  10. Shiny and Web Interfaces  
+```{r next_date, echo=FALSE}
+```
+`r datestring`
+__Readings:__ [Mastering Shiny](https://mastering-shiny.org/) Ch. 1-4
+__Objective(s):__ Learn how to communicate data to others using dynamic web based applications.
+__Biological Examples:__ NOAA buoy data.  
+__Etherpad:__ https://etherpad.wikimedia.org/p/355-shiny-2020  
 
 
 ### Week  11. T-Tests and P-Values 
@@ -181,6 +193,7 @@ __Biological Examples:__ Seal life history variation. Mouse anti-fungal drug dev
 __Files:__[Files for lab](./Labs/data/lm_data.zip)  
 __Etherpad:__ https://etherpad.wikimedia.org/p/355-mlr-2020
 
+<!--
 ### Week  14 Multiple Predictors Part 2  
 `r datestring`  
 __Readings:__  W&G on [Model Building](http://r4ds.had.co.nz/model-building.html)  
@@ -191,8 +204,9 @@ __Biological Examples:__ Fire severity in California. Brain size and natal inves
 __Files:__ [Files for lab](./Labs/data/mmi_data.zip)  
 __Etherpad:__ https://etherpad.wikimedia.org/p/355-aic-2020
 
+-->
 
-### Week  15. Open Lab and Final Presentations
+### Week  14. Open Lab and Final Presentations
 ```{r next_date, echo=FALSE}
 ```
 `r datestring`  

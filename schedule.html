@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
@@ -232,6 +231,7 @@ $(document).ready(function () {
   border: none;
   display: inline-block;
   border-radius: 4px;
+  background-color: transparent;
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
@@ -342,31 +342,33 @@ $(document).ready(function () {
 <strong>Lab:</strong> <a href="http://www.datacarpentry.org/spreadsheet-ecology-lesson/">DC Spreadsheet Ecology Lesson</a><br />
 <strong>Files:</strong> <a href="https://ndownloader.figshare.com/files/2252083">Portal Data</a><br />
 <strong>Etherpad:</strong> <a href="https://etherpad.wikimedia.org/p/355-spreadsheets-2020" class="uri">https://etherpad.wikimedia.org/p/355-spreadsheets-2020</a></p>
+<!--
+### Week  2. Introduction to R and RMarkdown  
+
+1/27/2020  
+__Readings:__ W&G On [Workflow Basics](https://r4ds.had.co.nz/workflow-basics.html) and [Projects](https://r4ds.had.co.nz/workflow-projects.html)    
+__Lectures:__  [Intro to R](./Lectures/04_r_intro.html), [Intro to vectors, lists, matrices, and data frames](./Lectures/05_r_intro_list_matrix_df.html), [Data import and package installation](./Lectures/06_read_data_libraries.html)    
+__Objective(s):__ Begin to learn the R computing language. Identify the syntax of an R function (name and arguments); Create an R project in RStudio.  
+__Biological Examples:__ Transgenic mouse experimentation. Bee genomics. Subtidal field surveys. Current data sharing archives in biology.
+__Etherpad:__  https://etherpad.wikimedia.org/p/biol355-r-intro-2020    
+
+-->
 </div>
-<div id="week-2.-introduction-to-r-and-rmarkdown" class="section level3">
-<h3>Week 2. Introduction to R and RMarkdown</h3>
+<div id="week-2-introduction-to-r-and-rmarkdown" class="section level3">
+<h3>Week 2 Introduction to R and RMarkdown</h3>
 <p>2/3/2020<br />
-<strong>Readings:</strong> W&amp;G On <a href="https://r4ds.had.co.nz/workflow-basics.html">Workflow Basics</a> and <a href="https://r4ds.had.co.nz/workflow-projects.html">Projects</a><br />
-<strong>Lectures:</strong> <a href="./Lectures/04_r_intro.html">Intro to R</a><br />
-<strong>Objective(s):</strong> Begin to learn the R computing language. Identify the syntax of an R function (name and arguments); Create an R project in RStudio.<br />
-<strong>Biological Examples:</strong> Transgenic mouse experimentation. Bee genomics. Subtidal field surveys. Current data sharing archives in biology. <strong>Etherpad:</strong> <a href="https://etherpad.wikimedia.org/p/biol355-r-intro-2020" class="uri">https://etherpad.wikimedia.org/p/biol355-r-intro-2020</a></p>
-</div>
-<div id="week-3-introduction-to-r" class="section level3">
-<h3>Week 3 Introduction to R</h3>
-<p>2/10/2020<br />
-<strong>Readings:</strong> W&amp;G on <a href="http://r4ds.had.co.nz/tibbles.html">Tibbles &amp; Data Frames</a> and <a href="http://r4ds.had.co.nz/data-import.html">Data Import</a>, DC Ecology <a href="http://www.datacarpentry.org/R-ecology-lesson/01-intro-to-r.html">Intro to R</a> and <a href="http://www.datacarpentry.org/R-ecology-lesson/02-starting-with-data.html">starting with data</a><br />
-<strong>Lectures:</strong><a href="./Lectures/05_r_intro_list_matrix_df.html">Intro to vectors, lists, matrices, and data frames</a>, <a href="./Lectures/06_read_data_libraries.html">Data import and package installation</a><br />
-<strong>Objective(s):</strong> Read data into R using read.csv(); Use R as a basic calculator; Describe and create variables in R; Interpret the output of the str() function; Install packages in R;<br />
+<strong>Readings:</strong> W&amp;G On <a href="https://r4ds.had.co.nz/workflow-basics.html">Workflow Basics</a> and <a href="https://r4ds.had.co.nz/workflow-projects.html">Projects</a>, <a href="http://r4ds.had.co.nz/tibbles.html">Tibbles &amp; Data Frames</a> and <a href="http://r4ds.had.co.nz/data-import.html">Data Import</a> <strong>Lectures:</strong> DC Ecology <a href="http://www.datacarpentry.org/R-ecology-lesson/01-intro-to-r.html">Intro to R</a> and <a href="http://www.datacarpentry.org/R-ecology-lesson/02-starting-with-data.html">starting with data</a><br />
+<strong>Objective(s):</strong> Begin to learn the R computing language. Identify the syntax of an R function (name and arguments); Create an R project in RStudio. Read data into R using read.csv(); Use R as a basic calculator; Describe and create variables in R; Interpret the output of the str() function; Install packages in R;<br />
 <strong>Biological Examples:</strong> Human genome size.<br />
 <strong>Lab:</strong> <a href="./Labs/Lab_Rmarkdown_Subsetting.html">R Markdown and Data Subsetting</a><br />
-<strong>Excercises:</strong> <a href="./Labs/lab_2_warmup.html">Warmup Excercises for Wednesday</a><br />
+<strong>Excercises:</strong> <a href="./Labs/lab_2_warmup.html">Warmup Excercises for Friday</a><br />
 <strong>Cheat Sheets:</strong> <a href="https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf">RMarkdown</a>, <a href="https://github.com/rstudio/cheatsheets/raw/master/data-import.pdf">Data Import</a><br />
 <strong>Files:</strong> <a href="./Data/my_data.xlsx">Excel</a>, <a href="./Data/my_data.csv">CSV</a><br />
-<strong>Homework:</strong> <a href="./Assignments/2_data_frames.html">Data frames!</a>, submit <a href="https://www.dropbox.com/request/e8pfG6vDPn47TsIIa0sS">here!</a></p>
+<strong>Homework:</strong> <a href="./Assignments/2_data_frames.html">Data frames!</a> <strong>Etherpad:</strong> <a href="https://etherpad.wikimedia.org/p/biol355-r-intro-2020" class="uri">https://etherpad.wikimedia.org/p/biol355-r-intro-2020</a></p>
 </div>
-<div id="week-4.-visualization" class="section level3">
-<h3>Week 4. Visualization</h3>
-<p>2/17/2020<br />
+<div id="week-3.-visualization" class="section level3">
+<h3>Week 3. Visualization</h3>
+<p>2/10/2020<br />
 <strong>Readings:</strong> W&amp;G on <a href="http://r4ds.had.co.nz/data-visualisation.html">Data Visualization</a>, <a href="./Readings/Unwin_2008_dataviz.pdf">Unwin 2008</a>, <a href="./Readings/choosing-a-good-chart-09.pdf">Choosing a Good Chart Cheat Sheet</a><br />
 <strong>Lectures:</strong> <a href="./Lectures/07_data_viz_principles.pdf">Principles of Data Visualization</a>, <a href="./Lectures/08_ggplot_intro.html">Intro to ggplot2</a><br />
 <strong>Objective(s):</strong> Develop understanding of graphical presentation best practices. Create a scatterplot using ggplot(); Learn how to add data to a simple map<br />
@@ -377,9 +379,9 @@ $(document).ready(function () {
 <strong>In Class Files:</strong> <a href="./in_class_files/2018/scripts/hadcrut_ggplot.R">ggplot and hadcrut</a><br />
 <strong>Homework:</strong> <a href="./Assignments/3_ggplot_intro.html">Plotapalooza</a>, submit <a href="https://www.dropbox.com/request/9whCDDUB8TNByJ5KbkoP">here!</a></p>
 </div>
-<div id="week-5.-data-reduction-and-summarization" class="section level3">
-<h3>Week 5. Data Reduction and Summarization</h3>
-<p>2/24/2020<br />
+<div id="week-4.-data-reduction-and-summarization" class="section level3">
+<h3>Week 4. Data Reduction and Summarization</h3>
+<p>2/17/2020<br />
 <strong>Readings:</strong> W&amp;G on <a href="http://r4ds.had.co.nz/transform.html">Data Transformation</a>, <a href="http://r4ds.had.co.nz/exploratory-data-analysis.html">Exploratory Data Analysis</a>, and <a href="http://r4ds.had.co.nz/pipes.html">Pipes</a>, DC Ecology Lesson on <a href="http://www.datacarpentry.org/R-ecology-lesson/03-dplyr.html">Data Aggregation</a><br />
 <strong>Lecture:</strong> <a href="./Lectures/09_summarizing_data.html">Organizing Data to Tell a Story</a>, <a href="./Labs/freeform_dplyr.zip">Data for Exploratory Data Analysis of Mortality and Natality with dplyr and ggplot2</a><br />
 <strong>Classwork:</strong> <a href="https://www.dropbox.com/request/cNqOhHN02iYpldf7KVnQ">Submit here!</a><br />
@@ -390,9 +392,9 @@ $(document).ready(function () {
 <strong>In Class Files:</strong> <a href="./in_class_files/2018/scripts/dplyr_lab.R">gapminder and dplyr</a><br />
 <strong>Etherpad:</strong> <a href="https://etherpad.wikimedia.org/p/355-dplyr-2020" class="uri">https://etherpad.wikimedia.org/p/355-dplyr-2020</a></p>
 </div>
-<div id="week-6.-date-cleaning-strings-factors-and-dates" class="section level3">
-<h3>Week 6. Date Cleaning: Strings, Factors, and Dates</h3>
-<p>3/2/2020<br />
+<div id="week-5.-date-cleaning-strings-factors-and-dates" class="section level3">
+<h3>Week 5. Date Cleaning: Strings, Factors, and Dates</h3>
+<p>2/24/2020<br />
 <strong>Readings:</strong> W&amp;G on <a href="http://r4ds.had.co.nz/strings.html">Strings</a>, <a href="http://r4ds.had.co.nz/dates-and-times.html">Dates and Times</a>, and <a href="http://r4ds.had.co.nz/factors.html">Factors</a><br />
 <strong>Lecture:</strong> <a href="./Lectures/dplyr_faded_examples.html">Dplyr Faded Example Practice</a>, <a href="./Lectures/11_regexp.html">Strings and Regular Expressions 1</a>, <a href="./Lectures/12_regexp_2.html">Strings and Regular Expressions 2</a><br />
 <strong>Cheat Sheets:</strong> <a href="https://github.com/rstudio/cheatsheets/raw/master/strings.pdf">Work with Strings Cheat Sheet</a><br />
@@ -401,9 +403,9 @@ $(document).ready(function () {
 <strong>Homework:</strong> <a href="./Labs/lab6_regex_practice.html">Regular Expressions</a>, <a href="https://www.dropbox.com/request/yCcQ3gZQ73M9A2WGdrWi">submit here</a><br />
 <strong>Etherpad:</strong> <a href="https://etherpad.wikimedia.org/p/355-strings-2020" class="uri">https://etherpad.wikimedia.org/p/355-strings-2020</a></p>
 </div>
-<div id="week-7.-tidy-data-and-data-cleaning" class="section level3">
-<h3>Week 7. Tidy Data and Data Cleaning</h3>
-<p>3/9/2020<br />
+<div id="week-6.-tidy-data-and-data-cleaning" class="section level3">
+<h3>Week 6. Tidy Data and Data Cleaning</h3>
+<p>3/2/2020<br />
 <strong>Readings:</strong> W&amp;G Chapters on <a href="http://r4ds.had.co.nz/tidy-data.html">Tidy Data</a><br />
 <strong>Lecture:</strong> <a href="./Lectures/13_data_tidy.html">Tidy Data</a><br />
 <strong>Lab:</strong> <a href="./Labs/axoltl_lab.html">Axoltl Data Cleaning</a><br />
@@ -411,9 +413,9 @@ $(document).ready(function () {
 <strong>Etherpad:</strong> <a href="https://etherpad.wikimedia.org/p/355-tidy-2020" class="uri">https://etherpad.wikimedia.org/p/355-tidy-2020</a><br />
 <strong>Homework</strong>: <a href="./Assignments/tidyr_over_break_shortened.html">Weather Data Cleaning</a>, <a href="https://www.dropbox.com/request/ruza0zXvyvnJgllJXqJ4">submit here</a></p>
 </div>
-<div id="week-8-9.-data-mashups-and-geospatial-data" class="section level3">
-<h3>Week 8 &amp; 9. Data “Mashups” and Geospatial Data</h3>
-<p>3/23/2020 and 3/30/2020<br />
+<div id="week-7-8.-data-mashups-and-geospatial-data" class="section level3">
+<h3>Week 7 &amp; 8. Data “Mashups” and Geospatial Data</h3>
+<p>3/9/2020 and 3/23/2020<br />
 <strong>Readings:</strong> W&amp;G Chapter on <a href="http://r4ds.had.co.nz/relational-data.html">Relational Data</a>, <a href="http://www.datacarpentry.org/R-spatial-raster-vector-lesson/">Data Carpentry Geospatial Introduction</a><br />
 <strong>Lectures:</strong> <a href="./Lectures/15_joins.pptx">Joins</a>, <a href="./Lectures/16_raster_gis_intro.html">Rasters</a>, <a href="./Lectures/17_gis_in_r.html">Intro to GIS and R</a>, <a href="./Lectures/18_interactive_maps.Rmd">Interactive Maps</a><br />
 <strong>Labs:</strong> <a href="./Labs/join_maps_lab.html">Joins and Geospatial Data</a><br />
@@ -431,9 +433,9 @@ $(document).ready(function () {
 1) Install OSGEO4W <a href="https://trac.osgeo.org/osgeo4w/wiki" class="uri">https://trac.osgeo.org/osgeo4w/wiki</a><br />
 2) Use it to install gdal</p>
 </div>
-<div id="week-10.-functions" class="section level3">
-<h3>Week 10. Functions</h3>
-<p>4/6/2020<br />
+<div id="week-9-functions" class="section level3">
+<h3>Week 9 Functions</h3>
+<p>3/30/2020<br />
 <strong>Readings:</strong> W&amp;G Chapters on <a href="http://r4ds.had.co.nz/functions.html">Functions</a> and <a href="http://r4ds.had.co.nz/iteration.html">Iteration</a><br />
 <strong>Lectures:</strong> <a href="./Lectures/19_functions_intro.html">Intro to Functions</a>, <a href="./Lectures/20_iteration.html">Iteration with purrr</a><br />
 <strong>Lab:</strong> <a href="./Labs/function_lab.html">Functions lab</a><br />
@@ -441,6 +443,11 @@ $(document).ready(function () {
 <strong>Biological Examples:</strong> NOAA buoy data.<br />
 <strong>Files:</strong> <a href="./Lectures/data/buoydata.zip">NOAA buoy data from Boston Harbor</a>, <a href="./Lectures/get_buoy.R">get_buoy.R</a><br />
 <strong>Etherpad:</strong> <a href="https://etherpad.wikimedia.org/p/355-functions-2020" class="uri">https://etherpad.wikimedia.org/p/355-functions-2020</a></p>
+</div>
+<div id="week-10.-shiny-and-web-interfaces" class="section level3">
+<h3>Week 10. Shiny and Web Interfaces</h3>
+<p>4/6/2020 <strong>Readings:</strong> <a href="https://mastering-shiny.org/">Mastering Shiny</a> Ch. 1-4 <strong>Objective(s):</strong> Learn how to communicate data to others using dynamic web based applications. <strong>Biological Examples:</strong> NOAA buoy data.<br />
+<strong>Etherpad:</strong> <a href="https://etherpad.wikimedia.org/p/355-shiny-2020" class="uri">https://etherpad.wikimedia.org/p/355-shiny-2020</a></p>
 </div>
 <div id="week-11.-t-tests-and-p-values" class="section level3">
 <h3>Week 11. T-Tests and P-Values</h3>
@@ -472,21 +479,22 @@ $(document).ready(function () {
 <strong>Biological Examples:</strong> Seal life history variation. Mouse anti-fungal drug development. Neanderthal brain size. Fire severity in California.<br />
 <strong>Files:</strong><a href="./Labs/data/lm_data.zip">Files for lab</a><br />
 <strong>Etherpad:</strong> <a href="https://etherpad.wikimedia.org/p/355-mlr-2020" class="uri">https://etherpad.wikimedia.org/p/355-mlr-2020</a></p>
+<!--
+### Week  14 Multiple Predictors Part 2  
+5/11/2020  
+__Readings:__  W&G on [Model Building](http://r4ds.had.co.nz/model-building.html)  
+__Lectures:__  [AIC and Multimodel Comparisons](./Lectures/27_mmi.html), [purrr](./Lectures/purrr.html).    
+__Lab:__ [AIC and Multimodel Inference in R](./Labs/lab11_mmi.html)  
+__Objective(s):__  Comparing and Contrasting models, Visualization of model outcomes when many models are fit  
+__Biological Examples:__ Fire severity in California. Brain size and natal investment in primates. Linguistic diversity and cultural characteristics.   
+__Files:__ [Files for lab](./Labs/data/mmi_data.zip)  
+__Etherpad:__ https://etherpad.wikimedia.org/p/355-aic-2020
+
+-->
 </div>
-<div id="week-14-multiple-predictors-part-2" class="section level3">
-<h3>Week 14 Multiple Predictors Part 2</h3>
-<p>5/4/2020<br />
-<strong>Readings:</strong> W&amp;G on <a href="http://r4ds.had.co.nz/model-building.html">Model Building</a><br />
-<strong>Lectures:</strong> <a href="./Lectures/27_mmi.html">AIC and Multimodel Comparisons</a>, <a href="./Lectures/purrr.html">purrr</a>.<br />
-<strong>Lab:</strong> <a href="./Labs/lab11_mmi.html">AIC and Multimodel Inference in R</a><br />
-<strong>Objective(s):</strong> Comparing and Contrasting models, Visualization of model outcomes when many models are fit<br />
-<strong>Biological Examples:</strong> Fire severity in California. Brain size and natal investment in primates. Linguistic diversity and cultural characteristics.<br />
-<strong>Files:</strong> <a href="./Labs/data/mmi_data.zip">Files for lab</a><br />
-<strong>Etherpad:</strong> <a href="https://etherpad.wikimedia.org/p/355-aic-2020" class="uri">https://etherpad.wikimedia.org/p/355-aic-2020</a></p>
-</div>
-<div id="week-15.-open-lab-and-final-presentations" class="section level3">
-<h3>Week 15. Open Lab and Final Presentations</h3>
-<p>5/11/2020<br />
+<div id="week-14.-open-lab-and-final-presentations" class="section level3">
+<h3>Week 14. Open Lab and Final Presentations</h3>
+<p>5/18/2020<br />
 Prep your final talks! Data science party!</p>
 </div>
 
