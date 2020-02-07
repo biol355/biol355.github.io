@@ -1,17 +1,19 @@
 ---
 title: "Homework: The land of data frames"
-date: "February 12, 2018"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
 output: html_document
 ---
 
-1.Define, compare, and contrast vectors, lists, matrices, and data frames.  
+Please write this up using Rmarkdown.
+
+1. Define, compare, and contrast vectors, lists, matrices, and data frames.  
   
 2. Install the `dplyr` library.
 
-3. Load the data file we used last week. Load it as an excel file (not a csv!). Then load it as a csv. Looking at the head of the excel and csv generated data frames, are there any differences?
+3. Load the data file you generated from your last lab. Load it as an excel file (not a csv!). Then load it as a csv using `read.csv`. Looking at the head of the excel and csv generated data frames, are there any differences? What if you use `readr::read_csv`? How does it compare?
 
 4. What does the output of `str` and `summary` tell you about the data you generated? Do you get different results from the excel versus csv loaded data frames?
 
-5. Add a column to mtcars called `Model` which uses the rownames of mtcars as its values. Show me the head of the data frame to see if it's been done correctly.
+5. Add a column to the mtcars data called `Model` which uses the rownames of mtcars as its values. Show me the head of the data frame to see if it's been done correctly.
 
-6. Let's use the `bind_rows` function in plyr, as it's pretty powerful. Let's say you want to add a new row to mtcars for a new model. Make a new data frame with the following columns: Model = Fizzywig, mpg=31.415, awesomness=11.  Now try to make a new data frame where you `rbind` `mtcars` and this new data frame. What happens? Then, make a new data frame here you use `dplyr::bind_rows` to combine them. Examine the resulting data frame. What do you see?
+6. Let's use the `bind_rows` function in dplyr, as it's pretty powerful. Let's say you want to add a new row to mtcars for a new model. Make a new data frame with the following columns: Model = Fizzywig, mpg=31.415, awesomness=11.  Now try to make a new data frame where you `rbind` `mtcars` and this new data frame. What happens? Then, make a new data frame here you use `dplyr::bind_rows` to combine them. Examine the resulting data frame. What do you see? How do the two methods differ?
