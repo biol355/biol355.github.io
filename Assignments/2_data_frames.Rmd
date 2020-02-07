@@ -5,6 +5,7 @@ output: html_document
 ---
 
 <!-- Please write this up using Rmarkdown. -->
+Please write this up as a script. Make sure everything runs. Answer questions using #comments.
 
 1. Define, compare, and contrast vectors, lists, matrices, and data frames. Feel free to look at their help files.  
   
