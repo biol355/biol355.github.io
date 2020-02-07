@@ -368,13 +368,13 @@ summary {
 </div>
 
 
-<p>Please write this up using Rmarkdown.</p>
+<!-- Please write this up using Rmarkdown. -->
 <ol style="list-style-type: decimal">
-<li><p>Define, compare, and contrast vectors, lists, matrices, and data frames.</p></li>
-<li><p>Install the <code>dplyr</code> library.</p></li>
-<li><p>Load the data file you generated from your last lab. Load it as an excel file (not a csv!). Then load it as a csv using <code>read.csv</code>. Looking at the head of the excel and csv generated data frames, are there any differences? What if you use <code>readr::read_csv</code>? How does it compare?</p></li>
-<li><p>What does the output of <code>str</code> and <code>summary</code> tell you about the data you generated? Do you get different results from the excel versus csv loaded data frames?</p></li>
-<li><p>Add a column to the mtcars data called <code>Model</code> which uses the rownames of mtcars as its values. Show me the head of the data frame to see if it’s been done correctly.</p></li>
+<li><p>Define, compare, and contrast vectors, lists, matrices, and data frames. Feel free to look at their help files.</p></li>
+<li><p>Install the <code>dplyr</code> library. Install the <code>readxl</code> library. Install the <code>readr</code> library.</p></li>
+<li><p>Load the <code>readxl</code> and <code>readr</code> libraries. Load the data file from lab using <code>read.csv</code> and <code>read_csv</code>. Now use <code>read_excel</code> to load the excel file you generated in lab. Looking at the three objects you loaded in, what are the any differences or similarities between them?</p></li>
+<li><p>What does the output of <code>str</code>, <code>summary</code>, and <code>visdat::vis_dat</code> tell you about the data you loaded? What is different or the same?</p></li>
+<li><p>Add a column to the mtcars data called <code>Model</code> which uses the rownames of mtcars as its values. Show me the head of the data frame to see if it’s been done correctly. Note, to add a column to a data frame, we can specify <code>yourdf$new_col_name &lt;- new_vector_we_we_are_adding</code> (note, that’s pseudo-code). Note how we are using the <code>$</code> notation to add a new column.</p></li>
 <li><p>Let’s use the <code>bind_rows</code> function in dplyr, as it’s pretty powerful. Let’s say you want to add a new row to mtcars for a new model. Make a new data frame with the following columns: Model = Fizzywig, mpg=31.415, awesomness=11. Now try to make a new data frame where you <code>rbind</code> <code>mtcars</code> and this new data frame. What happens? Then, make a new data frame here you use <code>dplyr::bind_rows</code> to combine them. Examine the resulting data frame. What do you see? How do the two methods differ?</p></li>
 </ol>
 
