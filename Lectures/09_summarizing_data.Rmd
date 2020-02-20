@@ -411,7 +411,63 @@ filter(salmon, river == "b" & mass > 3) %>%
   count
 ```  
 
+## Sidebar - the pipe!
+![](./Images/summarizing_data/magrittr.jpg)
 
+## Sidebar - the pipe!
+![](./Images/summarizing_data/p1.png)
+
+## Pipes pass an object as the first argument to a function
+```{r pipe_demo, echo = TRUE}
+5 %>% sum(4)
+
+salmon %>% count()
+```
+
+## Pipes and Functional Programming
+
+- We often thing in terms of do this, then then, then this  
+\
+- Programming that way requires overwriting a lot of objects  
+\
+- It gets.... messy
+
+## Functional Programming Workflow
+```{r cp_comments, eval = FALSE, echo=TRUE}
+#filter the salmon data by river
+
+#filter the salmon data by mass
+
+#get the count of the salmon
+```
+
+
+## Functional Programming Can get Verbose
+```{r fp_old, eval = FALSE, echo=TRUE}
+#filter the salmon data by river
+salmon_filtered <- filter(salmon, river == "a") 
+
+#filter the salmon data by mass
+salmon_filtered <- filter(salmon_filtered, mass > 3) 
+
+#get the count of the salmon
+count(salmon_filtered)
+```
+
+## Pipes Make Programs Read Like Language!
+
+```{r fp_new, eval = FALSE, echo=TRUE}
+salmon_filtered <- salmon %>%
+  
+  #filter the salmon data by river
+  filter(river == "a") %>%
+  
+  #filter the salmon data by mass
+  filter(mass > 3) %>%
+  
+  #get the count of the salmon
+  count()
+```
 
 ## Objectives
 1. Think about how sampling influences data structure  
