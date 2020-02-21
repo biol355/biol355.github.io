@@ -1,0 +1,84 @@
+---
+title: "Dplyr Homework"
+author: "Jarrett Byrnes"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, include = FALSE)
+library(dplyr)
+library(ggplot2)
+```
+
+## Analysing a data set, start to finish
+
+For this assignment we're going to look at [birthweights of babies in California from 2000 to 2013](./ca_birthweights_clean.csv). The data has year, groups of birthweights, and counts of number of babies in that group of birth weights. There's also information on county, zip code, lat/long, etc. These may or may not be useful, but are interesting grouping factors.
+
+
+#### 1. Warmup: Load up the data! Use `skimr` to show that you've done so properly, and everything is as it should be.
+```{r}
+library(readr)
+weights <- read_csv("./ca_birthweights_clean.csv")
+
+skimr::skim(weights)
+```
+
+#### 2. What is the number of children in each birthweight category in Sacramento, CA across the entire dataset?  
+
+```{r}
+weights %>%
+  filter(city == "Sacramento") %>%
+  group_by(BIRTHWEIGHT) %>%
+  summarize(BIRTHWEIGHT.COUNT = sum(BIRTHWEIGHT.COUNT))
+```
+
+
+
+#### 3. Are there trends in the birthweights of children in Truckee over time? Visualize this by looking at the number of individuals in each birthweight category in each year. Make the plot as easy to understand as possible. Extra credit for making it fancy and not just a default plot. Note, Truckee has multiple zip codes, so, you're going to want to make sure to sum over all zip codes in the city!
+
+```{r}
+weights %>%
+  filter(city == "Truckee") %>%
+  group_by(YEAR, BIRTHWEIGHT) %>%
+  summarize(BIRTHWEIGHT.COUNT = sum(BIRTHWEIGHT.COUNT)) %>%
+  ggplot(aes(x = YEAR, y = BIRTHWEIGHT.COUNT, color = BIRTHWEIGHT)) +
+  geom_line() + geom_point()
+```
+
+#### 4. Are there any trends by Latitude (e.g., North-South)? To answer this...
+&nbsp; &nbsp; 4a. Create a new column, `lat_group` where you use `cut_interval` to cut the data into 10 groups.  
+&nbsp; &nbsp; 4b. Calculate the birthweight count for each birthweight group and latitude group - but also calculate the mean latitude in that group.  
+&nbsp; &nbsp; 4c. Plot! Remember, make your axes, labels, and titles informative! That mean latitude will help you make a good plot. Trust me!
+```{r}
+weights %>% 
+  mutate(lat_group = cut_interval(latitude, 10)) %>%
+  group_by(lat_group, BIRTHWEIGHT) %>%
+  summarize(BIRTHWEIGHT.COUNT = sum(BIRTHWEIGHT.COUNT),
+            latitude = mean(latitude)) %>%
+  ggplot(aes(x = latitude, y = BIRTHWEIGHT.COUNT, color = BIRTHWEIGHT)) +
+  geom_line() + geom_point()
+```
+
+&nbsp; &nbsp; 4d. Well that was unsatisfying, given the different number of births at different latitudes. Can you redo this, correcting for number of individuals in each latitude bin to make it more useful? So, percent in each bin? Make those axes on the plot tell us what is going on! Hint: to do this, you'll need to group not just once, but twice. The first time, but latitude group and birthweight group, the second, you'll just use latitude group and instead of `summarize`, use a `mutate` to caculate percent in each birthweight category. Don't forget to `ungroup` at the end!
+
+```{r}
+weights %>% 
+  mutate(lat_group = cut_interval(latitude, 10)) %>%
+  group_by(lat_group, BIRTHWEIGHT) %>%
+  summarize(BIRTHWEIGHT.COUNT = sum(BIRTHWEIGHT.COUNT),
+            latitude = mean(latitude)) %>%
+  group_by(lat_group) %>%
+  mutate(BIRTHWEIGHT.PERCENT = BIRTHWEIGHT.COUNT/sum(BIRTHWEIGHT.COUNT)*100) %>%
+  ungroup() %>%
+  ggplot(aes(x = latitude, y = BIRTHWEIGHT.PERCENT, color = BIRTHWEIGHT)) +
+  geom_line() + geom_point()
+```
+
+&nbsp; &nbsp; 4e. What did visualization by raw numbers versus percent tell you? How are they different? Why might they be different? What does this tell you about visualization and analysis of population trends in general?
+
+#### 5. Extra credit (variable, depending on awesomeness of data viz)
+
+Note that there is latitude and longitude information in this data. Can you use that in some way to plot out anything interesting in the data in terms of geographic distribution. Note, log(x+1) transformations may be your friend for some things.  Or correcting by population size. Have fun with this! Feel free to look into geospatial visualization with ggplot2 or other packages - although we'll do this more formally in a few weeks. Might not be necessary, but, you never know.
+
+```{r}
