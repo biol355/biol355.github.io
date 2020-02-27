@@ -1,0 +1,145 @@
+\documentclass[]{tufte-handout}
+
+% ams
+\usepackage{amssymb,amsmath}
+
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \makeatletter
+  \@ifpackageloaded{fontspec}{}{\usepackage{fontspec}}
+  \makeatother
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+  \makeatletter
+  \@ifpackageloaded{soul}{
+     \renewcommand\allcapsspacing[1]{{\addfontfeature{LetterSpace=15}#1}}
+     \renewcommand\smallcapsspacing[1]{{\addfontfeature{LetterSpace=10}#1}}
+   }{}
+  \makeatother
+
+\fi
+
+% graphix
+\usepackage{graphicx}
+\setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
+
+% booktabs
+\usepackage{booktabs}
+
+% url
+\usepackage{url}
+
+% hyperref
+\usepackage{hyperref}
+
+% units.
+\usepackage{units}
+
+
+\setcounter{secnumdepth}{-1}
+
+% citations
+\usepackage{natbib}
+\bibliographystyle{plainnat}
+
+% pandoc syntax highlighting
+
+% longtable
+
+% multiplecol
+\usepackage{multicol}
+
+% strikeout
+\usepackage[normalem]{ulem}
+
+% morefloats
+\usepackage{morefloats}
+
+
+% tightlist macro required by pandoc >= 1.14
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+
+% title / author / date
+\title{Make an R Cheat Sheet}
+\author{Jarrett Byrnes}
+\date{2020-02-27}
+
+
+\begin{document}
+
+\maketitle
+
+
+
+
+\hypertarget{introduction}{%
+\section{Introduction}\label{introduction}}
+
+In the wild and wolly world of R, there are many packages out there.
+Some of them are on the Comprehensive R Archive Network\footnote{See
+  \href{https://cran.r-project.org/}{CRAN}}. Many can be found on
+\href{http://github.com/}{Github}\footnote{A site for sharing code and
+  using \texttt{git} as version control software. If you're interested,
+  see \href{https://happygitwithr.com/}{Happy with Git} for more and
+  talk to me. Extra credit awaits\ldots{}} and installed with the
+\href{https://devtools.r-lib.org/}{devtools} package\footnote{instead of
+  \texttt{install.packages} you use
+  \texttt{devtools::install\_github(\textquotesingle{}username/pkgname\textquotesingle{})}}.
+
+Throughout the semester, we've been refering you to
+\href{https://rstudio.com/resources/cheatsheets/}{R Cheat Sheets} for
+everything from
+\href{https://github.com/rstudio/cheatsheets/raw/master/strings.pdf}{working
+with strings} to
+\href{https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf}{ggplot2}
+and more. These cheat sheets are invaluable as learning tools. Creating
+a cheat sheet is also an amazing way to familiarize yourself with a new
+package, and really solidify your knowledge of the R ecosystem.
+
+So, for your midterm, I'd like you to create a cheat sheet for the
+package of your choice. It can be a simple package, or a complex
+package, or anything in between. Below, I'll detail the steps of the
+process, as well as provide a list of some packages that might be
+enjoyable to use for this assignment - although the choice is ultimately
+up to you!
+
+\hypertarget{steps}{%
+\section{Steps}\label{steps}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\item
+  First, look at existing
+  \href{https://rstudio.com/resources/cheatsheets/}{R Cheat Sheets}. I
+  will give you a homework question asking you to identify what you do
+  and do not find useful about the examples here shortly.
+\item
+  Second, read up on
+  \href{https://rstudio.com/resources/cheatsheets/how-to-contribute-a-cheatsheet/}{how
+  to create an R Cheat Sheet}. Download the template and read it over
+  CAREFULLY.
+\item
+  Second, select a package. It can be from the list below. It can be
+  from CRAN. It might be from a
+  \href{https://cran.r-project.org/web/views/}{CRAN Task View}. You
+  might find it on \href{https://awesome-r.com/}{awesome-r.com}. Or take
+  a look at the New and Updated packages section of
+  \href{https://rweekly.org/\#NewPackages}{rweekly} (note - I read this
+  daily!).
+\end{enumerate}
+
+\hypertarget{packages}{%
+\section{Packages}\label{packages}}
+
+\url{https://github.com/qinwf/awesome-R}
+\url{https://ropengov.github.io/projects/}
+\url{https://github.com/rOpenHealth}
+\url{https://ropensci.org/packages/}
+
+
+
+\end{document}

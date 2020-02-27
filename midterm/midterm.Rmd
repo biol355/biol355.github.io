@@ -1,0 +1,63 @@
+---
+title: "Make an R Cheat Sheet"
+subtitle: "A Biol355 Midterm"
+author: "Jarrett Byrnes"
+date: "`r Sys.Date()`"
+output:
+  tufte::tufte_html: default
+  tufte::tufte_handout:
+    citation_package: natbib
+    latex_engine: xelatex
+  tufte::tufte_book:
+    citation_package: natbib
+    latex_engine: xelatex
+link-citations: yes
+---
+
+```{r setup, include=FALSE}
+library(tufte)
+# invalidate cache when the tufte version changes
+knitr::opts_chunk$set(tidy = FALSE, echo = FALSE, warning=FALSE, message=FALSE, cache.extra = packageVersion('tufte'))
+options(htmltools.dir.version = FALSE)
+```
+
+# Introduction
+
+In the wild and wolly world of R, there are many packages out there. Some of them are on the Comprehensive R Archive Network^[See [CRAN](https://cran.r-project.org/)]. Many can be found on [Github](http://github.com/)^[A site for sharing code and using `git` as version control software. If you're interested, see [Happy with Git](https://happygitwithr.com/) for more and talk to me. Extra credit awaits...] and installed with the [devtools](https://devtools.r-lib.org/) package^[instead of `install.packages` you use `devtools::install_github('username/pkgname')`].  
+
+Throughout the semester, we've been refering you to [R Cheat Sheets](https://rstudio.com/resources/cheatsheets/) for everything from [working with strings](https://github.com/rstudio/cheatsheets/raw/master/strings.pdf) to [ggplot2](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf) and more.  These cheat sheets are invaluable as learning tools. Creating a cheat sheet is also an amazing way to familiarize yourself with a new package, and really solidify your knowledge of the R ecosystem.  
+
+So, for your midterm, I'd like you to create a cheat sheet for the package of your choice. It can be a simple package, or a complex package, or anything in between. Below, I'll detail the steps of the process, as well as provide a list of some packages that might be enjoyable to use for this assignment - although the choice is ultimately up to you!
+  
+# Steps
+1. First, look at existing [R Cheat Sheets](https://rstudio.com/resources/cheatsheets/). I will give you a homework question asking you to identify what you do and do not find useful about the examples here shortly.
+
+2. Second, read up on [how to create an R Cheat Sheet](https://rstudio.com/resources/cheatsheets/how-to-contribute-a-cheatsheet/). Download the template and read it over CAREFULLY.
+
+3. Third, select a package. See the section below on possible packages and/or where to find other packages.
+
+4. Play with the package. A lot. I will have an upcoming homework question about this, asking what are the most interesting things that the package does, what are the most useful things that it does, what elements of it you think most people would use the most frequently, and how would you organize this information.  
+  
+5. Make a sketch of your cheatsheet. Be as detailed as you can. This will also be a future homework question!  
+
+6. Finally, make the cheat sheet. Read the [template]((https://rstudio.com/resources/cheatsheets/how-to-contribute-a-cheatsheet/)) carefully, as there many wonderful 
+
+# Grading
+The breakdown of your grade for this assignment will be as follows:  
+
+- 50% Utility. Can I execute things from this package using your cheat sheet?  
+- 25% Completeness. How thoroughly did you explore the package? Is it just one or two things, or is this really a guide to the whole thing.
+- 15% Communication: Is it aesthetically pleasing (i.e. did you do a good job communicating the package to a new user)?  
+- 10% - Accessibility: Spelling, grammer, etc. Yes. They matter. It's communication.  
+- Extra credit - 10% - get it on Rstudio's contributed cheat sheet website
+- Extra credit - 10% - get folk commenting on it on [#rstats twitter](https://twitter.com/search?q=%23rstats&src=typed_query)!
+
+
+# Finding a Package
+It can be from the list below. It can be from CRAN. It might be from a [CRAN Task View](https://cran.r-project.org/web/views/). You might find it on [awesome-r.com](https://awesome-r.com/). Or take a look at the New and Updated packages section of [rweekly](https://rweekly.org/#NewPackages) (note - I read this daily!). Many data oriented packages can be found at [ROpenGov](https://ropengov.github.io/projects/) or for health data, [rOpenHealth](https://github.com/rOpenHealth). I'm also a big fan of [ROpenSci](https://ropensci.org/packages/) for many ecologically focused packages. Also, on our [data sets page](https://biol355.github.io/datasets.html) there are a variety of R packages that provide access to data. Those are great targets as well!  
+
+# Some package suggestions
+
+By all means, don't chose something from the list below if you don't want to! But there are some packages which might be good to think about if your imagination is flagging. I'll also provide a bit of an example of what they can do.
+
+gghighlight, ggforce, patchwork, vroom, snakecase, scatterD3, waffle, treemap, rHealthDataGov, visdat, skimr, worms, rnaturalearth, rayshadr, camtrapR, rnoaa
