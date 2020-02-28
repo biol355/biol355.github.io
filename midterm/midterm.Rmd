@@ -34,7 +34,7 @@ So, for your midterm, I'd like you to create a cheat sheet for the package of yo
 
 2. Second, read up on [how to create an R Cheat Sheet](https://rstudio.com/resources/cheatsheets/how-to-contribute-a-cheatsheet/). Download the template and read it over CAREFULLY.
 
-3. Third, select a package. See the section below on possible packages and/or where to find other packages.
+3. Third, select a package. See the section below on possible packages and/or where to find other packages. Once you have selected a package, sign up [here](https://docs.google.com/spreadsheets/d/1aIYRlr9s4HqpUhoGp2p4RegfvKdxMttRPGYi_e9jUVs/edit?usp=sharing) so only one person gets one package!
 
 4. Play with the package. A lot. I will have an upcoming homework question about this, asking what are the most interesting things that the package does, what are the most useful things that it does, what elements of it you think most people would use the most frequently, and how would you organize this information.  
   
@@ -54,10 +54,68 @@ The breakdown of your grade for this assignment will be as follows:
 
 
 # Finding a Package
-It can be from the list below. It can be from CRAN. It might be from a [CRAN Task View](https://cran.r-project.org/web/views/). You might find it on [awesome-r.com](https://awesome-r.com/). Or take a look at the New and Updated packages section of [rweekly](https://rweekly.org/#NewPackages) (note - I read this daily!). Many data oriented packages can be found at [ROpenGov](https://ropengov.github.io/projects/) or for health data, [rOpenHealth](https://github.com/rOpenHealth). I'm also a big fan of [ROpenSci](https://ropensci.org/packages/) for many ecologically focused packages. Also, on our [data sets page](https://biol355.github.io/datasets.html) there are a variety of R packages that provide access to data. Those are great targets as well!  
+While we provide a few packages below, you're also more than welcome to search for ones you might find interesting. There are a number of places to look. Your package can be from CRAN. It might be from a [CRAN Task View](https://cran.r-project.org/web/views/). You might find it on [awesome-r.com](https://awesome-r.com/). It could be a package featured as a [Top 40 new package at Rviews](https://www.google.com/search?q=top+40&q=site%3Ahttps%3A%2F%2Frviews.rstudio.com). Or take a look at the New and Updated packages section of [rweekly](https://rweekly.org/#NewPackages) (note - I read this daily!). Many data oriented packages can be found at [ROpenGov](https://ropengov.github.io/projects/) or for health data, [rOpenHealth](https://github.com/rOpenHealth). I'm also a big fan of [ROpenSci](https://ropensci.org/packages/) for many ecologically focused packages. Also, on our [data sets page](https://biol355.github.io/datasets.html) there are a variety of R packages that provide access to data. Those are great targets as well!  
 
 # Some package suggestions
 
 By all means, don't chose something from the list below if you don't want to! But there are some packages which might be good to think about if your imagination is flagging. I'll also provide a bit of an example of what they can do.
 
-gghighlight, ggforce, patchwork, vroom, snakecase, scatterD3, waffle, treemap, rHealthDataGov, visdat, skimr, worms, rnaturalearth, rayshadr, camtrapR, rnoaa
+## gghighlight
+
+```{r gghighlight, fig.margin = TRUE, fig.cap="An example of a new geom from gghighlight"}
+#from readme
+library(gghighlight)
+library(ggplot2)
+set.seed(2)
+d <- purrr::map_dfr(
+  letters,
+  ~ data.frame(
+      idx = 1:400,
+      value = cumsum(runif(400, -1, 1)),
+      type = .,
+      flag = sample(c(TRUE, FALSE), size = 400, replace = TRUE),
+      stringsAsFactors = FALSE
+    )
+)
+
+ggplot(d) +
+  geom_line(aes(idx, value, colour = type)) +
+  gghighlight(max(value) > 19)+ theme_minimal()+ facet_wrap(~ type)
+
+```
+
+[gghighlight](https://yutannihilation.github.io/gghighlight/) allows you to easily highlight specific lines and points within a ggplot.
+
+
+## ggforce
+
+The [ggforce](https://ggforce.data-imaginist.com/) package that contains a number of additional geoms and stats for `ggplot2` giving added functionality and really fun plots.
+```{r ggforce, fig.margin = TRUE, fig.cap="An example of a new geom from ggforce"}
+library(ggforce)
+data <- reshape2::melt(Titanic)
+data <- gather_set_data(data, 1:4)
+
+ggplot(data, aes(x, id = id, split = y, value = value)) +
+  geom_parallel_sets(aes(fill = Sex), alpha = 0.3, axis.width = 0.1) +
+  geom_parallel_sets_axes(axis.width = 0.1) +
+  geom_parallel_sets_labels(colour = 'white')
+```
+
+## patchwork
+## vroom
+## snakecase
+## scatterD3
+## waffle
+## treemap
+## rHealthDataGov
+## visdat
+## skimr
+## worms 
+## rnaturalearth
+## rayshadr
+## camtrapR
+## rnoaa
+
+
+## the lost pies of magrittr
+The [magrittr](https://magrittr.tidyverse.org/) package is far more than just `%>%`. There are a multitude of pipes we don't talk about, different ways of creating repeatable workflows with `. %>%` and more. Write a cheat sheet that embraces the full functionality of `magrittr`!
