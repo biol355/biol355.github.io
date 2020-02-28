@@ -92,7 +92,7 @@ __Lecture:__  [Strings and Regular Expressions 1](./Lectures/11_regexp.html), [S
 __Cheat Sheets:__ [Work with Strings Cheat Sheet](https://github.com/rstudio/cheatsheets/raw/master/strings.pdf)  
 __Objective(s):__ Understand how strings differ from numbers. Learn the basics of string manipulation. Describe the different strategies to clean data full of errors with minimal effort. Process and understand the concept of regular expression matching. Manipulate different date formats and work them into a data map reduce workflow.  
 __Files:__ [Portal Mammal Data with String Problems](./Lectures/data/portal_messy_regexp.xlsx)  
-__Homework:__ [Regular Expressions](./assignments/6_regex_practice.html)   
+__Homework:__ [Regular Expressions](./Assignments/6_regex_practice.html)   
 __Etherpad:__ https://etherpad.wikimedia.org/p/355-strings-2020  
 
 
