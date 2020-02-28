@@ -17,7 +17,8 @@ link-citations: yes
 ```{r setup, include=FALSE}
 library(tufte)
 # invalidate cache when the tufte version changes
-knitr::opts_chunk$set(tidy = FALSE, echo = FALSE, warning=FALSE, message=FALSE, cache.extra = packageVersion('tufte'))
+knitr::opts_chunk$set(tidy = FALSE, echo = FALSE, warning=FALSE, message=FALSE, cache.extra = packageVersion('tufte'))#,
+#                       fig.width=3.5, fig.height=3.5)
 options(htmltools.dir.version = FALSE)
 ```
 
@@ -62,7 +63,9 @@ By all means, don't chose something from the list below if you don't want to! Bu
 
 ## gghighlight
 
-```{r gghighlight, fig.margin = TRUE, fig.cap="An example of a new geom from gghighlight"}
+[gghighlight](https://yutannihilation.github.io/gghighlight/) allows you to easily highlight specific lines and points within a ggplot.
+
+```{r gghighlight, fig.margin = FALSE, fig.cap="An example of a new geom from gghighlight"}
 #from readme
 library(gghighlight)
 library(ggplot2)
@@ -84,13 +87,13 @@ ggplot(d) +
 
 ```
 
-[gghighlight](https://yutannihilation.github.io/gghighlight/) allows you to easily highlight specific lines and points within a ggplot.
 
 
 ## ggforce
 
 The [ggforce](https://ggforce.data-imaginist.com/) package that contains a number of additional geoms and stats for `ggplot2` giving added functionality and really fun plots.
-```{r ggforce, fig.margin = TRUE, fig.cap="An example of a new geom from ggforce"}
+
+```{r ggforce, fig.margin = FALSE, fig.cap="An example of a new geom from ggforce"}
 library(ggforce)
 data <- reshape2::melt(Titanic)
 data <- gather_set_data(data, 1:4)
@@ -102,6 +105,21 @@ ggplot(data, aes(x, id = id, split = y, value = value)) +
 ```
 
 ## patchwork
+
+[patchwork](https://patchwork.data-imaginist.com/) is a truly amazing package that allows you to combine multiple ggplots into multipaneled figures. I'll admit, this is one of the workhorse packages I use almost every day. But - it doesn't have a cheatsheet! Can you write one?
+
+```{r patchwork, fig.margin = FALSE, fig.cap="An example of multipaneled patchwork plots"}
+library(patchwork)
+p1 <- ggplot(mtcars) + geom_point(aes(mpg, disp))
+p2 <- ggplot(mtcars) + geom_boxplot(aes(gear, disp, group = gear))
+p3 <- ggplot(mtcars) + geom_smooth(aes(disp, qsec))
+p4 <- ggplot(mtcars) + geom_bar(aes(carb))
+
+(p1 | p2 | p3) /
+      p4
+
+```
+
 ## vroom
 ## snakecase
 ## scatterD3
