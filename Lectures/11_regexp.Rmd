@@ -34,7 +34,7 @@ portal <- read_excel("./data/portal_messy_regexp.xlsx")
 ```
 
 ##
-![](./images/regexp/regular_expressions_xkcd.png)
+![](./Images/regexp/regular_expressions_xkcd.png)
 
 ## Just Another Day Loading Data...
 ```{r read_data, eval=FALSE, message=FALSE, warning=FALSE}
@@ -195,14 +195,14 @@ str_detect(portal$Weight, "g")
 ## What is the problem?
 
 ```{r view}
-str_view(portal$Weight, "g")
+str_subset(portal$Weight, "g")
 ```
 
 UH OH! NA!
 
 ## What is the problem
 ```{r viewMA}
-str_view(na.omit(portal$Weight), "g")
+str_subset(portal$Weight, "g")
 ```
 
 ## Basic String Matching
@@ -210,14 +210,14 @@ str_view(na.omit(portal$Weight), "g")
 
 ```{r match}
 x <- c("apple", "bananna", "orange")
-str_view(x, "nn")
+str_subset(x, "nn")
 ```
 
 ## What about ANY character?
 - Sometimes we want flexibility
 
 ```{r match_any}
-str_view(x, "a.")
+str_subset(x, "a.")
 ```
 
 a followed by any character
@@ -228,7 +228,7 @@ a followed by any character
 ```{r match_r}
 x_p <- c("apple.", "bananna.", "orange.")
  
-str_view(x_p, "\\.")
+str_subset(x_p, "\\.")
 ```
 
 ## Exercise
@@ -241,21 +241,21 @@ str_view(x_p, "\\.")
 <b>First you get the power, then you get the money...</b>
 
 ```{r start1}
-str_view(x, "a")
+str_subset(x, "a")
 ```
 
 ## Beginning and End of Lines
 <b>First you get the power, then you get the money...</b>
 
 ```{r start2}
-str_view(x, "^a")
+str_subset(x, "^a")
 ```
 
 ## Beginning and End of Lines
 <b>First you get the power, then you get the money...</b>
 
 ```{r end}
-str_view(x, "e$", match=TRUE)
+str_subset(x, "e$")
 ```
 
 ## Exercise
@@ -277,25 +277,25 @@ Since these list are long, you might want to use the `match=TRUE` argument to `s
 ## Solutions
 ```{r}
 # 1. 
-str_view(words, "^y", match=TRUE)
+str_subset(words, "^y")
 ```
 
 ## Solutions
 ```{r}
 # 2. 
-str_view(words, "x$", match=TRUE)
+str_subset(words, "x$")
 ```
 
 ## Solutions
 ```{r}
 # 3. 
-str_view(words, "^...$", match=TRUE)
+str_subset(words, "^...$")
 ```
 
 ## Solutions
 ```{r}
 # 4. 
-str_view(words, ".......", match=TRUE)
+str_subset(words, ".......")
 ```
 
 
@@ -306,18 +306,18 @@ Come up with regexprs that will show you problems in Species and Weight
 
 ## Solutions
 ```{r}
-str_view(na.omit(portal$Weight), "g", match=TRUE)
+str_subset(na.omit(portal$Weight), "g")
 ```
 
 ## Solutions
 ```{r}
-str_view(na.omit(portal$Weight), "\\(", match=TRUE)
+str_subset(na.omit(portal$Weight), "\\(")
 ```
 
 
 ## Species
 ```{r}
-str_view(na.omit(portal$Species), "\\_", match=TRUE)
+str_subset(portal$Species, "_")
 ```
 
 ## More Generalized Search Strings
@@ -329,21 +329,21 @@ str_view(na.omit(portal$Species), "\\_", match=TRUE)
 
 ## So, who has a character in weight?
 ```{r weight_problems}
-str_view(na.omit(portal$Weight), "[a-zA-Z]", match=TRUE)
+str_subset(portal$Weight, "[a-zA-Z]")
 ```
 
 <div class="fragment">Still not general enough...</div>
 
 ## So, who has a character in weight?
 ```{r weight_problems2}
-str_view(na.omit(portal$Weight), "[^\\d]", match=TRUE)
+str_subset(portal$Weight, "[^\\d]")
 ```
 
 ## Either or and groups
 - Use `()` and `|` to try alternate groups
 
 ```{r grey}
-str_view(c("grey", "gray"), "(ey|ay)")
+str_subset(c("grey", "gray"), "(ey|ay)")
 ```
 
 ## Exercises
@@ -360,19 +360,19 @@ Create regular expressions to find all `stringr::words` that:
 ## Solutions
 ```{r}
 #starts with a vowel
-str_view(words, "^[aeiou]")
+str_subset(words, "^[aeiou]")
 ```
 
 ## Solutions
 ```{r}
 #End with ed, but not eed
-str_view(words, "[^e]ed$", match=TRUE)
+str_subset(words, "[^e]ed$")
 ```
 
 ## Solutions
 ```{r}
 #End with ing or ise
-str_view(words, "(ing|ise)$", match=TRUE)
+str_subset(words, "(ing|ise)$")
 ```
 
 ## Greedy Matching
@@ -386,7 +386,7 @@ str_view(words, "(ing|ise)$", match=TRUE)
 
 ## Example: Double Ps
 ```{r}
-str_view(x, "p{2}")
+str_subset(x, "p{2}")
 ```
 
 
@@ -396,7 +396,7 @@ str_view(x, "p{2}")
 
 ```{r}
 #double letters
-str_view(x, "([a-z])\\1")
+str_subset(x, "([a-z])\\1")
 ```
 
 ## Exercise
@@ -412,24 +412,24 @@ Create regular expressions to find all words that:</p>
 ## Solutions
 ```{r}
 #starts with three consonants
-str_view(words, "^[^aeiou]{3}", match=TRUE)
+str_subset(words, "^[^aeiou]{3}")
 ```
 
 ## Solutions
 ```{r}
 #Have three or more vowels in a row
-str_view(words, "[aeiou]{3,}", match=TRUE)
+str_subset(words, "[aeiou]{3,}")
 ```
 
 ## Solutions
 ```{r}
 #Have two or more vowel-consonant pairs in a row.
-str_view(words, "([aeiou][^aeiou]){2,}", match=TRUE)
+str_subset(words, "([aeiou][^aeiou]){2,}")
 ```
 
 
 ## Solutions
 ```{r}
 #That only contain consonants.
-str_view(words, "^[^aeiou]+$", match=TRUE)
+str_subset(words, "^[^aeiou]+$")
 ```
