@@ -121,19 +121,208 @@ p4 <- ggplot(mtcars) + geom_bar(aes(carb))
 ```
 
 ## vroom
+
+Reading comma separated files and the like seems fast to you now - but that's only because we've been reading files with kilobytes of data in them at most. What about when you get to REAL big data - files with gigabytes or more of data in them? That's where [vroom](https://vroom.r-lib.org/) comes in. It can read over 1GB of data per second! But with great power, comes great responsibility in terms of how you structure loading files - and there are ways to load MANY files with vroom as well. So, try writing a cheat sheet on large file(s) handling with [vroom](https://vroom.r-lib.org/)!
+
+```{r vroom, eval=FALSE, echo = TRUE}
+vroom::vroom("mtcars.tsv",
+  col_types = list(cyl = "i", gear = "f",hp = "i", disp = "_",
+                   drat = "_", vs = "l", am = "l", carb = "i")
+)
+#> # A tibble: 32 x 10
+#>   model           mpg   cyl    hp    wt  qsec vs    am    gear   carb
+#>   <chr>         <dbl> <int> <int> <dbl> <dbl> <lgl> <lgl> <fct> <int>
+#> 1 Mazda RX4      21       6   110  2.62  16.5 FALSE TRUE  4         4
+#> 2 Mazda RX4 Wag  21       6   110  2.88  17.0 FALSE TRUE  4         4
+#> 3 Datsun 710     22.8     4    93  2.32  18.6 TRUE  TRUE  4         1
+#> # … with 29 more rows
+```
+
 ## snakecase
+[snakecase](https://tazinho.github.io/snakecase/) is an all in one converter of complicated strings to a number of more standardized formats - snakecase, camelcase, and others. In addition to specific parsers, there's also a general parser, to come up with your own conversion case, and it handles transliterrating other languages on the fly.
+
+```{r snake, echo = TRUE, fig.fullwidth=TRUE}
+library(snakecase)
+
+string <- c("lowerCamelCase") 
+
+to_any_case(string)
+
+#from German!
+to_any_case("Doppelgänger", 
+            transliterations = "german", 
+            case = "upper_camel")
+```
+
 ## scatterD3
+Do you love awesome interactive web plots? Then [scatterD3](https://juba.github.io/scatterD3/) is for you!
+
+```{r scatterD3, fig.cap = "Play with this scatterD3 plot!"}
+library(scatterD3)
+mtcars$names <- rownames(mtcars)
+scatterD3(data = mtcars, x = wt, y = mpg, lab = names,
+          col_var = cyl, symbol_var = am,
+          xlab = "Weight", ylab = "Mpg", col_lab = "Cylinders",
+          point_size = 200, point_opacity = 0.5,
+          symbol_lab = "Manual transmission")
+```
+
 ## waffle
-## treemap
-## rHealthDataGov
+Pie charts are so yesterday. Make a [waffle](https://github.com/hrbrmstr/waffle) chart instead!
+
+```{r waffle, fig.cap = "Combining waffles and bar charts FOR SCIENCE!", fig.fullwidth=TRUE}
+library(waffle)
+library(hrbrthemes)
+library(dplyr)
+hrbrthemes::import_roboto_condensed()
+
+storms %>% 
+  filter(year >= 2010) %>% 
+  count(year, status) -> storms_df
+
+ggplot(storms_df, aes(fill = status, values = n)) +
+  geom_waffle(color = "white", size = .25, n_rows = 10, flip = TRUE) +
+  facet_wrap(~year, nrow = 1, strip.position = "bottom") +
+  scale_x_discrete() + 
+  scale_y_continuous(labels = function(x) x * 10, # make this multiplyer the same as n_rows
+                     expand = c(0,0)) +
+  ggthemes::scale_fill_tableau(name=NULL) +
+  coord_equal() +
+  labs(
+    title = "Faceted Waffle Bar Chart",
+    subtitle = "{dplyr} storms data",
+    x = "Year",
+    y = "Count"
+  ) +
+  theme_minimal(base_family = "Roboto Condensed") +
+  theme(panel.grid = element_blank(), axis.ticks.y = element_line()) +
+  guides(fill = guide_legend(reverse = TRUE))
+
+```
+
 ## visdat
+We've used [visdat](https://docs.ropensci.org/visdat/) for basically one function, but there's so so soooo much more! Build a cheat sheet to help folk explore their data!
+
+```{r visdat, fig.caption = "Using visdat to see which values are greater than or equal to 25."}
+library(visdat)
+vis_expect(airquality, ~.x >= 25)
+```
+
 ## skimr
-## worms 
+As with `visdat`, we've used [skimr](https://docs.ropensci.org/skimr/) for one function only, but, again, so much more! 
+
+```{r skimr}
+library(skimr)
+
+faithful %>%
+  skim()
+
+```
+
+## Extra Credit: data validation
+Combine the `skimr` and `visdat` packages along with any others you find that are useful to create a comprehensive data validation cheat sheet for when you first load a new data set. This is a powerful beast, and is worth up to 25% extra credit.
+
+## worrms 
+Taxonomy is hard. [worms](https://docs.ropensci.org/worrms/) makes it easy. Names change. We often want a lot of different information from a taxonomy. One place that is standardized to all marine species is the [World Register of Marine Species](https://www.marinespecies.org/).
+
+```{r worms, cache=TRUE, fig.fullwidth=TRUE}
+library(worrms)
+l <- wm_records_taxamatch(name = 'Laminariales') 
+r <- purrr::map_df(seq(1,401, 50),~ wm_records_rank(rank_id = 220, id = l[[1]]$AphiaID[1], offset = .x))
+
+#the plot
+r %>% 
+  filter(status=="accepted") %>%
+  group_by(family, genus) %>% 
+  count() %>%
+  ggplot(aes(x = family, y = n, fill = genus)) +
+  geom_col() +
+  ggthemes::theme_tufte(base_size=14) +
+  xlab("") + ylab("") +
+  ggtitle("number of species of kelps per family and genera") +
+  scale_fill_viridis_d(option = "B", guide = "none")
+```
+
 ## rnaturalearth
-## rayshadr
-## camtrapR
+[rnaturalearth](https://docs.ropensci.org/rnaturalearth/) provides an interface to the Natural Earth project - a collection of vector and raster files to make amazing maps.
+
+```{r rnaturalearth, fig.cap = "Lakes and rivers of the US", message=FALSE, warning=FALSE, cache=TRUE}
+library(rnaturalearth)
+
+# lakes
+lakes110 <- ne_download(scale = 50, type = 'lakes', category = 'physical', returnclass="sf")
+
+# rivers
+rivers110 <- ne_download(scale = 50, type = 'rivers_lake_centerlines', category = 'physical', returnclass="sf")
+
+ggplot(data = ne_countries(returnclass="sf")) +
+  geom_sf() +
+  geom_sf(data = lakes110, fill = "blue", color = "blue") +
+  geom_sf(data = rivers110, fill = "blue", color = "blue") +
+  theme_minimal()
+```
+
+
+## rayshader
+[rayshadr](https://www.rayshader.com/) allows you to make all sorts of hauntingly beautiful photo-realistic 3D plots - maps, ggplots, and more!
+
+```{r rayshadr, cache=TRUE}
+# library(rayshader)
+# 
+# mtcars_gg = ggplot(mtcars) + 
+#   geom_point(aes(x=mpg,color=cyl,y=disp),size=2) +
+#   scale_color_continuous(limits=c(0,8)) +
+#   ggtitle("mtcars: Displacement vs mpg vs # of cylinders") +
+#   theme(title = element_text(size=8),
+#         text = element_text(size=12)) 
+# 
+# plot_gg(mtcars_gg, height=3, width=3.5, multicore=TRUE, pointcontract = 0.7, soliddepth=-200)
+# rgl::rglwidget()
+```
+
+![rayshader](./rayshade.png)
+
+
 ## rnoaa
+[rnoaa](https://docs.ropensci.org/rnoaa/) is an astouding package that lets you access many of the different data sets available from NOAA. There is no way you can do a comprehensive cheat sheet here. BUT - if you want to make a cheat sheet to fully explore ONE data set, and show us how to use it to make it useful, that would be perfect!
+
+```{r rnoaa, cache=TRUE, fig.cap = "Sea Ice at the North Pole from 2000-2010"}
+library(rnoaa)
+
+dat <- sea_ice(year = 2000:2010, month = 'Apr', pole = 'N')
+df <- bind_rows(dat, .id = "x") 
+
+df <- df %>%
+  mutate(x = c(2000:2010)[as.numeric(x)])
+
+ggplot(df, aes(long, lat, group = group)) +
+  geom_polygon(fill = "steelblue") +
+  theme_ice() +
+  facet_wrap(~ x)
+```
+
+## rtweet
+Wanna dig into the stew of Twitter and analyze it? What do you find there? What's awesome? What's terrible? Check out [rtweet](https://rtweet.info/)
+
+```{r rtweet, fig.cap = "How often does Prof. Byrnes tweet?", cache=TRUE}
+library(rtweet)
+library(lubridate)
+tmls <- get_timelines(c("jebyrnes"), n = 10000)
+
+tmls %>% group_by(day = floor_date(created_at, "day")) %>%
+  count() %>%
+  ggplot(aes(x = day, y = n)) +
+  geom_line() +
+  geom_point() +
+  xlab("") +
+  ylab("Number of Tweets") +
+  theme_minimal(base_size=14) +
+  ggtitle("My tweet history")
+
+```
 
 
 ## the lost pies of magrittr
 The [magrittr](https://magrittr.tidyverse.org/) package is far more than just `%>%`. There are a multitude of pipes we don't talk about, different ways of creating repeatable workflows with `. %>%` and more. Write a cheat sheet that embraces the full functionality of `magrittr`!
+\
+\
