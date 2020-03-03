@@ -1,5 +1,5 @@
 # Data cleanup with Tidyr
-*Due March 22 2018*
+
 
 #### Please submit the following as an RMD as well as the knitted HTML file.
 
@@ -67,6 +67,38 @@ mean(x)
 
 I want to know that you know what your code is doing!
 
+### 3. Messy Weather
+Download the messy weather dataset from class today (3/7/2018) [link here](../Data/weather_messy.csv). This is a dataset that contains some weather measurements but structured in an...interesting way. Go through the cleanup steps required to go from this raw data to a cleaned up dataframe in the long format. This dataframe should have separate columns for year, month, day, and each measurement type. 
+
+**Suggested workflow:**  
+Below is ONE workflow for clearning. There are many others. I'd advise that you write our your workflow in comments before trying anything. Even draw sketches on a piece of paper for yourself about how you want to change the data, step by step. Then go from there. But, if it helps, check this one out.  
+\
+1. Read in data.   
+2. Deal with any extraneous blank spaces and redundant columns.  
+3. Fix column names (Hint:beyond the first three columns, each column represents a day of the month. )  
+4. Fill in missing year/months.  
+5. OPTIONAL: Combine date info into one column (you don't need to do this, but it might help you reduce the load on your brain and better grock what's happening).  You might just be able to go all long and work from there. Or find another solution.    
+6. Start playing with wide vs long. HINT: This dataset is one of those that we mentioned which has characteristics of both long and wide data: both `pivot_wider` and `pivot_longer` might be needed to get it to its final form.  
+7. Deal with NAs and other data-entry issues. HINT: to avoid deleting most of the datset, let NA values remain in the "events" column.  
+8. Final tweaks: make sure numbers are numeric and characters are characters.  
+9. If you combined date columns before, separate them back out again so you have one for year, one for month, and one for day. 
+10. Give me a plot, any plot! Be sure to make it look nice!
+
+
+**Function Toolbox**
+If you get stuck, consider using the following functions:
+`pivot_longer`, `pivot_wider`, `complete`, `unite`, `separate`, `vis_dat`, `str`, `filter`, `select`, `names`, and `fill`. Remember, if you want to know more about a function just type it into the console with a ? in front.  
+
+### 4. Your package!  
+A. What are the most interesting things your package does? Provide examples of each.  
+B. What are the most essential things your package does - that everyone will want to use it for. Provide examples of each.  
+C. How does your package complement/enhance/make use of tools already in the R ecosystem? Give examples!  
+
+### 5. Your cheat sheet!  
+A. In what order would you provide information about this package in a cheat sheet?  
+B. Based on all of the above, make a sketch of your cheatsheet. This can be on paper, powerpoint, using the template, not using it, whatever. Make a rough sketch showing what you'd show off, and in what format. Scan it, and attach the image to your homework.
+
+<!--
 ### 3. Make a proposal for your final project
 OK, rubber is hitting the road, people! We've looked at some initial visualizations, but, I'd like you to give us a proposal for your final project so we can make any adjustments. Bear in mind that over the next few weeks you will also be learning geospatial visualization (maps), basic statistical modeling, and some skills on automating repeated tasks (writing functions). Please provide the following information in your answer:  
   
@@ -75,3 +107,4 @@ OK, rubber is hitting the road, people! We've looked at some initial visualizati
 3. How do you plan to use this data to address your question? This could be a little vague at this point. But what analyses, visuzliations, etc. will you do? What packages do you think you'll need?   
 4. Do you anticipate any problems - either in data cleaning, or in skills you feel you lack. Are there any packages you've heard about, but have not yet learned?  
 Extra credit: Any visualizations of the data already?
+-->
