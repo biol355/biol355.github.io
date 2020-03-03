@@ -50,6 +50,7 @@ The breakdown of your grade for this assignment will be as follows:
 - 25% Completeness. How thoroughly did you explore the package? Is it just one or two things, or is this really a guide to the whole thing.
 - 15% Communication: Is it aesthetically pleasing (i.e. did you do a good job communicating the package to a new user)?  
 - 10% - Accessibility: Spelling, grammer, etc. Yes. They matter. It's communication.  
+- Extra credit - 10% - going above and beyond and covering a topic area with multiple packages instead of a single package. Talk to Prof. Byrnes for more on this.  
 - Extra credit - 10% - get it on Rstudio's contributed cheat sheet website
 - Extra credit - 10% - get folk commenting on it on [#rstats twitter](https://twitter.com/search?q=%23rstats&src=typed_query)!
 
