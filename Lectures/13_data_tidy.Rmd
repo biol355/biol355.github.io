@@ -37,7 +37,7 @@ Quite often, data is recorded in a long format for efficiency. Let's talk about 
 mammals <- data.frame(site = c(1,1,2,3,3,3), 
                       taxon = c('Suncus etruscus', 'Sorex cinereus', 
                                 'Myotis nigricans', 'Notiosorex crawfordi', 
-                                'Scuncus etruscus', 'Myotis nigricans'),
+                                'Suncus etruscus', 'Myotis nigricans'),
                       density = c(6.2, 5.2, 11.0, 1.2, 9.4, 9.6)
 )
 
