@@ -18,13 +18,13 @@ For the past few weeks, we've been grappling with data sets that we've almost wr
 
 As we talked about a few weeks ago, there are both long and wide data formats. *Long data* formats have one observation and one measurement per row. So, multiple rows constitude a single observation.
 
-![long from R4DS](./images/long_data.png)
+![long from R4DS](./Images/long_data.png)
 
 These kinds of data sets are great for plotting summary information for each group and each variable aggregated together. Think of a bar plot with averages for different species taken across different sites.
 
 *Wide data* has a every measurement in a single observation in a single row.
 
-![wide from R4DS](./images/wide.png)
+![wide from R4DS](./Images/wide.png)
 
 This kind of data is ideal for things like scatterplots of one measurement against another, with each observation as a single data point.
 
@@ -53,20 +53,21 @@ library(tidyverse)
 mammals <- data.frame(site = c(1,1,2,3,3,3), 
                       taxon = c('Suncus etruscus', 'Sorex cinereus', 
                                 'Myotis nigricans', 'Notiosorex crawfordi', 
-                                'Scuncus etruscus', 'Myotis nigricans'),
+                                'Suncus etruscus', 'Myotis nigricans'),
                       density = c(6.2, 5.2, 11.0, 1.2, 9.4, 9.6)
 )
 ```
 
-But, what if we wanted to plot the abundance of, say, *Myostis nigricans* against *Scuncus etruscus* - we can't do that from here. We need to `spread` the data into a wide format.  For that, there is the `tidyr` library and it's `spread` function.
+But, what if we wanted to plot the abundance of, say, *Myostis nigricans* against *Suncus etruscus* - we can't do that from here. We need to `pivot_wider` the data into a wide format.  For that, there is the `tidyr` library and it's `pivot_wider` function.
 
-`spread` works simply in that it take a data set, and you tell it the name of the column which contains values that will be the column names in your new data set - a so called "key" column. You also tell it which column contains the relevant numbers - the "values" column.
+`pivot_wider` works simply in that it take a data set, and you tell it the name of the column which contains values that will be the column names in your new data set - a so called "key" column. You also tell it which column contains the relevant numbers - the "values" column.
 
 ```{r, message=FALSE, warning=FALSE}
 library(tidyr)
 
 m_wide <- mammals %>%
-  spread(taxon, density)
+  pivot_wider(names_from = taxon,
+              values_from = density)
 
 m_wide
 ```
@@ -77,12 +78,13 @@ Great! We have a wide data set. But - uh oh, what are all of those NAs doing the
 
 We often have data sets like this. Ones where we have many measurements that we have not observed. Sometimes, they are NA - we just didn't take them. Other times, such as in this data set, we want to fill them in with a sensible value, such as 0.
 
-The simplest approach here would be to use the `fill` argument in `spread`.
+The simplest approach here would be to use the `values_fill` argument in `pivot_wider`. Note, we have to specify a list here, as pivot wider can work across multiple columns of values.
 
 ```{r}
 m_wide_0 <- mammals %>%
-  spread(taxon, density, fill=0)
-
+  pivot_wider(names_from = taxon,
+              values_from = density,
+              values_fill = list(density = 0))
 m_wide_0
 ```
 
@@ -95,13 +97,13 @@ m_long_0 <- mammals %>%
 m_long_0
 ```
 
-We could then take that new `complete` long data frame and `spread` it with abandon! Either way, now we can plot!
+We could then take that new `complete` long data frame and `pivot_wider` it with abandon! Either way, now we can plot!
 
 ```{r, message=FALSE, warning=FALSE}
 library(ggplot2)
 
 ggplot(m_wide_0, mapping = aes(x=`Myotis nigricans`,
-                               y=`Scuncus etruscus`)) +
+                               y=`Suncus etruscus`)) +
   geom_point(size=1.4) +
   stat_smooth() +
   theme_bw()
@@ -110,9 +112,9 @@ ggplot(m_wide_0, mapping = aes(x=`Myotis nigricans`,
 OK, so, that's not such an impressive plot, but you see what we're getting at here...
 
 ### Exercise with Spread
-1. Load the hadcrut data. Filter out the column month (it provides duplicate information). Now, use spread so that each `month_name` has it's own column. Is there a relationship between January and August anomoly?  
+1. Load the hadcrut data. Filter out the column month (it provides duplicate information). Now, use `pivot_wider` so that each `month_name` has it's own column. Is there a relationship between January and August anomoly?  
   
-2. We could have spread by year instead. What are the rows now? Notice anything funny about the column names?  
+2. We could have pivoted by year instead. What are the rows now? Notice anything funny about the column names?  
   
 3. Is there a relationship between the anomoly in 1942 and 2012?
 
@@ -120,17 +122,21 @@ OK, so, that's not such an impressive plot, but you see what we're getting at he
 
 But what if your intrepid mammal researcher had been wise and recorded their data in a wide format (in truth, this is what I do all the time). And instead of a scatterplot, we wanted to compare the densities of all of the different species in a point-range plot?  Well, then we'd have to go from a wide format to long.
 
-To do this, `tidyr` offers the `gather` function, as in gather up your wide data into one nice long piece. Gather is a little trickier, as you specify what you want the name of the new key column to be, what you want the name of the new values column to be, and then...well, you have some options. You can either specify which columns are to be gathered up (which can take a while) or you can specify which columns you want to exclude. You can do fancy things, like specify all columns between two others with a :, but, honestly, I often specify which to exclude. Let's see two examples.
+To do this, `tidyr` offers the `pivot_longer` function, as in gather up your wide data into one nice long piece. `pivot_longer` is a little trickier, as you specify what you want the name of the new key column to be, what you want the name of the new values column to be, and then...well, you have some options. You can either specify which columns are to be gathered up (which can take a while) or you can specify which columns you want to exclude. You can do fancy things, like specify all columns between two others with a :, but, honestly, I often specify which to exclude. Let's see two examples.
 
 ```{r}
 m_long <- m_wide_0 %>%
-  gather(Species_name, Density, -site)
-
+  pivot_longer(cols = -site, 
+               names_to = "Species_name", 
+               values_to = "Density")
+  
 m_long
 
 #Another way of doing the same thing
 m_long <- m_wide_0 %>%
-  gather(Species_name, Density, `Myotis nigricans`:`Suncus etruscus`)
+  pivot_longer(cols = `Suncus etruscus`:`Notiosorex crawfordi`,
+         names_to = "Species_name", 
+         values_to = "Density")
 
 m_long
 ```
@@ -140,8 +146,8 @@ And now that we have a long format, let's plot some means of species!
 ```{r}
 
 ggplot(m_long, mapping=aes(x=Species_name, y=Density)) +
-  geom_point(size=2) +
-  stat_summary(fun.data="mean_sdl", color="red")
+  geom_boxplot() +
+  geom_point(size=2, color = "red") 
 ```
 
 ### Exercises  
@@ -154,12 +160,55 @@ ggplot(m_long, mapping=aes(x=Species_name, y=Density)) +
 
 You may have noticed that we've been throwing around just one value column. What if you have two - say, density and average height? Or three? Or more? In other words, a not-long-not-wide-but-in-between data set. These are common.
 
-Well, tidyr isn't flexible on that count. Instead, you need to `unite` those columns into something that's easy to `separate` later down the line. Which we do with... regular expressions!  Yes, they are everywhere.  Let's take an example of height in the mammals data set.
 
 ```{r}
+#make randomness less random
+set.seed(355)
+
 mamh <- mammals %>%
   mutate(height=rnorm(6,30,3))
 ```
+
+What do we do, if we want to fill in zeros for all of the densities AND heights? Turns out, there are a lot of answers. This becomes a bit of fun puzzle solving, in a way.  Let's explore them, from simple to complex, to illustrate a few concepts.
+
+First, the complete solution (HA!) We can just use `complete` here. If you give multiple columns to the `fill` list argument, you will be able to fill them all - and even with different values, if need be! For example, we know that if density is 0, height would be NA, right?
+
+```{r}
+mamh_0_complete <- mamh %>%
+  complete(site, taxon,
+           fill = list(height = NA, density = 0))
+
+mamh_0_complete
+```
+
+That's one way to do it. Another is to make the data *truly* long, and work from there.
+
+```{r}
+mamh_long  <- mamh %>%
+  pivot_longer(cols = c(density, height),
+               names_to = "measurement",
+               values_to = "value")
+
+mamh_long
+```
+
+Now, we have a lot of options. One would be to use `complete`, albeit in a less satisfying way than before, and then pivoting wide back.
+
+```{r}
+mamh_0_from_long <- mamh_long %>%
+  
+  #fill in the 0s
+  complete(site, taxon, measurement, 
+           fill = list(value = 0)) %>%
+  
+  #pivot back to a wider frame
+  pivot_wider(names_from = measurement,
+              values_from = value)
+
+mamh_0_from_long
+```
+
+tidyr can be even more flexible on that count. You can use `unite` to turn those columns into something that's easy to `separate` later down the line. Which we do with... regular expressions!  Yes, they are everywhere.  Let's take an example of height in the mammals data set.
 
 So now we want to do everything above, but with density and height! So, we unite them, using a `_` as our separator. We could have used anything, but I like _ because it's used for so few other things with numbers. `tidyr` just needs to know the name of the new column, and then which columns will be united
 
@@ -199,9 +248,9 @@ mamh_long <- mamh_long %>%
 And there you go! You can now do exciting things like plot the density-height relationship, grouping by taxon, for example.
 
 ```{r}
-qplot(density, height, data=mamh_long, 
-      color=taxon, geom="point") +
-  stat_smooth(method="lm", fill=NA)
+ggplot(mamh_long,
+       aes(x = density, y = height, color = taxon)) +
+  geom_point() 
 ```
 
 #### Exercises  
