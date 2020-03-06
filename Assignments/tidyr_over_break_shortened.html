@@ -378,13 +378,18 @@ summary {
 <pre class="r"><code>sales_long &lt;- sales %&gt;%
     ______(___ = time_point, 
            _____ = sale_price, 
-           -_________, -_________, -________, -________)</code></pre>
+           cols = -c(_________:_________))</code></pre>
 <p>Drop the NAs</p>
 <pre class="r"><code>sales_long &lt;- sales_long %&gt;%
     ______(______(sale_price))</code></pre>
 <p>Split up year and month into two columns</p>
-<pre class="r"><code>sales_long &lt;- sales_long %&gt;%
-    ________(time_point, c(&quot;year&quot;, ______), ___ = &quot;-&quot;)</code></pre>
+<pre class="r"><code>library(dplyr)
+library(stringr)
+
+sales_long &lt;- sales_long %&gt;%
+    ____(year = str_split(time_point, &quot;____&quot;, simplify=TRUE)[,____],
+           month = ____(time_point, &quot;____&quot;, ____=____)[,____],
+           )</code></pre>
 <p>Make the following string:</p>
 <pre class="r"><code>my_string &lt;- &quot;Some people, when confronted with a problem, think &#39;I know, I&#39;ll use regular expressions.&#39; Now they have two problems.&quot;</code></pre>
 <p>Make it all uppercase</p>
@@ -394,7 +399,7 @@ summary {
 <p>Split this string into a vector of individual words</p>
 <pre class="r"><code>split_string &lt;- __________(my_string, pattern = ___, simplify = ______)</code></pre>
 <p>Find the words that start with consonants.</p>
-<pre class="r"><code>str_view(split_string, &quot;___________&quot;)</code></pre>
+<pre class="r"><code>str_____(split_string, &quot;___________&quot;)</code></pre>
 </div>
 <div id="tidying-the-hadcrut-data" class="section level3">
 <h3>2. Tidying the HadCrut Data</h3>
@@ -404,25 +409,34 @@ summary {
 x &lt;- runif(100)
 #I will then use mean to find the average of this vector
 mean(x)</code></pre>
-<pre><code>## [1] 0.4779668</code></pre>
-<p>I want to know that you know what your code is doing!</p>
+<pre><code>## [1] 0.4808768</code></pre>
+<p>I want to know that you know what your code is doing! <!--
+### 3. Messy Weather
+Download the messy weather dataset from class today (3/7/2018) [link here](../Data/weather_messy.csv). This is a dataset that contains some weather measurements but structured in an...interesting way. Go through the cleanup steps required to go from this raw data to a cleaned up dataframe in the long format. This dataframe should have separate columns for year, month, day, and each measurement type. 
+
+**Suggested workflow:**  
+Below is ONE workflow for clearning. There are many others. I'd advise that you write our your workflow in comments before trying anything. Even draw sketches on a piece of paper for yourself about how you want to change the data, step by step. Then go from there. But, if it helps, check this one out.  
+\
+1. Read in data.   
+2. Deal with any extraneous blank spaces and redundant columns.  
+3. Fix column names (Hint:beyond the first three columns, each column represents a day of the month. )  
+4. Fill in missing year/months.  
+5. OPTIONAL: Combine date info into one column (you don't need to do this, but it might help you reduce the load on your brain and better grock what's happening).  You might just be able to go all long and work from there. Or find another solution.    
+6. Start playing with wide vs long. HINT: This dataset is one of those that we mentioned which has characteristics of both long and wide data: both `pivot_wider` and `pivot_longer` might be needed to get it to its final form.  
+7. Deal with NAs and other data-entry issues. HINT: to avoid deleting most of the datset, let NA values remain in the "events" column.  
+8. Final tweaks: make sure numbers are numeric and characters are characters.  
+9. If you combined date columns before, separate them back out again so you have one for year, one for month, and one for day. 
+10. Give me a plot, any plot! Be sure to make it look nice!
+
+--></p>
 </div>
-<div id="messy-weather" class="section level3">
-<h3>3. Messy Weather</h3>
-<p>Download the messy weather dataset from class today (3/7/2018) <a href="../Data/weather_messy.csv">link here</a>. This is a dataset that contains some weather measurements but structured in an…interesting way. Go through the cleanup steps required to go from this raw data to a cleaned up dataframe in the long format. This dataframe should have separate columns for year, month, day, and each measurement type.</p>
-<p><strong>Suggested workflow:</strong><br />
-Below is ONE workflow for clearning. There are many others. I’d advise that you write our your workflow in comments before trying anything. Even draw sketches on a piece of paper for yourself about how you want to change the data, step by step. Then go from there. But, if it helps, check this one out.<br />
-<br />
-1. Read in data.<br />
-2. Deal with any extraneous blank spaces and redundant columns.<br />
-3. Fix column names (Hint:beyond the first three columns, each column represents a day of the month. )<br />
-4. Fill in missing year/months.<br />
-5. OPTIONAL: Combine date info into one column (you don’t need to do this, but it might help you reduce the load on your brain and better grock what’s happening). You might just be able to go all long and work from there. Or find another solution.<br />
-6. Start playing with wide vs long. HINT: This dataset is one of those that we mentioned which has characteristics of both long and wide data: both <code>pivot_wider</code> and <code>pivot_longer</code> might be needed to get it to its final form.<br />
-7. Deal with NAs and other data-entry issues. HINT: to avoid deleting most of the datset, let NA values remain in the “events” column.<br />
-8. Final tweaks: make sure numbers are numeric and characters are characters.<br />
-9. If you combined date columns before, separate them back out again so you have one for year, one for month, and one for day. 10. Give me a plot, any plot! Be sure to make it look nice!</p>
-<p><strong>Function Toolbox</strong> If you get stuck, consider using the following functions: <code>pivot_longer</code>, <code>pivot_wider</code>, <code>complete</code>, <code>unite</code>, <code>separate</code>, <code>vis_dat</code>, <code>str</code>, <code>filter</code>, <code>select</code>, <code>names</code>, and <code>fill</code>. Remember, if you want to know more about a function just type it into the console with a ? in front.</p>
+<div id="coronavirus" class="section level3">
+<h3>3. Coronavirus</h3>
+<p>Finish your lab from <a href="https://biol355.github.io/Labs/coronavirus.html" class="uri">https://biol355.github.io/Labs/coronavirus.html</a></p>
+<!-- **Function Toolbox**
+If you get stuck, consider using the following functions:
+`pivot_longer`, `pivot_wider`, `complete`, `unite`, `separate`, `vis_dat`, `str`, `filter`, `select`, `names`, and `fill`. Remember, if you want to know more about a function just type it into the console with a ? in front.  
+-->
 </div>
 <div id="your-package" class="section level3">
 <h3>4. Your package!</h3>

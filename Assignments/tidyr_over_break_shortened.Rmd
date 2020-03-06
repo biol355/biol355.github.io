@@ -13,7 +13,7 @@ First, convert it from wide to long, with a column for year/month called time_po
 sales_long <- sales %>%
     ______(___ = time_point, 
            _____ = sale_price, 
-           -_________, -_________, -________, -________)
+           cols = -c(_________:_________))
 ```
 
 
@@ -25,8 +25,13 @@ sales_long <- sales_long %>%
 
 Split up year and month into two columns
 ```{r split date, error = TRUE, eval=FALSE}
+library(dplyr)
+library(stringr)
+
 sales_long <- sales_long %>%
-    ________(time_point, c("year", ______), ___ = "-")
+    ____(year = str_split(time_point, "____", simplify=TRUE)[,____],
+           month = ____(time_point, "____", ____=____)[,____],
+           )
 ```
 
 Make the following string:
@@ -49,7 +54,7 @@ split_string <- __________(my_string, pattern = ___, simplify = ______)
 
 Find the words that start with consonants.
 ```{r TRUE, eval=FALSE}
-str_view(split_string, "___________")
+str_____(split_string, "___________")
 
 ```
 
@@ -66,7 +71,7 @@ mean(x)
 ```
 
 I want to know that you know what your code is doing!
-
+<!--
 ### 3. Messy Weather
 Download the messy weather dataset from class today (3/7/2018) [link here](../Data/weather_messy.csv). This is a dataset that contains some weather measurements but structured in an...interesting way. Go through the cleanup steps required to go from this raw data to a cleaned up dataframe in the long format. This dataframe should have separate columns for year, month, day, and each measurement type. 
 
@@ -84,10 +89,15 @@ Below is ONE workflow for clearning. There are many others. I'd advise that you 
 9. If you combined date columns before, separate them back out again so you have one for year, one for month, and one for day. 
 10. Give me a plot, any plot! Be sure to make it look nice!
 
+-->
 
-**Function Toolbox**
+### 3. Coronavirus
+Finish your lab from https://biol355.github.io/Labs/coronavirus.html
+
+<!-- **Function Toolbox**
 If you get stuck, consider using the following functions:
 `pivot_longer`, `pivot_wider`, `complete`, `unite`, `separate`, `vis_dat`, `str`, `filter`, `select`, `names`, and `fill`. Remember, if you want to know more about a function just type it into the console with a ? in front.  
+-->
 
 ### 4. Your package!  
 A. What are the most interesting things your package does? Provide examples of each.  
