@@ -1,0 +1,58 @@
+---
+title: "Taking a Look at Corvid 19: Tidy Friday"
+author: "Biol355"
+date: "3/6/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Real and Current Data
+
+
+With the advent of the Corvid-19 caronavirus outbreak across the world, people want to know more - and no more now!  Fortunately, the R community has begun coming together and making tools to rapidly disseminate data. There are two packages out there currently, but let's focus on the coronavirus package. To install it, use the following code:
+
+```{r install, eval=FALSE}
+#uses devtools to install from github
+devtools::install_github("RamiKrispin/coronavirus")
+```
+
+## The available Data
+
+Let's see what is there:
+
+```{r cars}
+library(coronavirus)
+
+head(coronavirus)
+```
+
+Each row is a single instance of recorded cases. There is information on the country and region, the province or state, the latitude, longitude, and date. We also see the number of cases and whether the observation is of a confirmed case, a recovery, or a death. You can take a look at `?coronavirus` for more information or at https://ramikrispin.github.io/coronavirus/.
+
+## Explore the data.
+
+I want you to load the data, look through it, and then, make it tell a story! To do this, I want you to
+
+1. Really dig into what is there with all of the tools we have at our disposal.  
+\
+2. Sit down and write out what kind of story you want to tell. What do you want to learn from this data? Write out a paragraph. Or two!  
+\
+3. Sketch out any data visualizations you might want to make. With pencil and paper - just a theoretical example of what it might look like.  
+\
+4. Start a fresh .R file and, in comments, sketch out the steps you will take and what you will do.  
+      4a. Note, for all data viz, don't just use defaults. Get creative. Make this look like something that we wouldn't be surprised to find in a magazine or newspaper. Feel free to use alternate themes - even from `ggthemes` or other places. Google around.
+\
+5. Once finished, move the code into a .Rmd file to create a nice, clean, HTMl file that tells a story. Show how you processed the data. and make the visuzliations.  
+\
+6. If you are a superstar, create a second story! Or dig into this different package - https://guangchuangyu.github.io/nCov2019/ - and see if it can be used to tell a different story.  
+\
+
+## Showing what you found
+
+As you make your first cool data viz, copy it, email it to me and Rachel, and tell us. We want to show it off to the class to see what you found!  
+\
+After you finish your lab report (your .Rmd file), compile it, and send it to us as well. I want to make a gallery of interesting reports for you all to look at to see what is possible.  
+\
+Extra credit if you post it to Twitter with the hashtags #rstats and #coronavirus, making sure to mention that you used https://ramikrispin.github.io/coronavirus/
