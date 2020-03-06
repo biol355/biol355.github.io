@@ -1,5 +1,5 @@
 ---
-title: "Taking a Look at Corvid 19: Tidy Friday"
+title: "Taking a Look at Covid 19: Tidy Friday"
 author: "Biol355"
 date: "3/6/2020"
 output: html_document
@@ -13,7 +13,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 In the R community, there's a weekly event known as [Tidy Tuesday](https://github.com/rfordatascience/tidytuesday) where everyone comes together around a single big dataset and attempts to create the most interesting visualizations possible, posting code and data viz on Twitter using [#TidyTuesday](https://twitter.com/search?q=%23tidytuesday&src=typed_query&f=live). I'd like us to try a... Tidy Friday, with data on the ongoing coronavirus pandemic.  
 \
-With the advent of the Corvid-19 caronavirus outbreak across the world, people want to know more - and no more now!  Fortunately, the R community has begun coming together and making tools to rapidly disseminate data. There are two packages out there currently, but let's focus on the coronavirus package. To install it, use the following code:
+With the advent of the Covid-19 caronavirus outbreak across the world, people want to know more - and no more now!  Fortunately, the R community has begun coming together and making tools to rapidly disseminate data. There are two packages out there currently, but let's focus on the coronavirus package. To install it, use the following code:
 
 ```{r install, eval=FALSE}
 #uses devtools to install from github
