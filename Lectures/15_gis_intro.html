@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title>15_gis_intro.utf8.md</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="libs/reveal.js-3.3.0.1/css/reveal.css"/>
+
+
+
+<link rel="stylesheet" href="libs/reveal.js-3.3.0.1/css/theme/white.css" id="theme">
+
+
+  <!-- some tweaks to reveal css -->
+  <style type="text/css">
+    .reveal h1 { font-size: 2.0em; }
+    .reveal h2 { font-size: 1.5em;  }
+    .reveal h3 { font-size: 1.25em;	}
+    .reveal h4 { font-size: 1em;	}
+
+    .reveal .slides>section,
+    .reveal .slides>section>section {
+      padding: 0px 0px;
+    }
+
+
+
+    .reveal table {
+      border-width: 1px;
+      border-spacing: 2px;
+      border-style: dotted;
+      border-color: gray;
+      border-collapse: collapse;
+      font-size: 0.7em;
+    }
+
+    .reveal table th {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      font-weight: bold;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+    .reveal table td {
+      border-width: 1px;
+      padding-left: 10px;
+      padding-right: 25px;
+      border-style: dotted;
+      border-color: gray;
+    }
+
+
+  </style>
+
+    <style type="text/css">code{white-space: pre;}</style>
+
+    <link rel="stylesheet" href="style.css"/>
+
+<!-- Printing and PDF exports -->
+<script id="paper-css" type="application/dynamic-css">
+
+/* Default Print Stylesheet Template
+   by Rob Glazebrook of CSSnewbie.com
+   Last Updated: June 4, 2008
+
+   Feel free (nay, compelled) to edit, append, and
+   manipulate this file as you see fit. */
+
+
+@media print {
+
+	/* SECTION 1: Set default width, margin, float, and
+	   background. This prevents elements from extending
+	   beyond the edge of the printed page, and prevents
+	   unnecessary background images from printing */
+	html {
+		background: #fff;
+		width: auto;
+		height: auto;
+		overflow: visible;
+	}
+	body {
+		background: #fff;
+		font-size: 20pt;
+		width: auto;
+		height: auto;
+		border: 0;
+		margin: 0 5%;
+		padding: 0;
+		overflow: visible;
+		float: none !important;
+	}
+
+	/* SECTION 2: Remove any elements not needed in print.
+	   This would include navigation, ads, sidebars, etc. */
+	.nestedarrow,
+	.controls,
+	.fork-reveal,
+	.share-reveal,
+	.state-background,
+	.reveal .progress,
+	.reveal .backgrounds {
+		display: none !important;
+	}
+
+	/* SECTION 3: Set body font face, size, and color.
+	   Consider using a serif font for readability. */
+	body, p, td, li, div {
+		font-size: 20pt!important;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		color: #000;
+	}
+
+	/* SECTION 4: Set heading font face, sizes, and color.
+	   Differentiate your headings from your body text.
+	   Perhaps use a large sans-serif for distinction. */
+	h1,h2,h3,h4,h5,h6 {
+		color: #000!important;
+		height: auto;
+		line-height: normal;
+		font-family: Georgia, "Times New Roman", Times, serif !important;
+		text-shadow: 0 0 0 #000 !important;
+		text-align: left;
+		letter-spacing: normal;
+	}
+	/* Need to reduce the size of the fonts for printing */
+	h1 { font-size: 28pt !important;  }
+	h2 { font-size: 24pt !important; }
+	h3 { font-size: 22pt !important; }
+	h4 { font-size: 22pt !important; font-variant: small-caps; }
+	h5 { font-size: 21pt !important; }
+	h6 { font-size: 20pt !important; font-style: italic; }
+
+	/* SECTION 5: Make hyperlinks more usable.
+	   Ensure links are underlined, and consider appending
+	   the URL to the end of the link for usability. */
+	a:link,
+	a:visited {
+		color: #000 !important;
+		font-weight: bold;
+		text-decoration: underline;
+	}
+	/*
+	.reveal a:link:after,
+	.reveal a:visited:after {
+		content: " (" attr(href) ") ";
+		color: #222 !important;
+		font-size: 90%;
+	}
+	*/
+
+
+	/* SECTION 6: more reveal.js specific additions by @skypanther */
+	ul, ol, div, p {
+		visibility: visible;
+		position: static;
+		width: auto;
+		height: auto;
+		display: block;
+		overflow: visible;
+		margin: 0;
+		text-align: left !important;
+	}
+	.reveal pre,
+	.reveal table {
+		margin-left: 0;
+		margin-right: 0;
+	}
+	.reveal pre code {
+		padding: 20px;
+		border: 1px solid #ddd;
+	}
+	.reveal blockquote {
+		margin: 20px 0;
+	}
+	.reveal .slides {
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 0 !important;
+		zoom: 1 !important;
+
+		overflow: visible !important;
+		display: block !important;
+
+		text-align: left !important;
+		-webkit-perspective: none;
+		   -moz-perspective: none;
+		    -ms-perspective: none;
+		        perspective: none;
+
+		-webkit-perspective-origin: 50% 50%;
+		   -moz-perspective-origin: 50% 50%;
+		    -ms-perspective-origin: 50% 50%;
+		        perspective-origin: 50% 50%;
+	}
+	.reveal .slides section {
+		visibility: visible !important;
+		position: static !important;
+		width: auto !important;
+		height: auto !important;
+		display: block !important;
+		overflow: visible !important;
+
+		left: 0 !important;
+		top: 0 !important;
+		margin-left: 0 !important;
+		margin-top: 0 !important;
+		padding: 60px 20px !important;
+		z-index: auto !important;
+
+		opacity: 1 !important;
+
+		page-break-after: always !important;
+
+		-webkit-transform-style: flat !important;
+		   -moz-transform-style: flat !important;
+		    -ms-transform-style: flat !important;
+		        transform-style: flat !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+
+		-webkit-transition: none !important;
+		   -moz-transition: none !important;
+		    -ms-transition: none !important;
+		        transition: none !important;
+	}
+	.reveal .slides section.stack {
+		padding: 0 !important;
+	}
+	.reveal section:last-of-type {
+		page-break-after: avoid !important;
+	}
+	.reveal section .fragment {
+		opacity: 1 !important;
+		visibility: visible !important;
+
+		-webkit-transform: none !important;
+		   -moz-transform: none !important;
+		    -ms-transform: none !important;
+		        transform: none !important;
+	}
+	.reveal section img {
+		display: block;
+		margin: 15px 0px;
+		background: rgba(255,255,255,1);
+		border: 1px solid #666;
+		box-shadow: none;
+	}
+
+	.reveal section small {
+		font-size: 0.8em;
+	}
+
+}  
+</script>
+
+
+<script id="pdf-css" type="application/dynamic-css">
+    
+/**
+ * This stylesheet is used to print reveal.js
+ * presentations to PDF.
+ *
+ * https://github.com/hakimel/reveal.js#pdf-export
+ */
+
+* {
+	-webkit-print-color-adjust: exact;
+}
+
+body {
+	margin: 0 auto !important;
+	border: 0;
+	padding: 0;
+	float: none !important;
+	overflow: visible;
+}
+
+html {
+	width: 100%;
+	height: 100%;
+	overflow: visible;
+}
+
+/* Remove any elements not needed in print. */
+.nestedarrow,
+.reveal .controls,
+.reveal .progress,
+.reveal .playback,
+.reveal.overview,
+.fork-reveal,
+.share-reveal,
+.state-background {
+	display: none !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	text-shadow: 0 0 0 #000 !important;
+}
+
+.reveal pre code {
+	overflow: hidden !important;
+	font-family: Courier, 'Courier New', monospace !important;
+}
+
+ul, ol, div, p {
+	visibility: visible;
+	position: static;
+	width: auto;
+	height: auto;
+	display: block;
+	overflow: visible;
+	margin: auto;
+}
+.reveal {
+	width: auto !important;
+	height: auto !important;
+	overflow: hidden !important;
+}
+.reveal .slides {
+	position: static;
+	width: 100%;
+	height: auto;
+
+	left: auto;
+	top: auto;
+	margin: 0 !important;
+	padding: 0 !important;
+
+	overflow: visible;
+	display: block;
+
+	-webkit-perspective: none;
+	   -moz-perspective: none;
+	    -ms-perspective: none;
+	        perspective: none;
+
+	-webkit-perspective-origin: 50% 50%; /* there isn't a none/auto value but 50-50 is the default */
+	   -moz-perspective-origin: 50% 50%;
+	    -ms-perspective-origin: 50% 50%;
+	        perspective-origin: 50% 50%;
+}
+
+.reveal .slides section {
+	page-break-after: always !important;
+
+	visibility: visible !important;
+	position: relative !important;
+	display: block !important;
+	position: relative !important;
+
+	margin: 0 !important;
+	padding: 0 !important;
+	box-sizing: border-box !important;
+	min-height: 1px;
+
+	opacity: 1 !important;
+
+	-webkit-transform-style: flat !important;
+	   -moz-transform-style: flat !important;
+	    -ms-transform-style: flat !important;
+	        transform-style: flat !important;
+
+	-webkit-transform: none !important;
+	   -moz-transform: none !important;
+	    -ms-transform: none !important;
+	        transform: none !important;
+}
+
+.reveal section.stack {
+	margin: 0 !important;
+	padding: 0 !important;
+	page-break-after: avoid !important;
+	height: auto !important;
+	min-height: auto !important;
+}
+
+.reveal img {
+	box-shadow: none;
+}
+
+.reveal .roll {
+	overflow: visible;
+	line-height: 1em;
+}
+
+/* Slide backgrounds are placed inside of their slide when exporting to PDF */
+.reveal section .slide-background {
+	display: block !important;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	z-index: -1;
+}
+
+/* All elements should be above the slide-background */
+.reveal section>* {
+	position: relative;
+	z-index: 1;
+}
+
+/* Display slide speaker notes when 'showNotes' is enabled */
+.reveal .speaker-notes-pdf {
+	display: block;
+	width: 100%;
+	max-height: none;
+	left: auto;
+	top: auto;
+	z-index: 100;
+}
+
+/* Display slide numbers when 'slideNumber' is enabled */
+.reveal .slide-number-pdf {
+	display: block;
+	position: absolute;
+	font-size: 14px;
+}
+
+</script>
+
+
+<script>
+var style = document.createElement( 'style' );
+style.type = 'text/css';
+var style_script_id = window.location.search.match( /print-pdf/gi ) ? 'pdf-css' : 'paper-css';
+var style_script = document.getElementById(style_script_id).text;
+style.innerHTML = style_script;
+document.getElementsByTagName('head')[0].appendChild(style);
+</script>
+
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+
+<section id="section" class="slide level2">
+<h2></h2>
+<br>
+<h2>
+<center>
+GIS and R
+</center>
+</h2>
+<p><img data-src="./Images/gis/deforestation-rates-v2a1.png" /></p>
+</section>
+<section id="a-disclaimer" class="slide level2">
+<h2>A Disclaimer</h2>
+<p><img data-src="./Images/gis/we-will-teach.jpg" style="width:50.0%" /></p>
+</section>
+<section id="that-plankton-data" class="slide level2">
+<h2>That Plankton Data…</h2>
+</section>
+<section id="trends-only-tell-us-so-much" class="slide level2">
+<h2>Trends only tell us so much</h2>
+<p><img src="15_gis_intro_files/figure-revealjs/unnamed-chunk-2-1.jpeg" width="672" /></p>
+</section>
+<section id="trends-only-tell-us-so-much-1" class="slide level2">
+<h2>Trends only tell us so much</h2>
+<p><img src="15_gis_intro_files/figure-revealjs/unnamed-chunk-3-1.jpeg" width="672" /></p>
+</section>
+<section id="youre-starting-to-see-something-spatial" class="slide level2">
+<h2>You’re starting to see something spatial…</h2>
+<p><img src="15_gis_intro_files/figure-revealjs/unnamed-chunk-4-1.jpeg" width="672" /></p>
+</section>
+<section id="often-within-relationships-is-a-pattern" class="slide level2">
+<h2>Often within Relationships is a Pattern</h2>
+<img src="15_gis_intro_files/figure-revealjs/underly-1.jpeg" width="672" />
+<div class="fragment">
+What do you learn from this that is new?
+</div>
+</section>
+<section id="context" class="slide level2">
+<h2>Context!</h2>
+<img src="15_gis_intro_files/figure-revealjs/ggmap-1.jpeg" width="672" />
+<div class="fragment">
+What do you learn from this that is new?
+</div>
+</section>
+<section id="what-does-this-tell-you-that-a-bar-plot-would-not" class="slide level2">
+<h2>What does this tell you that a bar plot would not?</h2>
+<p><img src="15_gis_intro_files/figure-revealjs/hartmap-1.jpeg" width="672" /></p>
+</section>
+<section id="what-does-this-tell-you-that-a-bar-plot-would-not-1" class="slide level2">
+<h2>What does this tell you that a bar plot would not?</h2>
+<p><img data-src="./Images/gis/kale_to_bacon.jpg" style="width:65.0%" /></p>
+</section>
+<section id="objectives" class="slide level2">
+<h2>Objectives</h2>
+<ol type="1">
+<li>What is spatial data and how is it unique/new?<br />
+</li>
+<li>What is vector data?<br />
+</li>
+<li>What is raster data?<br />
+</li>
+<li>What is a projection?</li>
+</ol>
+</section>
+<section id="types-of-spatial-data" class="slide level2">
+<h2>Types of Spatial Data</h2>
+<p><img data-src="./Images/gis/types%20of%20spatial%20data.png" /></p>
+</section>
+<section id="points-are-coordinates" class="slide level2">
+<h2>Points are Coordinates</h2>
+<p><img src="15_gis_intro_files/figure-revealjs/points-1.jpeg" width="672" /></p>
+</section>
+<section id="properties-of-coordinates" class="slide level2">
+<h2>Properties of Coordinates</h2>
+<ul>
+<li>An x and y value<br />
+</li>
+<li>A Projection<br />
+</li>
+<li>An extent (minimum and maximum)<br />
+</li>
+<li>Additional Information</li>
+</ul>
+</section>
+<section id="projections-and-coordinate-reference-systems" class="slide level2">
+<h2>Projections and Coordinate Reference Systems</h2>
+<p><img data-src="./Images/gis/projections_1.gif" style="width:95.0%" /></p>
+</section>
+<section id="projections-and-coordinate-reference-systems-1" class="slide level2">
+<h2>Projections and Coordinate Reference Systems</h2>
+<p><img data-src="./Images/gis/map_diff_proj.jpg" /></p>
+</section>
+<section id="extent" class="slide level2">
+<h2>Extent</h2>
+<p><img data-src="./Images/gis/spatial_extent.png" alt="Spatial extent image" style="width:95.0%" /></p>
+</section>
+<section id="additional-information-in-points" class="slide level2">
+<h2>Additional Information in Points!</h2>
+<p><img src="15_gis_intro_files/figure-revealjs/points_colors-1.jpeg" width="672" /></p>
+</section>
+<section id="lines-can-also-contain-information" class="slide level2">
+<h2>Lines Can Also Contain Information</h2>
+<p><img src="15_gis_intro_files/figure-revealjs/lines_color-1.jpeg" width="672" /></p>
+</section>
+<section id="as-can-polygons" class="slide level2">
+<h2>As can Polygons</h2>
+<p><img src="15_gis_intro_files/figure-revealjs/polymap-1.jpeg" width="672" /></p>
+</section>
+<section id="objectives-1" class="slide level2">
+<h2>Objectives</h2>
+<ol type="1">
+<li>What is spatial data and how is it unique/new?<br />
+</li>
+<li><font color = "red">What is vector data?</font><br />
+</li>
+<li>What is raster data?<br />
+</li>
+<li>What is a projection?</li>
+</ol>
+</section>
+<section id="many-ways-of-representing-the-same-data" class="slide level2">
+<h2>Many Ways of Representing the Same Data</h2>
+<p><img data-src="./Images/gis/Data%20layer%20types.jpg" /></p>
+</section>
+<section id="vector-data" class="slide level2">
+<h2>Vector Data</h2>
+<p><img data-src="./Images/gis/pnt_line_poly.png" />{width = “75%”}</p>
+</section>
+<section id="more-complex-vector-data" class="slide level2">
+<h2>More Complex Vector Data</h2>
+<p><img data-src="./Images/gis/geosptypes.png" />{width = “85%”}</p>
+</section>
+<section id="points" class="slide level2">
+<h2>Points</h2>
+<p><img src="15_gis_intro_files/figure-revealjs/points_colors-1.jpeg" width="672" /></p>
+</section>
+<section id="lines-paths" class="slide level2">
+<h2>Lines (Paths)</h2>
+<p><img src="15_gis_intro_files/figure-revealjs/lines-1.jpeg" width="672" /></p>
+</section>
+<section id="one-polygon" class="slide level2">
+<h2>One Polygon</h2>
+<p><img src="15_gis_intro_files/figure-revealjs/one_polygon-1.jpeg" width="672" /></p>
+</section>
+<section id="two-polygons" class="slide level2">
+<h2>Two Polygons</h2>
+<p><img src="15_gis_intro_files/figure-revealjs/two_polygon-1.jpeg" width="672" /></p>
+</section>
+<section id="many-polygons" class="slide level2">
+<h2>Many Polygons</h2>
+<p><img src="15_gis_intro_files/figure-revealjs/many_polygon-1.jpeg" width="672" /></p>
+</section>
+<section id="many-polygons-1" class="slide level2">
+<h2>Many Polygons</h2>
+<p><img src="15_gis_intro_files/figure-revealjs/all_polygon_nocolor-1.jpeg" width="672" /></p>
+</section>
+<section id="this-is-just-vector-data" class="slide level2">
+<h2>This is just vector data</h2>
+<p><img src="15_gis_intro_files/figure-revealjs/polymap-1.jpeg" width="672" /></p>
+</section>
+<section id="exercise-identify-these-vector-types" class="slide level2">
+<h2>Exercise: Identify these Vector Types</h2>
+<p><img src="15_gis_intro_files/figure-revealjs/unnamed-chunk-5-1.jpeg" width="672" /></p>
+</section>
+<section id="exercise-identify-these-vector-types-1" class="slide level2">
+<h2>Exercise: Identify these Vector Types</h2>
+<p><img src="15_gis_intro_files/figure-revealjs/unnamed-chunk-6-1.jpeg" width="672" /></p>
+</section>
+<section id="objectives-2" class="slide level2">
+<h2>Objectives</h2>
+<ol type="1">
+<li>What is spatial data and how is it unique/new?<br />
+</li>
+<li>What is vector data?<br />
+</li>
+<li><font color = "red">What is raster data?</font><br />
+</li>
+<li>What is a projection?</li>
+</ol>
+</section>
+<section id="rasters" class="slide level2">
+<h2>Rasters</h2>
+<p><img data-src="./Images/gis/raster_intro.png" style="width:75.0%" /></p>
+</section>
+<section id="rasters-versus-vector-files" class="slide level2">
+<h2>Rasters versus Vector Files</h2>
+<p><img data-src="./Images/gis/raster_vector.jpg" /></p>
+</section>
+<section id="rasters-versus-vector-files-1" class="slide level2">
+<h2>Rasters versus Vector Files</h2>
+<p><img data-src="./Images/gis/raster_vector_types.png" style="width:90.0%" /></p>
+</section>
+<section id="raster-stacksbricks" class="slide level2">
+<h2>Raster Stacks/Bricks</h2>
+<p><img data-src="./Images/gis/multiband_raster_neon.png" /></p>
+</section>
+<section id="multi-band-raster-data-rgb-image" class="slide level2">
+<h2>Multi-band Raster Data = RGB image!</h2>
+<p><img data-src="./Images/gis/RGBSTack_1.jpg" alt="RGB multi-band raster image" style="width:95.0%" /></p>
+</section>
+<section id="individual-bands" class="slide level2">
+<h2>Individual Bands</h2>
+<p><img src="15_gis_intro_files/figure-revealjs/demonstrate-RGB-Image-1.jpeg" width="672" /></p>
+</section>
+<section id="composite-image" class="slide level2">
+<h2>Composite Image</h2>
+<p><img src="15_gis_intro_files/figure-revealjs/plot-RGB-now-1.jpeg" width="672" /></p>
+</section>
+<section id="with-rasters-we-have-to-think-of-resolution" class="slide level2">
+<h2>With rasters, we have to think of Resolution</h2>
+<p><img data-src="./Images/gis/raster_resolution.png" alt="Resolution image" style="width:95.0%" /></p>
+</section>
+<section id="resolution-v.-extent-scale" class="slide level2">
+<h2>Resolution v. Extent (scale)</h2>
+<p><img data-src="./Images/gis/Resolution%20vs%20Scale.jpg" alt="resolution_v_scale" style="width:75.0%" /></p>
+</section>
+<section id="why-rasters-versus-vector-formats" class="slide level2">
+<h2>Why Rasters Versus Vector Formats</h2>
+<p align="left">
+<p><strong>Filesize</strong>: Advantage Vector (smaller!)</p>
+<p><strong>Depth of Detail</strong>: Advantage Raster</p>
+<p><strong>Ease of Use in Analysis</strong>: Advantage Raster</p>
+<p><strong>Ease of Reprojection/Scaling</strong>: Advantage Vector</p>
+<strong>Ease of Creation</strong>: Advantage Raster
+</p>
+</section>
+<section id="objectives-3" class="slide level2">
+<h2>Objectives</h2>
+<ol type="1">
+<li>What is spatial data and how is it unique/new?<br />
+</li>
+<li>What is vector data?<br />
+</li>
+<li>What is raster data?<br />
+</li>
+<li><font color = "red">What is a projection?</font></li>
+</ol>
+</section>
+<section id="projections-and-coordinate-reference-systems-2" class="slide level2">
+<h2>Projections and Coordinate Reference Systems</h2>
+<p><img data-src="./Images/gis/projections_1.gif" style="width:95.0%" /></p>
+</section>
+<section id="projections-and-coordinate-reference-systems-3" class="slide level2">
+<h2>Projections and Coordinate Reference Systems</h2>
+<p><img data-src="./Images/gis/map_diff_proj.jpg" /></p>
+</section>
+<section id="components-of-a-crs" class="slide level2">
+<h2>Components of a CRS</h2>
+<p>CRS information has three components:</p>
+<ul>
+<li><strong>Datum:</strong> A model of the shape of the earth.
+<ul>
+<li>In this workshop, we will use the <a href="https://www.linz.govt.nz/data/geodetic-system/datums-projections-and-heights/geodetic-datums/world-geodetic-system-1984-wgs84">WGS84 datum</a><br />
+<br />
+</li>
+</ul></li>
+<li><strong>Projection:</strong> A mathematical transformation of the angular measurements on a round earth to a flat surface (i.e. paper or a computer screen).<br />
+<br />
+</li>
+<li><strong>Additional Parameters:</strong> e.g., center of the map.</li>
+</ul>
+</section>
+<section id="a-datum-is-the-choice-of-fruit-to-use" class="slide level2">
+<h2>A datum is the choice of fruit to use</h2>
+<p><img data-src="./Images/gis/citrus.jpg" alt="fruits" /></p>
+<p><a href="https://github.com/MicheleTobias/R-Projections-Workshop">Image source</a></p>
+</section>
+<section id="a-projection-is-how-you-peel-your-orange-and-then-flatten-the-peel" class="slide level2">
+<h2>A projection is how you peel your orange and then flatten the peel</h2>
+<p><img data-src="./Images/gis/orange-peel-earth.jpg" /></p>
+<p><a href="http://blogs.lincoln.ac.nz/gis/2017/03/29/where-on-earth-are-we/">Image source</a></p>
+</section>
+<section id="a-proj4-string-includes-the-following" class="slide level2">
+<h2>A PROJ4 string includes the following</h2>
+<ul>
+<li><strong>proj=:</strong> the projection of the data</li>
+<li><strong>zone=:</strong> the zone of the data (this is specific to the UTM projection)</li>
+<li><strong>datum=:</strong> the datum use</li>
+<li><strong>units=:</strong> the units for the coordinates of the data</li>
+<li><strong>ellps=:</strong> the ellipsoid (how the earth’s roundness is calculated) for the data</li>
+</ul>
+</section>
+<section id="utm-zones" class="slide level2">
+<h2>UTM Zones</h2>
+<p><img data-src="https://upload.wikimedia.org/wikipedia/commons/8/8d/Utm-zones-USA.svg" alt="The UTM zones across the continental United States." /></p>
+</section>
+<section id="you-can-do-a-lot-with-those-parameters" class="slide level2">
+<h2>You can do a lot with those parameters</h2>
+<p><img data-src="./Images/gis/jasondavies_maps_640.gif" /></p>
+<p>See Jason Davies’s Map Projection Transitions - <a href="https://www.jasondavies.com/maps/transition/" class="uri">https://www.jasondavies.com/maps/transition/</a></p>
+</section>
+<section id="exercise-reading-a-proj4-string" class="slide level2">
+<h2>Exercise: Reading a PROJ4 String</h2>
+<p>Here is a PROJ4 string for one of the datasets we will use in this workshop:<br />
+<br />
+<code>+proj=utm +zone=18 +datum=WGS84 +units=m +no_defs</code><br />
+<code>+ellps=WGS84 +towgs84=0,0,0</code><br />
+<br />
+</p>
+<ul>
+<li>What projection, zone, datum, and ellipsoid are used for this data?</li>
+<li>What are the units of the data?</li>
+<li>Using the map above, what part of the United States was this data collected from?</li>
+</ul>
+</section>
+<section id="need-help-choosing-a-projection" class="slide level2">
+<h2>Need help choosing a projection</h2>
+<p>See <a href="http://projectionwizard.org/" class="uri">http://projectionwizard.org/</a></p>
+<p><img data-src="./Images/gis/projection_wizard.png" style="width:80.0%" /></p>
+</section>
+<section id="additional-resources-for-learning" class="slide level2">
+<h2>Additional Resources for Learning</h2>
+<ul>
+<li><a href="https://geocompr.robinlovelace.net/">Geocomputation with R</a> by Lovelace et al. 
+<ul>
+<li>Great online book covering materials here in depth<br />
+<br />
+</li>
+</ul></li>
+<li><a href="http://r-spatial.org/book">Spatial Data Science</a> by Edzer Pebsma and Roger Bivand
+<ul>
+<li>Online book in progress by authors of many R spatial packages<br />
+</li>
+<li>Covers emerging packages, such as <code>stars</code> for spatio-temporal rasters</li>
+</ul></li>
+</ul>
+</section>
+    </div>
+  </div>
+
+  <script src="libs/reveal.js-3.3.0.1/lib/js/head.min.js"></script>
+  <script src="libs/reveal.js-3.3.0.1/js/reveal.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Display the page number of the current slide
+        slideNumber: true,
+        // Push each slide change to the browser history
+        history: true,
+        // Vertical centering of slides
+        center: false,
+        // Opens links in an iframe preview overlay
+        previewLinks: true,
+        // Transition style
+        transition: 'fade', // none/fade/slide/convex/concave/zoom
+        // Transition style for full page slide backgrounds
+        backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
+
+
+
+        // Optional reveal.js plugins
+        dependencies: [
+        ]
+      });
+    </script>
+  <!-- dynamically load mathjax for compatibility with self-contained -->
+  <script>
+    (function () {
+      var script = document.createElement("script");
+      script.type = "text/javascript";
+      script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+      document.getElementsByTagName("head")[0].appendChild(script);
+    })();
+  </script>
+
+<script>
+  (function() {
+    if (window.jQuery) {
+      Reveal.addEventListener( 'slidechanged', function(event) {  
+        window.jQuery(event.previousSlide).trigger('hidden');
+        window.jQuery(event.currentSlide).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+
+  </body>
+</html>
