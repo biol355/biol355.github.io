@@ -11,7 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## The world!
 
-For today, I've given you a number of shapefiles associated with worldmaps, state maps of the US, and county maps of Massachusetts and the coronavirus. You can download the data [here](./Data/coronavirus_shapefiles.zip). I'd like you to take a gander and think about what you can do with them.
+For today, I've given you a number of shapefiles associated with worldmaps, state maps of the US, and county maps of Massachusetts and the coronavirus. You can download the data [here](./data/coronavirus_shapefiles.zip). I'd like you to take a gander and think about what you can do with them.
 
 To start with, let's take a look at the world.
 
@@ -27,6 +27,19 @@ ggplot(worldmap) +
 ```
 
 That's a nice example workflow for loading and plotting one single shapefile. The shapefiles I have given you have multiple rows for dates, geospatial areas, and different case types (confirmed, death, recovered). You should be somewhat familiar with this already.
+
+
+## Available Shapefiles
+
+- worldmap.shp - A map of the world with country boundaries.  
+- us.shp - A map of the US with state boundaries.
+- ma_county_maps.shp - A map of Massachusetts with county boundaries.
+- coronavirus_points.shp - The coronavirus dataset with each lat/long as a POINT.
+- coronavirus_polys.shp - The coronavirus dataset with each case in a country POLYGON.
+- ma_counties_coronavirus.shp - The coronavirus dataset for Massachusetts with each case as a polygon in a MA county.
+- usa_coronavirus_points.shp - All coronavirus data in the US represented as POINTS.
+- usa_coronavirus_polygons - All coronavirus data in the US represented as POLYGONS.
+You have a number of available shapefiles for use. Here they are
 
 ## Lab Exercises
 
