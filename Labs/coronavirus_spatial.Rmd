@@ -40,4 +40,4 @@ With that in mind, I'd like you to -
 \
 4. Show the progression of conformed coronavirus in Massachusetts spatially over time using facets and dates.  
 \
-5. Cook up something else! Plot it!
+5. Take the map above you liked the most and reproject it! Do something cool and funky looking!
