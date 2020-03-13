@@ -1,0 +1,43 @@
+---
+title: "Spatial Coronavirus"
+author: "Biol355"
+date: "3/13/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## The world!
+
+For today, I've given you a number of shapefiles associated with worldmaps, state maps of the US, and county maps of Massachusetts and the coronavirus. You can download the data [here](./Data/coronavirus_shapefiles.zip). I'd like you to take a gander and think about what you can do with them.
+
+To start with, let's take a look at the world.
+
+```{r world, warning=FALSE, message=FALSE}
+library(sf)
+library(ggplot2)
+
+worldmap <- st_read("./data/coronavirus_shapefiles/worldmap.shp")
+
+ggplot(worldmap) +
+  geom_sf() +
+  coord_sf()
+```
+
+That's a nice example workflow for loading and plotting one single shapefile. The shapefiles I have given you have multiple rows for dates, geospatial areas, and different case types (confirmed, death, recovered). You should be somewhat familiar with this already.
+
+## Lab Exercises
+
+With that in mind, I'd like you to - 
+
+1. Plot the spatial distribution of coronavirus cases.  Color by date.  
+\
+2. Show the distribution of mortality across the world by country using polygons.  
+\
+3. Within the US, show the total confirmed cases of coronavirus across the country by state. Feel free to use points or polygons here.   
+\
+4. Show the progression of conformed coronavirus in Massachusetts spatially over time using facets and dates.  
+\
+5. Cook up something else! Plot it!
