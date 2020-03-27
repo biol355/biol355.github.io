@@ -40,7 +40,6 @@ ma_counties_coronavirus <- st_join(ma_county_maps, usa_confirmed_sf) %>%
 
 
 
-st_write(coronavirus_sf, "./data/coronavirus_shapefiles/coronavirus_worldwide.shp", delete_dsn = TRUE)
 st_write(worldmap, "./data/coronavirus_shapefiles/worldmap.shp",  delete_dsn = TRUE)
 st_write(coronavirus_points, "./data/coronavirus_shapefiles/coronavirus_points.shp", delete_dsn = TRUE)
 st_write(coronavirus_polys, "./data/coronavirus_shapefiles/coronavirus_polys.shp", delete_dsn = TRUE)
