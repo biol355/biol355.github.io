@@ -9,170 +9,86 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ### Intro 
-For this week's homework, we're going to focus on making maps with the TB incidence data from the World Health Organization and a little bit of Sea Surface Temperature.
+For this week's homework, let's work on mapping the covid-19 data. You have two choices of data source. The first is the coronavirus data we have already loaded.
 
-First, the TB data, which is at the country level. Let's take a look
-
-```{r who_load, message=FALSE}
-library(readr)
-
-tb_world <- read_csv("../Labs/data/who_tb_data.csv")
-
-tb_world
-
+```{r corona}
+library(coronavirus)
+head(coronavirus)
 ```
 
-We can then use this worh the world map from ggplot2
-```{r world, message=FALSE}
-library(tidyverse)
-library(ggplot2)
+The second is a newer dataset. It harvests data that is from the New York Times. It is focused solely on the US. To install it, you'll need to do the following
 
-#get a map
-worldmap <- map_data("world")
+```{r, eval = FALSE}
+#if you don't have it already
+install.packages("devtools")
+
+#install the library from github
+devtools::install_github("covid19R/covid19nytimes")
 ```
 
-### Joins and Mapping
+```{r nytimes}
+library(covid19nytimes)
+covid_states <- refresh_covid19nytimes_states()
 
-1. Explore joining these two data sets. What does not join well? Can you fix any of them via changes in the tb or worldmap dataset? Make whatever fixes you can, and then join them with tools from `dplyr` for....  
+head(covid_states)
 
-2. Using ggplot2, make a map showing change in mortality over four years (filter to four years, and then use `facet_wrap`).
+covid_counties <- refresh_covid19nytimes_counties()
 
-
-### Shapefiles
-
-Let's work with a shapefile of international borders now. Note the libraries I'm loading - you should in your homework, too!
-
-```{r borders, message=FALSE}
-library(rgdal)
-library(sp)
-library(broom)
-
-world_shapefile <- readOGR("../Labs/data/TM_WORLD_BORDERS_SIMPL-0.3")
-```
-
-What's inside?
-```{r show_borders}
-plot(world_shapefile)
-
-head(world_shapefile@data)
-```
-
-Oh neat! Notice the ISO2 and ISO3 columns? Those are designed to match the standardized columns from the `tb_world` data! Once we turn this into a data frame, should be a snap to merge! Let's make the same plot as we did previously, but now with shapefile.
-
-
-So, TB in 2015!
-
-```{r first_fade_shapefile}
-#get a map
-worldmap_shp <- tidy(world_shapefile, region="NAME")
-
-worldmap_shp_df <- left_join(worldmap_shp, world_shapefile@data,
-                          by = c("id" = "NAME")) %>%
-  rename(iso2 = ISO2, iso3 = ISO3)
-
-#filter to 2015
-tb_2015 <- tb_world %>% filter(year == 2015)
-
-#join
-incidence_df <- left_join(worldmap_shp_df, tb_2015)
-
-#plot
-ggplot(incidence_df, aes(x = long, y = lat, 
-                         group = group, fill=est_incidences)) +
-  geom_polygon() +
-  scale_fill_gradient(low = "blue", high = "red")
-
+head(covid_counties)
 
 ```
 
 
-OK, now, some faded examples using the above as a starting point
+Now, you have three data sets to choose from! Countries, states, or counties. Remember, with the coronavirus data, you have to do some dplyr::summarizing to get it down to countries, though!
 
-3. Mortality in 2000
+## Maps to use for this assignment
 
-```{r eval=FALSE}
-#get a map
-worldmap_shp <- tidy(world_shapefile, region="NAME")
+OK, so, we need world, US state, and US county maps - depending on which of the three datasets you chose
+```{r}
+library(sf)
 
-worldmap_shp_df <- ____(worldmap_shp, world_shapefile@data,
-                          by = c("id" = "NAME")) %>%
-  rename(iso2 = ISO2, iso3 = ISO3)
+#The world
+library(rnaturalearth)
+world_map <- ne_countries()
 
-#filter to 2000
-tb_2000 <- tb_world %>% filter(year == ____)
+#US States
+library(USAboundaries)
+us_states <- us_states()
 
-#join
-incidence_df_2000 <- left_join(____, ____)
-
-#plot
-ggplot(incidence_df_2000, aes(x = ____, y = ____, 
-                         group = group, fill=est_mortality)) +
-  geom_polygon() +
-  scale_fill_gradient(____)
+#US Counties
+us_counties <- us_counties()
 ```
 
-4. Incidence per 100K, but, only by interval, in 2016 - feel free to do something difference with the fill
-```{r, eval=FALSE}
-#get a map
-worldmap_shp <- ____(____, ____="NAME")
+Armed with this, let's make some maps!
 
-worldmap_shp_df <- ____(____, world_shapefile@____,
-                          by = c("id" = "NAME")) %>%
-  rename(iso2 = ISO2, iso3 = ISO3)
+### Questions
 
-#filter to 2016
-tb_2016 <- tb_world %>% ____(year == ____)
+1. Which data set - or aspect of a single data set, are you most interested in? Sort through the datasets. What is there? Is it the world? A single country? Multiple contries? All states? Counties in one state? 
 
-#join
-incidence_df_2016 <- left_join(____, ____, by = c("region" = "country"))
+Filter or summarize your data to just what you are interested in, in terms of space.
 
-#plot
-ggplot(incidence_df_2016, aes(x = ____, y = ____, 
-                         group = ____, 
-                         fill=____(est_incidences_per_100K_people,5))) +
-  ____() +
-  scale_fill_brewer(____ = "YlOrBr",
-                    ____ = guide_legend("Incidences per 100K"))
+For example
+```{r}
+library(dplyr)
+florida_covid <- covid_counties %>%
+  filter(stringr::str_detect(location, "[Ff]lorida"))
+
+florida_map <- us_counties %>%
+  filter(state_name == "Florida")
 ```
 
+2. What type or types of data from that dataset are you interested in? Why? Filter the dataset to that data type only.
 
-5. Make *two* maps that compare total incidence to incidence per 100K averaged across all years. So, there are three steps - first, the averaging. Then, the joining. Then, the plotting.  
+3. What do you want to learn from this slice of the data? Formulate a question and write it out here.
 
+4. Filter and manipulate the data so that it is in a format to be used to answer the question.
 
-### Leaflet, Rasters, Shapefiles, and Putting it All Together
+5. Join the covid data with spatial data to build a map.
 
-6. Let's take a look at the distribution of global SST anomalies. I've grabbed last week's data from http://www.cpc.ncep.noaa.gov/products/GIS/GIS_DATA/sst_oiv2/sst-anom.php (download it from this site [here](http://biol355.githib.io/Lectures/data/sst_anom.bin.20180318.tif) and I'd like you to load it, and the [marine ecoregions of the world](http://biol355.githib.io/Lectures/data//data/MEOW-TNC.zip) in order to make a map where we can explore how that temperature anomoly varies by ecoregion. This means you will be layering polygons from a shapefile on top of a raster using leaflet. Feel free to play with color palettes and any other property you'd care to examine!
+6. Create a map from this data! Make it awesome!
 
-Note, you'll need to supply the polygons name as the "data" to `leaflet` and supply the raster separately. `fillOpacity = 0` will also make them transparent
+7. What do you learn from the map you made?
 
-Also, include the following line to take out land, etc.
-```{r, eval=FALSE}
-values(sst)[values(sst)>100] <- NA
-```
+8. This static map is, I'm sure, great. Load up `tmap` and make it dynamic! Is there anything different you can learn from this form of visualization?
 
-This sets all of those big values to NA
-
-It should look something like below - but use whatever color palette or strategy that you think will make things pop the most! Feel free to also learn more about using leaflet at https://rstudio.github.io/leaflet/
-
-```{r test, echo=FALSE, message=FALSE, cache=TRUE}
-library(raster)
-library(leaflet)
-
-sst <- raster("../Lectures/data/sst_anom.bin.20180318.tif")
-values(sst)[values(sst)>100] <- NA
-
-meow <- readOGR("../Labs/data/MEOW-TNC")
-
-sstpal <- colorNumeric("RdBu", 
-                    values(sst),
-                    na.color = "transparent")
-
-leaflet(meow) %>%
-  addRasterImage(sst, colors = sstpal) %>%
-  addPolygons(weight = 1, color="black", fillOpacity = 0)%>%
-   addLegend(pal = sstpal, values = values(sst))
-
-```
-
-
-Based on the map **YOU** make, what do you see that is of interest?
+9. Last... it's time to start thinking about your final project. Name the one or more data sources you are interested in exploring. Tell us a bit about what is in them.
