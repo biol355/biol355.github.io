@@ -1,0 +1,464 @@
+---
+title: "Functions and Iteration"
+author: "Jarrett Byrnes"
+date: "4/2/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning=FALSE, message=FALSE)
+library(dplyr)
+library(stringr)
+library(ggplot2)
+library(purrr)
+```
+
+## A functional Review
+
+I wanted to start by going through modular programming in a bit more detail.  Let's start with the 1000 yard view, and break it into pieces.
+
+Our goal in this lab and as we move forward is to take a directory of files looking at different buoys and pull wave height information from them in a single unified data frame. 
+
+### The Wrapper
+
+To do that, we need a function that will load a file and, regardless of format, return a single standardized file type.  Let's sketch out a skeleton of what we want to happen.
+
+```{r skel}
+#start with a year
+
+#read in a file
+
+#fix formatting
+
+#return fixed file
+```
+
+We can then take that, and fill it in with function names of functions we will write...
+
+```{r filled}
+#start with a year as our argument
+get_buoy <- function(a_year){
+
+  #read in a file
+  one_buoy <- read_buoy(a_year)
+
+  #fix formatting
+  one_buoy <- format_buoy(one_buoy)
+
+  #return fixed file
+  return(one_buoy)
+}
+```
+
+This looks pretty good! Heck, we could even jazz it up with some pipes!
+```{r piped_wrapped}
+library(dplyr)
+
+#start with a year as our argument
+get_buoy <- function(a_year){
+
+  #read in a file
+  one_buoy <- read_buoy(a_year) %>%
+    
+    #fix formatting
+    format_buoy()
+
+  #return fixed file
+  return(one_buoy)
+}
+```
+
+Regardless, this leaves clear that we have at least two more functions to write - `read_buoy()` and `format_buoy()`. Let's start with the first.
+
+### Reading in the data
+
+
+We'll begin by outlining `read_buoy()`
+
+```{r read_buoy_skel}
+#take a year
+
+#make the correct filename for that year by combining it with directory info
+
+#read in the file
+
+#return it
+```
+
+Looking at the comments above, there is nothing that we need to write a new function for. We know how to combine strings - `stringr::str_c()`. We know how to read in files - `readr::read_csv()`. So, let's start with a year, and see how things go...
+
+
+```{r template}
+#take a year
+a_year <- 2012
+
+#make the correct filename for that year by combining it with directory info
+buoy_file <- stringr::str_c("./data/buoydata/44013_", a_year, ".csv")
+  
+#read in the file
+one_buoy <- readr::read_csv(buoy_file)
+
+#return it
+
+```
+
+Hey! That worked! We can look at this or other years, and see that it works. Looking at the files we read in, we see a variety of `NA` values - 99, 999, 99.00, and more. We can add those in, and wrap the above into a function!
+
+```{r read_buoy_fun}
+#take a year as the argument...
+read_buoy <- function(a_year){
+  #make the correct filename for that year by combining it with directory info
+  buoy_file <-
+    stringr::str_c("./data/buoydata/44013_", a_year, ".csv")
+  
+  #read in the file
+  one_buoy <- readr::read_csv(buoy_file,
+                              na = c("99", "999",
+                                     "99.00", "9999.00",
+                                     "99.0", "9999.0",
+                                     "999.0"))
+  
+  #return it
+  return(one_buoy)
+}
+```
+
+
+Then let's test it - 
+
+```{r test_read}
+one_buoy <- read_buoy(1992)
+
+head(one_buoy)
+
+visdat::vis_dat(one_buoy)
+```
+
+Nice!
+
+### Formatting the Data
+
+OK, we know that every file is going to be different. We have, broadly, three problems.
+
+1. Weird year names.
+2. Some files have two rows of column names, leaving a bad row.
+3. Some files have years in a different format.
+
+So, we want a function that will fix these. We can write a function skeleton. I'm going to write this skeleton in the form of a function, as we already know that a buoy data frame is the input.
+
+```{r format_skel}
+format_buoy <- function(a_buoy_df){
+  
+  #Take the buoy data frame
+  
+  #fix the year names
+  
+  #fix the bad rows
+  
+  #fix the years
+
+  return(a_buoy_df)
+}
+```
+
+None of these are low-level things. We'll need to write functions inside of functions! Modular programming! Let's start out by sketching what each of these functions will be.
+
+```{r format_buoy}
+format_buoy <- function(a_buoy_df){
+
+  #Take the buoy data frame
+  a_buoy_df <- a_buoy_df %>%
+    
+    #fix the year names
+    fix_year_names %>%
+    
+    #fix the bad rows
+    fix_bad_rows %>%
+    
+    #fix the years
+    fix_bad_years
+  
+  return(a_buoy_df)
+}
+```
+
+Great! We are now ready for our lower level modules. Fill in the blanks...
+
+1. For `fix_year_names()`
+
+```{r, eval = FALSE}
+library(stringr)
+#bad names
+fix_year_names <- function(a_buoy_df){
+  
+  #start with the colmn names
+  names(a_buoy_df) <- names(a_buoy_df) %>%
+    
+  #replace YY with YYYY
+  ____("^YY$", "YYYY") %>%
+    
+  #replace X.YY with YYYY
+  ____("X\\.YY", "YYYY")
+  
+  ____(a_buoy_df)
+}
+
+#A test!
+read_buoy(2012) %>%
+  fix_year_names 
+```
+
+```{r, include = FALSE}
+#bad names
+fix_year_names <- function(a_buoy_df){
+  
+  names(a_buoy_df) <- names(a_buoy_df) %>%
+  str_replace("^YY$", "YYYY") %>%
+  str_replace("X\\.YY", "YYYY")
+  
+  return(a_buoy_df)
+}
+```
+
+2. For `fix_bad_rows()`
+
+```{r, eval = FALSE}
+fix_bad_rows <- function(a_buoy_df){
+  
+  #start with a buoy df
+    a_buoy_df <- a_buoy_df %>%
+
+    #make everything numeric
+    mutate_all(____) %>%
+      
+    #filter out rows with NAs in the year
+    ____(!____(____))
+    
+    _____(a_buoy_df)
+}
+
+#A test!
+read_buoy(2012) %>%
+  fix_year_names %>%
+  fix_bad_rows
+  
+``` 
+
+```{r, include = FALSE}
+fix_bad_rows <- function(a_buoy_df){
+  #start with a buoy df
+    a_buoy_df <- a_buoy_df %>%
+
+    #make everything numeric
+    mutate_all(as.numeric) %>%
+      
+    #filter out rows with NAs in the year
+    filter(!is.na(YYYY))
+    
+    return(a_buoy_df)
+}
+```
+
+3. For `fix_bad_years()`
+
+```{r, eval = FALSE}
+#bad years
+fix_bad_years <- function(a_buoy_df){
+  #start with a buoy data frame
+  a_buoy_df <- ____ %>%
+    
+    #if the YYY col is less than 1900, add 1900 to it
+    ____(____ = ____(____ < 1900, YYYY+1900, ____))
+
+ return(a_buoy_df)
+}
+
+#A test!
+read_buoy(2012) %>%
+  fix_year_names %>%
+  fix_bad_rows %>%
+  fix_bad_years
+```
+
+```{r, include = FALSE}
+#bad years
+fix_bad_years <- function(a_buoy_df){
+  #start with a buoy data frame
+  a_buoy_df <- a_buoy_df %>%
+    
+    #if the YYY col is less than 1900, add 1900 to it
+    mutate(YYYY = ifelse(YYYY < 1900, YYYY+1900, YYYY))
+
+ return(a_buoy_df)
+}
+```
+
+### The end?
+
+Were you testing along the way? You will notice that now, given that you have written all of these functions And now, if we do, say, 
+
+```{r, message=FALSE}
+get_buoy(1992) %>% head()
+```
+
+Things look pretty good.
+
+## Modular Exercises
+1. Write a function that uses `get_buoy` to read in a file, get the monthly average wind speed  (WSPD) and the lower and upper SD, then plots it.
+
+```{r, eval = FALSE}
+library(ggplot2)
+
+plot_wspd_by_month <- function(a_year){
+  #get the file
+  a_buoy <- get_buoy(_____)
+  
+  #calculate the mean, lwd sd, and upper sd
+  summarized_buoy <- wsp_mean_sd(_____)
+  
+  #plot it
+  plot_summarized_buoy(_____)
+
+}
+
+wsp_mean_sd <- function(raw_buoy){
+  #take the buoy
+  _____ %>%
+    
+  #group by month
+  group_by(MM) %>%
+    
+  #calculate mean, mean-1sd, mean+1sd
+  summarize(mean_WSPD = mean(_____, na.rm=T),
+            upr_WSPD = _____ + sd(_____, na.rm=T),
+            lwr_WSPD = mean_WSPD - sd(_____, na.rm=T))
+}
+
+plot_summarized_buoy <- function(_____){
+  ggplot(buoy_to_plot, 
+         #x = month, yvals relate to wind speed
+         aes(x = MM, y = _____, ymin = _____, ymax = upr_WSPD)) +
+    #use a geom to show the mean +/- 1SD 
+    _____() +
+    
+    #use a geom to add concecting lines beween the means
+    _____()
+}
+
+```
+
+```{r, include = FALSE}
+library(ggplot2)
+
+plot_wspd_by_month <- function(a_year){
+  #get the file
+  a_buoy <- get_buoy(a_year)
+  
+  #calculate the mean, lwd sd, and upper sd
+  summarized_buoy <- wsp_mean_sd(a_buoy)
+  
+  #plot it
+  plot_summarized_buoy(summarized_buoy)
+
+}
+
+wsp_mean_sd <- function(raw_buoy){
+  #take the buoy
+  raw_buoy %>%
+    
+  #group by month
+  group_by(MM) %>%
+    
+  #calculate mean, mean-1sd, mean+1sd
+  summarize(mean_WSPD = mean(WSPD, na.rm=T),
+            upr_WSPD = mean_WSPD + sd(WSPD, na.rm=T),
+            lwr_WSPD = mean_WSPD - sd(WSPD, na.rm=T))
+}
+
+plot_summarized_buoy <- function(buoy_to_plot){
+  ggplot(buoy_to_plot, 
+         aes(x = MM, y = mean_WSPD, ymin = lwr_WSPD, ymax = upr_WSPD)) +
+    geom_pointrange() +
+    geom_line()
+}
+
+```
+
+Now, take that function out for a spin on different files! What do you see?
+
+2. Create a set of functions that, once a buoy is read in, returns a two facet ggplot2 object of a histogram of the difference between wind speed (WSPD) and gust speed (GST) and between the air temperature (ATMP) and water temperature (WTMP), so that you can later format and style it as you'd like.
+
+```{r}
+gust_increase_hist <- function(a_year){
+  #get the cleaned buoy
+  
+  #create a long data frame with each row as a data point, measuring either 
+  #difference between air and water or wind speed and gust speed
+  
+  #create a plot
+  
+}
+
+buoy_measured_diff_long <- function(a_buoy){
+  #with one buoy
+  
+  #calculate differences between ATMP and WTMP as well as WSPD and GST
+  
+  #pivot to make it long
+  
+  #return the modified data
+}
+
+plot_dual_hist <- function(summarized_buoy){
+  #create a ggplot with a single value as the x
+  
+  #make a histogram
+  
+  #facet by the measurement type
+}
+
+#test it out!
+```
+
+
+Which of the above functions is reusable in other scenarios?
+
+
+## A Final Lab Exercise using purrr and modular programming
+
+1. I've given you a set of RDS files that contain sf objects of state county boundaries. I'm curious - is there a link between the number of counties in a state and the average percent of the states area taken up by any one county (e.g., the mean county area / total state area). Show my, graphically.
+
+To do this, you will need
+
+A. A function that creates the data frame you will need for plotting for one state. This function will need to (potentially with subfunctions - I recommend it!)
+
+  - Read in any state's data given a state name. Use `readRDS` to read in a single data file and fix up the CRS (these are all in lat/long - you want a mollweide, in which distance is in meters). You'll need `st_transform` for the later, and the projection is epsg:54009.
+  
+  - Calculate the number of counties
+
+  - Caculate percent area of each county and then get average and total area. You'll need `st_area()` here. Note, for sf objects, when you `summarize()`, you also compress all of the polygons into one big single polygon... which you can then take one big area from! You'll need to get both county and state areas! 
+  
+B. Get all of the paths to the state files to iterate over.
+
+C. Succesfully iterate over all states to generate a large data frame
+
+D. Plot!
+
+2. Once you finish this - wrap all of this together into a function (with perhaps a few extra subfunctions - or not - your design choice!) so that all I need to do is specify the directory a bunch of state shape files are in, and you'll generate this plot. To test, make two folder. Copy half of the state RDS files into one, and the other half into the other. You should be able to call this function supplying either directory path, and generate the plot.
+  
+  
+
+```{r, eval = FALSE, include = FALSE}
+library(sf)
+library(dplyr)
+counties <- list.files("./data/counties", full.names=TRUE)
+
+state <- readRDS(counties[1])
+state <- st_transform(state, crs = 54009)
+st_area(state)
+st_area(state %>% summarize())
+nrow(state)
+
+
+```
+
