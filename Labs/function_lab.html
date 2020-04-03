@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 
@@ -254,9 +254,7 @@ h6 {
 </style>
 
 
-</head>
 
-<body>
 
 <style type="text/css">
 .main-container {
@@ -270,30 +268,91 @@ code {
 }
 img {
   max-width:100%;
-  height: auto;
 }
 .tabbed-pane {
   padding-top: 12px;
 }
+.html-widget {
+  margin-bottom: 20px;
+}
 button.code-folding-btn:focus {
   outline: none;
+}
+summary {
+  display: list-item;
 }
 </style>
 
 
 
-<div class="container-fluid main-container">
-
 <!-- tabsets -->
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-</script>
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
 
 <!-- code folding -->
 
 
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
 
 
 
@@ -323,9 +382,9 @@ $(document).ready(function () {
 </ul>
 <p>Remember that a function takes input (which could be multiple things), does something to that input, and then returns some kind of output.</p>
 <hr />
-<section id="exercises" class="level3">
+<div id="exercises" class="section level3">
 <h3>Exercises</h3>
-<ol type="1">
+<ol style="list-style-type: decimal">
 <li>This may be a type of function you are more familiar with. It is an equation that converts Celsius to Farenheit. A previous student of mine was basically Farenheit-illiterate; she never know what the weather is going to be like. Given this equation, can you write a function that converts a temperature value in Farenheit to Celsius for her?</li>
 </ol>
 <ul>
@@ -371,73 +430,73 @@ buoy_1990 &lt;- read_csv('./data/buoydata/44013_1990.csv', na = c(&quot;99&quot;
 </ul>
 <p>If you are not sure of some of these things, remember to run the code chunks bit by bit, putting in test values (e.g., one year of data) to ensure that you know what you are working with, what each line is doing, and what the final returned value is.</p>
 <hr />
-</section>
-<section id="using-conditionals" class="level3">
+</div>
+<div id="using-conditionals" class="section level3">
 <h3>Using conditionals!</h3>
 <hr />
-<section id="logical-operators" class="level4">
+<div id="logical-operators" class="section level4">
 <h4>Logical Operators</h4>
-<p>See - <a href="http://www.statmethods.net/management/operators.html" class="uri">http://www.statmethods.net/management/operators.html</a></p>
+<p>See - <a href="http://www.statmethods.net/management/operators.html">http://www.statmethods.net/management/operators.html</a></p>
 <table>
 <thead>
 <tr class="header">
-<th style="text-align: center;">Operator</th>
+<th align="center">Operator</th>
 <th>Description</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: center;">&lt;</td>
+<td align="center">&lt;</td>
 <td>less than</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">&lt;=</td>
+<td align="center">&lt;=</td>
 <td>less than or equal to</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">&gt;</td>
+<td align="center">&gt;</td>
 <td>greater than</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">&gt;=</td>
+<td align="center">&gt;=</td>
 <td>greater than or equal to</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">==</td>
+<td align="center">==</td>
 <td>exactly equal to</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">!=</td>
+<td align="center">!=</td>
 <td>not equal to</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">!x</td>
+<td align="center">!x</td>
 <td>Not x</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">x</td>
+<td align="center">x</td>
 <td>y</td>
 </tr>
 <tr class="odd">
-<td style="text-align: center;">x &amp; y</td>
+<td align="center">x &amp; y</td>
 <td>x AND y</td>
 </tr>
 <tr class="even">
-<td style="text-align: center;">isTRUE(x)</td>
+<td align="center">isTRUE(x)</td>
 <td>test if X is TRUE</td>
 </tr>
 </tbody>
 </table>
-</section>
-<section id="if-statement-structure" class="level4">
+</div>
+<div id="if-statement-structure" class="section level4">
 <h4>If statement structure:</h4>
-<p>See <a href="http://www.programiz.com/r-programming/if-else-statement" class="uri">http://www.programiz.com/r-programming/if-else-statement</a> for a good tutorial on if/else statements.</p>
+<p>See <a href="http://www.programiz.com/r-programming/if-else-statement">http://www.programiz.com/r-programming/if-else-statement</a> for a good tutorial on if/else statements.</p>
 <pre class="r"><code>if (test_expression) {
    statement
 }</code></pre>
-</section>
-</section>
-<section id="if-else-statement-structure" class="level3">
+</div>
+</div>
+<div id="if-else-statement-structure" class="section level3">
 <h3>If … else … statement structure:</h3>
 <pre class="r"><code>if (test_expression) {
    statement1
@@ -477,7 +536,7 @@ if (x &gt; 0) {
    print(&quot;Negative number&quot;)
 }</code></pre>
 <pre><code>## [1] &quot;Negative number&quot;</code></pre>
-<ol start="3" type="1">
+<ol start="3" style="list-style-type: decimal">
 <li>My student came from ‘tropical Canada’. She don’t like the cold but she <strong>really</strong> didn’t like it when it’s hot. Although she wanted to know what the temperature is in Celsius when the US weather channel reported it t in Farenheit, there are certain points at which it was just too cold or too hot for to to care about the exact value. Modify the f_to_c function below to print the following:</li>
 </ol>
 <ul>
@@ -488,7 +547,11 @@ if (x &gt; 0) {
   celsius &lt;- (farenheit -  32)  *  5 / 9 
   return(celsius)
 }</code></pre>
-</section>
+<ol start="4" style="list-style-type: decimal">
+<li><p>Based on the data set you’re planning to use for your final, do you need to write any functions to clean the data as you bring it in? If so, describe it, and take a stab at writing it. If not, show us that the data loads cleanly.</p></li>
+<li><p>With the data you just loaded, make one visualization. But, before you do, articulate a question you want to answer with said visualization. What do you think you will see? Now make the plot. Did you see what you expected? What did the data tell you?</p></li>
+</ol>
+</div>
 
 
 
@@ -507,6 +570,23 @@ $(document).ready(function () {
 
 
 </script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

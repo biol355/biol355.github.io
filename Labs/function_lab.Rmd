@@ -225,3 +225,7 @@ f_to_c <- function(farenheit) {
   return(celsius)
 }
 ```
+
+4. Based on the data set you're planning to use for your final, do you need to write any functions to clean the data as you bring it in? If so, describe it, and take a stab at writing it. If not, show us that the data loads cleanly.
+
+5. With the data you just loaded, make one visualization. But, before you do, articulate a question you want to answer with said visualization. What do you think you will see? Now make the plot. Did you see what you expected? What did the data tell you?
