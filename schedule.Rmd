@@ -149,7 +149,7 @@ __Lab:__ [Functions and Iteration](./Labs/functions_iteration.html)
 __Objective(s):__ Learn the benefits of reusable code, Understand the structure of a function, Discover debugging and making functions fail usefully, Apply conditional logic to build flexible code, Derive principles to make functions that are easy to understand and apply to multiple data sets.  
 __Biological Examples:__ NOAA buoy data.  
 __Files:__   [NOAA buoy data from Boston Harbor](./Lectures/data/buoydata.zip), [get_buoy.R](./Lectures/get_buoy.R)  
-__Homework:__ [Functions!](./Labs/function_lab.html)  
+__Homework:__ [Functions!](./Assignments/function_homework.html)  
 __Etherpad:__ https://etherpad.wikimedia.org/p/355-functions-2020  
 
 ### Week  10. Shiny and Web Interfaces  
