@@ -422,7 +422,7 @@ buoy_1990 &lt;- read_csv('./data/buoydata/44013_1990.csv', na = c(&quot;99&quot;
   return(___________)
 
 }</code></pre>
-<p>2d. Amend the process_buoy function to allow for a variable buoy number (currently we are using data from buoy 44013, but there are many other numbers/names that could be used!), directory location of the file, <em>and</em> year.</p>
+<p>2d. Amend the read_buoy function to allow for a variable buoy number (currently we are using data from buoy 44013, but there are many other numbers/names that could be used!), directory location of the file, <em>and</em> year.</p>
 <p>2e. Apply the workflow that you used in 2a - 2c to create a function to clean up the data using a dplyr workflow. Have it generate daily averaged wave heights and temperatures as well as renaming all of the columns to something understandable. Begin by writing a dplyr workflow for one data frame. Then generalize it. Remember to ask yourself the following questions:</p>
 <ul>
 <li>What parts of your code are consistent across every line/code chunk?</li>
@@ -442,7 +442,8 @@ buoy_1990 &lt;- read_csv('./data/buoydata/44013_1990.csv', na = c(&quot;99&quot;
   #get the cleaned buoy
   
   #create a long data frame with each row as a data point, measuring either 
-  #difference between air and water or wind speed and gust speed
+  #difference between air and water OR wind speed and gust speed - one row per measurement
+  #with a column that says WHAT that measurement is 
   
   #create a plot
   
@@ -459,7 +460,7 @@ buoy_measured_diff_long &lt;- function(a_buoy){
 }
 
 plot_dual_hist &lt;- function(summarized_buoy){
-  #create a ggplot with a single value as the x
+  #create a ggplot with a single variable as the x
   
   #make a histogram
   
