@@ -378,26 +378,8 @@ summary {
 <p>We’ve been using the <code>coronavirus</code> package to this point, but, while it rejiggers itself for automated data updates, let’s tap it from the source!</p>
 <pre class="r"><code>library(readr)
 
-coronavirus &lt;- read_csv(&quot;https://github.com/RamiKrispin/coronavirus-csv/raw/master/coronavirus_dataset.csv&quot;)</code></pre>
-<pre><code>## Parsed with column specification:
-## cols(
-##   Province.State = col_logical(),
-##   Country.Region = col_character(),
-##   Lat = col_double(),
-##   Long = col_double(),
-##   date = col_date(format = &quot;&quot;),
-##   cases = col_double(),
-##   type = col_character()
-## )</code></pre>
-<pre><code>## Warning: 18249 parsing failures.
-##   row            col           expected  actual                                                                                file
-## 14300 Province.State 1/0/T/F/TRUE/FALSE Alberta 'https://github.com/RamiKrispin/coronavirus-csv/raw/master/coronavirus_dataset.csv'
-## 14301 Province.State 1/0/T/F/TRUE/FALSE Alberta 'https://github.com/RamiKrispin/coronavirus-csv/raw/master/coronavirus_dataset.csv'
-## 14302 Province.State 1/0/T/F/TRUE/FALSE Alberta 'https://github.com/RamiKrispin/coronavirus-csv/raw/master/coronavirus_dataset.csv'
-## 14303 Province.State 1/0/T/F/TRUE/FALSE Alberta 'https://github.com/RamiKrispin/coronavirus-csv/raw/master/coronavirus_dataset.csv'
-## 14304 Province.State 1/0/T/F/TRUE/FALSE Alberta 'https://github.com/RamiKrispin/coronavirus-csv/raw/master/coronavirus_dataset.csv'
-## ..... .............. .................. ....... ...................................................................................
-## See problems(...) for more details.</code></pre>
+coronavirus &lt;- read_csv(&quot;https://github.com/RamiKrispin/coronavirus-csv/raw/master/coronavirus_dataset.csv&quot;,
+                        col_types = &quot;ccddDdc&quot;)</code></pre>
 <table>
 <thead>
 <tr class="header">
@@ -412,7 +394,7 @@ coronavirus &lt;- read_csv(&quot;https://github.com/RamiKrispin/coronavirus-csv/
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left">NA</td>
+<td align="left">Zhejiang</td>
 <td align="left">China</td>
 <td align="right">29.1832</td>
 <td align="right">120.0934</td>
@@ -421,7 +403,7 @@ coronavirus &lt;- read_csv(&quot;https://github.com/RamiKrispin/coronavirus-csv/
 <td align="left">recovered</td>
 </tr>
 <tr class="even">
-<td align="left">NA</td>
+<td align="left">Zhejiang</td>
 <td align="left">China</td>
 <td align="right">29.1832</td>
 <td align="right">120.0934</td>
@@ -430,7 +412,7 @@ coronavirus &lt;- read_csv(&quot;https://github.com/RamiKrispin/coronavirus-csv/
 <td align="left">recovered</td>
 </tr>
 <tr class="odd">
-<td align="left">NA</td>
+<td align="left">Zhejiang</td>
 <td align="left">China</td>
 <td align="right">29.1832</td>
 <td align="right">120.0934</td>
@@ -439,7 +421,7 @@ coronavirus &lt;- read_csv(&quot;https://github.com/RamiKrispin/coronavirus-csv/
 <td align="left">recovered</td>
 </tr>
 <tr class="even">
-<td align="left">NA</td>
+<td align="left">Zhejiang</td>
 <td align="left">China</td>
 <td align="right">29.1832</td>
 <td align="right">120.0934</td>
@@ -448,7 +430,7 @@ coronavirus &lt;- read_csv(&quot;https://github.com/RamiKrispin/coronavirus-csv/
 <td align="left">recovered</td>
 </tr>
 <tr class="odd">
-<td align="left">NA</td>
+<td align="left">Zhejiang</td>
 <td align="left">China</td>
 <td align="right">29.1832</td>
 <td align="right">120.0934</td>
@@ -457,7 +439,7 @@ coronavirus &lt;- read_csv(&quot;https://github.com/RamiKrispin/coronavirus-csv/
 <td align="left">recovered</td>
 </tr>
 <tr class="even">
-<td align="left">NA</td>
+<td align="left">Zhejiang</td>
 <td align="left">China</td>
 <td align="right">29.1832</td>
 <td align="right">120.0934</td>

@@ -20,7 +20,8 @@ We've been using the `coronavirus` package to this point, but, while it rejigger
 ```{r}
 library(readr)
 
-coronavirus <- read_csv("https://github.com/RamiKrispin/coronavirus-csv/raw/master/coronavirus_dataset.csv")
+coronavirus <- read_csv("https://github.com/RamiKrispin/coronavirus-csv/raw/master/coronavirus_dataset.csv",
+                        col_types = "ccddDdc")
 ```
 
 ```{r tab, echo = FALSE}
