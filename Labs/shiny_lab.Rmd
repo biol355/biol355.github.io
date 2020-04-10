@@ -1,0 +1,76 @@
+---
+title: "Shiny Coronavirus"
+author: "Biol355"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Shiny Homework
+Having a homework for shiny that builds through multiple steps is...kinda nuts. What I'd like you to do is save an R file for each one (prepend 1_, 2_, 3_, etc. so we know which number it is) and then zip it up to submit. For when you post the app, give us a URL!
+
+There are a LOT of extra credit options here. You don't have to do them in order, or do them all. But, take a gander. This is all to help you prep for your final project!
+
+## We know this data so well
+
+We've been using the `coronavirus` package to this point, but, while it rejiggers itself for automated data updates, let's tap it from the source!
+
+```{r}
+library(readr)
+
+coronavirus <- read_csv("https://github.com/RamiKrispin/coronavirus-csv/raw/master/coronavirus_dataset.csv")
+```
+
+```{r tab, echo = FALSE}
+knitr::kable(tail(coronavirus))
+```
+
+Today, we'll build a shiny app that works with this data.
+
+
+## 1. Make a shiny template that runs
+
+You know how to do this. Use Rstudio or hand-code your own template. Save it as `app.R`. Have it load the data above (straight from the source!) Make sure that it runs. 
+
+## 2. Add a Layout
+
+Choose a layout. It can be a sidebar layout, as we've been doing, or, try setting up something different from [here](https://shiny.rstudio.com/articles/layout-guide.html)
+
+## 3. Got a layout? Cool. Add a theme.
+There are a LOT of themes for shiny. The ones that come pre-installed are [here](https://rstudio.github.io/shinythemes/) along with a tutorial. Make your app stylin! Make sure your app runs.
+
+### 3a. Extra credit (4 points) A novel theme and layout!
+Scour the web for shiny packages (seriously, just google shiny packages or other terms) to use your own unique layout and theme that is not pre-packaged. 2 poitns for theme, 2 points for layout. I'm not saying how many points we'll give for shiny lcars....
+
+## 4. Show us the data. 
+
+OK, you are all setup. Using `tableOutput()` in the proper place in your UI and `renderTable()` in your server, show us the tail of the coronavirus table. Make sure your app runs.
+
+## 5. Trends
+
+OK, now have it create a ggplot that, using `plotOutput()` and `renderPlot()` shows us the worldwide trend in confirmed cases of coronavirus. Note - you'll have to do some data manipulation here! But you've done this before. Have the title tell us what date this is current to. Make sure your app runs. Note - check yourself against a dashboard like [this](https://ramikrispin.github.io/coronavirus_dashboard/) to make sure your results are more or less correct.
+
+## 6. Make it reactive
+
+Now, add two inputs. One allows users to chose a country. The second allows them to select the type of cases to display (confirmed, death, recovered). Use whatever `*Input` functions you would like. For the country and type, have it show trends and the data table. Make sure your app runs.
+
+## 7. Deploy your app!
+Using http://shinyapps.io, deploy your app! Tell us the link!
+
+## 8. Extra Credit (for full credit of another question)
+Use [tabsets](https://shiny.rstudio.com/articles/tabsets.html) so that all of the outputs are not returned all at once. Deploy this!
+
+## 9. Map Extra Credit (for full credit of another question)
+
+Using `tmap`, `leafletOutput()`, and `renderLeaflet()` (don't worry, shiny takes care of making it interactive) add a worldmap somewhere (your choice how to do this layout - will be easier with the tabs!) that shows the final # of whatever type you have selected across a worldmap (hey, you know how to merge this data with a worldmap - maybe you have some code for it, that, for additional extra credit, you can source in!) For double your extra credit, when you select a country, have it zoom in on the country (replot but center on that country).
+
+## 10. MOAR MAP Extra Credit (for 2x full credit of another question)
+Can you use things at smaller spatial scales than countries?  Or even show just that country and the things in it? And do it well!
+
+## 11. Even More Extra Credit (for full credit of another question)
+
+Go wild. Do something different with this! Use other output types, use other input types, filter differently, map differently - Have fun! And tell us what you did. Deploy it. We can't wait to see!
+
+
