@@ -370,7 +370,7 @@ summary {
 
 <div id="shiny-homework" class="section level2">
 <h2>Shiny Homework</h2>
-<p>Having a homework for shiny that builds through multiple steps is…kinda nuts. What I’d like you to do is save an R file for each one (prepend 1_, 2_, 3_, etc. so we know which number it is) and then zip it up to submit. For when you post the app, give us a URL!</p>
+<p>Having a homework for shiny that builds through multiple steps is…kinda nuts. What I’d like you to do is save an R file for each one (prepend 1_, 2_, 3_, etc. so we know which number it is) and then zip it all up to submit. For when you post the app, give us a URL!</p>
 <p>There are a LOT of extra credit options here. You don’t have to do them in order, or do them all. But, take a gander. This is all to help you prep for your final project!</p>
 </div>
 <div id="we-know-this-data-so-well" class="section level2">
@@ -453,11 +453,11 @@ coronavirus &lt;- read_csv(&quot;https://github.com/RamiKrispin/coronavirus-csv/
 </div>
 <div id="make-a-shiny-template-that-runs" class="section level2">
 <h2>1. Make a shiny template that runs</h2>
-<p>You know how to do this. Use Rstudio or hand-code your own template. Save it as <code>app.R</code>. Have it load the data above (straight from the source!) Make sure that it runs.</p>
+<p>You know how to do this. Use Rstudio or hand-code your own template. Save it as <code>1_app.R</code>. Have it load the data above (straight from the source!) Make sure that it runs.</p>
 </div>
 <div id="add-a-layout" class="section level2">
 <h2>2. Add a Layout</h2>
-<p>Choose a layout. It can be a sidebar layout, as we’ve been doing, or, try setting up something different from <a href="https://shiny.rstudio.com/articles/layout-guide.html">here</a></p>
+<p>Choose a layout. It can be a sidebar layout, as we’ve been doing, or, try setting up something different from <a href="https://shiny.rstudio.com/articles/layout-guide.html">here</a>. Save this as <code>2_app.R</code> after making sure your app runs!</p>
 </div>
 <div id="got-a-layout-cool.-add-a-theme." class="section level2">
 <h2>3. Got a layout? Cool. Add a theme.</h2>
@@ -477,7 +477,7 @@ coronavirus &lt;- read_csv(&quot;https://github.com/RamiKrispin/coronavirus-csv/
 </div>
 <div id="make-it-reactive" class="section level2">
 <h2>6. Make it reactive</h2>
-<p>Now, add two inputs. One allows users to chose a country. The second allows them to select the type of cases to display (confirmed, death, recovered). Use whatever <code>*Input</code> functions you would like. For the country and type, have it show trends and the data table. Make sure your app runs.</p>
+<p>Now, add two inputs. One allows users to chose a country. The second allows them to select the type of cases to display (confirmed, death, recovered). Use whatever <code>*Input</code> functions you would like. Now, where you have OUTPUTS for global trends and a tail of a data table, replace them with outputs that show the trend for the selected country and type and the table for the selected country and type. Make sure your app runs.</p>
 </div>
 <div id="deploy-your-app" class="section level2">
 <h2>7. Deploy your app!</h2>
@@ -489,14 +489,18 @@ coronavirus &lt;- read_csv(&quot;https://github.com/RamiKrispin/coronavirus-csv/
 </div>
 <div id="map-extra-credit-for-full-credit-of-another-question" class="section level2">
 <h2>9. Map Extra Credit (for full credit of another question)</h2>
-<p>Using <code>tmap</code>, <code>leafletOutput()</code>, and <code>renderLeaflet()</code> (don’t worry, shiny takes care of making it interactive) add a worldmap somewhere (your choice how to do this layout - will be easier with the tabs!) that shows the final # of whatever type you have selected across a worldmap (hey, you know how to merge this data with a worldmap - maybe you have some code for it, that, for additional extra credit, you can source in!) For double your extra credit, when you select a country, have it zoom in on the country (replot but center on that country).</p>
+<p>Using <code>tmap</code>, <code>leafletOutput()</code>, and <code>renderLeaflet()</code> (don’t worry, shiny takes care of making it interactive) add a worldmap somewhere (your choice how to do this layout - will be easier with the tabs!) that shows the final # of whatever type you have selected across a worldmap (hey, you know how to merge this data with a worldmap - maybe you have some code for it, that, for additional extra credit, you can source in!)</p>
 </div>
-<div id="moar-map-extra-credit-for-2x-full-credit-of-another-question" class="section level2">
-<h2>10. MOAR MAP Extra Credit (for 2x full credit of another question)</h2>
-<p>Can you use things at smaller spatial scales than countries? Or even show just that country and the things in it? And do it well!</p>
+<div id="moar-map-extra-credit-for-full-credit-of-another-question" class="section level2">
+<h2>10. MOAR Map Extra Credit (for full credit of another question)</h2>
+<p>Set up the app so that, when you select a country, have it zoom in on the country (replot but center on that country).</p>
+</div>
+<div id="moar-moar-map-extra-credit-for-2x-full-credit-of-another-question" class="section level2">
+<h2>11. MOAR MOAR MAP Extra Credit (for 2x full credit of another question)</h2>
+<p>Can you use information at smaller spatial scales than countries? You might have to use another spatial data source - at least a different function within <code>rnaturalearth</code> or from somewhere else. Either have this smaller-scale information represented on the global map OR when you select a country, plot JUST that country with smaller province/state areas as the internal borders. Good luck!</p>
 </div>
 <div id="even-more-extra-credit-for-full-credit-of-another-question" class="section level2">
-<h2>11. Even More Extra Credit (for full credit of another question)</h2>
+<h2>12. Even More Extra Credit (for full credit of another question)</h2>
 <p>Go wild. Do something different with this! Use other output types, use other input types, filter differently, map differently - Have fun! And tell us what you did. Deploy it. We can’t wait to see!</p>
 </div>
 

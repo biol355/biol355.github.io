@@ -9,7 +9,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ## Shiny Homework
-Having a homework for shiny that builds through multiple steps is...kinda nuts. What I'd like you to do is save an R file for each one (prepend 1_, 2_, 3_, etc. so we know which number it is) and then zip it up to submit. For when you post the app, give us a URL!
+Having a homework for shiny that builds through multiple steps is...kinda nuts. What I'd like you to do is save an R file for each one (prepend 1_, 2_, 3_, etc. so we know which number it is) and then zip it all up to submit. For when you post the app, give us a URL!
 
 There are a LOT of extra credit options here. You don't have to do them in order, or do them all. But, take a gander. This is all to help you prep for your final project!
 
@@ -33,11 +33,11 @@ Today, we'll build a shiny app that works with this data.
 
 ## 1. Make a shiny template that runs
 
-You know how to do this. Use Rstudio or hand-code your own template. Save it as `app.R`. Have it load the data above (straight from the source!) Make sure that it runs. 
+You know how to do this. Use Rstudio or hand-code your own template. Save it as `1_app.R`. Have it load the data above (straight from the source!) Make sure that it runs. 
 
 ## 2. Add a Layout
 
-Choose a layout. It can be a sidebar layout, as we've been doing, or, try setting up something different from [here](https://shiny.rstudio.com/articles/layout-guide.html)
+Choose a layout. It can be a sidebar layout, as we've been doing, or, try setting up something different from [here](https://shiny.rstudio.com/articles/layout-guide.html). Save this as `2_app.R` after making sure your app runs!
 
 ## 3. Got a layout? Cool. Add a theme.
 There are a LOT of themes for shiny. The ones that come pre-installed are [here](https://rstudio.github.io/shinythemes/) along with a tutorial. Make your app stylin! Make sure your app runs.
@@ -55,7 +55,7 @@ OK, now have it create a ggplot that, using `plotOutput()` and `renderPlot()` sh
 
 ## 6. Make it reactive
 
-Now, add two inputs. One allows users to chose a country. The second allows them to select the type of cases to display (confirmed, death, recovered). Use whatever `*Input` functions you would like. For the country and type, have it show trends and the data table. Make sure your app runs.
+Now, add two inputs. One allows users to chose a country. The second allows them to select the type of cases to display (confirmed, death, recovered). Use whatever `*Input` functions you would like. Now, where you have OUTPUTS for global trends and a tail of a data table, replace them with outputs that show the trend for the selected country and type and the table for the selected country and type.  Make sure your app runs.
 
 ## 7. Deploy your app!
 Using http://shinyapps.io, deploy your app! Tell us the link!
@@ -65,12 +65,16 @@ Use [tabsets](https://shiny.rstudio.com/articles/tabsets.html) so that all of th
 
 ## 9. Map Extra Credit (for full credit of another question)
 
-Using `tmap`, `leafletOutput()`, and `renderLeaflet()` (don't worry, shiny takes care of making it interactive) add a worldmap somewhere (your choice how to do this layout - will be easier with the tabs!) that shows the final # of whatever type you have selected across a worldmap (hey, you know how to merge this data with a worldmap - maybe you have some code for it, that, for additional extra credit, you can source in!) For double your extra credit, when you select a country, have it zoom in on the country (replot but center on that country).
+Using `tmap`, `leafletOutput()`, and `renderLeaflet()` (don't worry, shiny takes care of making it interactive) add a worldmap somewhere (your choice how to do this layout - will be easier with the tabs!) that shows the final # of whatever type you have selected across a worldmap (hey, you know how to merge this data with a worldmap - maybe you have some code for it, that, for additional extra credit, you can source in!) 
 
-## 10. MOAR MAP Extra Credit (for 2x full credit of another question)
-Can you use things at smaller spatial scales than countries?  Or even show just that country and the things in it? And do it well!
+## 10. MOAR Map Extra Credit (for full credit of another question)
 
-## 11. Even More Extra Credit (for full credit of another question)
+Set up the app so that, when you select a country, have it zoom in on the country (replot but center on that country).
+
+## 11. MOAR MOAR MAP Extra Credit (for 2x full credit of another question)
+Can you use information at smaller spatial scales than countries?  You might have to use another spatial data source - at least a different function within `rnaturalearth` or from somewhere else. Either have this smaller-scale information represented on the global map OR when you select a country, plot JUST that country with smaller province/state areas as the internal borders. Good luck! 
+
+## 12. Even More Extra Credit (for full credit of another question)
 
 Go wild. Do something different with this! Use other output types, use other input types, filter differently, map differently - Have fun! And tell us what you did. Deploy it. We can't wait to see!
 
