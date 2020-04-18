@@ -1,0 +1,88 @@
+---
+title: "T-Tests"
+author: "Intro to Data Science"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+### 1) DOA Lizards
+Horned lizards have a problem. They get eaten by birds. BUT they are horned for a reason. Those horns might well protect them from being eaten. We have a data set of lizards with their aquamosal horn length. Lizards were either sampled live from the wild (Survive = 1), or from the corpses of those killed by birds (Survive = 0). Load up the data (noting that you'll have to deal with a non-standard `na.strings`) and using ``ggplot2` plot a histogram of the horn length of living and dead lizards.
+
+```{r data-load, message=FALSE, warning=FALSE, echo=FALSE}
+library(dplyr)
+library(ggplot2)
+lizards <- read.csv("../Lectures/t_test/12e3HornedLizards.csv", na.strings=".")
+```
+
+### 2) T-Test with Equal Sample Sizes
+Let's try the simplest two-sample unpaired t-test with this data. But to satisfy that, we'll have to make one change first...
+
+#### 2a) Making a balanced data frame
+A basic two-sample unpaired t-test needs sample sizes that are the same for both treatments. Using dplyr, make a data set that has 30 entries for both survival classes. You'll need to use both `group_by` and either `slice` or `sample_n` depending on your approach.
+
+```{r echo=FALSE}
+clean_lizards <- lizards %>%
+  group_by(Survive) %>%
+  slice(1:30) %>%
+  ungroup()
+```
+
+#### 2b) Put it to the test
+With this new data set, use `t.test` to run a t-test on the data. Note, the default values for the `t.test` function do not do a simple unpaired t-test with equal variances. You'll have to look at the help file to make sure you set the arguments properly. What are the results?
+
+```{r echo=FALSE, eval=FALSE}
+t.test(Squamosal.horn.length ~ Survive, 
+       data=clean_lizards, var.equal=TRUE)
+```
+
+#### 2c) Assume nothing
+OK, now that you have an answer, let's make sure it's the right one. Evaluate the normality of the residuals of this t-test, and make sure the residuals for each group are normal centered on 0. Do this by visualizing histograms of residuals overall and by treatment. `dplyr` might help you here. 
+
+Is this test OK? Do you believe it? If not, what do you need to do to the data to meet the assumptions of the t-test?
+
+```{r, echo=FALSE, eval=FALSE}
+clean_lizards <- clean_lizards %>%
+  group_by(Survive) %>%
+  mutate(residual=Squamosal.horn.length-mean(Squamosal.horn.length)) %>%
+  ungroup()
+
+
+ggplot(data=clean_lizards, 
+       aes(x=residual)) +
+  geom_histogram(bins=10)
+
+ggplot(data=clean_lizards, 
+       aes(x=residual, fill=factor(Survive))) +
+  geom_histogram(bins=10)+
+  facet_wrap(~Survive)
+
+```
+
+### 3) T-Test with Unequal Sample Sizes
+OK, we actually have a lot more data for surviving than dead horned lizards. How do the results of your t-test differ if you use all of the data, again, assuming that each population has the same variance. Apply any transformation to the data you feel appropriate given your tests of assumptions.
+```{r echo=FALSE, eval=FALSE}
+t.test(log(Squamosal.horn.length) ~ Survive, 
+       data=lizards, var.equal=TRUE)
+```
+
+### 4) T-Test with Unequal Sample Sizes and Variances
+Now, how do the results differ if you DON'T assume equal variances in addition to using unequal sample sizes? Apply any transformation to the data you feel appropriate given your tests of assumptions. 
+
+```{r echo=FALSE, eval=FALSE}
+t.test(log(Squamosal.horn.length) ~ Survive, 
+       data=lizards, var.equal=FALSE)
+```
+
+### 5) Final Prep: More Questions  
+We've emphasized *what is your question* throughout the semester. Look at your dataset. What are *four* different questions that you could ask using your dataset.  
+
+### 6) Final Prep: Data manipulation  
+Is the raw data you have accessed in the format you want to answer all of the questions above? If so, describe how and why it is positioned to answer the question. What would you do with it? If not, describe what changes you would need to make to the data.  
+
+### 7) Final Prep: Visualize  
+Last week, you built one visualization that is connected to your dataset. Now, given that you have four questions above, filter and manipulate your data (if necessary) to create one kind of visualization that answers a question in #5. Style the visualization in such a way that it's not just default parameters, but something you would feel comfortable being published in a newspaper.  
+

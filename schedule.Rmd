@@ -178,7 +178,7 @@ __Biological Examples:__ The effects of testosterone on bird behavior.
 __Lab:__ [T-Tests](./Labs/lab_9_t.html)  
 __Files:__ [Blackbird Testosterone Implants](./Labs/data/12e2BlackbirdTestosterone.csv), [Survivorship of Salmon and Trout](./Labs/data/12e4BrookTrout.csv)  
 __Etherpad:__ https://etherpad.wikimedia.org/p/355-ttest-2020  
-__Homework:__ [Functions and t-tests](./assignments/7_functions_tidyr.html), [Marmoset data](./assignments/monkey_weights.xlsx), [Submit here!](https://www.dropbox.com/request/b39kxrSyRPw9O8OtuTQi)    
+__Homework:__ [t-tests](./Assignments/9_t.html), [Lizard data](./Lectures/t_test/12e3HornedLizards.csv)  
   
 ### Week 12. Analysis of Variance and the Linear Model
 ```{r next_date, echo=FALSE}

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<meta name="author" content="Intro to Data Science" />
+
+<meta name="date" content="2020-04-18" />
+
+<title>T-Tests</title>
+
+
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#header {
+text-align: center;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; }  code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">T-Tests</h1>
+<h4 class="author">Intro to Data Science</h4>
+<h4 class="date">2020-04-18</h4>
+
+
+
+<div id="doa-lizards" class="section level3">
+<h3>1) DOA Lizards</h3>
+<p>Horned lizards have a problem. They get eaten by birds. BUT they are horned for a reason. Those horns might well protect them from being eaten. We have a data set of lizards with their aquamosal horn length. Lizards were either sampled live from the wild (Survive = 1), or from the corpses of those killed by birds (Survive = 0). Load up the data (noting that you’ll have to deal with a non-standard <code>na.strings</code>) and using `<code>ggplot2</code> plot a histogram of the horn length of living and dead lizards.</p>
+</div>
+<div id="t-test-with-equal-sample-sizes" class="section level3">
+<h3>2) T-Test with Equal Sample Sizes</h3>
+<p>Let’s try the simplest two-sample unpaired t-test with this data. But to satisfy that, we’ll have to make one change first…</p>
+<div id="a-making-a-balanced-data-frame" class="section level4">
+<h4>2a) Making a balanced data frame</h4>
+<p>A basic two-sample unpaired t-test needs sample sizes that are the same for both treatments. Using dplyr, make a data set that has 30 entries for both survival classes. You’ll need to use both <code>group_by</code> and either <code>slice</code> or <code>sample_n</code> depending on your approach.</p>
+</div>
+<div id="b-put-it-to-the-test" class="section level4">
+<h4>2b) Put it to the test</h4>
+<p>With this new data set, use <code>t.test</code> to run a t-test on the data. Note, the default values for the <code>t.test</code> function do not do a simple unpaired t-test with equal variances. You’ll have to look at the help file to make sure you set the arguments properly. What are the results?</p>
+</div>
+<div id="c-assume-nothing" class="section level4">
+<h4>2c) Assume nothing</h4>
+<p>OK, now that you have an answer, let’s make sure it’s the right one. Evaluate the normality of the residuals of this t-test, and make sure the residuals for each group are normal centered on 0. Do this by visualizing histograms of residuals overall and by treatment. <code>dplyr</code> might help you here.</p>
+<p>Is this test OK? Do you believe it? If not, what do you need to do to the data to meet the assumptions of the t-test?</p>
+</div>
+</div>
+<div id="t-test-with-unequal-sample-sizes" class="section level3">
+<h3>3) T-Test with Unequal Sample Sizes</h3>
+<p>OK, we actually have a lot more data for surviving than dead horned lizards. How do the results of your t-test differ if you use all of the data, again, assuming that each population has the same variance. Apply any transformation to the data you feel appropriate given your tests of assumptions.</p>
+</div>
+<div id="t-test-with-unequal-sample-sizes-and-variances" class="section level3">
+<h3>4) T-Test with Unequal Sample Sizes and Variances</h3>
+<p>Now, how do the results differ if you DON’T assume equal variances in addition to using unequal sample sizes? Apply any transformation to the data you feel appropriate given your tests of assumptions.</p>
+</div>
+<div id="final-prep-more-questions" class="section level3">
+<h3>5) Final Prep: More Questions</h3>
+<p>We’ve emphasized <em>what is your question</em> throughout the semester. Look at your dataset. What are <em>four</em> different questions that you could ask using your dataset.</p>
+</div>
+<div id="final-prep-data-manipulation" class="section level3">
+<h3>6) Final Prep: Data manipulation</h3>
+<p>Is the raw data you have accessed in the format you want to answer all of the questions above? If so, describe how and why it is positioned to answer the question. What would you do with it? If not, describe what changes you would need to make to the data.</p>
+</div>
+<div id="final-prep-visualize" class="section level3">
+<h3>7) Final Prep: Visualize</h3>
+<p>Last week, you built one visualization that is connected to your dataset. Now, given that you have four questions above, filter and manipulate your data (if necessary) to create one kind of visualization that answers a question in #5. Style the visualization in such a way that it’s not just default parameters, but something you would feel comfortable being published in a newspaper.</p>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
