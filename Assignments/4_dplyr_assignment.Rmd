@@ -1,6 +1,6 @@
 ---
 title: "Dplyr Homework"
-author: "Jarrett Byrnes"
+author: "Biol 355"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: html_document
 ---
