@@ -1,0 +1,535 @@
+---
+title: "Linear Model Lab"
+author: "Biol 355"
+output:
+  html_document:
+    toc: true
+    toc_depth: 5
+    toc_float: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Believe it or not, despite all of the complexity under the hood, fitting a linear model in R with least squares is quite simple with a straightfoward workflow.
+
+1. Load the data
+2. Visualize the data - just to detect problems and perform a cursory test of assumptions!
+3. Fit the model.
+4. Use the fit model to test assumptions
+5. Evaluate the model
+6. Visualize the fit model
+
+Let's go through each step with an example of seals. Are older seals larger?
+
+## 0. Load and visualize the data
+
+### Are Older Seals Bigger?
+```{r}
+library(dplyr)
+library(ggplot2)
+
+seals <- read.csv("./data/17e8ShrinkingSeals Trites 1996.csv")
+
+seal_base <- ggplot(seals, aes(x=age.days, y=length.cm)) +
+  geom_point() +
+  theme_grey(base_size=14)
+
+seal_base
+```
+
+Neat data set, no?
+
+Now, looking at this from the get-go, we can see it's likely nonlinear. Maybe even non-normal! Let's ignore that for now, as it will make the results great fodder for our diagnostics!
+
+## 1. Fitting a model
+
+OK, so, you have the data. And in your model, you want to see how age is a predictor of length. How do you fit it?
+
+Nothing could be simpler. R has a function called `lm()` which stands for linear model. It works just like base plot, with the `y ~ x` syntax. And we create a fit model object.
+
+```{r lm}
+seal_lm <- lm(length.cm ~ age.days, data=seals)
+```
+
+That's it.
+
+Now, if we want to just peak at the fit, before going forward, we can use `coef()` which is pretty standard across all R fit model functions.
+
+```{r coef}
+coef(seal_lm)
+```
+
+But that's getting ahead of ourselves...
+
+## 2. Evaluating Assumptions
+
+R also provides a 1-stop shop for evaluating functions. Fit model objects can typically be plotted. Now, it uses base plot, so, we'll use the `par` function to setup a 2x2 plotting area.
+
+```{r assumptions}
+par(mfrow = c(2,2)) #2 rows, 2 columns
+
+plot(seal_lm)
+
+par(mfrow=c(1,1)) #reset back to 1 panel
+```
+
+Whoah - that's a lot! And, there's no figure with Cook's D or a histogram of residuals.
+
+OK, breathe.
+
+`plot.lm()` actualyl generates even more plots than shown here. You can specify what plot you want with the `which` argument, but will need to look at `?plot.lm` to know just what to look at.
+
+I have five plots I really like to look at - four of which `plot.lm()` will generate. Those four are the fitted versus residuals:
+
+```{r assumptions_fit_resid}
+plot(seal_lm, which=1)
+```
+
+Note the curvature of the line? Troubling, or a high n?
+
+A QQ plot of the residuals
+```{r qq}
+plot(seal_lm, which=2)
+```
+Not bad!
+
+The Cook's D values
+```{r cooks}
+plot(seal_lm, which=4)
+```
+All quite small!
+
+And last, leverage
+```{r leverage}
+plot(seal_lm, which=5)
+```
+
+I also like to look at the histogram of residuals.There is a function called `residuals` that will work on nearly any fit model object in R. So we can just...
+
+```{r resid_hist}
+hist(residuals(seal_lm))
+```
+
+Note, there's also a library called modelr which can add the appropriate residuals to your data frame using a dplyr-like syntax. 
+
+```{r modelr_resd}
+library(modelr)
+
+seals <- seals %>%
+  add_residuals(seal_lm)
+
+head(seals)
+```
+
+Check out that new column. You can now plot your predictor versus residuals, which should show no trend, which you can use a spline with stat_smooth to see.
+
+```{r obs_resid}
+qplot(age.days, resid, data=seals) +
+  stat_smooth()
+```
+
+And you can also add fitted values and look at fitted versus residual.
+
+```{r modelr_fit}
+seals <- seals %>%
+  add_predictions(seal_lm)
+
+qplot(pred, resid, data=seals) +
+  stat_smooth(method="lm")
+```
+
+## 3. Putting it to the test
+OK, ok, everything looks fine. Now, how do we test our model.
+
+First, F-tests! R has a base method called `anova` which - well, it's for looking at analysis of partitioning variance, but really will take on a wide variety of forms as we go forward. For now, it will produce F tables for us
+
+```{r anova_seals}
+anova(seal_lm)
+```
+
+Boom! P values! And they are low. Simple, no?
+
+For more information - t tests, R<sup2>2</sup>, and more, we can use `summary()` - again, a function that is a go-to for nearly any fit model.
+
+```{r summary}
+summary(seal_lm)
+```
+
+This is a lot of information to drink in - function call, distribution of residuals, coefficient t-tests, and multiple pieces of information about total fit.
+
+We may want to get this information in a more condensed form for use in other contexts - particularly to compare against other models.  For that, there's a wonderful packages called `broom` that sweeps up your model into easy digestable pieces.
+
+First, the coefficient table - let's make it pretty.
+```{r broom}
+library(broom)
+
+tidy(seal_lm)
+```
+
+Nice.
+
+We can also do this for the F-test.
+
+```{r broom_anova}
+tidy(anova(seal_lm))
+```
+
+If we want to get information about fit, there's `glance()`
+
+```{r glance}
+glance(seal_lm)
+```
+
+## 4. Visualization
+
+Lovely! Now, how do we visualize the fit and fit prediction error?
+
+In `ggplot2` we can use the smoother, `stat_smooth` in conjunction with `method = "lm"` to get the job done.
+
+```{r show_data}
+seal_fit_plot <- ggplot(data=seals) +
+  aes(x=age.days, y=length.cm) +
+  geom_point() +
+  stat_smooth(method="lm")
+
+seal_fit_plot
+```
+
+
+## 5. Faded Examples.
+
+#### A Fat Model
+Fist, the relationship between how lean you are and how quickly you lose fat. Implement this to get a sense ot the general workflow for analysis
+
+```{r, eval=FALSE}
+library(ggplot2)
+fat <- read.csv("./data/17q04BodyFatHeatLoss Sloan and Keatinge 1973 replica.csv")
+
+#initial visualization to determine if lm is appropriate
+fat_plot <- ggplot(data=fat, aes(x=leanness, y=lossrate)) + 
+  geom_point()
+fat_plot
+
+fat_mod <- lm(lossrate ~ leanness, data=fat)
+
+#assumptions
+plot(fat_mod, which=1)
+plot(fat_mod, which=2)
+
+#f-tests of model
+anova(fat_mod)
+
+#t-tests of parameters
+summary(fat_mod)
+
+#plot with line
+fat_plot + 
+  stat_smooth(method=lm, formula=y~x)
+```
+
+#### An Itchy Followup  
+For your first faded example, let's look at the relationship between DEET and mosquito bites.
+
+```{r eval=FALSE}
+deet <- read.csv("./data/17q24DEETMosquiteBites.csv")
+
+deet_plot <- ggplot(data=___, aes(x=dose, y=bites)) + 
+  geom_point()
+
+deet_plot
+
+deet_mod <- lm(bites ~ dose, data=deet)
+
+#assumptions
+plot(___, which=1)
+plot(___, which=2)
+
+#f-tests of model
+anova(___)
+
+#t-tests of parameters
+summary(___)
+
+#plot with line
+deet_plot + 
+  stat_smooth(method=lm, formula=y~x)
+```
+
+## 6.One-Way ANOVA Model
+We'll start today with the dataset `15e1KneesWhoSayNight.csv` about an experiment to help resolve jetlag by having people shine lights at different parts of themselves to try and shift their internal clocks.
+
+```{r knees}
+library(tidyverse)
+
+knees <- read_csv("./data/15e1KneesWhoSayNight.csv")
+```
+
+We can see the outcomes with `ggplot2`
+
+```{r knees_plot}
+library(ggplot2)
+ggplot(knees, mapping=aes(x=treatment, y=shift)) +
+  stat_summary(color="red", size=1.3) +
+    geom_point(alpha=0.7) +
+  theme_bw(base_size=17)
+```
+
+### 6.1 LM, AOV, and Factors
+As the underlying model of ANOVA is a linear one, we fit ANOVAs using `lm()` just as with linear regression.
+
+```{r intro_knees}
+knees <- read.csv("./data/15e1KneesWhoSayNight.csv")
+
+knees_lm <- lm(shift ~ treatment, data=knees)
+```
+
+Now, there are two things to notice here. One, note that treatment is a either a character or factor. If it is not, because we are using `lm()`, it will be fit like a linear regression. So, beware!
+
+There **is** an ANOVA-specific model fitting function - `aov`.
+
+```{r aov}
+knees_aov <- aov(shift ~ treatment, data=knees)
+```
+
+It's ok, I guess, and works with a few functions that `lm()` objects do not. But, in general, I find it too limiting. You can't see coefficients, etc. Boooooring.
+
+### 6.2 Assumption Evaluation
+
+Because this is an lm, we can check our assumptions as before - with one new one.  First, some oldies but goodies.
+
+```{r assumptionsanova}
+#The whole par thing lets me make a multi-panel plot
+par(mfrow=c(2,2))
+plot(knees_lm, which=c(1,2,5))
+par(mfrow=c(1,1))
+```
+
+Now, the residuals v. fitted lets us see how the residuals are distributed by treatment, but I often find it insufficient, as spacing on the x-axis can get odd. I could roll my own plot of resudials versus treatment, but, there's a **wonderful** package called `car` - which is from the book *Companion to Applied Regression* by John Fox. I recommend it highly! It has a function in it called `residualPlots()` which is useful here.
+
+```{r residualPlots, warning=FALSE}
+library(car)
+residualPlots(knees_lm)
+```
+
+Note how it both does fitted v. residuals but also a boxplot by treatment. Handy, no?
+
+### 6.3 F-Tests
+
+OK, so, let's see the ANOVA table! With the function....`anova()`!
+
+```{r anova_knees}
+anova(knees_lm)
+```
+
+Now....this is a type I sums of squares test. Which is fine for a 1-way ANOVA. If you want to start getting into the practice of using type II, `car` provides a function `Anova()` - note the capital A - which defaults to type II and I use instead. In fact, I use it all the time, as it handles a wide set of different models.
+
+```{r Anova_knees}
+Anova(knees_lm)
+```
+
+Here it matters not a whit as you get the same table.
+
+
+### 6.4 Post-hoc Tests
+
+So, there are a lot of things we can do with a fit model
+
+#### 6.4.0 Summary Output
+
+```{r anova_summar}
+summary(knees_lm)
+```
+
+First, notice that we get the same information as a linear regression - including $R^2$ and overall model F-test. THis is great. We also get coefficients, but, what do they mean?
+
+Well, they are the treatment contrasts. Not super useful. R fits a model where treatment 1 is the intercept, and then we look at deviations from that initial treatment as your other coefficients. It's efficient, but, hard to make sense of. To not get an intercept term, you need to refit the model without the intercept. You can fit a whole new model with `-1` in the model formulation. Or, as I like to do to ensure I don't frak anything up, you can `update()` your model. Just use `.` to signify *what was there before*.
+
+```{r update_summary}
+knees_lm_no_int <- update(knees_lm, formula = . ~ . -1)
+
+summary(knees_lm_no_int)
+```
+
+OK - that makes more sense. For a 1-way ANOVA, we can also see treatment means using the `emmeans` package - much more on that next week (and later below for contrasts).
+
+```{r emmeans, message=FALSE}
+library(emmeans)
+library(multcompView)
+
+emmeans(knees_lm, ~treatment)
+```
+
+I also like this because it outputs CIs.
+
+We see means and if they are different from 0. But....what about post-hoc tests
+
+#### 6.4.1 A Priori Contrasts
+
+If you have a priori contrasts, you can use the `constrat` library to test them. You give contrast an a list and a b list. Then we get all comparisons of a v. b, in order. It's not great syntactically, but, it lets you do some pretty creative things.
+
+```{r contrasts, message=FALSE}
+contrast::contrast(knees_lm, 
+         a = list(treatment = "control"), 
+         b = list(treatment = "eyes"))
+```
+
+#### 6.4.2 Tukey's HSD
+Meh. 9 times out of 10 we want to do something more like a Tukey Test. There is a `TukeyHSD` function that works on `aov` objects, but, if you're doing anything with an `lm`, it borks on you. Instead, let's use `emmeans`. It is wonderful as it's designed to work with ANOVA and ANCOVA models with complicated structures such that, for post-hocs, it adjusts to the mean or median level of all other factors. Very handy. 
+
+```{r tukey_emmeans}
+knees_em <- emmeans(knees_lm, ~treatment)
+
+contrast(knees_em,
+        method = "tukey")
+```
+
+We don't need to worry about many of the fancier things that emmeans does for the moment - those will become more useful with other models. But, we can look at this test a few different ways. First, we can visualize it
+
+```{r plot_tukey}
+plot(contrast(knees_em,
+        method = "tukey")) +
+  geom_vline(xintercept = 0, color = "red", lty=2)
+```
+
+We can also, using our tukey method of adjustment, get "groups" - i.e., see which groups are statistically the same versus different.
+
+```{r groups}
+library(multcompView)
+CLD(knees_em, adjust="tukey")
+```
+
+This can be very useful in plotting. For example, we can use that output as a data frame for a `ggplot` in a few different ways.
+
+```{r plot_groups}
+CLD(knees_em, adjust="tukey") %>%
+  ggplot(aes(x = treatment, y = emmean, 
+             ymin = lower.CL, ymax = upper.CL,
+             color = factor(.group))) +
+  geom_pointrange() 
+
+
+CLD(knees_em, adjust="tukey") %>%
+  mutate(.group = letters[as.numeric(.group)]) %>%
+  ggplot(aes(x = treatment, y = emmean, 
+             ymin = lower.CL, ymax = upper.CL)) +
+  geom_pointrange() +
+  geom_text(mapping = aes(label = .group), y = rep(1, 3)) +
+  ylim(c(-2.5, 2))
+
+
+knees_expanded <- left_join(knees, CLD(knees_em, adjust="tukey"))
+ggplot(knees_expanded,
+       aes(x = treatment, y = shift, color = .group)) + 
+  geom_point()
+```
+
+#### 6.4.2 Dunnet's Test
+
+We can similarly use this to look at a Dunnett's test, which compares against the control
+```{r bunnett_emmeans}
+contrast(knees_em,
+        method = "dunnett")
+```
+
+Note, if the "control" had not been the first treatment, you can either re-order the factor using `forcats` or just specify which of the levels is the control. For example, eyes is the second treatment. Let's make it our new reference.
+
+```{r bunnett_emmeans_2}
+contrast(knees_em,
+        method = "dunnett", ref=2)
+```
+
+You can even plot these results
+```{r plot_contrast}
+plot(contrast(knees_em,
+        method = "dunnett", ref=2)) +
+  geom_vline(xintercept = 0, color = "red", lty=2)
+```
+
+
+
+#### 6.4.2 Bonferroni Correction and FDR
+
+Let's say you wanted to do all pairwise tests, but, compare using a Bonferroni correction or FDR. Or none! No problem! There's an `adjust` argument
+
+```{r tukey_emmeans_other_adjust}
+contrast(knees_em,
+        method = "tukey", adjust="bonferroni")
+
+
+contrast(knees_em,
+        method = "tukey", adjust="fdr")
+
+contrast(knees_em,
+        method = "tukey", adjust="none")
+```
+
+
+
+### 7. ANOVA Faded Examples
+Let's try three ANOVAs!
+First - do landscape characteristics affect the number of generations plant species can exist before local extinction?
+
+```{r plants, eval=FALSE}
+plants <- read.csv("./data/15q01PlantPopulationPersistence.csv")
+
+#Visualize
+qplot(treatment, generations, data=plants, geom="boxplot")
+
+#fit
+plant_lm <- lm(generations ~ treatment, data=plants)
+
+#assumptions
+plot(plant_lm, which=c(1,2,4,5))
+
+#ANOVA
+anova(plant_lm)
+
+#Tukey's HSD
+contrast(emmeans(plant_lm, ~treatment), method = "tukey")
+```
+
+Second, how do different host types affect nematode longevity?
+
+
+```{r nemetods, eval=FALSE}
+worms <- read.csv("./data/15q19NematodeLifespan.csv")
+
+#Visualize
+qplot(treatment, lifespan, data=____, geom="____")
+
+#fit
+worm_lm <- lm(______ ~ ______, data=worms)
+
+#assumptions
+plot(______, which=c(1,2,4,5))
+
+#ANOVA
+anova(______)
+
+#Tukey's HSD
+contrast(emmeans(______, ~________), method = "tukey")
+```
+
+And last, how about how number of genotypes affect eelgrass productivity. Note, THERE IS A TRAP HERE. Look at your dataset before you do ANYTHING.
+
+```{r eelgrass, eval=FALSE}
+eelgrass <- read.csv("./data/15q05EelgrassGenotypes.csv")
+
+#Visualize
+________(treatment.genotypes, shoots, data=____, geom="____")
+
+#fit
+eelgrass_lm <- __(______ ~ ______, data=________)
+
+#assumptions
+________(______, which=c(1,2,4,5))
+
+#ANOVA
+________(______)
+
+#Tukey's HSD
+contrast(________(______, ~________), method = "________")
+```
+
