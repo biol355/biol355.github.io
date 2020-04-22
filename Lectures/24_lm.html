@@ -13,7 +13,7 @@
 <style type="text/css">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -26,13 +26,11 @@ code.sourceCode { white-space: pre-wrap; }
 a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
 pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
+  { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
   { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -515,7 +513,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 
 <section id="diving-into-the-linear-model" class="slide level2">
 <h2>Diving into the Linear Model</h2>
-<p><img data-src="./Images/lm/linear_regression_love.gif" style="width:50.0%" /></p>
+<p><img data-src="Images/lm/linear_regression_love.gif" style="width:50.0%" /></p>
 </section>
 <section id="deeper-into-the-world-of-linear-models" class="slide level2">
 <h2>Deeper into the World of Linear Models</h2>
@@ -527,7 +525,7 @@ document.getElementsByTagName('head')[0].appendChild(style);
 </section>
 <section id="the-knees-the-thing" class="slide level2">
 <h2>The Knee’s The Thing!</h2>
-<p><img data-src="./Images/anova/_47947_knee300.jpg" /> <br><br></p>
+<p><img data-src="Images/anova/_47947_knee300.jpg" /> <br><br></p>
 <ul>
 <li>Test if shining light behind knees or on eyes helped jet lag</li>
 <li>Also a control group with no light</li>
@@ -575,10 +573,10 @@ document.getElementsByTagName('head')[0].appendChild(style);
 <a class="sourceLine" id="cb1-3" data-line-number="3"></a>
 <a class="sourceLine" id="cb1-4" data-line-number="4"><span class="kw">contrast</span>(<span class="kw">emmeans</span>(mod, <span class="dt">specs =</span> <span class="st">&quot;treatment&quot;</span>),</a>
 <a class="sourceLine" id="cb1-5" data-line-number="5">         <span class="dt">method =</span> <span class="st">&quot;pairwise&quot;</span>, <span class="dt">adjust =</span> <span class="st">&quot;none&quot;</span>)</a></code></pre></div>
-<pre><code>##  contrast          estimate        SE df t.ratio p.value
-##  control - eyes  1.24267857 0.3643283 19   3.411  0.0029
-##  control - knee  0.02696429 0.3643283 19   0.074  0.9418
-##  eyes - knee    -1.21571429 0.3762767 19  -3.231  0.0044</code></pre>
+<pre><code>##  contrast       estimate    SE df t.ratio p.value
+##  control - eyes    1.243 0.364 19  3.411  0.0029 
+##  control - knee    0.027 0.364 19  0.074  0.9418 
+##  eyes - knee      -1.216 0.376 19 -3.231  0.0044</code></pre>
 </section>
 <section id="bonferroni-corrections" class="slide level2">
 <h2>Bonferroni Corrections</h2>
@@ -586,10 +584,10 @@ document.getElementsByTagName('head')[0].appendChild(style);
 m = # of comparisons</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="kw">contrast</span>(<span class="kw">emmeans</span>(mod, <span class="dt">specs =</span> <span class="st">&quot;treatment&quot;</span>),</a>
 <a class="sourceLine" id="cb3-2" data-line-number="2">         <span class="dt">method =</span> <span class="st">&quot;pairwise&quot;</span>, <span class="dt">adjust =</span> <span class="st">&quot;bonferroni&quot;</span>)</a></code></pre></div>
-<pre><code>##  contrast          estimate        SE df t.ratio p.value
-##  control - eyes  1.24267857 0.3643283 19   3.411  0.0088
-##  control - knee  0.02696429 0.3643283 19   0.074  1.0000
-##  eyes - knee    -1.21571429 0.3762767 19  -3.231  0.0132
+<pre><code>##  contrast       estimate    SE df t.ratio p.value
+##  control - eyes    1.243 0.364 19  3.411  0.0088 
+##  control - knee    0.027 0.364 19  0.074  1.0000 
+##  eyes - knee      -1.216 0.376 19 -3.231  0.0132 
 ## 
 ## P value adjustment: bonferroni method for 3 tests</code></pre>
 </section>
@@ -600,10 +598,10 @@ m = # of comparisons<br />
 k = rank of comparison</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw">contrast</span>(<span class="kw">emmeans</span>(mod, <span class="dt">specs =</span> <span class="st">&quot;treatment&quot;</span>),</a>
 <a class="sourceLine" id="cb5-2" data-line-number="2">         <span class="dt">method =</span> <span class="st">&quot;pairwise&quot;</span>, <span class="dt">adjust =</span> <span class="st">&quot;fdr&quot;</span>)</a></code></pre></div>
-<pre><code>##  contrast          estimate        SE df t.ratio p.value
-##  control - eyes  1.24267857 0.3643283 19   3.411  0.0066
-##  control - knee  0.02696429 0.3643283 19   0.074  0.9418
-##  eyes - knee    -1.21571429 0.3762767 19  -3.231  0.0066
+<pre><code>##  contrast       estimate    SE df t.ratio p.value
+##  control - eyes    1.243 0.364 19  3.411  0.0066 
+##  control - knee    0.027 0.364 19  0.074  0.9418 
+##  eyes - knee      -1.216 0.376 19 -3.231  0.0066 
 ## 
 ## P value adjustment: fdr method for 3 tests</code></pre>
 </section>
@@ -614,10 +612,10 @@ Test statistic: q = <span class="math inline">\((\mu_a - \mu_b)/SE\)</span> wher
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">tuk &lt;-<span class="st"> </span><span class="kw">contrast</span>(<span class="kw">emmeans</span>(mod, <span class="dt">specs =</span> <span class="st">&quot;treatment&quot;</span>),</a>
 <a class="sourceLine" id="cb7-2" data-line-number="2">         <span class="dt">method =</span> <span class="st">&quot;pairwise&quot;</span>, <span class="dt">adjust =</span> <span class="st">&quot;tukey&quot;</span>)</a>
 <a class="sourceLine" id="cb7-3" data-line-number="3">tuk</a></code></pre></div>
-<pre><code>##  contrast          estimate        SE df t.ratio p.value
-##  control - eyes  1.24267857 0.3643283 19   3.411  0.0079
-##  control - knee  0.02696429 0.3643283 19   0.074  0.9970
-##  eyes - knee    -1.21571429 0.3762767 19  -3.231  0.0117
+<pre><code>##  contrast       estimate    SE df t.ratio p.value
+##  control - eyes    1.243 0.364 19  3.411  0.0079 
+##  control - knee    0.027 0.364 19  0.074  0.9970 
+##  eyes - knee      -1.216 0.376 19 -3.231  0.0117 
 ## 
 ## P value adjustment: tukey method for comparing a family of 3 estimates</code></pre>
 </section>
@@ -634,7 +632,7 @@ Test statistic: q = <span class="math inline">\((\mu_a - \mu_b)/SE\)</span> wher
 <li>Nonlinear Regression</li>
 </ol>
 </section>
-<section id="aging-seals" class="slide level2" data-background="./lm/three-seals-on-the-beach.jpg">
+<section id="aging-seals" class="slide level2" data-background="./Images/lm/three-seals-on-the-beach.jpg">
 <h2><font color="white">Aging Seals</font></h2>
 </section>
 <section id="are-older-seals-bigger" class="slide level2">
@@ -679,11 +677,10 @@ Describes the relationship between two variables. Not scaled.
 <p><br><br><br> <span class="math display">\[\sigma_{XY} = \frac{\sum (X-\bar{X})(y-\bar{Y})}{n-1}\]</span></p>
 </div>
 </div>
-<div id="right">
-<div class="fragment" style="vertical-align: text-top;">
+</section>
+<section id="covariance" class="slide level2">
+<h2>Covariance</h2>
 <p><img src="24_lm_files/figure-revealjs/rnormPlot_cov-1.png" width="480" /></p>
-</div>
-</div>
 </section>
 <section id="pearson-correlation" class="slide level2">
 <h2>Pearson Correlation</h2>
@@ -694,9 +691,10 @@ Scaled between -1 and 1.<br />
 <div id="left" class="fragment">
 <p><br><br><br> <span class="math display">\[\Large\rho_{xy} = \frac{\sigma_{xy}}{\sigma_{x}\sigma_{y}}\]</span></p>
 </div>
-<div id="right" class="fragment">
+</section>
+<section id="pearson-correlation-1" class="slide level2">
+<h2>Pearson Correlation</h2>
 <p><img src="24_lm_files/figure-revealjs/rnormPlot_cor-1.png" width="480" /></p>
-</div>
 </section>
 <section id="get-r-in-your-bones" class="slide level2">
 <h2>Get r in your bones…</h2>
@@ -854,7 +852,10 @@ Scaled between -1 and 1.<br />
 </section>
 <section id="a-new-model" class="slide level2">
 <h2>A New Model</h2>
-<span class="math display">\[y = \beta_0 + \beta_{1}log(x) + \epsilon\]</span>
+<p><span class="math display">\[y_i = exp^{\beta_0 + \beta_{1}log(x_i) + \epsilon}\]</span></p>
+<div class="fragment">
+<p><span class="math display">\[log(y_i) = \beta_0 + \beta_{1}log(x_i) + \epsilon\]</span></p>
+</div>
 <div class="fragment">
 
 <div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1">seal_mod_log &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="kw">log</span>(length.cm) <span class="op">~</span><span class="st"> </span><span class="kw">I</span>(<span class="kw">log</span>(age.days)), <span class="dt">data=</span>seals)</a></code></pre></div>

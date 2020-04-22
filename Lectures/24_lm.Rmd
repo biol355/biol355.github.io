@@ -147,7 +147,7 @@ plot(tuk)
 <br><br>
 3. Nonlinear Regression
 
-## <font color="white">Aging Seals</font>{data-background="./lm/three-seals-on-the-beach.jpg"}
+## <font color="white">Aging Seals</font>{data-background="./Images/lm/three-seals-on-the-beach.jpg"}
 
 ## Are Older Seals Bigger?
 ```{r}
@@ -194,11 +194,11 @@ $$\sigma_{XY} = \frac{\sum (X-\bar{X})(y-\bar{Y})}{n-1}$$
 </div>
 </div>
 
-<div id="right">
-<div class="fragment" style="vertical-align: text-top;">
+## Covariance
+
 ```{r rnormPlot_cov, echo=FALSE, fig.height=4, fig.width=5}
-#create a data frame to show a multivariate normal distribution
 library(mvtnorm)
+#create a data frame to show a multivariate normal distribution
 sigma <- matrix(c(3,2,2,4), ncol=2)
 vals <- rmvnorm(n=500, mean=c(1,2), sigma=sigma)
 
@@ -207,7 +207,7 @@ data_mvnorm<-expand.grid(x1=nums, x2=nums)
 data_mvnorm$freq<-dmvnorm(data_mvnorm, sigma=sigma)
 
 #make up some fake data
-set.seed(355)
+set.seed(697)
 data_rmnorm<-as.data.frame(rmvnorm(400, sigma=sigma))
 names(data_rmnorm)=c("x", "y")
 data_rmnorm$y<-data_rmnorm$y + 3
@@ -216,8 +216,7 @@ plot(y~x, pch=19, data=data_rmnorm, cex.lab=1.4)
 text(-4,8, paste("cov(x,y) = ",round(cov(data_rmnorm)[1,2],3), sep=""))
 
 ```
-</div>
-</div>
+
 
 ## Pearson Correlation
 
@@ -231,7 +230,8 @@ your sample
 $$\Large\rho_{xy} = \frac{\sigma_{xy}}{\sigma_{x}\sigma_{y}}$$
 </div>
 
-<div id="right" class="fragment">
+## Pearson Correlation
+
 ```{r rnormPlot_cor, echo=FALSE, fig.height=4, fig.width=5}
 
 plot((y-mean(y))/sd(y)~I(x/sd(x)), pch=19, data=data_rmnorm, 
@@ -239,7 +239,6 @@ plot((y-mean(y))/sd(y)~I(x/sd(x)), pch=19, data=data_rmnorm,
 text(-2,2, paste("cor(x,y) = ",round(cor(data_rmnorm)[1,2],3), sep=""))
 
 ```
-</div>
 
 
 ## Get r in your bones...
