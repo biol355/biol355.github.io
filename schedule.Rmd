@@ -188,6 +188,7 @@ __Lectures:__ [Analysis of Variance](./Lectures/23_anova.html), [Linear Models](
 __Lab:__ [Linear Models and ANOVA](./Labs/lm_anova_lab.html), [data files for lab](./Labs/data/lm_lab_data.zip)  
 __Objective(s):__ Analyze the differences between multiple means.  Fit a linear regression using lm() in R through a bivariate scatterplot. Evaluate assumptions of a linear model with normal error   
 __Biological Examples:__  Jet-lag recovery and circadian rhythms. Seal life history variation  [files](./Lectures/data/anova.zip)  
+__Homework:__ [Linear temperature change?](./Assignments/10_lm_anova.html)  
 __Etherpad:__ https://etherpad.wikimedia.org/p/355-anova-2020   
 
 ### Week  13  General and Generalized Linear Models, Multiple Predictors  

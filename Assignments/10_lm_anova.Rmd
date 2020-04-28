@@ -1,0 +1,84 @@
+---
+title: "The Linear Model"
+author: "Intro to Data Science"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, eval = FALSE)
+```
+
+For this data, let's look at the Hadley Met Centre temperature anomaly over time dataset we have used previously. If you've lost track of it, you can [download it here](./data/hadcrut_temp_anomoly_1850_2015.csv).
+
+### 1) Is there a cliamte trend
+
+#### 1A. Load up the Hadley Met Centre Data and a few libraries you will need for today. Plot the anomaly by time, just to see what it looks like looking at anomaly by year. Is it linear? Nonlinear? What do you think?
+
+```{r, echo = TRUE}
+library(readr)
+library(ggplot2)
+library(car)
+
+had <- read_csv("./data/hadcrut_temp_anomoly_1850_2015.csv")
+```
+
+```{r}
+baseplot <- ggplot(had,
+                   aes(x = year, y = anomaly)) +
+  geom_point() +
+  theme_classic()
+
+baseplot
+```
+
+#### 1B. Let's go with fitting a linear trend to the data!
+
+Fit a linear model looking at how year predicts anomaly.
+
+```{r}
+had_lm <- lm(anomaly ~ year, data = had)
+```
+
+#### 1C. Assume nothing! Does your data meet the assumptions of linear regression? Why or why not?
+
+```{r}
+plot(had_lm, which = 1)
+plot(had_lm, which = 2)
+
+#QQ looks good, but, oh, that residual versus fitted plot is BAD
+```
+
+#### 1D. OK, not good, right? Looking at the raw data, can you tell us why using the whole data set for a linear regression is perhaps not a good idea?
+
+```{r, eval = FALSE}
+#Things don't go linear until ~ 1950
+```
+
+#### 1E. OK, what if we cut it off at 1900. Does that do better and meet assumptions?
+
+#### 1F. OK, evaluate the model for 1900 onwards! Look at the F statistic to tell us if there is a trend and the R<sup>2</sup> to tell us how much variability is explained.
+
+#### 1G. Great! Let's visualize this! First, add a grouping variable using `ifelse` to your data for before and after 1900. Have this as your `group` or `color` in your `aes()`. Plot the data. And add the fit model (both before and after 1900) using the appropriate `stat_()`.
+
+### 2. Monthly issues?
+
+#### 2A. Subset the data to just post 1900.
+
+#### 2B. Use the fit model to extract residuals and add them back to your data frame. You can either use `residuals()` or, for 2 points extra credit, use `modelr::add_residuals()` - which, if you read the help file and look at the docs on [modelr](https://modelr.tidyverse.org/).
+
+#### 2C. Now, are any of these months particularly bad? Fit a linear model asking if the residual of the trend is predicted by month.
+
+#### 2D. Does this model meet the assumptions of a linear model/ANOVA? 
+
+#### 2E. Regardless of whether the model meets assumptions, evaluate it with an ANOVA! What does your F-table tell you?
+
+#### 2F. Regardless of what your F table tells you, let's do one last thing - use `emmeans` to get an `emmeans` object, then apply the appropriate contrast to compare all months to one another. Use the p-value correction of your choice - but justify why you are using it! 
+
+#### 2G. Are any months different from one another? Is there one month that stands out?
+
+#### 2H. Plot the residuals by month with the mean and SE shown (your choice how you do this)! Does this give you the same answers as your post-hoc tests? What do you learn from this analysis overall?
