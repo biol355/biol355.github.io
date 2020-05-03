@@ -143,10 +143,10 @@ __Before Class:__ Install `rgdal` (you'll need to install gdal first - see below
 ```
 
 `r datestring`  
-__Readings:__ W&G Chapters on [Functions](http://r4ds.had.co.nz/functions.html) and [Iteration](http://r4ds.had.co.nz/iteration.html)  
-__Lectures:__ [Intro to Functions](./Lectures/19_functions_intro.html), [Iteration with purrr](./Lectures/20_iteration.html)  
-__Lab:__ [Functions and Iteration](./Labs/functions_iteration.html)  
-__Objective(s):__ Learn the benefits of reusable code, Understand the structure of a function, Discover debugging and making functions fail usefully, Apply conditional logic to build flexible code, Derive principles to make functions that are easy to understand and apply to multiple data sets.  
+__Readings:__ W&G Chapters on [Functions](http://r4ds.had.co.nz/functions.html)   
+__Lectures:__ [Intro to Functions](./Lectures/19_functions_intro.html)  
+__Lab:__ [Functions](./Labs/functions_iteration.html)  
+__Objective(s):__ Learn the benefits of reusable code, Understand the structure of a function, Discover debugging and making functions fail usefully,  Derive principles to make functions that are easy to understand and apply to multiple data sets.  
 __Biological Examples:__ NOAA buoy data.  
 __Files:__   [NOAA buoy data from Boston Harbor](./Lectures/data/buoydata.zip), [get_buoy.R](./Lectures/get_buoy.R)  
 __Homework:__ [Functions!](./Assignments/function_homework.html)  
@@ -190,6 +190,20 @@ __Objective(s):__ Analyze the differences between multiple means.  Fit a linear 
 __Biological Examples:__  Jet-lag recovery and circadian rhythms. Seal life history variation  [files](./Lectures/data/anova.zip)  
 __Homework:__ [Linear temperature change?](./Assignments/10_lm_anova.html)  
 __Etherpad:__ https://etherpad.wikimedia.org/p/355-anova-2020   
+
+### Week  13 Iteration 
+```{r next_date, echo=FALSE}
+```
+
+`r datestring`  
+__Readings:__ W&G Chapters on  [Iteration](http://r4ds.had.co.nz/iteration.html)  
+__Lectures:__  [Iteration with purrr](./Lectures/20_iteration.html)  
+__Lab:__ [Many Models](https://r4ds.had.co.nz/many-models.html)  
+__Objective(s):__ Learn the benefits of iteration in code. Automate multiple tasks. Fitting many models in an automated fashion to test generality.  
+__Biological Examples:__ Gapminder, Climate Change, Covid-19 in the US   
+__Files:__   [Split up Hadley Met Centre Data](./Lectures/data/buoydata.zip), [get_buoy.R](./Lectures/get_buoy.R)  
+__Homework:__ [Iterating Covid](./Assignments/11_iteration.html)  
+__Etherpad:__ https://etherpad.wikimedia.org/p/355-iteration-2020  
 
 ### Week  13  General and Generalized Linear Models, Multiple Predictors  
 ```{r next_date_2, echo=FALSE}

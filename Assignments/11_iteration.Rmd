@@ -1,0 +1,167 @@
+---
+title: "Iteration and Purrr"
+author: "Biol 355"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, eval = FALSE, warning=FALSE, message=FALSE)
+library(dplyr)
+library(purrr)
+library(readr)
+library(covid19nytimes)
+library(ggplot2)
+library(tidyr)
+library(modelr)
+library(glue)
+```
+```{r prep_data, eval = FALSE}
+dat <- refresh_covid19nytimes_states() %>%
+  pivot_wider(names_from = data_type, values_from = value) %>%
+  group_by(location) %>%
+  filter(deaths_total >= 10) %>%
+  arrange(date) %>%
+  mutate(days_since_10_deaths = 1:n()) %>%
+  ungroup() %>%
+  select(-location_code, -location_code_type)
+
+#check
+ggplot(dat, aes(x = days_since_10_deaths, y = deaths_total, group = location)) + 
+  geom_line(color = "lightgrey") + 
+  theme_classic() +
+  scale_y_continuous(trans = "log10")
+
+dat_list <- split(dat, dat$location)
+
+write_state_dat <- function(adf){
+  write_csv(adf, glue("./data/nytimes_covid/{adf$location[1]}.csv"))
+}
+
+map(dat_list, write_state_dat)
+
+```
+
+Today's assignment, we're going to look at the NY Times covid data to estimate doubling time of the virus - i.e., how long it takes for the number infected to double.
+
+## 1. Load the data
+
+Grab the data from [here](./data/nytimes_covid.zip). Note, it's a lot of different data files split up by state. Load up dplyr, purrr, modelr, readr, and tidyr.
+
+
+### 1A. 
+Use `list.files()` and show that you can create a vector object containing the complete file path to all of the files.
+
+```{r}
+f <- list.files("./data/nytimes_covid/", full.names = TRUE)
+```
+
+### 1B. 
+Use the appropriate `map_*()` function from `purrr` to load all of the data and turn it into a single data frame from the vector in 1A. This should take you one line of code.
+
+```{r}
+nyt <- map_df(f, read_csv)
+```
+
+## 2. Fit a model
+
+### 2A.
+Subset the model to just Michigan and `days_since_10_deaths` less than 20. Fit a linear model examining how days since 10 deaths predicts `deaths_total`. Note, we're using `days_since_10_deaths` in order to standardize across all states having infections that start at different times. We're using deaths, as total cases can be biased by number of tests administered, and deaths are a better indication of prevalence.
+
+```{r}
+mich <- dat %>%
+  filter(location == "Massachusetts",
+         days_since_10_deaths < 20)
+
+mod_mich <- lm(deaths_total ~ days_since_10_deaths, data = mich)
+```
+
+### 2B.
+Does this model meet the assumptions of linearity and normality of residuals? Show how you can tell.
+
+```{r}
+plot(mod_mich, which = 1)
+plot(mod_mich, which = 2)
+```
+
+
+### 2C. 
+It doesn't. Try fitting a model with a log transformed value for deaths_total. You can do this transformation within the `lm()` statement itself.
+```{r}
+logmod <- lm(log(deaths_total) ~ days_since_10_deaths, data = mich)
+```
+
+### 2D.
+Great - now, write a function that, given a data frame, will fit a linear model with a log transformed death total as predicted by days since 10 deaths. Show it works by showing that, feeding the filtered dataset to it as an argument, you get the same resulting model fit as in 2C. You can show this by plotting the fitted values of each against each other using `fitted_values` for each.
+
+```{r}
+fit_mod <- function(adf){
+  lm(log(deaths_total) ~ days_since_10_deaths, data = adf)
+}
+
+log_mod_1 <- fit_mod(mich)
+
+plot(fitted.values(logmod), fitted.values(log_mod_1))
+```
+
+## 3. Estimating Doubling time
+
+### 3A.
+Now, with *all* of the data, filter it so that `days_since_10_deaths` is less than or equal to 20 days.
+
+```{r}
+dat_20 <- dat %>% filter(days_since_10_deaths<=20)
+```
+
+### 3B.
+Using `group_by()`, `nest()`, `mutate()`, and `map()`, fit a model for each state looing at log of deaths as predicted by days since 10 deaths, as in part 2.
+
+```{r}
+fit_dat_20 <- dat_20 %>%
+  group_by(location) %>%
+  nest() %>%
+  mutate(model = map(data, ~lm(log(deaths_total) ~ days_since_10_deaths, data = .x)))
+```
+
+### 3C.
+Use the tibble above to generate a tibble that has just the state and the slope of the fit relationship. Nothing else. You'll need to use `map()`, `unnest()`, and `filter()`, as well as `broom::tidy()`.
+
+```{r}
+fit_slopes_20 <- fit_dat_20 %>%
+  mutate(slopes = map(model, ~broom::tidy(.x) %>% filter(term=="days_since_10_deaths"))) %>%
+  unnest(slopes) %>%
+  select(location, estimate)
+```
+
+### 3D.
+We have estimated a term from population growth models called r. $\frac{dn}{dt} = rn$.  Doubling time is defined as $t_{double} = ln(2)/r$. Plot the distribution of doubling times. Which states have the shortest doubling times, and which have the longest from this time period.
+
+```{r}
+fit_slopes_20 <- fit_slopes_20 %>%
+  mutate(doubling_time = log(2)/estimate) %>%
+  arrange(doubling_time)
+
+ggplot(fit_slopes_20, aes(x = doubling_time)) +
+  geom_histogram(bins = 15)
+
+head(fit_slopes_20)
+tail(fit_slopes_20)
+```
+
+### EXTRA CREDIT 4.
+Make a map of doubling times.
+
+### EXTRA CREDIT 5.
+Calculate doubling times for states for AFTER 20 days since 10 deaths.
+
+### EXTRA CREDIT 6.
+Conduct a t-test to see if doubling time slows after 20 days (you will have to calculate doubling time before minus doubling time after 20 days). We'll assume somewhere in there is when movement restrictions, etc. are implemented.
+
+### EXTRA CREDIT 7.
+Visualize the results from the t-test in the most compelling way possible. Think about communicating this to a policy maker.
+
+### EXTRA CREDIT 8. x3
+Using the `tidycoronavirus` package, get the exact date of shelter-in-place/movement restriction orders. Using the workflows built above, do an analysis of doubling time before and after when restrictions are put in place using a t-test. 
+
+### EXTRA CREDIT 9.
+Visualize the distribution of residuals from #8 on a map. What do you learn about where the residuals are large and positive versus large and negative. Any ideas about why?
