@@ -40,6 +40,8 @@ qplot(conc, density, data=DNase, geom=c("point", "line"), group=Run) +
 &nbsp;  
 
 ## Course News:  
+*5/11/2020*: Check out out spring 2020 projects right [here](./projects_2020.html)
+
 *1/23/2020*  Please join our class slack channel on the UMass Boston R User Group Slack by going to http://umbrug.slack.com, and, once joined, join the #biol355 channel.  
 
 
