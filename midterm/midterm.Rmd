@@ -29,6 +29,12 @@ In the wild and wolly world of R, there are many packages out there. Some of the
 Throughout the semester, we've been refering you to [R Cheat Sheets](https://rstudio.com/resources/cheatsheets/) for everything from [working with strings](https://github.com/rstudio/cheatsheets/raw/master/strings.pdf) to [ggplot2](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf) and more.  These cheat sheets are invaluable as learning tools. Creating a cheat sheet is also an amazing way to familiarize yourself with a new package, and really solidify your knowledge of the R ecosystem.  
 
 So, for your midterm, I'd like you to create a cheat sheet for the package of your choice. It can be a simple package, or a complex package, or anything in between. Below, I'll detail the steps of the process, as well as provide a list of some packages that might be enjoyable to use for this assignment - although the choice is ultimately up to you!
+
+# Past Example Cheatsheets
+
+[vegan](https://github.com/rstudio/cheatsheets/raw/master/vegan.pdf) - by Bruna Silva in 2020, now on Rstudio's website!  
+[auk](https://github.com/CornellLabofOrnithology/auk/blob/master/cheatsheet/auk-cheatsheet.pdf) - by Mickayla Johnson in 2020  
+[waffle](https://twitter.com/StephenSmiddy1/status/1243590545458552832/photo/1) - by Stephen Smiddy in 2020  
   
 # Steps
 1. First, look at existing [R Cheat Sheets](https://rstudio.com/resources/cheatsheets/). I will give you a homework question asking you to identify what you do and do not find useful about the examples here shortly.

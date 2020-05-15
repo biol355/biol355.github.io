@@ -106,7 +106,7 @@ Do longer lived species also have larger home ranges? Let's test this!
 
 zoo <- read_csv("./data/17q02ZooMortality Clubb and Mason 2003 replica.csv")
 
-zoo_plot <- ggplot(data=___, aes(x=mortality, y=homerange)) + 
+zoo_plot <- ggplot(data=___, aes(x=mortality, y=log.homerange)) + 
   ___()
 
 ___
