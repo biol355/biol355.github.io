@@ -4,3 +4,30 @@ title: "Final Projects for 2020"
 
 Below are the links and short descriptions for the 2020 Final Projects!
 
+- Mickayla Johnston:	Exploring the Effects of Landcover Type on Red-Winged Blackbirds (*Agelaius phoeniceus*)	https://mickaylaj.shinyapps.io/final/	
+
+- Gabbie Parker:	Relationships between CO<sub>2</sub> emissions and income  
+
+- Bruna Silva:	Whales of Stellwagen Bank	https://brus-apps.shinyapps.io/whales_of_stellwagen/
+
+- Briana Giambusso:	 Risk Survey Analyses		
+
+- Delaney Ledoux	Billboard Hot 100	https://dledouxdataanalysis.shinyapps.io/billboardhot100/	
+\
+- Jared Lourie	Spotiphyst	https://j4yr0u93.shinyapps.io/spotiphyst/	
+\
+- Angie Guiducci	The real victim of a shark attack https://angelina-guiducci.shinyapps.io/shark_attacks/	
+
+- Stephen Smiddy:	Analyzing/Visualizing malpractice cases across the U.S.
+ 
+- Bob Bartolini:	Exploring trends of U.S. cancer statistics from 2016	https://robert-bartolini.shinyapps.io/FINAL/	
+
+- Peter Le:	Renewable energy potential	https://peterle-shiny.shinyapps.io/final_project/	
+
+- Jonathan Layman:	iNaturalist User Trends with R	https://jonathanlayman001.shinyapps.io/iNaturalist_user_trends/	
+
+- Elias Tamarkin:	Exploring the Possiblity that Airborn Pollutants can become Waterborn	https://elias-t.shinyapps.io/Air_to_Water_Pollution/
+
+- Dayana Alonzo	TBD		
+\
+- Jadine Daley	TBD		
