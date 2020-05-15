@@ -16,7 +16,7 @@ Below are the links and short descriptions for the 2020 Final Projects!
 \
 - Jared Lourie	Spotiphyst	https://j4yr0u93.shinyapps.io/spotiphyst/	
 \
-- Angie Guiducci	The real victim of a shark attack https://angelina-guiducci.shinyapps.io/shark_attacks/	
+- Angie Guiducci	The real victim of a shark attack https://angelina-guiducci.shinyapps.io/FINAL_PROJECT  
 
 - Stephen Smiddy:	Analyzing/Visualizing malpractice cases across the U.S.
  
