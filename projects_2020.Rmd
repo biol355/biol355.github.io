@@ -27,7 +27,3 @@ Below are the links and short descriptions for the 2020 Final Projects!
 - Jonathan Layman:	iNaturalist User Trends with R	https://jonathanlayman001.shinyapps.io/iNaturalist_user_trends/	
 
 - Elias Tamarkin:	Exploring the Possiblity that Airborn Pollutants can become Waterborn	https://elias-t.shinyapps.io/Air_to_Water_Pollution/
-
-- Dayana Alonzo	TBD		
-\
-- Jadine Daley	TBD		
