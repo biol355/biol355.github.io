@@ -26,7 +26,7 @@ ggplot(data = DNase,
 
 **TA:** Michael Roy
 
-**Email:** michael.roy001.@umb.edu  
+**Email:** michael.roy002@umb.edu  
 
 **Where:** Zoom!    
 
