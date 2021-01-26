@@ -43,7 +43,7 @@ ggplot(data = DNase,
 
 *1/25/2021*  Please join our class slack channel on the UMass Boston R User Group Slack by going to http://umbrug.slack.com, and, once joined, join the #biol355 channel.  
 
-*1/24/2020*  Welcome to the class! Please browse around the site or download the [lecture syllabus](./governance_syllabus/byrnes_355_datascience_lecture_4.docx) and [lab syllabus](./governance_syllabus/byrnes_356_datascience_lab_4.docx)!  
+*1/24/2021*  Welcome to the class! Please browse around the site or download the [lecture syllabus](./governance_syllabus/byrnes_355_datascience_lecture_4.docx) and [lab syllabus](./governance_syllabus/byrnes_356_datascience_lab_4.docx)!  
 
 *5/11/2020*: Check out last spring 2020's projects right [here](./projects_2020.html)  
 
