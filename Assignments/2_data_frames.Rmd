@@ -11,7 +11,7 @@ Please write this up as a script. Make sure everything runs. Answer questions us
   
 2. Install the `dplyr` library. Install the `readxl` library. Install the `readr` library.
 
-3. Load the `readxl` and `readr` libraries. Load the data file from lab using `read.csv` and `read_csv`. Now use `read_excel` to load the excel file you generated in lab. Looking at the three objects you loaded in, what are the any differences or similarities between them? 
+3. Load the `readxl` and `readr` libraries. Load the following data files: https://biol355.github.io/Data/my_data.csv using `read.csv` and `read_csv` and https://biol355.github.io/Data/my_data.xlsx  using `read_excel`. Looking at the three objects you loaded in, what are the any differences or similarities between them? 
 
 4. What does the output of `str`, `summary`, and `visdat::vis_dat` tell you about the data you loaded? What is different or the same?
 
