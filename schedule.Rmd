@@ -63,7 +63,7 @@ __Cheat Sheets:__ [Data visualization](https://github.com/rstudio/cheatsheets/ra
 __Other References:__[ggplot2 references](http://ggplot2.tidyverse.org/reference/), [Fundamentals of Data Visualization](http://serialmentor.com/dataviz/), [colors for data viz](https://lisacharlotterost.github.io/2016/04/22/Colors-for-DataVis/)  
 __Etherpad:__ https://etherpad.wikimedia.org/p/355-dataviz-2021  
 __In Class Files:__ [ggplot and hadcrut](./in_class_files/2018/scripts/hadcrut_ggplot.R)  
-__Homework:__ [Plotapalooza](./Assignments/3_ggplot_intro.html), submit [here!](https://www.dropbox.com/request/9whCDDUB8TNByJ5KbkoP)
+__Homework:__ [Plotapalooza](./Assignments/3_ggplot_intro.html)  
 
 ### Week  4. Data Reduction and Summarization
 ```{r next_date, echo=FALSE}
@@ -72,7 +72,6 @@ __Homework:__ [Plotapalooza](./Assignments/3_ggplot_intro.html), submit [here!](
 `r datestring`  
 __Readings:__ W&G on [Data Transformation](http://r4ds.had.co.nz/transform.html), [Exploratory Data Analysis](http://r4ds.had.co.nz/exploratory-data-analysis.html), and [Pipes](http://r4ds.had.co.nz/pipes.html), DC Ecology Lesson on [Data Aggregation](http://www.datacarpentry.org/R-ecology-lesson/03-dplyr.html)  
 __Lecture:__ [Organizing Data to Tell a Story](./Lectures/09_summarizing_data.html)   
-__Classwork:__ [Submit here!](https://www.dropbox.com/request/cNqOhHN02iYpldf7KVnQ)  
 __Lab:__ [Gapminder and Dplyr](https://swcarpentry.github.io/r-novice-gapminder/13-dplyr/), [Dplyr Faded Example Practice](./Lectures/dplyr_faded_examples.html)<!--, [Data for Exploratory Data Analysis of Mortality and Natality with dplyr and ggplot2](./Labs/freeform_dplyr.zip)-->   
 __Cheat Sheets:__ [Data Wrangling Cheat Sheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)  
 __Objective(s):__ Describe the meaning and identify applications of the following summary/descriptive statistics: mean, mode, median, standard deviation; Describe the split-apply-combine strategy of data reduction and summarization; Use group_by() and summarise() to calculate summary statistics for groupings within a dataset; Subset data using filter()  
@@ -106,7 +105,7 @@ __Lab:__ [Tidy Coronavirus](./Labs/coronavirus.html)<!-- [Axoltl Data Cleaning](
 __Objective(s):__ Understand how to reshape and manipulate data. Describe the difference between the two fundamental forms of data – long versus wide, Use the tidyr package in R to convert between long and wide data; Use unite and separate to create tidy data (where each column is a variable).   
 __Biological Examples:__ [Axoltl limb regeneration](./Lectures/data/ALM assay statistics.xlsx). [Mammal taxonomic records](./Lectures/data/mammals.R).  [Weather data](./Data/weather_messy.csv).  [Sale prices for homework](./Data/Sale_Prices_City.csv). [HAD CRUT Global temperature anomaly over the past century, wide format](./Data/hadcrut_temp_anomoly_wide_1850_2015.csv).      
 __Etherpad:__ https://etherpad.wikimedia.org/p/355-tidy-2021  
-__Homework__: [Weather Data Cleaning](./Assignments/tidyr_over_break_shortened.html), [submit here](https://www.dropbox.com/request/ruza0zXvyvnJgllJXqJ4)    
+__Homework__: [Weather Data Cleaning](./Assignments/tidyr_over_break_shortened.html)     
 __MIDTERM__: [make a cheatsheet](./midterm/midterm.html)      
 
 ### Week  7 & 8. Data "Mashups" and Geospatial Data
