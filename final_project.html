@@ -14,6 +14,7 @@
 
 <title>Final Project</title>
 
+<script src="site_libs/header-attrs-2.6/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
@@ -23,6 +24,15 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -68,6 +78,7 @@ h6 {
   text-align: left;
 }
 </style>
+
 
 
 
@@ -285,6 +296,9 @@ $(document).ready(function () {
   <a href="http://umbrug.slack.com">Course Slack</a>
 </li>
 <li>
+  <a href="midterm/midterm.html">Midterm</a>
+</li>
+<li>
   <a href="final_project.html">Final</a>
 </li>
 <li class="dropdown">
@@ -295,10 +309,10 @@ $(document).ready(function () {
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="./governance_syllabus/byrnes_355_datascience_lecture_4.docx">Lecture</a>
+      <a href="./biol_355_syllabus_2021.docx">Lecture</a>
     </li>
     <li>
-      <a href="./governance_syllabus/byrnes_356_datascience_lab_4.docx">Lab</a>
+      <a href="./biol_356_syllabus_2021.docx">Lab</a>
     </li>
   </ul>
 </li>
@@ -310,9 +324,6 @@ $(document).ready(function () {
 </li>
 <li>
   <a href="https://twitter.com/jebyrnes/lists/stats-r-on-twitter">R On Twitter</a>
-</li>
-<li>
-  <a href="http://byrneslab.net/resources/boston-area-data-science-groups/">Meetups</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -530,7 +541,7 @@ You might want to use the <code>goodpractices</code> library and the <code>style
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
