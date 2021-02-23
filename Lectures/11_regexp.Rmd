@@ -15,7 +15,7 @@ output:
 ## 
 <Br><Br><br><br>
 <h2><center>Wrangling and Cleaning Strings</center></h2>
-![](./images/regexp/regular-expressions.jpg)
+![](./Images/regexp/regular-expressions.jpg)
 
 
 ```{r prep, echo=FALSE, cache=FALSE, message=FALSE, warning=FALSE}
