@@ -193,8 +193,7 @@ __Etherpad:__ https://etherpad.wikimedia.org/p/355-anova-2021
 ### Week  13 Iteration 
 ```{r next_date, echo=FALSE}
 ```
-
-`r datestring`  
+ `r datestring`   
 __Readings:__ W&G Chapters on  [Iteration](http://r4ds.had.co.nz/iteration.html)  
 __Lectures:__  [Iteration with purrr](./Lectures/20_iteration.html)  
 __Lab:__ [Many Models](https://r4ds.had.co.nz/many-models.html)  
@@ -205,7 +204,7 @@ __Homework:__ [Iterating Covid](./Assignments/11_iteration.html)
 __Etherpad:__ https://etherpad.wikimedia.org/p/355-iteration-2021  
 
 ### Week  13  General and Generalized Linear Models, Multiple Predictors  
-```{r next_date_2, echo=FALSE}
+```{r next_date, echo=FALSE}
 ```
 `r datestring_1`  
 __Readings:__  W&G on [Model Basics](http://r4ds.had.co.nz/model-basics.html)   
@@ -218,7 +217,7 @@ __Etherpad:__ https://etherpad.wikimedia.org/p/355-mlr-2021
 
 <!--
 ### Week  14 Multiple Predictors Part 2  
-`r datestring`  
+`datestring`  
 __Readings:__  W&G on [Model Building](http://r4ds.had.co.nz/model-building.html)  
 __Lectures:__  [AIC and Multimodel Comparisons](./Lectures/27_mmi.html), [purrr](./Lectures/purrr.html).    
 __Lab:__ [AIC and Multimodel Inference in R](./Labs/lab11_mmi.html)  
