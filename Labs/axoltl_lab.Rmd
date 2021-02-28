@@ -5,14 +5,14 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
 library(tidyverse)
 library(readxl)
 ```
 
 ### You have Ascended. Others... have not.
 
-You have spent almost half a semester immersing yourself in thinking about good data practice. You may not think you have, but I guaruntee that you now have a strict aversion to many data practices that you might have walked into the room with. You know, for example, that you will always endeavour to have your data in a long or wide format, with complete columns, reasonable NA values, and strong data validation. One value per cell! And so many more principles.  
+You have spent almost half a semester immersing yourself in thinking about good data practice. You may not think you have, but I guarantee that you now have a strict aversion to many data practices that you might have walked into the room with. You know, for example, that you will always endeavor to have your data in a long or wide format, with complete columns, reasonable NA values, and strong data validation. One value per cell! And so many more principles.  
 
 Your past self and, frankly, many of your collaborators, are not at this level of transcendence. However, they are fabulous scientists producing juicy data.  
   
@@ -59,30 +59,51 @@ axoltl <- read_excel("./data/ALM assay statistics.xlsx")
 axoltl
 ```
 
-Well that's no good. We notice instantly that the real column names are split between row 2 and 3. We can clean this up pretty easily by moving those names up and then getting rid of rows we don't need.
+Well that's no good. We notice instantly that the real column names are split between row 2 and 3. We can clean this up by making a new vector of column names, and then reloading the data, starting at row 4, with the proper names. Let's start with making some new column names
 
-```{r colname_fix}
-#move row 3 names to the top
-names(axoltl) <- axoltl[3,]
+```{r colname_make}
+cnames <- paste(axoltl[2,], axoltl[3,])
 
-#fix those last two
-names(axoltl)[1:2] <- axoltl[2,1:2]
+cnames
+```
 
-#get rid of rows we don't need
-axoltl <- axoltl[-c(1:3),]
+OK, this is good, except for three things. 1) The "NA " or " NA"s. 2) The random "Phenotypes " from the original sheet which we don't need. 3) Replicate column names.
+
+We can deal with the first two using regexps! The third we can use an awesome package called [janitor](https://sfirke.github.io/janitor/) which helps with cleaning excel files. Particularly, the function `clean_names()` Note, janitor will replace " " with "_" - so, let's also fix that.
+
+**Exercise**: If you were to do this replacement, step by step, what regexps would you use?
+
+```{r clean_colnames, warning = FALSE}
+library(janitor)
+
+#in one row!
+cnames <- cnames %>%
+  str_replace_all("^NA ", "") %>%
+  str_replace_all( "NA$", "") %>%
+  str_replace_all("Phenotypes ", "") %>%
+  make_clean_names() %>%
+  str_replace_all("_", " ")
+
+cnames
+```
+
+Great! Now we can reload the data and use clean names! Let's skip to line 4 as our first line of data, and use `col_names` to specify clean column names.
+
+```{r}
+axoltl <- read_excel("./data/ALM assay statistics.xlsx",
+                     skip = 4,
+                     col_names = cnames)
 
 axoltl
 ```
 
 WHOAH! Way better!
 
-Now we can bare off the columns from NOTES on, which we don't need.
+Now we can shave off the columns from NOTES on, which we don't need by using select and knowing that the bad columns start with x.
 
 ```{r notes_remove}
-names(axoltl)
-
-#We want column 8 onwards gone!
-axoltl <- axoltl[,1:7]
+axoltl <- axoltl %>%
+  select(-starts_with("x"))
 
 axoltl
 ```
@@ -92,6 +113,8 @@ Lovely!
 ### Fixing up column names
 
 So, column names are long and unweildy. Also, capitalization is odd. Let's make them use title capitalization Then let's make sure each one only has only two words.
+
+**Exercise**: Using regexps, how would you putt out the first two words of a phrase? Practice using stringr::sentences ot test!
 
 ```{r change_names}
 names(axoltl) <- names(axoltl) %>%
@@ -117,7 +140,9 @@ Nice, now, let's scrub anything in the Experiment column. We need to do somethin
 
 ```{r scrub_completed}
 axoltl <- axoltl %>%
-  mutate(Experiment = str_replace(Experiment, ".*[cC]omple.*", NA_character_))
+  mutate(Experiment = str_replace(Experiment, 
+                                  ".*[cC]omple.*", 
+                                  NA_character_))
 ```
 
 ### Filling down
@@ -130,11 +155,14 @@ axoltl <- axoltl %>%
 
 Now what about the rest? Well here's where gathering and spreading can be *very* useful.
 
-Let's think about this data. Notice that every row only has 1 once. That's because the 1 means - this was the outcome from that treatment on this particular animal. So, what we want, is each animal to have the condition of its response. This means going from this wide format to a long format.
+Let's think about this data. Notice that every row only has 1 once. That's because the 1 means - this was the outcome from that treatment on this particular animal. So, what we want, is each animal to have the condition of its response. This means going from this wide format to a long format. Experiment, Animal Id, and Notes need to hang around, however, as they are unique to each animal.
 
 ```{r reshape}
 axoltl_long <- axoltl %>%
-  gather(Response, Value, -Experiment, -`Animal Id`)
+  pivot_longer(cols = -c(Experiment, `Animal Id`, Notes),
+               names_to = "Response",
+               values_to = "Value")
+  
 
 axoltl_long
 ```
@@ -148,11 +176,11 @@ axoltl_long <- axoltl_long %>%
 ```
 
 ### Plot!
-OK! We're ready to plot the response! 
+OK! We're ready to plot the response! We can use `geom_bar()` here, but, what are other ways you would visualize?
 
 ```{r plot}
 ggplot(data=axoltl_long, aes(x=Experiment, fill=Response)) +
   geom_bar() +
-  theme_bw(base_size=17) +
+  theme_bw(base_size=14) +
   theme(axis.text.x = element_text(angle=45, hjust=1)) 
 ```
