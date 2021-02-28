@@ -16,6 +16,10 @@ link-citations: yes
 
 ```{r setup, include=FALSE}
 library(tufte)
+library(waffle)
+library(hrbrthemes)
+library(dplyr)
+hrbrthemes::import_roboto_condensed()
 # invalidate cache when the tufte version changes
 knitr::opts_chunk$set(tidy = FALSE, echo = FALSE, warning=FALSE, message=FALSE, cache.extra = packageVersion('tufte'))#,
 #                       fig.width=3.5, fig.height=3.5)
@@ -30,6 +34,12 @@ Throughout the semester, we've been refering you to [R Cheat Sheets](https://rst
 
 So, for your midterm, I'd like you to create a cheat sheet for the package of your choice. It can be a simple package, or a complex package, or anything in between. Below, I'll detail the steps of the process, as well as provide a list of some packages that might be enjoyable to use for this assignment - although the choice is ultimately up to you!
 
+# Due Date 
+March 26, 2021
+
+# Simple Extra Credit
+Put your cheatsheet up on Github!If you're interested, see [Happy with Git](https://happygitwithr.com/) for more and/or talk to me.  
+
 # Past Example Cheatsheets
 
 [vegan](https://github.com/rstudio/cheatsheets/raw/master/vegan.pdf) - by Bruna Silva in 2020, now on Rstudio's website!  
@@ -41,7 +51,7 @@ So, for your midterm, I'd like you to create a cheat sheet for the package of yo
 
 2. Second, read up on [how to create an R Cheat Sheet](https://rstudio.com/resources/cheatsheets/how-to-contribute-a-cheatsheet/). Download the template and read it over CAREFULLY.
 
-3. Third, select a package. See the section below on possible packages and/or where to find other packages. Once you have selected a package, sign up [here](https://docs.google.com/spreadsheets/d/1aIYRlr9s4HqpUhoGp2p4RegfvKdxMttRPGYi_e9jUVs/edit?usp=sharing) so only one person gets one package!
+3. Third, select a package. See the section below on possible packages and/or where to find other packages. Once you have selected a package, sign up [here](https://docs.google.com/spreadsheets/d/1nEyWhubzjY3x7vzezP_mVmaa59b9RMpdivzH8d4EkwI/edit?usp=sharing) so only one person gets one package!
 
 4. Play with the package. A lot. I will have an upcoming homework question about this, asking what are the most interesting things that the package does, what are the most useful things that it does, what elements of it you think most people would use the most frequently, and how would you organize this information.  
   
@@ -174,6 +184,7 @@ scatterD3(data = mtcars, x = wt, y = mpg, lab = names,
           symbol_lab = "Manual transmission")
 ```
 
+<!--
 ## waffle
 Pie charts are so yesterday. Make a [waffle](https://github.com/hrbrmstr/waffle) chart instead!
 
@@ -206,6 +217,7 @@ ggplot(storms_df, aes(fill = status, values = n)) +
   guides(fill = guide_legend(reverse = TRUE))
 
 ```
+-->
 
 ## visdat
 We've used [visdat](https://docs.ropensci.org/visdat/) for basically one function, but there's so so soooo much more! Build a cheat sheet to help folk explore their data!
@@ -229,7 +241,7 @@ faithful %>%
 ## Extra Credit: data validation
 Combine the `skimr` and `visdat` packages along with any others you find that are useful to create a comprehensive data validation cheat sheet for when you first load a new data set. This is a powerful beast, and is worth up to 25% extra credit.
 
-## worrms 
+## worms 
 Taxonomy is hard. [worms](https://docs.ropensci.org/worrms/) makes it easy. Names change. We often want a lot of different information from a taxonomy. One place that is standardized to all marine species is the [World Register of Marine Species](https://www.marinespecies.org/).
 
 ```{r worms, cache=TRUE, fig.fullwidth=TRUE}
@@ -314,6 +326,7 @@ Wanna dig into the stew of Twitter and analyze it? What do you find there? What'
 ```{r rtweet, fig.cap = "How often does Prof. Byrnes tweet?", cache=TRUE}
 library(rtweet)
 library(lubridate)
+
 tmls <- get_timelines(c("jebyrnes"), n = 10000)
 
 tmls %>% group_by(day = floor_date(created_at, "day")) %>%
