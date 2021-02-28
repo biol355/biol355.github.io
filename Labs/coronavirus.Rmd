@@ -47,7 +47,7 @@ I want you to load the data, look through it, and then, make it tell a story! To
 \
 5. Once finished, move the code into a .Rmd file to create a nice, clean, HTMl file that tells a story. Show how you processed the data. and make the visuzliations.  
 \
-6. If you are a superstar, create a second story! Or dig into this different package - https://guangchuangyu.github.io/nCov2019/ - and see if it can be used to tell a different story.  
+6. If you are a superstar, create a second story! Or dig into a different package - see https://mine-cetinkaya-rundel.github.io/covid19-r/ for a partial list or google around - and see if it can be used to tell a different story.  
 \
 
 ## Showing what you found
