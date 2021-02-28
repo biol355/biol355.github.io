@@ -52,7 +52,7 @@ I want you to load the data, look through it, and then, make it tell a story! To
 
 ## Showing what you found
 
-As you make your first cool data viz, copy it, email it to me and Rachel, and tell us. We want to show it off to the class to see what you found!  
+As you make your first cool data viz, copy it, email it to me and Michael, and tell us. We want to show it off to the class to see what you found!  
 \
 After you finish your lab report (your .Rmd file), compile it, and send it to us as well. I want to make a gallery of interesting reports for you all to look at to see what is possible.  
 \
