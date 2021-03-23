@@ -125,7 +125,7 @@ __Biological Examples:__ Hemlock wooly adelgid distribution. CDC records of hear
 __Optional Reading:__ [Making maps in R](https://geocompr.robinlovelace.net/adv-map.html) and other chapters in Geocomputation in R. [Spatial Data Science](https://keen-swartz-3146c4.netlify.com/), [information about the lab data](https://datacarpentry.org/geospatial-workshop/data/)   
 __Files:__  [geospatial data for lab](https://ndownloader.figshare.com/articles/2009586/versions/10), [Hemlock](../Data/hemlock.xlsx), [hemlock_densities](../Data/hemlock_densities.xlsx),  [Arctic Boreal Forest Vegetation](./Lectures/data/boreal.csv), [Heart Disease in America](./Lectures/data/hd_all.xlsx), [data for lab on joins](./Labs/data/joinmap_data.zip), [US County Borders in 2013](./Lectures/data/cb_2013_us_county_500k.zip), [March 18, 2018 SST Anomalies ](./Lectures/data/sst_anom.bin.20180318.tif)   
 __Etherpad:__ https://etherpad.wikimedia.org/p/355-gis-2021  
-__Homework:__ [Map making!](./assignments/mapping_assignment.html)  
+__Homework:__ [Map making!](./Assignments/mapping_assignment.html)  
 __Before Class:__ Install `rgdal` (you'll need to install gdal first - see below), `sf`, `sp`, `raster`, `leaflet`, `maptools`, `mapdata`, and `rgeos`. 
 
 **To install gdal on a mac, there are two steps**  
