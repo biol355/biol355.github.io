@@ -151,7 +151,21 @@ __Files:__   [NOAA buoy data from Boston Harbor](./Lectures/data/buoydata.zip), 
 __Homework:__ [Functions!](./Assignments/function_homework.html)  
 __Etherpad:__ https://etherpad.wikimedia.org/p/355-functions-2021  
 
-### Week  10. Shiny and Web Interfaces  
+### Week  10 Iteration 
+```{r next_date, echo=FALSE}
+```
+ `r datestring`   
+__Readings:__ W&G Chapters on  [Iteration](http://r4ds.had.co.nz/iteration.html)  
+__Lectures:__  [Iteration with purrr](./Lectures/20_iteration.html)  
+__Lab:__ [Many Models](https://r4ds.had.co.nz/many-models.html)  
+__Objective(s):__ Learn the benefits of iteration in code. Automate multiple tasks. Fitting many models in an automated fashion to test generality.  
+__Biological Examples:__ Gapminder, Climate Change, Covid-19 in the US   
+__Files:__   [Split up Hadley Met Centre Data](./Lectures/data/buoydata.zip), [get_buoy.R](./Lectures/get_buoy.R)  
+__Homework:__ [Iterating Covid](./Assignments/11_iteration.html)  
+__Etherpad:__ https://etherpad.wikimedia.org/p/355-iteration-2021 
+
+
+### Week  11. Shiny and Web Interfaces  
 ```{r next_date, echo=FALSE}
 ```
 `r datestring`
@@ -166,7 +180,7 @@ __Etherpad:__ [Shiny homework with coronavirus](./Labs/shiny_lab.html)
 __Etherpad:__ https://etherpad.wikimedia.org/p/355-shiny-2021  
 
 
-### Week  11. T-Tests and P-Values 
+### Week  12. T-Tests and P-Values 
 ```{r next_date, echo=FALSE}
 ```
 `r datestring`  
@@ -179,7 +193,7 @@ __Files:__ [Blackbird Testosterone Implants](./Labs/data/12e2BlackbirdTestostero
 __Etherpad:__ https://etherpad.wikimedia.org/p/355-ttest-2021  
 __Homework:__ [t-tests](./Assignments/9_t.html), [Lizard data](./Lectures/t_test/12e3HornedLizards.csv)  
   
-### Week 12. Analysis of Variance and the Linear Model
+### Week 13. Analysis of Variance and the Linear Model
 ```{r next_date, echo=FALSE}
 ```
  `r datestring`  
@@ -189,21 +203,9 @@ __Objective(s):__ Analyze the differences between multiple means.  Fit a linear 
 __Biological Examples:__  Jet-lag recovery and circadian rhythms. Seal life history variation  [files](./Lectures/data/anova.zip)  
 __Homework:__ [Linear temperature change?](./Assignments/10_lm_anova.html)  
 __Etherpad:__ https://etherpad.wikimedia.org/p/355-anova-2021   
+ 
 
-### Week  13 Iteration 
-```{r next_date, echo=FALSE}
-```
- `r datestring`   
-__Readings:__ W&G Chapters on  [Iteration](http://r4ds.had.co.nz/iteration.html)  
-__Lectures:__  [Iteration with purrr](./Lectures/20_iteration.html)  
-__Lab:__ [Many Models](https://r4ds.had.co.nz/many-models.html)  
-__Objective(s):__ Learn the benefits of iteration in code. Automate multiple tasks. Fitting many models in an automated fashion to test generality.  
-__Biological Examples:__ Gapminder, Climate Change, Covid-19 in the US   
-__Files:__   [Split up Hadley Met Centre Data](./Lectures/data/buoydata.zip), [get_buoy.R](./Lectures/get_buoy.R)  
-__Homework:__ [Iterating Covid](./Assignments/11_iteration.html)  
-__Etherpad:__ https://etherpad.wikimedia.org/p/355-iteration-2021  
-
-### Week  13  General and Generalized Linear Models, Multiple Predictors  
+### Week  14  General and Generalized Linear Models, Multiple Predictors  
 ```{r next_date, echo=FALSE}
 ```
 `r datestring_1`  
@@ -228,7 +230,7 @@ __Etherpad:__ https://etherpad.wikimedia.org/p/355-aic-2021
 
 -->
 
-### Week  14. Open Lab and Final Presentations
+### Week  15. Open Lab and Final Presentations
 ```{r next_date, echo=FALSE}
 ```
 `r datestring`  
