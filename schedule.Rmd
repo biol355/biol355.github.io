@@ -161,7 +161,7 @@ __Lab:__ [Importing Hospital Records](https://www.gerkelab.com/blog/2018/09/impo
 __Objective(s):__ Learn the benefits of iteration in code. Automate multiple tasks. Fitting many models in an automated fashion to test generality.  
 __Biological Examples:__ Gapminder, Climate Change, Covid-19 in the US   
 __Files:__   [Split up Hadley Met Centre Data](./Lectures/data/buoydata.zip), [get_buoy.R](./Lectures/get_buoy.R)  
-__Homework:__ [Iterating Covid](./Assignments/11_iteration.html)  
+__Homework:__ STANDBY <!-- [Iterating Covid](./Assignments/11_iteration.html)-->  
 __Etherpad:__ https://etherpad.wikimedia.org/p/355-iteration-2021 
 
 
