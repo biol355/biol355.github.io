@@ -9,9 +9,10 @@ output: html_document
 knitr::opts_chunk$set(echo = FALSE, eval = FALSE)
 ```
 
-[Here](./data/counties.zip) is a set of RDS files that contain sf objects of state county boundaries. We are going to work with these using iteration and functions to 
+[Here](./data/counties.zip) is a set of RDS files that contain sf objects of state county boundaries. We are going to work with these using iteration and functions for some of this week's work.
 
 1. Let's warm up with some SF practice. the function `readRDS()` reads in RDS files. The dplyr function `bind_rows()` can take rows of a data frame, tibble, of sf object, and bind them together properly. Using the `purrr` library, read in all of the counties files and then combine them into a single data frame. Plot the result. 
+
 ```{r}
 library(dplyr)
 library(sf)
@@ -27,7 +28,7 @@ all_counties <- bind_rows(counties)
 
 2. This is great. Now, I'm curious - is there a link between the number of counties in a state and the ratio of area of the largest county in the state to the total state area? Let's find out!
 
-A. Write a function that, given a state name, will use `readRDS` to read in a single data file and fix up the CRS (these are all in lat/long - you want a mollweide, in which distance is in meters). Plot Massachusetts to make sure everything works.
+&nbsp; &nbsp; &nbsp; A. Write a function that, given a state name, will use `readRDS` to read in a single data file and fix up the CRS (these are all in lat/long - you want a mollweide, in which distance is in meters). Plot Massachusetts to make sure everything works.
 
 ```{r}
 read_state <- function(state_name){
@@ -37,7 +38,8 @@ read_state <- function(state_name){
 read_state("massachusetts") %>% ggplot() + geom_sf()
 ```
 
-B. Write a function that, given an sf object of a single state and its counties, will return a one row data frame with the number of counties, the area of the largest county, the average county area, the state's area, and the ratio of the largest county to total area. `st_area()` will help you calculate area - but you will need to `as.numeric()`, and if you take an sf object and use `summarize()` on it, it will merge all of the polygons into one.
+
+&nbsp; &nbsp; &nbsp; B. Write a function that, given an sf object of a single state and its counties, will return a one row data frame with the number of counties, the area of the largest county, the average county area, the state's area, and the ratio of the largest county to total area. `st_area()` will help you calculate area - but you will need to `as.numeric()`, and if you take an sf object and use `summarize()` on it, it will merge all of the polygons into one.
 
 ```{r}
 state_properties <- function(sf_obj){
@@ -54,7 +56,8 @@ state_properties <- function(sf_obj){
 }
 ```
 
-C. Using iteration, make a data frame that has all of the above information for all of the states. +1 EXTRA CREDIT - have a column named state with the state name. (hint: `?setNames`)
+
+&nbsp; &nbsp; &nbsp; C. Using iteration, make a data frame that has all of the above information for all of the states. +1 EXTRA CREDIT - have a column named state with the state name. (hint: `?setNames`)
 
 ```{r}
 states <- list.files("data/counties/") %>%
@@ -65,7 +68,8 @@ state_info <- map(states, read_state) %>%
   map_dfr(state_properties, .id = "state")
 ```
 
-D. Plot that largest county ratio to number of counties! What do you learn? +1 extra credit for each exploration beyond this.
+
+&nbsp; &nbsp; &nbsp; D. Plot that largest county ratio to number of counties! What do you learn? +1 extra credit for each exploration beyond this.
 
 ```{r}
 ggplot(state_info,
@@ -111,7 +115,8 @@ got_info %>%
 
 Another cool thing is that we can always `tidyr::unnest()` columns to expand them out, repeating, say, names or other elements of a data frame.
 
-A. Select just name and aliases. Filter the resulting data down to something usable, and then unnest aliases. Use the resulting data to determine, who had the most aliases!
+
+&nbsp; &nbsp; &nbsp; A. Select just name and aliases. Filter the resulting data down to something usable, and then unnest aliases. Use the resulting data to determine, who had the most aliases!
 ```{r}
 library(tidyr)
 
@@ -126,7 +131,8 @@ got_info %>%
 # Arya Stark
 ```
 
-B. Great! Now. Let's use this idea of unnesting to build and then visualize a dataset that shows the breakdown, within each allegiance, whether there are more aliases for men or women. What does this visualization teach you about the different allegiances?
+
+&nbsp; &nbsp; &nbsp; B. Great! Now. Let's use this idea of unnesting to build and then visualize a dataset that shows the breakdown, within each allegiance, whether there are more aliases for men or women. What does this visualization teach you about the different allegiances?
 
 ```{r}
 allegiance_alias <- got_info %>%
