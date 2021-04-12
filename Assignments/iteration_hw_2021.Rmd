@@ -155,3 +155,22 @@ ggplot(allegiance_alias,
   theme_void()
   
 ```
+
+
+E.C. +8 Write a function that takes a state name, and plots the state, but with height of county as % area using [deckgl](https://crazycapivara.github.io/deckgl/) or [mapdeck](https://symbolixau.github.io/mapdeck/index.html)
+
+```{r}
+#install.packages("deckgl")
+#install.packages("mapdeck")
+library(mapdeck)
+oh <- read_state("Ohio")
+oh <- oh %>%
+  mutate(land_perc = st_area(.) %>% as.numeric,
+         land_perc = land_perc/sum(land_perc)*100)
+
+mapdeck(style = mapdeck_style("dark"), pitch = 50) %>%
+  add_polygon(oh,
+         layer = "land_perc",
+         elevation = "land_perc",
+         fill_colour = "land_perc", elevation_scale = 100000)
+```
