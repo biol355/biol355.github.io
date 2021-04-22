@@ -58,7 +58,7 @@ OK, now have it create a ggplot that, using `plotOutput()` and `renderPlot()` sh
 Now, add two inputs. One allows users to chose a country. The second allows them to select the type of cases to display (confirmed, death, recovered). Use whatever `*Input` functions you would like. Now, where you have OUTPUTS for global trends and a tail of a data table, replace them with outputs that show the trend for the selected country and type and the table for the selected country and type.  Make sure your app runs.
 
 ## 7. Deploy your app!
-Using http://shinyapps.io, deploy your app! Tell us the link!
+Using http://shiny.umb.edu, upload your code, make sure the app works (in case you have to install any libraries), and then tell us the link! If you've forgotten how, go back and watch the last 10-15 minutes of our Shiny Lab!
 
 ## 8. Extra Credit (for full credit of another question)
 Use [tabsets](https://shiny.rstudio.com/articles/tabsets.html) so that all of the outputs are not returned all at once. Deploy this!
