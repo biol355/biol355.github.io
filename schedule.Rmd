@@ -189,7 +189,7 @@ __Lectures:__ [Introduction to Frequentist Hypothesis Tests](./Lectures/21_testi
 __Objective(s):__ Describe the basics of probability and p-values, Compare groups of data using T-tests and its extensions.  
 __Biological Examples:__ The effects of testosterone on bird behavior.  
 __Lab:__ [T-Tests](./Labs/lab_9_t.html)  
-__Files:__ [Blackbird Testosterone Implants](./Labs/data/12e2BlackbirdTestosterone.csv), [Survivorship of Salmon and Trout](./Labs/data/12e4BrookTrout.csv)  
+__Files:__ [Blackbird Testosterone Implants](./Labs/data/12e2BlackbirdTestosterone.csv), [Survivorship of Salmon and Trout](./Labs/data/12e4BrookTrout.csv), [Monogomy and Testes size](./Labs/data/12q05MonogamousTestes.csv)  
 __Etherpad:__ https://etherpad.wikimedia.org/p/355-ttest-2021  
 __Homework:__ [t-tests](./Assignments/9_t.html), [Lizard data](./Lectures/t_test/12e3HornedLizards.csv)  
   
