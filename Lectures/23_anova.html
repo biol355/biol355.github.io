@@ -11,26 +11,27 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -39,9 +40,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -505,6 +506,7 @@ style.innerHTML = style_script;
 document.getElementsByTagName('head')[0].appendChild(style);
 </script>
 
+    <script src="23_anova_files/header-attrs-2.6/header-attrs.js"></script>
 </head>
 <body>
   <div class="reveal">
@@ -512,14 +514,14 @@ document.getElementsByTagName('head')[0].appendChild(style);
 
 
 <section id="section" class="slide level2" data-background="./Images/anova/anova.jpg">
-<h2></h2>
+<h2 data-background="./Images/anova/anova.jpg"></h2>
 <Br>
 <h1 style="background:white;">
 Analysis of Multiple Groups with ANOVA
 </h1>
 </section>
 <section id="fighting-jet-lag" class="slide level2" data-background="./Images/anova/airport_2349324a-large.jpg">
-<h2><font color="white">Fighting Jet Lag</font></h2>
+<h2 data-background="./Images/anova/airport_2349324a-large.jpg"><font color="white">Fighting Jet Lag</font></h2>
 </section>
 <section id="the-knees-the-thing" class="slide level2">
 <h2>The Knee’s The Thing!</h2>
@@ -580,7 +582,7 @@ Ratio of two normal distributions = F Distribution
 <h2>Linking your Model to Your Question</h2>
 <p>Data Generating Process:<span class="math display">\[T_{control}\mu_{control} + T_{eye}\mu_{eye} + T_{knee}\mu_{knee}\]</span> <br>VERSUS<br> Error Generating Process <span class="math display">\[\epsilon_i \sim N(0,\sigma)\]</span></p>
 <div class="fragment">
-If groups are a meaningful explanatory variable, what does that imply about variability in th data?
+If groups are a meaningful explanatory variable, what does that imply about variability in the data?
 </div>
 </section>
 <section id="variability-due-to-dgp-versus-egp" class="slide level2">
@@ -612,7 +614,7 @@ If groups are a meaningful explanatory variable, what does that imply about vari
 <li>Our model states that shift is determined by treatment</li>
 <li>This relationship is linear with a normal error distribution <br></li>
 </ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1">mod &lt;-<span class="st"> </span><span class="kw">lm</span>(shift <span class="op">~</span><span class="st"> </span>treatment, <span class="dt">data=</span>jetlag)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(shift <span class="sc">~</span> treatment, <span class="at">data=</span>jetlag)</span></code></pre></div>
 <br>
 <div class="fragment">
 Note: The ~ syntax can also be used for <code>t.test</code>
@@ -680,11 +682,11 @@ Note: The ~ syntax can also be used for <code>t.test</code>
 </section>
 <section id="f-table" class="slide level2">
 <h2>F-Table</h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw">anova</span>(mod)</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(mod)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
-<th></th>
+<th style="text-align: left;"></th>
 <th style="text-align: right;">Df</th>
 <th style="text-align: right;">Sum Sq</th>
 <th style="text-align: right;">Mean Sq</th>
@@ -694,7 +696,7 @@ Note: The ~ syntax can also be used for <code>t.test</code>
 </thead>
 <tbody>
 <tr class="odd">
-<td>treatment</td>
+<td style="text-align: left;">treatment</td>
 <td style="text-align: right;">2</td>
 <td style="text-align: right;">7.224492</td>
 <td style="text-align: right;">3.6122459</td>
@@ -702,7 +704,7 @@ Note: The ~ syntax can also be used for <code>t.test</code>
 <td style="text-align: right;">0.0044723</td>
 </tr>
 <tr class="even">
-<td>Residuals</td>
+<td style="text-align: left;">Residuals</td>
 <td style="text-align: right;">19</td>
 <td style="text-align: right;">9.415345</td>
 <td style="text-align: right;">0.4955445</td>
@@ -746,57 +748,57 @@ Note: The ~ syntax can also be used for <code>t.test</code>
 </section>
 <section id="this-analysis" class="slide level2">
 <h2>This analysis</h2>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">jetlag &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;./data/anova/15e1KneesWhoSayNight.csv&quot;</span>)</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co">#fit</span></a>
-<a class="sourceLine" id="cb3-4" data-line-number="4">jetlag_mod &lt;-<span class="st"> </span><span class="kw">lm</span>(shift <span class="op">~</span><span class="st"> </span>treatment, <span class="dt">data=</span>jetlag)</a>
-<a class="sourceLine" id="cb3-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="co">#Assumptions</span></a>
-<a class="sourceLine" id="cb3-7" data-line-number="7"><span class="kw">plot</span>(jetlag_mod, <span class="dt">which=</span><span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb3-8" data-line-number="8"><span class="kw">plot</span>(jetlag_mod, <span class="dt">which=</span><span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb3-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb3-10" data-line-number="10"><span class="co">#Results</span></a>
-<a class="sourceLine" id="cb3-11" data-line-number="11"><span class="kw">anova</span>(jetlag_mod)</a>
-<a class="sourceLine" id="cb3-12" data-line-number="12"></a>
-<a class="sourceLine" id="cb3-13" data-line-number="13"><span class="co">#Visualize</span></a>
-<a class="sourceLine" id="cb3-14" data-line-number="14"><span class="kw">ggplot</span>(<span class="dt">data =</span> jetlag, <span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x=</span>treatment, <span class="dt">y=</span>shift)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb3-15" data-line-number="15"><span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">fun.data=</span>mean_se)</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>jetlag <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;./data/anova/15e1KneesWhoSayNight.csv&quot;</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#fit</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>jetlag_mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(shift <span class="sc">~</span> treatment, <span class="at">data=</span>jetlag)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">#Assumptions</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(jetlag_mod, <span class="at">which=</span><span class="dv">1</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(jetlag_mod, <span class="at">which=</span><span class="dv">2</span>)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="co">#Results</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(jetlag_mod)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="co">#Visualize</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> jetlag, <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>treatment, <span class="at">y=</span>shift)) <span class="sc">+</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun.data=</span>mean_se)</span></code></pre></div>
 </section>
 <section id="nematode-lifespans" class="slide level2">
 <h2>Nematode Lifespans!</h2>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1">nemetodes &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;./data/anova/15q19NematodeLifespan.csv&quot;</span>)</a>
-<a class="sourceLine" id="cb4-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb4-3" data-line-number="3"><span class="co">#fit</span></a>
-<a class="sourceLine" id="cb4-4" data-line-number="4">nem_mod &lt;-<span class="st"> </span><span class="kw">lm</span>(_______ <span class="op">~</span><span class="st"> </span>_______, <span class="dt">data=</span>nemetodes)</a>
-<a class="sourceLine" id="cb4-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="co">#Assumptions</span></a>
-<a class="sourceLine" id="cb4-7" data-line-number="7"><span class="kw">plot</span>(nem_mod, <span class="dt">which=</span><span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb4-8" data-line-number="8"><span class="kw">plot</span>(nem_mod, <span class="dt">which=</span><span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb4-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb4-10" data-line-number="10"><span class="co">#Results</span></a>
-<a class="sourceLine" id="cb4-11" data-line-number="11"><span class="kw">anova</span>(_______)</a>
-<a class="sourceLine" id="cb4-12" data-line-number="12"></a>
-<a class="sourceLine" id="cb4-13" data-line-number="13"><span class="co">#Visualize</span></a>
-<a class="sourceLine" id="cb4-14" data-line-number="14"><span class="kw">ggplot</span>(<span class="dt">data =</span> nemetodes, <span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x=</span>_______, <span class="dt">y=</span>_______)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb4-15" data-line-number="15"><span class="st">  </span><span class="kw">stat_summary</span>(<span class="dt">fun.data=</span>mean_se)</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>nemetodes <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;./data/anova/15q19NematodeLifespan.csv&quot;</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">#fit</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>nem_mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(_______ <span class="sc">~</span> _______, <span class="at">data=</span>nemetodes)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">#Assumptions</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(nem_mod, <span class="at">which=</span><span class="dv">1</span>)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(nem_mod, <span class="at">which=</span><span class="dv">2</span>)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="co">#Results</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(_______)</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="co">#Visualize</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> nemetodes, <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>_______, <span class="at">y=</span>_______)) <span class="sc">+</span></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">stat_summary</span>(<span class="at">fun.data=</span>mean_se)</span></code></pre></div>
 </section>
 <section id="eelgrass-genotypes" class="slide level2">
 <h2>Eelgrass Genotypes</h2>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">eelgrass &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;./data/anova/EelgrassGenotypes.csv&quot;</span>)</a>
-<a class="sourceLine" id="cb5-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb5-3" data-line-number="3"><span class="co">#fit</span></a>
-<a class="sourceLine" id="cb5-4" data-line-number="4">eelgrass_mod &lt;-<span class="st"> </span><span class="kw">lm</span>(_______, ______)</a>
-<a class="sourceLine" id="cb5-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb5-6" data-line-number="6"><span class="co">#Assumptions</span></a>
-<a class="sourceLine" id="cb5-7" data-line-number="7"><span class="kw">plot</span>(_______, <span class="dt">which=</span><span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb5-8" data-line-number="8"><span class="kw">plot</span>(_______, <span class="dt">which=</span><span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb5-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb5-10" data-line-number="10"><span class="co">#Results</span></a>
-<a class="sourceLine" id="cb5-11" data-line-number="11"><span class="kw">_______</span>(_______)</a>
-<a class="sourceLine" id="cb5-12" data-line-number="12"></a>
-<a class="sourceLine" id="cb5-13" data-line-number="13"><span class="co">#Visualize</span></a>
-<a class="sourceLine" id="cb5-14" data-line-number="14"><span class="kw">ggplot</span>(<span class="dt">data =</span> _______, <span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x=</span>_______, <span class="dt">y=</span>_______)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb5-15" data-line-number="15"><span class="st">  </span><span class="kw">_______</span>(_______)</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>eelgrass <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;./data/anova/EelgrassGenotypes.csv&quot;</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#fit</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>eelgrass_mod <span class="ot">&lt;-</span> <span class="fu">lm</span>(_______, ______)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">#Assumptions</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(_______, <span class="at">which=</span><span class="dv">1</span>)</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(_______, <span class="at">which=</span><span class="dv">2</span>)</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co">#Results</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="fu">_______</span>(_______)</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co">#Visualize</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> _______, <span class="at">mapping=</span><span class="fu">aes</span>(<span class="at">x=</span>_______, <span class="at">y=</span>_______)) <span class="sc">+</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">_______</span>(_______)</span></code></pre></div>
 </section>
     </div>
   </div>

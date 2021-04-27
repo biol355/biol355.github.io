@@ -96,7 +96,7 @@ Data Generating Process:$$T_{control}\mu_{control} + T_{eye}\mu_{eye} + T_{knee}
 <br>VERSUS<br>
 Error Generating Process $$\epsilon_i \sim N(0,\sigma)$$ 
 
-<div class="fragment">If groups are a meaningful explanatory variable, what does that imply about variability in th data?</div>
+<div class="fragment">If groups are a meaningful explanatory variable, what does that imply about variability in the data?</div>
 
 ## Variability due to DGP versus EGP
 ```{r}
@@ -257,8 +257,9 @@ ggplot(data=jetlag, mapping=aes(x=Treatment, y=shift)) +
 
 
 ## Faded Examples
-> * Let's walk through an example
-     
+
+> * Let's walk through an example  
+  
 > * Then I'll give you an example to work through, but with some code edited out
 
 ## This analysis
