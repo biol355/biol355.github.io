@@ -18,21 +18,21 @@ ggplot(data = DNase,
 
 **What:** Biol 355 & 356 Section 01  
   
-**Instructor:** Jarrett Byrnes, PhD.
+**Instructor:** [Jarrett Byrnes](http://byrneslab.net), PhD.
 
 **Email:** jarrett.byrnes@umb.edu  
   
 **Twitter:** [jebyrnes](http://twitter.com/jebyrnes)
 
-**TA:** Michael Roy
+**TA:** Asmae Toumi
 
-**Email:** michael.roy002@umb.edu  
+**Email:** atoumi.cu@gmail.com
 
-**Where:** Zoom!    
+**Where:** Biol 355 - Healey 0042 (Purple Lab), Biol 356 - Healey 3rd floor 9F (Blue Lab), or Zoom!    
 
 **Weekly Schedule:** Tuesday & Thursday 2:00-3:15, Lab Friday 10:00 - 1:00  
-**Student Hours:** Prof. Byrnes will hold student office hours Wednesday from 1-3 and will post a Zoom link in the class Slack group  
-&nbsp; &nbsp; TRoy will hold student office hours Tuesday 10-11:30 or by appointment also on Zoom and will post a link to the class slack.  
+**Student Hours:** Prof. Byrnes will hold student office hours Tuesday from 11-1 or by appointment and will post a Zoom link in the class Slack group  
+&nbsp; &nbsp; TA Toumi  will hold student office hours Monday and Tuesday from 5-6pm or by appointment on Zoom and will post a link to the class slack.  
 
 **Source for this Website:** https://github.com/biol355/biol355.github.io/
 &nbsp;  
@@ -41,10 +41,10 @@ ggplot(data = DNase,
 
 ## Course News:  
 
-*1/25/2021*  Please join our class slack channel on the UMass Boston R User Group Slack by going to http://umbrug.slack.com, and, once joined, join the #biol355 channel.  
+*9/1/2021*  Please join our class slack channel on the UMass Boston R User Group Slack by going to http://umbrug.slack.com, and, once joined, join the #biol355 channel.  
 
-*1/24/2021*  Welcome to the class! Please browse around the site or download the [lecture syllabus](./governance_syllabus/byrnes_355_datascience_lecture_4.docx) and [lab syllabus](./governance_syllabus/byrnes_356_datascience_lab_4.docx)!  
+*9/1/2021*   Welcome to the class! Please browse around the site or download the [lecture syllabus](./governance_syllabus/byrnes_355_datascience_lecture_4.docx) and [lab syllabus](./governance_syllabus/byrnes_356_datascience_lab_4.docx)!  
 
-*5/11/2020*: Check out last spring 2020's projects right [here](./projects_2020.html)  
+*8/11/2020*: Check out previous year's past projects right [here](./past_projects.html)  
 
 

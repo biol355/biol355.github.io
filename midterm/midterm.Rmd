@@ -70,6 +70,9 @@ The breakdown of your grade for this assignment will be as follows:
 - Extra credit - 10% - get it on Rstudio's contributed cheat sheet website
 - Extra credit - 10% - get folk commenting on it on [#rstats twitter](https://twitter.com/search?q=%23rstats&src=typed_query)!
 
+# Things NOT to do
+- Do not write a long word document explaining the package  
+- Do not make a bunch of slides rather than use the template for a cheat sheet  
 
 # Finding a Package
 While we provide a few packages below, you're also more than welcome to search for ones you might find interesting. There are a number of places to look. Your package can be from CRAN. It might be from a [CRAN Task View](https://cran.r-project.org/web/views/). You might find it on [awesome-r.com](https://awesome-r.com/). It could be a package featured as a [Top 40 new package at Rviews](https://www.google.com/search?q=top+40&q=site%3Ahttps%3A%2F%2Frviews.rstudio.com). Or take a look at the New and Updated packages section of [rweekly](https://rweekly.org/#NewPackages) (note - I read this daily!). Many data oriented packages can be found at [ROpenGov](https://ropengov.github.io/projects/) or for health data, [rOpenHealth](https://github.com/rOpenHealth). I'm also a big fan of [ROpenSci](https://ropensci.org/packages/) for many ecologically focused packages. Also, on our [data sets page](https://biol355.github.io/datasets.html) there are a variety of R packages that provide access to data. Those are great targets as well!  
