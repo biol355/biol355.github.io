@@ -1,0 +1,57 @@
+---
+title: "Final Projects from Previous Semesters"
+---
+
+# Spring 2021
+- Abdullah Almohammad:	Cancer Cases through US	https://shiny.umb.edu/rstudio/p/c45b9e62/  
+  
+- Alexandra Vazquez:	Crime Incidences in Massachussetts from 2018	https://shiny.umb.edu/shiny/users/alexandra.vazquez001/Crime_App/  
+  
+- Amy Trinh:	MBTA Subway Ridership	https://shiny.umb.edu/shiny/users/amy.trinh001/Final/  
+    
+- Daniel Beebe:	Cryptocurrency mining and power usage	https://shiny.umb.edu/shiny/users/daniel.beebe001/Cryptocurrency_Power_Consumption/crypto/  
+  
+- Gardy Hyacinthe:	Life Expectancy	https://shiny.umb.edu/shiny/users/gardy.hyacinthe001/Final_app/  
+  
+- Hui-Ling Ho:	TMDB movie information!	https://shiny.umb.edu/shiny/users/huiling.ho001/Final%20project/  
+  
+  
+- Maria Ramos: 	Drug Induced Deaths In the US from 1999-2015	https://shiny.umb.edu/shiny/users/maria.ramos002/Final/  
+  
+- Matthew He:	Electrical generation vs avg temperature in USA, 2020	https://mh02.shinyapps.io/EvT2020/  
+
+- Sam Hartman	SAT/AP scores linked to demographic data, location, and school performance	https://shiny.umb.edu/shiny/users/samuel.hartman001/bio355_shiny_final/  
+  
+- Shannon Joyce:	Annual Number of Deaths by Cause 	https://shiny.umb.edu/shiny/users/shannon.joyce001/ShinyFinal/  
+  
+- Tony Ruan:	Global COVID-19 Case Type Distribution	https://shiny.umb.edu/shiny/users/yongan.ruan001/covid_spatial_data/  
+
+- Seakhong Sov:	Housing Market Crisis	https://shiny.umb.edu/shiny/users/seakhong.sov001/Housing_Market/  
+  
+# Spring 2020
+
+Below are the links and short descriptions for the 2020 Final Projects!
+
+- Mickayla Johnston:	Exploring the Effects of Landcover Type on Red-Winged Blackbirds (*Agelaius phoeniceus*)	https://mickaylaj.shinyapps.io/final/	
+
+- Gabbie Parker:	Relationships between CO<sub>2</sub> emissions and income  
+
+- Bruna Silva:	Whales of Stellwagen Bank	https://brus-apps.shinyapps.io/whales_of_stellwagen/
+
+- Briana Giambusso:	 Risk Survey Analyses		
+
+- Delaney Ledoux	Billboard Hot 100	https://dledouxdataanalysis.shinyapps.io/billboardhot100/	
+\
+- Jared Lourie	Spotiphyst	https://j4yr0u93.shinyapps.io/spotiphyst/	
+\
+- Angie Guiducci	The real victim of a shark attack https://angelina-guiducci.shinyapps.io/FINAL_PROJECT  
+
+- Stephen Smiddy:	Analyzing/Visualizing malpractice cases across the U.S.
+ 
+- Bob Bartolini:	Exploring trends of U.S. cancer statistics from 2016	https://robert-bartolini.shinyapps.io/FINAL/	
+
+- Peter Le:	Renewable energy potential	https://peterle-shiny.shinyapps.io/final_project/	
+
+- Jonathan Layman:	iNaturalist User Trends with R	https://jonathanlayman001.shinyapps.io/iNaturalist_user_trends/	
+
+- Elias Tamarkin:	Exploring the Possiblity that Airborn Pollutants can become Waterborn	https://elias-t.shinyapps.io/Air_to_Water_Pollution/
