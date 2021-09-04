@@ -9,7 +9,7 @@ W&G = [Wickham & Grolemund](http://r4ds.had.co.nz), DC = Data Carpentry Lesson, 
     
 ```{r dates, echo=FALSE, message=FALSE, warning=FALSE}
 library(lubridate)
-current_date = parse_date_time("2021-01-25", orders="ymd")-days(7)
+current_date <- parse_date_time("2021-09-06", orders="ymd")-days(7)
 ```
 ### Week 1. Overview of Course, Data Creation, and Spreadsheets  
 ```{r next_date, echo=FALSE }
@@ -168,7 +168,7 @@ __Etherpad:__ https://etherpad.wikimedia.org/p/355-iteration-2021
 ### Week  11. Shiny and Web Interfaces  
 ```{r next_date, echo=FALSE}
 ```
-`r datestring`
+`r datestring`  
 __Readings:__ [Mastering Shiny](https://mastering-shiny.org/) Ch. 1-3, 4 optional, but recommended    
 __Objective(s):__ Learn how to communicate data to others using dynamic web based applications.  
 __Lectures:__ [Building Shiny Apps](https://docs.google.com/presentation/d/1dXhqqsD7dPOOdcC5Y7RW--dEU7UfU52qlb0YD3kKeLw/edit#slide=id.gd565d6fc7_0_182)  
@@ -208,7 +208,7 @@ __Etherpad:__ https://etherpad.wikimedia.org/p/355-anova-2021
 ### Week  14  General and Generalized Linear Models, Multiple Predictors  
 ```{r next_date, echo=FALSE}
 ```
-`r datestring_1`  
+`r datestring`  
 __Readings:__  W&G on [Model Basics](http://r4ds.had.co.nz/model-basics.html)   
 __Lectures:__ [The General Linear Model (ANCOVA, multiple regression)](./Lectures/26_ancova_mulltreg.html), [Generalized Linear Models](./Lectures/25_glm.html), [AIC and Multimodel Comparisons](./Lectures/27_mmi.html)  
 __Lab:__ [Linear Models](./Labs/lab10_lm.html)  

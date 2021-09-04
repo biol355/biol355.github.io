@@ -13,13 +13,22 @@
 
 <title>Course Schedule and Readings</title>
 
-<script src="site_libs/header-attrs-2.6/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.10/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -34,11 +43,6 @@
     </style>
 
 <style type="text/css">code{white-space: pre;}</style>
-<style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
 <script type="text/javascript">
 if (window.hljs) {
   hljs.configure({languages: []});
@@ -51,32 +55,6 @@ if (window.hljs) {
 
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
 
 
 
@@ -87,10 +65,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -107,40 +81,13 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+pre code {
+  padding: 0;
+}
 </style>
 
 
 <style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 60px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h2 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h3 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h4 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h5 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
-.section h6 {
-  padding-top: 65px;
-  margin-top: -65px;
-}
 .dropdown-submenu {
   position: relative;
 }
@@ -168,7 +115,7 @@ body {
   margin-right: -10px;
 }
 .dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
+  border-left-color: #adb5bd;
 }
 .dropdown-submenu.pull-left {
   float: none;
@@ -180,7 +127,7 @@ body {
 }
 </style>
 
-<script>
+<script type="text/javascript">
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -191,10 +138,23 @@ $(document).ready(function () {
   var menuAnchor = $('a[href="' + href + '"]');
 
   // mark it active
-  menuAnchor.parent().addClass('active');
+  menuAnchor.tab('show');
 
   // if it's got a parent navbar menu mark it active as well
   menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
 });
 </script>
 
@@ -206,7 +166,6 @@ $(document).ready(function () {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -332,7 +291,7 @@ $(document).ready(function () {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
@@ -346,7 +305,7 @@ $(document).ready(function () {
 <p>W&amp;G = <a href="http://r4ds.had.co.nz">Wickham &amp; Grolemund</a>, DC = Data Carpentry Lesson, U/P for linked pdfs = biol355</p>
 <div id="week-1.-overview-of-course-data-creation-and-spreadsheets" class="section level3">
 <h3>Week 1. Overview of Course, Data Creation, and Spreadsheets</h3>
-<p>1/25/2021<br />
+<p>9/6/2021<br />
 <strong>Lecture:</strong> <a href="./Lectures/01_intro.pdf">Welcome!</a>, <a href="./Lectures/02_data_creation.html">Data Collection and Metadata</a><br />
 <strong>Readings:</strong> <a href="http://r4ds.had.co.nz/introduction.html">W&amp;G Introduction Chapter 1</a>, <a href="./Readings/Browman_and_Woo_Spreadsheets.pdf">Browman and Woo 2017</a><br />
 <strong>Objective(s):</strong> Introduce the students to the course; understand what is data, discuss how we preserve information about data, view different examples of datasets from different disciplines. Compare poor versus good practice in creating data. Differentiate between data recording and data entry.<br />
@@ -356,7 +315,7 @@ $(document).ready(function () {
 <!--
 ### Week  2. Introduction to R and RMarkdown  
 
-1/25/2021  
+9/6/2021  
 __Readings:__ W&G On [Workflow Basics](https://r4ds.had.co.nz/workflow-basics.html) and [Projects](https://r4ds.had.co.nz/workflow-projects.html)    
 __Lectures:__  [Intro to R](./Lectures/04_r_intro.html), [Intro to vectors, lists, matrices, and data frames](./Lectures/05_r_intro_list_matrix_df.html), [Data import and package installation](./Lectures/06_read_data_libraries.html)    
 __Objective(s):__ Begin to learn the R computing language. Identify the syntax of an R function (name and arguments); Create an R project in RStudio.  
@@ -367,7 +326,7 @@ __Etherpad:__  https://etherpad.wikimedia.org/p/biol355-r-intro-2021
 </div>
 <div id="week-2-introduction-to-r-and-rmarkdown" class="section level3">
 <h3>Week 2 Introduction to R and RMarkdown</h3>
-<p>2/1/2021<br />
+<p>9/13/2021<br />
 <strong>Readings:</strong> W&amp;G On <a href="https://r4ds.had.co.nz/workflow-basics.html">Workflow Basics</a> and <a href="https://r4ds.had.co.nz/workflow-projects.html">Projects</a>, <a href="http://r4ds.had.co.nz/tibbles.html">Tibbles &amp; Data Frames</a> and <a href="http://r4ds.had.co.nz/data-import.html">Data Import</a><br />
 <strong>Lectures:</strong> DC Ecology <a href="http://www.datacarpentry.org/R-ecology-lesson/01-intro-to-r.html">Intro to R</a> and <a href="http://www.datacarpentry.org/R-ecology-lesson/02-starting-with-data.html">starting with data</a><br />
 <strong>Objective(s):</strong> Begin to learn the R computing language. Identify the syntax of an R function (name and arguments); Create an R project in RStudio. Read data into R using read.csv(); Use R as a basic calculator; Describe and create variables in R; Interpret the output of the str() function; Install packages in R;<br />
@@ -381,7 +340,7 @@ __Etherpad:__  https://etherpad.wikimedia.org/p/biol355-r-intro-2021
 </div>
 <div id="week-3.-visualization" class="section level3">
 <h3>Week 3. Visualization</h3>
-<p>2/8/2021<br />
+<p>9/20/2021<br />
 <strong>Readings:</strong> W&amp;G on <a href="http://r4ds.had.co.nz/data-visualisation.html">Data Visualization</a>, <a href="./Readings/Unwin_2008_dataviz.pdf">Unwin 2008</a>, <a href="./Readings/choosing-a-good-chart-09.pdf">Choosing a Good Chart Cheat Sheet</a><br />
 <strong>Lectures:</strong> <a href="./Lectures/07_data_viz_principles.pdf">Principles of Data Visualization</a>, <a href="./Lectures/08_ggplot_intro.html">Intro to ggplot2</a><br />
 <strong>Objective(s):</strong> Develop understanding of graphical presentation best practices. Create a scatterplot using ggplot(); Learn how to add data to a simple map<br />
@@ -394,7 +353,7 @@ __Etherpad:__  https://etherpad.wikimedia.org/p/biol355-r-intro-2021
 </div>
 <div id="week-4.-data-reduction-and-summarization" class="section level3">
 <h3>Week 4. Data Reduction and Summarization</h3>
-<p>2/15/2021<br />
+<p>9/27/2021<br />
 <strong>Readings:</strong> W&amp;G on <a href="http://r4ds.had.co.nz/transform.html">Data Transformation</a>, <a href="http://r4ds.had.co.nz/exploratory-data-analysis.html">Exploratory Data Analysis</a>, and <a href="http://r4ds.had.co.nz/pipes.html">Pipes</a>, DC Ecology Lesson on <a href="http://www.datacarpentry.org/R-ecology-lesson/03-dplyr.html">Data Aggregation</a><br />
 <strong>Lecture:</strong> <a href="./Lectures/09_summarizing_data.html">Organizing Data to Tell a Story</a><br />
 <strong>Lab:</strong> <a href="https://swcarpentry.github.io/r-novice-gapminder/13-dplyr/">Gapminder and Dplyr</a>, <a href="./Lectures/dplyr_faded_examples.html">Dplyr Faded Example Practice</a><!--, [Data for Exploratory Data Analysis of Mortality and Natality with dplyr and ggplot2](./Labs/freeform_dplyr.zip)--><br />
@@ -407,7 +366,7 @@ __Etherpad:__  https://etherpad.wikimedia.org/p/biol355-r-intro-2021
 </div>
 <div id="week-5.-date-cleaning-strings-factors-and-dates" class="section level3">
 <h3>Week 5. Date Cleaning: Strings, Factors, and Dates</h3>
-<p>2/22/2021<br />
+<p>10/4/2021<br />
 <strong>Readings:</strong> W&amp;G on <a href="http://r4ds.had.co.nz/strings.html">Strings</a>, <a href="http://r4ds.had.co.nz/dates-and-times.html">Dates and Times</a>, and <a href="http://r4ds.had.co.nz/factors.html">Factors</a><br />
 <strong>Lecture:</strong> <a href="./Lectures/11_regexp.html">Strings and Regular Expressions 1</a>, <a href="./Lectures/12_regexp_2.html">Strings and Regular Expressions 2</a><br />
 <strong>Cheat Sheets:</strong> <a href="https://github.com/rstudio/cheatsheets/raw/master/strings.pdf">Work with Strings Cheat Sheet</a><br />
@@ -418,7 +377,7 @@ __Etherpad:__  https://etherpad.wikimedia.org/p/biol355-r-intro-2021
 </div>
 <div id="week-6.-tidy-data-and-data-cleaning" class="section level3">
 <h3>Week 6. Tidy Data and Data Cleaning</h3>
-<p>3/1/2021<br />
+<p>10/11/2021<br />
 <strong>Readings:</strong> W&amp;G Chapters on <a href="http://r4ds.had.co.nz/tidy-data.html">Tidy Data</a><br />
 <strong>Lecture:</strong> <a href="./Lectures/13_data_tidy.html">Tidy Data</a>, <a href="./Labs/axoltl_lab.html">Axoltl Data Cleaning</a><br />
 <strong>Lab:</strong> <a href="./Labs/coronavirus.html">Tidy Coronavirus</a><br />
@@ -430,7 +389,7 @@ __Etherpad:__  https://etherpad.wikimedia.org/p/biol355-r-intro-2021
 </div>
 <div id="week-7-8.-data-mashups-and-geospatial-data" class="section level3">
 <h3>Week 7 &amp; 8. Data “Mashups” and Geospatial Data</h3>
-<p>3/8/2021 and 3/22/2021<br />
+<p>10/18/2021 and 11/1/2021<br />
 <strong>Readings:</strong> <a href="https://geocompr.robinlovelace.net/intro.html">Intro to Geocomputation in R</a>, <a href="https://geocompr.robinlovelace.net/spatial-class.html">Geographic Data in R</a>, W&amp;G Chapter on <a href="http://r4ds.had.co.nz/relational-data.html">Relational Data</a><br />
 <strong>Lectures:</strong> <a href="./Lectures/15_gis_intro.html">Intro to GIS</a>, <a href="./Lectures/16_raster_gis_intro.html">Rasters</a>, <a href="./Lectures/17_gis_in_r.html">GIS in R</a>, <a href="./Lectures/15_joins.pptx">Joins</a>, <a href="./Lectures/18_interactive_maps.Rmd">Interactive Maps</a><br />
 <strong>Labs:</strong> <a href="https://datacarpentry.org/r-raster-vector-geospatial/">Lessons 1,2, 6-8 from Data Carpentry Geospatial Lab</a>, <a href="./Labs/coronavirus_spatial.html">coronavirus spatial mapping</a> <a href="./Labs/join_maps_lab.html">joins and maps</a><br />
@@ -451,7 +410,7 @@ __Etherpad:__  https://etherpad.wikimedia.org/p/biol355-r-intro-2021
 </div>
 <div id="week-9-functions" class="section level3">
 <h3>Week 9 Functions</h3>
-<p>3/29/2021<br />
+<p>11/8/2021<br />
 <strong>Readings:</strong> W&amp;G Chapters on <a href="http://r4ds.had.co.nz/functions.html">Functions</a><br />
 <strong>Lectures:</strong> <a href="./Lectures/19_functions_intro.html">Intro to Functions</a><br />
 <strong>Lab:</strong> <a href="./Labs/functions_iteration.html">Functions</a><br />
@@ -463,7 +422,7 @@ __Etherpad:__  https://etherpad.wikimedia.org/p/biol355-r-intro-2021
 </div>
 <div id="week-10-iteration" class="section level3">
 <h3>Week 10 Iteration</h3>
-<p>4/5/2021<br />
+<p>11/15/2021<br />
 <strong>Readings:</strong> W&amp;G Chapters on <a href="http://r4ds.had.co.nz/iteration.html">Iteration</a><br />
 <strong>Lectures:</strong> <a href="./Lectures/20_iteration.html">Iteration with purrr</a><br />
 <strong>Lab:</strong> <a href="https://www.gerkelab.com/blog/2018/09/import-directory-csv-purrr-readr/">Importing Hospital Records</a>, <a href="https://sanderwuyts.com/en/blog/purrr-tutorial/">Bioinformatics and List Columns</a> <!-- [Many Models](https://r4ds.had.co.nz/many-models.html)--><br />
@@ -475,7 +434,8 @@ __Etherpad:__  https://etherpad.wikimedia.org/p/biol355-r-intro-2021
 </div>
 <div id="week-11.-shiny-and-web-interfaces" class="section level3">
 <h3>Week 11. Shiny and Web Interfaces</h3>
-<p>4/12/2021 <strong>Readings:</strong> <a href="https://mastering-shiny.org/">Mastering Shiny</a> Ch. 1-3, 4 optional, but recommended<br />
+<p>11/29/2021 (After Thanksgiving)<br />
+<strong>Readings:</strong> <a href="https://mastering-shiny.org/">Mastering Shiny</a> Ch. 1-3, 4 optional, but recommended<br />
 <strong>Objective(s):</strong> Learn how to communicate data to others using dynamic web based applications.<br />
 <strong>Lectures:</strong> <a href="https://docs.google.com/presentation/d/1dXhqqsD7dPOOdcC5Y7RW--dEU7UfU52qlb0YD3kKeLw/edit#slide=id.gd565d6fc7_0_182">Building Shiny Apps</a><br />
 <strong>Lab:</strong> <a href="https://deanattali.com/blog/building-shiny-apps-tutorial/">Lab for Building Shiny Apps</a><br />
@@ -487,7 +447,7 @@ __Etherpad:__  https://etherpad.wikimedia.org/p/biol355-r-intro-2021
 </div>
 <div id="week-12.-t-tests-and-p-values" class="section level3">
 <h3>Week 12. T-Tests and P-Values</h3>
-<p>4/19/2021<br />
+<p>12/6/2021<br />
 <strong>Readings:</strong> <a href="./Readings/cortina%20and%20Dunlop%201997%20significance%20testing%20p%20value.pdf">Cortina and Dunlop 1997</a><br />
 <strong>Lectures:</strong> <a href="./Lectures/21_testing_hypotheses_p.pdf">Introduction to Frequentist Hypothesis Tests</a>, <a href="./Lectures/22_t.pdf">T-Tests</a><br />
 <strong>Objective(s):</strong> Describe the basics of probability and p-values, Compare groups of data using T-tests and its extensions.<br />
@@ -499,7 +459,7 @@ __Etherpad:__  https://etherpad.wikimedia.org/p/biol355-r-intro-2021
 </div>
 <div id="week-13.-analysis-of-variance-and-the-linear-model" class="section level3">
 <h3>Week 13. Analysis of Variance and the Linear Model</h3>
-<p>4/26/2021<br />
+<p>12/13/2021<br />
 <strong>Lectures:</strong> <a href="./Lectures/23_anova.html">Analysis of Variance</a>, <a href="./Lectures/24_lm.html">Linear Models</a><br />
 <strong>Lab:</strong> <a href="./Labs/lm_anova_lab.html">Linear Models and ANOVA</a>, <a href="./Labs/data/lm_lab_data.zip">data files for lab</a><br />
 <strong>Objective(s):</strong> Analyze the differences between multiple means. Fit a linear regression using lm() in R through a bivariate scatterplot. Evaluate assumptions of a linear model with normal error<br />
@@ -509,7 +469,7 @@ __Etherpad:__  https://etherpad.wikimedia.org/p/biol355-r-intro-2021
 </div>
 <div id="week-14-general-and-generalized-linear-models-multiple-predictors" class="section level3">
 <h3>Week 14 General and Generalized Linear Models, Multiple Predictors</h3>
-<p>3/8/2021<br />
+<p>12/20/2021<br />
 <strong>Readings:</strong> W&amp;G on <a href="http://r4ds.had.co.nz/model-basics.html">Model Basics</a><br />
 <strong>Lectures:</strong> <a href="./Lectures/26_ancova_mulltreg.html">The General Linear Model (ANCOVA, multiple regression)</a>, <a href="./Lectures/25_glm.html">Generalized Linear Models</a>, <a href="./Lectures/27_mmi.html">AIC and Multimodel Comparisons</a><br />
 <strong>Lab:</strong> <a href="./Labs/lab10_lm.html">Linear Models</a><br />
@@ -532,7 +492,7 @@ __Etherpad:__ https://etherpad.wikimedia.org/p/355-aic-2021
 </div>
 <div id="week-15.-open-lab-and-final-presentations" class="section level3">
 <h3>Week 15. Open Lab and Final Presentations</h3>
-<p>5/10/2021<br />
+<p>12/27/2021<br />
 Prep your final talks! Data science party!</p>
 </div>
 
@@ -563,7 +523,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>
