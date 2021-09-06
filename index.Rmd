@@ -37,6 +37,8 @@ ggplot(data = DNase,
 **Student Hours:** Prof. Byrnes will hold student office hours Tuesday from 11-1 at https://umassboston.zoom.us/j/95856616788 (note waiting room) or by appointment  
 &nbsp; &nbsp; TA Toumi  will hold student office hours Monday and Tuesday from 5-6pm or by appointment on Zoom and will post a link to the class slack.  
 
+**Syllabi:** [lecture](./biol_355_syllabus_2021.docx) and [lab](./biol_356_syllabus_2021.docx) - note, this might be out of date relative to the website, and as such, see the [schedule](schedule.html) or other links above.  
+  
 **Source for this Website:** https://github.com/biol355/biol355.github.io/
 &nbsp;  
 &nbsp;  
