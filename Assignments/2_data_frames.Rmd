@@ -4,17 +4,14 @@ date: "`r format(Sys.time(), '%B %d, %Y')`"
 output: html_document
 ---
 
-<!-- Please write this up using Rmarkdown. -->
-Please write this up as a script. Make sure everything runs. Answer questions using #comments.
+Please write this up as using Rmarkdown. Make sure everything runs. Answer questions in text. Comment with abandon.
 
-1. Define, compare, and contrast vectors, lists, matrices, and data frames. Feel free to look at their help files.  
+1. Create a vector of 100 randomly distributed numbers between 0 and 100 using `runif` and save the vector into the variable `my_vec`. What information does `str` and `summary` tell you about `my_vec`?  How do they differ?
   
-2. Install the `dplyr` library. Install the `readxl` library. Install the `readr` library.
+2. Load the `readxl` and `readr` libraries. They are part of tidyverse and you should have them. If not, `install.packages()` is your friend! Then, load the following data files: https://biol355.github.io/Data/my_data.csv using `read.csv` and `read_csv` and https://biol355.github.io/Data/my_data.xlsx  using `read_excel`. Looking at the three objects you loaded in, what are the any differences or similarities between them? 
 
-3. Load the `readxl` and `readr` libraries. Load the following data files: https://biol355.github.io/Data/my_data.csv using `read.csv` and `read_csv` and https://biol355.github.io/Data/my_data.xlsx  using `read_excel`. Looking at the three objects you loaded in, what are the any differences or similarities between them? 
+4. What does the output of `str`, `summary`, `skimr::skim()`, and `visdat::vis_dat` tell you about the data you loaded? What is different or the same?
 
-4. What does the output of `str`, `summary`, and `visdat::vis_dat` tell you about the data you loaded? What is different or the same?
+5. Add a column to the mtcars data called `Model` which uses the row names of mtcars (`rownames(mtcars)`) as its values. Show me the head of the data frame to see if it's been done correctly. Note, to add a column to a data frame, we can specify `yourdf$new_col_name <- new_vector_we_we_are_adding` (note, that's pseudo-code). Note how we are using the `$` notation to add a new column.
 
-5. Add a column to the mtcars data called `Model` which uses the rownames of mtcars as its values. Show me the head of the data frame to see if it's been done correctly. Note, to add a column to a data frame, we can specify `yourdf$new_col_name <- new_vector_we_we_are_adding` (note, that's pseudo-code). Note how we are using the `$` notation to add a new column.
-
-6. Let's use the `bind_rows` function in dplyr, as it's pretty powerful. Let's say you want to add a new row to mtcars for a new model. Make a new data frame with the following columns: Model = Fizzywig, mpg=31.415, awesomness=11.  Now try to make a new data frame where you `rbind` `mtcars` and this new data frame. What happens? Then, make a new data frame here you use `dplyr::bind_rows` to combine them. Examine the resulting data frame. What do you see? How do the two methods differ?
+6. Let's use the `bind_rows` function in dplyr, as it's pretty powerful. Let's say you want to add a new row to mtcars for a new model. Make a new data frame with the following columns: Model = Fizzywig, mpg=31.415, awesomness=11.  Now try to make a new data frame where you `rbind` `mtcars` and this new data frame. What happens? Don't do this in a markdown code chunk - just try it, and then report what happens. It might or might not go as planned (and Rmarkdown can choke unless you add the appropriate argument to the code chunk - more on that soon)! Then, make a new data frame here you use `dplyr::bind_rows` to combine them. Examine the resulting data frame. What do you see? You can try this in a code chunk for your markdown. How do the two methods differ? Look at their help files for some information that might help you.
