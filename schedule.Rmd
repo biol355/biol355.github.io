@@ -56,13 +56,13 @@ __Etherpad:__  https://etherpad.wikimedia.org/p/biol355-r-intro-2021_fall
 ```
 `r datestring`  
 __Readings:__ W&G on [Data Visualization](http://r4ds.had.co.nz/data-visualisation.html),  [Unwin 2008](./Readings/Unwin_2008_dataviz.pdf), [Choosing a Good Chart Cheat Sheet](./Readings/choosing-a-good-chart-09.pdf)  
-__Lectures:__ [Principles of Data Visualization](./Lectures/07_data_viz_principles.pdf), [Intro to ggplot2](./Lectures/08_ggplot_intro.html)  
+__Lectures:__ [Principles of Data Visualization](./Lectures/07_data_viz_principles.pdf), [Intro to ggplot2](https://biol607.github.io/lab/04_ggplot_palmer_intro.html)  
+__Lab:__ [ggplot2 and climate change](./Lectures/08_ggplot_intro.html)  
 __Objective(s):__  Develop understanding of graphical presentation best practices. Create a scatterplot using ggplot(); Learn how to add data to a simple map    
 __Biological Examples:__  [Plum Island LTER Plankton Distribution](./Lectures/data/EST-PR-PlanktonChemTax.xls). [HAD CRUT Global temperature anomaly over the past century](./Lectures/data/hadcrut_temp_anomoly_1850_2015.csv)  
 __Cheat Sheets:__ [Data visualization](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf), [Mapping with ggmap](https://www.nceas.ucsb.edu/~frazier/RSpatialGuides/ggmap/ggmapCheatsheet.pdf)  
 __Other References:__[ggplot2 references](http://ggplot2.tidyverse.org/reference/), [Fundamentals of Data Visualization](http://serialmentor.com/dataviz/), [colors for data viz](https://lisacharlotterost.github.io/2016/04/22/Colors-for-DataVis/)  
 __Etherpad:__ https://etherpad.wikimedia.org/p/355-dataviz-2021_fall  
-__In Class Files:__ [ggplot and hadcrut](./in_class_files/2018/scripts/hadcrut_ggplot.R)  
 __Homework:__ [Plotapalooza](./Assignments/3_ggplot_intro.html)  
 
 ### Week  4. Data Reduction and Summarization
