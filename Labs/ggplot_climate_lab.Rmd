@@ -1,0 +1,53 @@
+---
+title: "Using ggplot2 with Global Temperature Data"
+author: "Biol 355"
+date: "9/23/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
+```
+
+Good data visualizations can have a strong impact on how you think about a phenomena. Earlier in 2016, a single image made by Ed Hawkins brought home how much our global average temperature has changed in a way that even the famous hockey stick graph didn't. 
+
+<center>![http://www.climatecentral.org/news/see-earths-temperature-spiral-toward-2c-20332](../Lectures/images/ggplot/hawkins_hadcrut.gif)\
+from http://www.climatecentral.org/news/see-earths-temperature-spiral-toward-2c-20332</center>
+
+There is a **lot** going on in this image. It's truly stunning. And a lot of it illustrates all of the best principles of data visualization - and it can be done in ggplot2! So, today, we're going to use this graph as our point of entry into exploring data visualization and ggplot2. Along the way we're going to explore many many aspects of `ggplot2` that are available to us.
+
+For this we're going to use a processed form of the data you can download (and put in your data folder) [here](./Lectures/data/hadcrut_temp_anomoly_wide_1850_2021.csv).
+
+For today we will largely work in pairs. For each question, talk through what you are going to do and agree on a strategy. Then, one person take the driver's seat and the second person tell them what to code out to implement their vision. The "driver" can help out by fixing code along the way that isn't quite right. When you're done and have a great visualization, indicate you're done with the problem on the class etherpad and post your image to slack.
+
+And don't be hesitant to consult ye olde [ggplot2 cheat sheet](https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf)!
+
+## The Lab Challenge Problems
+
+0. Load up the data. After you load the data (let's say we called it `hadcrut`), let's put the names in order with something like
+
+```{r, echo = TRUE, eval = FALSE}
+hadcrut$month <- factor(hadcrut$month, levels = month.abb)
+```
+
+For those that want to know what this is doing, a factor is like a character - only there is an underlying order to it which is specified by levels. `month.abb` is a vector that is a constant (like pi or letters) in base R of all of the abbreviations of month in order. For more on factors, see [this great blog post](https://simplystatistics.org/2015/07/24/stringsasfactors-an-unauthorized-biography/) from simplystatistics.
+
+1. What does the distribution of temperature anomalies look like? 
+
+2. Does the distribution vary by month? 
+
+3. How about by year? Use whatever geoms, scales, or other tools you feel best show this.
+
+BONUS 4. Install the `ggridges` package and take a look at some of its [documentation](https://wilkelab.org/ggridges/). Can you use ggridges to show information about anomaly by month or year? Combine the two?
+
+5. Using `stat_summary()` or some other stat, can you see any relationship between month and anomaly over time? Do certain months have larger anomalies than others?
+
+6. Let's talk time. Can you plot anomaly by month with different lines for different years. To make it clearer, color line by year. Play with color scales and themes until you have something you like.
+
+7. Can you highlight when certain thresholds - say 1C and 2C - are passed? Use `geom_hline()` here.
+
+8. Cool. Now. What if you use `coord_polar()` here. What does that make things look like?
+
+9. Last, using everything above as a starting point, what do you feel is the best visualization you can generate with this data set to show climate change? Don't hold back! When you're done, post the viz to the slack channel.
+
+BONUS BONUS - Check out [gganimate](https://gganimate.com/). Can you remake hawkins graph? Or use animation some other way to make something even more informative?
