@@ -16,7 +16,7 @@ from http://www.climatecentral.org/news/see-earths-temperature-spiral-toward-2c-
 
 There is a **lot** going on in this image. It's truly stunning. And a lot of it illustrates all of the best principles of data visualization - and it can be done in ggplot2! So, today, we're going to use this graph as our point of entry into exploring data visualization and ggplot2. Along the way we're going to explore many many aspects of `ggplot2` that are available to us.
 
-For this we're going to use a processed form of the data you can download (and put in your data folder) [here](./Lectures/data/hadcrut_temp_anomoly_wide_1850_2021.csv).
+For this we're going to use a processed form of the data you can download (and put in your data folder) [here](../Lectures/data/hadcrut_temp_anomoly_wide_1850_2021.csv).
 
 For today we will largely work in pairs. For each question, talk through what you are going to do and agree on a strategy. Then, one person take the driver's seat and the second person tell them what to code out to implement their vision. The "driver" can help out by fixing code along the way that isn't quite right. When you're done and have a great visualization, indicate you're done with the problem on the class etherpad and post your image to slack.
 
