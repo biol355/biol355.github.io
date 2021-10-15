@@ -1,7 +1,7 @@
 ---
 title: "Taking a Look at Covid 19: Tidy Friday"
 author: "Biol355"
-date: "3/6/2020"
+date: "`r Sys.Date()`"
 output: html_document
 ---
 
@@ -16,8 +16,7 @@ In the R community, there's a weekly event known as [Tidy Tuesday](https://githu
 With the advent of the Covid-19 caronavirus outbreak across the world, people want to know more - and no more now!  Fortunately, the R community has begun coming together and making tools to rapidly disseminate data. There are two packages out there currently, but let's focus on the coronavirus package. To install it, use the following code:
 
 ```{r install, eval=FALSE}
-#uses devtools to install from github
-devtools::install_github("RamiKrispin/coronavirus")
+install.packages("coronavirus")
 ```
 
 ## The available Data
@@ -30,7 +29,15 @@ library(coronavirus)
 head(coronavirus)
 ```
 
-Each row is a single instance of recorded cases. There is information on the country and region, the province or state, the latitude, longitude, and date. We also see the number of cases and whether the observation is of a confirmed case, a recovery, or a death. You can take a look at `?coronavirus` for more information or at https://ramikrispin.github.io/coronavirus/.
+Each row is a single instance of recorded cases. There is information on the province (i.e., State) and country, the latitude, longitude, and date. We also see the number of cases and whether the observation is of a confirmed case, a recovery, or a death. You can take a look at `?coronavirus` for more information or at https://ramikrispin.github.io/coronavirus/.
+
+There is also a second dataset on vaccines.
+
+```{r vaccine}
+head(covid19_vaccine)
+```
+
+This is much more rich with spatial data, but, can be used in a similar manner.
 
 ## Explore the data.
 
@@ -52,8 +59,8 @@ I want you to load the data, look through it, and then, make it tell a story! To
 
 ## Showing what you found
 
-As you make your first cool data viz, copy it, email it to me and Michael, and tell us. We want to show it off to the class to see what you found!  
+As you make your first cool data viz, copy it and post it to slack! Show it off to the class to see what you found!  
 \
-After you finish your lab report (your .Rmd file), compile it, and send it to us as well. I want to make a gallery of interesting reports for you all to look at to see what is possible.  
+After you finish your lab report (your .Rmd file), compile it, and submit it at your homework link. I want to make a gallery of interesting reports for you all to look at to see what is possible.  
 \
 Extra credit if you post it to Twitter with the hashtags #rstats and #coronavirus, making sure to mention that you used https://ramikrispin.github.io/coronavirus/
