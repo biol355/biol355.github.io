@@ -29,7 +29,7 @@ library(coronavirus)
 head(coronavirus)
 ```
 
-Each row is a single instance of recorded cases. There is information on the province (i.e., State) and country, the latitude, longitude, and date. We also see the number of cases and whether the observation is of a confirmed case, a recovery, or a death. You can take a look at `?coronavirus` for more information or at https://ramikrispin.github.io/coronavirus/.
+Each row is a single instance of recorded cases. There is information on the province, country, continent, the latitude, longitude, and date. We also see the number of cases and whether the observation is of a confirmed case, a recovery, or a death. You can take a look at `?coronavirus` for more information or at https://ramikrispin.github.io/coronavirus/.
 
 There is also a second dataset on vaccines.
 
