@@ -16,11 +16,25 @@ sales_long <- sales %>%
            cols = -c(_________:_________))
 ```
 
+```{r eval = FALSE, echo = FALSE}
+sales <- read_csv("../Data/Sale_Prices_City.csv")
+
+sales_long <- sales %>%
+    pivot_longer(names_to = "time_point", 
+           values_to = "sale_price", 
+           cols = -c(RegionID:SizeRank))
+```
+
 
 Drop the NAs
 ```{r drop NA, error = TRUE, eval=FALSE}
 sales_long <- sales_long %>%
     ______(______(sale_price))
+```
+
+```{r eval = FALSE, echo = FALSE}
+sales_long <- sales_long %>%
+    filter(!is.na(sale_price))
 ```
 
 Split up year and month into two columns
@@ -34,32 +48,65 @@ sales_long <- sales_long %>%
            )
 ```
 
+```{r eval = FALSE, echo = FALSE}
+library(dplyr)
+library(stringr)
+
+sales_long <- sales_long %>%
+    mutate(year = str_split(time_point, "-", simplify=TRUE)[,1],
+           month = str_split(time_point, "-", simplify=TRUE)[,2],
+           )
+```
+
+
 Make the following string:
 ```{r make string}
 my_string <- "Some people, when confronted with a problem, think 'I know, I'll use regular expressions.' Now they have two problems."
 ```
+
 Make it all uppercase
 ```{r uppercase, error = TRUE, eval=FALSE}
 __________(my_string)
 ```
+
+```{r eval = FALSE, echo = FALSE}
+str_to_upper(my_string)
+```
+
 Remove all instances of the letter e
 ```{r goodbyeee, error = TRUE, eval=FALSE}
 ______________(my_string, ______ = "e", replacement = ___)
 ```
+
+Remove all instances of the letter e
+```{r eval = FALSE, echo = FALSE}
+str_replace(my_string, pattern = "e", replacement = "")
+```
+
+
 Split this string into a vector of individual words
 ```{r split TRUE, eval=FALSE}
 split_string <- __________(my_string, pattern = ___, simplify = ______)
 ```
 
+```{r eval = FALSE, echo = FALSE}
+split_string <- str_split(my_string, pattern = " ", simplify = TRUE)
+```
+
+
 
 Find the words that start with consonants.
 ```{r TRUE, eval=FALSE}
 str_____(split_string, "___________")
-
 ```
 
+```{r eval = FALSE, echo = FALSE}
+str_extract(split_string, "^[^aeiouAEIOU'].*") #note '
+```
+
+
 ### 2. Tidying the HadCrut Data
-Load up the raw hadcrut data, [link here](../Data/hadcrut_temp_anomoly_wide_1850_2015.csv). We've been using this in a long format, but it actually is supplied as wide data. Use your skills with Tidyr to make it look like the long data we've been using in class!
+Load up the raw hadcrut data, [link here](../Data/hadcrut_temp_anomoly_wide_1850_2015.csv). We've been using this in a long format, but it actually is supplied as wide data. Use your skills with `tidyr` to make it look like the long data we've been using in class!
 
 Make sure in this exercise you submit: Code required for loading data, converting to long format, and then use `head()` to display the first five lines.Be sure to include steps where you check your work with `str` and and explain the relavent parts of what you see! Feel free to do this in comments. an example of this could be:
 
@@ -71,6 +118,32 @@ mean(x)
 ```
 
 I want to know that you know what your code is doing!
+
+```{r, echo = FALSE, eval = FALSE}
+library(readr)
+library(tidyr)
+library(stringr)
+library(dplyr)
+
+#load the data
+had <- read_csv("../Data/hadcrut_temp_anomoly_wide_1850_2015.csv")
+
+# pivot all of it longer and get rid of annual measurements
+# also get rid of ice cover
+had_long <- had %>%
+  pivot_longer(-year) %>%
+  filter(name != 'annual') %>%
+  filter(!str_detect(name, "cover"))
+
+# get rid of "month." and make the whole thing nicer
+had_long <- had_long %>%
+  mutate(name = str_remove(name, "month\\.") %>% as.numeric(),
+         month_name = month.abb[name]) %>% #get month name
+  rename(month = name) #rename initial column
+
+
+head(had_long)
+```
 <!--
 ### 3. Messy Weather
 Download the messy weather dataset from class today (3/7/2018) [link here](../Data/weather_messy.csv). This is a dataset that contains some weather measurements but structured in an...interesting way. Go through the cleanup steps required to go from this raw data to a cleaned up dataframe in the long format. This dataframe should have separate columns for year, month, day, and each measurement type. 
