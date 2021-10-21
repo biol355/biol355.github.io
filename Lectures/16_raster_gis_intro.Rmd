@@ -4,11 +4,11 @@ output:
   html_document:
     df_print: paged
 ---
-###R for GIS
+### R for GIS
 
 R is a great tool in the world of geospatial analyses. There are a number of powerful packages that allow us to load, process, analyze, and visualize geospatial data. 
 
-###What is Geospatial Data?
+### What is Geospatial Data?
 Any data that has a geographic component is considered geospatial data. These components are often some form of coordinates, but could also be an address, zipcode, country, etc.   
 
 Geospatial data takes two forms: raster and vector data.  
@@ -19,7 +19,7 @@ Geospatial data takes two forms: raster and vector data.
 
 Today we will cover the basics of GIS with an introduction to raster data.
 
-###Rasters
+### Rasters
 
 
 ![](./Images/raster_concept.png)

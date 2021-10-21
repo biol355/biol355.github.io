@@ -159,10 +159,6 @@ ggplot(plank, aes(Longitude, Latitude)) +
 - Additional Information
 
 ## Projections and Coordinate Reference Systems
-![](./Images/gis/projections_1.gif){width=95%}
-
-
-## Projections and Coordinate Reference Systems
 ![](./Images/gis/map_diff_proj.jpg)
 
 
