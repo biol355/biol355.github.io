@@ -118,7 +118,7 @@ datestring <- paste(month(current_date), day(current_date), year(current_date), 
 ```
 `r datestring_1` and `r datestring`  
 __Readings:__   [Intro to Geocomputation in R](https://geocompr.robinlovelace.net/intro.html), [Geographic Data in R](https://geocompr.robinlovelace.net/spatial-class.html), W&G Chapter on [Relational Data](http://r4ds.had.co.nz/relational-data.html)    
-__Lectures:__  [Intro to GIS](./Lectures/15_gis_intro.html), [Rasters](https://datacarpentry.org/r-raster-vector-geospatial/01-raster-structure/index.html) and [plotting rasters](https://datacarpentry.org/r-raster-vector-geospatial/02-raster-plot/index.html), [Joins](./Lectures/15_joins.pptx), [Vector Data](https://datacarpentry.org/r-raster-vector-geospatial/)
+__Lectures:__  [Intro to GIS](./Lectures/15_gis_intro.html), [Rasters](https://datacarpentry.org/r-raster-vector-geospatial/01-raster-structure/index.html) and [plotting rasters](https://datacarpentry.org/r-raster-vector-geospatial/02-raster-plot/index.html), [Joins](./Lectures/15_joins.pptx), [Vector Data](https://datacarpentry.org/r-raster-vector-geospatial/)  
 __Labs:__ [coronavirus spatial mapping](./Labs/coronavirus_spatial.html) [joins and maps](./Labs/join_maps_lab.html)  
 __Objective(s):__ Know when and where to use different types of joins, Understand how to merge survey data with geospatial information to get a geographic understanding of epidemiological patterns  
 __Biological Examples:__ Hemlock wooly adelgid distribution. CDC records of heart disease across counties of the US. Change in coastal sea surface temperature since 1850. Global TB mortality distribution.  
