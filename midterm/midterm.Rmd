@@ -50,7 +50,7 @@ Put your cheatsheet up on Github!If you're interested, see [Happy with Git](http
 # Steps
 1. First, look at existing [R Cheat Sheets](https://rstudio.com/resources/cheatsheets/). I will give you a homework question asking you to identify what you do and do not find useful about the examples here shortly.
 
-2. Second, read up on [how to create an R Cheat Sheet](https://rstudio.com/resources/cheatsheets/how-to-contribute-a-cheatsheet/). Download the template and read it over CAREFULLY.
+2. Second, read up on [how to create an R Cheat Sheet](https://github.com/rstudio/cheatsheets/blob/main/.github/CONTRIBUTING.md). Download the template and read it over CAREFULLY.
 
 3. Third, select a package. See the section below on possible packages and/or where to find other packages. Once you have selected a package, sign up [here](https://docs.google.com/spreadsheets/d/1nEyWhubzjY3x7vzezP_mVmaa59b9RMpdivzH8d4EkwI/edit?usp=sharing) so only one person gets one package!
 
@@ -58,7 +58,7 @@ Put your cheatsheet up on Github!If you're interested, see [Happy with Git](http
   
 5. Make a sketch of your cheatsheet. Be as detailed as you can. This will also be a future homework question!  
 
-6. Finally, make the cheat sheet. Read the [template]((https://rstudio.com/resources/cheatsheets/how-to-contribute-a-cheatsheet/)) carefully, as there many wonderful 
+6. Finally, make the cheat sheet. Read the [template](https://github.com/rstudio/cheatsheets/blob/main/.github/CONTRIBUTING.md) carefully, as there many wonderful tips for how to make an effective cheatsheet.
 
 # Grading
 The breakdown of your grade for this assignment will be as follows:  

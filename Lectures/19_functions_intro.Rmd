@@ -469,7 +469,7 @@ names(one_buoy) <- names(one_buoy) %>%
 
 names(one_buoy)
 
-````
+```
 
 ## Now, make it a function!
 ```{r, echo=TRUE}
@@ -595,5 +595,5 @@ Yes, sometimes you will write long functions - as long as they are simple and re
 1. Write a function that will get monthly summaries of wave height and temperature only
      - Make the returned column names for all values nice and readable  
          
-2. Write a master wrapper function that you give a year, and it returns a monthy summarized well names data frame
+2. Write a master wrapper function that you give a year, and it returns a monthly summarized well names data frame
 
