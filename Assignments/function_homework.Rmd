@@ -37,7 +37,9 @@ Remember that a function takes input (which could be multiple things), does some
 1. This may be a type of function you are more familiar with. It is an equation that converts Celsius to Farenheit. A previous student of mine was basically Farenheit-illiterate; she never know what the weather is going to be like. Given this equation, can you write a function that converts a temperature value in Farenheit to Celsius for her?
 
 * C = (F  -  32)  x  5/9 
-
+```{r echo=FALSE, eval = FALSE}
+c_to_f <- function(f) (f-32)*5/9
+```
 Take your function for a spin, does it return the correct values?  
 
 * 32 F  = 0 C
@@ -71,7 +73,19 @@ buoy_1990 <- read_csv('./data/buoydata/44013_1990.csv', na = c("99", "999"))
 str_c("./data/buoydata/44013_", 1986, ".csv", sep = "")
 ```
 
+```{r make_filename, echo = FALSE, eval = FALSE}
+make_filename <- function(a_year) {
+  str_c("./data/buoydata/44013_", a_year, ".csv", sep = "")
+}
+```
+
 **Extra credit (2 points):** Check out the [glue package](https://glue.tidyverse.org/) and do the same thing with `glue()`.
+
+```{r make_filename_glue, echo = FALSE, eval = FALSE}
+make_filename <- function(a_year) {
+  glue::glue("./data/buoydata/44013_{a_year}.csv")
+}
+```
 
 2c. Complete the skeleton of this function based on the work that you have done up to now. Describe, in words, what is happening in every step.  
 
@@ -87,19 +101,43 @@ read_buoy <- function(_________){
 }
 ```
 
+```{r, eval = FALSE, echo = FALSE}
+read_buoy <- function(a_year){
+  
+  filename <- make_filename(a_year) #or the str_c from above
+  
+  a_buoy <- read_csv(filename, na = c("99", "999"))
+  
+  return(a_buoy)
+
+}
+```
+
 2d. Amend the read_buoy function to allow for a variable buoy number (currently we are using data from buoy 44013, but there are many other numbers/names that could be used!), directory location of the file, *and* year. 
 
-2e. Apply the workflow that you used in 2a - 2c to create a function to clean up the data using a dplyr workflow. Have it generate daily averaged wave heights and temperatures as well as renaming all of the columns to something understandable. Begin by writing a dplyr workflow for one data frame. Then generalize it. Remember to ask yourself the following questions: 
+```{r, eval = FALSE, echo = FALSE}
+read_buoy <- function(a_year, a_buoy=44013){
+  
+  filename <- glue::glue("./data/buoydata/{a_buoy}_{a_year}.csv") #or the str_c from above
+  
+  a_buoy <- read_csv(filename, na = c("99", "999"))
+  
+  return(a_buoy)
+
+}
+```
+
+2e. Apply the workflow that you used in 2a - 2c to create a function to clean up the data using a dplyr workflow that will work for 1987, 2000, and 2007 Have it generate daily averaged wave heights and temperatures as well as renaming all of the columns to something understandable. Begin by writing a dplyr workflow for one data frame at a time. Then generalize it. Remember to ask yourself the following questions: 
 
 * What parts of your code are consistent across every line/code chunk? 
 * What parts are different? 
 * What is the output that you want your function to return?
 
-If you are not sure of some of these things, remember to run the code chunks bit by bit, putting in test values (e.g., one year of data) to ensure that you know what you are working with, what each line is doing, and what the final returned value is. 
+If you are not sure of some of these things, remember to run the code chunks bit by bit, putting in test values (e.g., one year of data) to ensure that you know what you are working with, what each line is doing, and what the final returned value is. Your answer might look similar to what we did in class, or, very different depending on how you write the function.
 
 ```{r, eval=FALSE, echo=FALSE}
-#Now the data transformations
-buoy_1986 <- buoy_1986 %>%
+#1987
+buoy_1987 <- read_buoy(1987) %>%
   select(YY, MM, DD, WVHT, WTMP) %>%
   rename(Year = YY,
          Month = MM,
@@ -112,12 +150,12 @@ buoy_1986 <- buoy_1986 %>%
     ungroup()
 
 #1987
-buoy_1987 <- read.csv("./buoydata/44013_1987.csv", na.strings="99")
+buoy_2000 <- read.csv("./data/buoydata/44013_1987.csv", na.strings="99")
 
-#Now the data transformations
-buoy_1987 <- buoy_1987 %>%
-  select(YY, MM, DD, WVHT, WTMP) %>%
-  rename(Year = YY,
+#2000
+buoy_2000 <- read_buoy(2000) %>%
+  select(YYYY, MM, DD, WVHT, WTMP) %>%
+  rename(Year = YYYY,
          Month = MM,
          Day = DD,
          Wave_Height = WVHT,
@@ -127,7 +165,48 @@ buoy_1987 <- buoy_1987 %>%
             Temperature_c = mean(Temperature_c, na.rm=T)) %>%
     ungroup()
 
-buoydata <- rbind(buoy_1986, buoy_1987)
+buoy_2007 <- read_buoy(2007) %>%
+  select(X.YY, MM, DD, WVHT, WTMP) %>%
+  mutate_all(as.numeric) %>%
+  rename(Year = X.YY,
+         Month = MM,
+         Day = DD,
+         Wave_Height = WVHT,
+         Temperature_c = WTMP) %>%
+  group_by(Year, Month, Day) %>%
+  summarise(Wave_Height = mean(Wave_Height, na.rm=T),
+            Temperature_c = mean(Temperature_c, na.rm=T)) %>%
+    ungroup()
+
+# Differences - 2000 has a YYYY column, <1999 is YY and needs to add 1900
+# 2013 is all characters and has a X.YY column - starts at 2007
+# Everything else is the same
+#this is one way - basically, the function below is an extension of what we did in class
+
+make_avg_buoy <- function(a_year, a_buoy = 44013){
+  buoy_data <- read_buoy(a_year, a_buoy)
+  
+  if(a_year < 1999){
+    buoy_data <- mutate(buoy_data, YYYY = 1900+YY)
+  }
+  
+  if(a_year > 2006){
+    buoy_data <- mutate_all(buoy_data, as.numeric) %>% rename(YYYY = X.YY)
+  }
+  
+  buoy_data <- buoy_data %>%
+  rename(Year = YYYY,
+         Month = MM,
+         Day = DD,
+         Wave_Height = WVHT,
+         Temperature_c = WTMP) %>%
+  group_by(Year, Month, Day) %>%
+  summarise(Wave_Height = mean(Wave_Height, na.rm=T),
+            Temperature_c = mean(Temperature_c, na.rm=T)) %>%
+    ungroup()
+  
+  return(buoy_data)
+}
 ```
 
 --------------------------------------------------------------------------------
@@ -136,11 +215,16 @@ buoydata <- rbind(buoy_1986, buoy_1987)
 
 --------------------------------------------------------------------------------
 
-3. Using all that we previously created in lab, create a set of functions that, once a buoy is read in, returns a two facet ggplot2 object of a histogram of the difference between wind speed (WSPD) and gust speed (GST) and between the air temperature (ATMP) and water temperature (WTMP), so that you can later format and style it as you'd like.
+3A-C. Using all that we previously created in the functions week and/or this homework, create a set of functions that, once a buoy is read in, returns a two facet ggplot2 object of a histogram of the difference between wind speed (WSPD) and gust speed (GST) and between the air temperature (ATMP) and water temperature (WTMP), so that you can later format and style it as you'd like.  E.C.(+1 per question) Break the templates below into smaller modular functions. 
+
+```{r, echo = FALSE, eval = FALSE}
+## For grading, they should fill all of the comments in. It will either work or not!
+## Grade them 3 points per function
+```
 
 ```{r}
 gust_increase_hist <- function(a_year){
-  #get the cleaned buoy
+  #get the cleaned buoy data
   
   #create a long data frame with each row as a data point, measuring either 
   #difference between air and water OR wind speed and gust speed - one row per measurement
@@ -180,4 +264,13 @@ plot_dual_hist <- function(summarized_buoy){
 
 4. Based on the data set you're planning to use for your final, do you need to write any functions to clean the data as you bring it in? If so, describe it, and take a stab at writing it. If not, show us that the data loads cleanly.
 
+```{r, echo = FALSE, eval = FALSE}
+## For grading, they should show meaningful thought here. They might not have the
+## data cleaned yet - they might just be starting - be gentle!
+```
+
 5. With the data you just loaded, make one visualization. But, before you do, articulate a question you want to answer with said visualization. What do you think you will see? Now make the plot. Did you see what you expected? What did the data tell you?
+
+```{r, echo = FALSE, eval = FALSE}
+## This is a question open for exploration. They should have fun here!
+```
