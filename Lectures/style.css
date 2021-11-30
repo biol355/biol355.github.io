@@ -57,3 +57,34 @@ img{
   border:0px;
   box-shadow: 0 0 0 0;
 }
+
+.white {
+  color:white;
+}
+
+.red {
+  color:red;
+}
+
+
+.large{
+  font-size: 130%;
+}
+
+.small{
+  font-size: 50%;
+}
+
+.tiny{
+  font-size:10%;
+}
+
+.small-code pre code {
+  font-size: 1em;
+}
+
+
+.remark-slide-content {
+    font-size: 24px;
+    padding: 1em 4em 1em 4em;
+}
