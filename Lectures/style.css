@@ -88,3 +88,24 @@ img{
     font-size: 24px;
     padding: 1em 4em 1em 4em;
 }
+
+.pull-left-wide {
+  float: left;
+  width: 60%;
+}
+
+.pull-left-narrow {
+  float: left;
+  width: 39%;
+}
+
+
+.pull-right-wide {
+  float: right;
+  width: 60%;
+}
+
+.pull-right-narrow {
+  float: right;
+  width: 39%;
+}
