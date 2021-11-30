@@ -8,7 +8,8 @@ output: html_document
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
-See past projects [here](./projects.html)  
+
+See past projects [here](./past_projects.html)  
 
 # Submission links
 Submit links to projects the day before due to [professor](mailto:jarrett.byrnes@umb.edu)  
