@@ -5,28 +5,28 @@ title: "Final Projects from Previous Semesters"
 # Spring 2021
 - Abdullah Almohammad:	Cancer Cases through US	https://shiny.umb.edu/rstudio/p/c45b9e62/  
   
-- Alexandra Vazquez:	Crime Incidences in Massachussetts from 2018	https://shiny.umb.edu/shiny/users/alexandra.vazquez001/Crime_App/  
+- Alexandra Vazquez:	Crime Incidences in Massachussetts from 2018	https://shiny.umb.edu/shiny/users/jarrett.byrnes/biol355_spring_2021/alexandra.vazquez001/ 
   
-- Amy Trinh:	MBTA Subway Ridership	https://shiny.umb.edu/shiny/users/amy.trinh001/Final/  
+- Amy Trinh:	MBTA Subway Ridership	https://shiny.umb.edu/shiny/users/jarrett.byrnes/biol355_spring_2021/amy.trinh001/Final/  
     
-- Daniel Beebe:	Cryptocurrency mining and power usage	https://shiny.umb.edu/shiny/users/daniel.beebe001/Cryptocurrency_Power_Consumption/crypto/  
+- Daniel Beebe:	Cryptocurrency mining and power usage	https://shiny.umb.edu/shiny/users/jarrett.byrnes/biol355_spring_2021/daniel.beebe001/Cryptocurrency_Power_Consumption/   
   
-- Gardy Hyacinthe:	Life Expectancy	https://shiny.umb.edu/shiny/users/gardy.hyacinthe001/Final_app/  
+- Gardy Hyacinthe:	Life Expectancy	https://shiny.umb.edu/shiny/users/jarrett.byrnes/biol355_spring_2021/gardy.hyacinthe001/   
   
-- Hui-Ling Ho:	TMDB movie information!	https://shiny.umb.edu/shiny/users/huiling.ho001/Final%20project/  
+- Hui-Ling Ho:	TMDB movie information!	https://shiny.umb.edu/shiny/users/jarrett.byrnes/biol355_spring_2021/huiling.ho001/Final%20project/  
   
   
-- Maria Ramos: 	Drug Induced Deaths In the US from 1999-2015	https://shiny.umb.edu/shiny/users/maria.ramos002/Final/  
+- Maria Ramos: 	Drug Induced Deaths In the US from 1999-2015	https://shiny.umb.edu/shiny/users/jarrett.byrnes/biol355_spring_2021/maria.ramos002/Final/   
   
 - Matthew He:	Electrical generation vs avg temperature in USA, 2020	https://mh02.shinyapps.io/EvT2020/  
 
-- Sam Hartman	SAT/AP scores linked to demographic data, location, and school performance	https://shiny.umb.edu/shiny/users/samuel.hartman001/bio355_shiny_final/  
+- Sam Hartman	SAT/AP scores linked to demographic data, location, and school performance	https://shiny.umb.edu/shiny/users/jarrett.byrnes/biol355_spring_2021/samuel.hartman001/bio355_shiny_final/    
   
-- Shannon Joyce:	Annual Number of Deaths by Cause 	https://shiny.umb.edu/shiny/users/shannon.joyce001/ShinyFinal/  
+- Shannon Joyce:	Annual Number of Deaths by Cause 	https://shiny.umb.edu/shiny/users/jarrett.byrnes/biol355_spring_2021/shannon.joyce001/ShinyFinal/    
   
-- Tony Ruan:	Global COVID-19 Case Type Distribution	https://shiny.umb.edu/shiny/users/yongan.ruan001/covid_spatial_data/  
+- Tony Ruan:	Global COVID-19 Case Type Distribution	https://shiny.umb.edu/shiny/users/jarrett.byrnes/biol355_spring_2021/yongan.ruan001/covid_spatial_data/    
 
-- Seakhong Sov:	Housing Market Crisis	https://shiny.umb.edu/shiny/users/seakhong.sov001/Housing_Market/  
+- Seakhong Sov:	Housing Market Crisis	https://shiny.umb.edu/shiny/users/jarrett.byrnes/biol355_spring_2021/seakhong.sov001/Housing_Market/    
   
 # Spring 2020
 
