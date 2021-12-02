@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Models with Single Predictors</title>
+    <meta charset="utf-8" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/remark-css/shinobi.css" rel="stylesheet" />
+    <link href="libs/remark-css/default-fonts.css" rel="stylesheet" />
+    <script src="libs/kePrint/kePrint.js"></script>
+    <link href="libs/lightable/lightable.css" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" type="text/css" />
+    <link rel="stylesheet" href="cols.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+class: center, middle
+
+# Single Predictor Models
+
+
+
+
+
+![:scale 55%](Images/lm/linear_regression_love.gif)
+
+---
+
+# What are we doing when we model data?
+
+&lt;br&gt;&lt;br&gt;
+
+1. Start with a question we want to answer 
+
+2. Design a model of the part of the world we need to know about to answer the question  
+
+3. Acquire data appropriate to build that model  
+
+4. Chose an engine to fit the model  
+
+5. Chose an inferential framework
+
+6. Use that framework to ask the fit model questions about the world  
+
+
+---
+# Many models have one predictor
+![:scale 75%](Images/lm/simple_train.jpg)
+
+---
+
+class: middle
+
+# Many models have one predictor
+
+
+&lt;img src="one_predictor_models_files/figure-html/dag-1.png" style="display: block; margin: auto;" /&gt;
+
+
+---
+# Model in Equation Form
+
+.large[
+
+`$$y_i \sim \mathcal{N}(\hat{y_i}, \sigma^2)\\
+\hat{y_i} = \beta_0 + \beta_1  x_i$$`
+
+]
+
+--
+
+&lt;br&gt;&lt;br&gt;
+
+- Response `\(y_i\)` is normally distributed around a fitted value with some residual error.  
+
+- The fitted value is determined by an intercept and a slope multiplied by a predictor `\(x_i\)`.  
+
+- That's it.
+
+---
+background-color:black
+class:middle
+![](Images/lm/why_linear_models.jpg)
+
+---
+# One Predictor Models
+1. Linear Regression  
+      - Did our model set its world on fire?  
+      - Does our predictor matter?  
+      - Describing associations between variables
+      - What confidence do we have in our fit?  
+      - How good are we at explaining our response
+
+2. Comparing two means  
+     - It's just linear regression with two values for X  
+     - Assessing the difference between two estimated parameters
+
+3. Comparing many means  
+     - It's just a bunch of two-value linear regressions again  
+     - Making pairwise comparisons  
+
+---
+
+# Batesian Mimicry with Pufferfish
+
+
+
+.pull-left[
+- Pufferfish are toxic/harmful to predators  
+&lt;br&gt;
+- Batesian mimics gain protection from predation - why?
+&lt;br&gt;&lt;br&gt;
+- Evolved response to appearance?
+&lt;br&gt;&lt;br&gt;
+- Researchers tested with mimics varying in toxic pufferfish resemblance
+]
+
+.pull-right[
+![:scale 80%](./Images/lm/puffer_mimics.jpg)
+]
+
+
+---
+# Scale of Dissimilarity
+
+![:scale 25%](./Images/lm/puffer_treatments.png)
+
+.pull-left[ .small[Carey and Schluter 2003] ]
+
+---
+
+# The Data
+&lt;img src="one_predictor_models_files/figure-html/puffershow-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Our Model
+.large[
+
+`$$visits_i \sim \mathcal{N}(\hat{visits_i}, \sigma^2)\\
+\hat{visits_i} = \beta_0 + \beta_1  resemblance_i$$`
+
+]
+
+&lt;img src="one_predictor_models_files/figure-html/dagmod-1.png" style="display: block; margin: auto;" /&gt;
+---
+
+# Fit with Our Engine: Ordinary Least Squares
+
+### Simple model, simple solution!  
+
+&lt;br&gt;&lt;br&gt;
+
+.large[
+
+```r
+mod &lt;- lm(predators ~ resemblance, data = puffer)
+```
+
+]
+
+---
+
+# Engine Makes No Difference Here
+
+
+
+
+|engine |term        | estimate| std.error|
+|:------|:-----------|--------:|---------:|
+|OLS    |(Intercept) |    16.87|      1.66|
+|OLS    |resemblance |    -2.99|      0.57|
+|ML     |(Intercept) |    16.87|      1.66|
+|ML     |resemblance |    -2.99|      0.57|
+|Bayes  |(Intercept) |    16.92|      1.77|
+|Bayes  |resemblance |    -3.00|      0.61|
+
+---
+background-color:black
+class:middle
+
+![:scale 65%](Images/lm/i-dont-always-5acc6f.jpg)
+
+---
+
+# Does Your Model Match Your Data?
+
+&lt;img src="one_predictor_models_files/figure-html/densplot-1.png" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+# Are There Weird Patterns in Your Residuals?
+
+&lt;img src="one_predictor_models_files/figure-html/unnamed-chunk-1-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+# What To Do If You've Caused a Fire
+
+- Lay down and cry
+
+--
+
+- Change your model to something more interesting
+     - This includes simple changes like log or logit transforming
+
+--
+
+- Recognize that your coefficient estimates are still correct, you just cannot do any inferential *testing* or talk about *error*
+
+---
+
+# Did Our Predictor Matter?
+
+- F = Variability due to Slope &amp; Intercept / Variability due to Error
+
+--
+
+- We ask, what is the probability we obtain an F values like the one we see or an even bigger one if our predictor didn't matter given how much data we have?
+
+--
+
+- This is called a **p-value**
+
+&lt;img src="one_predictor_models_files/figure-html/infer_badly-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Did Our Predictor Matter?
+&lt;br&gt;&lt;br&gt;
+&lt;table class="table table-striped" style="margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; df &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; sumsq &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; meansq &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; statistic &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; p.value &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; resemblance &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 255.15 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 255.15 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 27.37 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Residuals &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 18 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 167.80 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 9.32 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; NA &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; NA &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+--
+
+- p is so small it rounds to 0  
+
+--
+
+- the probability of our result or a more extreme result given a null hypothesis that our result isn't distinguishable from noise is 0
+
+--
+
+- larger p-values mean a greater chance that we cannot reject this null
+
+--
+
+- what % chance are you comfortable with?
+
+---
+
+# What is the Association Between Predictor and Response?
+
+&lt;table class="table table-striped" style="margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; estimate &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; std.error &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; (Intercept) &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 16.87 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.66 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; resemblance &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -2.99 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.57 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+- **Intercept:** If resemblance = 0, 16.87 predators will approach on average.
+
+--
+
+- **Slope:** A 1 unit increase in resemblance is associated with a decrease in ~3 predator visits
+
+--
+
+- The SE gives an estimate of the precision of our slope...
+
+---
+
+# How Precise Are Our Estimates?
+### We can see by simulating new lines from our coefficients
+
+&lt;img src="one_predictor_models_files/figure-html/unnamed-chunk-2-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+# How Precise Are Our Estimates?
+### We can see by with a 95% confidence interval of our estimate
+
+&lt;img src="one_predictor_models_files/figure-html/unnamed-chunk-3-1.png" style="display: block; margin: auto;" /&gt;
+---
+
+# How Strong is the Association Between Our Generative Model and Observed Data?
+
+`$$R^2 = 1 - \frac{Residual \; Variation}{Total \; Variation \; in \; the \; Data}$$`
+&lt;img src="one_predictor_models_files/figure-html/resplot-1.png" style="display: block; margin: auto;" /&gt;
+
+
+---
+# One Predictor Models
+1. Linear Regression  
+      - Did our model set its world on fire?  
+      - Does our predictor matter?  
+      - Describing associations between variables
+      - What confidence do we have in our fit?  
+      - How good are we at explaining our response
+
+2. .red[ Comparing two means]  
+     - It's just linear regression with two values for X  
+
+3. Comparing many means  
+     - It's just a bunch of two-value linear regressions again  
+     - Making pairwise comparisons  
+     
+---
+
+# Comparing High and Low Similarity
+
+&lt;img src="one_predictor_models_files/figure-html/two_trts-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+class:middle
+background-color: black
+
+![](Images/lm/morpheus_regression.jpg)
+
+---
+
+# Our Model Is Unchanged
+.large[
+
+`$$visits_i \sim \mathcal{N}(\hat{visits_i}, \sigma^2)\\
+\hat{visits_i} = \beta_0 + \beta_1  resemblance_i$$`
+
+]
+
+&lt;img src="one_predictor_models_files/figure-html/dagmod-1.png" style="display: block; margin: auto;" /&gt;
+---
+
+# Comparing Means is Just a Line with a 0 and 1 as X
+
+&lt;img src="one_predictor_models_files/figure-html/zero_one-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Fit with OLS
+
+- `lm` recodes treatment as 0/1 - a dummy variable!
+
+.large[
+
+
+```r
+mod_t &lt;- lm(predators ~ resemblance_trt, data = puffer_t)
+```
+
+]
+
+---
+
+# Does Your Model Match Your Data?
+
+&lt;img src="one_predictor_models_files/figure-html/densplot_t-1.png" style="display: block; margin: auto;" /&gt;
+---
+
+# Are There Weird Patterns in Your Residuals?
+
+&lt;img src="one_predictor_models_files/figure-html/unnamed-chunk-4-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Did Our Predictor Matter?
+### F-Test!
+
+&lt;table class="table table-striped" style="margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; df &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; sumsq &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; meansq &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; statistic &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; p.value &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; resemblance_trt &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 207.20 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 207.20 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 18.55 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Residuals &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 10 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 111.71 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 11.17 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; NA &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; NA &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+--
+
+Still basically no chance of observing our data or more extreme data
+
+---
+
+# Are the Groups *REALLY* Different?
+
+- If we subtract one group mean from the other, the **null hypothesis** is that the answer will be 0
+
+--
+
+- It should fall in a distribution, though, given that this is a sample.
+
+--
+
+- This distribution was discovered by a former chief brewer at Guiness! He published under the name Student and called this the t distribution.
+
+---
+
+# Are the Groups *REALLY* Different?
+
+&lt;table class="table table-striped" style="margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; contrast &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; estimate &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; std.error &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; df &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; statistic &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; p.value &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Not Similar - Similar &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 8.43 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.96 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 10 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4.31 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;img src="one_predictor_models_files/figure-html/emmeans_t-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+# What do our Estimates Look Like?
+
+&lt;img src="one_predictor_models_files/figure-html/unnamed-chunk-5-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+# One Predictor Models
+1. Linear Regression  
+      - Did our model set its world on fire?  
+      - Does our predictor matter?  
+      - Describing associations between variables
+      - What confidence do we have in our fit?  
+      - How good are we at explaining our response
+
+2. Comparing two means  
+     - It's just linear regression with two values for X  
+
+3. .red[ Comparing many means]  
+     - It's just a bunch of two-value linear regressions again  
+     - Making pairwise comparisons  
+     
+---
+
+# Categorical Instead of Continuous Predictors
+
+
+&lt;img src="one_predictor_models_files/figure-html/puffer_categories-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+class:middle
+background-color: black
+
+![](Images/lm/linear_regression_everywhere.jpg)
+
+---
+
+# Our Model Changes...slightly....
+.large[
+
+`$$visits_{ij} \sim \mathcal{N}(\hat{visits_{ij}}, \sigma^2)\\
+\hat{visits_{ij}} = \beta_0 + \sum\beta_j  resemblance_{ij}$$`
+
+]
+
+--
+
+&lt;Br&gt;&lt;br&gt;
+- individual i in treatment j  
+
+--
+
+- `\(resemblance_{ij}\)` is now 1 if you are in treatment j, otherwise 0
+
+--
+
+- `\(\beta_j\)` can be deviation from a grant mean, `\(\beta_0\)`
+
+---
+# But Conceptually It Is the Same
+
+&lt;img src="one_predictor_models_files/figure-html/dagmod-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+# It's just a bunch of 0's and 1s!
+
+&lt;img src="one_predictor_models_files/figure-html/unnamed-chunk-6-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+# What You Are Ultimately Fitting
+
+
+```r
+mod_aov &lt;- lm(predators ~ resemblance_c, data = puffer)
+```
+
+&lt;img src="one_predictor_models_files/figure-html/cat-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Still Have to Make Sure We Have Started No Fires
+
+&lt;img src="one_predictor_models_files/figure-html/aov_perf-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Does Our Predictor Matter?
+## This is often called an Analysis of Variance or ANOVA
+### It's still just an F test
+
+&lt;br&gt;
+&lt;table class="table table-striped" style="margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; df &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; sumsq &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; meansq &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; statistic &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; p.value &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; resemblance_c &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 270.24 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 90.08 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 9.44 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Residuals &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 16 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 152.71 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 9.54 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; NA &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; NA &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+--
+
+Compare to regression - note difference in F:
+&lt;table class="table table-striped" style="margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; df &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; sumsq &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; meansq &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; statistic &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; p.value &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; resemblance &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 255.15 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 255.15 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 27.37 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Residuals &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 18 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 167.80 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 9.32 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; NA &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; NA &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+
+# What do our Estimates Look Like?
+&lt;img src="one_predictor_models_files/figure-html/cat-1.png" style="display: block; margin: auto;" /&gt;
+---
+
+# Which Groups *REALLY* Different?  Have some T...
+&lt;img src="one_predictor_models_files/figure-html/tukey-1.png" style="display: block; margin: auto;" /&gt;
+
+--
+
+Was this model a good way to ask the question?
+
+---
+
+# One Predictor and Go!
+.large[
+
+`$$y_i \sim \mathcal{N}(\hat{y_i}, \sigma^2)\\
+\hat{y_i} = \beta_0 + \beta_1  x$$`
+
+]
+
+- There are many ways to use this model  
+
+--
+
+- We can fit lines, compare two or even more means
+
+--
+
+- But it's just a model. Your questions have to guide how you use it.
+
+--
+
+- For communication with your audience, they don't need the nitty-gritty details - but they need to learn what the model can tell them that is new
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="my_macros.js"></script>
+<script src="cols_macro.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
