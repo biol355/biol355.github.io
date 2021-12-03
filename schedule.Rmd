@@ -186,8 +186,7 @@ __Readings:__ [Cortina and Dunlop 1997](./Readings/cortina and Dunlop 1997 signi
 __Lectures:__ [Introduction to Modeling](./Lectures/modeling_intro.html), [Single Predictor Models](./Lectures/one_predictor_models.html)  
 __Objective(s):__ Understand the workflow of generating inference from data, Describe the basics of probability and p-values, Model linear relationships in data, Compare groups of data using T-tests and ANOVa  
 __Biological Examples:__ Batesian mimicry, Penguin morphometrics, The effects of testosterone on bird behavior.  
-__Lab:__ Forthcoming...  
-__Files:__ Forthcoming...  
+__Lab:__ [infer and tidymodels](Labs/Infer.html)  
 __Etherpad:__ https://etherpad.wikimedia.org/p/355-modeling-2021_fall  
 __Homework:__ Forthcoming...  
 
