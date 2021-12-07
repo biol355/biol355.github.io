@@ -267,6 +267,7 @@ ggdag_classic() +
 ```
 
 ---
+
 # Fit with Our Engine: Ordinary Least Squares
 ### It's just another linear model!
 
@@ -279,13 +280,9 @@ klm <- lm(rich ~ cover + firesev + hetero, data=keeley)
 klm_out <- augment(klm)
 ```
 
---
-
- or.....
+or.....
  
---
-
-```{r}
+```{r, echo = TRUE}
 library(parsnip)
 mod <- linear_reg() %>%
   set_engine("lm") %>%
@@ -439,7 +436,7 @@ ggplot(pred_info, mapping=aes(x=cover, y=rich)) +
 
 ---
 class: center, middle
-![image](./images/21/anova-3.jpg)
+![image](./Images/anova/anova-3.jpg)
 
 ---
 # Compare These Models

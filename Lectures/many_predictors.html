@@ -164,6 +164,7 @@ background-size: cover
 &lt;img src="many_predictors_files/figure-html/dagmlr-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
+
 # Fit with Our Engine: Ordinary Least Squares
 ### It's just another linear model!
 
@@ -176,13 +177,19 @@ klm &lt;- lm(rich ~ cover + firesev + hetero, data=keeley)
 klm_out &lt;- augment(klm)
 ```
 
---
-
- or.....
+or.....
  
---
 
+```r
+library(parsnip)
+mod &lt;- linear_reg() %&gt;%
+  set_engine("lm") %&gt;%
+  fit(rich ~ cover + firesev + hetero, data=keeley)
 
+mod_out &lt;- mod %&gt;%
+  pluck("fit") %&gt;%
+  augment()
+```
 
 ]
 
@@ -368,7 +375,7 @@ Where MS is a measure of variability (Sums of squares/DF)
 
 ---
 class: center, middle
-![image](./images/21/anova-3.jpg)
+![image](./Images/anova/anova-3.jpg)
 
 ---
 # Compare These Models
