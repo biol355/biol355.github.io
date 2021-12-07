@@ -604,7 +604,7 @@ background-size: cover
 
 ![:scale 65%](Images/modeling/train_switch.jpg)  
 ![:col_header Hypothesis Testing, 
-  .red[Model Comparison ], 
+  Model Comparison, 
   Bayesian Model Implications
   ]
 --
@@ -815,7 +815,7 @@ Cover Only Score: `r sum(keeley_splits$mse_cover)/5`
 
 <br><br>
 
-![](./images/cv/LOOCV.gif)
+![](./Images/cv/LOOCV.gif)
 
 
 
@@ -932,7 +932,7 @@ AICcmodavg::aictab(
 --
 ![:col_list 
   Deductive Inference,
-  .red[ Predictive Inference ],
+  Predictive Inference,
   Inductive Inference
 ]
 --
