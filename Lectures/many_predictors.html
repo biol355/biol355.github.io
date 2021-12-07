@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Models with Many Predictors</title>
+    <meta charset="utf-8" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/remark-css/shinobi.css" rel="stylesheet" />
+    <link href="libs/remark-css/default-fonts.css" rel="stylesheet" />
+    <script src="libs/kePrint/kePrint.js"></script>
+    <link href="libs/lightable/lightable.css" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" type="text/css" />
+    <link rel="stylesheet" href="cols.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+class: center, middle
+background-image: url("Images/mlr/plate_spinners.jpg")
+
+# .white[Multiple Predictors in a Model]
+
+
+
+
+
+---
+
+# So Many Ways to Build a Model
+
+1. Multiple Predictors  
+  
+2. Many Types of Categories
+  
+3. Many Models and Cross-Validation  
+
+---
+
+# Where we ended - One Predictor and Go!
+.large[
+
+`$$y_i \sim \mathcal{N}(\widehat{y_i}, \sigma^2)\\
+\widehat{y_i} = \beta_0 + \beta_1  x$$`
+
+]
+
+
+
+&lt;img src="many_predictors_files/figure-html/puffershow-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Where we ended - This Model Works for Means!
+.large[
+
+`$$y_i \sim \mathcal{N}(\widehat{y_i}, \sigma^2)\\
+\widehat{y_i} = \beta_0 + \beta_1  x$$`
+
+]
+
+
+&lt;img src="many_predictors_files/figure-html/two_trts-1.png" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+# Where we ended - Many Means, Many 0/1s! So.... Many Slopes?
+.large[
+
+`$$y{ij} \sim \mathcal{N}(\widehat{y_{ij}}, \sigma^2)\\
+\widehat{y_{ij}} = \beta_0 + \sum\beta_j  x_{ij}$$`
+]
+
+&lt;img src="many_predictors_files/figure-html/aovplot-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+# One-Way ANOVA Graphically
+
+![:scale 60%](./Images/mlr/anova.png)
+
+.large[
+
+`$$y_{ij} \sim \mathcal{N}(\widehat{y_{ij}}, \sigma^2)\\
+\widehat{y_{ij}} = \beta_0 + \sum\beta_j  x_{ij}$$`
+]
+
+---
+# Multiple Linear Regression?
+
+![:scale 60%](./Images/mlr/regression1.png)
+
+--
+
+- Note no connection between predictors, as in ANOVA. 
+
+--
+
+- This is ONLY true if we have manipulated variables so that there is no relationship between the two. This is not often the case!
+
+
+---
+# Multiple Linear Regression
+
+![:scale 60%](./Images/mlr/regression2.png)
+
+--
+
+- Curved double-headed arrow indicates COVARIANCE between predictors that we must account for.  
+
+--
+
+- MLR controls for the correlation - estimates unique contribution of each predictor controlling for the other.
+
+--
+
+- I like to think of it as holding the other predictor at its mean, or 0, or anything!
+
+---
+# Multiple Linear Regression - We've Seen This Before!
+
+.large[
+
+`$$y{i} \sim \mathcal{N}(\widehat{y_{i}}, \sigma^2)\\
+\widehat{y_{i}} = \beta_0 + \sum\beta_j  x_{ij}$$`
+
+]
+
+![:scale 60%](./Images/mlr/regression2.png)
+
+
+---
+background-image: url("Images/mlr/fires.jpg")
+background-size: cover
+
+&lt;div style="bottom:100%; text-align:left; background:goldenrod"&gt;&lt;h4&gt;Five year study of wildfires &amp; recovery in Southern California shur- blands in 1993. 90 plots (20 x 50m)&lt;/h4&gt;
+(data from Jon Keeley et al.)&lt;/div&gt;
+
+---
+
+# What causes species richness?
+
+- Distance from fire patch 
+- Elevation
+- Abiotic index
+- Patch age
+- Patch heterogeneity
+- Severity of last fire
+- Plant cover
+
+---
+
+# Many Things may Influence Species Richness
+
+&lt;img src="many_predictors_files/figure-html/keeley_pairs-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Our Model
+
+`$$Richness_i \sim \mathcal{N}(\widehat{Richness_i}, \sigma^2)\\
+\widehat{Richness_i} =\beta_{0} + \beta_{1} cover +\beta_{2} firesev + \beta_{3}hetero$$`
+
+&lt;img src="many_predictors_files/figure-html/dagmlr-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+# Fit with Our Engine: Ordinary Least Squares
+### It's just another linear model!
+
+.large[
+
+
+```r
+klm &lt;- lm(rich ~ cover + firesev + hetero, data=keeley)
+
+klm_out &lt;- augment(klm)
+```
+
+--
+
+ or.....
+ 
+--
+
+
+
+]
+
+---
+# Does Your Model Match Your Data?
+
+&lt;img src="many_predictors_files/figure-html/ggplot_dist-1.png" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+# Are There Weird Patterns in Your Residuals?
+&lt;img src="many_predictors_files/figure-html/mlr_resid-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+![](./Images/mlr/gosling_multicollinearity.jpg)
+
+If your predictors are correlated at &gt; 0.8.... are they really independent predictors?
+
+---
+# The Variance Inflation Factor
+
+
+```
+# Check for Multicollinearity
+
+Low Correlation
+
+    Term  VIF Increased SE Tolerance
+   cover 1.29         1.14      0.77
+ firesev 1.26         1.12      0.79
+  hetero 1.05         1.02      0.95
+```
+
+--
+
+- Basically, you look at how much all predictors explain each other ( `\(R^2\)` of lots of mlr fits)  
+
+--
+
+- 5-10 is... not good. Greater, you have set fire to your inferential train
+
+---
+
+# What To Do If You've Caused a Fire
+
+--
+
+- Cry
+
+--
+
+- Drop a predictor
+
+--
+
+- Transform a predictor, if it is appropriate
+---
+
+# Did Our PredictorS Matter?
+
+F = (MS model with predictor - MS model without)/MS Residual  
+&lt;br&gt;
+Where MS is a measure of variability (Sums of squares/DF)  
+
+&lt;table class="table table-striped" style="margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; sumsq &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; df &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; statistic &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; p.value &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; cover &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1674.18 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 12.01 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.00 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; firesev &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 635.65 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4.56 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.04 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; hetero &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4864.52 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 34.91 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.00 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Residuals &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 11984.57 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 86 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; NA &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; NA &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+
+# What are the Association Between Predictors and Response?
+
+
+&lt;table class="table table-striped" style="margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; estimate &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; std.error &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; (Intercept) &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.68 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 10.67 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; cover &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 15.56 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4.49 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; firesev &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -1.82 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.85 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; hetero &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 65.99 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 11.17 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+- **Intercept:** If all predictors are 0, a plot will have 1.68 species approach on average.
+
+--
+
+- **Cover:** Holding fire severity and heterogeneity constant, a 1 unit increase in cover is associated with an increase in 15.6 species
+
+
+--
+
+- **Fire Severity:** Holding cover and heterogeneity constant, a 1 unit increase in fire severity is associated with an loss of 1.82 species
+
+
+--
+
+- **Heterogeneity:** Holding fire severity and cover constant, a 1 unit increase in heterogeneity is associated with an increase in 70 species
+
+---
+
+# Visualize Each Predictor Holding Others at the Median or Mean
+
+&lt;img src="many_predictors_files/figure-html/visreg-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Or Build a Plot That Shows the Implication of Selecting Certain Values - a Counterfactual Plot
+
+&lt;img src="many_predictors_files/figure-html/counterfact-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+# So Many Ways to Build a Model
+
+1. Multiple Predictors  
+  
+2. .red[ Many Types of Categories ]
+  
+3. Many Models and Cross-Validation  
+
+---
+class: center, middle
+![image](./images/21/anova-3.jpg)
+
+---
+# Compare These Models
+
+### Multiple Linear Regression:
+
+`$$y_{ij} \sim N(\widehat{y_{ij}}, \sigma^{2} )$$`
+`$$\widehat{y_{ij}} = \beta_{0} + \sum \beta_{ij}x_{ij}$$` 
+
+### Mutiway ANOVA:
+
+`$$y_{ijk} \sim N(\widehat{y_{ijk}}, \sigma^{2} )$$` 
+`$$\widehat{y_{ijk}} = \beta_{0} + \sum \beta_{ij}x_{ij} + \sum \beta_{ik}x_{ik}$$`  
+
+
+`$$x_{ij} \; \mathrm{and} \; x_{ik} = 0,1$$`
+
+---
+# Multiway Model = More Than One Treatment Type
+## For example: A Randomized Controlled Blocked Design
+
+![:scale 60%](./Images/anova/blocked_designs/Slide4.jpg)
+
+
+---
+
+# Effects of Stickleback Density on Zooplankton Replicated in Different Lakes (Blocks)
+&lt;br&gt;&lt;br&gt;
+.pull-left[
+![image](./Images/anova/daphnia.jpeg)
+]
+
+.pull-right[
+![image](./Images/anova/threespine_stickleback.jpeg)
+]
+
+---
+# Effects of Both Treatment and Block
+
+&lt;img src="many_predictors_files/figure-html/zooplankton_boxplot-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+# It's All 0s and 1s
+
+Data Prepped for Model
+&lt;table class="table table-striped" style="margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:right;"&gt; treatmentcontrol &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; treatmenthigh &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; treatmentlow &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; block2 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; block3 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; block4 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; block5 &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+# Put it to the Test: F-Test
+&lt;table class="table table-striped" style="margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; df &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; sumsq &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; meansq &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; F &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; p.value &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; treatment &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6.857 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.429 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 16.366 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.001 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; block &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.340 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.585 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.792 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.101 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Residuals &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 8 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.676 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.209 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; NA &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; NA &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+`\(R^2\)` = 0.846
+
+---
+# Comparison of Differences at Average of Other Treatment(s)
+
+&lt;table class="table table-striped" style="margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; contrast &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; estimate &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; SE &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; df &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; t.ratio &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; p.value &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; control - high &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.64 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.289 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 8 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 5.665 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.001 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; control - low &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.02 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.289 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 8 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.524 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.019 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; high - low &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.62 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.289 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 8 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -2.142 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.142 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+
+---
+
+# And a Plot!
+
+&lt;img src="many_predictors_files/figure-html/plot_zoop_em-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+# If you really wanted to...
+
+&lt;img src="many_predictors_files/figure-html/plot_zoop_em_2-1.png" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+# So Many Ways to Build a Model
+
+1. Multiple Predictors  
+  
+2. Many Types of Categories
+  
+3. .red[Many Models and Cross-Validation]  
+
+
+---
+background-image: url("Images/mlr/fires.jpg")
+background-size: cover
+
+&lt;div style="bottom:100%; text-align:left; background:goldenrod"&gt;&lt;h4&gt;Five year study of wildfires &amp; recovery in Southern California shur- blands in 1993. 90 plots (20 x 50m)&lt;/h4&gt;
+(data from Jon Keeley et al.)&lt;/div&gt;
+
+---
+
+# What causes species richness?
+
+- Distance from fire patch 
+- Elevation
+- Abiotic index
+- Patch age
+- Patch heterogeneity
+- Severity of last fire
+- Plant cover
+
+---
+
+# WHAT PREDICTORS SHOULD I USE?
+
+![](./Images/mlr/regression_depression.jpg)
+
+---
+# The Second Inferential Track!
+
+![:scale 65%](Images/modeling/train_switch.jpg)  
+![:col_header Hypothesis Testing, 
+  .red[Model Comparison ], 
+  Bayesian Model Implications
+  ]
+--
+![:col_list 
+  Deductive Inference,
+  Predictive Inference,
+  Inductive Inference
+]
+--
+![:col_list 
+  Uses probabilities of overlap with a point hypothesis,
+  Uses tests of model performances on new data,
+  Uses probability distributions of parameters and simulation
+]
+
+
+---
+
+# Predictive Ability: A Way to Differentiate Between Model Performance
+
+- Fit of a model seems like a good place to start...
+
+--
+
+- BUT - `\(R^2\)` is specific to the data *you used to fit the model.
+
+--
+
+- We need something more objective!
+
+--
+
+- How about how well our model does at predicting new data?
+
+
+---
+
+# But we Don't HAVE any New Data: Training, Testing, and Cross-Validation
+
+1. Fit a model on a **training** data set
+
+2. Evaluate a Model on a **TEST** data set
+
+3. Compare predictive ability of competing models with MSE, Deviance, etc.
+
+---
+
+# Common Out of Sample Metrics
+
+`\(MSE = \frac{1}{n}\sum{(Y_i - \hat{Y})^2}\)`  
+    - In units of sums of squares
+
+`\(RMSE = \sqrt{\frac{1}{n}\sum{(Y_i - \hat{Y})^2}}\)`  
+    - In units of response variable!
+    - Estimate of SD of out of sample predictions
+     
+`\(Deviance = -2 \sum log(\space p(Y_i | \hat{Y}, \theta)\space)\)`  
+    - Probability-based
+    - Encompasses a wide number of probability distributions
+    - Just MSE for gaussian linear models!
+
+---
+
+# But.... what data do I use for training and testing?
+## Random Cross-Validation
+
+- Cross-validating on only one point could be biased by choice of poing
+
+- So, choose a random subset of your data!
+
+- Typically use a 60:40 split, or 70:30 for lower sample size
+
+- Calculate fit metrics for alternate models and compare
+
+---
+
+# For Example...Leave Out One Row of the Keeley Data
+
+`$$Richness_i \sim \mathcal{N}(\widehat{Richness_i}, \sigma^2)\\
+\widehat{Richness_i} =\beta_{0} + \beta_{1} cover +\beta_{2} firesev + \beta_{3}hetero$$`
+
+&lt;img src="many_predictors_files/figure-html/unnamed-chunk-3-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Or, Compare Two Models Leaving out 30% of the Data At Random
+
+
+```r
+split_dat &lt;- initial_split(keeley, prop = 0.7)
+
+mod_a &lt;- lm(rich ~ cover + firesev + hetero, 
+           data = training(split_dat))
+
+mod_b &lt;- lm(rich ~ cover, 
+           data = training(split_dat))
+```
+
+&lt;img src="many_predictors_files/figure-html/unnamed-chunk-5-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+class: center, middle
+
+# But, wait, what if I choose a bad section of the data by chance?
+
+---
+
+# K-Fold Cross Validation
+
+- Data is split into K sets of training and testing folds
+
+- Performance is averaged over all sets
+
+![](Images/cv/kfold_performance.png)
+
+---
+
+# Five-Fold CV
+
+&lt;table&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; id &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; mse_all &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; mse_cover &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Fold1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 173.8523 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 253.6410 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Fold2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 128.8726 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 256.7461 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Fold3 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 154.1263 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 209.2751 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Fold4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 139.0737 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 198.8732 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Fold5 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 170.3209 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 132.5258 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+All Predictors Model Score: 153.2491681  
+
+Cover Only Score: 210.2122324
+
+
+---
+# Problem: How Many Folds?
+
+- What is a good number?
+     - More folds = smaller test dataset
+     - Bias-Variance tradeoff if also looking at coefficients
+
+--
+
+- 5 and 10 are fairly standard, depending on data set size
+
+--
+
+
+- More folds = closer to average out of sample error
+
+--
+
+
+- But, more folds can be computationally intensive
+
+--
+
+- Still, Leave One Out Cross Validation is very powerful
+
+
+---
+# LOOCV (Leave One Out Cross-Validation)
+
+&lt;br&gt;&lt;br&gt;
+
+![](./images/cv/LOOCV.gif)
+
+
+
+---
+# LOOCV Comparison of Out of Sample Deviance (MSE)
+&lt;br&gt;&lt;br&gt;
+
+All Predictor Model:144.78
+
+  
+  
+Cover Only Model: 210.27
+
+---
+class: center, middle
+
+# What if We Have 10e10 Data Points or Many  Many Models?
+
+---
+# A Funny Thing Happens As You Increase Parameters in a Model...
+
+
+
+&lt;img src="many_predictors_files/figure-html/traintest_plot-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+# Enter the AIC
+.pull-left[
+![](./Images/mmi/hirotugu_akaike.jpg)
+]
+
+.pull-right[
+- `\(E[D_{test}] = D_{train} + 2K\)`  
+  
+- This is Akaike's Information Criteria (AIC)  
+
+]
+
+`$$\Large AIC = Deviance + 2K$$`
+
+---
+# AIC and Prediction
+
+- AIC optimized for forecasting (out of sample deviance)  
+
+- Approximates average out of sample deviance from test data
+
+- Assumes large N relative to K  
+    - AICc for a correction  
+
+---
+
+# AIC Tables Give us Weight of Evidence for Different Models
+
+
+```r
+klm &lt;- lm(rich ~ cover + firesev + hetero, data=keeley)
+klm_cover &lt;- lm(rich ~ cover, data=keeley)
+klm_firesev &lt;- lm(rich ~ firesev, data=keeley)
+klm_hetero &lt;- lm(rich ~ hetero, data=keeley)
+```
+
+&lt;table class="table table-striped" style="margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; Modnames &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; K &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; AIC &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Delta_AIC &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; AICWt &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; All predictors &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 705.65 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.00 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; heterogeneity &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 728.03 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 22.38 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; fire &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 736.03 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 30.38 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; cover &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 738.80 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 33.15 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+# We Have Visisted the Second Track!
+
+![:scale 65%](Images/modeling/train_switch.jpg)  
+![:col_header Hypothesis Testing, 
+  Model Comparison, 
+  Bayesian Model Implications
+  ]
+--
+![:col_list 
+  Deductive Inference,
+  .red[ Predictive Inference ],
+  Inductive Inference
+]
+--
+![:col_list 
+  Uses probabilities of overlap with a point hypothesis,
+  Uses tests of model performances on new data,
+  Uses probability distributions of parameters and simulation
+]
+
+
+---
+# Final Thoughts on Cross-Validation and Model Selection
+
+- Make sure your model meets assumptions before including it in a set to be evaluated! Don't set fire to your inferential train!!
+
+--
+
+- Prediction is not always your goal!  
+
+--
+
+- A model can be predictive but not have causal meaning  
+
+--
+
+- BUT - prediction is highly useful for real-world application
+
+--
+
+- In working with users, CV approaches can help them gain insight into which models to use in order to guide their choices
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="my_macros.js"></script>
+<script src="cols_macro.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
