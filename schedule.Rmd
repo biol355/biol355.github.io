@@ -196,7 +196,7 @@ __Homework:__ Forthcoming...
 ```
 `r datestring`  
 __Readings:__  W&G on [Model Basics](http://r4ds.had.co.nz/model-basics.html)  
-__Lectures:__ [Multiple Predictors and Model Comparison](./Lectures/many_predictors.html), [Adventures in Error](./Lectures/error_structure.html)  
+__Lectures:__ [Multiple Predictors and Model Comparison](./Lectures/many_predictors.html), [The General Linear Model](./Lectures/advanced_models.html)  
 __Objective(s):__ Describe when to use nonlinear models/curves, Comparing and Contrasting models, Visualization of model outcomes  
 __Biological Examples:__ Seal life history variation. Mouse anti-fungal drug development. Neanderthal brain size. Fire severity in California.   
 __Lab:__ Forthcoming...  

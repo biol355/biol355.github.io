@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Enter the General Linear Model</title>
+    <meta charset="utf-8" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/remark-css/shinobi.css" rel="stylesheet" />
+    <link href="libs/remark-css/default-fonts.css" rel="stylesheet" />
+    <script src="libs/kePrint/kePrint.js"></script>
+    <link href="libs/lightable/lightable.css" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" type="text/css" />
+    <link rel="stylesheet" href="cols.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+
+class: center, middle
+
+# The General Linear Model - Mixing in Categories, Nonlinearities, and All That
+
+![](Images/mmi/acl-bg.jpg)
+
+
+
+
+
+---
+# The General Linear Model
+
+`$$\Large \boldsymbol{Y} \sim \mathcal{N}(\boldsymbol{Y}, \sigma^2\boldsymbol{I})$$`
+$$\Large \boldsymbol{\hat{Y}} = \boldsymbol{\beta X}  $$  
+
+-   This is the Matrix formulation of `\(\sum\beta_jx_j\)`  
+  
+-   This equation is huge. X can be anything - categorical,
+    continuous, squared, sine, etc.
+
+-   There can be straight additivity, or interactions
+
+-   So far, the only model we've used with &gt;1 predictor is ANOVA
+
+
+---
+
+# So Many Ways to Build a Model
+.large[
+
+1. Mixing Categorical and Continuous Variables
+  
+2. Nonlinearities  
+
+3. Interaction Effects
+  
+]
+
+---
+
+## Combining Categorical Variables and Continuous Variables (Analysis of Covariance)
+
+`$$\Large \boldsymbol{Y} = \boldsymbol{\beta X}$$`  
+
+translates to
+
+`$$\widehat{y_i} = \beta_0 + \beta_{1}x_1  + \sum_{j=2}^{k}\beta_{ij}x_{ij}$$`  
+`$$x_{ij} = 0,1$$`
+
+- Here, we have many levels of a group in `\(x_{ij}\)`
+
+-   Often used to correct for a gradient or some continuous variable affecting outcome\
+\
+-   OR used to correct a regression due to additional groups that may throw off slope estimates\
+      - e.g. Simpson's Paradox: A positive relationship between test scores and academic performance can be masked by gender differences
+
+
+---
+# Neanderthals and Mixing Categorical and Continuous Variables
+
+![:scale 60%](./Images/mlr/neanlooking.jpeg)
+
+Who had a bigger brain: Neanderthals or us?
+
+
+
+
+---
+# The Means Look the Same...
+
+&lt;img src="advanced_models_files/figure-html/neand_boxplot-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+# But there appears to be a Relationship Between Body and Brain Mass
+
+&lt;img src="advanced_models_files/figure-html/neand_plot-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+# And Mean Body Mass is Different
+
+&lt;img src="advanced_models_files/figure-html/neand_boxplot2-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+class: center, middle
+
+![](Images/mlr/redo_analysis.jpg)
+
+---
+# Mixing Categories and Continuous Variables: Analysis of Covariance
+
+Evaluate a categorical effect(s), controlling for a *covariate* (parallel lines)  
+
+
+
+
+&lt;img src="advanced_models_files/figure-html/neand_plot_fit-1.png" style="display: block; margin: auto;" /&gt;
+
+ 
+Groups modify the *intercept*.
+
+---
+# Fit with Our Engine: Ordinary Least Squares
+
+
+
+---
+# Does Your Model Match Your Data?
+
+&lt;img src="advanced_models_files/figure-html/unnamed-chunk-1-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Are There Weird Patterns in Your Residuals?
+
+&lt;img src="advanced_models_files/figure-html/unnamed-chunk-2-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Did You Modelboss Too Close to the Correlated Suns?
+
+&lt;img src="advanced_models_files/figure-html/unnamed-chunk-3-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Did Our Predictors Matter?
+
+&lt;table class="table table-striped" style="margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; sumsq &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; df &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; statistic &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; p.value &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; species &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.028 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6.204 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.017 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; lnmass &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.130 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 29.276 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.000 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Residuals &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.160 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 36 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; NA &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; NA &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+
+# What are the Association Between Predictors and Response?
+&lt;table class="table table-striped" style="margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; sumsq &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; df &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; statistic &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; p.value &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; species &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.028 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6.204 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.017 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; lnmass &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.130 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 29.276 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.000 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Residuals &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.160 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 36 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; NA &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; NA &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+---
+
+# What Does it Look Like to See the Unique Effect of One Driver?
+
+&lt;table class="table table-striped" style="margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; estimate &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; std.error &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; statistic &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; p.value &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; (Intercept) &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 5.188 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.395 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 13.126 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.000 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; speciesrecent &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.070 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.028 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.491 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.017 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; lnmass &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.496 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.092 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 5.411 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.000 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+--
+
+- Intercept is the brain mass of a neanderthal with 0 body mass  
+
+--
+
+- speciesrecent is the change in brain mass for a recent human, still assuming 0 body mass  
+
+--
+
+- lnmass is the association of log body mass with log brain mass
+
+---
+
+# We can run comparisons at equal body mass
+
+&lt;img src="advanced_models_files/figure-html/unnamed-chunk-7-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+# So Many Ways to Build a Model
+.large[
+
+1. Mixing Categorical and Continuous Variables
+  
+2. .red[ Nonlinearities]  
+
+3. Interaction Effects
+  
+]
+
+---
+background-image: url("Images/mlr/fires.jpg")
+background-size: cover
+
+&lt;div style="bottom:100%; text-align:left; background:goldenrod"&gt;&lt;h4&gt;Five year study of wildfires &amp; recovery in Southern California shur- blands in 1993. 90 plots (20 x 50m)&lt;/h4&gt;
+(data from Jon Keeley et al.)&lt;/div&gt;
+
+---
+
+class:center, middle
+
+# What is the effect of cover on richness?
+
+---
+
+# The Linear Effect of Cover on Richness
+
+&lt;img src="advanced_models_files/figure-html/unnamed-chunk-8-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+# But... What's Up With That Bend?
+
+&lt;img src="advanced_models_files/figure-html/unnamed-chunk-9-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+# How Do We Add Nonlinearities to our Linear Model?
+
+`$$y_{i} \sim N(\widehat{y_{i}}, \sigma^{2} )$$`
+`$$\widehat{y_{i}} = \beta_{0} + \sum \beta_{j}x_{ij}$$` 
+
+--
+
+- What if `\(x_1\)` is a linear term and `\(x_2 = x_1^2\)`?
+
+--
+
+- Adding nonlinear terms is just adding more predictors to a multiple linear regression model
+
+--
+
+- Sometimes to reduce collinearity/make our model make more sense, we need to center x - i.e. use `\(x-\bar{x}\)` - to reduce SE in parameters
+
+---
+
+# A Nonlinear Effect of Cover?
+
+```r
+mod_sq &lt;- lm(rich ~ cover + I(cover^2), data = keeley)
+```
+
+
+&lt;img src="advanced_models_files/figure-html/unnamed-chunk-10-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Which is Better? Maybe A Cubic? Cross-Validate with LOO!
+
+&lt;table class="table table-striped" style="margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:right;"&gt; order &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; mse &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 210.27 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 200.16 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 3 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 208.85 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 196.36 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 211.24 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 6 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1323.11 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+# 2 or 4? Or Other Nonlinear Terms?
+
+&lt;img src="advanced_models_files/figure-html/unnamed-chunk-12-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+class: center, middle
+
+# Cool story. Other than nonlinear transformations of y or x, are there other forms of nonlinearity we should watch for?
+
+---
+
+# So Many Ways to Build a Model
+.large[
+
+1. Mixing Categorical and Continuous Variables
+  
+2. Nonlinearities  
+
+3. .red[Interaction Effects]
+  
+]
+---
+
+# What if Fire Severity Only Affects Species Richness in Old Stands?
+
+&lt;img src="advanced_models_files/figure-html/cat_int_plot-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+# Interaction Effects
+
+- The effect of one predictor cannot be known without knowing the level of another  
+
+--
+
+- Common in nature!  
+
+--
+
+- Some are inevitable (e.g., the effects of disturbance depend on something being there to disturb)  
+
+--
+
+- Some are.... quite tricky, but the spice of biological life!
+
+--
+
+- Exercise: Think of an interaction effect you have encountered in biology or elsewhere!
+
+---
+
+# Interaction Effects in Models
+
+
+`$$y_{i} \sim N(\widehat{y_{i}}, \sigma^{2} )$$`
+`$$\widehat{y_{i}} = \beta_{0} +  \beta_{1}x_{1i} +  \beta_{2}x_{2i} +   \beta_{3}x_{1i}x_{2i}$$` 
+`$$x_{2i} = 0,1$$`
+--
+
+If we consider `\(x_1 * x_2\)` a variable in it's own right - i.e. `\(x_3\)` then..... this is just.......
+
+--
+
+`$$\widehat{y_{i}} = \beta_{0} +  \sum\beta_{j}x_{ij}$$`
+
+IT'S ALL THE SAME THING!
+
+---
+
+# Interaction Effects in Models - and F-Tests!
+
+
+```r
+mod_int &lt;- lm(rich ~ firesev * age_break, data = keeley)
+```
+
+&lt;table class="table table-striped" style="margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; sumsq &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; df &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; statistic &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; p.value &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; firesev &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1918.314 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 10.122 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.002 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; age_break &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 202.176 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.067 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.305 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; firesev:age_break &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1060.005 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 5.593 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.020 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Residuals &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 16298.526 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 86 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; NA &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; NA &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+
+# Interaction Effects What does it mean?
+
+&lt;table class="table table-striped" style="margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; estimate &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; std.error &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; statistic &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; p.value &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; (Intercept) &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 53.464 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6.581 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 8.123 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.000 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; firesev &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.117 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.626 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.072 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.943 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; age_breakold stand &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 16.348 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 8.961 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.824 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.072 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; firesev:age_breakold stand &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -4.730 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.000 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -2.365 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.020 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+- The intercept is the number of species when fire severity is 0 and stand age is young
+
+--
+
+- The firesev effect is the effect of fire for young stands
+
+--
+
+- The age effect is the increase in species in an old stand - but only if fire severity is 0
+
+--
+
+- The interaction is the change in the fire severity slope when the stand is old
+
+
+---
+# This is Why I Hate Staring at Coefficients
+
+&lt;img src="advanced_models_files/figure-html/cat_int_plot-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+class: center, middle
+
+# Maybe if Age Was Continuous....
+
+---
+
+# Models with Continuous Interactions - The Same Model!
+`$$y_{i} \sim \mathcal{N}(\widehat{y_{i}}, \sigma^2)$$`
+`$$\widehat{y_{i}} = \beta_{0} +  \beta_{1}x_{1i} +  \beta_{2}x_{2i} +  \beta_{3}x_{1i}x_{2i}$$` 
+
+&lt;img src="advanced_models_files/figure-html/int_dag-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Fit and Go!
+
+.large[
+
+
+```r
+mod_int_c &lt;- lm(rich ~ firesev * age, data = keeley)
+```
+]
+
+
+&lt;table class="table table-striped" style="margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; sumsq &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; df &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; statistic &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; p.value &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; firesev &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1361.509 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 7.877 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.006 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; age &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 466.926 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.701 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.104 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; firesev:age &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2228.687 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 12.894 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.001 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Residuals &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 14865.094 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 86 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; NA &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; NA &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+
+# Did You Make Sure your Train Wasn't On Fire?
+
+&lt;img src="advanced_models_files/figure-html/unnamed-chunk-14-1.png" style="display: block; margin: auto;" /&gt;
+
+
+---
+
+# But Was This a Good Idea? AIC Edition
+
+&lt;table class="table table-striped" style="margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; Modnames &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; K &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; AIC &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Delta_AIC &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; AICWt &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; fire*age &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 725.035 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.000 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.991 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; fire + age &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 735.608 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 10.573 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.005 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; age &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 736.034 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 10.998 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.004 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; fire &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 740.506 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 15.470 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.000 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+
+# Coefficients are Clearer
+
+&lt;table class="table table-striped" style="margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; estimate &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; std.error &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; statistic &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; p.value &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; (Intercept) &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 42.935 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 7.851 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 5.469 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.000 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; firesev &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.106 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.863 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1.667 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.099 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; age &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.827 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.313 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.641 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.010 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; firesev:age &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.230 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.064 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -3.591 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.001 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+- Intercept is when all predictors are 0  
+  &lt;br&gt;
+- Additive slopes are when the OTHER predictor is 0  
+&lt;br&gt;
+- Interaction is how they modify each other
+
+---
+
+# What if a Predictor Value of 0 Makes No Sense: Centering
+
+.large[
+
+`$$X_i - \bar{X}$$`
+
+]
+
+- Additive coefficients are now the effect of a predictor at the mean value of the other predictors
+
+- Intercepts are at the mean value of all predictors
+
+- Visualization will keep you from getting confused!
+
+---
+
+# Model Visualization: The Effect of One Predictor at Different Levels of the Other
+
+&lt;img src="advanced_models_files/figure-html/vr-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Final Thoughts
+
+- Whew! That's a lot of ways to build a model!  
+
+--
+
+- Note, we are still thinking in terms of normal error - and an additive model
+
+--
+
+- There are plenty of extensions 
+     - nonlinear non-additive models  
+     - Generalized Linear Models with Non-Normal Error  
+     
+--
+
+- But, additive Gaussian models are a safe starting point  
+
+--
+
+- AND extensions.... really all just have linear models at their core  
+
+--
+
+- It's the BIOLOGY and your intuition of what model to build that should **always** be the core of your modeling process
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script src="my_macros.js"></script>
+<script src="cols_macro.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

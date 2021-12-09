@@ -1,0 +1,656 @@
+---
+title: "Enter the General Linear Model"
+output:
+  xaringan::moon_reader:
+    seal: false
+    lib_dir: libs
+    css: [default, shinobi, default-fonts, style.css, cols.css]
+    nature:
+      beforeInit: ["my_macros.js", "cols_macro.js"]
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+
+---
+class: center, middle
+
+# The General Linear Model - Mixing in Categories, Nonlinearities, and All That
+
+![](Images/mmi/acl-bg.jpg)
+
+```{r setup, message=FALSE, warning=FALSE, echo = FALSE}
+library(tidyverse)
+
+library(ggplot2)
+library(GGally)
+library(ggthemes)
+library(patchwork)
+library(ggdag)
+library(gridExtra)
+
+
+library(car)
+library(broom)
+library(knitr)
+library(emmeans)
+library(modelr)
+library(rsample)
+
+
+
+opts_chunk$set(fig.height=7, 
+               fig.width = 10,
+               fig.align = "center",
+               comment=NA, 
+               warning=FALSE, 
+               echo = FALSE,
+               message = FALSE)
+
+
+options(htmltools.dir.version = FALSE)
+theme_set(theme_classic(base_size=22))
+```
+
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+library(xaringanthemer)
+style_mono_light(
+  base_color = "#23395b",
+  colors = c(
+  red = "#f34213",
+  purple = "#3e2f5b",
+  orange = "#ff8811",
+  green = "#136f63",
+  white = "#FFFFFF"
+  )
+)
+```
+
+---
+# The General Linear Model
+
+$$\Large \boldsymbol{Y} \sim \mathcal{N}(\boldsymbol{Y}, \sigma^2\boldsymbol{I})$$
+$$\Large \boldsymbol{\hat{Y}} = \boldsymbol{\beta X}  $$  
+
+-   This is the Matrix formulation of $\sum\beta_jx_j$  
+  
+-   This equation is huge. X can be anything - categorical,
+    continuous, squared, sine, etc.
+
+-   There can be straight additivity, or interactions
+
+-   So far, the only model we've used with >1 predictor is ANOVA
+
+
+---
+
+# So Many Ways to Build a Model
+.large[
+
+1. Mixing Categorical and Continuous Variables
+  
+2. Nonlinearities  
+
+3. Interaction Effects
+  
+]
+
+---
+
+## Combining Categorical Variables and Continuous Variables (Analysis of Covariance)
+
+$$\Large \boldsymbol{Y} = \boldsymbol{\beta X}$$  
+
+translates to
+
+$$\widehat{y_i} = \beta_0 + \beta_{1}x_1  + \sum_{j=2}^{k}\beta_{ij}x_{ij}$$  
+$$x_{ij} = 0,1$$
+
+- Here, we have many levels of a group in $x_{ij}$
+
+-   Often used to correct for a gradient or some continuous variable affecting outcome\
+\
+-   OR used to correct a regression due to additional groups that may throw off slope estimates\
+      - e.g. Simpson's Paradox: A positive relationship between test scores and academic performance can be masked by gender differences
+
+
+---
+# Neanderthals and Mixing Categorical and Continuous Variables
+
+![:scale 60%](./Images/mlr/neanlooking.jpeg)
+
+Who had a bigger brain: Neanderthals or us?
+
+
+
+
+---
+# The Means Look the Same...
+
+```{r neand_boxplot}
+neand <- read.csv("./data/18q09NeanderthalBrainSize.csv")
+neand_plot_box <- qplot(species, lnbrain, data=neand, fill=species, geom="boxplot") 
+
+neand_plot_box
+```
+
+---
+
+# But there appears to be a Relationship Between Body and Brain Mass
+
+```{r neand_plot}
+neand_plot <- qplot(lnmass, lnbrain, data=neand, color=species, size=I(3))  
+
+neand_plot
+```
+
+---
+
+# And Mean Body Mass is Different
+
+```{r neand_boxplot2}
+neand_plot_box2 <- qplot(species, lnmass, data=neand, fill=species, geom="boxplot") 
+
+neand_plot_box2
+```
+
+---
+class: center, middle
+
+![](Images/mlr/redo_analysis.jpg)
+
+---
+# Mixing Categories and Continuous Variables: Analysis of Covariance
+
+Evaluate a categorical effect(s), controlling for a *covariate* (parallel lines)  
+
+```{r neand_model, echo=FALSE}
+neand_lm <- lm(lnbrain ~ species + lnmass, data=neand)
+
+```
+
+
+```{r neand_plot_fit, fig.height=5, fig.width=7}
+neand <- cbind(neand, predict(neand_lm, interval="confidence"))
+
+neand_plot +
+  geom_line(data=neand, aes(y=fit)) + 
+  geom_ribbon(data=neand, aes(ymin=lwr, 
+                              ymax=upr, group=species), 
+              fill="lightgrey", color=NA,
+              alpha=0.5) 
+```
+
+ 
+Groups modify the *intercept*.
+
+---
+# Fit with Our Engine: Ordinary Least Squares
+
+```{r ancova}
+neand_lm <- lm(lnbrain ~ species + lnmass, 
+               data=neand)
+
+neand_dat <- augment(neand_lm)
+```
+
+---
+# Does Your Model Match Your Data?
+
+```{r}
+neand_dat %>%
+  select(lnbrain, .fitted) %>%
+  pivot_longer(everything()) %>%
+ggplot(aes(x = value, color = name)) +
+  geom_density(size = 2) +
+  scale_color_colorblind()
+```
+
+---
+
+# Are There Weird Patterns in Your Residuals?
+
+```{r}
+performance::check_model(neand_lm, check = c("linearity", "normality"))
+```
+
+---
+
+# Did You Modelboss Too Close to the Correlated Suns?
+
+```{r}
+performance::check_collinearity(neand_lm) %>% plot()
+```
+
+---
+
+# Did Our Predictors Matter?
+
+```{r}
+Anova(neand_lm) %>%
+  tidy() %>%
+  kable(digits = 3) %>% kableExtra::kable_styling("striped")
+```
+
+---
+
+# What are the Association Between Predictors and Response?
+```{r}
+Anova(neand_lm) %>%
+  tidy() %>%
+  kable(digits = 3) %>% kableExtra::kable_styling("striped")
+```
+---
+
+# What Does it Look Like to See the Unique Effect of One Driver?
+
+```{r}
+tidy(neand_lm) %>%
+  kable(digits = 3) %>% kableExtra::kable_styling("striped")
+```
+--
+
+- Intercept is the brain mass of a neanderthal with 0 body mass  
+
+--
+
+- speciesrecent is the change in brain mass for a recent human, still assuming 0 body mass  
+
+--
+
+- lnmass is the association of log body mass with log brain mass
+
+---
+
+# We can run comparisons at equal body mass
+
+```{r}
+visreg::visreg(neand_lm, gg = TRUE)[[1]] +
+  labs(subtitle = "Species association holding\nlnmass at its mean")
+```
+
+---
+
+# So Many Ways to Build a Model
+.large[
+
+1. Mixing Categorical and Continuous Variables
+  
+2. .red[ Nonlinearities]  
+
+3. Interaction Effects
+  
+]
+
+---
+background-image: url("Images/mlr/fires.jpg")
+background-size: cover
+
+<div style="bottom:100%; text-align:left; background:goldenrod"><h4>Five year study of wildfires & recovery in Southern California shur- blands in 1993. 90 plots (20 x 50m)</h4>
+(data from Jon Keeley et al.)</div>
+
+---
+
+class:center, middle
+
+# What is the effect of cover on richness?
+
+---
+
+# The Linear Effect of Cover on Richness
+
+```{r}
+data(keeley, package = "piecewiseSEM")
+
+ggplot(keeley,
+       aes(x = rich, y = cover)) +
+  geom_point() +
+  stat_smooth(method = "lm", formula = y ~ poly(x,1))
+```
+
+---
+
+# But... What's Up With That Bend?
+
+```{r}
+mod <- lm(rich ~ cover, data = keeley)
+performance::check_model(mod, check = c("linearity", "normality"))
+```
+
+---
+
+# How Do We Add Nonlinearities to our Linear Model?
+
+$$y_{i} \sim N(\widehat{y_{i}}, \sigma^{2} )$$
+$$\widehat{y_{i}} = \beta_{0} + \sum \beta_{j}x_{ij}$$ 
+
+--
+
+- What if $x_1$ is a linear term and $x_2 = x_1^2$?
+
+--
+
+- Adding nonlinear terms is just adding more predictors to a multiple linear regression model
+
+--
+
+- Sometimes to reduce collinearity/make our model make more sense, we need to center x - i.e. use $x-\bar{x}$ - to reduce SE in parameters
+
+---
+
+# A Nonlinear Effect of Cover?
+```{r squared, echo = TRUE}
+mod_sq <- lm(rich ~ cover + I(cover^2), data = keeley)
+```
+
+
+```{r}
+ggplot(keeley,
+       aes(y = rich, x = cover)) +
+  geom_point() +
+  stat_smooth(method = "lm", formula = y ~ poly(x,2))
+```
+
+---
+
+# Which is Better? Maybe A Cubic? Cross-Validate with LOO!
+
+```{r}
+set.seed(2022)
+cv_analysis <- crossing(tibble(order = 1:6), keeley) %>%
+  group_by(order) %>%
+  nest() %>%
+  mutate(kfold = map(data, loo_cv)) %>%
+  unnest(kfold) %>%
+  select(-data) %>%
+  mutate(mod = map2(order, splits, 
+                    ~lm(rich ~ poly(cover, .x), 
+                        data = analysis(.y))),
+         mse = map2_dbl(mod, splits, 
+                    ~mse(.x, assessment(.y))))
+
+cv_analysis %>%
+  group_by(order) %>%
+  summarize(mse = sum(mse)/n()) %>%
+  kable(digits = 2) %>%
+  kableExtra::kable_styling("striped")
+```
+
+---
+# 2 or 4? Or Other Nonlinear Terms?
+
+```{r}
+a <- ggplot(keeley,
+       aes(y = rich, x = cover)) +
+  geom_point() +
+  stat_smooth(method = "lm", formula = y ~ poly(x,2))
+
+b <- ggplot(keeley,
+       aes(y = rich, x = cover)) +
+  geom_point() +
+  stat_smooth(method = "lm", formula = y ~ poly(x,4))
+
+a+b
+```
+
+---
+
+class: center, middle
+
+# Cool story. Other than nonlinear transformations of y or x, are there other forms of nonlinearity we should watch for?
+
+---
+
+# So Many Ways to Build a Model
+.large[
+
+1. Mixing Categorical and Continuous Variables
+  
+2. Nonlinearities  
+
+3. .red[Interaction Effects]
+  
+]
+---
+
+# What if Fire Severity Only Affects Species Richness in Old Stands?
+
+```{r cat_int_plot}
+keeley <- mutate(keeley,
+                 age_break = ifelse(age < 20, "new stand", "old stand"))
+
+ggplot(keeley,
+       aes(x = firesev, y = rich)) +
+  geom_point() +
+  stat_smooth(method = "lm") +
+  facet_wrap(vars(age_break))
+```
+
+---
+# Interaction Effects
+
+- The effect of one predictor cannot be known without knowing the level of another  
+
+--
+
+- Common in nature!  
+
+--
+
+- Some are inevitable (e.g., the effects of disturbance depend on something being there to disturb)  
+
+--
+
+- Some are.... quite tricky, but the spice of biological life!
+
+--
+
+- Exercise: Think of an interaction effect you have encountered in biology or elsewhere!
+
+---
+
+# Interaction Effects in Models
+
+
+$$y_{i} \sim N(\widehat{y_{i}}, \sigma^{2} )$$
+$$\widehat{y_{i}} = \beta_{0} +  \beta_{1}x_{1i} +  \beta_{2}x_{2i} +   \beta_{3}x_{1i}x_{2i}$$ 
+$$x_{2i} = 0,1$$
+--
+
+If we consider $x_1 * x_2$ a variable in it's own right - i.e. $x_3$ then..... this is just.......
+
+--
+
+$$\widehat{y_{i}} = \beta_{0} +  \sum\beta_{j}x_{ij}$$
+
+IT'S ALL THE SAME THING!
+
+---
+
+# Interaction Effects in Models - and F-Tests!
+
+```{r, echo = TRUE}
+mod_int <- lm(rich ~ firesev * age_break, data = keeley)
+```
+
+```{r anova_int}
+Anova(mod_int) %>%
+  tidy() %>%
+  kable(digits = 3) %>%
+  kableExtra::kable_styling("striped")
+```
+
+---
+
+# Interaction Effects What does it mean?
+
+```{r coef_int}
+tidy(mod_int) %>%
+  kable(digits = 3) %>%
+  kableExtra::kable_styling("striped")
+```
+
+- The intercept is the number of species when fire severity is 0 and stand age is young
+
+--
+
+- The firesev effect is the effect of fire for young stands
+
+--
+
+- The age effect is the increase in species in an old stand - but only if fire severity is 0
+
+--
+
+- The interaction is the change in the fire severity slope when the stand is old
+
+
+---
+# This is Why I Hate Staring at Coefficients
+
+```{r cat_int_plot}
+```
+
+---
+class: center, middle
+
+# Maybe if Age Was Continuous....
+
+---
+
+# Models with Continuous Interactions - The Same Model!
+$$y_{i} \sim \mathcal{N}(\widehat{y_{i}}, \sigma^2)$$
+$$\widehat{y_{i}} = \beta_{0} +  \beta_{1}x_{1i} +  \beta_{2}x_{2i} +  \beta_{3}x_{1i}x_{2i}$$ 
+
+```{r int_dag, fig.height = 5, fig.width = 9}
+
+set.seed(2021)
+dagify(richness ~ firesev + age + "firesev*age" + error,
+                   labels = c("richness" = "richness",
+                              "firesev" = "firesev",
+                              "firesev*age" = "firesev*age",
+                              "age" = "age",
+                              "error" = "error"),
+                  exposure = "firesev",
+                  outcome = "richness",
+                  latent = "error") %>%
+ggdag_classic() + 
+  theme_dag_gray() +
+  scale_color_viridis_d(guide = "none") +
+  guides(shape = "none", color = "none")
+```
+
+---
+
+# Fit and Go!
+
+.large[
+
+```{r lm_int_mod, echo = TRUE}
+mod_int_c <- lm(rich ~ firesev * age, data = keeley)
+```
+]
+
+
+```{r anova_int_c}
+Anova(mod_int_c) %>%
+  tidy() %>%
+  kable(digits = 3) %>%
+  kableExtra::kable_styling("striped")
+```
+
+---
+
+# Did You Make Sure your Train Wasn't On Fire?
+
+```{r}
+performance::check_model(mod_int_c, check = c("linearity", "normality"))
+```
+
+
+---
+
+# But Was This a Good Idea? AIC Edition
+
+```{r aic}
+modlist <- list(
+  mod_int_c,
+  lm(rich ~ firesev + age, data = keeley),
+  lm(rich ~ age, data = keeley),
+  lm(rich ~ firesev , data = keeley)
+)
+  
+AICcmodavg::aictab(modlist, c("fire*age", "fire + age", "fire", "age"), second.ord = FALSE) %>%
+  as_tibble() %>%
+  select(-ModelLik, -Cum.Wt, -LL) %>%
+  kable(digits = 3) %>%
+  kableExtra::kable_styling("striped")
+```
+
+---
+
+# Coefficients are Clearer
+
+```{r coef_int_c}
+tidy(mod_int_c) %>%
+  kable(digits = 3) %>%
+  kableExtra::kable_styling("striped")
+```
+
+- Intercept is when all predictors are 0  
+  <br>
+- Additive slopes are when the OTHER predictor is 0  
+<br>
+- Interaction is how they modify each other
+
+---
+
+# What if a Predictor Value of 0 Makes No Sense: Centering
+
+.large[
+
+$$X_i - \bar{X}$$
+
+]
+
+- Additive coefficients are now the effect of a predictor at the mean value of the other predictors
+
+- Intercepts are at the mean value of all predictors
+
+- Visualization will keep you from getting confused!
+
+---
+
+# Model Visualization: The Effect of One Predictor at Different Levels of the Other
+
+```{r vr}
+visreg::visreg(mod_int_c, "firesev", "age", gg = TRUE)
+```
+
+---
+
+# Final Thoughts
+
+- Whew! That's a lot of ways to build a model!  
+
+--
+
+- Note, we are still thinking in terms of normal error - and an additive model
+
+--
+
+- There are plenty of extensions 
+     - nonlinear non-additive models  
+     - Generalized Linear Models with Non-Normal Error  
+     
+--
+
+- But, additive Gaussian models are a safe starting point  
+
+--
+
+- AND extensions.... really all just have linear models at their core  
+
+--
+
+- It's the BIOLOGY and your intuition of what model to build that should **always** be the core of your modeling process
+
