@@ -198,6 +198,7 @@ __Lectures:__ [Multiple Predictors and Model Comparison](./Lectures/many_predict
 __Objective(s):__ Describe when to use nonlinear models/curves, Comparing and Contrasting models, Visualization of model outcomes  
 __Biological Examples:__ Seal life history variation. Mouse anti-fungal drug development. Neanderthal brain size. Fire severity in California.   
 __Lab:__ [tidymodels](Labs/gentle_intro_tmwr.html)  
+__Data for Lab:__ [2021 World Happiness Report](Labs/data/world-happiness-report-2021.csv)  
 __Etherpad:__ https://etherpad.wikimedia.org/p/355-many_predictors-2021_fall  
 
 
