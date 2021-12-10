@@ -107,9 +107,10 @@ $$x_{ij} = 0,1$$
 
 - Here, we have many levels of a group in $x_{ij}$
 
--   Often used to correct for a gradient or some continuous variable affecting outcome\
-\
--   OR used to correct a regression due to additional groups that may throw off slope estimates\
+-   Often used to correct for a gradient or some continuous variable affecting outcome  
+  
+
+-   OR used to correct a regression due to additional groups that may throw off slope estimates  
       - e.g. Simpson's Paradox: A positive relationship between test scores and academic performance can be masked by gender differences
 
 
@@ -161,32 +162,18 @@ class: center, middle
 ---
 # Mixing Categories and Continuous Variables: Analysis of Covariance
 
+$$lnbrain_i \sim \mathcal{N}(\widehat{lnbrain_i}, \sigma_2)$$
+$$\widehat{lnbrain_i} = \beta_0 + \beta_{1}lnmass_1  + \sum_{j=2}^{k}\beta_{ij}species_{ij}$$  
+$$species_{ij} = 0\; or\; 1\; if\; neandertal$$
+
 Evaluate a categorical effect(s), controlling for a *covariate* (parallel lines)  
 
-```{r neand_model, echo=FALSE}
-neand_lm <- lm(lnbrain ~ species + lnmass, data=neand)
-
-```
-
-
-```{r neand_plot_fit, fig.height=5, fig.width=7}
-neand <- cbind(neand, predict(neand_lm, interval="confidence"))
-
-neand_plot +
-  geom_line(data=neand, aes(y=fit)) + 
-  geom_ribbon(data=neand, aes(ymin=lwr, 
-                              ymax=upr, group=species), 
-              fill="lightgrey", color=NA,
-              alpha=0.5) 
-```
-
- 
 Groups modify the *intercept*.
 
 ---
 # Fit with Our Engine: Ordinary Least Squares
 
-```{r ancova}
+```{r ancova, echo = TRUE}
 neand_lm <- lm(lnbrain ~ species + lnmass, 
                data=neand)
 
@@ -258,6 +245,23 @@ tidy(neand_lm) %>%
 --
 
 - lnmass is the association of log body mass with log brain mass
+
+---
+
+# What Does it Mean Visually?
+
+```{r neand_plot_fit}
+neand <- cbind(neand, predict(neand_lm, interval="confidence"))
+
+neand_plot +
+  geom_line(data=neand, aes(y=fit)) + 
+  geom_ribbon(data=neand, aes(ymin=lwr, 
+                              ymax=upr, group=species), 
+              fill="lightgrey", color=NA,
+              alpha=0.5) 
+```
+
+ 
 
 ---
 

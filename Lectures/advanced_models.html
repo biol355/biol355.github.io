@@ -67,9 +67,10 @@ translates to
 
 - Here, we have many levels of a group in `\(x_{ij}\)`
 
--   Often used to correct for a gradient or some continuous variable affecting outcome\
-\
--   OR used to correct a regression due to additional groups that may throw off slope estimates\
+-   Often used to correct for a gradient or some continuous variable affecting outcome  
+  
+
+-   OR used to correct a regression due to additional groups that may throw off slope estimates  
       - e.g. Simpson's Paradox: A positive relationship between test scores and academic performance can be masked by gender differences
 
 
@@ -108,20 +109,24 @@ class: center, middle
 ---
 # Mixing Categories and Continuous Variables: Analysis of Covariance
 
+`$$lnbrain_i \sim \mathcal{N}(\widehat{lnbrain_i}, \sigma_2)$$`
+`$$\widehat{lnbrain_i} = \beta_0 + \beta_{1}lnmass_1  + \sum_{j=2}^{k}\beta_{ij}species_{ij}$$`  
+`$$species_{ij} = 0\; or\; 1\; if\; neandertal$$`
+
 Evaluate a categorical effect(s), controlling for a *covariate* (parallel lines)  
 
-
-
-
-&lt;img src="advanced_models_files/figure-html/neand_plot_fit-1.png" style="display: block; margin: auto;" /&gt;
-
- 
 Groups modify the *intercept*.
 
 ---
 # Fit with Our Engine: Ordinary Least Squares
 
 
+```r
+neand_lm &lt;- lm(lnbrain ~ species + lnmass, 
+               data=neand)
+
+neand_dat &lt;- augment(neand_lm)
+```
 
 ---
 # Does Your Model Match Your Data?
@@ -265,6 +270,14 @@ Groups modify the *intercept*.
 --
 
 - lnmass is the association of log body mass with log brain mass
+
+---
+
+# What Does it Mean Visually?
+
+&lt;img src="advanced_models_files/figure-html/neand_plot_fit-1.png" style="display: block; margin: auto;" /&gt;
+
+ 
 
 ---
 
