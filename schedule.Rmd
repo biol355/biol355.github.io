@@ -188,8 +188,6 @@ __Objective(s):__ Understand the workflow of generating inference from data, Des
 __Biological Examples:__ Batesian mimicry, Penguin morphometrics, The effects of testosterone on bird behavior.  
 __Lab:__ [infer and tidymodels](Labs/Infer.html)  
 __Etherpad:__ https://etherpad.wikimedia.org/p/355-modeling-2021_fall  
-__Homework:__ Forthcoming...  
-
 
 ### Week  13. Modeling with Many Predictors 
 ```{r next_date, echo=FALSE}
@@ -199,10 +197,8 @@ __Readings:__  W&G on [Model Basics](http://r4ds.had.co.nz/model-basics.html)
 __Lectures:__ [Multiple Predictors and Model Comparison](./Lectures/many_predictors.html), [The General Linear Model](./Lectures/advanced_models.html)  
 __Objective(s):__ Describe when to use nonlinear models/curves, Comparing and Contrasting models, Visualization of model outcomes  
 __Biological Examples:__ Seal life history variation. Mouse anti-fungal drug development. Neanderthal brain size. Fire severity in California.   
-__Lab:__ Forthcoming...  
-__Files:__ Forthcoming...  
+__Lab:__ [tidymodels](gentle_intro_tmwr.html)  
 __Etherpad:__ https://etherpad.wikimedia.org/p/355-many_predictors-2021_fall  
-__Homework:__ Forthcoming...  
 
 
 ### Week  14. Open Lab
