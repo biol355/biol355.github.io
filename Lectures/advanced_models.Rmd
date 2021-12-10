@@ -289,7 +289,7 @@ visreg::visreg(neand_lm, gg = TRUE)[[1]] +
 background-image: url("Images/mlr/fires.jpg")
 background-size: cover
 
-<div style="bottom:100%; text-align:left; background:goldenrod"><h4>Five year study of wildfires & recovery in Southern California shur- blands in 1993. 90 plots (20 x 50m)</h4>
+<div style="bottom:100%; text-align:left; background:goldenrod"><h4>Five year study of wildfires & recovery in Southern California shrublands in 1993. 90 plots (20 x 50m)</h4>
 (data from Jon Keeley et al.)</div>
 
 ---
