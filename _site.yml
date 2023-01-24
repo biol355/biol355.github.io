@@ -18,9 +18,9 @@ navbar:
   - text: "Syllabus"
     menu:
        - text: "Lecture"
-         href: ./biol_355_syllabus_2021.docx
+         href: https://docs.google.com/document/d/1-jW63ua7hVZI52ZzqZnaf8lIfFvIhHLPmdoU6dGyIxQ/edit?usp=sharing
        - text: "Lab"
-         href: ./biol_356_syllabus_2021.docx
+         href: https://docs.google.com/document/d/1WSyOwxDmcU8LfmkL-91GKwPBFMZp5OP5X_EookCZ0vk/edit?usp=sharing
   - text: "Datasets"
     href: datasets.html
   - text: "Resources"
