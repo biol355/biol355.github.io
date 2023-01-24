@@ -38,7 +38,7 @@ ggplot(data = DNase,
 
 **Student Hours:** Prof. Byrnes will hold student office hours Tuesday and Thursday from 10-12 in 3130 in the ISC or by appointment.
 
-&nbsp; &nbsp; TA Richter  will hold student office hours Monday from 2-4 in ISC 5210 or by appointment.  
+&nbsp; &nbsp; TA Richter  will hold student office hours Monday from 2-4 in ISC 5210 or by appointment.   
 
 **Syllabi:** [lecture](https://docs.google.com/document/d/1-jW63ua7hVZI52ZzqZnaf8lIfFvIhHLPmdoU6dGyIxQ/edit?usp=sharing) and [lab](https://docs.google.com/document/d/1WSyOwxDmcU8LfmkL-91GKwPBFMZp5OP5X_EookCZ0vk/edit?usp=sharing) - note, this might be out of date relative to the website, and as such, see the [schedule](schedule.html) or other links above.  
   
