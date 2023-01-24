@@ -18,9 +18,9 @@ navbar:
   - text: "Syllabus"
     menu:
        - text: "Lecture"
-         href: https://docs.google.com/document/d/1-jW63ua7hVZI52ZzqZnaf8lIfFvIhHLPmdoU6dGyIxQ/edit?usp=sharing
+         href: "https://docs.google.com/document/d/1-jW63ua7hVZI52ZzqZnaf8lIfFvIhHLPmdoU6dGyIxQ/edit?usp=sharing"
        - text: "Lab"
-         href: https://docs.google.com/document/d/1WSyOwxDmcU8LfmkL-91GKwPBFMZp5OP5X_EookCZ0vk/edit?usp=sharing
+         href: "https://docs.google.com/document/d/1WSyOwxDmcU8LfmkL-91GKwPBFMZp5OP5X_EookCZ0vk/edit?usp=sharing"
   - text: "Datasets"
     href: datasets.html
   - text: "Resources"
