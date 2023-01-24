@@ -24,20 +24,23 @@ ggplot(data = DNase,
   
 **Twitter:** [jebyrnes](http://twitter.com/jebyrnes)
 
-**TA:** Asmae Toumi
+**TA:** Troy Richter. 
 
-**Email:** atoumi.cu@gmail.com
+**Email:** Troy.Richter001@umb.edu
 
-**Where:** Biol 355 - Healey 0042 (Purple Lab), Biol 356 - Healey 3rd floor 9F (Blue Lab), or Zoom!  
-**Lecture Playlist** https://youtube.com/playlist?list=PLZRMqMK8aRmL9UqEsi_uT-JHkloZEwHUn  
+**Where:** Blue Lab, Healey Library (up one floor)
 
-**Zoom Link if you Cannot Be In Person** https://umassboston.zoom.us/j/92684606180 (note, waiting room)  
+**Lecture Playlist** Coming Soon
+
+**Zoom Link if you Cannot Be In Person** https://umassboston.zoom.us/j/94809395440 (note, waiting room)  
 
 **Weekly Schedule:** Tuesday & Thursday 2:00-3:15, Lab Friday 10:00 - 1:00  
-**Student Hours:** Prof. Byrnes will hold student office hours Tuesday from 11-1 at https://umassboston.zoom.us/j/95856616788 (note waiting room) or by appointment  
-&nbsp; &nbsp; TA Toumi  will hold student office hours Tuesday from 5-7pm [here](https://umassboston.zoom.us/j/96133484413) or by appointment.  
 
-**Syllabi:** [lecture](./biol_355_syllabus_2021.docx) and [lab](./biol_356_syllabus_2021.docx) - note, this might be out of date relative to the website, and as such, see the [schedule](schedule.html) or other links above.  
+**Student Hours:** Prof. Byrnes will hold student office hours Tuesday and Thursday from 10-12 in 3130 in the ISC or by appointment.
+
+&nbsp; &nbsp; TA Richter  will hold student office hours Monday from 2-4 in ISC 5210 or by appointment.  
+
+**Syllabi:** [lecture](https://docs.google.com/document/d/1-jW63ua7hVZI52ZzqZnaf8lIfFvIhHLPmdoU6dGyIxQ/edit?usp=sharing) and [lab](https://docs.google.com/document/d/1WSyOwxDmcU8LfmkL-91GKwPBFMZp5OP5X_EookCZ0vk/edit?usp=sharing) - note, this might be out of date relative to the website, and as such, see the [schedule](schedule.html) or other links above.  
   
 **Source for this Website:** https://github.com/biol355/biol355.github.io/
 &nbsp;  
@@ -46,10 +49,10 @@ ggplot(data = DNase,
 
 ## Course News:  
 
-*9/1/2021*  Please join our class slack channel on the UMass Boston R User Group Slack by going to http://umbrug.slack.com, and, once joined, join the #biol355 channel.  
+*1/23/2023*  Please join our class slack channel on the UMass Boston R User Group Slack by going to http://umbrug.slack.com, and, once joined, join the #biol355 channel.  
 
-*9/1/2021*   Welcome to the class! Please browse around the site or download the [lecture syllabus](./governance_syllabus/byrnes_355_datascience_lecture_4.docx) and [lab syllabus](./governance_syllabus/byrnes_356_datascience_lab_4.docx)!  
+*1/23/2023*  Welcome to the class! Please browse around the site and look at the [lecture syllabus](https://docs.google.com/document/d/1-jW63ua7hVZI52ZzqZnaf8lIfFvIhHLPmdoU6dGyIxQ/edit?usp=sharing) and [lab syllabus](https://docs.google.com/document/d/1WSyOwxDmcU8LfmkL-91GKwPBFMZp5OP5X_EookCZ0vk/edit?usp=sharing)!  
 
-*8/11/2020*: Check out previous year's past projects right [here](./past_projects.html)  
+*1/23/2023* Check out previous year's past projects right [here](./past_projects.html)  
 
 
