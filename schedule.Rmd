@@ -9,7 +9,7 @@ W&G = [Wickham & Grolemund](http://r4ds.had.co.nz), DC = Data Carpentry Lesson, 
     
 ```{r dates, echo=FALSE, message=FALSE, warning=FALSE}
 library(lubridate)
-current_date <- parse_date_time("2021-09-06", orders="ymd")-days(7)
+current_date <- parse_date_time("2023-01-23", orders="ymd")-days(7)
 ```
 ### Week 1. Overview of Course, Data Creation, and Spreadsheets  
 ```{r next_date, echo=FALSE }

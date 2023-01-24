@@ -13,7 +13,7 @@
 
 <title>Course Schedule and Readings</title>
 
-<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.19/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
@@ -60,6 +60,7 @@ if (window.hljs) {
 
 
 
+
 <style type = "text/css">
 .main-container {
   max-width: 940px;
@@ -80,6 +81,9 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
 }
 pre code {
   padding: 0;
@@ -137,11 +141,15 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.tab('show');
-
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
   // Navbar adjustments
   var navHeight = $(".navbar").first().height() + 15;
@@ -170,8 +178,8 @@ $(document).ready(function () {
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -179,16 +187,9 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -232,7 +233,7 @@ $(document).ready(function () {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -260,17 +261,17 @@ $(document).ready(function () {
   <a href="final_project.html">Final</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Syllabus
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="./biol_355_syllabus_2021.docx">Lecture</a>
+      <a href="https://docs.google.com/document/d/1-jW63ua7hVZI52ZzqZnaf8lIfFvIhHLPmdoU6dGyIxQ/edit?usp=sharing">Lecture</a>
     </li>
     <li>
-      <a href="./biol_356_syllabus_2021.docx">Lab</a>
+      <a href="https://docs.google.com/document/d/1WSyOwxDmcU8LfmkL-91GKwPBFMZp5OP5X_EookCZ0vk/edit?usp=sharing">Lab</a>
     </li>
   </ul>
 </li>
@@ -300,22 +301,49 @@ $(document).ready(function () {
 </div>
 
 
-<p>While the topics covered are broad, each week will feature different examples from genetics, ecology, molecular, and evolutionary biology highlighting uses of each individual set of techniques.</p>
-<p>This course will be a mixture of lecture, live-code demonstrations, and opportunities for in class work. Lecture days will have small exercises for students at the end of class. We will conduct lectures and labs in a computer lab in order for students to be able to follow along and try out new concepts once described and demonstrated in lecture, enabling rapid feedback between students and faculty.</p>
-<p>W&amp;G = <a href="http://r4ds.had.co.nz">Wickham &amp; Grolemund</a>, DC = Data Carpentry Lesson, U/P for linked pdfs = biol355</p>
-<div id="week-1.-overview-of-course-data-creation-and-spreadsheets" class="section level3">
+<p>While the topics covered are broad, each week will feature different
+examples from genetics, ecology, molecular, and evolutionary biology
+highlighting uses of each individual set of techniques.</p>
+<p>This course will be a mixture of lecture, live-code demonstrations,
+and opportunities for in class work. Lecture days will have small
+exercises for students at the end of class. We will conduct lectures and
+labs in a computer lab in order for students to be able to follow along
+and try out new concepts once described and demonstrated in lecture,
+enabling rapid feedback between students and faculty.</p>
+<p>W&amp;G = <a href="http://r4ds.had.co.nz">Wickham &amp;
+Grolemund</a>, DC = Data Carpentry Lesson, U/P for linked pdfs =
+biol355</p>
+<div id="week-1.-overview-of-course-data-creation-and-spreadsheets"
+class="section level3">
 <h3>Week 1. Overview of Course, Data Creation, and Spreadsheets</h3>
-<p>9/6/2021<br />
-<strong>Lecture:</strong> <a href="./Lectures/01_intro.pdf">Welcome!</a>, <a href="./Lectures/02_data_creation.html">Data Collection and Metadata</a><br />
-<strong>Readings:</strong> <a href="http://r4ds.had.co.nz/introduction.html">W&amp;G Introduction Chapter 1</a>, <a href="./Readings/Browman_and_Woo_Spreadsheets.pdf">Browman and Woo 2017</a><br />
-<strong>Objective(s):</strong> Introduce the students to the course; understand what is data, discuss how we preserve information about data, view different examples of datasets from different disciplines. Compare poor versus good practice in creating data. Differentiate between data recording and data entry.<br />
-<strong>Lab:</strong> <a href="http://www.datacarpentry.org/spreadsheet-ecology-lesson/">DC Spreadsheet Ecology Lesson</a><br />
-<strong>Files:</strong> <a href="https://ndownloader.figshare.com/files/2252083">Portal Data</a><br />
-<strong>Etherpad:</strong> <a href="https://etherpad.wikimedia.org/p/355-spreadsheets-2021_fall" class="uri">https://etherpad.wikimedia.org/p/355-spreadsheets-2021_fall</a></p>
+<p>1/23/2023<br />
+<strong>Lecture:</strong> <a
+href="./Lectures/01_intro.pdf">Welcome!</a>, <a
+href="./Lectures/02_data_creation.html">Data Collection and
+Metadata</a><br />
+<strong>Readings:</strong> <a
+href="http://r4ds.had.co.nz/introduction.html">W&amp;G Introduction
+Chapter 1</a>, <a
+href="./Readings/Browman_and_Woo_Spreadsheets.pdf">Browman and Woo
+2017</a><br />
+<strong>Objective(s):</strong> Introduce the students to the course;
+understand what is data, discuss how we preserve information about data,
+view different examples of datasets from different disciplines. Compare
+poor versus good practice in creating data. Differentiate between data
+recording and data entry.<br />
+<strong>Lab:</strong> <a
+href="http://www.datacarpentry.org/spreadsheet-ecology-lesson/">DC
+Spreadsheet Ecology Lesson</a><br />
+<strong>Files:</strong> <a
+href="https://ndownloader.figshare.com/files/2252083">Portal
+Data</a><br />
+<strong>Etherpad:</strong> <a
+href="https://etherpad.wikimedia.org/p/355-spreadsheets-2021_fall"
+class="uri">https://etherpad.wikimedia.org/p/355-spreadsheets-2021_fall</a></p>
 <!--
 ### Week  2. Introduction to R and RMarkdown  
 
-9/6/2021  
+1/23/2023  
 __Readings:__ W&G On [Workflow Basics](https://r4ds.had.co.nz/workflow-basics.html) and [Projects](https://r4ds.had.co.nz/workflow-projects.html)    
 __Lectures:__  [Intro to R](./Lectures/04_r_intro.html), [Intro to vectors, lists, matrices, and data frames](./Lectures/05_r_intro_list_matrix_df.html), [Data import and package installation](./Lectures/06_read_data_libraries.html)    
 __Objective(s):__ Begin to learn the R computing language. Identify the syntax of an R function (name and arguments); Create an R project in RStudio.  
@@ -326,158 +354,392 @@ __Etherpad:__  https://etherpad.wikimedia.org/p/biol355-r-intro-2021_fall
 </div>
 <div id="week-2-introduction-to-r-and-rmarkdown" class="section level3">
 <h3>Week 2 Introduction to R and RMarkdown</h3>
-<p>9/13/2021<br />
-<strong>Readings:</strong> W&amp;G On <a href="https://r4ds.had.co.nz/workflow-basics.html">Workflow Basics</a> and <a href="https://r4ds.had.co.nz/workflow-projects.html">Projects</a>, <a href="http://r4ds.had.co.nz/tibbles.html">Tibbles &amp; Data Frames</a> and <a href="http://r4ds.had.co.nz/data-import.html">Data Import</a><br />
-<strong>Lectures:</strong> DC Ecology <a href="http://www.datacarpentry.org/R-ecology-lesson/01-intro-to-r.html">Intro to R</a> and <a href="http://www.datacarpentry.org/R-ecology-lesson/02-starting-with-data.html">starting with data</a><br />
-<strong>Objective(s):</strong> Begin to learn the R computing language. Identify the syntax of an R function (name and arguments); Create an R project in RStudio. Read data into R using read.csv(); Use R as a basic calculator; Describe and create variables in R; Interpret the output of the str() function; Install packages in R;<br />
+<p>1/30/2023<br />
+<strong>Readings:</strong> W&amp;G On <a
+href="https://r4ds.had.co.nz/workflow-basics.html">Workflow Basics</a>
+and <a
+href="https://r4ds.had.co.nz/workflow-projects.html">Projects</a>, <a
+href="http://r4ds.had.co.nz/tibbles.html">Tibbles &amp; Data Frames</a>
+and <a href="http://r4ds.had.co.nz/data-import.html">Data
+Import</a><br />
+<strong>Lectures:</strong> DC Ecology <a
+href="http://www.datacarpentry.org/R-ecology-lesson/01-intro-to-r.html">Intro
+to R</a> and <a
+href="http://www.datacarpentry.org/R-ecology-lesson/02-starting-with-data.html">starting
+with data</a><br />
+<strong>Objective(s):</strong> Begin to learn the R computing language.
+Identify the syntax of an R function (name and arguments); Create an R
+project in RStudio. Read data into R using read.csv(); Use R as a basic
+calculator; Describe and create variables in R; Interpret the output of
+the str() function; Install packages in R;<br />
 <strong>Biological Examples:</strong> Human genome size.<br />
-<strong>Lab:</strong> <a href="https://rmarkdown.rstudio.com/lesson-1.html">Intro to RMarkdown</a>, <a href="./Labs/Lab_Rmarkdown_Subsetting.html">R Markdown and Data Subsetting</a><br />
-<strong>Excercises:</strong> <a href="./Labs/lab_2_warmup.html">Warmup Excercises for Friday</a><br />
-<strong>Cheat Sheets:</strong> <a href="https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf">RMarkdown</a>, <a href="https://github.com/rstudio/cheatsheets/raw/master/data-import.pdf">Data Import</a><br />
-<strong>Files:</strong> <a href="./Data/my_data.xlsx">Excel</a>, <a href="./Data/my_data.csv">CSV</a><br />
-<strong>Homework:</strong> <a href="./Assignments/2_data_frames.html">Data frames!</a><br />
-<strong>Etherpad:</strong> <a href="https://etherpad.wikimedia.org/p/biol355-r-intro-2021_fall" class="uri">https://etherpad.wikimedia.org/p/biol355-r-intro-2021_fall</a></p>
+<strong>Lab:</strong> <a
+href="https://rmarkdown.rstudio.com/lesson-1.html">Intro to
+RMarkdown</a>, <a href="./Labs/Lab_Rmarkdown_Subsetting.html">R Markdown
+and Data Subsetting</a><br />
+<strong>Excercises:</strong> <a href="./Labs/lab_2_warmup.html">Warmup
+Excercises for Friday</a><br />
+<strong>Cheat Sheets:</strong> <a
+href="https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf">RMarkdown</a>,
+<a
+href="https://github.com/rstudio/cheatsheets/raw/master/data-import.pdf">Data
+Import</a><br />
+<strong>Files:</strong> <a href="./Data/my_data.xlsx">Excel</a>, <a
+href="./Data/my_data.csv">CSV</a><br />
+<strong>Homework:</strong> <a
+href="./Assignments/2_data_frames.html">Data frames!</a><br />
+<strong>Etherpad:</strong> <a
+href="https://etherpad.wikimedia.org/p/biol355-r-intro-2021_fall"
+class="uri">https://etherpad.wikimedia.org/p/biol355-r-intro-2021_fall</a></p>
 </div>
 <div id="week-3.-visualization" class="section level3">
 <h3>Week 3. Visualization</h3>
-<p>9/20/2021<br />
-<strong>Readings:</strong> W&amp;G on <a href="http://r4ds.had.co.nz/data-visualisation.html">Data Visualization</a>, <a href="./Readings/Unwin_2008_dataviz.pdf">Unwin 2008</a>, <a href="./Readings/choosing-a-good-chart-09.pdf">Choosing a Good Chart Cheat Sheet</a><br />
-<strong>Lectures:</strong> <a href="./Lectures/07_data_viz_principles.pdf">Principles of Data Visualization</a>, <a href="https://biol607.github.io/lab/04_ggplot_palmer_intro.html">Intro to ggplot2</a><br />
-<strong>Lab:</strong> <a href="./Labs/ggplot_climate_lab.html">ggplot2 and climate change</a><!-- [ggplot2 and climate change](./Lectures/08_ggplot_intro.html) --><br />
-<strong>Objective(s):</strong> Develop understanding of graphical presentation best practices. Create a scatterplot using ggplot(); Learn how to add data to a simple map<br />
-<strong>Biological Examples:</strong> <a href="./Lectures/data/EST-PR-PlanktonChemTax.xls">Plum Island LTER Plankton Distribution</a>. <a href="./Lectures/data/hadcrut_temp_anomoly_1850_2021.csv">HAD CRUT Global temperature anomaly over the past century</a><br />
-<strong>Cheat Sheets:</strong> <a href="https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf">Data visualization</a>, <a href="https://www.nceas.ucsb.edu/~frazier/RSpatialGuides/ggmap/ggmapCheatsheet.pdf">Mapping with ggmap</a><br />
-<strong>Other References:</strong><a href="http://ggplot2.tidyverse.org/reference/">ggplot2 references</a>, <a href="http://serialmentor.com/dataviz/">Fundamentals of Data Visualization</a>, <a href="https://lisacharlotterost.github.io/2016/04/22/Colors-for-DataVis/">colors for data viz</a><br />
-<strong>Etherpad:</strong> <a href="https://etherpad.wikimedia.org/p/355-dataviz-2021_fall" class="uri">https://etherpad.wikimedia.org/p/355-dataviz-2021_fall</a><br />
-<strong>Homework:</strong> <a href="./Assignments/3_ggplot_intro.html">Plotapalooza</a></p>
+<p>2/6/2023<br />
+<strong>Readings:</strong> W&amp;G on <a
+href="http://r4ds.had.co.nz/data-visualisation.html">Data
+Visualization</a>, <a href="./Readings/Unwin_2008_dataviz.pdf">Unwin
+2008</a>, <a href="./Readings/choosing-a-good-chart-09.pdf">Choosing a
+Good Chart Cheat Sheet</a><br />
+<strong>Lectures:</strong> <a
+href="./Lectures/07_data_viz_principles.pdf">Principles of Data
+Visualization</a>, <a
+href="https://biol607.github.io/lab/04_ggplot_palmer_intro.html">Intro
+to ggplot2</a><br />
+<strong>Lab:</strong> <a href="./Labs/ggplot_climate_lab.html">ggplot2
+and climate
+change</a><!-- [ggplot2 and climate change](./Lectures/08_ggplot_intro.html) --><br />
+<strong>Objective(s):</strong> Develop understanding of graphical
+presentation best practices. Create a scatterplot using ggplot(); Learn
+how to add data to a simple map<br />
+<strong>Biological Examples:</strong> <a
+href="./Lectures/data/EST-PR-PlanktonChemTax.xls">Plum Island LTER
+Plankton Distribution</a>. <a
+href="./Lectures/data/hadcrut_temp_anomoly_1850_2021.csv">HAD CRUT
+Global temperature anomaly over the past century</a><br />
+<strong>Cheat Sheets:</strong> <a
+href="https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf">Data
+visualization</a>, <a
+href="https://www.nceas.ucsb.edu/~frazier/RSpatialGuides/ggmap/ggmapCheatsheet.pdf">Mapping
+with ggmap</a><br />
+<strong>Other References:</strong><a
+href="http://ggplot2.tidyverse.org/reference/">ggplot2 references</a>,
+<a href="http://serialmentor.com/dataviz/">Fundamentals of Data
+Visualization</a>, <a
+href="https://lisacharlotterost.github.io/2016/04/22/Colors-for-DataVis/">colors
+for data viz</a><br />
+<strong>Etherpad:</strong> <a
+href="https://etherpad.wikimedia.org/p/355-dataviz-2021_fall"
+class="uri">https://etherpad.wikimedia.org/p/355-dataviz-2021_fall</a><br />
+<strong>Homework:</strong> <a
+href="./Assignments/3_ggplot_intro.html">Plotapalooza</a></p>
 </div>
-<div id="week-4.-data-reduction-and-summarization" class="section level3">
+<div id="week-4.-data-reduction-and-summarization"
+class="section level3">
 <h3>Week 4. Data Reduction and Summarization</h3>
-<p>9/27/2021<br />
-<strong>Readings:</strong> W&amp;G on <a href="http://r4ds.had.co.nz/transform.html">Data Transformation</a>, <a href="http://r4ds.had.co.nz/exploratory-data-analysis.html">Exploratory Data Analysis</a>, and <a href="http://r4ds.had.co.nz/pipes.html">Pipes</a>, DC Ecology Lesson on <a href="http://www.datacarpentry.org/R-ecology-lesson/03-dplyr.html">Data Aggregation</a><br />
-<strong>Lecture:</strong> <a href="./Lectures/09_summarizing_data.html">Organizing Data to Tell a Story</a><br />
-<strong>Lab:</strong> <a href="https://swcarpentry.github.io/r-novice-gapminder/13-dplyr/">Gapminder and Dplyr</a>, <a href="./Lectures/dplyr_faded_examples.html">Dplyr Faded Example Practice</a><!--, [Data for Exploratory Data Analysis of Mortality and Natality with dplyr and ggplot2](./Labs/freeform_dplyr.zip)--><br />
-<strong>Cheat Sheets:</strong> <a href="https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf">Data Wrangling Cheat Sheet</a><br />
-<strong>Objective(s):</strong> Describe the meaning and identify applications of the following summary/descriptive statistics: mean, mode, median, standard deviation; Describe the split-apply-combine strategy of data reduction and summarization; Use group_by() and summarise() to calculate summary statistics for groupings within a dataset; Subset data using filter()<br />
-<strong>Biological Examples:</strong> Human genome size. <a href="./Lectures/data/salmon_rivers.csv">Sockeye salmon sizes</a>.<br />
-<strong>In Class Files:</strong> <a href="./in_class_files/2018/scripts/dplyr_lab.R">gapminder and dplyr</a><br />
-<strong>Homework:</strong> <a href="./Assignments/4_dplyr_assignment.html">Birthweights in California</a><br />
-<strong>Etherpad:</strong> <a href="https://etherpad.wikimedia.org/p/355-dplyr-2021_fall" class="uri">https://etherpad.wikimedia.org/p/355-dplyr-2021_fall</a></p>
+<p>2/13/2023<br />
+<strong>Readings:</strong> W&amp;G on <a
+href="http://r4ds.had.co.nz/transform.html">Data Transformation</a>, <a
+href="http://r4ds.had.co.nz/exploratory-data-analysis.html">Exploratory
+Data Analysis</a>, and <a
+href="http://r4ds.had.co.nz/pipes.html">Pipes</a>, DC Ecology Lesson on
+<a
+href="http://www.datacarpentry.org/R-ecology-lesson/03-dplyr.html">Data
+Aggregation</a><br />
+<strong>Lecture:</strong> <a
+href="./Lectures/09_summarizing_data.html">Organizing Data to Tell a
+Story</a><br />
+<strong>Lab:</strong> <a
+href="https://swcarpentry.github.io/r-novice-gapminder/13-dplyr/">Gapminder
+and Dplyr</a>, <a href="./Lectures/dplyr_faded_examples.html">Dplyr
+Faded Example
+Practice</a><!--, [Data for Exploratory Data Analysis of Mortality and Natality with dplyr and ggplot2](./Labs/freeform_dplyr.zip)--><br />
+<strong>Cheat Sheets:</strong> <a
+href="https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf">Data
+Wrangling Cheat Sheet</a><br />
+<strong>Objective(s):</strong> Describe the meaning and identify
+applications of the following summary/descriptive statistics: mean,
+mode, median, standard deviation; Describe the split-apply-combine
+strategy of data reduction and summarization; Use group_by() and
+summarise() to calculate summary statistics for groupings within a
+dataset; Subset data using filter()<br />
+<strong>Biological Examples:</strong> Human genome size. <a
+href="./Lectures/data/salmon_rivers.csv">Sockeye salmon sizes</a>.<br />
+<strong>In Class Files:</strong> <a
+href="./in_class_files/2018/scripts/dplyr_lab.R">gapminder and
+dplyr</a><br />
+<strong>Homework:</strong> <a
+href="./Assignments/4_dplyr_assignment.html">Birthweights in
+California</a><br />
+<strong>Etherpad:</strong> <a
+href="https://etherpad.wikimedia.org/p/355-dplyr-2021_fall"
+class="uri">https://etherpad.wikimedia.org/p/355-dplyr-2021_fall</a></p>
 </div>
-<div id="week-5.-date-cleaning-strings-factors-and-dates" class="section level3">
+<div id="week-5.-date-cleaning-strings-factors-and-dates"
+class="section level3">
 <h3>Week 5. Date Cleaning: Strings, Factors, and Dates</h3>
-<p>10/4/2021<br />
-<strong>Readings:</strong> W&amp;G on <a href="http://r4ds.had.co.nz/strings.html">Strings</a>, <a href="http://r4ds.had.co.nz/dates-and-times.html">Dates and Times</a>, and <a href="http://r4ds.had.co.nz/factors.html">Factors</a><br />
-<strong>Lecture:</strong> <a href="./Lectures/11_regexp.html">Strings and Regular Expressions 1</a>, <a href="./Lectures/12_regexp_2.html">Strings and Regular Expressions 2</a><br />
-<strong>Cheat Sheets:</strong> <a href="https://github.com/rstudio/cheatsheets/raw/master/strings.pdf">Work with Strings Cheat Sheet</a><br />
-<strong>Objective(s):</strong> Understand how strings differ from numbers. Learn the basics of string manipulation. Describe the different strategies to clean data full of errors with minimal effort. Process and understand the concept of regular expression matching. Manipulate different date formats and work them into a data map reduce workflow.<br />
-<strong>Files:</strong> <a href="./Lectures/data/portal_messy_regexp.xlsx">Portal Mammal Data with String Problems</a><br />
-<strong>Homework:</strong> <a href="./Assignments/6_regex_practice.html">Regular Expressions</a><br />
-<strong>Etherpad:</strong> <a href="https://etherpad.wikimedia.org/p/355-strings-2021_fall" class="uri">https://etherpad.wikimedia.org/p/355-strings-2021_fall</a></p>
+<p>2/20/2023<br />
+<strong>Readings:</strong> W&amp;G on <a
+href="http://r4ds.had.co.nz/strings.html">Strings</a>, <a
+href="http://r4ds.had.co.nz/dates-and-times.html">Dates and Times</a>,
+and <a href="http://r4ds.had.co.nz/factors.html">Factors</a><br />
+<strong>Lecture:</strong> <a href="./Lectures/11_regexp.html">Strings
+and Regular Expressions 1</a>, <a
+href="./Lectures/12_regexp_2.html">Strings and Regular Expressions
+2</a><br />
+<strong>Cheat Sheets:</strong> <a
+href="https://github.com/rstudio/cheatsheets/raw/master/strings.pdf">Work
+with Strings Cheat Sheet</a><br />
+<strong>Objective(s):</strong> Understand how strings differ from
+numbers. Learn the basics of string manipulation. Describe the different
+strategies to clean data full of errors with minimal effort. Process and
+understand the concept of regular expression matching. Manipulate
+different date formats and work them into a data map reduce
+workflow.<br />
+<strong>Files:</strong> <a
+href="./Lectures/data/portal_messy_regexp.xlsx">Portal Mammal Data with
+String Problems</a><br />
+<strong>Homework:</strong> <a
+href="./Assignments/6_regex_practice.html">Regular Expressions</a><br />
+<strong>Etherpad:</strong> <a
+href="https://etherpad.wikimedia.org/p/355-strings-2021_fall"
+class="uri">https://etherpad.wikimedia.org/p/355-strings-2021_fall</a></p>
 </div>
 <div id="week-6.-tidy-data-and-data-cleaning" class="section level3">
 <h3>Week 6. Tidy Data and Data Cleaning</h3>
-<p>10/11/2021<br />
-<strong>Readings:</strong> W&amp;G Chapters on <a href="http://r4ds.had.co.nz/tidy-data.html">Tidy Data</a><br />
-<strong>Lecture:</strong> <a href="./Lectures/13_data_tidy.html">Tidy Data</a>, <a href="./Labs/axoltl_lab.html">Axoltl Data Cleaning</a><br />
-<strong>Lab:</strong> <a href="./Labs/coronavirus.html">Tidy Coronavirus</a><br />
-<strong>Objective(s):</strong> Understand how to reshape and manipulate data. Describe the difference between the two fundamental forms of data – long versus wide, Use the tidyr package in R to convert between long and wide data; Use unite and separate to create tidy data (where each column is a variable).<br />
-<strong>Biological Examples:</strong> <a href="./Lectures/data/ALM%20assay%20statistics.xlsx">Axoltl limb regeneration</a>. <a href="./Lectures/data/mammals.R">Mammal taxonomic records</a>. <a href="./Data/weather_messy.csv">Weather data</a>. <a href="./Data/Sale_Prices_City.csv">Sale prices for homework</a>. <a href="./Lectures/data/hadcrut_temp_anomoly_wide_1850_2021.csv">HAD CRUT Global temperature anomaly over the past century, wide format</a>.<br />
-<strong>Etherpad:</strong> <a href="https://etherpad.wikimedia.org/p/355-tidy-2021_fall" class="uri">https://etherpad.wikimedia.org/p/355-tidy-2021_fall</a><br />
-<strong>Homework</strong>: <a href="./Assignments/tidyr_over_break_shortened.html">Weather Data Cleaning</a><br />
-<strong>MIDTERM</strong>: <a href="./midterm/midterm.html">make a cheatsheet</a></p>
+<p>2/27/2023<br />
+<strong>Readings:</strong> W&amp;G Chapters on <a
+href="http://r4ds.had.co.nz/tidy-data.html">Tidy Data</a><br />
+<strong>Lecture:</strong> <a href="./Lectures/13_data_tidy.html">Tidy
+Data</a>, <a href="./Labs/axoltl_lab.html">Axoltl Data
+Cleaning</a><br />
+<strong>Lab:</strong> <a href="./Labs/coronavirus.html">Tidy
+Coronavirus</a><br />
+<strong>Objective(s):</strong> Understand how to reshape and manipulate
+data. Describe the difference between the two fundamental forms of data
+– long versus wide, Use the tidyr package in R to convert between long
+and wide data; Use unite and separate to create tidy data (where each
+column is a variable).<br />
+<strong>Biological Examples:</strong> <a
+href="./Lectures/data/ALM%20assay%20statistics.xlsx">Axoltl limb
+regeneration</a>. <a href="./Lectures/data/mammals.R">Mammal taxonomic
+records</a>. <a href="./Data/weather_messy.csv">Weather data</a>. <a
+href="./Data/Sale_Prices_City.csv">Sale prices for homework</a>. <a
+href="./Lectures/data/hadcrut_temp_anomoly_wide_1850_2021.csv">HAD CRUT
+Global temperature anomaly over the past century, wide format</a>.<br />
+<strong>Etherpad:</strong> <a
+href="https://etherpad.wikimedia.org/p/355-tidy-2021_fall"
+class="uri">https://etherpad.wikimedia.org/p/355-tidy-2021_fall</a><br />
+<strong>Homework</strong>: <a
+href="./Assignments/tidyr_over_break_shortened.html">Weather Data
+Cleaning</a><br />
+<strong>MIDTERM</strong>: <a href="./midterm/midterm.html">make a
+cheatsheet</a></p>
 </div>
-<div id="week-7-8.-data-mashups-and-geospatial-data" class="section level3">
+<div id="week-7-8.-data-mashups-and-geospatial-data"
+class="section level3">
 <h3>Week 7 &amp; 8. Data “Mashups” and Geospatial Data</h3>
-<p>10/18/2021 and 11/1/2021<br />
-<strong>Readings:</strong> <a href="https://geocompr.robinlovelace.net/intro.html">Intro to Geocomputation in R</a>, <a href="https://geocompr.robinlovelace.net/spatial-class.html">Geographic Data in R</a>, W&amp;G Chapter on <a href="http://r4ds.had.co.nz/relational-data.html">Relational Data</a><br />
-<strong>Lectures:</strong> <a href="./Lectures/15_gis_intro.html">Intro to GIS</a>, <a href="https://datacarpentry.org/r-raster-vector-geospatial/01-raster-structure/index.html">Rasters</a> and <a href="https://datacarpentry.org/r-raster-vector-geospatial/02-raster-plot/index.html">plotting rasters</a>, <a href="./Lectures/15_joins.pptx">Joins</a>, <a href="https://datacarpentry.org/r-raster-vector-geospatial/">Vector Data</a><br />
-<strong>Labs:</strong> <a href="./Labs/coronavirus_spatial.html">coronavirus spatial mapping</a> <a href="./Labs/join_maps_lab.html">joins and maps</a><br />
-<strong>Objective(s):</strong> Know when and where to use different types of joins, Understand how to merge survey data with geospatial information to get a geographic understanding of epidemiological patterns<br />
-<strong>Biological Examples:</strong> Hemlock wooly adelgid distribution. CDC records of heart disease across counties of the US. Change in coastal sea surface temperature since 1850. Global TB mortality distribution.<br />
-<strong>Optional Reading:</strong> <a href="https://geocompr.robinlovelace.net/adv-map.html">Making maps in R</a> and other chapters in Geocomputation in R. <a href="https://keen-swartz-3146c4.netlify.com/">Spatial Data Science</a>, <a href="https://datacarpentry.org/geospatial-workshop/data/">information about the lab data</a><br />
-<strong>Files:</strong> <a href="https://ndownloader.figshare.com/articles/2009586/versions/10">geospatial data for lab</a>, <a href="../Data/hemlock.xlsx">Hemlock</a>, <a href="../Data/hemlock_densities.xlsx">hemlock_densities</a>, <a href="./Lectures/data/boreal.csv">Arctic Boreal Forest Vegetation</a>, <a href="./Labs/data/hd_all.xlsx">Heart Disease in America</a>, <a href="./Labs/data/joinmap_data.zip">data for lab on joins</a>, <a href="./Lectures/data/cb_2013_us_county_500k.zip">US County Borders in 2013</a>, <a href="./Lectures/data/sst_anom.bin.20180318.tif">March 18, 2018 SST Anomalies</a><br />
-<strong>Etherpad:</strong> <a href="https://etherpad.wikimedia.org/p/355-gis-2021_fall" class="uri">https://etherpad.wikimedia.org/p/355-gis-2021_fall</a><br />
-<strong>Homework:</strong> <a href="./Assignments/mapping_assignment.html">Map making!</a><br />
-<strong>Before Class:</strong> Install <code>rgdal</code> (you’ll need to install gdal first - see below), <code>sf</code>, <code>sp</code>, <code>raster</code>, <code>leaflet</code>, <code>maptools</code>, <code>mapdata</code>, and <code>rgeos</code>.</p>
+<p>3/6/2023 and 3/20/2023<br />
+<strong>Readings:</strong> <a
+href="https://geocompr.robinlovelace.net/intro.html">Intro to
+Geocomputation in R</a>, <a
+href="https://geocompr.robinlovelace.net/spatial-class.html">Geographic
+Data in R</a>, W&amp;G Chapter on <a
+href="http://r4ds.had.co.nz/relational-data.html">Relational
+Data</a><br />
+<strong>Lectures:</strong> <a href="./Lectures/15_gis_intro.html">Intro
+to GIS</a>, <a
+href="https://datacarpentry.org/r-raster-vector-geospatial/01-raster-structure/index.html">Rasters</a>
+and <a
+href="https://datacarpentry.org/r-raster-vector-geospatial/02-raster-plot/index.html">plotting
+rasters</a>, <a href="./Lectures/15_joins.pptx">Joins</a>, <a
+href="https://datacarpentry.org/r-raster-vector-geospatial/">Vector
+Data</a><br />
+<strong>Labs:</strong> <a
+href="./Labs/coronavirus_spatial.html">coronavirus spatial mapping</a>
+<a href="./Labs/join_maps_lab.html">joins and maps</a><br />
+<strong>Objective(s):</strong> Know when and where to use different
+types of joins, Understand how to merge survey data with geospatial
+information to get a geographic understanding of epidemiological
+patterns<br />
+<strong>Biological Examples:</strong> Hemlock wooly adelgid
+distribution. CDC records of heart disease across counties of the US.
+Change in coastal sea surface temperature since 1850. Global TB
+mortality distribution.<br />
+<strong>Optional Reading:</strong> <a
+href="https://geocompr.robinlovelace.net/adv-map.html">Making maps in
+R</a> and other chapters in Geocomputation in R. <a
+href="https://keen-swartz-3146c4.netlify.com/">Spatial Data Science</a>,
+<a
+href="https://datacarpentry.org/geospatial-workshop/data/">information
+about the lab data</a><br />
+<strong>Files:</strong> <a
+href="https://ndownloader.figshare.com/articles/2009586/versions/10">geospatial
+data for lab</a>, <a href="../Data/hemlock.xlsx">Hemlock</a>, <a
+href="../Data/hemlock_densities.xlsx">hemlock_densities</a>, <a
+href="./Lectures/data/boreal.csv">Arctic Boreal Forest Vegetation</a>,
+<a href="./Labs/data/hd_all.xlsx">Heart Disease in America</a>, <a
+href="./Labs/data/joinmap_data.zip">data for lab on joins</a>, <a
+href="./Lectures/data/cb_2013_us_county_500k.zip">US County Borders in
+2013</a>, <a href="./Lectures/data/sst_anom.bin.20180318.tif">March 18,
+2018 SST Anomalies</a><br />
+<strong>Etherpad:</strong> <a
+href="https://etherpad.wikimedia.org/p/355-gis-2021_fall"
+class="uri">https://etherpad.wikimedia.org/p/355-gis-2021_fall</a><br />
+<strong>Homework:</strong> <a
+href="./Assignments/mapping_assignment.html">Map making!</a><br />
+<strong>Before Class:</strong> Install <code>rgdal</code> (you’ll need
+to install gdal first - see below), <code>sf</code>, <code>sp</code>,
+<code>raster</code>, <code>leaflet</code>, <code>maptools</code>,
+<code>mapdata</code>, and <code>rgeos</code>.</p>
 <p><strong>To install gdal on a mac, there are two steps</strong><br />
-1) Install Homebrew from <a href="http://brew.sh/" class="uri">http://brew.sh/</a> (this is an awesome thing to have anyway)<br />
+1) Install Homebrew from <a href="http://brew.sh/"
+class="uri">http://brew.sh/</a> (this is an awesome thing to have
+anyway)<br />
 2) in Terminal type<br />
 <code>brew install gdal</code></p>
 <p><strong>To install on a Windows PC</strong><br />
-1) Install OSGEO4W <a href="https://trac.osgeo.org/osgeo4w/wiki" class="uri">https://trac.osgeo.org/osgeo4w/wiki</a><br />
+1) Install OSGEO4W <a href="https://trac.osgeo.org/osgeo4w/wiki"
+class="uri">https://trac.osgeo.org/osgeo4w/wiki</a><br />
 2) Use it to install gdal</p>
 </div>
 <div id="week-9-functions" class="section level3">
 <h3>Week 9 Functions</h3>
-<p>11/8/2021<br />
-<strong>Readings:</strong> W&amp;G Chapters on <a href="http://r4ds.had.co.nz/functions.html">Functions</a><br />
-<strong>Lectures:</strong> <a href="./Lectures/19_functions_intro.html">Intro to Functions</a><br />
-<strong>Lab:</strong> <a href="./Labs/functions_iteration.html">Functions</a><br />
-<strong>Objective(s):</strong> Learn the benefits of reusable code, Understand the structure of a function, Discover debugging and making functions fail usefully, Derive principles to make functions that are easy to understand and apply to multiple data sets.<br />
+<p>3/27/2023<br />
+<strong>Readings:</strong> W&amp;G Chapters on <a
+href="http://r4ds.had.co.nz/functions.html">Functions</a><br />
+<strong>Lectures:</strong> <a
+href="./Lectures/19_functions_intro.html">Intro to Functions</a><br />
+<strong>Lab:</strong> <a
+href="./Labs/functions_iteration.html">Functions</a><br />
+<strong>Objective(s):</strong> Learn the benefits of reusable code,
+Understand the structure of a function, Discover debugging and making
+functions fail usefully, Derive principles to make functions that are
+easy to understand and apply to multiple data sets.<br />
 <strong>Biological Examples:</strong> NOAA buoy data.<br />
-<strong>Files:</strong> <a href="./Lectures/data/buoydata.zip">NOAA buoy data from Boston Harbor</a>, <a href="./Lectures/get_buoy.R">get_buoy.R</a><br />
-<strong>Homework:</strong> <a href="./Assignments/function_homework.html">Functions!</a><br />
-<strong>Etherpad:</strong> <a href="https://etherpad.wikimedia.org/p/355-functions-2021_fall" class="uri">https://etherpad.wikimedia.org/p/355-functions-2021_fall</a></p>
+<strong>Files:</strong> <a href="./Lectures/data/buoydata.zip">NOAA buoy
+data from Boston Harbor</a>, <a
+href="./Lectures/get_buoy.R">get_buoy.R</a><br />
+<strong>Homework:</strong> <a
+href="./Assignments/function_homework.html">Functions!</a><br />
+<strong>Etherpad:</strong> <a
+href="https://etherpad.wikimedia.org/p/355-functions-2021_fall"
+class="uri">https://etherpad.wikimedia.org/p/355-functions-2021_fall</a></p>
 </div>
 <div id="week-10-iteration" class="section level3">
 <h3>Week 10 Iteration</h3>
-<p>11/15/2021<br />
-<strong>Readings:</strong> W&amp;G Chapters on <a href="http://r4ds.had.co.nz/iteration.html">Iteration</a><br />
-<strong>Lectures:</strong> <a href="./Lectures/20_iteration.html">Iteration with purrr</a><br />
-<strong>Lab:</strong> <a href="https://www.gerkelab.com/blog/2018/09/import-directory-csv-purrr-readr/">Importing Hospital Records</a>, <a href="https://sanderwuyts.com/en/blog/purrr-tutorial/">Bioinformatics and List Columns</a> <!-- [Many Models](https://r4ds.had.co.nz/many-models.html)--><br />
-<strong>Objective(s):</strong> Learn the benefits of iteration in code. Automate multiple tasks. Fitting many models in an automated fashion to test generality.<br />
-<strong>Biological Examples:</strong> Gapminder, Climate Change, Covid-19 in the US<br />
-<strong>Files:</strong> <a href="./Lectures/data/buoydata.zip">Split up Hadley Met Centre Data</a>, <a href="./Lectures/get_buoy.R">get_buoy.R</a><br />
-<strong>Homework:</strong> <a href="./Assignments/iteration_hw_2021.html">Iterations and List Columns</a> <!-- [Iterating Covid](./Assignments/11_iteration.html)--><br />
-<strong>Etherpad:</strong> <a href="https://etherpad.wikimedia.org/p/355-iteration-2021_fall" class="uri">https://etherpad.wikimedia.org/p/355-iteration-2021_fall</a></p>
+<p>4/3/2023<br />
+<strong>Readings:</strong> W&amp;G Chapters on <a
+href="http://r4ds.had.co.nz/iteration.html">Iteration</a><br />
+<strong>Lectures:</strong> <a
+href="./Lectures/20_iteration.html">Iteration with purrr</a><br />
+<strong>Lab:</strong> <a
+href="https://www.gerkelab.com/blog/2018/09/import-directory-csv-purrr-readr/">Importing
+Hospital Records</a>, <a
+href="https://sanderwuyts.com/en/blog/purrr-tutorial/">Bioinformatics
+and List Columns</a>
+<!-- [Many Models](https://r4ds.had.co.nz/many-models.html)--><br />
+<strong>Objective(s):</strong> Learn the benefits of iteration in code.
+Automate multiple tasks. Fitting many models in an automated fashion to
+test generality.<br />
+<strong>Biological Examples:</strong> Gapminder, Climate Change,
+Covid-19 in the US<br />
+<strong>Files:</strong> <a href="./Lectures/data/buoydata.zip">Split up
+Hadley Met Centre Data</a>, <a
+href="./Lectures/get_buoy.R">get_buoy.R</a><br />
+<strong>Homework:</strong> <a
+href="./Assignments/iteration_hw_2021.html">Iterations and List
+Columns</a>
+<!-- [Iterating Covid](./Assignments/11_iteration.html)--><br />
+<strong>Etherpad:</strong> <a
+href="https://etherpad.wikimedia.org/p/355-iteration-2021_fall"
+class="uri">https://etherpad.wikimedia.org/p/355-iteration-2021_fall</a></p>
 </div>
 <div id="week-11.-shiny-and-web-interfaces" class="section level3">
 <h3>Week 11. Shiny and Web Interfaces</h3>
-<p>11/22/2021<br />
-<strong>Readings:</strong> <a href="https://mastering-shiny.org/">Mastering Shiny</a> Ch. 1-3, 4 optional, but recommended<br />
-<strong>Objective(s):</strong> Learn how to communicate data to others using dynamic web based applications.<br />
-<strong>Lectures:</strong> <a href="https://docs.google.com/presentation/d/1dXhqqsD7dPOOdcC5Y7RW--dEU7UfU52qlb0YD3kKeLw/edit#slide=id.gd565d6fc7_0_182">Building Shiny Apps</a><br />
-<strong>Lab:</strong> <a href="https://deanattali.com/blog/building-shiny-apps-tutorial/">Lab for Building Shiny Apps</a><br />
-<strong>Data:</strong><a href="Lectures/data/shiny/checkbook_explorerfy21.csv">download</a> which is originally from <a href="https://data.boston.gov/dataset/checkbook-explorer/resource/32897eeb-d9ca-494f-93b1-991c50bcd6a6">here</a><br />
-<strong>Additional Resource:</strong> <a href="https://shiny.rstudio.com/tutorial/" class="uri">https://shiny.rstudio.com/tutorial/</a><br />
-<strong>Homework:</strong> <a href="./Labs/shiny_lab.html">Shiny homework with coronavirus</a><br />
-<strong>Etherpad:</strong> <a href="https://etherpad.wikimedia.org/p/355-shiny-2021_fall" class="uri">https://etherpad.wikimedia.org/p/355-shiny-2021_fall</a></p>
+<p>4/10/2023<br />
+<strong>Readings:</strong> <a
+href="https://mastering-shiny.org/">Mastering Shiny</a> Ch. 1-3, 4
+optional, but recommended<br />
+<strong>Objective(s):</strong> Learn how to communicate data to others
+using dynamic web based applications.<br />
+<strong>Lectures:</strong> <a
+href="https://docs.google.com/presentation/d/1dXhqqsD7dPOOdcC5Y7RW--dEU7UfU52qlb0YD3kKeLw/edit#slide=id.gd565d6fc7_0_182">Building
+Shiny Apps</a><br />
+<strong>Lab:</strong> <a
+href="https://deanattali.com/blog/building-shiny-apps-tutorial/">Lab for
+Building Shiny Apps</a><br />
+<strong>Data:</strong><a
+href="Lectures/data/shiny/checkbook_explorerfy21.csv">download</a> which
+is originally from <a
+href="https://data.boston.gov/dataset/checkbook-explorer/resource/32897eeb-d9ca-494f-93b1-991c50bcd6a6">here</a><br />
+<strong>Additional Resource:</strong> <a
+href="https://shiny.rstudio.com/tutorial/"
+class="uri">https://shiny.rstudio.com/tutorial/</a><br />
+<strong>Homework:</strong> <a href="./Labs/shiny_lab.html">Shiny
+homework with coronavirus</a><br />
+<strong>Etherpad:</strong> <a
+href="https://etherpad.wikimedia.org/p/355-shiny-2021_fall"
+class="uri">https://etherpad.wikimedia.org/p/355-shiny-2021_fall</a></p>
 </div>
 <div id="week-12.-introduction-to-modeling" class="section level3">
 <h3>Week 12. Introduction to Modeling</h3>
-<p>11/29/2021<br />
-<strong>Readings:</strong> <a href="./Readings/cortina%20and%20Dunlop%201997%20significance%20testing%20p%20value.pdf">Cortina and Dunlop 1997</a><br />
-<strong>Lectures:</strong> <a href="./Lectures/modeling_intro.html">Introduction to Modeling</a>, <a href="./Lectures/one_predictor_models.html">Single Predictor Models</a><br />
-<strong>Objective(s):</strong> Understand the workflow of generating inference from data, Describe the basics of probability and p-values, Model linear relationships in data, Compare groups of data using T-tests and ANOVa<br />
-<strong>Biological Examples:</strong> Batesian mimicry, Penguin morphometrics, The effects of testosterone on bird behavior.<br />
-<strong>Lab:</strong> <a href="Labs/Infer.html">infer and tidymodels</a><br />
-<strong>Etherpad:</strong> <a href="https://etherpad.wikimedia.org/p/355-modeling-2021_fall" class="uri">https://etherpad.wikimedia.org/p/355-modeling-2021_fall</a></p>
+<p>4/17/2023<br />
+<strong>Readings:</strong> <a
+href="./Readings/cortina%20and%20Dunlop%201997%20significance%20testing%20p%20value.pdf">Cortina
+and Dunlop 1997</a><br />
+<strong>Lectures:</strong> <a
+href="./Lectures/modeling_intro.html">Introduction to Modeling</a>, <a
+href="./Lectures/one_predictor_models.html">Single Predictor
+Models</a><br />
+<strong>Objective(s):</strong> Understand the workflow of generating
+inference from data, Describe the basics of probability and p-values,
+Model linear relationships in data, Compare groups of data using T-tests
+and ANOVa<br />
+<strong>Biological Examples:</strong> Batesian mimicry, Penguin
+morphometrics, The effects of testosterone on bird behavior.<br />
+<strong>Lab:</strong> <a href="Labs/Infer.html">infer and
+tidymodels</a><br />
+<strong>Etherpad:</strong> <a
+href="https://etherpad.wikimedia.org/p/355-modeling-2021_fall"
+class="uri">https://etherpad.wikimedia.org/p/355-modeling-2021_fall</a></p>
 </div>
 <div id="week-13.-modeling-with-many-predictors" class="section level3">
 <h3>Week 13. Modeling with Many Predictors</h3>
-<p>12/6/2021<br />
-<strong>Readings:</strong> W&amp;G on <a href="http://r4ds.had.co.nz/model-basics.html">Model Basics</a><br />
-<strong>Lectures:</strong> <a href="./Lectures/many_predictors.html">Multiple Predictors and Model Comparison</a>, <a href="./Lectures/advanced_models.html">The General Linear Model</a><br />
-<strong>Objective(s):</strong> Describe when to use nonlinear models/curves, Comparing and Contrasting models, Visualization of model outcomes<br />
-<strong>Biological Examples:</strong> Seal life history variation. Mouse anti-fungal drug development. Neanderthal brain size. Fire severity in California.<br />
-<strong>Lab:</strong> <a href="Labs/gentle_intro_tmwr.html">tidymodels</a><br />
-<strong>Data for Lab:</strong> <a href="Labs/data/world-happiness-report-2021.csv">2021 World Happiness Report</a><br />
-<strong>Etherpad:</strong> <a href="https://etherpad.wikimedia.org/p/355-many_predictors-2021_fall" class="uri">https://etherpad.wikimedia.org/p/355-many_predictors-2021_fall</a></p>
+<p>4/24/2023<br />
+<strong>Readings:</strong> W&amp;G on <a
+href="http://r4ds.had.co.nz/model-basics.html">Model Basics</a><br />
+<strong>Lectures:</strong> <a
+href="./Lectures/many_predictors.html">Multiple Predictors and Model
+Comparison</a>, <a href="./Lectures/advanced_models.html">The General
+Linear Model</a><br />
+<strong>Objective(s):</strong> Describe when to use nonlinear
+models/curves, Comparing and Contrasting models, Visualization of model
+outcomes<br />
+<strong>Biological Examples:</strong> Seal life history variation. Mouse
+anti-fungal drug development. Neanderthal brain size. Fire severity in
+California.<br />
+<strong>Lab:</strong> <a
+href="Labs/gentle_intro_tmwr.html">tidymodels</a><br />
+<strong>Data for Lab:</strong> <a
+href="Labs/data/world-happiness-report-2021.csv">2021 World Happiness
+Report</a><br />
+<strong>Etherpad:</strong> <a
+href="https://etherpad.wikimedia.org/p/355-many_predictors-2021_fall"
+class="uri">https://etherpad.wikimedia.org/p/355-many_predictors-2021_fall</a></p>
 </div>
 <div id="week-14.-open-lab" class="section level3">
 <h3>Week 14. Open Lab</h3>
-<p>12/13/2021</p>
+<p>5/1/2023</p>
 </div>
 <div id="week-15.-final-presentations" class="section level3">
 <h3>Week 15. Final Presentations</h3>
-<p>12/20/2021<br />
+<p>5/8/2023<br />
 Final Presentations on the afternoon of Dec 20th!</p>
 <!--
 
 ### Week  12. T-Tests and P-Values 
 
-12/27/2021  
+5/15/2023  
 __Readings:__ [Cortina and Dunlop 1997](./Readings/cortina and Dunlop 1997 significance testing p value.pdf)  
 __Lectures:__ [Introduction to Frequentist Hypothesis Tests](./Lectures/21_testing_hypotheses_p.pdf), [T-Tests](./Lectures/22_t.pdf)  
 __Objective(s):__ Describe the basics of probability and p-values, Compare groups of data using T-tests and its extensions.  
@@ -489,7 +751,7 @@ __Homework:__ [t-tests](./Assignments/9_t.html), [Lizard data](./Lectures/t_test
   
 ### Week 13. Analysis of Variance and the Linear Model
 
- 1/3/2022  
+ 5/22/2023  
 __Lectures:__ [Analysis of Variance](./Lectures/23_anova.html), [Linear Models](./Lectures/24_lm.html)    
 __Lab:__ [Linear Models and ANOVA](./Labs/lm_anova_lab.html), [data files for lab](./Labs/data/lm_lab_data.zip)  
 __Objective(s):__ Analyze the differences between multiple means.  Fit a linear regression using lm() in R through a bivariate scatterplot. Evaluate assumptions of a linear model with normal error   
@@ -500,7 +762,7 @@ __Etherpad:__ https://etherpad.wikimedia.org/p/355-anova-2021_fall
 
 ### Week  14  General and Generalized Linear Models, Multiple Predictors  
 
-1/10/2022  
+5/29/2023  
 __Readings:__  W&G on [Model Basics](http://r4ds.had.co.nz/model-basics.html)   
 __Lectures:__ [The General Linear Model (ANCOVA, multiple regression)](./Lectures/26_ancova_mulltreg.html), [Generalized Linear Models](./Lectures/25_glm.html), [AIC and Multimodel Comparisons](./Lectures/27_mmi.html)  
 __Lab:__ [Linear Models](./Labs/lab10_lm.html)  
