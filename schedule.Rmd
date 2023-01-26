@@ -5,7 +5,7 @@ title: "Course Schedule and Readings"
   
 This course will be a mixture of lecture, live-code demonstrations, and opportunities for in class work. Lecture days will have small exercises for students at the end of class. We will conduct lectures and labs in a computer lab in order for students to be able to follow along and try out new concepts once described and demonstrated in lecture, enabling rapid feedback between students and faculty.
   
-W&G = [Wickham & Grolemund](http://r4ds.had.co.nz), DC = Data Carpentry Lesson, U/P for linked pdfs = biol355
+W&G = [Wickham & Grolemund](http://r4ds.hadley.nz), DC = Data Carpentry Lesson, U/P for linked pdfs = biol355
     
 ```{r dates, echo=FALSE, message=FALSE, warning=FALSE}
 library(lubridate)
@@ -18,7 +18,7 @@ datestring <- paste(month(current_date), day(current_date), year(current_date), 
 ```
 `r datestring`  
 __Lecture:__ [Welcome!](./Lectures/01_intro.pdf),  [Data Collection and Metadata](./Lectures/02_data_creation.html)  
-__Readings:__ [W&G Introduction Chapter 1](http://r4ds.had.co.nz/introduction.html), [Browman and Woo 2017](./Readings/Browman_and_Woo_Spreadsheets.pdf)  
+__Readings:__ [W&G Introduction Chapter 1](http://r4ds.hadley.nz/intro.html), [Browman and Woo 2017](./Readings/Browman_and_Woo_Spreadsheets.pdf)  
 __Objective(s):__ Introduce the students to the course; understand what is data, discuss how we preserve information about data, view different examples of datasets from different disciplines. Compare poor versus good practice in creating data. Differentiate between data recording and data entry.  
 __Lab:__ [DC Spreadsheet Ecology Lesson](http://www.datacarpentry.org/spreadsheet-ecology-lesson/)  
 __Files:__ [Portal Data](https://ndownloader.figshare.com/files/2252083)   
@@ -28,7 +28,7 @@ __Etherpad:__ https://etherpad.wikimedia.org/p/355-spreadsheets-2023_spring
 ### Week  2. Introduction to R and RMarkdown  
 
 `r datestring`  
-__Readings:__ W&G On [Workflow Basics](https://r4ds.had.co.nz/workflow-basics.html) and [Projects](https://r4ds.had.co.nz/workflow-projects.html)    
+__Readings:__ W&G On [Workflow Basics](https://r4ds.hadley.nz/workflow-basics.html) and [Projects](https://r4ds.hadley.nz/workflow-projects.html)    
 __Lectures:__  [Intro to R](./Lectures/04_r_intro.html), [Intro to vectors, lists, matrices, and data frames](./Lectures/05_r_intro_list_matrix_df.html), [Data import and package installation](./Lectures/06_read_data_libraries.html)    
 __Objective(s):__ Begin to learn the R computing language. Identify the syntax of an R function (name and arguments); Create an R project in RStudio.  
 __Biological Examples:__ Transgenic mouse experimentation. Bee genomics. Subtidal field surveys. Current data sharing archives in biology.
@@ -40,13 +40,13 @@ __Etherpad:__  https://etherpad.wikimedia.org/p/biol355-r-intro-2023_spring
 ```{r next_date, echo=FALSE}
 ```
 `r datestring`  
-__Readings:__ W&G On [Workflow Basics](https://r4ds.had.co.nz/workflow-basics.html) and [Projects](https://r4ds.had.co.nz/workflow-projects.html), [Tibbles & Data Frames](http://r4ds.had.co.nz/tibbles.html) and [Data Import](http://r4ds.had.co.nz/data-import.html)  
+__Readings:__ W&G On [Workflow Basics](https://r4ds.hadley.nz/workflow-basics.html) and [Scripts and Projects](https://r4ds.hadley.nz/workflow-scripts.html), [Tibbles & Data Frames](https://r4ds.had.co.nz/tibbles.html), [Data Import](http://r4ds.hadley.nz/data-import.html), [Spreadsheets](https://r4ds.hadley.nz/spreadsheets.html)  
 __Lectures:__  DC Ecology [Intro to R](http://www.datacarpentry.org/R-ecology-lesson/01-intro-to-r.html) and [starting with data](http://www.datacarpentry.org/R-ecology-lesson/02-starting-with-data.html)   
 __Objective(s):__  Begin to learn the R computing language. Identify the syntax of an R function (name and arguments); Create an R project in RStudio. Read data into R using read.csv(); Use R as a basic calculator; Describe and create variables in R; Interpret the output of the str() function; Install packages in R;  
 __Biological Examples:__ Human genome size.   
-__Lab:__ [Intro to RMarkdown](https://rmarkdown.rstudio.com/lesson-1.html), [R Markdown and Data Subsetting](./Labs/Lab_Rmarkdown_Subsetting.html)  
+__Lab:__ [Intro to Quarto](https://r4ds.hadley.nz/quarto.html), [R Markdown and Data Subsetting](./Labs/Lab_Rmarkdown_Subsetting.html)  
 __Excercises:__ [Warmup Excercises for Friday](./Labs/lab_2_warmup.html)  
-__Cheat Sheets:__ [RMarkdown](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf), [Data Import](https://github.com/rstudio/cheatsheets/raw/master/data-import.pdf)  
+__Cheat Sheets:__  [Data Import](https://github.com/rstudio/cheatsheets/raw/master/data-import.pdf)  
 __Files:__ [Excel](./Data/my_data.xlsx), [CSV](./Data/my_data.csv)     
 __Homework:__ [Data frames!](./Assignments/2_data_frames.html)   
 __Etherpad:__  https://etherpad.wikimedia.org/p/biol355-r-intro-2023_spring    
@@ -55,7 +55,7 @@ __Etherpad:__  https://etherpad.wikimedia.org/p/biol355-r-intro-2023_spring
 ```{r next_date, echo=FALSE}
 ```
 `r datestring`  
-__Readings:__ W&G on [Data Visualization](http://r4ds.had.co.nz/data-visualisation.html),  [Unwin 2008](./Readings/Unwin_2008_dataviz.pdf), [Choosing a Good Chart Cheat Sheet](./Readings/choosing-a-good-chart-09.pdf)  
+__Readings:__ W&G on [Data Visualization](https://r4ds.hadley.nz/data-visualize.html),  [Unwin 2008](./Readings/Unwin_2008_dataviz.pdf), [Exploring Data Visually](https://r4ds.hadley.nz/eda).   
 __Lectures:__ [Principles of Data Visualization](./Lectures/07_data_viz_principles.pdf), [Intro to ggplot2](https://biol607.github.io/lab/04_ggplot_palmer_intro.html)  
 __Lab:__ [ggplot2 and climate change](./Labs/ggplot_climate_lab.html)<!-- [ggplot2 and climate change](./Lectures/08_ggplot_intro.html) -->  
 __Objective(s):__  Develop understanding of graphical presentation best practices. Create a scatterplot using ggplot(); Learn how to add data to a simple map    
@@ -70,7 +70,7 @@ __Homework:__ [Plotapalooza](./Assignments/3_ggplot_intro.html)
 ```
 
 `r datestring`  
-__Readings:__ W&G on [Data Transformation](http://r4ds.had.co.nz/transform.html), [Exploratory Data Analysis](http://r4ds.had.co.nz/exploratory-data-analysis.html), and [Pipes](http://r4ds.had.co.nz/pipes.html), DC Ecology Lesson on [Data Aggregation](http://www.datacarpentry.org/R-ecology-lesson/03-dplyr.html)  
+__Readings:__ W&G on [Data Transformation](http://r4ds.hadley.nz/transform.html) and [Pipes](https://r4ds.hadley.nz/workflow-pipes.html), DC Ecology Lesson on [Data Aggregation](http://www.datacarpentry.org/R-ecology-lesson/03-dplyr.html)  
 __Lecture:__ [Organizing Data to Tell a Story](./Lectures/09_summarizing_data.html)   
 __Lab:__ [Gapminder and Dplyr](https://swcarpentry.github.io/r-novice-gapminder/13-dplyr/), [Dplyr Faded Example Practice](./Lectures/dplyr_faded_examples.html)<!--, [Data for Exploratory Data Analysis of Mortality and Natality with dplyr and ggplot2](./Labs/freeform_dplyr.zip)-->   
 __Cheat Sheets:__ [Data Wrangling Cheat Sheet](https://www.rstudio.com/wp-content/uploads/2015/02/data-wrangling-cheatsheet.pdf)  
@@ -86,7 +86,7 @@ __Etherpad:__ https://etherpad.wikimedia.org/p/355-dplyr-2023_spring
 ```
 
 `r datestring`  
-__Readings:__ W&G on [Strings](http://r4ds.had.co.nz/strings.html), [Dates and Times](http://r4ds.had.co.nz/dates-and-times.html), and [Factors](http://r4ds.had.co.nz/factors.html)  
+__Readings:__ W&G on [Strings](http://r4ds.hadley.nz/strings.html), [Dates and Times](http://r4ds.hadley.nz/dates-and-times.html), and [Factors](http://r4ds.hadley.nz/factors.html)  
 __Lecture:__  [Strings and Regular Expressions 1](./Lectures/11_regexp.html), [Strings and Regular Expressions 2](./Lectures/12_regexp_2.html)    
 __Cheat Sheets:__ [Work with Strings Cheat Sheet](https://github.com/rstudio/cheatsheets/raw/master/strings.pdf)  
 __Objective(s):__ Understand how strings differ from numbers. Learn the basics of string manipulation. Describe the different strategies to clean data full of errors with minimal effort. Process and understand the concept of regular expression matching. Manipulate different date formats and work them into a data map reduce workflow.  
@@ -99,7 +99,7 @@ __Etherpad:__ https://etherpad.wikimedia.org/p/355-strings-2023_spring
 ```{r next_date, echo=FALSE}
 ```
 `r datestring`  
-__Readings:__ W&G Chapters on [Tidy Data](http://r4ds.had.co.nz/tidy-data.html)  
+__Readings:__ W&G Chapters on [Tidy Data](http://r4ds.hadley.nz/tidy-data.html)  
 __Lecture:__ [Tidy Data](./Lectures/13_data_tidy.html), [Axoltl Data Cleaning](./Labs/axoltl_lab.html)    
 __Lab:__ [Tidy Coronavirus](./Labs/coronavirus.html)  
 __Objective(s):__ Understand how to reshape and manipulate data. Describe the difference between the two fundamental forms of data – long versus wide, Use the tidyr package in R to convert between long and wide data; Use unite and separate to create tidy data (where each column is a variable).   
@@ -117,7 +117,7 @@ current_date <- current_date + days(7)  + days(7)
 datestring <- paste(month(current_date), day(current_date), year(current_date), sep="/")
 ```
 `r datestring_1` and `r datestring`  
-__Readings:__   [Intro to Geocomputation in R](https://geocompr.robinlovelace.net/intro.html), [Geographic Data in R](https://geocompr.robinlovelace.net/spatial-class.html), W&G Chapter on [Relational Data](http://r4ds.had.co.nz/relational-data.html)    
+__Readings:__   [Intro to Geocomputation in R](https://geocompr.robinlovelace.net/intro.html), [Geographic Data in R](https://geocompr.robinlovelace.net/spatial-class.html), W&G Chapter on [Relational Data](http://r4ds.hadley.nz/relational-data.html)    
 __Lectures:__  [Intro to GIS](./Lectures/15_gis_intro.html), [Rasters](https://datacarpentry.org/r-raster-vector-geospatial/01-raster-structure/index.html) and [plotting rasters](https://datacarpentry.org/r-raster-vector-geospatial/02-raster-plot/index.html), [Joins](./Lectures/15_joins.pptx), [Vector Data](https://datacarpentry.org/r-raster-vector-geospatial/)  
 __Labs:__ [coronavirus spatial mapping](./Labs/coronavirus_spatial.html) [joins and maps](./Labs/join_maps_lab.html)  
 __Objective(s):__ Know when and where to use different types of joins, Understand how to merge survey data with geospatial information to get a geographic understanding of epidemiological patterns  
@@ -142,7 +142,7 @@ __Before Class:__ Install `rgdal` (you'll need to install gdal first - see below
 ```
 
 `r datestring`  
-__Readings:__ W&G Chapters on [Functions](http://r4ds.had.co.nz/functions.html)   
+__Readings:__ W&G Chapters on [Functions](http://r4ds.hadley.nz/functions.html)   
 __Lectures:__ [Intro to Functions](./Lectures/19_functions_intro.html)  
 __Lab:__ [Functions](./Labs/functions_iteration.html)  
 __Objective(s):__ Learn the benefits of reusable code, Understand the structure of a function, Discover debugging and making functions fail usefully,  Derive principles to make functions that are easy to understand and apply to multiple data sets.  
@@ -155,9 +155,9 @@ __Etherpad:__ https://etherpad.wikimedia.org/p/355-functions-2023_spring
 ```{r next_date, echo=FALSE}
 ```
  `r datestring`   
-__Readings:__ W&G Chapters on  [Iteration](http://r4ds.had.co.nz/iteration.html)  
+__Readings:__ W&G Chapters on  [Iteration](http://r4ds.hadley.nz/iteration.html)  
 __Lectures:__  [Iteration with purrr](./Lectures/20_iteration.html)  
-__Lab:__ [Importing Hospital Records](https://www.gerkelab.com/blog/2018/09/import-directory-csv-purrr-readr/), [Bioinformatics and List Columns](https://sanderwuyts.com/en/blog/purrr-tutorial/) <!-- [Many Models](https://r4ds.had.co.nz/many-models.html)-->  
+__Lab:__ [Importing Hospital Records](https://www.gerkelab.com/blog/2018/09/import-directory-csv-purrr-readr/), [Bioinformatics and List Columns](https://sanderwuyts.com/en/blog/purrr-tutorial/) <!-- [Many Models](https://r4ds.hadley.nz/many-models.html)-->  
 __Objective(s):__ Learn the benefits of iteration in code. Automate multiple tasks. Fitting many models in an automated fashion to test generality.  
 __Biological Examples:__ Gapminder, Climate Change, Covid-19 in the US   
 __Files:__   [Split up Hadley Met Centre Data](./Lectures/data/buoydata.zip), [get_buoy.R](./Lectures/get_buoy.R)  
@@ -193,7 +193,7 @@ __Etherpad:__ https://etherpad.wikimedia.org/p/355-modeling-2023_spring
 ```{r next_date, echo=FALSE}
 ```
 `r datestring`  
-__Readings:__  W&G on [Model Basics](http://r4ds.had.co.nz/model-basics.html)  
+__Readings:__  W&G on [Model Basics](http://r4ds.hadley.nz/model-basics.html)  
 __Lectures:__ [Multiple Predictors and Model Comparison](./Lectures/many_predictors.html), [The General Linear Model](./Lectures/advanced_models.html)  
 __Objective(s):__ Describe when to use nonlinear models/curves, Comparing and Contrasting models, Visualization of model outcomes  
 __Biological Examples:__ Seal life history variation. Mouse anti-fungal drug development. Neanderthal brain size. Fire severity in California.   
@@ -244,7 +244,7 @@ __Etherpad:__ https://etherpad.wikimedia.org/p/355-anova-2023_spring
 ```{r next_date, echo=FALSE}
 ```
 `r datestring`  
-__Readings:__  W&G on [Model Basics](http://r4ds.had.co.nz/model-basics.html)   
+__Readings:__  W&G on [Model Basics](http://r4ds.hadley.nz/model-basics.html)   
 __Lectures:__ [The General Linear Model (ANCOVA, multiple regression)](./Lectures/26_ancova_mulltreg.html), [Generalized Linear Models](./Lectures/25_glm.html), [AIC and Multimodel Comparisons](./Lectures/27_mmi.html)  
 __Lab:__ [Linear Models](./Labs/lab10_lm.html)  
 __Objective(s):__ Describe when to use nonlinear models/curves, Comparing and Contrasting models, Visualization of model outcomes  
@@ -254,7 +254,7 @@ __Etherpad:__ https://etherpad.wikimedia.org/p/355-mlr-2023_spring
 
 ### Week  14 Multiple Predictors Part 2  
 `datestring`  
-__Readings:__  W&G on [Model Building](http://r4ds.had.co.nz/model-building.html)  
+__Readings:__  W&G on [Model Building](http://r4ds.hadley.nz/model-building.html)  
 __Lectures:__  [AIC and Multimodel Comparisons](./Lectures/27_mmi.html), [purrr](./Lectures/purrr.html).    
 __Lab:__ [AIC and Multimodel Inference in R](./Labs/lab11_mmi.html)  
 __Objective(s):__  Comparing and Contrasting models, Visualization of model outcomes when many models are fit  
