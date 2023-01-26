@@ -443,8 +443,8 @@ class: center, middle
 
 ### Multiple Linear Regression:
 
-$$y_{ij} \sim N(\widehat{y_{ij}}, \sigma^{2} )$$
-$$\widehat{y_{ij}} = \beta_{0} + \sum \beta_{ij}x_{ij}$$ 
+$$y_{i} \sim N(\widehat{y_{i}}, \sigma^{2} )$$
+$$\widehat{y_{i}} = \beta_{0} + \sum \beta_{j}x_{ij}$$ 
 
 ### Mutiway ANOVA:
 

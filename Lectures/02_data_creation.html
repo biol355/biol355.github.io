@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="generator" content="pandoc">
-  <title>02_data_creation.utf8.md</title>
+  <title>02_data_creation.knit</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -443,14 +443,18 @@ style.innerHTML = style_script;
 document.getElementsByTagName('head')[0].appendChild(style);
 </script>
 
+    <script src="libs/header-attrs-2.19/header-attrs.js"></script>
 </head>
 <body>
   <div class="reveal">
     <div class="slides">
 
 
-<section id="section" class="slide level2" data-background="./Images/spreadsheets/o-THE-MATRIX-facebook.jpg" data-opacity="0.4">
-<h2></h2>
+<section id="section" class="slide level2"
+data-background="./Images/spreadsheets/o-THE-MATRIX-facebook.jpg"
+data-opacity="0.4">
+<h2 data-background="./Images/spreadsheets/o-THE-MATRIX-facebook.jpg"
+data-opacity="0.4"></h2>
 <Br><br><br><br><br><Br><br><br><br><br>
 <h2 style="position: absolute; top:50%;  text-align: center; color:white">
 <center>
@@ -458,26 +462,31 @@ Getting your Data Into a Matrix
 </center>
 </h2>
 </section>
-<section id="you-have-collected-your-data---what-now" class="slide level2">
+<section id="you-have-collected-your-data---what-now"
+class="slide level2">
 <h2>You have collected your data - what now?</h2>
-<p><img data-src="./Images/spreadsheets/breckie_data.png" style="width:85.0%" /></p>
+<p><img data-src="Images/spreadsheets/breckie_data.png"
+style="width:85.0%" /></p>
 </section>
 <section id="what-can-happen-to-data" class="slide level2">
 <h2>What Can Happen to Data</h2>
-<p><img data-src="./Images/spreadsheets/data_entropy.png" style="width:85.0%" /></p>
+<p><img data-src="Images/spreadsheets/data_entropy.png"
+style="width:85.0%" /></p>
 </section>
 <section id="fighting-information-entropy" class="slide level2">
 <h2>Fighting Information Entropy</h2>
-<p><img data-src="./Images/spreadsheets/data_no_entropy.png" style="width:85.0%" /></p>
+<p><img data-src="Images/spreadsheets/data_no_entropy.png"
+style="width:85.0%" /></p>
 </section>
 <section id="what-would-your-next-steps-be" class="slide level2">
 <h2>What Would Your Next Steps Be?</h2>
-<p><img data-src="./Images/spreadsheets/breckie_data.png" style="width:85.0%" /></p>
+<p><img data-src="Images/spreadsheets/breckie_data.png"
+style="width:85.0%" /></p>
 </section>
-<section id="building-an-environment-for-data-storytelling" class="slide level2">
+<section id="building-an-environment-for-data-storytelling"
+class="slide level2">
 <h2>Building an Environment for Data Storytelling</h2>
 <ol type="1">
-<li><p>Project Directory Structure</p></li>
 <li><p>Building of a good spreadsheet</p></li>
 <li><p>More than just data…</p></li>
 <li><p>Is this a good spreadsheet?</p></li>
@@ -485,122 +494,17 @@ Getting your Data Into a Matrix
 </section>
 <section id="you-after-recording-data" class="slide level2">
 <h2>You, After Recording Data</h2>
-<p><img data-src="./Images/spreadsheets/illuminati-movies-matrix-drone.jpg" /></p>
-</section>
-<section id="why-think-about-directory-structure" class="slide level2">
-<h2>Why Think About Directory Structure</h2>
-<ol type="1">
-<li><p>Directory structure organized your brain</p></li>
-<li><p>Easy to find what you need</p></li>
-<li><p>Makes versioning of files easier</p></li>
-<li><p>Provides natural project extensions</p></li>
-</ol>
-</section>
-<section id="oh-the-horror" class="slide level2">
-<h2>Oh, the horror!</h2>
-<p><img data-src="./Images/spreadsheets/total_mess.jpg" /></p>
-</section>
-<section id="at-least-some-versioning-but" class="slide level2">
-<h2>At least some versioning, but…</h2>
-<p><img data-src="./Images/spreadsheets/mess_with_versioned_filenames.jpg" /></p>
-</section>
-<section id="getting-there" class="slide level2">
-<h2>Getting there…</h2>
-<p><img data-src="./Images/spreadsheets/semi_organized.jpg" /></p>
-</section>
-<section id="a-full-workflow-for-a-huge-project" class="slide level2">
-<h2>A Full Workflow for a Huge Project</h2>
-<p><img data-src="./Images/spreadsheets/linear_project.jpg" /></p>
-</section>
-<section id="how-would-you-structure-your-environment" class="slide level2">
-<h2>How would you structure your environment?</h2>
-<ol type="1">
-<li>Pick a partner.<br />
-<br />
-</li>
-<li>Concoct a made-up data collection adventure.<br />
-<br />
-</li>
-<li>Decide what elements you would want to use to create a good structured environment for your data analysis project.</li>
-</ol>
-</section>
-<section id="a-good-project-structure" class="slide level2">
-<h2>A Good Project Structure</h2>
-<p align="left">
-Top Level<br />
-|<br />
-|— Data<br />
-
-<div class="fragment" style="text-align:left">
-<div class="line-block"></div>
-|— Scripts
-</div>
-<div class="fragment" style="text-align:left">
-<div class="line-block"></div>
-|— Derived_Data
-</div>
-<div class="fragment" style="text-align:left">
-<div class="line-block"></div>
-|— Figures
-</div>
-<div class="fragment" style="text-align:left">
-<div class="line-block"></div>
-|— Reports
-</div>
-</p>
-<div class="fragment">
-<center>
-Is this enough?
-</center>
-</div>
-</section>
-<section id="an-alternate-structure" class="slide level2">
-<h2>An alternate structure</h2>
-<img data-src="./Images/spreadsheets/proj_structure.png" style="width:60.0%" />
-<div class="fragment">
-<center>
-What is different here?
-</center>
-</div>
-</section>
-<section id="this-can-get-very-detailed" class="slide level2">
-<h2>This can get very detailed</h2>
-<p><img data-src="./Images/spreadsheets/project_detailed.png" /><br />
-<br />
-<a href="http://projecttemplate.net/" class="uri">http://projecttemplate.net/</a></p>
-</section>
-<section id="linking-structure-to-workflow" class="slide level2">
-<h2>Linking Structure to Workflow</h2>
-<p><img data-src="./Images/spreadsheets/proj_structure_2.jpeg" /></p>
-</section>
-<section id="in-general-lets-use-this" class="slide level2">
-<h2>In General, Let’s Use This</h2>
-<p align="left">
-Top Level<br />
-|<br />
-|— Data<br />
-|— Scripts<br />
-|— Derived_Data<br />
-|— Figures<br />
-|— Reports
-</p>
-</section>
-<section id="building-an-environment-for-data-storytelling-1" class="slide level2">
-<h2>Building an Environment for Data Storytelling</h2>
-<ol type="1">
-<li><p>Project Directory Structure</p></li>
-<li><p><font color="red">Building of a good spreadsheet</font></p></li>
-<li><p>More than just data…</p></li>
-<li><p>Is this a good spreadsheet?</p></li>
-</ol>
+<p><img
+data-src="Images/spreadsheets/illuminati-movies-matrix-drone.jpg" /></p>
 </section>
 <section id="spreadsheets-make-the-wold-go-round" class="slide level2">
 <h2>Spreadsheets Make the Wold Go ’Round</h2>
-<p><img data-src="./Images/spreadsheets/1200px-Microsoft_Office_Excel_(2018–present).svg.png" /></p>
+<p><img
+data-src="Images/spreadsheets/1200px-Microsoft_Office_Excel_(2018%E2%80%93present).svg.png" /></p>
 </section>
 <section id="within-this-grid-is-power" class="slide level2">
 <h2>Within This Grid Is Power</h2>
-<p><img data-src="./Images/spreadsheets/maxresdefault.jpg" /></p>
+<p><img data-src="Images/spreadsheets/maxresdefault.jpg" /></p>
 </section>
 <section id="two-main-styles-of-data" class="slide level2">
 <h2>Two Main Styles of Data</h2>
@@ -609,7 +513,8 @@ Top Level<br />
 <ul>
 <li>Many measurements per observation<br />
 </li>
-<li>Multple columns describing specific observation and measurement<br />
+<li>Multple columns describing specific observation and
+measurement<br />
 <br />
 <br />
 </li>
@@ -622,11 +527,12 @@ Top Level<br />
 </section>
 <section id="wide-and-long-data" class="slide level2">
 <h2>Wide and Long Data</h2>
-<p><img data-src="./Images/spreadsheets/wide_long.png" /></p>
+<p><img data-src="Images/spreadsheets/wide_long.png" /></p>
 </section>
 <section id="wide-data" class="slide level2">
 <h2>Wide Data</h2>
-<p><img data-src="./Images/spreadsheets/wide_data.png" style="width:80.0%" /></p>
+<p><img data-src="Images/spreadsheets/wide_data.png"
+style="width:80.0%" /></p>
 <ul>
 <li>One Observation per row<br />
 </li>
@@ -635,7 +541,7 @@ Top Level<br />
 </section>
 <section id="long-data" class="slide level2">
 <h2>Long Data</h2>
-<p><img data-src="./Images/spreadsheets/long_data.png" /></p>
+<p><img data-src="Images/spreadsheets/long_data.png" /></p>
 <ul>
 <li>Each measurement 1 row<br />
 </li>
@@ -644,24 +550,30 @@ Top Level<br />
 </section>
 <section id="hybrid-data" class="slide level2">
 <h2>Hybrid Data</h2>
-<p><img data-src="./Images/spreadsheets/hybrid_data.png" /></p>
+<p><img data-src="Images/spreadsheets/hybrid_data.png" /></p>
 <ul>
 <li>Neither long nor wide</li>
-<li>Each row has multiple measurements…but also some unique qualities</li>
+<li>Each row has multiple measurements…but also some unique
+qualities</li>
 <li>Each row is not a complete observation</li>
 </ul>
 </section>
-<section id="efficiency-may-drive-data-sheet-design" class="slide level2">
+<section id="efficiency-may-drive-data-sheet-design"
+class="slide level2">
 <h2>Efficiency May Drive Data Sheet Design</h2>
-<p><img data-src="./Images/spreadsheets/efficiency_drives_sheet_design_1.png" /></p>
+<p><img
+data-src="Images/spreadsheets/efficiency_drives_sheet_design_1.png" /></p>
 </section>
-<section id="efficiency-may-drive-data-sheet-design-1" class="slide level2">
+<section id="efficiency-may-drive-data-sheet-design-1"
+class="slide level2">
 <h2>Efficiency May Drive Data Sheet Design</h2>
-<p><img data-src="./Images/spreadsheets/efficiency_drives_sheet_design_2.png" /></p>
+<p><img
+data-src="Images/spreadsheets/efficiency_drives_sheet_design_2.png" /></p>
 </section>
 <section id="syncing-data-collection-and-entry" class="slide level2">
 <h2>Syncing Data Collection and Entry</h2>
-<p><img data-src="./Images/spreadsheets/wide_data_sheet.png" style="width:75.0%" /></p>
+<p><img data-src="Images/spreadsheets/wide_data_sheet.png"
+style="width:75.0%" /></p>
 <center>
 Wide or long?
 </center>
@@ -686,11 +598,11 @@ Wide or long?
 </section>
 <section id="initial-workbook-creation" class="slide level2">
 <h2>Initial Workbook Creation</h2>
-<p><img data-src="./Images/spreadsheets/sheet_1.jpg" /></p>
+<p><img data-src="Images/spreadsheets/sheet_1.jpg" /></p>
 </section>
 <section id="initial-workbook-creation-1" class="slide level2">
 <h2>Initial Workbook Creation</h2>
-<p><img data-src="./Images/spreadsheets/make_it_square.jpg" /></p>
+<p><img data-src="Images/spreadsheets/make_it_square.jpg" /></p>
 <center>
 Wide or long or hybrid - your call
 </center>
@@ -698,16 +610,17 @@ Wide or long or hybrid - your call
 Browman and Woo 2017
 </div>
 </section>
-<section id="can-have-multiple-sheets-with-linked-columns" class="slide level2">
+<section id="can-have-multiple-sheets-with-linked-columns"
+class="slide level2">
 <h2>Can have multiple sheets with linked columns</h2>
-<p><img data-src="./Images/spreadsheets/linked_squares.jpg" /></p>
+<p><img data-src="Images/spreadsheets/linked_squares.jpg" /></p>
 <div style="font-size:12pt; position:absolute; left:0; bottom:-100px">
 Browman and Woo 2017
 </div>
 </section>
 <section id="just-say-no-to-blank-cells" class="slide level2">
 <h2>Just say no to blank cells</h2>
-<p><img data-src="./Images/spreadsheets/no_blank_cells.jpg" /></p>
+<p><img data-src="Images/spreadsheets/no_blank_cells.jpg" /></p>
 <ul>
 <li>Use NA, -, ., or something else <strong>standard</strong></li>
 </ul>
@@ -717,14 +630,14 @@ Browman and Woo 2017
 </section>
 <section id="make-variable-names-simple" class="slide level2">
 <h2>Make Variable Names Simple</h2>
-<img data-src="./Images/spreadsheets/variable_names.jpg" />
+<img data-src="Images/spreadsheets/variable_names.jpg" />
 <div style="font-size:12pt; position:absolute; left:0; bottom:-100px">
 Browman and Woo 2017
 </div>
 </section>
 <section id="warning-dates" class="slide level2">
 <h2>Warning: Dates</h2>
-<p><img data-src="./Images/spreadsheets/iso_8601.png" /></p>
+<p><img data-src="Images/spreadsheets/iso_8601.png" /></p>
 <ul>
 <li>Use a Standard format<br />
 </li>
@@ -737,7 +650,7 @@ Browman and Woo 2017
 </section>
 <section id="do-not-use-highlighting-formulae-etc" class="slide level2">
 <h2>Do not use highlighting, formulae, etc</h2>
-<img data-src="./Images/spreadsheets/highlighting_bad.jpg" />
+<img data-src="Images/spreadsheets/highlighting_bad.jpg" />
 <div style="font-size:12pt; position:absolute; left:0; bottom:-100px">
 Browman and Woo 2017
 </div>
@@ -758,18 +671,21 @@ OK, OK, I’ve Mastered Data Entry. Is that All?
 Is Recording Data From a Sheet Enough?
 </h1>
 </section>
-<section id="building-an-environment-for-data-storytelling-2" class="slide level2">
+<section id="building-an-environment-for-data-storytelling-1"
+class="slide level2">
 <h2>Building an Environment for Data Storytelling</h2>
 <ol type="1">
-<li><p>Project Directory Structure</p></li>
 <li><p>Building of a good spreadsheet</p></li>
 <li><p><font color="red">More than just data…</font></p></li>
 <li><p>Is this a good spreadsheet?</p></li>
 </ol>
 </section>
-<section id="managing-data-to-fight-information-entropy" class="slide level2">
+<section id="managing-data-to-fight-information-entropy"
+class="slide level2">
 <h2>Managing Data to Fight Information Entropy</h2>
-<p><img data-src="./Images/spreadsheets/data_management.png" /> ## Metadata <img data-src="./Images/spreadsheets/metadata_wordcloud.png" /></p>
+<p><img data-src="Images/spreadsheets/data_management.png" /> ##
+Metadata <img
+data-src="Images/spreadsheets/metadata_wordcloud.png" /></p>
 </section>
 <section id="metadata-data-reporting" class="slide level2">
 <h2>Metadata: Data Reporting</h2>
@@ -784,19 +700,19 @@ Is Recording Data From a Sheet Enough?
 </section>
 <section id="section-2" class="slide level2">
 <h2></h2>
-<p><img data-src="./Images/spreadsheets/killing_metadata.png" /></p>
+<p><img data-src="Images/spreadsheets/killing_metadata.png" /></p>
 </section>
 <section id="section-3" class="slide level2">
 <h2></h2>
-<p><img data-src="./Images/spreadsheets/metadata_shirt.png" /></p>
+<p><img data-src="Images/spreadsheets/metadata_shirt.png" /></p>
 </section>
 <section id="metadata-tab" class="slide level2">
 <h2>Metadata Tab</h2>
-<p><img data-src="./Images/spreadsheets/sheet_2.jpg" /></p>
+<p><img data-src="Images/spreadsheets/sheet_2.jpg" /></p>
 </section>
 <section id="get-extensive-with-metadata" class="slide level2">
 <h2>Get Extensive with Metadata</h2>
-<img data-src="./Images/spreadsheets/data_dictionary.jpg" />
+<img data-src="Images/spreadsheets/data_dictionary.jpg" />
 <div style="font-size:12pt; position:absolute; left:0; bottom:-100px">
 Browman and Woo 2017
 </div>
@@ -806,7 +722,8 @@ Browman and Woo 2017
 <ul>
 <li><p>Numerical - Continuous - Integers - Ordinal<br />
 </p></li>
-<li><p>Controlled Vocabulary - Certain defined words with defined meanings - Has a reference ‘dictionary’</p></li>
+<li><p>Controlled Vocabulary - Certain defined words with defined
+meanings - Has a reference ‘dictionary’</p></li>
 <li><p>Dates/Times - Many formats – POSIX</p></li>
 <li><p>Raw Text</p></li>
 <li><p>Other Media</p></li>
@@ -814,16 +731,17 @@ Browman and Woo 2017
 </section>
 <section id="tab-for-controlled-vocabularies" class="slide level2">
 <h2>Tab for Controlled Vocabularies</h2>
-<p><img data-src="./Images/spreadsheets/sheet_3.jpg" /></p>
+<p><img data-src="Images/spreadsheets/sheet_3.jpg" /></p>
 </section>
-<section id="tab-for-recording-changes-after-initial-entry" class="slide level2">
+<section id="tab-for-recording-changes-after-initial-entry"
+class="slide level2">
 <h2>Tab for Recording Changes after Initial Entry</h2>
-<p><img data-src="./Images/spreadsheets/sheet_4.jpg" /></p>
+<p><img data-src="Images/spreadsheets/sheet_4.jpg" /></p>
 </section>
-<section id="building-an-environment-for-data-storytelling-3" class="slide level2">
+<section id="building-an-environment-for-data-storytelling-2"
+class="slide level2">
 <h2>Building an Environment for Data Storytelling</h2>
 <ol type="1">
-<li><p>Project Directory Structure</p></li>
 <li><p>Building of a good spreadsheet</p></li>
 <li><p>More than just data…</p></li>
 <li><p><font color="red">Is this a good spreadsheet?</font></p></li>
@@ -831,19 +749,20 @@ Browman and Woo 2017
 </section>
 <section id="is-this-wide-long-other-or-bad" class="slide level2">
 <h2>Is this wide, long, other, or bad?</h2>
-<p><img data-src="./Images/spreadsheets/bad_sheet_0.png" /></p>
+<p><img data-src="Images/spreadsheets/bad_sheet_0.png" /></p>
 </section>
 <section id="what-is-bad-practice-here" class="slide level2">
 <h2>What is bad practice here?</h2>
-<p><img data-src="./Images/spreadsheets/bad_sheet_3.png" /></p>
+<p><img data-src="Images/spreadsheets/bad_sheet_3.png" /></p>
 </section>
 <section id="what-is-wrong-here" class="slide level2">
 <h2>What is wrong here?</h2>
-<p><img data-src="./Images/spreadsheets/bad_sheet_2.png" /></p>
+<p><img data-src="Images/spreadsheets/bad_sheet_2.png" /></p>
 </section>
 <section id="what-is-bad-practice-here-1" class="slide level2">
 <h2>What is bad practice here?</h2>
-<p><img data-src="./Images/spreadsheets/bad_sheet_1.png" style="width:80.0%" /></p>
+<p><img data-src="Images/spreadsheets/bad_sheet_1.png"
+style="width:80.0%" /></p>
 </section>
     </div>
   </div>
@@ -856,18 +775,43 @@ Browman and Woo 2017
       // Full list of configuration options available at:
       // https://github.com/hakimel/reveal.js#configuration
       Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: true,
+        // Display a presentation progress bar
+        progress: true,
         // Display the page number of the current slide
         slideNumber: true,
         // Push each slide change to the browser history
         history: true,
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+        // Enable the slide overview mode
+        overview: true,
         // Vertical centering of slides
         center: false,
+        // Enables touch navigation on devices with touch input
+        touch: true,
+        // Turns fragments on and off globally
+        fragments: true,
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
         // Opens links in an iframe preview overlay
         previewLinks: true,
         // Transition style
         transition: 'fade', // none/fade/slide/convex/concave/zoom
+        // Transition speed
+        transitionSpeed: 'default', // default/fast/slow
         // Transition style for full page slide backgrounds
         backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
 
 
 

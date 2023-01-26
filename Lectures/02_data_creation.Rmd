@@ -38,100 +38,16 @@ opts_chunk$set(fig.height=5, fig.width=7, comment=NA,
 ![](./Images/spreadsheets/breckie_data.png){width="85%"}
 
 ## Building an Environment for Data Storytelling
-1. Project Directory Structure  
+
+1. Building of a good spreadsheet  
   
-2. Building of a good spreadsheet  
+2. More than just data...
   
-3. More than just data...
-  
-4. Is this a good spreadsheet?
+3. Is this a good spreadsheet?
 
 ##  You, After Recording Data
 ![](./Images/spreadsheets/illuminati-movies-matrix-drone.jpg)
 
-## Why Think About Directory Structure
-1. Directory structure organized your brain  
-  
-2. Easy to find what you need  
-  
-3. Makes versioning of files easier  
-  
-4. Provides natural project extensions
-
-## Oh, the horror!
-![](./Images/spreadsheets/total_mess.jpg)
-
-## At least some versioning, but...
-![](./Images/spreadsheets/mess_with_versioned_filenames.jpg)
-
-## Getting there...
-![](./Images/spreadsheets/semi_organized.jpg)
-
-## A Full Workflow for a Huge Project
-![](./Images/spreadsheets/linear_project.jpg)
-
-## How would you structure your environment?
-
-1. Pick a partner.  
-\
-2. Concoct a made-up data collection adventure.  
-\
-3. Decide what elements you would want to use to create a good structured environment for your data analysis project.
-
-
-## A Good Project Structure
-<p align="left">
-Top Level  
- |  
- |--- Data  
- <div class="fragment" style="text-align:left">|  
- |--- Scripts</div>  
- <div class="fragment" style="text-align:left">|  
- |--- Derived_Data</div>  
- <div class="fragment" style="text-align:left">|  
- |--- Figures</div>  
- <div class="fragment" style="text-align:left">|  
- |--- Reports</div>  
-</p>
-
-<div class="fragment"><center>Is this enough?</center></div>
-
-## An alternate structure
-![](./Images/spreadsheets/proj_structure.png){width="60%"}
-<div class="fragment"><center>What is different here?</center></div>
-
-## This can get very detailed
-![](./Images/spreadsheets/project_detailed.png)
-\
-\
-http://projecttemplate.net/
-
-
-## Linking Structure to Workflow
-![](./Images/spreadsheets/proj_structure_2.jpeg)
-
-
-
-## In General, Let's Use This
-<p align="left">
-Top Level  
- |  
- |--- Data  
- |--- Scripts  
- |--- Derived_Data  
- |--- Figures  
- |--- Reports
-</p>
-
-
-## Building an Environment for Data Storytelling
-1. Project Directory Structure  
-  
-2. <font color="red">Building of a good spreadsheet</font>  
-  
-3. More than just data...
-  
-4. Is this a good spreadsheet?
 
 ## Spreadsheets Make the Wold Go 'Round
 ![](./Images/spreadsheets/1200px-Microsoft_Office_Excel_(2018–present).svg.png)
@@ -251,13 +167,12 @@ Top Level
 <h1>Is Recording Data From a Sheet Enough?</h1>
 
 ## Building an Environment for Data Storytelling
-1. Project Directory Structure  
+
+1. Building of a good spreadsheet  
   
-2. Building of a good spreadsheet  
+2.  <font color="red">More than just data...</font>  
   
-3.  <font color="red">More than just data...</font>  
-  
-4. Is this a good spreadsheet?
+3. Is this a good spreadsheet?
 
 ## Managing Data to Fight Information Entropy
 ![](./Images/spreadsheets/data_management.png)
@@ -313,13 +228,12 @@ Top Level
 
 
 ## Building an Environment for Data Storytelling
-1. Project Directory Structure  
+
+1. Building of a good spreadsheet  
   
-2. Building of a good spreadsheet  
+2.  More than just data...  
   
-3.  More than just data...  
-  
-4. <font color="red">Is this a good spreadsheet?</font>
+3. <font color="red">Is this a good spreadsheet?</font>
 
 ## Is this wide, long, other, or bad?
 ![](./Images/spreadsheets/bad_sheet_0.png)
