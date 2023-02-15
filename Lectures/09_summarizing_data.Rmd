@@ -404,11 +404,11 @@ filter(salmon, river == "a" & mass > 3)
 
 ## Many Filters
 ```{r filter4, message=FALSE, warning=FALSE, echo=TRUE}
-filter(salmon, river == "a" & mass > 3) %>%
-  count
+filter(salmon, river == "a" & mass > 3) |>
+  count()
 
-filter(salmon, river == "b" & mass > 3) %>%
-  count
+filter(salmon, river == "b" & mass > 3) |>
+  count()
 ```  
 
 ## Sidebar - the pipe!
@@ -419,9 +419,9 @@ filter(salmon, river == "b" & mass > 3) %>%
 
 ## Pipes pass an object as the first argument to a function
 ```{r pipe_demo, echo = TRUE}
-5 %>% sum(4)
+5 |> sum(4)
 
-salmon %>% count()
+salmon |> count()
 ```
 
 ## Pipes and Functional Programming
@@ -457,13 +457,13 @@ count(salmon_filtered)
 ## Pipes Make Programs Read Like Language!
 
 ```{r fp_new, eval = FALSE, echo=TRUE}
-salmon_filtered <- salmon %>%
+salmon_filtered <- salmon |>
   
   #filter the salmon data by river
-  filter(river == "a") %>%
+  filter(river == "a") |>
   
   #filter the salmon data by mass
-  filter(mass > 3) %>%
+  filter(mass > 3) |>
   
   #get the count of the salmon
   count()
@@ -496,9 +496,9 @@ salmon_filtered <- salmon %>%
 
 ## Grouping by River
 ```{r group_ex, echo=TRUE}
-salmon_rivers <- salmon %>%
+salmon_rivers <- salmon |>
 
-  group_by(river) %>%
+  group_by(river) |>
   
   summarize(mean_mass = mean(mass),
             sd_mass = sd(mass))
@@ -524,8 +524,8 @@ ggplot(salmon_rivers,
 ## Custom Counts
 ```{r counts}
 salmon %>%
-  group_by(mass_class) %>%
-  count %>%
+  group_by(mass_class) |>
+  count() |>
   ggplot(aes(x=mass_class, y=n)) +
   geom_col()
 ```

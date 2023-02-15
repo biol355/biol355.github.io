@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="generator" content="pandoc">
-  <title>09_summarizing_data.utf8.md</title>
+  <title>09_summarizing_data.knit</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -11,26 +11,28 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -39,15 +41,15 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -60,7 +62,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -506,14 +508,18 @@ style.innerHTML = style_script;
 document.getElementsByTagName('head')[0].appendChild(style);
 </script>
 
+    <script src="libs/header-attrs-2.20/header-attrs.js"></script>
 </head>
 <body>
   <div class="reveal">
     <div class="slides">
 
 
-<section id="section" class="slide level2" data-background="./Images/summarizing_data/many_salmon.png" data-opacity="0.4">
-<h2></h2>
+<section id="section" class="slide level2"
+data-background="./Images/summarizing_data/many_salmon.png"
+data-opacity="0.4">
+<h2 data-background="./Images/summarizing_data/many_salmon.png"
+data-opacity="0.4"></h2>
 <Br><br><br><br><br><Br><br><br><br><br>
 <h2 style="position: absolute; top:50%;  text-align: center; color:white">
 <center>
@@ -523,17 +529,18 @@ Making Data Tell its Story
 </section>
 <section id="first-some-fun" class="slide level2">
 <h2>First, some fun!</h2>
-<p><a href="https://twitter.com/dataandme/status/965785338227712000?ref_src=twsrc%5Etfw"> <img data-src="./Images/summarizing_data/ggpom.jpg" /> </a></p>
+<p><a href="https://twitter.com/dataandme/status/965785338227712000?ref_src=twsrc%5Etfw">
+<img data-src="Images/summarizing_data/ggpom.jpg" /> </a></p>
 </section>
 <section id="first-some-fun-1" class="slide level2">
 <h2>First, some fun!</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="co">#devtools::install_github(&quot;gadenbuie/ggpomological&quot;)</span></a>
-<a class="sourceLine" id="cb1-2" title="2"><span class="kw">library</span>(ggpomological)</a>
-<a class="sourceLine" id="cb1-3" title="3"></a>
-<a class="sourceLine" id="cb1-4" title="4"><span class="kw">ggplot</span>(iris, <span class="kw">aes</span>(<span class="dt">x=</span>Petal.Length, <span class="dt">y =</span> Petal.Width, <span class="dt">color=</span>Species)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb1-5" title="5"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">size=</span><span class="dv">3</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb1-6" title="6"><span class="st">  </span><span class="kw">theme_pomological</span>(<span class="dt">base_family =</span> <span class="st">&#39;Homemade Apple&#39;</span>, <span class="dt">base_size=</span><span class="dv">16</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb1-7" title="7"><span class="st">  </span><span class="kw">scale_color_pomological</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#devtools::install_github(&quot;gadenbuie/ggpomological&quot;)</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggpomological)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(<span class="at">x=</span>Petal.Length, <span class="at">y =</span> Petal.Width, <span class="at">color=</span>Species)) <span class="sc">+</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size=</span><span class="dv">3</span>) <span class="sc">+</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_pomological</span>(<span class="at">base_family =</span> <span class="st">&#39;Homemade Apple&#39;</span>, <span class="at">base_size=</span><span class="dv">16</span>) <span class="sc">+</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_pomological</span>()</span></code></pre></div>
 </section>
 <section id="first-some-fun-2" class="slide level2">
 <h2>First, some fun!</h2>
@@ -541,11 +548,14 @@ Making Data Tell its Story
 </section>
 <section id="first-some-fun-3" class="slide level2">
 <h2>First, some fun!</h2>
-<p><img src="09_summarizing_data_files/figure-revealjs/pom2-1.jpeg" width="672" /> See also <a href="https://github.com/cttobin/ggthemr" class="uri">https://github.com/cttobin/ggthemr</a></p>
+<p><img src="09_summarizing_data_files/figure-revealjs/pom2-1.jpeg" width="672" />
+See also <a href="https://github.com/cttobin/ggthemr"
+class="uri">https://github.com/cttobin/ggthemr</a></p>
 </section>
 <section id="where-are-we-going" class="slide level2">
 <h2>Where are we going?</h2>
-<p><img data-src="./Images/summarizing_data/legodata_www.mydigitalfootprint.com.png" /></p>
+<p><img
+data-src="Images/summarizing_data/legodata_www.mydigitalfootprint.com.png" /></p>
 </section>
 <section id="objectives" class="slide level2">
 <h2>Objectives</h2>
@@ -558,26 +568,37 @@ Making Data Tell its Story
 </section>
 <section id="how-much-does-one-salmon-weigh" class="slide level2">
 <h2>How much does one salmon weigh?</h2>
-<p><img data-src="./Images/summarizing_data/salmon.png" style="width:75.0%" /></p>
+<p><img data-src="Images/summarizing_data/salmon.png"
+style="width:75.0%" /></p>
 <p>Weight: 3.09kg</p>
 </section>
 <section id="how-much-do-these-salmon-weigh" class="slide level2">
 <h2>How much do these salmon weigh?</h2>
-<p><img data-src="./Images/summarizing_data/many_salmon.png" style="width:75.0%" /></p>
+<p><img data-src="Images/summarizing_data/many_salmon.png"
+style="width:75.0%" /></p>
 <p>3.09, 2.91, 3.06, 2.69, 2.88, 2.98, 1.61, 2.16, 1.56, 1.76</p>
 </section>
-<section id="what-can-we-say-about-the-weights-of-all-of-these-salmon" class="slide level2">
+<section id="what-can-we-say-about-the-weights-of-all-of-these-salmon"
+class="slide level2">
 <h2>What can we say about the weights of all of these salmon?</h2>
-<p><img data-src="./Images/summarizing_data/salmon_population.png" style="width:75.0%" /></p>
-<p>Pair up with someone and come up all of the information you can think of that would summarize this population.</p>
+<p><img data-src="Images/summarizing_data/salmon_population.png"
+style="width:75.0%" /></p>
+<p>Pair up with someone and come up all of the information you can think
+of that would summarize this population.</p>
 </section>
 <section id="population-versus-sample" class="slide level2">
 <h2>Population versus Sample</h2>
 <table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
 <tbody>
 <tr class="odd">
-<td style="text-align: center;"><img data-src="./Images/summarizing_data/salmon_population.png" /></td>
-<td style="text-align: center;"><img data-src="./Images/summarizing_data/many_salmon.png" /></td>
+<td style="text-align: center;"><img
+data-src="Images/summarizing_data/salmon_population.png" /></td>
+<td style="text-align: center;"><img
+data-src="Images/summarizing_data/many_salmon.png" /></td>
 </tr>
 </tbody>
 </table>
@@ -597,14 +618,16 @@ Population = All Individuals
 A <b>sample</b> of individuals in a randomly distributed population.
 </div>
 </section>
-<section id="what-are-the-properties-of-a-good-sample" class="slide level2">
+<section id="what-are-the-properties-of-a-good-sample"
+class="slide level2">
 <h2>What are the properties of a good sample?</h2>
 <div style="font-size:32pt; text-align:left">
 <ul>
 <li class="fragment">Sample is <strong>representative</strong></li>
 </ul>
 <ul>
-<li class="fragment">Replicates have an <strong>equal chance</strong> of being sampled</li>
+<li class="fragment">Replicates have an <strong>equal chance</strong> of
+being sampled</li>
 </ul>
 <ul>
 <li class="fragment">Replicates are <strong>independent</strong></li>
@@ -613,22 +636,29 @@ A <b>sample</b> of individuals in a randomly distributed population.
 </section>
 <section id="bias-from-unequal-representation" class="slide level2">
 <h2>Bias from Unequal Representation</h2>
-<p><img src="09_summarizing_data_files/figure-revealjs/colorSize-1.jpeg" width="576" /> If you only chose one color, you would only get one range of sizes.</p>
+<p><img src="09_summarizing_data_files/figure-revealjs/colorSize-1.jpeg" width="576" />
+If you only chose one color, you would only get one range of sizes.</p>
 </section>
 <section id="bias-from-unequal-change-of-sampling" class="slide level2">
 <h2>Bias from Unequal Change of Sampling</h2>
-<p><img src="09_summarizing_data_files/figure-revealjs/spatialBias-1.jpeg" width="576" /> <span class="fragment">Spatial gradient in size</span></p>
+<p><img src="09_summarizing_data_files/figure-revealjs/spatialBias-1.jpeg" width="576" />
+<span class="fragment">Spatial gradient in size</span></p>
 </section>
-<section id="bias-from-unequal-change-of-sampling-1" class="slide level2">
+<section id="bias-from-unequal-change-of-sampling-1"
+class="slide level2">
 <h2>Bias from Unequal Change of Sampling</h2>
-<p><img src="09_summarizing_data_files/figure-revealjs/spatialSample-1.jpeg" width="576" /> Oh, I’ll just grab those individuals closest to me…</p>
+<p><img src="09_summarizing_data_files/figure-revealjs/spatialSample-1.jpeg" width="576" />
+Oh, I’ll just grab those individuals closest to me…</p>
 </section>
-<section id="good-sampling-schemes-stratified-sampling" class="slide level2">
+<section id="good-sampling-schemes-stratified-sampling"
+class="slide level2">
 <h2>Good Sampling Schemes: <strong>Stratified</strong> Sampling</h2>
-<p><img src="09_summarizing_data_files/figure-revealjs/stratified-1.jpeg" width="576" /> Sample over a known gradient, aka <strong>cluster sampling</strong></p>
+<p><img src="09_summarizing_data_files/figure-revealjs/stratified-1.jpeg" width="576" />
+Sample over a known gradient, aka <strong>cluster sampling</strong></p>
 <p>Can incorporate multiple gradients</p>
 </section>
-<section id="good-sampling-schemes-random-sampling" class="slide level2">
+<section id="good-sampling-schemes-random-sampling"
+class="slide level2">
 <h2>Good Sampling Schemes: Random Sampling</h2>
 <img src="09_summarizing_data_files/figure-revealjs/spatialSample2-1.jpeg" width="576" />
 <div id="fragment">
@@ -637,7 +667,8 @@ Two sampling schemes:
 <ul>
 <li class="fragment">Random - samples chosen using random numbers<br />
 </li>
-<li class="fragment">Haphazard - samples chosen without any system (careful!)</li>
+<li class="fragment">Haphazard - samples chosen without any system
+(careful!)</li>
 </ul>
 </section>
 <section id="stratified-or-random" class="slide level2">
@@ -650,13 +681,22 @@ Two sampling schemes:
 <li><p>How important are external factors you cannot assess?</p></li>
 </ul>
 </section>
-<section id="different-sampling-for-different-populations" class="slide level2">
+<section id="different-sampling-for-different-populations"
+class="slide level2">
 <h2>Different Sampling for Different Populations</h2>
 <table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
 <tbody>
 <tr class="odd">
-<td style="text-align: center;"><img data-src="./Images/summarizing_data/alaska_rivers.png" style="width:50.0%" /></td>
-<td style="text-align: center;"><img data-src="./Images/summarizing_data/salmon_population.png" style="width:50.0%" /></td>
+<td style="text-align: center;"><img
+data-src="Images/summarizing_data/alaska_rivers.png"
+style="width:50.0%" /></td>
+<td style="text-align: center;"><img
+data-src="Images/summarizing_data/salmon_population.png"
+style="width:50.0%" /></td>
 </tr>
 </tbody>
 </table>
@@ -670,7 +710,8 @@ Consider each scenario and in pairs design a sampling schema:<br />
 <h2>Objectives</h2>
 <ol type="1">
 <li><p>Think about how sampling influences data structure</p></li>
-<li><p><font color="red">Consider how we summarize our data</font></p></li>
+<li><p><font color="red">Consider how we summarize our
+data</font></p></li>
 <li><p>A little bit o’ Boolean</p></li>
 <li><p>The split-apply-combine philosophy</p></li>
 </ol>
@@ -679,34 +720,43 @@ Consider each scenario and in pairs design a sampling schema:<br />
 <h2>Our Data</h2>
 <p><img src="09_summarizing_data_files/figure-revealjs/hist-1.jpeg" width="672" /></p>
 </section>
-<section id="sample-versus-population-summarization" class="slide level2">
+<section id="sample-versus-population-summarization"
+class="slide level2">
 <h2>Sample versus Population Summarization</h2>
 <ul>
 <li><p>We assume a sample is representative of a population</p></li>
-<li><p>Therefore, sample statistics are estimates of population statistics</p></li>
+<li><p>Therefore, sample statistics are estimates of population
+statistics</p></li>
 <li><p>Larger Samples = Better Estimators</p></li>
 </ul>
 </section>
 <section id="accuracy-versus-precision" class="slide level2">
 <h2>Accuracy versus Precision</h2>
-<img data-src="./Images/summarizing_data/accurate-precise1.jpg" /> <br><br><br>
+<img data-src="Images/summarizing_data/accurate-precise1.jpg" />
+<br><br><br>
 <div class="small">
-<a href="https://bobchoat.files.wordpress.com/2014/01/accurate-precise1.jpg" class="uri">https://bobchoat.files.wordpress.com/2014/01/accurate-precise1.jpg</a>
+<a
+href="https://bobchoat.files.wordpress.com/2014/01/accurate-precise1.jpg"
+class="uri">https://bobchoat.files.wordpress.com/2014/01/accurate-precise1.jpg</a>
 </div>
 </section>
 <section id="central-tendancy-mean" class="slide level2 bigger">
-<h2>Central Tendancy: Mean</h2>
+<h2 class="bigger">Central Tendancy: Mean</h2>
  <br />
  <br />
 
 <center>
-<span class="math inline">\(\bar{Y} = \frac{ \displaystyle \sum_{i=1}^{n}{y_{i}} }{n}\)</span>
+<span class="math inline">\(\bar{Y} = \frac{ \displaystyle
+\sum_{i=1}^{n}{y_{i}} }{n}\)</span>
 </center>
-<p><span class="math inline">\(\large \bar{Y}\)</span> - The average value of a sample<br />
-<span class="math inline">\(y_{i}\)</span> - The value of a measurement for a single individual<br />
+<p><span class="math inline">\(\large \bar{Y}\)</span> - The average
+value of a sample<br />
+<span class="math inline">\(y_{i}\)</span> - The value of a measurement
+for a single individual<br />
 n - The number of individuals in a sample<br />
  <br />
-<span class="math inline">\(\mu\)</span> - The average value of a population<br />
+<span class="math inline">\(\mu\)</span> - The average value of a
+population<br />
 (Greek = population, Latin = Sample)</p>
 </section>
 <section id="median---dead-center" class="slide level2">
@@ -714,7 +764,8 @@ n - The number of individuals in a sample<br />
 <pre><code> [1] 1.56 1.61 1.76 2.16 2.69 2.88 2.91 2.98 3.06 3.09</code></pre>
 <Br><br>
 <div class="fragment">
-Middle Value = 50th Percentile = 0.5 Quantile = Median<Br>good for non-normal data
+Middle Value = 50th Percentile = 0.5 Quantile = Median<Br>good for
+non-normal data
 </div>
 <br><br>
 <div class="fragment">
@@ -726,27 +777,32 @@ Middle Value = 50th Percentile = 0.5 Quantile = Median<Br>good for non-normal da
 <p><img src="09_summarizing_data_files/figure-revealjs/central1-1.jpeg" width="672" /></p>
 <p><font color="blue">mean</font>, <font color="red">median</font></p>
 </section>
-<section id="what-about-population-level-variability" class="slide level2">
+<section id="what-about-population-level-variability"
+class="slide level2">
 <h2>What about population-level variability?</h2>
 <p><img src="09_summarizing_data_files/figure-revealjs/central_var1-1.jpeg" width="672" /></p>
 <div class="fragment">
 What is the range of 2/3 of the population?
 </div>
 </section>
-<section id="what-about-population-level-variability-1" class="slide level2">
+<section id="what-about-population-level-variability-1"
+class="slide level2">
 <h2>What about population-level variability?</h2>
 <p><img src="09_summarizing_data_files/figure-revealjs/central_var2-1.jpeg" width="672" /></p>
 <p>What is the range of 2/3 of the population?</p>
 </section>
 <section id="sample-properties-variance" class="slide level2">
 <h2>Sample Properties: Variance</h2>
-<p>How variable was that population? <span class="math display">\[\large s^2=  \frac{\displaystyle \sum_{i=1}^{n}{(Y_i - \bar{Y})^2}} {n-1}\]</span></p>
+<p>How variable was that population? <span class="math display">\[\large
+s^2=  \frac{\displaystyle \sum_{i=1}^{n}{(Y_i - \bar{Y})^2}}
+{n-1}\]</span></p>
 <ul>
 <li>Sums of Squares over n-1<br />
 </li>
 <li>n-1 corrects for both sample size and sample bias<br />
 </li>
-<li><span class="math inline">\(\sigma^2\)</span> if describing the population</li>
+<li><span class="math inline">\(\sigma^2\)</span> if describing the
+population</li>
 <li>Units in square of measurement…</li>
 </ul>
 </section>
@@ -757,10 +813,12 @@ What is the range of 2/3 of the population?
 <li>Units the same as the measurement</li>
 <li>If distribution is normal, 67% of data within 1 SD</li>
 <li>95% within 2 SD</li>
-<li><span class="math inline">\(\sigma\)</span> if describing the population</li>
+<li><span class="math inline">\(\sigma\)</span> if describing the
+population</li>
 </ul>
 </section>
-<section id="what-about-population-level-variability-2" class="slide level2">
+<section id="what-about-population-level-variability-2"
+class="slide level2">
 <h2>What about population-level variability?</h2>
 <p><img src="09_summarizing_data_files/figure-revealjs/central-1.jpeg" width="672" /></p>
 </section>
@@ -782,7 +840,7 @@ What is the range of 2/3 of the population?
 </section>
 <section id="boxplots" class="slide level2">
 <h2>Boxplots</h2>
-<p><img data-src="./Images/summarizing_data/EDA-boxplot.png" /></p>
+<p><img data-src="Images/summarizing_data/EDA-boxplot.png" /></p>
 </section>
 <section id="boxplot-of-one-population" class="slide level2">
 <h2>Boxplot of One Population</h2>
@@ -807,7 +865,7 @@ What is the range of 2/3 of the population?
 </section>
 <section id="what-do-we-want-to-see" class="slide level2">
 <h2>What do we want to see?</h2>
-<pre><code># A tibble: 228 x 3
+<pre><code># A tibble: 228 × 3
     mass river mass_class 
    &lt;dbl&gt; &lt;chr&gt; &lt;fct&gt;      
  1  3.09 a     (2.75,3.14]
@@ -824,14 +882,14 @@ What is the range of 2/3 of the population?
 </section>
 <section id="our-hero" class="slide level2">
 <h2>Our Hero…</h2>
-<p><img data-src="./Images/summarizing_data/hex-dplyr.jpg" /></p>
+<p><img data-src="Images/summarizing_data/hex-dplyr.jpg" /></p>
 </section>
 <section id="filtering" class="slide level2">
 <h2>Filtering</h2>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">library</span>(dplyr)</a>
-<a class="sourceLine" id="cb8-2" title="2"></a>
-<a class="sourceLine" id="cb8-3" title="3"><span class="kw">filter</span>(salmon, mass <span class="op">&gt;</span><span class="st"> </span><span class="dv">2</span>)</a></code></pre></div>
-<pre><code># A tibble: 74 x 3
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(salmon, mass <span class="sc">&gt;</span> <span class="dv">2</span>)</span></code></pre></div>
+<pre><code># A tibble: 74 × 3
     mass river mass_class 
    &lt;dbl&gt; &lt;chr&gt; &lt;fct&gt;      
  1  3.09 a     (2.75,3.14]
@@ -848,8 +906,8 @@ What is the range of 2/3 of the population?
 </section>
 <section id="filtering-1" class="slide level2">
 <h2>Filtering</h2>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="kw">filter</span>(salmon, river <span class="op">==</span><span class="st"> &quot;a&quot;</span>)</a></code></pre></div>
-<pre><code># A tibble: 38 x 3
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(salmon, river <span class="sc">==</span> <span class="st">&quot;a&quot;</span>)</span></code></pre></div>
+<pre><code># A tibble: 38 × 3
     mass river mass_class 
    &lt;dbl&gt; &lt;chr&gt; &lt;fct&gt;      
  1  3.09 a     (2.75,3.14]
@@ -866,12 +924,13 @@ What is the range of 2/3 of the population?
 </section>
 <section id="logical-operators" class="slide level2">
 <h2>Logical Operators</h2>
-<p><img data-src="./Images/summarizing_data/transform-logical.png" /></p>
+<p><img
+data-src="Images/summarizing_data/transform-logical.png" /></p>
 </section>
 <section id="many-filters" class="slide level2">
 <h2>Many Filters</h2>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1"><span class="kw">filter</span>(salmon, river <span class="op">==</span><span class="st"> &quot;a&quot;</span> <span class="op">&amp;</span><span class="st"> </span>mass <span class="op">&gt;</span><span class="st"> </span><span class="dv">3</span>)</a></code></pre></div>
-<pre><code># A tibble: 4 x 3
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(salmon, river <span class="sc">==</span> <span class="st">&quot;a&quot;</span> <span class="sc">&amp;</span> mass <span class="sc">&gt;</span> <span class="dv">3</span>)</span></code></pre></div>
+<pre><code># A tibble: 4 × 3
    mass river mass_class 
   &lt;dbl&gt; &lt;chr&gt; &lt;fct&gt;      
 1  3.09 a     (2.75,3.14]
@@ -881,33 +940,34 @@ What is the range of 2/3 of the population?
 </section>
 <section id="many-filters-1" class="slide level2">
 <h2>Many Filters</h2>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1"><span class="kw">filter</span>(salmon, river <span class="op">==</span><span class="st"> &quot;a&quot;</span> <span class="op">&amp;</span><span class="st"> </span>mass <span class="op">&gt;</span><span class="st"> </span><span class="dv">3</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb14-2" title="2"><span class="st">  </span>count</a></code></pre></div>
-<pre><code># A tibble: 1 x 1
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(salmon, river <span class="sc">==</span> <span class="st">&quot;a&quot;</span> <span class="sc">&amp;</span> mass <span class="sc">&gt;</span> <span class="dv">3</span>) <span class="sc">|&gt;</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>()</span></code></pre></div>
+<pre><code># A tibble: 1 × 1
       n
   &lt;int&gt;
 1     4</code></pre>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"><span class="kw">filter</span>(salmon, river <span class="op">==</span><span class="st"> &quot;b&quot;</span> <span class="op">&amp;</span><span class="st"> </span>mass <span class="op">&gt;</span><span class="st"> </span><span class="dv">3</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb16-2" title="2"><span class="st">  </span>count</a></code></pre></div>
-<pre><code># A tibble: 1 x 1
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(salmon, river <span class="sc">==</span> <span class="st">&quot;b&quot;</span> <span class="sc">&amp;</span> mass <span class="sc">&gt;</span> <span class="dv">3</span>) <span class="sc">|&gt;</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>()</span></code></pre></div>
+<pre><code># A tibble: 1 × 1
       n
   &lt;int&gt;
 1     4</code></pre>
 </section>
 <section id="sidebar---the-pipe" class="slide level2">
 <h2>Sidebar - the pipe!</h2>
-<p><img data-src="./Images/summarizing_data/magrittr.jpg" /></p>
+<p><img data-src="Images/summarizing_data/magrittr.jpg" /></p>
 </section>
 <section id="sidebar---the-pipe-1" class="slide level2">
 <h2>Sidebar - the pipe!</h2>
-<p><img data-src="./Images/summarizing_data/p1.png" /></p>
+<p><img data-src="Images/summarizing_data/p1.png" /></p>
 </section>
-<section id="pipes-pass-an-object-as-the-first-argument-to-a-function" class="slide level2">
+<section id="pipes-pass-an-object-as-the-first-argument-to-a-function"
+class="slide level2">
 <h2>Pipes pass an object as the first argument to a function</h2>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1"><span class="dv">5</span> <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">sum</span>(<span class="dv">4</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">|&gt;</span> <span class="fu">sum</span>(<span class="dv">4</span>)</span></code></pre></div>
 <pre><code>[1] 9</code></pre>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1">salmon <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">count</span>()</a></code></pre></div>
-<pre><code># A tibble: 1 x 1
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>salmon <span class="sc">|&gt;</span> <span class="fu">count</span>()</span></code></pre></div>
+<pre><code># A tibble: 1 × 1
       n
   &lt;int&gt;
 1   228</code></pre>
@@ -926,35 +986,37 @@ What is the range of 2/3 of the population?
 </section>
 <section id="functional-programming-workflow" class="slide level2">
 <h2>Functional Programming Workflow</h2>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1"><span class="co">#filter the salmon data by river</span></a>
-<a class="sourceLine" id="cb22-2" title="2"></a>
-<a class="sourceLine" id="cb22-3" title="3"><span class="co">#filter the salmon data by mass</span></a>
-<a class="sourceLine" id="cb22-4" title="4"></a>
-<a class="sourceLine" id="cb22-5" title="5"><span class="co">#get the count of the salmon</span></a></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">#filter the salmon data by river</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co">#filter the salmon data by mass</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="co">#get the count of the salmon</span></span></code></pre></div>
 </section>
-<section id="functional-programming-can-get-verbose" class="slide level2">
+<section id="functional-programming-can-get-verbose"
+class="slide level2">
 <h2>Functional Programming Can get Verbose</h2>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1"><span class="co">#filter the salmon data by river</span></a>
-<a class="sourceLine" id="cb23-2" title="2">salmon_filtered &lt;-<span class="st"> </span><span class="kw">filter</span>(salmon, river <span class="op">==</span><span class="st"> &quot;a&quot;</span>) </a>
-<a class="sourceLine" id="cb23-3" title="3"></a>
-<a class="sourceLine" id="cb23-4" title="4"><span class="co">#filter the salmon data by mass</span></a>
-<a class="sourceLine" id="cb23-5" title="5">salmon_filtered &lt;-<span class="st"> </span><span class="kw">filter</span>(salmon_filtered, mass <span class="op">&gt;</span><span class="st"> </span><span class="dv">3</span>) </a>
-<a class="sourceLine" id="cb23-6" title="6"></a>
-<a class="sourceLine" id="cb23-7" title="7"><span class="co">#get the count of the salmon</span></a>
-<a class="sourceLine" id="cb23-8" title="8"><span class="kw">count</span>(salmon_filtered)</a></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">#filter the salmon data by river</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>salmon_filtered <span class="ot">&lt;-</span> <span class="fu">filter</span>(salmon, river <span class="sc">==</span> <span class="st">&quot;a&quot;</span>) </span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co">#filter the salmon data by mass</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>salmon_filtered <span class="ot">&lt;-</span> <span class="fu">filter</span>(salmon_filtered, mass <span class="sc">&gt;</span> <span class="dv">3</span>) </span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="co">#get the count of the salmon</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="fu">count</span>(salmon_filtered)</span></code></pre></div>
 </section>
-<section id="pipes-make-programs-read-like-language" class="slide level2">
+<section id="pipes-make-programs-read-like-language"
+class="slide level2">
 <h2>Pipes Make Programs Read Like Language!</h2>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" title="1">salmon_filtered &lt;-<span class="st"> </span>salmon <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb24-2" title="2"><span class="st">  </span></a>
-<a class="sourceLine" id="cb24-3" title="3"><span class="st">  </span><span class="co">#filter the salmon data by river</span></a>
-<a class="sourceLine" id="cb24-4" title="4"><span class="st">  </span><span class="kw">filter</span>(river <span class="op">==</span><span class="st"> &quot;a&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb24-5" title="5"><span class="st">  </span></a>
-<a class="sourceLine" id="cb24-6" title="6"><span class="st">  </span><span class="co">#filter the salmon data by mass</span></a>
-<a class="sourceLine" id="cb24-7" title="7"><span class="st">  </span><span class="kw">filter</span>(mass <span class="op">&gt;</span><span class="st"> </span><span class="dv">3</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb24-8" title="8"><span class="st">  </span></a>
-<a class="sourceLine" id="cb24-9" title="9"><span class="st">  </span><span class="co">#get the count of the salmon</span></a>
-<a class="sourceLine" id="cb24-10" title="10"><span class="st">  </span><span class="kw">count</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>salmon_filtered <span class="ot">&lt;-</span> salmon <span class="sc">|&gt;</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">#filter the salmon data by river</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(river <span class="sc">==</span> <span class="st">&quot;a&quot;</span>) <span class="sc">|&gt;</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">#filter the salmon data by mass</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(mass <span class="sc">&gt;</span> <span class="dv">3</span>) <span class="sc">|&gt;</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>  <span class="co">#get the count of the salmon</span></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>()</span></code></pre></div>
 </section>
 <section id="objectives-3" class="slide level2">
 <h2>Objectives</h2>
@@ -962,44 +1024,50 @@ What is the range of 2/3 of the population?
 <li><p>Think about how sampling influences data structure</p></li>
 <li><p>Consider how we summarize our data</p></li>
 <li><p>A little bit o’ Boolean</p></li>
-<li><p><font color="red">The split-apply-combine philosophy</font></p></li>
+<li><p><font color="red">The split-apply-combine
+philosophy</font></p></li>
 </ol>
 </section>
 <section id="where-are-we-going-1" class="slide level2">
 <h2>Where are we going?</h2>
-<p><img data-src="./Images/summarizing_data/legodata_www.mydigitalfootprint.com.png" /></p>
+<p><img
+data-src="Images/summarizing_data/legodata_www.mydigitalfootprint.com.png" /></p>
 </section>
 <section id="split-apply-combine" class="slide level2">
 <h2>Split-Apply-Combine</h2>
 <ul>
-<li><p>Filtering and working with one chunk of the data is not enough</p></li>
+<li><p>Filtering and working with one chunk of the data is not
+enough</p></li>
 <li><p>We often want to summarize information about many groups</p></li>
 </ul>
 </section>
 <section id="split-apply-combine-1" class="slide level2">
 <h2>Split-Apply-Combine</h2>
-<p><img data-src="./Images/summarizing_data/split_apply_combine.png" /></p>
+<p><img
+data-src="Images/summarizing_data/split_apply_combine.png" /></p>
 </section>
 <section id="think-pair-share" class="slide level2">
 <h2>Think-Pair-Share</h2>
 <ol type="1">
-<li><p>What are things you want to know about different rivers in the salmon data?</p></li>
-<li><p>What are things you want to know about different size classes in the salmon data?</p></li>
+<li><p>What are things you want to know about different rivers in the
+salmon data?</p></li>
+<li><p>What are things you want to know about different size classes in
+the salmon data?</p></li>
 </ol>
 </section>
 <section id="grouping-by-river" class="slide level2">
 <h2>Grouping by River</h2>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1">salmon_rivers &lt;-<span class="st"> </span>salmon <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb25-2" title="2"></a>
-<a class="sourceLine" id="cb25-3" title="3"><span class="st">  </span><span class="kw">group_by</span>(river) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb25-4" title="4"><span class="st">  </span></a>
-<a class="sourceLine" id="cb25-5" title="5"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">mean_mass =</span> <span class="kw">mean</span>(mass),</a>
-<a class="sourceLine" id="cb25-6" title="6">            <span class="dt">sd_mass =</span> <span class="kw">sd</span>(mass))</a></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>salmon_rivers <span class="ot">&lt;-</span> salmon <span class="sc">|&gt;</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(river) <span class="sc">|&gt;</span></span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_mass =</span> <span class="fu">mean</span>(mass),</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_mass =</span> <span class="fu">sd</span>(mass))</span></code></pre></div>
 </section>
 <section id="what-can-we-do-with-this" class="slide level2">
 <h2>What can we do with this?</h2>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" title="1"><span class="kw">arrange</span>(salmon_rivers, mean_mass)</a></code></pre></div>
-<pre><code># A tibble: 6 x 3
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(salmon_rivers, mean_mass)</span></code></pre></div>
+<pre><code># A tibble: 6 × 3
   river mean_mass sd_mass
   &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;
 1 d          1.89   0.450
@@ -1028,18 +1096,43 @@ What is the range of 2/3 of the population?
       // Full list of configuration options available at:
       // https://github.com/hakimel/reveal.js#configuration
       Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: true,
+        // Display a presentation progress bar
+        progress: true,
         // Display the page number of the current slide
         slideNumber: true,
         // Push each slide change to the browser history
         history: true,
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+        // Enable the slide overview mode
+        overview: true,
         // Vertical centering of slides
         center: false,
+        // Enables touch navigation on devices with touch input
+        touch: true,
+        // Turns fragments on and off globally
+        fragments: true,
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
         // Opens links in an iframe preview overlay
         previewLinks: true,
         // Transition style
         transition: 'fade', // none/fade/slide/convex/concave/zoom
+        // Transition speed
+        transitionSpeed: 'default', // default/fast/slow
         // Transition style for full page slide backgrounds
         backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
 
 
 
