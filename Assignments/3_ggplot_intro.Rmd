@@ -1,13 +1,15 @@
 ---
 title: "Homework: I love it when a Plot comes together"
-date: "February 17, 2018"
+date: "February 17, 2023"
 output: html_document
 ---
 
 <br><br><br>
 1. This week, we'll work with a dataset from sampling plankton in the Plum Island Estuary by the [PIE Long Term Ecological Research site](http://pie-lter.ecosystems.mbl.edu/). This dataset is in an excel file with both metadata and data. There's a lot of information in it, and we'll come back to this dataset a few times through the semester.  
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1A. Load up the plankton data using the `readxl` library, and generate a scatterplot of the relationship between `Chlorophytes` and `TotalChlA`.  Is there more Chlorophyll when there are more Chlorophytes?
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1A. Load up the plankton data using the `readxl` library, and generate a scatterplot of the relationship between `Chlorophytes` and `TotalChlA`.  Note - this will require you to read the documentation for the function you use to read in the data, as you will have to deal with loading in a sheet other than the first one as well as dealing with columns that load as characters, but are numerics, due to some character strings being used to specify NA. How do you deal with this using `read_xls()`?
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1A Continued.Is there more Chlorophyll when there are more Chlorophytes? Note, if one of your axes is unreadable due to the number of values, that column is a character and not a numeric. Go back and fix this with how you load the data.
    
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   1B. Many processes can modify this relationship. They all tend to covary with distance from the mouth of the estuary, where it empties into the ocean and is highly saline. Maybe distance from estuary mouth - `Distance` - affects the relationship between Chlorophytes and total chlorophyll?  Can you see any pattern of how distance alters this relationship by coloring the points by Distance? Use something other than the default color scale.
    
