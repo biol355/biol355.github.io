@@ -35,7 +35,8 @@ weights %>%
 
 
 
-#### 3. Are there trends in the birthweights of children in Truckee over time? Visualize this by looking at the number of individuals in each birthweight category in each year. Make the plot as easy to understand as possible. Extra credit for making it fancy and not just a default plot. Note, Truckee has multiple zip codes, so, you're going to want to make sure to sum over all zip codes in the city!
+#### 3. Are there trends in the birthweights of children in Truckee over time? 
+Visualize this by looking at the summed number of individuals in each birthweight category in each year. Make the plot as easy to understand as possible. Extra credit for making it fancy and not just a default plot. Note, Truckee has multiple zip codes, so, you're going to want to make sure to sum over all zip codes in the city!
 
 ```{r}
 weights %>%
