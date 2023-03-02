@@ -1,0 +1,77 @@
+---
+title: "Tidy Friday with Bob Ross"
+format: html
+---
+![](https://github.com/nrennie/tidytuesday/raw/main/2023/2023-02-21/20230221.png?raw=true)
+
+## Tidy Tuesday!
+
+In the R community, there's a weekly event known as [Tidy Tuesday](https://github.com/rfordatascience/tidytuesday) where everyone comes together around a single big dataset and attempts to create the most interesting visualizations possible, posting code and data viz on Twitter using [#TidyTuesday](https://twitter.com/search?q=%23tidytuesday&src=typed_query&f=live). I'd like us to try a... Tidy Friday, with data from a previous week's Tidy Tuesday - change in colors used by Bob Ross in [paintings](https://www.twoinchbrush.com/all-paintings) in his seminal TV show, [The Joy of Painting](https://www.youtube.com/@bobross_thejoyofpainting) over time!
+
+Check out the repository [here](https://github.com/rfordatascience/tidytuesday/tree/master/data/2023/2023-02-21) and the color palette package [BobRossColors](https://github.com/frankiethull/BobRossColors).
+
+## Load the data
+
+You can start by loading the data:
+
+```{r}
+bob_ross <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2023/2023-02-21/bob_ross.csv')
+```
+
+and install the colors if you want to use them later! Look at https://github.com/frankiethull/BobRossColors to learn how to use them (there are examples).
+
+```{r}
+#| eval: false
+devtools::install_github("frankiethull/BobRossColors")
+library(BobRossColors)
+```
+
+The data contains the following
+
+
+|variable         |class     |description      |
+|:----------------|:---------|:----------------|
+|painting_index   |double    |	Painting number as enumerated in collection.   |
+|img_src          |character |	Url path to image.      |
+|painting_title   |character |	Title of the painting.  |
+|season           |double    |  Season of 'The Joy of Painting' in which the painting was featured.           |
+|episode          |double    |  Episode of 'The Joy of Painting' in which the painting was featured.	        |
+|num_colors       |double    |  Number of unique colors used in the painting.       |
+|youtube_src      |character |	Youtube video of episode featuring the painting.      |
+|colors           |character |	List of colors used in the painting.          |
+|color_hex        |character |	List of colors (hexadecimal code) used in the painting.     |
+|Black_Gesso      |logical |Black_Gesso used |
+|Bright_Red       |logical |Bright_Red used |
+|Burnt_Umber      |logical |Burnt_Umber used |
+|Cadmium_Yellow   |logical |Cadmium_Yellow used |
+|Dark_Sienna      |logical |Dark_Sienna used |
+|Indian_Red       |logical |Indian_Red used |
+|Indian_Yellow    |logical |Indian_Yellow used |
+|Liquid_Black     |logical |Liquid_Black used |
+|Liquid_Clear     |logical |Liquid_Clear used |
+|Midnight_Black   |logical |Midnight_Black used |
+|Phthalo_Blue     |logical |Phthalo_Blue used |
+|Phthalo_Green    |logical |Phthalo_Green used |
+|Prussian_Blue    |logical |Prussian_Blue used |
+|Sap_Green        |logical |Sap_Green used |
+|Titanium_White   |logical |Titanium_White used |
+|Van_Dyke_Brown   |logical |Van_Dyke_Brown used |
+|Yellow_Ochre     |logical |Yellow_Ochre used |
+|Alizarin_Crimson |logical |Alizarin_Crimson used |
+
+
+## So, time to play!
+
+I want you to load the data, look through it, and then, make it tell a story! To do this, I want you to:
+
+1. Really dig into what is there with all of the tools we have at our disposal.  
+
+2. Sit down and write out what kind of story you want to tell. What do you want to learn from this data? Write out a paragraph. Or two!  
+  
+3. Sketch out any data visualizations you might want to make. With pencil and paper - just a theoretical example of what it might look like.  
+  
+4. Start a fresh .R file and, in comments, sketch out the steps you will take and what you will do.  Try the approach of writing what you start with, what you want to end with, and then fill in the middle via comments before you start to code.  
+      4a. Note, for all data viz, don't just use defaults. Get creative. Make this look like something that we wouldn't be surprised to find in a magazine or newspaper. Feel free to use alternate themes - even from `ggthemes` or other places. Google around.  
+      4b. Use some `BobRossColors`!
+
+5. Once finished, move the code into a Quarto document file to create a nice, clean, HTMl file that tells a story. Show how you processed the data. and make the visuzliations.  Submit the result in the same place you submit your homework!  At the end, we'll call around and see if anyone wants to show off their work!
