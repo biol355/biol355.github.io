@@ -48,7 +48,7 @@ weights %>%
 
 #### 4. Are there any trends by Latitude (e.g., North-South)? To answer this...
 &nbsp; &nbsp; 4a. Create a new column, `lat_group` where you use `cut_interval` to cut the data into 10 groups.  
-&nbsp; &nbsp; 4b. Calculate the birthweight count for each birthweight group and latitude group - but also calculate the mean latitude in that group.  
+&nbsp; &nbsp; 4b. Calculate the summed birthweight count for each birthweight group and latitude group - but also calculate the mean latitude in that group.  
 &nbsp; &nbsp; 4c. Plot! Remember, make your axes, labels, and titles informative! That mean latitude will help you make a good plot. Trust me!
 ```{r}
 weights %>% 
