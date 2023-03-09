@@ -164,8 +164,8 @@ Below is ONE workflow for clearning. There are many others. I'd advise that you 
 
 -->
 
-### 3. Coronavirus
-Finish your lab from https://biol355.github.io/Labs/coronavirus.html
+### 3. Bob Ross!
+Finish your lab from https://biol355.github.io/Labs/bob_ross_tidy.html
 
 <!-- **Function Toolbox**
 If you get stuck, consider using the following functions:
