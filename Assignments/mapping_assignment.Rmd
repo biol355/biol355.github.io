@@ -1,0 +1,99 @@
+---
+title: "Mapmaker, Mapmaker, Make me a Map!"
+author: "Intro to Data Science for Biology"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, message = FALSE, warning = FALSE)
+```
+
+### Intro 
+For this week's homework, let's work on mapping the covid-19 data. You have two choices of data source. The first is the coronavirus data we have already loaded.
+
+```{r corona}
+library(coronavirus)
+head(coronavirus)
+```
+
+The second is a newer dataset. It harvests data that is from the New York Times. It is focused solely on the US. To install it, you'll need to do the following
+
+```{r, eval = FALSE}
+# if you don't have it already
+install.packages("devtools")
+
+# install the library from github
+devtools::install_github("covid19R/covid19nytimes")
+```
+
+```{r nytimes}
+library(covid19nytimes)
+covid_states <- refresh_covid19nytimes_states()
+
+head(covid_states)
+
+covid_counties <- refresh_covid19nytimes_counties()
+
+head(covid_counties)
+
+```
+
+
+Now, you have three data sets to choose from! Countries, states, or counties. Remember, with the coronavirus data, you have to do some dplyr::summarizing to get it down to countries, though!
+
+## Maps to use for this assignment
+
+OK, so, we need world, US state, and US county maps - depending on which of the three datasets you chose
+```{r}
+library(sf)
+
+# The world
+library(rnaturalearth)
+world_map <- ne_countries()
+
+# US States
+# install if you don't have USAboundaries loaded
+# install.packages("remotes")
+# remotes::install_github("ropensci/USAboundaries")
+# remotes::install_github("ropensci/USAboundariesData")
+
+library(USAboundaries)
+us_states <- us_states()
+
+# US Counties
+us_counties <- us_counties() |> janitor::clean_names()
+```
+
+Armed with this, let's make some maps!
+
+### Questions
+
+1. Which data set - or aspect of a single data set, are you most interested in? Sort through the data sets. What is there? Is it the world? A single country? Multiple countries? All states? Counties in one state? 
+
+Filter or summarize your data to just what you are interested in, in terms of space.
+
+For example
+```{r}
+library(dplyr)
+florida_covid <- covid_counties |>
+  filter(stringr::str_detect(location, "[Ff]lorida"))
+
+florida_map <- us_counties |>
+  filter(state_name == "Florida")
+```
+
+2. What type or types of data from that dataset are you interested in? Why? Filter the dataset to that data type only.
+
+3. What do you want to learn from this slice of the data? Formulate a question and write it out here.
+
+4. Filter and manipulate the data so that it is in a format to be used to answer the question.
+
+5. Join the covid data with spatial data to build a map.
+
+6. Create a map from this data! Make it awesome!
+
+7. What do you learn from the map you made?
+
+8. This static map is, I'm sure, great. Load up `tmap` and make it dynamic! Is there anything different you can learn from this form of visualization?
+
+9. Last... it's time to start thinking about your final project. Name the one or more data sources you are interested in exploring. Tell us a bit about what is in them.
