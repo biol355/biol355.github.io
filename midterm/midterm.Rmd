@@ -35,7 +35,7 @@ Throughout the semester, we've been refering you to [R Cheat Sheets](https://rst
 So, for your midterm, I'd like you to create a cheat sheet for the package of your choice. It can be a simple package, or a complex package, or anything in between. Below, I'll detail the steps of the process, as well as provide a list of some packages that might be enjoyable to use for this assignment - although the choice is ultimately up to you!
 
 # Due Date 
-Nov 5, 2021  
+March 24, 2023  
 
 # Simple Extra Credit
 Put your cheatsheet up on Github!If you're interested, see [Happy with Git](https://happygitwithr.com/) for more and/or talk to me.  

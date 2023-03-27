@@ -143,7 +143,7 @@ __Before Class:__ Install `rgdal` (you'll need to install gdal first - see below
 
 `r datestring`  
 __Readings:__ W&G Chapters on [Functions](http://r4ds.hadley.nz/functions.html)   
-__Lectures:__ [Intro to Functions](./Lectures/19_functions_intro.html)  
+__Lectures:__ [Intro to Functions](https://biol607.github.io/lectures/functions.html#/section)  
 __Lab:__ [Functions](./Labs/functions_iteration.html)  
 __Objective(s):__ Learn the benefits of reusable code, Understand the structure of a function, Discover debugging and making functions fail usefully,  Derive principles to make functions that are easy to understand and apply to multiple data sets.  
 __Biological Examples:__ NOAA buoy data.  
