@@ -1,0 +1,732 @@
+---
+title:
+css: style.css
+output:
+  revealjs::revealjs_presentation:
+    reveal_options:
+      slideNumber: true
+      previewLinks: true
+    theme: white
+    center: false
+    transition: fade
+    self_contained: false
+    lib_dir: libs
+---
+## 
+<br>
+<h2><center>Writing Reusable Code with Functions</center></h2>
+![](./Images/functions/function.png)
+
+```{r prep, echo=FALSE, cache=FALSE, message=FALSE, warning=FALSE}
+library(knitr)
+library(tidyverse)
+library(readr)
+library(ggplot2)
+theme_set(theme_bw(base_size=16))
+
+opts_chunk$set(fig.height=5, fig.width=7, comment=NA, 
+               warning=FALSE, message=FALSE, 
+               dev="jpeg", echo=FALSE,
+               root.dir = here::here())
+```
+
+
+```{r all_buoy, cache=TRUE, echo = FALSE}
+make_buoy_data <- function(a_year){
+  #Read in a file based on year
+  buoy_data <- read_buoy(a_year)
+
+  #Standardize file format 
+  #for between year differences
+  buoy_data <- standardize_buoy(buoy_data )
+
+  #Take that data frame and format it
+  buoy_data <- format_buoy(buoy_data )
+
+  #Return formatted data frame
+  return(buoy_data)
+}
+
+read_buoy <- function(a_year){
+  
+  #make a filename
+  filename <- paste0("lectures/data/buoydata/44013_",
+								 a_year, ".csv")
+
+  #read in the file with that name
+  a_buoy <- read.csv(filename, 
+					na.strings = c("99", "999", "9999"))
+
+  #return the resulting data frame
+  return(a_buoy)
+  
+}
+
+standardize_buoy <- function(buoydata){
+    
+  #make sure the year column is called YY
+  names(buoydata) <- gsub("X.YY", "YY", names(buoydata))
+  names(buoydata) <- gsub("YYYY", "YY", names(buoydata))
+
+  #If the year > 2005, remove the second row 
+  if(as.numeric(buoydata$YY[2])>2005) buoydata <- buoydata[-1,]
+  
+  #Make sure our columns of interest are numeric
+  buoydata <- buoydata %>% 
+    mutate(YY = as.numeric(YY),
+           MM = as.numeric(MM),
+           DD = as.numeric(DD),
+           WTMP = as.numeric(WTMP),
+           WVHT = as.numeric(WVHT))
+
+  #make sure the years all are in the thousands
+  if(buoydata$YY[1]<1999) buoydata$YY <- buoydata$YY + 1900
+
+  return(buoydata)
+}
+
+format_buoy <- function(buoydata){
+  buoydata <- buoydata %>%
+    select(YY, MM, DD, WVHT, WTMP) %>%
+    rename(Year = YY,
+         Month = MM,
+         Day = DD,
+         Wave_Height = WVHT,
+         Temperature_c = WTMP) %>%
+    group_by(Year, Month, Day) %>%
+    summarise(Wave_Height = mean(Wave_Height, na.rm=T),
+            Temperature_c = mean(Temperature_c, na.rm=T)) %>%
+    ungroup() |>
+    mutate(Date = as.Date(paste(Year, Month, Day, sep = "-")))
+
+  return(buoydata)
+}
+
+buoys <- make_buoy_data(1986)
+
+for(one_year in 1987:2013){
+  	buoys <- rbind(buoys, 	
+				make_buoy_data(one_year))
+
+}
+
+buoys_annual <- buoys %>%
+ filter(Year > 1980) %>%
+  group_by(Year) %>%
+  summarize(Wave_Height = mean(Wave_Height, na.rm=T),
+            Temperature_c = mean(Temperature_c, na.rm=T)) 
+  
+
+
+buoys_monthly <- buoys %>%
+ filter(Year > 1980) %>%
+  group_by(Year, Month) %>%
+  summarize(Wave_Height = mean(Wave_Height, na.rm=T),
+            Temperature_c = mean(Temperature_c, na.rm=T)) %>%
+  mutate(Date = lubridate::parse_date_time(str_c(Month, Year, sep="-"), orders="my"))
+  
+
+```
+
+## Let's Say You Have This...
+![](./Images/functions/buoyfiles.jpg)
+
+## You Want To...
+```{r echo = TRUE, warning = FALSE, message = FALSE, fig.height = 4}
+dat  <- make_buoy_data(1986)
+
+ggplot(dat, 
+       aes(x = Date, y = Temperature_c)) + 
+  geom_line()
+
+```
+
+
+## But There Are Problems - Changing Year Formats and names
+```{r read_show, echo=FALSE, message=FALSE, warning=FALSE}
+head(read_csv("lectures/data/buoydata/44013_1986.csv"))
+head(read_csv("lectures/data/buoydata/44013_1999.csv"))
+```
+
+## Worse... nonnumeric row cruft
+```{r read_show2, echo=FALSE, message=FALSE, warning=FALSE}
+head(read_csv("lectures/data/buoydata/44013_2012.csv"))
+```
+
+
+## 
+
+<br><br><br><h2>Solutions?</h2>
+
+## Solutions
+1. Write code for each individual file  
+    - Lots of copy-paste
+
+2. Write code that row-binds all data and clean from there  
+     - Only good once - what about next year?  
+
+3. FUNCTIONS!
+
+
+## What is our Philosophy?
+<p align="left"><br><br>
+"You should consider writing a function whenever you’ve copied and pasted a block of code more than twice" <Br> <br>- H. Wickham
+</p>
+
+## Let's Find the Problems!
+
+<center>Work with a partner, load in data files individually, and identify all of the problems/things that are different from file to file. Or, things that might make it difficult to work with data later (i.e., hard to understand what is in the data).</center>
+
+
+## Problems with Buoys - Each one (or two) is a function!
+
+1. NA characters vary (99, 999). 
+
+2. Need to eliminate rows with `#yr` & turn cols numeric
+
+3. Names for year are nonstandard
+     - X.YY, YY, and YYYY
+     
+4. Some years are listed with only two digits
+     - Typically, but maybe not always, less than 1999  
+     
+5. Col names are abbreviations - make it readable!
+
+6. Is hourly really a good idea?  
+  
+## Where to Start?!
+
+- Every problem is an opportunity for a function. 
+  
+- With every problem, identify what you want to input as an argument, and what you want as an output. 
+
+- Don't make one function do too much! You can always chain together many functions
+
+
+## To start - reading in a buoy file
+
+- Let's just write a function that will read in any of the buoys and return a nice data frame. 
+
+- Let's call it `read_buoy`. 
+
+- But before we start....
+
+
+## How do I build a function? 
+1. OK, what's *normally* going to change 
+     - The year!  
+     
+2. BUT - what could change under some circumstances?
+     - buoy number, directory, separator. 
+     - let's leave that for later and just 
+     
+3. Identify what could differ between files for **just loading**
+     - Don't try and do too much at once!
+
+4. Write some test code to load in one buoy NOT in a function to start 
+
+## Test Code: Copy these comments and write code!
+
+```{r test, echo=TRUE, eval=TRUE}
+# define a year
+
+# make a filename
+
+# read in a file
+```
+
+## Test Code Example
+
+```{r test2, echo=TRUE, eval=TRUE, message=FALSE}
+# define a year
+a_year <- 2013
+
+# make a filename (could use paste0 instead of str_c)
+# or glue::glue()
+buoy_file <- str_c("lectures/data/buoydata/44013_", a_year, ".csv")
+
+# read in a file
+read_csv(buoy_file)
+
+```
+
+
+## Unit Testing
+Take the smallest piece of code in an application, and make a test to ensure if works properly
+
+```{r test3, echo=TRUE, eval=FALSE, message=FALSE}
+#define a year
+a_year <- 1993
+
+#make a filename
+buoy_file <- str_c("lectures/data/buoydata/44013_", a_year, ".csv")
+
+# read in a file
+dat <- read_csv(buoy_file)
+
+# A TEST (or two)
+visdat::vis_dat(dat)
+summary(dat)
+```
+
+## Unit test for 1993 - OK on type
+
+```{r,  message=FALSE}
+#define a year
+a_year <- 1993
+
+#make a filename
+buoy_file <- str_c("lectures/data/buoydata/44013_", a_year, ".csv")
+
+# read in a file
+dat <- read_csv(buoy_file)
+
+# A TEST
+visdat::vis_dat(dat)
+```
+
+
+## Unit test for 1993 - bad on range!
+
+```{r,  message=FALSE}
+#define a year
+a_year <- 1993
+
+#make a filename
+buoy_file <- str_c("lectures/data/buoydata/44013_", a_year, ".csv")
+
+# read in a file
+dat <- read_csv(buoy_file)
+
+# A TEST
+summary(dat)
+```
+
+<div class = "fragment">What are other problems these unit tests find? Try it out!</div>
+
+## More testing with Small Changes - YES!
+```{r, echo = TRUE}
+read_csv(buoy_file, na = c("99", "999", "9999")) |>
+ summary()
+```
+
+<div class="fragment">Tested against a few years to figure out NAs, vis_dat helped</div>
+<Br>
+<div class="fragment">Now ask, what more can be generalized for arguments?</div>
+
+## Make this a Function by making a_year an argument and adding a return!
+
+```{r fun_structure, echo=TRUE, eval=FALSE, message=FALSE}
+#define a year
+a_year <- 2013
+
+#make a filename
+buoy_file <- str_c("lectures/data/buoydata/44013_", a_year, ".csv")
+
+# read in a file
+read_csv(buoy_file, na = c("99", "999", "9999"))
+
+```
+
+Also, get a little fancier and add a `buoy_number` and `buoy_dir` argument with sensible defaults - you've got this!
+
+## One Reading Function
+
+```{r read, echo=TRUE}
+read_buoy <- function(a_year, buoy_number = 44013, 
+                      buoy_dir = "lectures/data/buoydata/"){
+
+  #make a file name
+  buoy_file <- str_c(buoy_dir, buoy_number, "_", a_year, ".csv")
+  
+  #read in the file
+  one_buoy <- read_csv(buoy_file, 
+                       na = c("99", "999", "9999"))
+  
+  #return the file
+  return(one_buoy)
+  
+}
+```
+
+
+
+## Problems with Buoys - Each one (or two) is a function!
+
+1. <s>NA characters vary (99, 999).</s>  
+
+2. Need to eliminate rows with `#yr` & turn cols numeric
+
+3. Names for year are nonstandard
+     - X.YY, YY, and YYYY
+     
+4. Some years are listed with only two digits
+     - Typically, but maybe not always, less than 1999  
+     
+5. Col names are abbreviations - make it readable!
+
+6. Is hourly really a good idea?  
+
+## Problem 2: Extra Rows and Characters
+```{r, message=FALSE}
+read_buoy(2013) |> head()
+```
+
+## Fix it with a function!
+
+- Work with a partner and write a function that will strip non-numeric rows from a buoy data frame and turn character cols numeric
+
+- Start with a single test case, and apply unit tests. 
+    - hint: `mutate(across(.cols = everything(), .fns = as.numeric))`   
+    - hint: what is the same and what is different across files?
+
+- Once it works broadly, turn it into a function so that we can...
+
+```{r, eval = FALSE, echo = TRUE}
+read_buoy(1995) |>
+  fix_bad_buoy_rows()
+```
+
+## My test code outline (there are many solutions)
+
+```{r, echo = TRUE}
+# get some buoy data
+
+# Turn everything numeric, as then some rows will be all NA
+
+# Remove rows where month is NA, as the year col name changes
+
+# TESTS
+
+```
+
+## Alternate Solution if we Don't Care About NAs
+
+```{r, echo = TRUE}
+# get some buoy data
+
+# Turn everything numeric, as then some rows will be all NA
+
+# TESTS
+
+```
+
+## My test code 
+
+```{r, echo = TRUE, eval = FALSE}
+# get some buoy data
+dat <- read_buoy(2013)
+
+# Turn everything numeric, as then some rows will be all NA
+dat <- dat |>
+  mutate(across(.cols = everything(),
+                .fns = as.numeric))
+
+# Remove rows where month is NA, as the year col name changes
+dat <- dat |> 
+  filter(!is.na(MM))
+
+# TESTS
+visdat::vis_dat(dat)
+summary(dat)
+
+```
+
+
+## Turn it into a function
+
+```{r, echo = TRUE,}
+fix_bad_buoy_rows <- function(dat) {
+  
+  # Turn everything numeric, as then some rows will be all NA
+  dat <- dat |>
+    mutate(across(.cols = everything(),
+                  .fns = as.numeric)) |>
+  
+  # Remove rows where month is NA, as the year col name changes
+    filter(!is.na(MM))
+  
+  # return
+  return(dat)
+}
+
+```
+
+## Does It Blend?
+
+```{r, echo = TRUE, warning = FALSE}
+read_buoy(2013) |>
+  fix_bad_buoy_rows() |>
+  head()
+```
+
+
+
+## Problems with Buoys - Each one (or two) is a function!
+
+1. <s>NA characters vary (99, 999).</s>  
+
+2. <s>Need to eliminate rows with `#yr` & turn cols numeric</s>
+
+3. Names for year are nonstandard
+     - X.YY, YY, and YYYY
+     
+4. Some years are listed with only two digits
+     - Typically, but maybe not always, less than 1999  
+     
+5. Col names are abbreviations - make it readable!
+
+6. Is hourly really a good idea?  
+
+
+## That Year Problem
+
+```{r, message=FALSE}
+read_buoy(1986)|> fix_bad_buoy_rows() |> head()
+```
+
+```{r, message=FALSE}
+read_buoy(1999)|> fix_bad_buoy_rows() |> head()
+```
+
+
+## That Year Problem
+
+```{r, message=FALSE}
+read_buoy(1986)|> fix_bad_buoy_rows() |> head()
+```
+
+```{r, message=FALSE}
+read_buoy(2012)|> fix_bad_buoy_rows() |> head()
+```
+
+## Fix two problems with 1 function!
+
+- Work with a partner and write a function that will:  
+      - make the year column always be YYYY  
+      - make the year column be a 4 digit year (e.g. 98 = 1998)  
+      - hint: this is a good order to solve in    
+      - hint: regexp with `names()` or `rename_with()` are helpful  
+
+- Test & once it works broadly, turn it into a function so that we can...
+
+```{r, eval = FALSE, echo = TRUE}
+read_buoy(1995) |>
+  fix_bad_buoy_rows() |>
+  standardize_buoy_years()
+```
+
+## My test code 
+
+```{r, eval = FALSE, echo = TRUE}
+# get buoy data
+dat <- read_buoy(1986)|> fix_bad_buoy_rows()
+
+# use rename_with to fix year column name
+dat <- dat |> rename_with(
+  .cols = contains("YY"),
+  .fn = ~"YYYY"
+)
+
+# if a year is < 100, add 1900 to it
+dat <- dat |> 
+  mutate(YYYY = ifelse(YYYY < 100, YYYY+1900, YYYY))
+
+# TEST
+range(dat$YYYY)
+```
+
+## My alternate code 
+
+```{r, eval = FALSE, echo = TRUE}
+# get buoy data
+dat <- read_buoy(1986)|> fix_bad_buoy_rows()
+
+# use regexp to fix year column name
+names(dat) <- str_replace( names(dat),
+                           pattern = "X\\.YY", 
+                           replace = "YYYY")
+
+names(dat) <- str_replace( names(dat),
+                           pattern = "^YY$", 
+                           replace = "YYYY")
+
+
+# if a year is < 100, add 1900 to it
+dat <- dat |> 
+  mutate(YYYY = ifelse(YYYY < 100, YYYY+1900, YYYY))
+
+# TEST
+range(dat$YYYY)
+```
+
+## Make it into a function
+```{r, echo = TRUE}
+standardize_buoy_years <- function(dat) {
+  
+  # use rename_with to fix year column name
+  dat <- dat |> rename_with(.cols = contains("YY"),
+                            .fn = ~ "YYYY") |>
+    
+    # if a year is < 100, add 1900 to it
+    mutate(YYYY = ifelse(YYYY < 100, YYYY + 1900, YYYY))
+  
+  return(dat)
+}
+```
+
+## Does It Blend?
+```{r, eval = FALSE, echo = TRUE}
+read_buoy(1995) |>
+  fix_bad_buoy_rows() |>
+  standardize_buoy_years() |> 
+  head()
+```
+
+## Does It Blend?
+```{r, eval = FALSE, echo = TRUE}
+read_buoy(2013) |>
+  fix_bad_buoy_rows() |>
+  standardize_buoy_years() |> 
+  head()
+```
+
+## Problems with Buoys - Each one (or two) is a function!
+
+1. <s>NA characters vary (99, 999).</s>  
+
+2. <s>Need to eliminate rows with `#yr` & turn cols numeric</s>
+
+3. <s>Names for year are nonstandard</s>
+     - <s>X.YY, YY, and YYYY</s>
+     
+4. <s>Some years are listed with only two digits</s>
+     - <s>Typically, but maybe not always, less than 1999</s>  
+     
+5. Col names are abbreviations - make it readable!
+
+6. Is hourly really a good idea?  
+
+## Before We Move Forward...
+
+What is this?
+
+```{r, echo = TRUE, eval = FALSE}
+read_buoy(1995) |>
+  fix_bad_buoy_rows() |>
+  standardize_buoy_years() 
+```
+
+<div class = "fragment">
+Note that you have been making little function **MODULES** that we string together</div>
+
+<div class = "fragment">
+Year can still change - it's almost like we have another function in the making composed of modules.... this is....
+</div>
+
+## Modular Programming
+
+
+![](./Images/functions/functions_meme.jpg)
+
+## Wait, what is this modular madness?
+- Our code is  composed of modular pieces  
+  
+- This means each modular function can be used in other contexts
+     - Enhances code flexibility and future reuse  
+  
+- It also means it is easier to find where our code has gone wrong  
+     - Easier to test and debug
+  
+- AND - we don't get lost writing one honking single function
+
+## From Pipelines to Wrapper Function
+
+```{r, eval = FALSE, echo = TRUE}
+read_buoy(1995) |>
+  fix_bad_buoy_rows() |>
+  standardize_buoy_years() 
+```
+
+<div class = "fragment">
+Let's wrap this in a function</div>
+
+<div class = "fragment">
+
+```{r, eval = FALSE, echo = TRUE}
+get_buoy_data <- function(a_year){
+  read_buoy(a_year) |>
+  fix_bad_buoy_rows() |>
+  standardize_buoy_years() 
+}
+```
+
+</div>
+  
+## A Cleaner Wrapper
+
+```{r, echo = TRUE}
+get_buoy_data <- function(a_year){
+  
+  # read in buoy file and fix NAs
+  read_buoy(a_year) |>
+  
+  # fix non-numeric row problem
+  fix_bad_buoy_rows() |>
+  
+  # standardize year column
+  standardize_buoy_years() 
+}
+```
+
+
+## Backwards Approach to Writing Modular Code
+1. Analyze the steps of your task. 
+
+2. Break it down into pieces. 
+
+3. Write one function per piece. 
+
+4. Chain pieces together in a pipeline. 
+
+5. Turn pipeline into a wrapper function!
+
+
+## Or - Thinking Forwards for Writing Modular Code
+
+1. Start with a wrapper   
+     - Write out the steps of what you want to do in comments  
+     - Pair those with functions using "snake case" `clean_data`  
+     - Use `|>` for efficiency/readability!  
+        
+2. Write the subfunctions  
+     - Repeat the toplevel comments anf functions  
+     
+3. Continue until you have the lowest level atomized functions  
+     
+4. Test THOSE functions. Then test up the chain....
+
+
+## Why do this
+- Reusable modules in other context. 
+  
+- Can unit test elements of the wrapper function 
+
+- Easier to debug!  
+
+- Can solve problems forwards or backwards!
+
+## Reality Check
+<br><br><br>
+Yes, sometimes you will write long functions - as long as they are simple and readable, meh
+
+## Final Exercises - do 1, and then make wrappers in 2 and 3 with MINIMAL effort
+
+1. Write a function that will get daily summaries of wave height and temperature only
+     - Make the returned column names for all values nice and readable  
+     - use `paste()` and `as.Date()` to make a Date column after summarize
+     
+2. Do the same, but monthly...
+         
+3. Do the same, but anually....
+
