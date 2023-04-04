@@ -156,6 +156,7 @@ __Etherpad:__ https://etherpad.wikimedia.org/p/355-functions-2023_spring
 ```
  `r datestring`   
 __Readings:__ W&G Chapters on  [Iteration](http://r4ds.hadley.nz/iteration.html)  
+__Optional Reading:__ Advanced R on [functionals] (https://adv-r.hadley.nz/functionals.html)  
 __Lectures:__  [Iteration with purrr](./Lectures/20_iteration.html)  
 __Lab:__ [Importing Hospital Records](https://www.gerkelab.com/blog/2018/09/import-directory-csv-purrr-readr/), [Bioinformatics and List Columns](https://sanderwuyts.com/en/blog/purrr-tutorial/) <!-- [Many Models](https://r4ds.hadley.nz/many-models.html)-->  
 __Objective(s):__ Learn the benefits of iteration in code. Automate multiple tasks. Fitting many models in an automated fashion to test generality.  

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="generator" content="pandoc">
-  <title>20_iteration.utf8</title>
+  <title>20_iteration.knit</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -11,28 +11,28 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -41,15 +41,15 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
 code span.at { color: #7d9029; } /* Attribute */
 code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
+code span.bu { color: #008000; } /* BuiltIn */
 code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
 code span.ch { color: #4070a0; } /* Char */
 code span.cn { color: #880000; } /* Constant */
@@ -62,7 +62,7 @@ code span.er { color: #ff0000; font-weight: bold; } /* Error */
 code span.ex { } /* Extension */
 code span.fl { color: #40a070; } /* Float */
 code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
+code span.im { color: #008000; font-weight: bold; } /* Import */
 code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
 code span.kw { color: #007020; font-weight: bold; } /* Keyword */
 code span.op { color: #666666; } /* Operator */
@@ -508,14 +508,16 @@ style.innerHTML = style_script;
 document.getElementsByTagName('head')[0].appendChild(style);
 </script>
 
+    <script src="libs/header-attrs-2.21/header-attrs.js"></script>
 </head>
 <body>
   <div class="reveal">
     <div class="slides">
 
 
-<section id="section" class="slide level2" data-background="./Images/iteration/maxresdefault.jpg">
-<h2></h2>
+<section id="section" class="slide level2"
+data-background="./Images/iteration/maxresdefault.jpg">
+<h2 data-background="./Images/iteration/maxresdefault.jpg"></h2>
 <br><br><br>
 <h1 style="background-color:white; font-size: 300%;">
 <center>
@@ -526,200 +528,206 @@ Iteration
 <section id="weve-done-good" class="slide level2">
 <h2>We’ve done good!</h2>
 <p>Our wrapper</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw">library</span>(tidyverse)</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"><span class="kw">library</span>(readr)</a>
-<a class="sourceLine" id="cb1-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb1-4" data-line-number="4">get_buoy &lt;-<span class="st"> </span><span class="cf">function</span>(a_year){</a>
-<a class="sourceLine" id="cb1-5" data-line-number="5">  one_buoy &lt;-<span class="st"> </span><span class="kw">read_buoy</span>(a_year) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb1-6" data-line-number="6"><span class="st">    </span>format_buoy <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb1-7" data-line-number="7"><span class="st">    </span>make_monthly_buoy </a>
-<a class="sourceLine" id="cb1-8" data-line-number="8">  </a>
-<a class="sourceLine" id="cb1-9" data-line-number="9">  <span class="kw">return</span>(one_buoy)</a>
-<a class="sourceLine" id="cb1-10" data-line-number="10">}</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>get_buoy <span class="ot">&lt;-</span> <span class="cf">function</span>(a_year){</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  one_buoy <span class="ot">&lt;-</span> <span class="fu">read_buoy</span>(a_year) <span class="sc">%&gt;%</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    format_buoy <span class="sc">%&gt;%</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    make_monthly_buoy </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(one_buoy)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 </section>
 <section id="our-reading-function" class="slide level2">
 <h2>Our Reading Function</h2>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1">read_buoy &lt;-<span class="st"> </span><span class="cf">function</span>(a_year, <span class="dt">buoy_number =</span> <span class="dv">44013</span>, </a>
-<a class="sourceLine" id="cb2-2" data-line-number="2">                      <span class="dt">buoy_dir =</span> <span class="st">&quot;./data/buoydata/&quot;</span>){</a>
-<a class="sourceLine" id="cb2-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb2-4" data-line-number="4">  <span class="co">#make a file name</span></a>
-<a class="sourceLine" id="cb2-5" data-line-number="5">  buoy_file &lt;-<span class="st"> </span><span class="kw">str_c</span>(buoy_dir, buoy_number, <span class="st">&quot;_&quot;</span>, a_year, <span class="st">&quot;.csv&quot;</span>)</a>
-<a class="sourceLine" id="cb2-6" data-line-number="6">  </a>
-<a class="sourceLine" id="cb2-7" data-line-number="7">  <span class="co">#read in the file</span></a>
-<a class="sourceLine" id="cb2-8" data-line-number="8">  one_buoy &lt;-<span class="st"> </span><span class="kw">read_csv</span>(buoy_file, </a>
-<a class="sourceLine" id="cb2-9" data-line-number="9">                       <span class="dt">na =</span> <span class="kw">c</span>(<span class="st">&quot;99&quot;</span>, <span class="st">&quot;999&quot;</span>, </a>
-<a class="sourceLine" id="cb2-10" data-line-number="10">                              <span class="st">&quot;99.00&quot;</span>, <span class="st">&quot;9999.00&quot;</span>,</a>
-<a class="sourceLine" id="cb2-11" data-line-number="11">                              <span class="st">&quot;99.0&quot;</span>, <span class="st">&quot;9999.0&quot;</span>,</a>
-<a class="sourceLine" id="cb2-12" data-line-number="12">                              <span class="st">&quot;999.0&quot;</span>))</a>
-<a class="sourceLine" id="cb2-13" data-line-number="13">  </a>
-<a class="sourceLine" id="cb2-14" data-line-number="14">  <span class="co">#return the file</span></a>
-<a class="sourceLine" id="cb2-15" data-line-number="15">  <span class="kw">return</span>(one_buoy)</a>
-<a class="sourceLine" id="cb2-16" data-line-number="16">  </a>
-<a class="sourceLine" id="cb2-17" data-line-number="17">}</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>read_buoy <span class="ot">&lt;-</span> <span class="cf">function</span>(a_year, <span class="at">buoy_number =</span> <span class="dv">44013</span>, </span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">buoy_dir =</span> <span class="st">&quot;./data/buoydata/&quot;</span>){</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="co">#make a file name</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  buoy_file <span class="ot">&lt;-</span> <span class="fu">str_c</span>(buoy_dir, buoy_number, <span class="st">&quot;_&quot;</span>, a_year, <span class="st">&quot;.csv&quot;</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="co">#read in the file</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  one_buoy <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(buoy_file, </span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>                       <span class="at">na =</span> <span class="fu">c</span>(<span class="st">&quot;99&quot;</span>, <span class="st">&quot;999&quot;</span>, </span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>                              <span class="st">&quot;99.00&quot;</span>, <span class="st">&quot;9999.00&quot;</span>,</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>                              <span class="st">&quot;99.0&quot;</span>, <span class="st">&quot;9999.0&quot;</span>,</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>                              <span class="st">&quot;999.0&quot;</span>))</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="co">#return the file</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(one_buoy)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 </section>
 <section id="our-formatting-function" class="slide level2">
 <h2>Our Formatting Function</h2>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">format_buoy &lt;-<span class="st"> </span><span class="cf">function</span>(a_buoy_df){</a>
-<a class="sourceLine" id="cb3-2" data-line-number="2">  </a>
-<a class="sourceLine" id="cb3-3" data-line-number="3">  a_buoy_df &lt;-<span class="st"> </span>a_buoy_df <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb3-4" data-line-number="4"><span class="st">    </span>fix_year_names <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb3-5" data-line-number="5"><span class="st">    </span>fix_bad_rows <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb3-6" data-line-number="6"><span class="st">    </span>fix_bad_years</a>
-<a class="sourceLine" id="cb3-7" data-line-number="7">  </a>
-<a class="sourceLine" id="cb3-8" data-line-number="8">  <span class="kw">return</span>(a_buoy_df)</a>
-<a class="sourceLine" id="cb3-9" data-line-number="9">}</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>format_buoy <span class="ot">&lt;-</span> <span class="cf">function</span>(a_buoy_df){</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  a_buoy_df <span class="ot">&lt;-</span> a_buoy_df <span class="sc">%&gt;%</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    fix_year_names <span class="sc">%&gt;%</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    fix_bad_rows <span class="sc">%&gt;%</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    fix_bad_years</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(a_buoy_df)</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 </section>
 <section id="with-lots-of-subfunctions" class="slide level2">
 <h2>With lots of subfunctions</h2>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" data-line-number="1"><span class="co">#bad names</span></a>
-<a class="sourceLine" id="cb4-2" data-line-number="2">fix_year_names &lt;-<span class="st"> </span><span class="cf">function</span>(a_buoy_df){</a>
-<a class="sourceLine" id="cb4-3" data-line-number="3">  </a>
-<a class="sourceLine" id="cb4-4" data-line-number="4">  <span class="kw">names</span>(a_buoy_df) &lt;-<span class="st"> </span><span class="kw">names</span>(a_buoy_df) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb4-5" data-line-number="5"><span class="st">  </span><span class="kw">str_replace</span>(<span class="st">&quot;^YY$&quot;</span>, <span class="st">&quot;YYYY&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb4-6" data-line-number="6"><span class="st">  </span><span class="kw">str_replace</span>(<span class="st">&quot;X</span><span class="ch">\\</span><span class="st">.YY&quot;</span>, <span class="st">&quot;YYYY&quot;</span>)</a>
-<a class="sourceLine" id="cb4-7" data-line-number="7">  </a>
-<a class="sourceLine" id="cb4-8" data-line-number="8">  <span class="kw">return</span>(a_buoy_df)</a>
-<a class="sourceLine" id="cb4-9" data-line-number="9">}</a></code></pre></div>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1">fix_bad_rows &lt;-<span class="st"> </span><span class="cf">function</span>(a_buoy_df){</a>
-<a class="sourceLine" id="cb5-2" data-line-number="2">  <span class="cf">if</span>(<span class="kw">is.character</span>(a_buoy_df<span class="op">$</span>MM[<span class="dv">1</span>])){</a>
-<a class="sourceLine" id="cb5-3" data-line-number="3">    </a>
-<a class="sourceLine" id="cb5-4" data-line-number="4">    a_buoy_df &lt;-<span class="st"> </span>a_buoy_df[<span class="op">-</span><span class="dv">1</span>,] <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb5-5" data-line-number="5"><span class="st">      </span><span class="kw">mutate_all</span>(as.numeric)</a>
-<a class="sourceLine" id="cb5-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb5-7" data-line-number="7">    }</a>
-<a class="sourceLine" id="cb5-8" data-line-number="8"></a>
-<a class="sourceLine" id="cb5-9" data-line-number="9">    <span class="kw">return</span>(a_buoy_df)</a>
-<a class="sourceLine" id="cb5-10" data-line-number="10">}</a></code></pre></div>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="co">#bad years</span></a>
-<a class="sourceLine" id="cb6-2" data-line-number="2">fix_bad_years &lt;-<span class="st"> </span><span class="cf">function</span>(a_buoy_df){</a>
-<a class="sourceLine" id="cb6-3" data-line-number="3">  <span class="kw">return</span>(a_buoy_df <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="st">           </span><span class="kw">mutate</span>(<span class="dt">YYYY =</span> <span class="kw">ifelse</span>(YYYY <span class="op">&lt;</span><span class="st"> </span><span class="dv">1900</span>, YYYY<span class="op">+</span><span class="dv">1900</span>, YYYY)))</a>
-<a class="sourceLine" id="cb6-5" data-line-number="5">}</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">#bad names</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>fix_year_names <span class="ot">&lt;-</span> <span class="cf">function</span>(a_buoy_df){</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">names</span>(a_buoy_df) <span class="ot">&lt;-</span> <span class="fu">names</span>(a_buoy_df) <span class="sc">%&gt;%</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_replace</span>(<span class="st">&quot;^YY$&quot;</span>, <span class="st">&quot;YYYY&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">str_replace</span>(<span class="st">&quot;X</span><span class="sc">\\</span><span class="st">.YY&quot;</span>, <span class="st">&quot;YYYY&quot;</span>)</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(a_buoy_df)</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>fix_bad_rows <span class="ot">&lt;-</span> <span class="cf">function</span>(a_buoy_df){</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span>(<span class="fu">is.character</span>(a_buoy_df<span class="sc">$</span>MM[<span class="dv">1</span>])){</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    a_buoy_df <span class="ot">&lt;-</span> a_buoy_df[<span class="sc">-</span><span class="dv">1</span>,] <span class="sc">%&gt;%</span> </span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">mutate_all</span>(as.numeric)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">return</span>(a_buoy_df)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#bad years</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>fix_bad_years <span class="ot">&lt;-</span> <span class="cf">function</span>(a_buoy_df){</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(a_buoy_df <span class="sc">%&gt;%</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>           <span class="fu">mutate</span>(<span class="at">YYYY =</span> <span class="fu">ifelse</span>(YYYY <span class="sc">&lt;</span> <span class="dv">1900</span>, YYYY<span class="sc">+</span><span class="dv">1900</span>, YYYY)))</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 </section>
 <section id="our-monthly-summarize" class="slide level2">
 <h2>Our monthly summarize</h2>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1">make_monthly_buoy &lt;-<span class="st"> </span><span class="cf">function</span>(a_buoy_df){</a>
-<a class="sourceLine" id="cb7-2" data-line-number="2">  buoydata &lt;-<span class="st"> </span>a_buoy_df <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="st">    </span><span class="kw">select</span>(YYYY, MM, WVHT, WTMP) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="st">    </span><span class="kw">rename</span>(<span class="dt">Year =</span> YYYY,</a>
-<a class="sourceLine" id="cb7-5" data-line-number="5">         <span class="dt">Month =</span> MM,</a>
-<a class="sourceLine" id="cb7-6" data-line-number="6">         <span class="dt">Wave_Height =</span> WVHT,</a>
-<a class="sourceLine" id="cb7-7" data-line-number="7">         <span class="dt">Temperature_c =</span> WTMP) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb7-8" data-line-number="8"><span class="st">    </span><span class="kw">group_by</span>(Year, Month) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb7-9" data-line-number="9"><span class="st">    </span><span class="kw">summarise</span>(<span class="dt">Wave_Height =</span> <span class="kw">mean</span>(Wave_Height, <span class="dt">na.rm=</span>T),</a>
-<a class="sourceLine" id="cb7-10" data-line-number="10">            <span class="dt">Temperature_c =</span> <span class="kw">mean</span>(Temperature_c, <span class="dt">na.rm=</span>T)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb7-11" data-line-number="11"><span class="st">    </span><span class="kw">ungroup</span>()</a>
-<a class="sourceLine" id="cb7-12" data-line-number="12"></a>
-<a class="sourceLine" id="cb7-13" data-line-number="13">  <span class="kw">return</span>(buoydata)</a>
-<a class="sourceLine" id="cb7-14" data-line-number="14">}</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>make_monthly_buoy <span class="ot">&lt;-</span> <span class="cf">function</span>(a_buoy_df){</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  buoydata <span class="ot">&lt;-</span> a_buoy_df <span class="sc">%&gt;%</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">select</span>(YYYY, MM, WVHT, WTMP) <span class="sc">%&gt;%</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">rename</span>(<span class="at">Year =</span> YYYY,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>         <span class="at">Month =</span> MM,</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">Wave_Height =</span> WVHT,</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>         <span class="at">Temperature_c =</span> WTMP) <span class="sc">%&gt;%</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">group_by</span>(Year, Month) <span class="sc">%&gt;%</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">summarise</span>(<span class="at">Wave_Height =</span> <span class="fu">mean</span>(Wave_Height, <span class="at">na.rm=</span>T),</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>            <span class="at">Temperature_c =</span> <span class="fu">mean</span>(Temperature_c, <span class="at">na.rm=</span>T)) <span class="sc">%&gt;%</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ungroup</span>()</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(buoydata)</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 </section>
 <section id="reading-in-a-file-of-functions" class="slide level2">
 <h2>Reading in a file of functions</h2>
 <p align="left">
-<p>Often, we want to have a file with just all of our functions, so we don’t junk up our working file. This eventually extends to writing packages, but, that’s another class…</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw">source</span>(<span class="st">&quot;./get_buoy.R&quot;</span>)</a></code></pre></div>
+<p>Often, we want to have a file with just all of our functions, so we
+don’t junk up our working file. This eventually extends to writing
+packages, but, that’s another class…</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&quot;./get_buoy.R&quot;</span>)</span></code></pre></div>
 </section>
 <section id="this-works-great-for-one-year" class="slide level2">
 <h2>This works great for one year!</h2>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw">get_buoy</span>(<span class="dv">2012</span>)</a></code></pre></div>
-<pre><code># A tibble: 7 x 4
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">get_buoy</span>(<span class="dv">2012</span>)</span></code></pre></div>
+<pre><code># A tibble: 7 × 4
    Year Month Wave_Height Temperature_c
   &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt;         &lt;dbl&gt;
-1  2012  6.00       0.520         18.2 
-2  2012  7.00       0.407         20.1 
-3  2012  8.00       0.393         20.4 
-4  2012  9.00       0.768         16.4 
-5  2012 10.0        0.890         13.7 
-6  2012 11.0        1.17          10.7 
-7  2012 12.0        1.23           8.74</code></pre>
+1  2012     6       0.52          18.2 
+2  2012     7       0.407         20.1 
+3  2012     8       0.393         20.4 
+4  2012     9       0.768         16.4 
+5  2012    10       0.890         13.7 
+6  2012    11       1.17          10.7 
+7  2012    12       1.23           8.74</code></pre>
 </section>
-<section id="but-we-want" class="slide level2">
-<h2>But we want…</h2>
+<section id="but-what-if-we-want" class="slide level2">
+<h2>But what if we want…</h2>
 <p><img src="20_iteration_files/figure-revealjs/plottry-1.jpeg" width="672" /></p>
 </section>
 <section id="you-can-load-one-year-but" class="slide level2">
 <h2>You can load one year, but…</h2>
-<p><img data-src="./Images/functions/buoyfiles.jpg" /></p>
+<p><img data-src="Images/functions/buoyfiles.jpg" /></p>
 </section>
 <section id="how-do-we-get-to-there-from-here" class="slide level2">
 <h2>How do we get to there from here?</h2>
 <p>One solution:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">buoys &lt;-<span class="st"> </span><span class="kw">rbind</span>(<span class="kw">get_buoy</span>(<span class="dv">1986</span>),</a>
-<a class="sourceLine" id="cb11-2" data-line-number="2">               <span class="kw">get_buoy</span>(<span class="dv">1987</span>),</a>
-<a class="sourceLine" id="cb11-3" data-line-number="3">               <span class="kw">get_buoy</span>(<span class="dv">1988</span>)..........</a>
-<a class="sourceLine" id="cb11-4" data-line-number="4">)</a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>buoys <span class="ot">&lt;-</span> <span class="fu">rbind</span>(<span class="fu">get_buoy</span>(<span class="dv">1986</span>),</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>               <span class="fu">get_buoy</span>(<span class="dv">1987</span>),</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>               <span class="fu">get_buoy</span>(<span class="dv">1988</span>)..........</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 <div class="fragment">
 <h2>
 NO!
 </h2>
 </div>
 </section>
-<section id="isnt-this-what-computersrobots-are-all-about" class="slide level2">
+<section id="isnt-this-what-computersrobots-are-all-about"
+class="slide level2">
 <h2>Isn’t this what computers/robots are all about?</h2>
-<p><Br><br> <img data-src="./Images/iteration/assembly_line.gif" /></p>
+<p><Br><br> <img data-src="Images/iteration/assembly_line.gif" /></p>
 </section>
 <section id="the-old-school-way" class="slide level2">
 <h2>The old school way</h2>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="co">#create a tibble</span></a>
-<a class="sourceLine" id="cb12-2" data-line-number="2">buoys &lt;-<span class="st"> </span><span class="kw">get_buoy</span>(<span class="dv">1986</span>)</a>
-<a class="sourceLine" id="cb12-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb12-4" data-line-number="4"><span class="co">#now iterate over the remaining years and rbind</span></a>
-<a class="sourceLine" id="cb12-5" data-line-number="5"><span class="cf">for</span>(one_year <span class="cf">in</span> <span class="dv">1987</span><span class="op">:</span><span class="dv">2013</span>){</a>
-<a class="sourceLine" id="cb12-6" data-line-number="6">  </a>
-<a class="sourceLine" id="cb12-7" data-line-number="7">  buoys &lt;-<span class="st"> </span><span class="kw">rbind</span>(buoys, <span class="kw">get_buoy</span>(<span class="dv">1986</span>))</a>
-<a class="sourceLine" id="cb12-8" data-line-number="8">  </a>
-<a class="sourceLine" id="cb12-9" data-line-number="9">}</a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co">#create a tibble</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>buoys <span class="ot">&lt;-</span> <span class="fu">get_buoy</span>(<span class="dv">1986</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co">#now iterate over the remaining years and rbind</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span>(one_year <span class="cf">in</span> <span class="dv">1987</span><span class="sc">:</span><span class="dv">2013</span>){</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  buoys <span class="ot">&lt;-</span> <span class="fu">rbind</span>(buoys, <span class="fu">get_buoy</span>(<span class="dv">1986</span>))</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
 </section>
 <section id="the-map-paradigm" class="slide level2">
 <h2>The Map Paradigm</h2>
-<p><img data-src="./Images/iteration/map.png" /></p>
+<p><img data-src="Images/iteration/map.png" /></p>
 </section>
 <section id="section-1" class="slide level2">
 <h2></h2>
-<p><img data-src="./Images/iteration/purrr.png" style="width:60.0%" /></p>
+<p><img data-src="Images/iteration/purrr.png"
+style="width:60.0%" /></p>
 </section>
 <section id="map-functions" class="slide level2">
 <h2>Map functions</h2>
 <ul>
 <li><p>Take a list or vector as input</p></li>
 <li><p>Apply a function to each elment of the list/vector</p></li>
-<li><p>Return the corresponding object, bound together into a prespecified type</p></li>
+<li><p>Return the corresponding object, bound together into a
+prespecified type</p></li>
 </ul>
 </section>
 <section id="median-example" class="slide level2">
 <h2>Median Example</h2>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">df &lt;-<span class="st"> </span><span class="kw">tibble</span>(</a>
-<a class="sourceLine" id="cb13-2" data-line-number="2">  <span class="dt">a =</span> <span class="kw">rnorm</span>(<span class="dv">10</span>),</a>
-<a class="sourceLine" id="cb13-3" data-line-number="3">  <span class="dt">b =</span> <span class="kw">rnorm</span>(<span class="dv">10</span>),</a>
-<a class="sourceLine" id="cb13-4" data-line-number="4">  <span class="dt">c =</span> <span class="kw">rnorm</span>(<span class="dv">10</span>),</a>
-<a class="sourceLine" id="cb13-5" data-line-number="5">  <span class="dt">d =</span> <span class="kw">rnorm</span>(<span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb13-6" data-line-number="6">)</a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">a =</span> <span class="fu">rnorm</span>(<span class="dv">10</span>),</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">b =</span> <span class="fu">rnorm</span>(<span class="dv">10</span>),</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">c =</span> <span class="fu">rnorm</span>(<span class="dv">10</span>),</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">d =</span> <span class="fu">rnorm</span>(<span class="dv">10</span>)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
 </section>
 <section id="median-example-1" class="slide level2">
 <h2>Median Example</h2>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="co">#This actually already loaded with tidyverse</span></a>
-<a class="sourceLine" id="cb14-2" data-line-number="2"><span class="kw">library</span>(purrr) </a>
-<a class="sourceLine" id="cb14-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb14-4" data-line-number="4"><span class="kw">map</span>(df, median)</a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co">#This actually already loaded with tidyverse</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(purrr) </span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="fu">map</span>(df, median)</span></code></pre></div>
 <pre><code>$a
-[1] -0.1427377
+[1] 0.04465925
 
 $b
-[1] 0.1147585
+[1] 0.4002244
 
 $c
-[1] -0.04557728
+[1] 0.06169437
 
 $d
-[1] -0.1944985</code></pre>
+[1] 2.468612e-05</code></pre>
 </section>
 <section id="the-map-paradigm-1" class="slide level2">
 <h2>The Map Paradigm</h2>
-<p><img data-src="./Images/iteration/map.png" /></p>
+<p><img data-src="Images/iteration/map.png" /> ## What purrr::map is
+doing <img data-src="Images/iteration/map_adv_r.png" /></p>
 </section>
 <section id="what-if-i-dont-want-a-list" class="slide level2">
 <h2>What if I don’t want a list</h2>
-<p><img data-src="./Images/iteration/meowtini.jpg" /></p>
+<p><img data-src="Images/iteration/meowtini.jpg" /></p>
 </section>
 <section id="the-world-of-maps" class="slide level2">
 <h2>The world of maps</h2>
@@ -734,38 +742,47 @@ $d
 </section>
 <section id="more-medians" class="slide level2">
 <h2>More medians</h2>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw">map_dbl</span>(df, median)</a></code></pre></div>
-<pre><code>          a           b           c           d 
--0.14273773  0.11475855 -0.04557728 -0.19449852 </code></pre>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1"><span class="kw">map_chr</span>(df, median)</a></code></pre></div>
-<pre><code>          a           b           c           d 
-&quot;-0.142738&quot;  &quot;0.114759&quot; &quot;-0.045577&quot; &quot;-0.194499&quot; </code></pre>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="kw">map_df</span>(df, median)</a></code></pre></div>
-<pre><code># A tibble: 1 x 4
-       a     b       c      d
-   &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;
-1 -0.143 0.115 -0.0456 -0.194</code></pre>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">map_dbl</span>(df, median)</span></code></pre></div>
+<pre><code>           a            b            c            d 
+4.465925e-02 4.002244e-01 6.169437e-02 2.468612e-05 </code></pre>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">map_chr</span>(df, median)</span></code></pre></div>
+<pre><code>         a          b          c          d 
+&quot;0.044659&quot; &quot;0.400224&quot; &quot;0.061694&quot; &quot;0.000025&quot; </code></pre>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="fu">map_df</span>(df, median)</span></code></pre></div>
+<pre><code># A tibble: 1 × 4
+       a     b      c         d
+   &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;     &lt;dbl&gt;
+1 0.0447 0.400 0.0617 0.0000247</code></pre>
 </section>
-<section id="what-if-i-have-more-than-one-argument" class="slide level2">
+<section id="what-if-i-have-more-than-one-argument"
+class="slide level2">
 <h2>What if I have more than one argument?</h2>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="co">#add extra arguments at the end</span></a>
-<a class="sourceLine" id="cb22-2" data-line-number="2"><span class="kw">map_dbl</span>(df, median, <span class="dt">na.rm=</span>T)</a></code></pre></div>
-<pre><code>          a           b           c           d 
--0.14273773  0.11475855 -0.04557728 -0.19449852 </code></pre>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">#add extra arguments at the end</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="fu">map_dbl</span>(df, median, <span class="at">na.rm=</span>T)</span></code></pre></div>
+<pre><code>           a            b            c            d 
+4.465925e-02 4.002244e-01 6.169437e-02 2.468612e-05 </code></pre>
 </section>
-<section id="what-if-i-have-more-than-one-argument-1" class="slide level2">
+<section id="purrrmap-with-arguments" class="slide level2">
+<h2>purrr:::map with arguments</h2>
+<p><img data-src="Images/iteration/map-arg_adv_r.png" /></p>
+</section>
+<section id="what-if-i-have-more-than-one-argument-1"
+class="slide level2">
 <h2>What if I have more than one argument?</h2>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1"><span class="co">#using ~ and .</span></a>
-<a class="sourceLine" id="cb24-2" data-line-number="2"><span class="kw">map_dbl</span>(df, <span class="op">~</span><span class="kw">median</span>(., <span class="dt">na.rm=</span>T))</a></code></pre></div>
-<pre><code>          a           b           c           d 
--0.14273773  0.11475855 -0.04557728 -0.19449852 </code></pre>
+<p>We can also use ~ and a . as a placeholder:</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co">#using ~ and .</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">map_dbl</span>(df, <span class="sc">~</span> <span class="fu">median</span>(., <span class="at">na.rm=</span>T))</span></code></pre></div>
+<pre><code>           a            b            c            d 
+4.465925e-02 4.002244e-01 6.169437e-02 2.468612e-05 </code></pre>
 </section>
 <section id="you-try" class="slide level2">
 <h2>You try!</h2>
 <ol type="1">
-<li><p>What does <code>map(-2:2, rnorm, n = 5)</code> do? How is it different from <code>map_dbl(-2:2, rnorm, n = 5)</code>?</p></li>
+<li><p>What does <code>map(-2:2, rnorm, n = 5)</code> do? How is it
+different from <code>map_dbl(-2:2, rnorm, n = 5)</code>?</p></li>
 <li><p>Get the mean of each column of <code>df</code></p></li>
-<li><p>Compute the number of unique values in each column of <code>iris</code> (hint, you’ll need length and unique)!</p></li>
+<li><p>Compute the number of unique values in each column of
+<code>iris</code> (hint, you’ll need length and unique)!</p></li>
 </ol>
 </section>
 <section id="now-what-about-our-data-problem" class="slide level2">
@@ -778,51 +795,125 @@ $d
 <section id="your-turn-again" class="slide level2">
 <h2>Your turn again!</h2>
 <ul>
-<li><p>Make one big tibble using <code>map_df()</code>, a vector of years, and <code>get_buoy</code></p></li>
+<li><p>Make one big tibble using <code>map_df()</code>, a vector of
+years, and <code>get_buoy</code></p></li>
 <li><p>Get the annual mean of wave height</p></li>
-<li><p>Plot</p></li>
+<li><p>Plot!</p></li>
 </ul>
 </section>
 <section id="one-line-to-rule-them-all" class="slide level2">
 <h2>One Line to rule them all</h2>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1">all_buoys &lt;-<span class="st"> </span><span class="kw">map_df</span>(<span class="dv">1986</span><span class="op">:</span><span class="dv">2013</span>, get_buoy)</a></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>all_buoys <span class="ot">&lt;-</span> <span class="fu">map_df</span>(<span class="dv">1986</span><span class="sc">:</span><span class="dv">2013</span>, get_buoy)</span></code></pre></div>
 <div class="fragment">
-<pre><code># A tibble: 331 x 4
+<pre><code># A tibble: 331 × 4
     Year Month Wave_Height Temperature_c
    &lt;dbl&gt; &lt;dbl&gt;       &lt;dbl&gt;         &lt;dbl&gt;
- 1  1986  1.00          NA          3.62
- 2  1986  2.00          NA          2.68
- 3  1986  3.00          NA          3.04
- 4  1986  4.00          NA          6.42
- 5  1986  5.00          NA         10.5 
- 6  1986  6.00          NA         13.7 
- 7  1986  7.00          NA         17.1 
- 8  1986  8.00          NA         18.1 
- 9  1986  9.00          NA         14.9 
-10  1986 10.0           NA         12.8 
-# ... with 321 more rows</code></pre>
+ 1  1986     1     NaN              3.62
+ 2  1986     2     NaN              2.68
+ 3  1986     3     NaN              3.04
+ 4  1986     4     NaN              6.42
+ 5  1986     5     NaN             10.5 
+ 6  1986     6       0.470         13.7 
+ 7  1986     7       0.401         17.1 
+ 8  1986     8       0.517         18.1 
+ 9  1986     9       0.487         14.9 
+10  1986    10       0.683         12.8 
+# ℹ 321 more rows</code></pre>
 </div>
 </section>
 <section id="a-standard-workflow" class="slide level2">
 <h2>A Standard Workflow</h2>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1"><span class="co">#Annual Means</span></a>
-<a class="sourceLine" id="cb28-2" data-line-number="2">annual_buoys &lt;-<span class="st"> </span>all_buoys <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb28-3" data-line-number="3"><span class="st">  </span><span class="kw">group_by</span>(Year) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb28-4" data-line-number="4"><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">Wave_Height =</span> <span class="kw">mean</span>(Wave_Height, <span class="dt">na.rm=</span>T),</a>
-<a class="sourceLine" id="cb28-5" data-line-number="5">            <span class="dt">Temperature_c =</span> <span class="kw">mean</span>(Temperature_c, <span class="dt">na.rm=</span>T))</a>
-<a class="sourceLine" id="cb28-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb28-7" data-line-number="7"><span class="co">#Plot!</span></a>
-<a class="sourceLine" id="cb28-8" data-line-number="8"><span class="kw">ggplot</span>(annual_buoys, </a>
-<a class="sourceLine" id="cb28-9" data-line-number="9">       <span class="kw">aes</span>(<span class="dt">x=</span>Year, <span class="dt">y=</span>Wave_Height)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb28-10" data-line-number="10"><span class="st">  </span><span class="kw">geom_line</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co">#Annual Means</span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>annual_buoys <span class="ot">&lt;-</span> all_buoys <span class="sc">%&gt;%</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Year) <span class="sc">%&gt;%</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">Wave_Height =</span> <span class="fu">mean</span>(Wave_Height, <span class="at">na.rm=</span>T),</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">Temperature_c =</span> <span class="fu">mean</span>(Temperature_c, <span class="at">na.rm=</span>T))</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="co">#Plot!</span></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(annual_buoys, </span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>       <span class="fu">aes</span>(<span class="at">x=</span>Year, <span class="at">y=</span>Wave_Height)) <span class="sc">+</span></span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_line</span>()</span></code></pre></div>
 </section>
 <section id="our-plot" class="slide level2">
 <h2>Our Plot</h2>
 <p><img src="20_iteration_files/figure-revealjs/plot2-1.jpeg" width="672" /></p>
 </section>
+<section id="variations-on-a-purrr" class="slide level2">
+<h2>Variations on a purrr</h2>
+<ul>
+<li class="fragment">If we want map to do something, but not return an
+output, use <code>purrr::walk()</code>.<br />
+<br><br></li>
+</ul>
+<ul>
+<li class="fragment">If we have 2 lists, <code>map2()</code>.
+<br><br></li>
+</ul>
+<ul>
+<li class="fragment">If we have n lists, <code>pmap()</code>! <br></li>
+</ul>
+</section>
+<section id="walk-is-invisible" class="slide level2">
+<h2>Walk is invisible</h2>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">1</span>))</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a><span class="fu">walk</span>(<span class="fu">c</span>(<span class="dv">2002</span>, <span class="dv">2003</span>), <span class="sc">~</span> <span class="fu">get_buoy</span>(.) <span class="sc">|&gt;</span> </span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>       <span class="fu">plot</span>(Temperature_c <span class="sc">~</span> Month, <span class="at">data =</span> _) )</span></code></pre></div>
+<p><img src="20_iteration_files/figure-revealjs/unnamed-chunk-17-1.jpeg" width="672" /></p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">par</span>(<span class="at">mfrow =</span> <span class="fu">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</span></code></pre></div>
+</section>
+<section id="walk-is-invisible-1" class="slide level2">
+<h2>Walk is invisible</h2>
+<p><img data-src="Images/iteration/walk_adv_r.png" /></p>
+</section>
+<section id="iterate-through-two-things-with-map2" class="slide level2">
+<h2>Iterate through two things with map2</h2>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">11</span><span class="sc">:</span><span class="dv">20</span></span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="fu">map2_dbl</span>(x, y, sum)</span></code></pre></div>
+<pre><code> [1] 12 14 16 18 20 22 24 26 28 30</code></pre>
+</section>
+<section id="iterate-through-two-things-with-map2-1"
+class="slide level2">
+<h2>Iterate through two things with map2</h2>
+<p><img data-src="Images/iteration/map2_adv_r.png" /></p>
+</section>
+<section id="iterate-through-many-things-with-pmap"
+class="slide level2">
+<h2>Iterate through many things with pmap</h2>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="dv">11</span><span class="sc">:</span><span class="dv">20</span></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="dv">101</span><span class="sc">:</span><span class="dv">110</span></span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a><span class="fu">pmap_dbl</span>(<span class="fu">list</span>(x, y, z),</span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>         sum)</span></code></pre></div>
+<pre><code> [1] 113 116 119 122 125 128 131 134 137 140</code></pre>
+</section>
+<section id="iterate-through-many-things-with-pmap-1"
+class="slide level2">
+<h2>Iterate through many things with pmap</h2>
+<p><img data-src="Images/iteration/pmap-3_adv_r.png" /></p>
+</section>
+<section id="final-exercises" class="slide level2">
+<h2>Final Exercises</h2>
+<ol type="1">
+<li><p>Write a function that given a year will give you the mean
+temperature from a buoy. Then use <code>walk()</code> and
+<code>cat()</code> (with <code>get_buoy()</code>) to print out the mean
+temperatures for every file.<br />
+<br></p></li>
+<li><p>Use <code>map2_chr()</code>, <code>paste</code> or
+<code>str_c()</code>, and the output <code>get_buoy(2002)</code>’s Year
+and Month Columns (as arguments to map2) to make a character vector of
+dates in the format “Month-1-Year” using 1 to represent the first day of
+the month. Yes, you could do this via dplyr, but let’s play with
+<code>map2()</code> to make sure you get it.</p></li>
+</ol>
+</section>
 <section id="section-2" class="slide level2">
 <h2></h2>
-<p><img data-src="./Images/iteration/to_purr_or_not.jpg" /></p>
+<p><img data-src="Images/iteration/to_purr_or_not.jpg" /></p>
 </section>
     </div>
   </div>
@@ -835,18 +926,43 @@ $d
       // Full list of configuration options available at:
       // https://github.com/hakimel/reveal.js#configuration
       Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: true,
+        // Display a presentation progress bar
+        progress: true,
         // Display the page number of the current slide
         slideNumber: true,
         // Push each slide change to the browser history
         history: true,
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+        // Enable the slide overview mode
+        overview: true,
         // Vertical centering of slides
         center: false,
+        // Enables touch navigation on devices with touch input
+        touch: true,
+        // Turns fragments on and off globally
+        fragments: true,
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
         // Opens links in an iframe preview overlay
         previewLinks: true,
         // Transition style
         transition: 'fade', // none/fade/slide/convex/concave/zoom
+        // Transition speed
+        transitionSpeed: 'default', // default/fast/slow
         // Transition style for full page slide backgrounds
         backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
 
 
 

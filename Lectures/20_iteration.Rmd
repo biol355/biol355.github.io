@@ -146,7 +146,7 @@ source("./get_buoy.R")
 get_buoy(2012)
 ```
 
-## But we want...
+## But what if we want...
 ```{r plottry, message=FALSE, echo=FALSE, cache=TRUE}
 all_buoys <- map_df(1986:2013, get_buoy)
 
@@ -228,6 +228,9 @@ map(df, median)
 
 ## The Map Paradigm
 ![](./Images/iteration/map.png)
+## What purrr::map is doing
+![](./Images/iteration/map_adv_r.png)
+
 
 ## What if I don't want a list
 ![](./Images/iteration/meowtini.jpg)
@@ -256,12 +259,19 @@ map_dbl(df, median, na.rm=T)
 
 ```
 
+## purrr:::map with arguments
+![](images/iteration/map-arg_adv_r.png)
+
 
 ## What if I have more than one argument?
+
+We can also use ~ and a . as a placeholder:
+
 ```{r}
 #using ~ and .
-map_dbl(df, ~median(., na.rm=T))
+map_dbl(df, ~ median(., na.rm=T))
 ```
+
 ## You try!
 1. What does `map(-2:2, rnorm, n = 5)` do? How is it different from `map_dbl(-2:2, rnorm, n = 5)`?  
      
@@ -279,7 +289,7 @@ map_dbl(df, ~median(., na.rm=T))
      
 - Get the annual mean of wave height  
 
-- Plot
+- Plot!
 
 ## One Line to rule them all
 ```{r, message=FALSE, echo=TRUE, eval=FALSE}
@@ -308,6 +318,64 @@ ggplot(annual_buoys,
 ## Our Plot
 ```{r plot2,  echo=FALSE, eval=TRUE}
 ```
+
+## Variations on a purrr
+
+> - If we want map to do something, but not return an output, use `purrr::walk()`.   
+<br><br>
+  
+> - If we have 2 lists, `map2()`.
+<br><br>
+  
+> - If we have n lists, `pmap()`!
+<br>
+
+## Walk is invisible
+
+```{r echo = TRUE}
+par(mfrow = c(2,1))
+
+walk(c(2002, 2003), ~ get_buoy(.) |> 
+       plot(Temperature_c ~ Month, data = _) )
+
+par(mfrow = c(1,1))
+```
+
+## Walk is invisible
+![](images/iteration/walk_adv_r.png)
+
+## Iterate through two things with map2
+
+```{r echo = TRUE}
+x <- 1:10
+y <- 11:20
+
+map2_dbl(x, y, sum)
+```
+
+## Iterate through two things with map2
+![](images/iteration/map2_adv_r.png)
+
+## Iterate through many things with pmap
+```{r echo = TRUE}
+x <- 1:10
+y <- 11:20
+z <- 101:110
+
+pmap_dbl(list(x, y, z),
+         sum)
+```
+
+## Iterate through many things with pmap
+![](images/iteration/pmap-3_adv_r.png)
+
+## Final Exercises
+
+1. Write a function that given a year will give you the mean temperature from a buoy. Then use `walk()` and `cat()` (with `get_buoy()`) to print out the mean temperatures for every file.  
+<br>
+  
+2. Use `map2_chr()`, `paste` or `str_c()`, and the output `get_buoy(2002)`'s Year and Month Columns (as arguments to map2) to make a character vector of dates in the format "Month-1-Year" using 1 to represent the first day of the month. Yes, you could do this via dplyr, but let's play with `map2()` to make sure you get it.  
+
 
 ##
 ![](./Images/iteration/to_purr_or_not.jpg)
