@@ -30,7 +30,7 @@ Let's go through each step with an example of seals. Are older seals larger?
 library(dplyr)
 library(ggplot2)
 
-seals <- read.csv("./data/17e8ShrinkingSeals Trites 1996.csv")
+seals <- read.csv("Labs/data/17e8ShrinkingSeals Trites 1996.csv")
 
 seal_base <- ggplot(seals, aes(x=age.days, y=length.cm)) +
   geom_point() +
@@ -65,45 +65,60 @@ But that's getting ahead of ourselves...
 
 ## 2. Evaluating Assumptions
 
-R also provides a 1-stop shop for evaluating functions. Fit model objects can typically be plotted. Now, it uses base plot, so, we'll use the `par` function to setup a 2x2 plotting area.
+R also provides a 1-stop shop for evaluating functions. Fit model objects can typically be plotted using the `performance` package.
 
 ```{r assumptions}
-par(mfrow = c(2,2)) #2 rows, 2 columns
-
-plot(seal_lm)
-
-par(mfrow=c(1,1)) #reset back to 1 panel
+library(performance)
+check_model(seal_lm)
 ```
 
-Whoah - that's a lot! And, there's no figure with Cook's D or a histogram of residuals.
+Whoah - that's a lot! 
 
 OK, breathe.
 
-`plot.lm()` actualyl generates even more plots than shown here. You can specify what plot you want with the `which` argument, but will need to look at `?plot.lm` to know just what to look at.
-
-I have five plots I really like to look at - four of which `plot.lm()` will generate. Those four are the fitted versus residuals:
+There's a lot - first, checking to see if the model produces fits that look like the data. You can also get this with
 
 ```{r assumptions_fit_resid}
-plot(seal_lm, which=1)
+check_predictions(seal_lm)
 ```
 
-Note the curvature of the line? Troubling, or a high n?
+Next, we can look at the fitted and residual plot
+
+```{r}
+check_model(seal_lm, check = "ncv") |> plot()
+```
+
+Note the curvature of the line? Troubling, or a high n? It's worth thinking about. Next, we can look information about the residuals. First, we check the homogeneity of variance.
+
+```{r}
+check_heteroscedasticity(seal_lm) |> plot()
+```
+
+That curvilinearity at the end is again a hair concerning. But, let's dig deeper and look at the residuals. Are they normal?
+
+```{r}
+check_normality(seal_lm) |> plot()
+```
 
 A QQ plot of the residuals
+
 ```{r qq}
-plot(seal_lm, which=2)
+check_normality(seal_lm) |> plot(type = "qq")
 ```
+
 Not bad!
+
+Last, outliers
 
 The Cook's D values
 ```{r cooks}
-plot(seal_lm, which=4)
+check_outliers(seal_lm) |> plot(type = "bar")
 ```
 All quite small!
 
 And last, leverage
 ```{r leverage}
-plot(seal_lm, which=5)
+check_outliers(seal_lm) |> plot()
 ```
 
 I also like to look at the histogram of residuals.There is a function called `residuals` that will work on nearly any fit model object in R. So we can just...
@@ -205,7 +220,7 @@ Fist, the relationship between how lean you are and how quickly you lose fat. Im
 
 ```{r, eval=FALSE}
 library(ggplot2)
-fat <- read.csv("./data/17q04BodyFatHeatLoss Sloan and Keatinge 1973 replica.csv")
+fat <- read.csv("Labs/data/17q04BodyFatHeatLoss Sloan and Keatinge 1973 replica.csv")
 
 #initial visualization to determine if lm is appropriate
 fat_plot <- ggplot(data=fat, aes(x=leanness, y=lossrate)) + 
@@ -215,8 +230,7 @@ fat_plot
 fat_mod <- lm(lossrate ~ leanness, data=fat)
 
 #assumptions
-plot(fat_mod, which=1)
-plot(fat_mod, which=2)
+check_model(fat_mod)
 
 #f-tests of model
 anova(fat_mod)
@@ -233,7 +247,7 @@ fat_plot +
 For your first faded example, let's look at the relationship between DEET and mosquito bites.
 
 ```{r eval=FALSE}
-deet <- read.csv("./data/17q24DEETMosquiteBites.csv")
+deet <- read.csv("Labsdata/17q24DEETMosquiteBites.csv")
 
 deet_plot <- ggplot(data=___, aes(x=dose, y=bites)) + 
   geom_point()
@@ -243,8 +257,7 @@ deet_plot
 deet_mod <- lm(bites ~ dose, data=deet)
 
 #assumptions
-plot(___, which=1)
-plot(___, which=2)
+check_model(____)
 
 #f-tests of model
 anova(___)
@@ -263,7 +276,7 @@ We'll start today with the dataset `15e1KneesWhoSayNight.csv` about an experimen
 ```{r knees}
 library(tidyverse)
 
-knees <- read_csv("./data/15e1KneesWhoSayNight.csv")
+knees <- read_csv("Labs/data/15e1KneesWhoSayNight.csv")
 ```
 
 We can see the outcomes with `ggplot2`
@@ -280,7 +293,7 @@ ggplot(knees, mapping=aes(x=treatment, y=shift)) +
 As the underlying model of ANOVA is a linear one, we fit ANOVAs using `lm()` just as with linear regression.
 
 ```{r intro_knees}
-knees <- read.csv("./data/15e1KneesWhoSayNight.csv")
+knees <- read.csv("Labs/data/15e1KneesWhoSayNight.csv")
 
 knees_lm <- lm(shift ~ treatment, data=knees)
 ```
@@ -301,9 +314,7 @@ Because this is an lm, we can check our assumptions as before - with one new one
 
 ```{r assumptionsanova}
 #The whole par thing lets me make a multi-panel plot
-par(mfrow=c(2,2))
-plot(knees_lm, which=c(1,2,5))
-par(mfrow=c(1,1))
+check_model(knees_lm)
 ```
 
 Now, the residuals v. fitted lets us see how the residuals are distributed by treatment, but I often find it insufficient, as spacing on the x-axis can get odd. I could roll my own plot of resudials versus treatment, but, there's a **wonderful** package called `car` - which is from the book *Companion to Applied Regression* by John Fox. I recommend it highly! It has a function in it called `residualPlots()` which is useful here.
@@ -396,21 +407,21 @@ plot(contrast(knees_em,
 We can also, using our tukey method of adjustment, get "groups" - i.e., see which groups are statistically the same versus different.
 
 ```{r groups}
-library(multcompView)
-CLD(knees_em, adjust="tukey")
+library(multcomp)
+cld(knees_em, adjust="tukey")
 ```
 
 This can be very useful in plotting. For example, we can use that output as a data frame for a `ggplot` in a few different ways.
 
 ```{r plot_groups}
-CLD(knees_em, adjust="tukey") %>%
+cld(knees_em, adjust="tukey") %>%
   ggplot(aes(x = treatment, y = emmean, 
              ymin = lower.CL, ymax = upper.CL,
              color = factor(.group))) +
   geom_pointrange() 
 
 
-CLD(knees_em, adjust="tukey") %>%
+cld(knees_em, adjust="tukey") %>%
   mutate(.group = letters[as.numeric(.group)]) %>%
   ggplot(aes(x = treatment, y = emmean, 
              ymin = lower.CL, ymax = upper.CL)) +
@@ -419,7 +430,9 @@ CLD(knees_em, adjust="tukey") %>%
   ylim(c(-2.5, 2))
 
 
-knees_expanded <- left_join(knees, CLD(knees_em, adjust="tukey"))
+knees_expanded <- left_join(knees, 
+                            cld(knees_em, adjust="tukey"))
+
 ggplot(knees_expanded,
        aes(x = treatment, y = shift, color = .group)) + 
   geom_point()
@@ -472,7 +485,7 @@ Let's try three ANOVAs!
 First - do landscape characteristics affect the number of generations plant species can exist before local extinction?
 
 ```{r plants, eval=FALSE}
-plants <- read.csv("./data/15q01PlantPopulationPersistence.csv")
+plants <- read.csv("Labsdata/15q01PlantPopulationPersistence.csv")
 
 #Visualize
 qplot(treatment, generations, data=plants, geom="boxplot")
@@ -494,7 +507,7 @@ Second, how do different host types affect nematode longevity?
 
 
 ```{r nemetods, eval=FALSE}
-worms <- read.csv("./data/15q19NematodeLifespan.csv")
+worms <- read.csv("Labsdata/15q19NematodeLifespan.csv")
 
 #Visualize
 qplot(treatment, lifespan, data=____, geom="____")
@@ -515,7 +528,7 @@ contrast(emmeans(______, ~________), method = "tukey")
 And last, how about how number of genotypes affect eelgrass productivity. Note, THERE IS A TRAP HERE. Look at your dataset before you do ANYTHING.
 
 ```{r eelgrass, eval=FALSE}
-eelgrass <- read.csv("./data/15q05EelgrassGenotypes.csv")
+eelgrass <- read.csv("Labsdata/15q05EelgrassGenotypes.csv")
 
 #Visualize
 ________(treatment.genotypes, shoots, data=____, geom="____")
