@@ -14,7 +14,7 @@
 
 <title>Final Project</title>
 
-<script src="site_libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="site_libs/header-attrs-2.21/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
@@ -61,6 +61,7 @@ if (window.hljs) {
 
 
 
+
 <style type = "text/css">
 .main-container {
   max-width: 940px;
@@ -81,6 +82,9 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
 }
 pre code {
   padding: 0;
@@ -138,11 +142,15 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.tab('show');
-
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
   // Navbar adjustments
   var navHeight = $(".navbar").first().height() + 15;
@@ -171,8 +179,8 @@ $(document).ready(function () {
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -180,16 +188,9 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -233,7 +234,7 @@ $(document).ready(function () {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -261,17 +262,17 @@ $(document).ready(function () {
   <a href="final_project.html">Final</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Syllabus
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="./biol_355_syllabus_2021.docx">Lecture</a>
+      <a href="https://docs.google.com/document/d/1-jW63ua7hVZI52ZzqZnaf8lIfFvIhHLPmdoU6dGyIxQ/edit?usp=sharing">Lecture</a>
     </li>
     <li>
-      <a href="./biol_356_syllabus_2021.docx">Lab</a>
+      <a href="https://docs.google.com/document/d/1WSyOwxDmcU8LfmkL-91GKwPBFMZp5OP5X_EookCZ0vk/edit?usp=sharing">Lab</a>
     </li>
   </ul>
 </li>
@@ -298,7 +299,7 @@ $(document).ready(function () {
 
 <h1 class="title toc-ignore">Final Project</h1>
 <h4 class="author">Intro to Data Science for Biology</h4>
-<h4 class="date">Presentations Dec 20, 2021, Paper Due Dec 22, 2021</h4>
+<h4 class="date">Presentations May 12, 2023, Paper Due May 17, 2023</h4>
 
 </div>
 
@@ -306,20 +307,50 @@ $(document).ready(function () {
 <p>See past projects <a href="./past_projects.html">here</a></p>
 <div id="submission-links" class="section level1">
 <h1>Submission links</h1>
-<p>Submit links to projects the day before due to <a href="mailto:jarrett.byrnes@umb.edu">professor</a><br />
+<p>Submit links to projects the day before due to <a
+href="mailto:jarrett.byrnes@umb.edu">professor</a><br />
 Submit paper to usual dropbox link</p>
 </div>
 <div id="putting-it-all-together" class="section level1">
 <h1>Putting it all together</h1>
-<p>For your final project, I’m asking you to create an exploration of a dataset of your choice. This project should provide people with ways to explore the dataset in a way that will guide them towards learning something about relationships and patterns in the data. The final project will have two graded parts - a Shiny app for end-users and a final paper where you tell us just what you did. Your app and paper should explore two or more particular features of the data you find interesting, and provide an end-user a way to derive new and meaningful inferences from the data within the bounds of the controls you provide them with.</p>
+<p>For your final project, I’m asking you to create an exploration of a
+dataset of your choice. This project should provide people with ways to
+explore the dataset in a way that will guide them towards learning
+something about relationships and patterns in the data. The final
+project will have two graded parts - a Shiny app for end-users and a
+final paper where you tell us just what you did. Your app and paper
+should explore two or more particular features of the data you find
+interesting, and provide an end-user a way to derive new and meaningful
+inferences from the data within the bounds of the controls you provide
+them with.</p>
 <div id="the-shiny-app" class="section level2">
 <h2>The Shiny App</h2>
-<p>Your app should present 1) the dataset you are looking at, and a full explanation of what it is (this can be a front page, a tabset, or whatever you would like), 2) provide users at least 3 ways to explore different aspects of the data, 3) provide model fits and statistical tests where it would help the user, 4) useful visual representations that are easy for the user to understand. It should be organized in a way that a user has no problem navigating around, and should not just be one giant pane of overwhelming data and analyses.</p>
-<p>You will present the app to both your classmates and visitors in a presentation Zoom session. There, I will set you each up with your own breakout room where people can visit you and talk to you about the app. You will have a running app on <a href="http://shinyapps.io" class="uri">http://shinyapps.io</a> (or other server) to which you can give them a link. Half of the class will present for the first half-hour, the other half for the second half-hour, so you can visit each others projects!</p>
-<p>In addition to your professor and TA visiting you and trying out your app, you will be required to submit the code and data for the app as a zipped up archive. Note - You might want to use the <code>goodpractices</code> library and the <code>styler</code> library to make sure your code is readable and accords to good style-guide principles. You will submit this as you usually submit homeworks.</p>
+<p>Your app should present 1) the dataset you are looking at, and a full
+explanation of what it is (this can be a front page, a tabset, or
+whatever you would like), 2) provide users at least 3 ways to explore
+different aspects of the data, 3) provide model fits and statistical
+tests where it would help the user, 4) useful visual representations
+that are easy for the user to understand. It should be organized in a
+way that a user has no problem navigating around, and should not just be
+one giant pane of overwhelming data and analyses.</p>
+<p>You will present the app to both your classmates and visitors in a
+presentation Zoom session. There, I will set you each up with your own
+breakout room where people can visit you and talk to you about the app.
+You will have a running app on <a href="http://shinyapps.io"
+class="uri">http://shinyapps.io</a> (or other server) to which you can
+give them a link. Half of the class will present for the first
+half-hour, the other half for the second half-hour, so you can visit
+each others projects!</p>
+<p>In addition to your professor and TA visiting you and trying out your
+app, you will be required to submit the code and data for the app as a
+zipped up archive. Note - You might want to use the
+<code>goodpractices</code> library and the <code>styler</code> library
+to make sure your code is readable and accords to good style-guide
+principles. You will submit this as you usually submit homeworks.</p>
 <div id="grading" class="section level3">
 <h3>Grading</h3>
-<p>For your app and presentation, you will be graded on 1. Ease of use<br />
+<p>For your app and presentation, you will be graded on 1. Ease of
+use<br />
 2. Interpretability of what a user learns from the app<br />
 3. Thorough exploration of the data<br />
 4. Quality of visualizations<br />
@@ -328,20 +359,28 @@ Submit paper to usual dropbox link</p>
 7. Presentation of app to an end-user<br />
 8. Ability to answer questions about the data and results<br />
 <br />
-Extra credit is available to those who want to publicize their app more widely.<br />
+Extra credit is available to those who want to publicize their app more
+widely.<br />
 Each of the above will be graded on a 5 point scale.<br />
 1 = Student shows little ability to execute this concept.<br />
-2 = Student shows a flawed attempt at execution of this step, or minimal effort.<br />
-3 = Student shows understanding of the concept, and is able to achieve a minimal satisfactory outcome.<br />
-4 = Student shows understanding, and presents a well-crafted execution of the concept.<br />
-5 = Student has achieved mastery of the concept, with a deep and compelling execution.</p>
+2 = Student shows a flawed attempt at execution of this step, or minimal
+effort.<br />
+3 = Student shows understanding of the concept, and is able to achieve a
+minimal satisfactory outcome.<br />
+4 = Student shows understanding, and presents a well-crafted execution
+of the concept.<br />
+5 = Student has achieved mastery of the concept, with a deep and
+compelling execution.</p>
 </div>
 </div>
 <div id="the-paper" class="section level2">
 <h2>The Paper</h2>
 <div id="organizational-structure" class="section level3">
 <h3>Organizational Structure</h3>
-<p>The final paper should be broken up into something along the lines of the following sections. You may feel free to adapt this flexibly given your unique data set and set of problems and questions. But this is a general guide, particularly if you are lost.</p>
+<p>The final paper should be broken up into something along the lines of
+the following sections. You may feel free to adapt this flexibly given
+your unique data set and set of problems and questions. But this is a
+general guide, particularly if you are lost.</p>
 <div id="introduction" class="section level4">
 <h4>1) Introduction</h4>
 <ul>
@@ -350,21 +389,32 @@ Each of the above will be graded on a 5 point scale.<br />
 <li>Describe the dataset in detail</li>
 <li>Visualize summary information about the data</li>
 </ul></li>
-<li>Based on the data, what types of elements did you want people to be able to explore? What questions did you want them to be able to ask and answer?</li>
+<li>Based on the data, what types of elements did you want people to be
+able to explore? What questions did you want them to be able to ask and
+answer?</li>
 </ul>
 </div>
 <div id="methods" class="section level4">
 <h4>2) Methods</h4>
 <ul>
-<li>How did you prepare and manupulate the data to get it ready for your app? Write out the workflow(s) step by step.</li>
-<li>How did you decide on the ways you wanted the end-user to be able to explore the data? What information did you chose to give to them and why? What choices did you give them and why?</li>
-<li>What was the setup of your app? Tell us about the layout you chose, why you chose it, and how it created a</li>
-<li>What are the visualizations and analyses that you provided access to?
+<li>How did you prepare and manupulate the data to get it ready for your
+app? Write out the workflow(s) step by step.</li>
+<li>How did you decide on the ways you wanted the end-user to be able to
+explore the data? What information did you chose to give to them and
+why? What choices did you give them and why?</li>
+<li>What was the setup of your app? Tell us about the layout you chose,
+why you chose it, and how it created a</li>
+<li>What are the visualizations and analyses that you provided access
+to?
 <ul>
-<li>Show us the types of visualizations you wanted to create to help the data tell its story<br />
+<li>Show us the types of visualizations you wanted to create to help the
+data tell its story<br />
 </li>
-<li>What are the underlying models you let the user fit? Why those models? What is their data generating process and your error generating process?</li>
-<li>What statistical tests did you return to the user. Why? What did they tell them?</li>
+<li>What are the underlying models you let the user fit? Why those
+models? What is their data generating process and your error generating
+process?</li>
+<li>What statistical tests did you return to the user. Why? What did
+they tell them?</li>
 </ul></li>
 <li>Include a working link to your app</li>
 </ul>
@@ -373,37 +423,69 @@ Each of the above will be graded on a 5 point scale.<br />
 <div id="results" class="section level3">
 <h3>3) Results</h3>
 <ul>
-<li>What are the most obvious things that you can learn from your app about your dataset?
+<li>What are the most obvious things that you can learn from your app
+about your dataset?
 <ul>
-<li>Based on what people could do in your app, is there any 2-3 visualizations or analyses that stand out? Show them here.</li>
+<li>Based on what people could do in your app, is there any 2-3
+visualizations or analyses that stand out? Show them here.</li>
 </ul></li>
-<li>What are other visualizations and analyses that come out of your dataset?
+<li>What are other visualizations and analyses that come out of your
+dataset?
 <ul>
 <li>Anything that your app made you think you should go look at?</li>
-<li>Any statistical tests of patterns that you can see in your app, but are not formally tested there?</li>
+<li>Any statistical tests of patterns that you can see in your app, but
+are not formally tested there?</li>
 </ul></li>
 </ul>
 </div>
 <div id="discussion" class="section level3">
 <h3>4) Discussion</h3>
 <ul>
-<li>What did you learn from your app and your exploration of this data?</li>
-<li>Does the way you setup your app allow you to learn anything you did not expect?</li>
+<li>What did you learn from your app and your exploration of this
+data?</li>
+<li>Does the way you setup your app allow you to learn anything you did
+not expect?</li>
 <li>What feedback did you get about your app?</li>
-<li>Do your results suggest additional visualizations/analyses? Feel free to conduct them here.</li>
+<li>Do your results suggest additional visualizations/analyses? Feel
+free to conduct them here.</li>
 <li>What final conclusion can you draw about your data set?</li>
 </ul>
 </div>
 <div id="some-markdown-notes-for-the-paper" class="section level3">
 <h3>Some Markdown Notes for the paper</h3>
-<p>As a quick note, you might want to massage you <a href="https://rmarkdown.rstudio.com/lesson-3.html">code chunks</a> a bit in your presentation so we don’t see code, error messages, warnings, etc. Remember <code>warning=FALSE</code>, <code>message=FALSE</code>, <code>echo=FALSE</code>, and more are all your friends. For more - including how to resize graphs and such - see <a href="https://yihui.name/knitr/options/">here</a>.</p>
-<p>If you want to output your statistical results as a table, use <a href="https://rmarkdown.rstudio.com/lesson-7.html">knitr::kable</a> or <a href="https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html">kabelExtra</a>. If you want to build tables that you fill in with text, I recommend this <a href="https://www.tablesgenerator.com/markdown_tables">markdown table generator</a> as <a href="http://fletcher.github.io/MultiMarkdown-5/tables.html">markdown tables</a> can be tricky.<br />
+<p>As a quick note, you might want to massage you <a
+href="https://rmarkdown.rstudio.com/lesson-3.html">code chunks</a> a bit
+in your presentation so we don’t see code, error messages, warnings,
+etc. Remember <code>warning=FALSE</code>, <code>message=FALSE</code>,
+<code>echo=FALSE</code>, and more are all your friends. For more -
+including how to resize graphs and such - see <a
+href="https://yihui.name/knitr/options/">here</a>.</p>
+<p>If you want to output your statistical results as a table, use <a
+href="https://rmarkdown.rstudio.com/lesson-7.html">knitr::kable</a> or
+<a
+href="https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html">kabelExtra</a>.
+If you want to build tables that you fill in with text, I recommend this
+<a href="https://www.tablesgenerator.com/markdown_tables">markdown table
+generator</a> as <a
+href="http://fletcher.github.io/MultiMarkdown-5/tables.html">markdown
+tables</a> can be tricky.<br />
 <br />
-You might want to use the <code>goodpractices</code> library and the <code>styler</code> library to make sure your code is readable and accords to good style-guide principles.</p>
-<p>Last, here’s a <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">markdown cheatsheet</a> - although Rstudio’s help has a good set of materials as well.</p>
+You might want to use the <code>goodpractices</code> library and the
+<code>styler</code> library to make sure your code is readable and
+accords to good style-guide principles.</p>
+<p>Last, here’s a <a
+href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">markdown
+cheatsheet</a> - although Rstudio’s help has a good set of materials as
+well.</p>
 <div id="grading-of-the-paper" class="section level4">
 <h4>Grading of the Paper</h4>
-<p>Remember, I’m looking for quality well commented, well thought-out, well styled code in addition to gorgeous visualizations that convery a message and unambiguous analyses (where possible). As a guide to the whole paper, here’s my rubric. Once you finish your paper, assess yourself. Heck, if you even want to write a short section where you assess yourself against this rubric and justify why we should give you a certain grade according to this rubric, feel free!</p>
+<p>Remember, I’m looking for quality well commented, well thought-out,
+well styled code in addition to gorgeous visualizations that convery a
+message and unambiguous analyses (where possible). As a guide to the
+whole paper, here’s my rubric. Once you finish your paper, assess
+yourself. Heck, if you even want to write a short section where you
+assess yourself against this rubric and justify why we should give you a
+certain grade according to this rubric, feel free!</p>
 <table>
 <colgroup>
 <col width="18%" />
@@ -424,69 +506,162 @@ You might want to use the <code>goodpractices</code> library and the <code>style
 <tbody>
 <tr class="odd">
 <td>Description of data</td>
-<td>The student provides the source of the dataset. The description includes background on how the data were collected, with a focus on details of the data collection that would be relevant to how they answer their question (e.g., understanding of sampling design that may be relevant to meeting assumptions of statistical tests). The student provides exploratory summary statistics or visualisations that help the reader understand the scope, content, and coverage of the data.</td>
-<td>The student provides the source of the dataset. The description includes background on how the data were collected, with a focus on details of the data collection that would be relevant to how they answer their question (e.g., understanding of sampling design that may be relevant to meeting assumptions of statistical tests). The student provides exploratory summary statistics and visualizations.</td>
-<td>The student provides the source and brief description of the dataset. The student provides exploratory summary statistics or visualizations.</td>
-<td>Student gives us name and source of data set and what type of data is in it.</td>
+<td>The student provides the source of the dataset. The description
+includes background on how the data were collected, with a focus on
+details of the data collection that would be relevant to how they answer
+their question (e.g., understanding of sampling design that may be
+relevant to meeting assumptions of statistical tests). The student
+provides exploratory summary statistics or visualisations that help the
+reader understand the scope, content, and coverage of the data.</td>
+<td>The student provides the source of the dataset. The description
+includes background on how the data were collected, with a focus on
+details of the data collection that would be relevant to how they answer
+their question (e.g., understanding of sampling design that may be
+relevant to meeting assumptions of statistical tests). The student
+provides exploratory summary statistics and visualizations.</td>
+<td>The student provides the source and brief description of the
+dataset. The student provides exploratory summary statistics or
+visualizations.</td>
+<td>Student gives us name and source of data set and what type of data
+is in it.</td>
 </tr>
 <tr class="even">
 <td>Explanation and justification of question(s)</td>
-<td>There is a single focal question that is testable given the data. There are additional questions that are subsets or follow ups of the focal question. These questions will also be testable given the data. The student has described the rationale behind the question, providing context for how they came up with this question.</td>
-<td>There is a single focal question that is testable given the data. The student has described the rationale behind the question, providing context for how they came up with this question.</td>
-<td>There is a single focal question that is testable given the data. The student has described the rationale behind the question.</td>
-<td>There is a single focal question that relates to the data. The rationale for the question is unclear, however.</td>
+<td>There is a single focal question that is testable given the data.
+There are additional questions that are subsets or follow ups of the
+focal question. These questions will also be testable given the data.
+The student has described the rationale behind the question, providing
+context for how they came up with this question.</td>
+<td>There is a single focal question that is testable given the data.
+The student has described the rationale behind the question, providing
+context for how they came up with this question.</td>
+<td>There is a single focal question that is testable given the data.
+The student has described the rationale behind the question.</td>
+<td>There is a single focal question that relates to the data. The
+rationale for the question is unclear, however.</td>
 </tr>
 <tr class="odd">
 <td>Description of workflow</td>
-<td>The student provides a verbal description of the workflow used to answer their question. What steps did they take to answer their question. This can include everything from data tidying to visualization to analysis. Justification for the workflow is included in this description.</td>
-<td>The student provides a verbal description of the workflow used to answer their question. What steps did they take to answer their question? This can include everything from data tidying to visualization to analysis.</td>
-<td>The student provides a verbal description of the workflow of the analyses used to answer their question.</td>
-<td>The student provides a broad-based verbal description of the workflow of their process, but is not able to break it down into specific steps. The description reads as an abstract rather than a concrete set of actions.</td>
+<td>The student provides a verbal description of the workflow used to
+answer their question. What steps did they take to answer their
+question. This can include everything from data tidying to visualization
+to analysis. Justification for the workflow is included in this
+description.</td>
+<td>The student provides a verbal description of the workflow used to
+answer their question. What steps did they take to answer their
+question? This can include everything from data tidying to visualization
+to analysis.</td>
+<td>The student provides a verbal description of the workflow of the
+analyses used to answer their question.</td>
+<td>The student provides a broad-based verbal description of the
+workflow of their process, but is not able to break it down into
+specific steps. The description reads as an abstract rather than a
+concrete set of actions.</td>
 </tr>
 <tr class="even">
 <td>Selection and justification of statistical methods</td>
-<td>The statistical methods used are appropriate and answer the question posed. A justification of statistical method choice includes a clear statement of the underlying model used, with a description of the data generating process and error generating process. The student has clearly described the assumptions of the test or tests that they used and provided support that these assumptions have been met (e.g., verbal descriptions, additional statistical tests, data visualisations).</td>
-<td>The statistical methods used are appropriate and answer the question posed. The student has clearly described the assumptions of the test or tests that they used and provided support that these assumptions have been met (e.g., verbal descriptions, additional statistical tests, data visualisations).</td>
-<td>The statistical methods used are appropriate and answer the question posed.</td>
-<td>The studnet proposes statistical methods, but how they relate to the question being asked is unclear.</td>
+<td>The statistical methods used are appropriate and answer the question
+posed. A justification of statistical method choice includes a clear
+statement of the underlying model used, with a description of the data
+generating process and error generating process. The student has clearly
+described the assumptions of the test or tests that they used and
+provided support that these assumptions have been met (e.g., verbal
+descriptions, additional statistical tests, data visualisations).</td>
+<td>The statistical methods used are appropriate and answer the question
+posed. The student has clearly described the assumptions of the test or
+tests that they used and provided support that these assumptions have
+been met (e.g., verbal descriptions, additional statistical tests, data
+visualisations).</td>
+<td>The statistical methods used are appropriate and answer the question
+posed.</td>
+<td>The studnet proposes statistical methods, but how they relate to the
+question being asked is unclear.</td>
 </tr>
 <tr class="odd">
 <td>Code quality</td>
-<td>The student adheres to an R style guide (e.g., <a href="http://adv-r.had.co.nz/Style.html" class="uri">http://adv-r.had.co.nz/Style.html</a>). The code is easy to read and well commented, allowing an external reviewer to understand why certain steps are being done. This code is modular, with complex problems being broken down into small, human readable, and logically discrete steps. Functions are used instead of repeated code chunks where appropriate. The report has been written in Rmarkdown</td>
-<td>The code is easy to read and well commented, allowing an external reviewer to understand why certain steps are being done. This code is modular, with complex problems being broken down into small, human readable, and logically discrete steps. Functions are used instead of repeated code chunks where appropriate.</td>
-<td>The code is easy to read and well commented, allowing an external reviewer to understand why certain steps are being done.</td>
-<td>The student has made an effort to make the code readable via good commenting practices.</td>
+<td>The student adheres to an R style guide (e.g., <a
+href="http://adv-r.had.co.nz/Style.html"
+class="uri">http://adv-r.had.co.nz/Style.html</a>). The code is easy to
+read and well commented, allowing an external reviewer to understand why
+certain steps are being done. This code is modular, with complex
+problems being broken down into small, human readable, and logically
+discrete steps. Functions are used instead of repeated code chunks where
+appropriate. The report has been written in Rmarkdown</td>
+<td>The code is easy to read and well commented, allowing an external
+reviewer to understand why certain steps are being done. This code is
+modular, with complex problems being broken down into small, human
+readable, and logically discrete steps. Functions are used instead of
+repeated code chunks where appropriate.</td>
+<td>The code is easy to read and well commented, allowing an external
+reviewer to understand why certain steps are being done.</td>
+<td>The student has made an effort to make the code readable via good
+commenting practices.</td>
 </tr>
 <tr class="even">
 <td>Presentation of results</td>
-<td>Data visualisations are clearly relevant to the questions being asked and models being tested. Figures are appropriately captioned and can be interpreted with minimal additional context (i.e., can stand alone). Each visualisation conveys information that is related to the questions described in the introduction. Axes are well labeled, legends are clear, color schemes make key points easily understandable to the reader. Minutaue of font-sizes, visual aesthetics show clear attention to detail.</td>
-<td>Data visualisations are clearly relevant to the questions being asked and models being tested. Figures are appropriately captioned and can be interpreted with minimal additional context (i.e., can stand alone). Each visualisation conveys information that is related to the questions described in the introduction.</td>
-<td>Data visualisations are clearly relevant to the questions being asked and models being tested. Each visualisation conveys information that is related to the questions described in the introduction.</td>
-<td>Visualizations convey information related to analyses and questions in a clear manner, but are difficult to interpret.</td>
+<td>Data visualisations are clearly relevant to the questions being
+asked and models being tested. Figures are appropriately captioned and
+can be interpreted with minimal additional context (i.e., can stand
+alone). Each visualisation conveys information that is related to the
+questions described in the introduction. Axes are well labeled, legends
+are clear, color schemes make key points easily understandable to the
+reader. Minutaue of font-sizes, visual aesthetics show clear attention
+to detail.</td>
+<td>Data visualisations are clearly relevant to the questions being
+asked and models being tested. Figures are appropriately captioned and
+can be interpreted with minimal additional context (i.e., can stand
+alone). Each visualisation conveys information that is related to the
+questions described in the introduction.</td>
+<td>Data visualisations are clearly relevant to the questions being
+asked and models being tested. Each visualisation conveys information
+that is related to the questions described in the introduction.</td>
+<td>Visualizations convey information related to analyses and questions
+in a clear manner, but are difficult to interpret.</td>
 </tr>
 <tr class="odd">
 <td>Discussion/evaluation of results</td>
-<td>The conclusions are derived logically from the results and data visualisations. The student has examined and evaluated limitations in the analysis and has proposed ways to overcome these limitations. The student is able to synthesize multiple different results into a single strong conclusion.</td>
-<td>The conclusions are derived logically from the results and data visualisations. The student has multiple conclusions drawn from analyses, but does not bring them together into a single strong point.</td>
-<td>The conclusions are derived logically from the results and data visualisations.</td>
-<td>The conclusions are derived from the results and data visualisations, but do not connect clarly and cleanly. Some analyses are ignored.</td>
+<td>The conclusions are derived logically from the results and data
+visualisations. The student has examined and evaluated limitations in
+the analysis and has proposed ways to overcome these limitations. The
+student is able to synthesize multiple different results into a single
+strong conclusion.</td>
+<td>The conclusions are derived logically from the results and data
+visualisations. The student has multiple conclusions drawn from
+analyses, but does not bring them together into a single strong
+point.</td>
+<td>The conclusions are derived logically from the results and data
+visualisations.</td>
+<td>The conclusions are derived from the results and data
+visualisations, but do not connect clarly and cleanly. Some analyses are
+ignored.</td>
 </tr>
 <tr class="even">
 <td>Quality of writing</td>
-<td>Spelling and grammar count. Sections written so that they can be clearly understood by the reader. Student’s prose flow cleanly and clearly. Sentences are complete, organized, and are easy to understand. Clarity of communication is key.</td>
-<td>Spelling and grammar count. Sections written so that they can be clearly understood by the reader. Clarity of communication is key.</td>
-<td>Spelling and grammar count. Sections written so that they can be clearly understood by the reader.</td>
-<td>Spelling and grammar are not great, but the writing is still clear.</td>
+<td>Spelling and grammar count. Sections written so that they can be
+clearly understood by the reader. Student’s prose flow cleanly and
+clearly. Sentences are complete, organized, and are easy to understand.
+Clarity of communication is key.</td>
+<td>Spelling and grammar count. Sections written so that they can be
+clearly understood by the reader. Clarity of communication is key.</td>
+<td>Spelling and grammar count. Sections written so that they can be
+clearly understood by the reader.</td>
+<td>Spelling and grammar are not great, but the writing is still
+clear.</td>
 </tr>
 </tbody>
 </table>
 <p>So, each section of the rubric is out of 4.</p>
-<p>Note: Using libraries not taught in class will be +1 point per library. Please note when you are using a new library for you.</p>
+<p>Note: Using libraries not taught in class will be +1 point per
+library. Please note when you are using a new library for you.</p>
 </div>
 </div>
 <div id="an-example-from-the-past" class="section level3">
 <h3>An example from the past</h3>
-<p>This is before we moved to shiny apps, and, this needs a bit more organizational cohesion, and it was written in bullet points, which got big points off (write! and write well!) but overall, <a href="./final_project/FinalProject_paper_example.html">not a bad paper</a></p>
+<p>This is before we moved to shiny apps, and, this needs a bit more
+organizational cohesion, and it was written in bullet points, which got
+big points off (write! and write well!) but overall, <a
+href="./final_project/FinalProject_paper_example.html">not a bad
+paper</a></p>
 </div>
 </div>
 </div>

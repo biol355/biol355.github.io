@@ -212,7 +212,8 @@ __Etherpad:__ https://etherpad.wikimedia.org/p/355-many_predictors-2023_spring
 ```{r next_date, echo=FALSE}
 ```
 `r datestring`  
-Final Presentations on the afternoon of Dec 20th!
+Final Presentations on the morning of May 12th!
+(Papers due end of day May 17th)
 
 <!--
 
