@@ -1,0 +1,452 @@
+---
+title: 'Lab: General Linear Models in R'
+author: "Intro to Data Science for Biology"
+output:
+  html_document:
+    toc: true
+    toc_depth: 5
+    toc_float: true
+---
+
+Time for the general linear models.
+```{r setup, include=FALSE}
+library(tidyverse)
+library(readr)
+library(ggplot2)
+library(car)
+library(performance)
+library(emmeans)
+
+theme_set(theme_bw(base_size=17))
+knitr::opts_chunk$set(echo = TRUE,  message=FALSE, warning=FALSE)
+```
+
+
+## 1. Mixing Categorical and Continuous Predictors
+Combining categorical and continuous variables is not that different from multiway ANOVA. To start with, let's look at the neanderthal data.
+```{r neand, message=FALSE}
+neand <- read_csv("Labs/data/18q09NeanderthalBrainSize.csv")
+head(neand)
+```
+
+We can clearly see both the categorical variable we're interested in, and the covariate.
+
+To get a preliminary sense of what's going on here, do some exploratory visualization with `ggplot2` why doncha!
+
+```{r plot_neand}
+library(ggplot2)
+
+ggplot(data = neand,
+       aes(x = lnmass, 
+           y = lnbrain, 
+           color=species)) +
+  geom_point() + 
+  stat_smooth(method="lm")
+```
+
+Now, the CIs are going to be off as this wasn't all tested in the same model, but you begin to get a sense of whether things are parallel or not, and whether this covariate is important.
+
+What other plots might you produce?
+
+As this is a general linear model, good olde `lm()` is still there for us.
+```{r neand_lm}
+neand_lm <- lm(lnbrain ~ species + lnmass, data=neand)
+```
+
+### 1.1 Testing Assumptions 
+
+In addition to the ususal tests, we need to make sure that the slopes really are parallel. We do that by fitting a model with an interaction and testing it (which, well, if there *was* and interaction, might that be interesting).
+
+First, the usual
+
+```{r neand_tests}
+check_model(neand_lm)
+
+```
+
+Looks pretty good.
+
+To test the parallel presumption
+
+```{r neand_parallel}
+neand_int <- lm(lnbrain ~ species*lnmass, data=neand)
+
+Anova(neand_int)
+```
+
+Looking at the species:lnmass term, we see that the p value is large, indicating that the slope is homogeneous. We could have a heterogeneous slope - but we'll get to interactions later in the lab!
+
+### 1.2 Assessing results
+
+So, first we have our F-tests.
+
+```{r f_neand}
+Anova(neand_lm)
+```
+
+Both the treatment and covariate matter.
+
+Second, we might want to compare covariate adjusted groups and/or look at covariate adjusted means.
+
+```{r neand_lsmeans}
+library(emmeans)
+adj_means <- emmeans(neand_lm, specs="species",
+                     by = "lnmass")
+
+#adjusted means
+adj_means
+
+#comparisons
+contrast(adj_means, method="pairwise", adjust="none")
+```
+
+If you have an interaction, this method is no longer valid. Instead, you'll need to monkey with your posthocs (if you even want to use them - often we don't) to look at tests at different levels of the covariate.
+
+### 1.3 Visualization
+
+Visualization is funny, as you want to make parallel lines and also get the CIs right. Rather than rely on `ggplot2` to do this natively, we need to futz around a bit with generating predictions
+
+```{r neand_predictions}
+neand_predict <- predict(neand_lm, 
+                         interval="confidence")
+
+head(neand_predict)
+```
+
+So, here we have fit values, lower confidence interval, and upper confidence intervals. As we have not fed `predict()` any new data, these values line up with our `neand` data frame, so we can cbind it all together, and then use these values to make a prediction plot.
+
+```{r neand_plot_predict}
+neand <- cbind(neand, neand_predict)
+
+ggplot(data=neand) +
+  geom_point(mapping=aes(x=lnmass, y=lnbrain, color=species)) +
+  geom_line(mapping = aes(x = lnmass, y=fit, color=species)) + 
+  geom_ribbon(data=neand, aes(x = lnmass, 
+                              ymin=lwr, 
+                              ymax=upr,
+                              group = species), 
+              fill="lightgrey", 
+              alpha=0.5) +
+  theme_bw()
+```
+
+And there we have nice parallel lines with model predicted confidence intervals!
+
+### 1.4 Examples
+I've provided two data sets:  
+1) `18e4MoleRatLayabouts.csv` looking at how caste and mass affect the energy mole rates expend  
+\
+2) `18q11ExploitedLarvalFish.csv` looking at how status of a marine area - protected or not - influences the CV around age of maturity of a number of different fish (so, age is a predictor)
+
+Using the following workflow, analyze these data sets.
+
+```{r sampe_workflow}
+# Load the data
+
+# Perform a preliminary visualization
+
+# Fit an ANCOVA model
+
+# Test Asssumptions and modeify model if needed
+
+# Evaluate results
+
+# Post-hocs if you can
+
+# Visualize results
+```
+
+
+
+## 2. Multiple Linear Regression
+Multiple linear regression is conceptially very similar to ANCOVA. Let's use the keeley fire severity plant richness data to see it in action.
+
+```{r keeley}
+keeley <- read_csv("Labs/data/Keeley_rawdata_select4.csv")
+
+head(keeley)
+```
+
+For our purposes, we'll focus on fire severity and plant cover as predictors.
+
+### 2.1 Visualizing
+I'm not going to lie, visualizing multiple continuous variables is as much of an art as a science. One can use colors and sizes of points, or slice up the data into chunks and facet that. Here are a few examples.
+
+```{r plot_keeley}
+keeley_base <- ggplot(data = keeley,
+       mapping = aes(x = cover, y = rich,
+                     color = firesev)) +
+  geom_point() + 
+  scale_color_gradient(low="yellow", high="red") 
+
+keeley_base
+
+# or split up
+keeley_base +
+    facet_wrap(vars(cut_number(firesev, 4)))
+
+```
+
+Note the new faceting notation. Cool, no?
+
+What other plots can you make?
+
+### 2.2 Fit and Evaluate Assumptions
+Fitting is straightforward for an additive MLR model. It's just a linear model!
+
+```{r k_fit}
+keeley_mlr <- lm(rich ~ firesev + cover, data=keeley)
+```
+
+As for assumptions, we have the usual
+
+```{r k_assume}
+check_model(keeley_mlr)
+```
+
+But now we also need to think about how the residuals relate to each predictor. Fortunately, there's still `residualPlots`.
+
+```{r k_resid}
+residualPlots(keeley_mlr, test=FALSE)
+```
+
+Odd bow shape - but not too bad. Maybe there's an interaction? Maybe we want to log transform something? Who knows!
+
+We also want to look at multicollinearity. There are two steps for that. First, the `vif`
+
+```{r vif}
+vif(keeley_mlr)
+```
+
+Not bad. We might also want to look at the correlation matrix. Dplyr can help us here as we want to select down to just relevant columns.
+
+```{r k_cor}
+keeley |>
+  select(firesev, cover) |>
+  cor()
+```
+
+
+### 3.3 Evaluation
+
+We evaluate the same way as usual
+
+```{r k_eval}
+Anova(keeley_mlr)
+```
+
+And then the coefficients and R<sup>2</sup>
+
+```{r k_coef}
+summary(keeley_mlr)
+```
+
+Not amazing fit, but, the coefficients are clearly different from 0.
+
+### 2.3 Visualization
+
+This is where things get sticky. We have two main approaches. First, visualizing with component + residual plots
+
+```{r cr_k}
+crPlots(keeley_mlr, smooth=FALSE)
+```
+
+But the values on the y axis are....odd. We get a sense of what's going on and the scatter after accounting for our predictor of interest, but we might want to look at, say, evaluation of a variable at the mean of the other.
+
+For that, we have `visreg` with `gg=TRUE` to generate ggplots
+
+```{r k_visreg}
+library(visreg)
+visreg(keeley_mlr, "firesev", gg=TRUE)
+visreg(keeley_mlr, "cover", gg=TRUE)
+```
+
+Now the axes make far more sense, and we have a sense of the relationship.
+
+We can actually whip this up on our own using `crossing`, the median of each value, and predict.
+
+```{r k_pred}
+k_med_firesev <- data.frame(firesev = median(keeley$firesev),
+                                 cover = seq(0,1.5, length.out = 100))
+
+k_med_firesev <- cbind(k_med_firesev, predict(keeley_mlr, 
+                                              newdata = k_med_firesev,
+                                              interval="confidence"))
+  
+ggplot() +
+  geom_point(data=keeley, mapping = aes(x=cover, y = rich)) +
+  geom_line(data = k_med_firesev, mapping=aes(x=cover, y=fit), color="blue") +
+  geom_ribbon(data = k_med_firesev, mapping = aes(x=cover, 
+                                                  ymin = lwr,
+                                                  ymax = upr),
+              fill="lightgrey", alpha=0.5)
+```
+
+### 2.4 Examples
+OK, here are two datasets to work with:\
+
+1) `planktonSummary.csv` showing plankton from Lake Baikal (thanks, Stephanie Hampton). Evluate how Chlorophyll (`CHLFa`) is affected by other predictors. Note, you'll probably want to log transform `CHLFa`.   
+\
+2) `SwaddleWestNile2002NCEAS_shortnames.csv` is about the prevalence of West Nile virus in Birds around Sacramento county in California. What predicts human WNV?\
+
+Using the following workflow, analyze these data sets.
+
+```{r sampe_workflow_mlr}
+# Load the data
+
+# Perform a preliminary visualization. Play with this and choose two predictors
+
+# Fit a MLR model
+
+# Test Asssumptions and modify model if needed
+
+# Evaluate results
+
+# Visualize results
+```
+
+## 3. Interaction Effects in MLR
+
+### 3.1 Visualization of the Data
+Let's start with our fire severity data. We'll ask if age interacts with fire severity to shape plant species richness. First, we can visualize this. How do we visualize? Well, one simple way is to split points into groups by one of your two terms and see if patterns appear different.
+
+```{r}
+ggplot(keeley,
+       aes(x=firesev, y = rich)) +
+  geom_point() +
+  facet_wrap(~cut_interval(age, 3))
+```
+
+Note, I'm using cut_interval, as we often want to split our intervals up evenly, rather than having big boluses of data in certain groups. We could also apply `stat_smooth` to help give us an idea if things are changin in these different groups.
+
+```{r}
+ggplot(keeley,
+       aes(x=age, y = rich)) +
+  geom_point() +
+  facet_wrap(~cut_interval(firesev, 3)) +
+  stat_smooth(method="lm")
+```
+
+Note - number of groups will also influence how easily you can see interactions in the data. Try 2, 3, 4, 5, and 6. It's going to be sample size and predictor spread dependent.
+
+### 3.2 Fit and Evaluate Assumptions
+
+Since we have a suspected interaction effect here, let's look at the model
+
+```{r}
+keeley_int <- lm(rich ~ firesev*age, data = keeley)
+```
+
+Before we even look at the usual suspects, let's inspect our vif
+
+```{r}
+vif(keeley_int)
+```
+
+Whoah! 15! This might give you pause, but, remember, it's a VIF for an interaction with its linear predictors. So, no real problems here. If the VIF for one of your linear predictors was high, then maybe worry, but, high VIFs for nonlinear transforms is not a problem.
+
+Let's evaluate the rest.
+
+```{r}
+check_model(keeley_int)
+
+residualPlots(keeley_int)
+```
+
+Meh, not bad.
+
+### 3.3 Evaluation
+As before, I can use F-tables to evaluate my model.
+
+```{r}
+Anova(keeley_int)
+```
+
+I can also summarize as before to get coefficients, etc. Note, each additive coefficient, given the interaction and centering, means the effect of one predictor on the response at the **average** level of the other predictor. Take a look at the uncentered model to see what the coefficient for the effect of one predictor on the response when the other variable = 0. You can also back-calculate these if you want to convince yourself.
+
+```{r}
+summary(keeley_int)
+```
+
+Our $R^2$ isn't great - but, eh, that's what we've got! 
+
+### 3.4 Visualization
+
+So, how do we visualize? `visreg` actually again has us covered in a few ways straight off the bat.
+
+```{r}
+visreg(keeley_int, "age", by = "firesev", gg=TRUE)
+```
+
+We can change the breakpoints with a `breaks` argument, but, in general, this makes a nice structured ggplot for us to work with and modify further.
+
+We can also use visreg to look at the full range of things using `visreg2d`
+
+```{r}
+visreg2d(keeley_int, "age", "firesev", plot.type="gg")
+```
+
+Nice, I had to specify an x and y variable (this is good for when I have >1 interaction), but it's still pretty convenient.
+
+Now, you might want to do this yourself - for example, what if you had three predictors, and you wanted to look at all of them. Let's try that, actually.
+
+```{r mod}
+keeley_elev_int <- lm(rich ~ age*abiotic*firesev, data = keeley)
+
+Anova(keeley_elev_int)
+```
+
+Here we have an `age:firesev` interaction, but an additive effect of abiotic. Neat! But, man, visualization.... Ugh.  Fortunately, there's a nice solution. Let's make some fit lines using `modelr`. We're going to use `data_grid` to make a grid of possible predicted values. Then use the `predict` function to get confidence intervals of the fit. Note, `prediction` would give us the full range of variability. Another topic for another time.
+
+
+
+```{r}
+library(modelr)
+fit_data <-  keeley %>%
+  data_grid(abiotic = round(seq_range(abiotic, 3), 2),
+            age = seq_range(age, 4),
+            firesev = seq_range(firesev, 100)) 
+
+fit_lines <- fit_data %>%
+  predict(keeley_elev_int, newdata = .,  interval = "confidence") %>%
+  as_tibble() %>%
+  rename(rich = fit) %>%
+  bind_cols(fit_data)
+  
+```
+
+Now, we can plot this!
+```{r}
+ggplot(fit_lines, 
+       aes(x = firesev, y = rich,
+           ymin = lwr, ymax = upr,
+           group = factor(age),
+           color = factor(age))) +
+  geom_ribbon(alpha=0.3, color=NA) +
+  geom_line() +
+  facet_wrap(~str_c("abiotic: ", abiotic))
+```
+
+
+### 3.4 Examples
+OK, let's use the same datasets as before. Did you have any interactions?
+
+1) `planktonSummary.csv` showing plankton from Lake Baikal (thanks, Stephanie Hampton). Evluate how Chlorophyll (`CHLFa`) is affected by other predictors. Note, you'll probably want to log transform `CHLFa`.   
+\
+2) `SwaddleWestNile2002NCEAS_shortnames.csv` is about the prevalence of West Nile virus in Birds around Sacramento county in California. What predicts human WNV?\
+
+Using the following workflow, analyze these data sets.
+
+```{r}
+# Load the data
+
+# Perform a preliminary visualization. Play with this and choose two predictors
+
+# Fit a MLR model
+
+# Test Asssumptions and modify model if needed
+
+# Evaluate results
+
+# Visualize results
+```
