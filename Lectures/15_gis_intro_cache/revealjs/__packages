@@ -1,4 +1,3 @@
-base
 knitr
 tidyverse
 ggplot2
@@ -15,3 +14,4 @@ raster
 ggmap
 readxl
 broom
+lubridate
