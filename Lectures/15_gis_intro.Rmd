@@ -87,7 +87,7 @@ ggplot(plank, aes(Longitude, Latitude, color=Salinity, size=TotalChlA)) +
 <div class="fragment">What do you learn from this that is new?</div>
 
 ## Context!
-```{r ggmap, echo=FALSE, cache=TRUE, message=FALSE, warning=FALSE}
+```{r ggmap, echo=FALSE, cache=TRUE, message=FALSE, warning=FALSE, height = 9}
 #pie_map <- #get_googlemap(center=c(-70.823316, 42.728316), zoom = 12)
 #get_stadiamap(center=c(-70.823316, 42.728316), zoom = 12)
 plank_sf <- st_as_sf(plank, coords = c("Longitude", "Latitude"), crs = 4326)
