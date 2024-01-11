@@ -17,7 +17,6 @@ output:
 <h2><center>GIS and R</center></h2>
 ![](./Images/gis/deforestation-rates-v2a1.png)
 
-
 ```{r prep, echo=FALSE, cache=FALSE, message=FALSE, warning=FALSE}
 library(knitr)
 library(tidyverse)
@@ -33,27 +32,31 @@ theme_set(theme_bw(base_size=16))
 #https://developers.google.com/maps/documentation/geocoding/get-api-key
 key <- read.csv("~/goog.api") %>% names()
 register_google(key = key)
+#knitr::opts_knit$set(root.dir = 'Lectures')
+#stop(list.files())
+
 
 opts_chunk$set(fig.height=5, fig.width=7, comment=NA, 
                warning=FALSE, message=FALSE, error=FALSE, results='hide',
                dev="jpeg", echo=FALSE)
 
 
-heart_disease <- read_excel("./data/hd_all.xlsx", 
+heart_disease <- read_excel("Lectures/data/hd_all.xlsx", 
                             na="Insufficient Data")
 
 
+## A Disclaimer
+#![](./Images/gis/we-will-teach.jpg){width=50%}
+
 ```
 
-## A Disclaimer
-![](./Images/gis/we-will-teach.jpg){width=50%}
 
-
-## That Plankton Data...
-```{r}
-plank <- read_excel("./data/EST-PR-PlanktonChemTax.xls", 
+## Plankton Data from the Plum Island Estuary
+```{r, results = 'asis', echo = FALSE}
+plank <- read_excel("Lectures/data/EST-PR-PlanktonChemTax.xls", 
                     sheet=2, na="NA")
-plank
+
+plank |> head() |> knitr::kable(digits = 2) |> kableExtra::kable_styling()
 ```
 
 ## Trends only tell us so much
@@ -85,11 +88,14 @@ ggplot(plank, aes(Longitude, Latitude, color=Salinity, size=TotalChlA)) +
 
 ## Context!
 ```{r ggmap, echo=FALSE, cache=TRUE, message=FALSE, warning=FALSE}
-pie_map <- get_googlemap(center=c(-70.823316, 42.728316), zoom = 12)
+#pie_map <- #get_googlemap(center=c(-70.823316, 42.728316), zoom = 12)
+#get_stadiamap(center=c(-70.823316, 42.728316), zoom = 12)
+plank_sf <- st_as_sf(plank, coords = c("Longitude", "Latitude"), crs = 4326)
 
-ggmap(pie_map) +
-  geom_point(data = plank, 
-             mapping = aes(Longitude, Latitude, color=Salinity, size=TotalChlA)) +
+ggplot() +
+  ggspatial::annotation_map_tile(zoom = 12) +
+  geom_sf(data = plank_sf, 
+             mapping = aes(color=Salinity, size=TotalChlA)) +
   scale_color_viridis_c(option="B")
 
 ```
@@ -258,12 +264,12 @@ ggplot(data=heart_disease_map_data) +
 ## Exercise: Identify these Vector Types
 
 ```{r, echo = FALSE, message=FALSE, warning=FALSE}
-NE.States.Boundary.US <- st_read("./data/US-Boundary-Layers/Boundary-US-State-NEast.shp")
-lines_HARV <- st_read("./data/HARV/HARV_roads.shp")
-point_HARV <- st_read("./data/HARV/HARVtower_UTM18N.shp")
+NE.States.Boundary.US <- st_read("Lectures/data/US-Boundary-Layers/Boundary-US-State-NEast.shp")|> st_make_valid()
+lines_HARV <- st_read("Lectures/data/HARV/HARV_roads.shp")
+point_HARV <- st_read("Lectures/data/HARV/HARVtower_UTM18N.shp")
 
 ggplot() +
-   geom_sf(data = NE.States.Boundary.US, aes(color ="color"), 
+   geom_sf(data = NE.States.Boundary.US , aes(color ="color"), 
        show.legend = "line") +
      scale_color_manual(name = "", labels = "State Boundary", 
        values = c("color" = "gray18")) +
@@ -314,7 +320,7 @@ ggplot(lines_HARV) +
 ## Individual Bands
 ```{r demonstrate-RGB-Image, echo=FALSE}
 # Use stack function to read in all bands
-RGB_stack_HARV <- stack("data/HARV_raster/RGB_Imagery/HARV_RGB_Ortho.tif")
+RGB_stack_HARV <- stack("Lectures/data/HARV_raster/RGB_Imagery/HARV_RGB_Ortho.tif")
 
 names(RGB_stack_HARV) <- c("Red Band", "Green Band", "Blue Band")
 

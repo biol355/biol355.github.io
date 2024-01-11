@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="generator" content="pandoc">
-  <title>15_gis_intro.utf8.md</title>
+  <title>15_gis_intro.knit</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -443,6 +443,9 @@ style.innerHTML = style_script;
 document.getElementsByTagName('head')[0].appendChild(style);
 </script>
 
+    <script src="libs/header-attrs-2.25/header-attrs.js"></script>
+    <script src="libs/kePrint-0.0.1/kePrint.js"></script>
+    <link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 </head>
 <body>
   <div class="reveal">
@@ -457,14 +460,514 @@ document.getElementsByTagName('head')[0].appendChild(style);
 GIS and R
 </center>
 </h2>
-<p><img data-src="./Images/gis/deforestation-rates-v2a1.png" /></p>
+<p><img data-src="Images/gis/deforestation-rates-v2a1.png" /></p>
 </section>
-<section id="a-disclaimer" class="slide level2">
-<h2>A Disclaimer</h2>
-<p><img data-src="./Images/gis/we-will-teach.jpg" style="width:50.0%" /></p>
-</section>
-<section id="that-plankton-data" class="slide level2">
-<h2>That Plankton Data…</h2>
+<section id="plankton-data-from-the-plum-island-estuary"
+class="slide level2">
+<h2>Plankton Data from the Plum Island Estuary</h2>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Date
+</th>
+<th style="text-align:left;">
+Site
+</th>
+<th style="text-align:right;">
+Latitude
+</th>
+<th style="text-align:right;">
+Longitude
+</th>
+<th style="text-align:right;">
+Distance
+</th>
+<th style="text-align:left;">
+SampleName
+</th>
+<th style="text-align:left;">
+SubsampleName
+</th>
+<th style="text-align:left;">
+BottleName
+</th>
+<th style="text-align:left;">
+SampleType
+</th>
+<th style="text-align:right;">
+Volume
+</th>
+<th style="text-align:right;">
+Temp
+</th>
+<th style="text-align:right;">
+Salinity
+</th>
+<th style="text-align:right;">
+TotalChlA
+</th>
+<th style="text-align:right;">
+DiatomsandChrysophytes
+</th>
+<th style="text-align:right;">
+Cryptophytes
+</th>
+<th style="text-align:right;">
+Chlorophytes
+</th>
+<th style="text-align:right;">
+Dinoflagellates
+</th>
+<th style="text-align:right;">
+Euglenophytes
+</th>
+<th style="text-align:right;">
+Prasinophytes
+</th>
+<th style="text-align:right;">
+Haptophytes
+</th>
+<th style="text-align:right;">
+Prymnesiophytes
+</th>
+<th style="text-align:right;">
+Cyanobacteria
+</th>
+<th style="text-align:left;">
+Comments
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+2003-04-16
+</td>
+<td style="text-align:left;">
+EST-SO-Bend-Ocean
+</td>
+<td style="text-align:right;">
+42.69
+</td>
+<td style="text-align:right;">
+-70.75
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:left;">
+WS-1-331
+</td>
+<td style="text-align:left;">
+CT-1-331
+</td>
+<td style="text-align:left;">
+Ocean
+</td>
+<td style="text-align:left;">
+Wholewater
+</td>
+<td style="text-align:right;">
+200
+</td>
+<td style="text-align:right;">
+5.1
+</td>
+<td style="text-align:right;">
+31.9
+</td>
+<td style="text-align:right;">
+6.08
+</td>
+<td style="text-align:right;">
+5.90
+</td>
+<td style="text-align:right;">
+0.12
+</td>
+<td style="text-align:right;">
+0.05
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.01
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2003-04-16
+</td>
+<td style="text-align:left;">
+EST-SO-Bend-IBYC
+</td>
+<td style="text-align:right;">
+42.71
+</td>
+<td style="text-align:right;">
+-70.79
+</td>
+<td style="text-align:right;">
+2.7
+</td>
+<td style="text-align:left;">
+WS-2-332
+</td>
+<td style="text-align:left;">
+CT-2-332
+</td>
+<td style="text-align:left;">
+IBYC
+</td>
+<td style="text-align:left;">
+Wholewater
+</td>
+<td style="text-align:right;">
+200
+</td>
+<td style="text-align:right;">
+5.3
+</td>
+<td style="text-align:right;">
+31.0
+</td>
+<td style="text-align:right;">
+7.08
+</td>
+<td style="text-align:right;">
+6.65
+</td>
+<td style="text-align:right;">
+0.15
+</td>
+<td style="text-align:right;">
+0.07
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.21
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2003-04-16
+</td>
+<td style="text-align:left;">
+EST-SO-Bend-Nelson
+</td>
+<td style="text-align:right;">
+42.75
+</td>
+<td style="text-align:right;">
+-70.82
+</td>
+<td style="text-align:right;">
+8.5
+</td>
+<td style="text-align:left;">
+WS-3-333
+</td>
+<td style="text-align:left;">
+CT-3-333
+</td>
+<td style="text-align:left;">
+Nelson
+</td>
+<td style="text-align:left;">
+Wholewater
+</td>
+<td style="text-align:right;">
+200
+</td>
+<td style="text-align:right;">
+10.4
+</td>
+<td style="text-align:right;">
+15.3
+</td>
+<td style="text-align:right;">
+8.42
+</td>
+<td style="text-align:right;">
+7.08
+</td>
+<td style="text-align:right;">
+0.32
+</td>
+<td style="text-align:right;">
+0.34
+</td>
+<td style="text-align:right;">
+0.06
+</td>
+<td style="text-align:right;">
+0.44
+</td>
+<td style="text-align:right;">
+0.18
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2003-04-16
+</td>
+<td style="text-align:left;">
+EST-PR-Bend-24
+</td>
+<td style="text-align:right;">
+42.76
+</td>
+<td style="text-align:right;">
+-70.84
+</td>
+<td style="text-align:right;">
+11.0
+</td>
+<td style="text-align:left;">
+WS-4-334
+</td>
+<td style="text-align:left;">
+CT-4-334
+</td>
+<td style="text-align:left;">
+24
+</td>
+<td style="text-align:left;">
+Wholewater
+</td>
+<td style="text-align:right;">
+300
+</td>
+<td style="text-align:right;">
+11.1
+</td>
+<td style="text-align:right;">
+5.5
+</td>
+<td style="text-align:right;">
+7.01
+</td>
+<td style="text-align:right;">
+5.37
+</td>
+<td style="text-align:right;">
+0.39
+</td>
+<td style="text-align:right;">
+0.28
+</td>
+<td style="text-align:right;">
+0.11
+</td>
+<td style="text-align:right;">
+0.63
+</td>
+<td style="text-align:right;">
+0.17
+</td>
+<td style="text-align:right;">
+0.01
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.04
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2003-04-16
+</td>
+<td style="text-align:left;">
+EST-PR-Bend-22
+</td>
+<td style="text-align:right;">
+42.76
+</td>
+<td style="text-align:right;">
+-70.86
+</td>
+<td style="text-align:right;">
+12.5
+</td>
+<td style="text-align:left;">
+WS-5-335
+</td>
+<td style="text-align:left;">
+CT-5-335
+</td>
+<td style="text-align:left;">
+22
+</td>
+<td style="text-align:left;">
+Wholewater
+</td>
+<td style="text-align:right;">
+200
+</td>
+<td style="text-align:right;">
+11.1
+</td>
+<td style="text-align:right;">
+1.2
+</td>
+<td style="text-align:right;">
+4.23
+</td>
+<td style="text-align:right;">
+2.59
+</td>
+<td style="text-align:right;">
+0.30
+</td>
+<td style="text-align:right;">
+0.44
+</td>
+<td style="text-align:right;">
+0.08
+</td>
+<td style="text-align:right;">
+0.68
+</td>
+<td style="text-align:right;">
+0.07
+</td>
+<td style="text-align:right;">
+0.01
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.05
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+2003-04-16
+</td>
+<td style="text-align:left;">
+EST-PR-Bend-20
+</td>
+<td style="text-align:right;">
+42.75
+</td>
+<td style="text-align:right;">
+-70.88
+</td>
+<td style="text-align:right;">
+14.5
+</td>
+<td style="text-align:left;">
+WS-6-336
+</td>
+<td style="text-align:left;">
+CT-6-336
+</td>
+<td style="text-align:left;">
+20
+</td>
+<td style="text-align:left;">
+Wholewater
+</td>
+<td style="text-align:right;">
+160
+</td>
+<td style="text-align:right;">
+11.5
+</td>
+<td style="text-align:right;">
+0.4
+</td>
+<td style="text-align:right;">
+1.67
+</td>
+<td style="text-align:right;">
+0.74
+</td>
+<td style="text-align:right;">
+0.09
+</td>
+<td style="text-align:right;">
+0.50
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.33
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0.00
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0.01
+</td>
+<td style="text-align:left;">
+NA
+</td>
+</tr>
+</tbody>
+</table>
 </section>
 <section id="trends-only-tell-us-so-much" class="slide level2">
 <h2>Trends only tell us so much</h2>
@@ -474,11 +977,13 @@ GIS and R
 <h2>Trends only tell us so much</h2>
 <p><img src="15_gis_intro_files/figure-revealjs/unnamed-chunk-3-1.jpeg" width="672" /></p>
 </section>
-<section id="youre-starting-to-see-something-spatial" class="slide level2">
+<section id="youre-starting-to-see-something-spatial"
+class="slide level2">
 <h2>You’re starting to see something spatial…</h2>
 <p><img src="15_gis_intro_files/figure-revealjs/unnamed-chunk-4-1.jpeg" width="672" /></p>
 </section>
-<section id="often-within-relationships-is-a-pattern" class="slide level2">
+<section id="often-within-relationships-is-a-pattern"
+class="slide level2">
 <h2>Often within Relationships is a Pattern</h2>
 <img src="15_gis_intro_files/figure-revealjs/underly-1.jpeg" width="672" />
 <div class="fragment">
@@ -492,13 +997,16 @@ What do you learn from this that is new?
 What do you learn from this that is new?
 </div>
 </section>
-<section id="what-does-this-tell-you-that-a-bar-plot-would-not" class="slide level2">
+<section id="what-does-this-tell-you-that-a-bar-plot-would-not"
+class="slide level2">
 <h2>What does this tell you that a bar plot would not?</h2>
 <p><img src="15_gis_intro_files/figure-revealjs/hartmap-1.jpeg" width="672" /></p>
 </section>
-<section id="what-does-this-tell-you-that-a-bar-plot-would-not-1" class="slide level2">
+<section id="what-does-this-tell-you-that-a-bar-plot-would-not-1"
+class="slide level2">
 <h2>What does this tell you that a bar plot would not?</h2>
-<p><img data-src="./Images/gis/kale_to_bacon.jpg" style="width:65.0%" /></p>
+<p><img data-src="Images/gis/kale_to_bacon.jpg"
+style="width:65.0%" /></p>
 </section>
 <section id="objectives" class="slide level2">
 <h2>Objectives</h2>
@@ -514,7 +1022,7 @@ What do you learn from this that is new?
 </section>
 <section id="types-of-spatial-data" class="slide level2">
 <h2>Types of Spatial Data</h2>
-<p><img data-src="./Images/gis/types%20of%20spatial%20data.png" /></p>
+<p><img data-src="Images/gis/types%20of%20spatial%20data.png" /></p>
 </section>
 <section id="points-are-coordinates" class="slide level2">
 <h2>Points are Coordinates</h2>
@@ -532,17 +1040,15 @@ What do you learn from this that is new?
 <li>Additional Information</li>
 </ul>
 </section>
-<section id="projections-and-coordinate-reference-systems" class="slide level2">
+<section id="projections-and-coordinate-reference-systems"
+class="slide level2">
 <h2>Projections and Coordinate Reference Systems</h2>
-<p><img data-src="./Images/gis/projections_1.gif" style="width:95.0%" /></p>
-</section>
-<section id="projections-and-coordinate-reference-systems-1" class="slide level2">
-<h2>Projections and Coordinate Reference Systems</h2>
-<p><img data-src="./Images/gis/map_diff_proj.jpg" /></p>
+<p><img data-src="Images/gis/map_diff_proj.jpg" /></p>
 </section>
 <section id="extent" class="slide level2">
 <h2>Extent</h2>
-<p><img data-src="./Images/gis/spatial_extent.png" alt="Spatial extent image" style="width:95.0%" /></p>
+<p><img data-src="Images/gis/spatial_extent.png" style="width:95.0%"
+alt="Spatial extent image" /></p>
 </section>
 <section id="additional-information-in-points" class="slide level2">
 <h2>Additional Information in Points!</h2>
@@ -568,17 +1074,18 @@ What do you learn from this that is new?
 <li>What is a projection?</li>
 </ol>
 </section>
-<section id="many-ways-of-representing-the-same-data" class="slide level2">
+<section id="many-ways-of-representing-the-same-data"
+class="slide level2">
 <h2>Many Ways of Representing the Same Data</h2>
-<p><img data-src="./Images/gis/Data%20layer%20types.jpg" /></p>
+<p><img data-src="Images/gis/Data%20layer%20types.jpg" /></p>
 </section>
 <section id="vector-data" class="slide level2">
 <h2>Vector Data</h2>
-<p><img data-src="./Images/gis/pnt_line_poly.png" />{width = “75%”}</p>
+<p><img data-src="Images/gis/pnt_line_poly.png" />{width = “75%”}</p>
 </section>
 <section id="more-complex-vector-data" class="slide level2">
 <h2>More Complex Vector Data</h2>
-<p><img data-src="./Images/gis/geosptypes.png" />{width = “85%”}</p>
+<p><img data-src="Images/gis/geosptypes.png" />{width = “85%”}</p>
 </section>
 <section id="points" class="slide level2">
 <h2>Points</h2>
@@ -612,7 +1119,8 @@ What do you learn from this that is new?
 <h2>Exercise: Identify these Vector Types</h2>
 <p><img src="15_gis_intro_files/figure-revealjs/unnamed-chunk-5-1.jpeg" width="672" /></p>
 </section>
-<section id="exercise-identify-these-vector-types-1" class="slide level2">
+<section id="exercise-identify-these-vector-types-1"
+class="slide level2">
 <h2>Exercise: Identify these Vector Types</h2>
 <p><img src="15_gis_intro_files/figure-revealjs/unnamed-chunk-6-1.jpeg" width="672" /></p>
 </section>
@@ -630,23 +1138,26 @@ What do you learn from this that is new?
 </section>
 <section id="rasters" class="slide level2">
 <h2>Rasters</h2>
-<p><img data-src="./Images/gis/raster_intro.png" style="width:75.0%" /></p>
+<p><img data-src="Images/gis/raster_intro.png"
+style="width:75.0%" /></p>
 </section>
 <section id="rasters-versus-vector-files" class="slide level2">
 <h2>Rasters versus Vector Files</h2>
-<p><img data-src="./Images/gis/raster_vector.jpg" /></p>
+<p><img data-src="Images/gis/raster_vector.jpg" /></p>
 </section>
 <section id="rasters-versus-vector-files-1" class="slide level2">
 <h2>Rasters versus Vector Files</h2>
-<p><img data-src="./Images/gis/raster_vector_types.png" style="width:90.0%" /></p>
+<p><img data-src="Images/gis/raster_vector_types.png"
+style="width:90.0%" /></p>
 </section>
 <section id="raster-stacksbricks" class="slide level2">
 <h2>Raster Stacks/Bricks</h2>
-<p><img data-src="./Images/gis/multiband_raster_neon.png" /></p>
+<p><img data-src="Images/gis/multiband_raster_neon.png" /></p>
 </section>
 <section id="multi-band-raster-data-rgb-image" class="slide level2">
 <h2>Multi-band Raster Data = RGB image!</h2>
-<p><img data-src="./Images/gis/RGBSTack_1.jpg" alt="RGB multi-band raster image" style="width:95.0%" /></p>
+<p><img data-src="Images/gis/RGBSTack_1.jpg" style="width:95.0%"
+alt="RGB multi-band raster image" /></p>
 </section>
 <section id="individual-bands" class="slide level2">
 <h2>Individual Bands</h2>
@@ -656,13 +1167,16 @@ What do you learn from this that is new?
 <h2>Composite Image</h2>
 <p><img src="15_gis_intro_files/figure-revealjs/plot-RGB-now-1.jpeg" width="672" /></p>
 </section>
-<section id="with-rasters-we-have-to-think-of-resolution" class="slide level2">
+<section id="with-rasters-we-have-to-think-of-resolution"
+class="slide level2">
 <h2>With rasters, we have to think of Resolution</h2>
-<p><img data-src="./Images/gis/raster_resolution.png" alt="Resolution image" style="width:95.0%" /></p>
+<p><img data-src="Images/gis/raster_resolution.png"
+style="width:95.0%" alt="Resolution image" /></p>
 </section>
 <section id="resolution-v.-extent-scale" class="slide level2">
 <h2>Resolution v. Extent (scale)</h2>
-<p><img data-src="./Images/gis/Resolution%20vs%20Scale.jpg" alt="resolution_v_scale" style="width:75.0%" /></p>
+<p><img data-src="Images/gis/Resolution%20vs%20Scale.jpg"
+style="width:75.0%" alt="resolution_v_scale" /></p>
 </section>
 <section id="why-rasters-versus-vector-formats" class="slide level2">
 <h2>Why Rasters Versus Vector Formats</h2>
@@ -686,13 +1200,16 @@ What do you learn from this that is new?
 <li><font color = "red">What is a projection?</font></li>
 </ol>
 </section>
-<section id="projections-and-coordinate-reference-systems-2" class="slide level2">
+<section id="projections-and-coordinate-reference-systems-1"
+class="slide level2">
 <h2>Projections and Coordinate Reference Systems</h2>
-<p><img data-src="./Images/gis/projections_1.gif" style="width:95.0%" /></p>
+<p><img data-src="Images/gis/projections_1.gif"
+style="width:95.0%" /></p>
 </section>
-<section id="projections-and-coordinate-reference-systems-3" class="slide level2">
+<section id="projections-and-coordinate-reference-systems-2"
+class="slide level2">
 <h2>Projections and Coordinate Reference Systems</h2>
-<p><img data-src="./Images/gis/map_diff_proj.jpg" /></p>
+<p><img data-src="Images/gis/map_diff_proj.jpg" /></p>
 </section>
 <section id="components-of-a-crs" class="slide level2">
 <h2>Components of a CRS</h2>
@@ -700,78 +1217,108 @@ What do you learn from this that is new?
 <ul>
 <li><strong>Datum:</strong> A model of the shape of the earth.
 <ul>
-<li>In this workshop, we will use the <a href="https://www.linz.govt.nz/data/geodetic-system/datums-projections-and-heights/geodetic-datums/world-geodetic-system-1984-wgs84">WGS84 datum</a><br />
+<li>In this workshop, we will use the <a
+href="https://www.linz.govt.nz/data/geodetic-system/datums-projections-and-heights/geodetic-datums/world-geodetic-system-1984-wgs84">WGS84
+datum</a><br />
 <br />
 </li>
 </ul></li>
-<li><strong>Projection:</strong> A mathematical transformation of the angular measurements on a round earth to a flat surface (i.e. paper or a computer screen).<br />
+<li><strong>Projection:</strong> A mathematical transformation of the
+angular measurements on a round earth to a flat surface (i.e. paper or a
+computer screen).<br />
 <br />
 </li>
-<li><strong>Additional Parameters:</strong> e.g., center of the map.</li>
+<li><strong>Additional Parameters:</strong> e.g., center of the
+map.</li>
 </ul>
 </section>
-<section id="a-datum-is-the-choice-of-fruit-to-use" class="slide level2">
+<section id="a-datum-is-the-choice-of-fruit-to-use"
+class="slide level2">
 <h2>A datum is the choice of fruit to use</h2>
-<p><img data-src="./Images/gis/citrus.jpg" alt="fruits" /></p>
-<p><a href="https://github.com/MicheleTobias/R-Projections-Workshop">Image source</a></p>
+<p><img data-src="Images/gis/citrus.jpg" alt="fruits" /></p>
+<p><a
+href="https://github.com/MicheleTobias/R-Projections-Workshop">Image
+source</a></p>
 </section>
-<section id="a-projection-is-how-you-peel-your-orange-and-then-flatten-the-peel" class="slide level2">
-<h2>A projection is how you peel your orange and then flatten the peel</h2>
-<p><img data-src="./Images/gis/orange-peel-earth.jpg" /></p>
-<p><a href="http://blogs.lincoln.ac.nz/gis/2017/03/29/where-on-earth-are-we/">Image source</a></p>
+<section
+id="a-projection-is-how-you-peel-your-orange-and-then-flatten-the-peel"
+class="slide level2">
+<h2>A projection is how you peel your orange and then flatten the
+peel</h2>
+<p><img data-src="Images/gis/orange-peel-earth.jpg" /></p>
+<p><a
+href="http://blogs.lincoln.ac.nz/gis/2017/03/29/where-on-earth-are-we/">Image
+source</a></p>
 </section>
-<section id="a-proj4-string-includes-the-following" class="slide level2">
+<section id="a-proj4-string-includes-the-following"
+class="slide level2">
 <h2>A PROJ4 string includes the following</h2>
 <ul>
 <li><strong>proj=:</strong> the projection of the data</li>
-<li><strong>zone=:</strong> the zone of the data (this is specific to the UTM projection)</li>
+<li><strong>zone=:</strong> the zone of the data (this is specific to
+the UTM projection)</li>
 <li><strong>datum=:</strong> the datum use</li>
-<li><strong>units=:</strong> the units for the coordinates of the data</li>
-<li><strong>ellps=:</strong> the ellipsoid (how the earth’s roundness is calculated) for the data</li>
+<li><strong>units=:</strong> the units for the coordinates of the
+data</li>
+<li><strong>ellps=:</strong> the ellipsoid (how the earth’s roundness is
+calculated) for the data</li>
 </ul>
 </section>
 <section id="utm-zones" class="slide level2">
 <h2>UTM Zones</h2>
-<p><img data-src="https://upload.wikimedia.org/wikipedia/commons/8/8d/Utm-zones-USA.svg" alt="The UTM zones across the continental United States." /></p>
+<p><img
+data-src="https://upload.wikimedia.org/wikipedia/commons/8/8d/Utm-zones-USA.svg"
+alt="The UTM zones across the continental United States." /></p>
 </section>
-<section id="you-can-do-a-lot-with-those-parameters" class="slide level2">
+<section id="you-can-do-a-lot-with-those-parameters"
+class="slide level2">
 <h2>You can do a lot with those parameters</h2>
-<p><img data-src="./Images/gis/jasondavies_maps_640.gif" /></p>
-<p>See Jason Davies’s Map Projection Transitions - <a href="https://www.jasondavies.com/maps/transition/" class="uri">https://www.jasondavies.com/maps/transition/</a></p>
+<p><img data-src="Images/gis/jasondavies_maps_640.gif" /></p>
+<p>See Jason Davies’s Map Projection Transitions - <a
+href="https://www.jasondavies.com/maps/transition/"
+class="uri">https://www.jasondavies.com/maps/transition/</a></p>
 </section>
 <section id="exercise-reading-a-proj4-string" class="slide level2">
 <h2>Exercise: Reading a PROJ4 String</h2>
-<p>Here is a PROJ4 string for one of the datasets we will use in this workshop:<br />
+<p>Here is a PROJ4 string for one of the datasets we will use in this
+workshop:<br />
 <br />
 <code>+proj=utm +zone=18 +datum=WGS84 +units=m +no_defs</code><br />
 <code>+ellps=WGS84 +towgs84=0,0,0</code><br />
 <br />
 </p>
 <ul>
-<li>What projection, zone, datum, and ellipsoid are used for this data?</li>
+<li>What projection, zone, datum, and ellipsoid are used for this
+data?</li>
 <li>What are the units of the data?</li>
-<li>Using the map above, what part of the United States was this data collected from?</li>
+<li>Using the map above, what part of the United States was this data
+collected from?</li>
 </ul>
 </section>
 <section id="need-help-choosing-a-projection" class="slide level2">
 <h2>Need help choosing a projection</h2>
-<p>See <a href="http://projectionwizard.org/" class="uri">http://projectionwizard.org/</a></p>
-<p><img data-src="./Images/gis/projection_wizard.png" style="width:80.0%" /></p>
+<p>See <a href="http://projectionwizard.org/"
+class="uri">http://projectionwizard.org/</a></p>
+<p><img data-src="Images/gis/projection_wizard.png"
+style="width:80.0%" /></p>
 </section>
 <section id="additional-resources-for-learning" class="slide level2">
 <h2>Additional Resources for Learning</h2>
 <ul>
-<li><a href="https://geocompr.robinlovelace.net/">Geocomputation with R</a> by Lovelace et al. 
+<li><a href="https://geocompr.robinlovelace.net/">Geocomputation with
+R</a> by Lovelace et al. 
 <ul>
 <li>Great online book covering materials here in depth<br />
 <br />
 </li>
 </ul></li>
-<li><a href="http://r-spatial.org/book">Spatial Data Science</a> by Edzer Pebsma and Roger Bivand
+<li><a href="http://r-spatial.org/book">Spatial Data Science</a> by
+Edzer Pebsma and Roger Bivand
 <ul>
 <li>Online book in progress by authors of many R spatial packages<br />
 </li>
-<li>Covers emerging packages, such as <code>stars</code> for spatio-temporal rasters</li>
+<li>Covers emerging packages, such as <code>stars</code> for
+spatio-temporal rasters</li>
 </ul></li>
 </ul>
 </section>
@@ -786,18 +1333,43 @@ What do you learn from this that is new?
       // Full list of configuration options available at:
       // https://github.com/hakimel/reveal.js#configuration
       Reveal.initialize({
+        // Display controls in the bottom right corner
+        controls: true,
+        // Display a presentation progress bar
+        progress: true,
         // Display the page number of the current slide
         slideNumber: true,
         // Push each slide change to the browser history
         history: true,
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+        // Enable the slide overview mode
+        overview: true,
         // Vertical centering of slides
         center: false,
+        // Enables touch navigation on devices with touch input
+        touch: true,
+        // Turns fragments on and off globally
+        fragments: true,
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
         // Opens links in an iframe preview overlay
         previewLinks: true,
         // Transition style
         transition: 'fade', // none/fade/slide/convex/concave/zoom
+        // Transition speed
+        transitionSpeed: 'default', // default/fast/slow
         // Transition style for full page slide backgrounds
         backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
 
 
 
