@@ -138,9 +138,10 @@ heart_map <- ggplot(data=heart_disease_map_data,
 heart_map +
   scale_fill_viridis_c(option = "B")
 ```
-
+```{r eval = FALSE, echo = FALSE}
 ## What does this tell you that a bar plot would not?
-![](./Images/gis/kale_to_bacon.jpg){width=65%}
+#![](./Images/gis/kale_to_bacon.jpg){width=65%}
+```
 
 ## Objectives
 
