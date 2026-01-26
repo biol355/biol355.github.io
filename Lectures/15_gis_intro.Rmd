@@ -96,7 +96,8 @@ ggplot() +
   ggspatial::annotation_map_tile(zoom = 12) +
   geom_sf(data = plank_sf, 
              mapping = aes(color=Salinity, size=TotalChlA)) +
-  scale_color_viridis_c(option="B")
+  scale_color_viridis_c(option="B") +
+  coord_sf()
 
 ```
 <div class="fragment">What do you learn from this that is new?</div>
