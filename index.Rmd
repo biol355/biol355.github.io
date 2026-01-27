@@ -18,27 +18,27 @@ ggplot(data = DNase,
 
 **What:** Biol 355 & 356 Section 01  
   
-**Instructor:** [Jarrett Byrnes](http://byrneslab.net), PhD.
+**Instructor:** [Jarrett Byrnes](https://celp-lab.org/current_members/jarrett_byrnes.html), PhD.
 
 **Email:** jarrett.byrnes@umb.edu  
   
-**Twitter:** [jebyrnes](http://twitter.com/jebyrnes)
+**Bluesky:** [@jebyrnes.bsky.social](https://bsky.app/profile/jebyrnes.bsky.social)
 
-**TA:** Troy Richter. 
+**TA:** [Daniel Lopez](https://celp-lab.org/current_members/daniel_lopez.html). 
 
-**Email:** Troy.Richter001@umb.edu
+**Email:** Daniel.Lopez002@umb.edu
 
-**Where:** Blue Lab, Healey Library (up one floor)
+**Where:** Purple Lab, Healey Library (on LL)
 
 **Lecture Playlist** Coming Soon
 
-**Zoom Link if you Cannot Be In Person** https://umassboston.zoom.us/j/94809395440 (note, waiting room)  
+**Zoom Link if you Cannot Be In Person** https://umassboston.zoom.us/j/99199380702 (note, waiting room)  
 
 **Weekly Schedule:** Tuesday & Thursday 2:00-3:15, Lab Friday 10:00 - 1:00  
 
 **Student Hours:** Prof. Byrnes will hold student office hours Tuesday and Thursday from 10-12 in 3130 in the ISC or by appointment.
 
-&nbsp; &nbsp; TA Richter  will hold student office hours Monday from 2-4 in ISC 5210 or by appointment.   
+&nbsp; &nbsp; TA Lopez  will hold student office hours Monday from 2-4 in ISC 3130 or by appointment.   
 
 **Syllabi:** [lecture](https://docs.google.com/document/d/1-jW63ua7hVZI52ZzqZnaf8lIfFvIhHLPmdoU6dGyIxQ/edit?usp=sharing) and [lab](https://docs.google.com/document/d/1WSyOwxDmcU8LfmkL-91GKwPBFMZp5OP5X_EookCZ0vk/edit?usp=sharing) - note, this might be out of date relative to the website, and as such, see the [schedule](schedule.html) or other links above.  
   
@@ -46,7 +46,7 @@ ggplot(data = DNase,
 &nbsp;  
 &nbsp;  
 &nbsp;  
-
+<!--
 ## Course News:  
 
 *1/23/2023*  Please join our class slack channel on the UMass Boston R User Group Slack by going to http://umbrug.slack.com, and, once joined, join the #biol355 channel.  
@@ -55,4 +55,4 @@ ggplot(data = DNase,
 
 *1/23/2023* Check out previous year's past projects right [here](./past_projects.html)  
 
-
+-->
