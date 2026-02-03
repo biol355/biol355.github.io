@@ -43,11 +43,11 @@ __Etherpad:__  https://etherpad.wikimedia.org/p/biol355-r-intro-2026_spring
 ```
 `r datestring`  
 __Readings:__ W&G On [Workflow Basics](https://r4ds.hadley.nz/workflow-basics.html) and [Scripts and Projects](https://r4ds.hadley.nz/workflow-scripts.html), [Tibbles & Data Frames](https://r4ds.had.co.nz/tibbles.html), [Data Import](http://r4ds.hadley.nz/data-import.html), [Spreadsheets](https://r4ds.hadley.nz/spreadsheets.html)  
-__Lectures:__  DC Ecology [Intro to R](http://www.datacarpentry.org/R-ecology-lesson/01-intro-to-r.html) and [starting with data](http://www.datacarpentry.org/R-ecology-lesson/02-starting-with-data.html)   
+__Lectures:__  DC Ecology [Intro to R](https://datacarpentry.github.io/R-ecology-lesson/introduction-r-rstudio.html) and [exploring and understanding data](https://datacarpentry.github.io/R-ecology-lesson/how-r-thinks-about-data.html)   
 __Objective(s):__  Begin to learn the R computing language. Identify the syntax of an R function (name and arguments); Create an R project in RStudio. Read data into R using read.csv(); Use R as a basic calculator; Describe and create variables in R; Interpret the output of the str() function; Install packages in R;  
 __Biological Examples:__ Human genome size.   
 __Lab:__ [Intro to Quarto](https://r4ds.hadley.nz/quarto.html), [R Markdown and Data Subsetting](./Labs/Lab_Rmarkdown_Subsetting.html)  
-__Excercises:__ [Warmup Excercises for Friday](./Labs/lab_2_warmup.html)  
+__Exercises:__ [Warmup Excercises for Friday](./Labs/lab_2_warmup.html)  
 __Cheat Sheets:__  [Data Import](https://github.com/rstudio/cheatsheets/raw/master/data-import.pdf)  
 __Files:__ [Excel](./Data/my_data.xlsx), [CSV](./Data/my_data.csv)     
 __Homework:__ [Data frames!](./Assignments/2_data_frames.html)   
