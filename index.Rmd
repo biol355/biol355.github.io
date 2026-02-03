@@ -36,9 +36,9 @@ ggplot(data = DNase,
 
 **Weekly Schedule:** Tuesday & Thursday 2:00-3:15, Lab Friday 10:00 - 1:00  
 
-**Student Hours:** Prof. Byrnes will hold student office hours Tuesday and Thursday from 10-12 in 3130 in the ISC or by appointment.
+**Student Hours:** Prof. Byrnes will hold student office hours Tuesday and Thursday from 3:30-5pm in 3130 in the ISC or by appointment.
 
-&nbsp; &nbsp; TA Lopez  will hold student office hours Monday from 2-4 in ISC 3130 or by appointment.   
+&nbsp; &nbsp; TA Lopez  will hold student office hours Thursdays from 10-12 in the 3rd floor ISC lounge by the bio grad student offices or by appointment.   
 
 **Syllabi:** [lecture](https://docs.google.com/document/d/1-jW63ua7hVZI52ZzqZnaf8lIfFvIhHLPmdoU6dGyIxQ/edit?usp=sharing) and [lab](https://docs.google.com/document/d/1WSyOwxDmcU8LfmkL-91GKwPBFMZp5OP5X_EookCZ0vk/edit?usp=sharing) - note, this might be out of date relative to the website, and as such, see the [schedule](schedule.html) or other links above.  
   
