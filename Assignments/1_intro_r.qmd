@@ -1,0 +1,26 @@
+---
+title: "First R Exercises"
+author: "Intro to Data Science in Biology Homework"
+format:
+  html:
+    toc: true
+    theme: cosmo
+---
+
+Make a new R Project called `1_intro_to_r_homework_YOURNAME` (where you fill in your name with underscores). In it, create a markdown folder where you will make a Quarto document for this homework. Make sure you compile your homework. Once done, zip the whole project folder up and submit on Canvas.
+
+On the quarto document, answer the following questions using code blocks but also writing text to explain your answers.
+
+1. Create a vector of 100 randomly distributed numbers between 0 and 100 using the `runif()` function and save the vector into the variable `my_vec`. What information does `str` and `summary` tell you about `my_vec`?  How do they differ?
+
+2. Try out a little plot. What does `hist(my_vec)` show you? What information does the helpfile for `hist` tell you about what you just did?
+
+3. Install a package! Install the `ratdat` package using `install.packages(ratdat)`. Once you have done that, load the ratdat library using `library(ratdat)`. Please comment out the loading of `install.packages()` in your code block, as you only need to install once!
+
+4. Ratdat has a data set called `complete`. Apply the following functions to complete: `class`, `str`, `summary`.  What do these three functions tell you about complete? Look at the helpfile for `complete` - what does it tell you that meshes with the output of the above functions.
+
+5. To run a function from a library without loading is, we use the syntatx `name_of_library::function_name()` - so library first, ::, and then the function. Use `visdat::vis_dat()` on complete. What does it tell you? How might this be useful relative to just using the functions from question 4? NOTE: If you do not have the library, you might have to install it with `install.packages()` again. You can just do this in your console instead of in the quarto document.
+
+6. Same question as 5, but, this time try out `skimr::skim()` as well as `naniar::miss_var_summary()` on complete. What do they tell you.
+
+7. I know it's early, but, if I asked you right now, what kind of data are you thinking about working with for your final project? Give me a brief description of the what it is and what you might want to explore. This isn't a final thing, but I want you to start dreaming. 
