@@ -24,61 +24,33 @@ library(readr)
 library(dplyr)
 library(magrittr)
 library(ggplot2)
-read_chunk("./09_sampling_lecture.R")
-theme_set(theme_bw(base_size=16))
+read_chunk("lectures/09_sampling_lecture.R")
+theme_set(theme_light(base_size=16))
 
 opts_chunk$set(fig.height = 6, fig.width = 7, comment=NA, 
                warning=FALSE, message=FALSE, 
                dev="jpeg", echo=FALSE)
                
-suppressMessages(salmon <- read_csv('./data/02e1cSockeyeFemaleBodyMass.csv'))
+suppressMessages(salmon <- read_csv('lectures/data/02e1cSockeyeFemaleBodyMass.csv'))
 salmon %<>% mutate(river = rep(letters[1:6],nrow(salmon)/6),
                    mass_class = cut_interval(mass, 6))
 ```
 
-## First, some fun!
-<a href="https://twitter.com/dataandme/status/965785338227712000?ref_src=twsrc%5Etfw">
-![](./Images/summarizing_data/ggpom.jpg)
-</a>
-
-
-## First, some fun!
-```{r pom, echo=TRUE, eval=FALSE}
-#devtools::install_github("gadenbuie/ggpomological")
-library(ggpomological)
-
-ggplot(iris, aes(x=Petal.Length, y = Petal.Width, color=Species)) +
-  geom_point(size=3) +
-  theme_pomological(base_family = 'Homemade Apple', base_size=16) +
-  scale_color_pomological()
-
-```
-
-## First, some fun!
-```{r pom, echo=FALSE, eval=TRUE, warning=FALSE}
-```
-
-## First, some fun!
-```{r pom2, echo=FALSE, eval=TRUE, warning=FALSE}
-ggplot(iris, aes(x=Petal.Length,  fill=Species)) +
-  geom_histogram(position="stack", bins=30, color=NA) +
-  theme_pomological(base_family = 'Homemade Apple', base_size=16) +
-  scale_color_pomological() +
-  scale_fill_pomological()
-```
-See also https://github.com/cttobin/ggthemr
-
 ## Where are we going?
 ![](./Images/summarizing_data/legodata_www.mydigitalfootprint.com.png)
 
-## Objectives
-1. Think about how sampling influences data structure  
+## Groups of Topics
+
+1. Our Data
+
+2. Cleaning and Filtering our Data  
+
+3. Summarizing counts functionally!  
+
+4. How do we summarize our data?  
   
-2. Consider how we summarize our data  
-  
-3. A little bit o' Boolean  
-  
-4. The split-apply-combine philosophy  
+5. The split-apply-combine philosophy  
+ 
 
 ## How much does one salmon weigh?
 ![](./Images/summarizing_data/salmon.png){width="75%"}
@@ -96,110 +68,9 @@ Weight: 3.09kg
 
 Pair up with someone and come up all of the information you can think of that would summarize this population.
 
-## Population versus Sample
-|   |   |
-|:-:|:-:|
-| ![](./Images/summarizing_data/salmon_population.png) | ![](./Images/summarizing_data/many_salmon.png) |
-
-
-## What is a population?
-```{r population,  echo=FALSE, fig.width=6, fig.height=4.5}
-```
-<div class="fragment">&nbsp;  
-Population = All Individuals</div>
-
-
-
-## What is a sample?
-```{r sample,  echo=FALSE, fig.width=6, fig.height=4.5}
-```
-<div class="fragment">A <b>sample</b> of individuals in a randomly distributed population.</div>
-
-
-## What are the properties of a good sample?
-<div style="font-size:32pt; text-align:left">
-> - Sample is **representative**  
-  
-  
-> - Replicates have an **equal chance** of being sampled  
-   
-   
-> - Replicates are **independent**  
- 
-</div>
-
-
-
-## Bias from Unequal Representation
-```{r colorSize,  echo=FALSE, fig.width=6, fig.height=4.5}
-```
-If you only chose one color, you would only get one range of sizes.
-
-          
-## Bias from Unequal Change of Sampling
-```{r spatialBias,  echo=FALSE, fig.width=6, fig.height=4.5}
-```
-<span class="fragment">Spatial gradient in size</span>
-
-
-          
-## Bias from Unequal Change of Sampling
-```{r spatialSample,  echo=FALSE, fig.width=6, fig.height=4.5}
-```
-Oh, I'll just grab those individuals closest to me...
-
-
-## Good Sampling Schemes: **Stratified** Sampling
-```{r stratified,  echo=FALSE, fig.width=6, fig.height=4.5}
-```
-Sample over a known gradient, aka **cluster sampling**
-
-Can incorporate multiple gradients
-
-## Good Sampling Schemes: Random Sampling
-```{r spatialSample2,  echo=FALSE, fig.width=6, fig.height=4.5}
-```
-<div id="fragment">Two sampling schemes:  </div>
-> *  Random - samples chosen using random numbers  
-> * Haphazard - samples chosen without any system (careful!)
-
-  
-
-## Stratified or Random?
-
-- How is your population defined?  
-  
-- What is the scale of your inference?  
-  
-- What might influence the inclusion of a replicate?  
-  
-- How important are external factors you know about?  
-  
-- How important are external factors you cannot assess?  
-
-## Different Sampling for Different Populations
-|   |   |
-|:-:|:-:|
-| ![](./Images/summarizing_data/alaska_rivers.png){width="50%"} | ![](./Images/summarizing_data/salmon_population.png){width="50%"} |
-<p align="left">
-Consider each scenario and in pairs design a sampling schema:  
-1. Population = All salmon across all rivers  
-2. Population = Salmon in one river
-</p>
-
-
-## Objectives
-1. Think about how sampling influences data structure  
-  
-2. <font color="red">Consider how we summarize our data</font>  
-  
-3. A little bit o' Boolean  
-  
-4. The split-apply-combine philosophy  
-
 ## Our Data
 ```{r hist, fig.height=7}
-img <- png::readPNG("./Images/summarizing_data/salmon_population.png")
+img <- png::readPNG("lectures/Images/summarizing_data/salmon_population.png")
 g <- grid::rasterGrob(img, interpolate=TRUE)
 
 p <- ggplot(data = salmon, aes(x = mass)) + 
@@ -213,168 +84,36 @@ p_all <- p  +
 p_all
 ```
 
-## Sample versus Population Summarization
-- We assume a sample is representative of a population  
+## Groups of Topics
+
+1. Our Data
+
+2. <font color="red">Cleaning and Filtering our Data</font>  
+
+3. Summarizing counts functionally!
+
+4. How do we summarize our data?  
   
-- Therefore, sample statistics are estimates of population statistics  
-  
-- Larger Samples = Better Estimators
+5. The split-apply-combine philosophy  
 
-## Accuracy versus Precision
-![](./Images/summarizing_data/accurate-precise1.jpg)
-<br><br><br>
-<div class="small">https://bobchoat.files.wordpress.com/2014/01/accurate-precise1.jpg</div>
+## What Data Do We Want?
+```{r river_facet}
+river_dots <- ggplot(data = salmon, aes(x = mass, group = river)) + 
+  ggdist::stat_dots(color="black", fill = "black",
+                    size = 1,
+                    binwidth = NA) +
 
-## Central Tendancy: Mean {.bigger}
-&nbsp;  
-&nbsp;  
-<center> 
-$\bar{Y} = \frac{ \displaystyle \sum_{i=1}^{n}{y_{i}} }{n}$
-</center>
+  facet_wrap(~river)
 
-$\large \bar{Y}$ - The average value of a sample  
-$y_{i}$ - The value of a measurement for a single individual   
-n - The number of individuals in a sample  
-&nbsp;  
-$\mu$ - The average value of a population  
-(Greek = population, Latin = Sample)
-
-
-## Median - Dead Center
-
-```{r sampSort, echo=FALSE}
-sort(salmon$mass[1:10])
-```
-<Br><br>
-<div class="fragment"> Middle Value = 50th Percentile = 0.5 Quantile = Median<Br>good for non-normal data</div>  
-<br><br>
-<div class="fragment"> 
-```{r median, echo=FALSE}
-median(salmon$mass)
-```
-</div>
-
-## Central Tendancies
-```{r central1}
-p_all +
-  geom_vline(color="blue", xintercept=mean(salmon$mass), lwd=2) +
-  geom_vline(color="red", xintercept=median(salmon$mass), lwd=2)
+river_dots
 ```
 
-<font color="blue">mean</font>, <font color="red">median</font>
-
-
-
-## What about population-level variability?
-```{r central_var1}
-p_all +
-  geom_vline(color="blue", xintercept=mean(salmon$mass))
+## What Data Do We Want? Adults!
+```{r river_facet_line}
+river_dots +
+  geom_vline(xintercept = 2, color = "red")
 ```
 
-<div class="fragment">What is the range of 2/3 of the population?</div>
-
-
-## What about population-level variability?
-```{r central_var2}
-p_all +
-  geom_vline(color="blue", xintercept=mean(salmon$mass), lwd=2) +
-  geom_vline(color="orange", xintercept=mean(salmon$mass) + sd(salmon$mass), lwd=2) +
-  geom_vline(color="orange", xintercept=mean(salmon$mass)- sd(salmon$mass), lwd=2) 
-```
-
-What is the range of 2/3 of the population?
-
-## Sample Properties: Variance
-How variable was that population?
-$$\large s^2=  \frac{\displaystyle \sum_{i=1}^{n}{(Y_i - \bar{Y})^2}} {n-1}$$
-
-* Sums of Squares over n-1  
-* n-1 corrects for both sample size and sample bias  
-* $\sigma^2$ if describing the population
-* Units in square of measurement...
-
-## Sample Properties: Standard Deviation
-$$ \large s = \sqrt{s^2}$$  
-
-* Units the same as the measurement
-* If distribution is normal, 67% of data within 1 SD
-* 95% within 2 SD
-* $\sigma$ if describing the population
-
-## What about population-level variability?
-
-```{r central}
-p_all +
-  geom_vline(color="blue", xintercept=mean(salmon$mass), lwd=2) +
-  geom_vline(color="orange", xintercept=mean(salmon$mass) + sd(salmon$mass), lwd=2) +
-  geom_vline(color="orange", xintercept=mean(salmon$mass)- sd(salmon$mass), lwd=2) +
-  geom_vline(color="purple", xintercept=mean(salmon$mass) + 2*sd(salmon$mass), lwd=2) +
-  geom_vline(color="purple", xintercept=mean(salmon$mass)- 2*sd(salmon$mass), lwd=2) 
-```
-
-## Variability: Quantiles and Quartiles
-
-```{r sampSort, echo=FALSE, comment=NA}
-```
-<br><br>
-<div class="fragment">
-Quantiles:
-```{r quantiles, echo=FALSE, comment=NA}
-quantile(salmon$mass, c(0.05, 0.1, 0.5, 0.90, 0.95))
-```
-</div>
-
-<br><br>
-<div class="fragment">
-Quartiles (quarter-quantiles):
-```{r quartiles, echo=FALSE, comment=NA}
-quantile(salmon$mass)
-```
-</div>
-
-## Boxplots
-![](./Images/summarizing_data/EDA-boxplot.png)
-
-## Boxplot of One Population
-```{r boxplot}
-qplot(x=1, mass, data = salmon, geom="boxplot")
-```
-
-## Boxplot of Many Populations
-```{r boxplot_many}
-img_ak <- png::readPNG("./Images/summarizing_data/alaska_rivers.png")
-g_ak <- grid::rasterGrob(img_ak, interpolate=TRUE)
-
-qplot(x=river, mass, data = salmon, geom="boxplot") +
-  annotation_custom(g_ak, xmin=6.2, ymin=3.5) + 
-  ylim(c(0,6)) +
-  scale_x_discrete(limits=letters[1:8], labels=c(letters[1:6], "", ""))
-```
-
-## Meh, I still like ridgelines
-```{r ridgeplot}
-library(ggridges)
-suppressMessages(library(viridis))
-ggplot(salmon, aes(x=mass, y=river, fill=..x..)) +
-  geom_density_ridges_gradient(bandwidth=0.2) +
-  scale_fill_viridis(name = "mass (kg)", option = "C") +
-  scale_y_discrete(limits=letters[1:7], labels=c(letters[1:6], ""))
-
-```
-
-## Objectives
-1. Think about how sampling influences data structure  
-  
-2. Consider how we summarize our data  
-  
-3. <font color="red">A little bit o' Boolean</font>  
-  
-4. The split-apply-combine philosophy  
-
-## What do we want to see?
-```{r see_salmon}
-salmon
-```
 
 ## Our Hero...
 
@@ -402,14 +141,37 @@ filter(salmon, river == "a")
 filter(salmon, river == "a" & mass > 3)
 ```  
 
-## Many Filters
+## Groups of Topics
+
+1. Our Data
+
+2. Cleaning and Filtering our Data  
+
+3. <font color="red">Summarizing counts functionally!</font>
+
+4. How do we summarize our data?  
+  
+5. The split-apply-combine philosophy  
+
+
+## Counting
+```{r count}
+count(salmon)
+```
+
+## Nesting Functions: Ugly! Hard to Read!
+
 ```{r filter4, message=FALSE, warning=FALSE, echo=TRUE}
+count( filter(salmon, river == "a" & mass > 3) )
+```  
+
+## Introducing The Pipe
+
+```{r filter5, message=FALSE, warning=FALSE, echo=TRUE}
 filter(salmon, river == "a" & mass > 3) |>
   count()
-
-filter(salmon, river == "b" & mass > 3) |>
-  count()
 ```  
+
 
 ## Sidebar - the pipe!
 ![](./Images/summarizing_data/magrittr.jpg)
@@ -469,14 +231,173 @@ salmon_filtered <- salmon |>
   count()
 ```
 
-## Objectives
-1. Think about how sampling influences data structure  
+## Groups of Topics
+
+1. Our Data
+
+2. Cleaning and Filtering our Data  
+
+3. Summarizing counts functionally!  
+
+4. <font color="red">How do we summarize our data?</font>  
   
-2. Consider how we summarize our data  
+5. The split-apply-combine philosophy  
+
+
+## Summary Properties of a Sample
+- Measures of Central tendency: Mean, Median, Mode
+
+- Measures of Variation: Standard Deviation, Percentiles
+
+- Measures of Precision of Estimating the Above: Standard Error 
   
-3. A little bit o' Boolean  
+
+## Central Tendancy: Mean {.bigger}
+&nbsp;  
+&nbsp;  
+<center> 
+$\bar{Y} = \frac{ \displaystyle \sum_{i=1}^{n}{y_{i}} }{n}$
+</center>
+
+$\large \bar{Y}$ - The average value of a sample  
+$y_{i}$ - The value of a measurement for a single individual   
+n - The number of individuals in a sample  
+
+
+## Median - Dead Center
+
+```{r sampSort, echo=FALSE}
+sort(salmon$mass[1:10])
+```
+<Br><br>
+<div class="fragment"> Middle Value = 50th Percentile = 0.5 Quantile = Median<Br>good for non-normal data</div>  
+<br><br>
+<div class="fragment"> 
+```{r median, echo=FALSE}
+median(salmon$mass)
+```
+</div>
+
+## Central Tendancies
+```{r central1}
+p_all +
+  geom_vline(color="blue", xintercept=mean(salmon$mass), lwd=2) +
+  geom_vline(color="red", xintercept=median(salmon$mass), lwd=2) +
+  labs(subtitle = "Blue = Mean, Red = Median")
+```
+
+
+
+## What about population-level variability?
+```{r central_var1}
+p_all +
+  geom_vline(color="blue", xintercept=mean(salmon$mass))
+```
+
+<div class="fragment">What is the range of 2/3 of the population?</div>
+
+
+## What about population-level variability? 2/3 of the population is within 1SD
+```{r central_var2}
+p_all +
+  geom_vline(color="blue", xintercept=mean(salmon$mass), lwd=2) +
+  geom_vline(color="orange", xintercept=mean(salmon$mass) + sd(salmon$mass), lwd=2) +
+  geom_vline(color="orange", xintercept=mean(salmon$mass)- sd(salmon$mass), lwd=2) 
+```
+
+What is the range of 2/3 of the population?
+
+## Sample Properties: Variance
+How variable was that population?
+$$\large s^2=  \frac{\displaystyle \sum_{i=1}^{n}{(Y_i - \bar{Y})^2}} {n-1}$$
+
+* Sums of Squares over n-1  
+* n-1 corrects for both sample size and sample bias  
+* Units in square of measurement...
+
+## Sample Properties: Standard Deviation
+$$ \large s = \sqrt{s^2}$$  
+
+* Units the same as the measurement
+* If distribution is normal, 67% of data within 1 SD
+* 95% within 2 SD
+
+## Visualizing Measures of Variability
+
+```{r central}
+p_all +
+  geom_vline(color="blue", xintercept=mean(salmon$mass), lwd=2) +
+  geom_vline(color="orange", xintercept=mean(salmon$mass) + sd(salmon$mass), lwd=2) +
+  geom_vline(color="orange", xintercept=mean(salmon$mass)- sd(salmon$mass), lwd=2) +
+  geom_vline(color="purple", xintercept=mean(salmon$mass) + 2*sd(salmon$mass), lwd=2) +
+  geom_vline(color="purple", xintercept=mean(salmon$mass)- 2*sd(salmon$mass), lwd=2)  +
+  labs(subtitle = "Orange = 1 SD, Purple = 2 SD")
+```
+
+## Variability: Quantiles/Percentiles and Quartiles
+
+```{r sampSort, echo=FALSE, comment=NA}
+```
+<br><br>
+<div class="fragment">
+Quantiles:
+```{r quantiles, echo=FALSE, comment=NA}
+quantile(salmon$mass, c(0.05, 0.1, 0.5, 0.90, 0.95))
+```
+</div>
+
+<br><br>
+<div class="fragment">
+Quartiles (quarter-quantiles):
+```{r quartiles, echo=FALSE, comment=NA}
+quantile(salmon$mass)
+```
+</div>
+
+## Boxplots
+![](./Images/summarizing_data/EDA-boxplot.png)
+
+## Boxplot of One Population
+```{r boxplot}
+qplot(x=1, mass, data = salmon, geom="boxplot")
+```
+
+## Boxplot of Many Populations
+```{r boxplot_many}
+img_ak <- png::readPNG("lectures/Images/summarizing_data/alaska_rivers.png")
+g_ak <- grid::rasterGrob(img_ak, interpolate=TRUE)
+
+ggplot(data = salmon,
+       aes(x = river, y = mass)) +
+  geom_boxplot() +
+  annotation_custom(g_ak, xmin=6.2, ymin=3.5) + 
+  ylim(c(0,6)) +
+  scale_x_discrete(limits=letters[1:8], labels=c(letters[1:6], "", ""))
+```
+
+## Meh, I still like ridgelines
+```{r ridgeplot}
+library(ggridges)
+
+ggplot(salmon, aes(x=mass, y=river, fill=after_stat(x))) +
+  geom_density_ridges_gradient(bandwidth=0.2) +
+  scale_fill_viridis_c(name = "mass (kg)", option = "C") +
+  scale_y_discrete(limits=letters[1:7], labels=c(letters[1:6], ""))
+
+```
+
+## Groups of Topics
+
+1. Our Data
+
+2. Cleaning and Filtering our Data  
+
+3. Summarizing counts functionally!  
+
+4. How do we summarize our data?  
   
-4. <font color="red">The split-apply-combine philosophy</font>  
+5. <font color="red">The split-apply-combine philosophy</font>  
+ 
 
 ## Where are we going?
 ![](./Images/summarizing_data/legodata_www.mydigitalfootprint.com.png)
@@ -489,26 +410,77 @@ salmon_filtered <- salmon |>
 ## Split-Apply-Combine
 ![](./Images/summarizing_data/split_apply_combine.png)
 
-## Think-Pair-Share
-1. What are things you want to know about different rivers in the salmon data?  
-  
-2. What are things you want to know about different size classes in the salmon data?
+## Two Questions
+1. What is the mean and variation of salmon by river?
 
-## Grouping by River
-```{r group_ex, echo=TRUE}
-salmon_rivers <- salmon |>
+2. For each size class of salmon, how many are in each river?
 
-  group_by(river) |>
-  
-  summarize(mean_mass = mean(mass),
-            sd_mass = sd(mass))
+## What do we need to know to learn about rivers?
+```{r, echo = TRUE}
+# make a data frame of summary info
+
+  # start with data
+
+  # group them (somehow?) by river
+
+  # for each river, summarize the data to mean and sd
 ```
 
-## What can we do with this?
+## Start with the data
+```{r, eval = FALSE, echo = TRUE}
+# make a data frame of summary info
+salmon_rivers <- 
+  
+  # start with data
+  salmon |>
+  
+  # group them (somehow?) by river
+
+  # for each river, summarize the data to mean and sd
+```
+
+## The group_by() function
+```{r, eval = FALSE, echo = TRUE}
+# make a data frame of summary info
+salmon_rivers <- 
+  
+  # start with data
+  salmon |>
+  
+  # group them (somehow?) by river
+  group_by(river)
+
+  # for each river, summarize the data to mean and sd
+```
+
+## Summarizing
+```{r, echo = TRUE}
+# make a data frame of summary info
+salmon_rivers <- 
+  
+  # start with data
+  salmon |>
+  
+  # group them (somehow?) by river
+  group_by(river) |>
+
+  # for each river, summarize the data to mean and sd
+  summarize(
+    mean_mass = mean(mass),
+    sd_mass = sd(mass)
+  )
+```
+
+
+## Show the result(yes, this could have been piped)
 ```{r arrange, echo=TRUE}
 arrange(salmon_rivers, mean_mass)
 ```
 
+## Other way! Descending
+```{r arrange2, echo=TRUE}
+arrange(salmon_rivers, desc(mean_mass))
+```
 
 ## What can we do with this?
 ```{r plot_groups, echo=FALSE}
@@ -521,12 +493,103 @@ ggplot(salmon_rivers,
   geom_point(size=4)
 ```
 
-## Custom Counts
-```{r counts}
-salmon %>%
-  group_by(mass_class) |>
-  count() |>
-  ggplot(aes(x=mass_class, y=n)) +
-  geom_col()
+## What about mass class per river?
+
+```{r, echo = TRUE}
+salmon_mass_count <- 
+  
+  # start with data
+  salmon |>
+  
+  # make mass classes
+  mutate(mass_class = cut_interval(mass, 5))
 ```
 
+## Mass Classes from cut_interval()
+
+```{r, echo = TRUE}
+salmon_mass_count
+```
+
+## OK, What next for count by class and river?
+```{r, eval = FALSE, echo = TRUE}
+salmon_mass_count <- 
+  
+  # start with data
+  salmon |>
+  
+  # make mass classes
+  mutate(mass_class = cut_interval(mass, 5)) |>
+  
+  #.....
+```
+
+## A Plan of Attack
+```{r, eval = FALSE, echo = TRUE}
+salmon_mass_count <- 
+  
+  # start with data
+  salmon |>
+  
+  # make mass classes
+  mutate(mass_class = cut_interval(mass, 5)) |>
+  
+  # group by class and river
+  
+  # summarize with a count
+```
+
+## Let's do it with n()
+```{r, echo = TRUE}
+salmon_mass_count <- 
+  
+  # start with data
+  salmon |>
+  
+  # make mass classes
+  mutate(mass_class = cut_interval(mass, 5)) |>
+  
+  # group by class and river
+  group_by(mass_class, river) |>
+  
+  # summarize with a count
+  summarize(number_fish = n())
+```
+
+
+## Ungrouping to cleanup
+```{r, warning=FALSE, echo = TRUE}
+salmon_mass_count <- 
+  
+  # start with data
+  salmon |>
+  
+  # make mass classes
+  mutate(mass_class = cut_interval(mass, 5)) |>
+  
+  # group by class and river
+  group_by(mass_class, river) |>
+  
+  # summarize with a count
+  summarize(number_fish = n()) |>
+  
+  ungroup()
+```
+
+## Visualize our Result
+```{r, echo = FALSE, echo = FALSE}
+ggplot(salmon_mass_count,
+       aes(x = number_fish,
+           color = river, 
+           y = mass_class)) +
+  geom_point(position = position_dodge(width = 0.6)) +
+  scale_color_brewer(palette = "Set2")
+```
+
+## A Solid Workflow!
+![](./Images/summarizing_data/legodata_www.mydigitalfootprint.com.png)
+
+## If we have time - let's see it live!
+1. What are things you want to know about different rivers in the salmon data?  
+  
+2. What are things you want to know about different size classes in the salmon data?

@@ -7,80 +7,88 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="libs/reveal.js-3.3.0.1/css/reveal.css"/>
+  <link rel="stylesheet" href="libs/reveal.js-4.2.1/dist/reset.css">
+  <link rel="stylesheet" href="libs/reveal.js-4.2.1/dist/reveal.css">
 
-
-<style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-</style>
-
-<link rel="stylesheet" href="libs/reveal.js-3.3.0.1/css/theme/white.css" id="theme">
-
-
-  <!-- some tweaks to reveal css -->
   <style type="text/css">
+    /* CSS from pandoc style.html() */
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+            html { -webkit-text-size-adjust: 100%; }
+            pre > code.sourceCode { white-space: pre; position: relative; }
+            pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+            pre > code.sourceCode > span:empty { height: 1.2em; }
+            .sourceCode { overflow: visible; }
+            code.sourceCode > span { color: inherit; text-decoration: inherit; }
+            div.sourceCode { margin: 1em 0; }
+            pre.sourceCode { margin: 0; }
+            @media screen {
+            div.sourceCode { overflow: auto; }
+            }
+            @media print {
+            pre > code.sourceCode { white-space: pre-wrap; }
+            pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+            }
+            pre.numberSource code
+              { counter-reset: source-line 0; }
+            pre.numberSource code > span
+              { position: relative; left: -4em; counter-increment: source-line; }
+            pre.numberSource code > span > a:first-child::before
+              { content: counter(source-line);
+                position: relative; left: -1em; text-align: right; vertical-align: baseline;
+                border: none; display: inline-block;
+                -webkit-touch-callout: none; -webkit-user-select: none;
+                -khtml-user-select: none; -moz-user-select: none;
+                -ms-user-select: none; user-select: none;
+                padding: 0 4px; width: 4em;
+                color: #aaaaaa;
+              }
+            pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+            div.sourceCode
+              {   }
+            @media screen {
+            pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+            }
+            code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+            code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+            code span.at { color: #7d9029; } /* Attribute */
+            code span.bn { color: #40a070; } /* BaseN */
+            code span.bu { color: #008000; } /* BuiltIn */
+            code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+            code span.ch { color: #4070a0; } /* Char */
+            code span.cn { color: #880000; } /* Constant */
+            code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+            code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+            code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+            code span.dt { color: #902000; } /* DataType */
+            code span.dv { color: #40a070; } /* DecVal */
+            code span.er { color: #ff0000; font-weight: bold; } /* Error */
+            code span.ex { } /* Extension */
+            code span.fl { color: #40a070; } /* Float */
+            code span.fu { color: #06287e; } /* Function */
+            code span.im { color: #008000; font-weight: bold; } /* Import */
+            code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+            code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+            code span.op { color: #666666; } /* Operator */
+            code span.ot { color: #007020; } /* Other */
+            code span.pp { color: #bc7a00; } /* Preprocessor */
+            code span.sc { color: #4070a0; } /* SpecialChar */
+            code span.ss { color: #bb6688; } /* SpecialString */
+            code span.st { color: #4070a0; } /* String */
+            code span.va { color: #19177c; } /* Variable */
+            code span.vs { color: #4070a0; } /* VerbatimString */
+            code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+              </style>
+
+  <link rel="stylesheet" href="libs/reveal.js-4.2.1/dist/theme/white.css" id="theme">
+
+
+  <style type="text/css">
+  /* some tweaks to reveal css */
     .reveal h1 { font-size: 2.0em; }
     .reveal h2 { font-size: 1.5em;  }
     .reveal h3 { font-size: 1.25em;	}
@@ -90,9 +98,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     .reveal .slides>section>section {
       padding: 0px 0px;
     }
-
-
-
     .reveal table {
       border-width: 1px;
       border-spacing: 2px;
@@ -118,397 +123,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
       border-style: dotted;
       border-color: gray;
     }
-
-
   </style>
 
-    <style type="text/css">code{white-space: pre;}</style>
-
     <link rel="stylesheet" href="style.css"/>
-
-<!-- Printing and PDF exports -->
-<script id="paper-css" type="application/dynamic-css">
-
-/* Default Print Stylesheet Template
-   by Rob Glazebrook of CSSnewbie.com
-   Last Updated: June 4, 2008
-
-   Feel free (nay, compelled) to edit, append, and
-   manipulate this file as you see fit. */
-
-
-@media print {
-
-	/* SECTION 1: Set default width, margin, float, and
-	   background. This prevents elements from extending
-	   beyond the edge of the printed page, and prevents
-	   unnecessary background images from printing */
-	html {
-		background: #fff;
-		width: auto;
-		height: auto;
-		overflow: visible;
-	}
-	body {
-		background: #fff;
-		font-size: 20pt;
-		width: auto;
-		height: auto;
-		border: 0;
-		margin: 0 5%;
-		padding: 0;
-		overflow: visible;
-		float: none !important;
-	}
-
-	/* SECTION 2: Remove any elements not needed in print.
-	   This would include navigation, ads, sidebars, etc. */
-	.nestedarrow,
-	.controls,
-	.fork-reveal,
-	.share-reveal,
-	.state-background,
-	.reveal .progress,
-	.reveal .backgrounds {
-		display: none !important;
-	}
-
-	/* SECTION 3: Set body font face, size, and color.
-	   Consider using a serif font for readability. */
-	body, p, td, li, div {
-		font-size: 20pt!important;
-		font-family: Georgia, "Times New Roman", Times, serif !important;
-		color: #000;
-	}
-
-	/* SECTION 4: Set heading font face, sizes, and color.
-	   Differentiate your headings from your body text.
-	   Perhaps use a large sans-serif for distinction. */
-	h1,h2,h3,h4,h5,h6 {
-		color: #000!important;
-		height: auto;
-		line-height: normal;
-		font-family: Georgia, "Times New Roman", Times, serif !important;
-		text-shadow: 0 0 0 #000 !important;
-		text-align: left;
-		letter-spacing: normal;
-	}
-	/* Need to reduce the size of the fonts for printing */
-	h1 { font-size: 28pt !important;  }
-	h2 { font-size: 24pt !important; }
-	h3 { font-size: 22pt !important; }
-	h4 { font-size: 22pt !important; font-variant: small-caps; }
-	h5 { font-size: 21pt !important; }
-	h6 { font-size: 20pt !important; font-style: italic; }
-
-	/* SECTION 5: Make hyperlinks more usable.
-	   Ensure links are underlined, and consider appending
-	   the URL to the end of the link for usability. */
-	a:link,
-	a:visited {
-		color: #000 !important;
-		font-weight: bold;
-		text-decoration: underline;
-	}
-	/*
-	.reveal a:link:after,
-	.reveal a:visited:after {
-		content: " (" attr(href) ") ";
-		color: #222 !important;
-		font-size: 90%;
-	}
-	*/
-
-
-	/* SECTION 6: more reveal.js specific additions by @skypanther */
-	ul, ol, div, p {
-		visibility: visible;
-		position: static;
-		width: auto;
-		height: auto;
-		display: block;
-		overflow: visible;
-		margin: 0;
-		text-align: left !important;
-	}
-	.reveal pre,
-	.reveal table {
-		margin-left: 0;
-		margin-right: 0;
-	}
-	.reveal pre code {
-		padding: 20px;
-		border: 1px solid #ddd;
-	}
-	.reveal blockquote {
-		margin: 20px 0;
-	}
-	.reveal .slides {
-		position: static !important;
-		width: auto !important;
-		height: auto !important;
-
-		left: 0 !important;
-		top: 0 !important;
-		margin-left: 0 !important;
-		margin-top: 0 !important;
-		padding: 0 !important;
-		zoom: 1 !important;
-
-		overflow: visible !important;
-		display: block !important;
-
-		text-align: left !important;
-		-webkit-perspective: none;
-		   -moz-perspective: none;
-		    -ms-perspective: none;
-		        perspective: none;
-
-		-webkit-perspective-origin: 50% 50%;
-		   -moz-perspective-origin: 50% 50%;
-		    -ms-perspective-origin: 50% 50%;
-		        perspective-origin: 50% 50%;
-	}
-	.reveal .slides section {
-		visibility: visible !important;
-		position: static !important;
-		width: auto !important;
-		height: auto !important;
-		display: block !important;
-		overflow: visible !important;
-
-		left: 0 !important;
-		top: 0 !important;
-		margin-left: 0 !important;
-		margin-top: 0 !important;
-		padding: 60px 20px !important;
-		z-index: auto !important;
-
-		opacity: 1 !important;
-
-		page-break-after: always !important;
-
-		-webkit-transform-style: flat !important;
-		   -moz-transform-style: flat !important;
-		    -ms-transform-style: flat !important;
-		        transform-style: flat !important;
-
-		-webkit-transform: none !important;
-		   -moz-transform: none !important;
-		    -ms-transform: none !important;
-		        transform: none !important;
-
-		-webkit-transition: none !important;
-		   -moz-transition: none !important;
-		    -ms-transition: none !important;
-		        transition: none !important;
-	}
-	.reveal .slides section.stack {
-		padding: 0 !important;
-	}
-	.reveal section:last-of-type {
-		page-break-after: avoid !important;
-	}
-	.reveal section .fragment {
-		opacity: 1 !important;
-		visibility: visible !important;
-
-		-webkit-transform: none !important;
-		   -moz-transform: none !important;
-		    -ms-transform: none !important;
-		        transform: none !important;
-	}
-	.reveal section img {
-		display: block;
-		margin: 15px 0px;
-		background: rgba(255,255,255,1);
-		border: 1px solid #666;
-		box-shadow: none;
-	}
-
-	.reveal section small {
-		font-size: 0.8em;
-	}
-
-}  
-</script>
-
-
-<script id="pdf-css" type="application/dynamic-css">
-    
-/**
- * This stylesheet is used to print reveal.js
- * presentations to PDF.
- *
- * https://github.com/hakimel/reveal.js#pdf-export
- */
-
-* {
-	-webkit-print-color-adjust: exact;
-}
-
-body {
-	margin: 0 auto !important;
-	border: 0;
-	padding: 0;
-	float: none !important;
-	overflow: visible;
-}
-
-html {
-	width: 100%;
-	height: 100%;
-	overflow: visible;
-}
-
-/* Remove any elements not needed in print. */
-.nestedarrow,
-.reveal .controls,
-.reveal .progress,
-.reveal .playback,
-.reveal.overview,
-.fork-reveal,
-.share-reveal,
-.state-background {
-	display: none !important;
-}
-
-h1, h2, h3, h4, h5, h6 {
-	text-shadow: 0 0 0 #000 !important;
-}
-
-.reveal pre code {
-	overflow: hidden !important;
-	font-family: Courier, 'Courier New', monospace !important;
-}
-
-ul, ol, div, p {
-	visibility: visible;
-	position: static;
-	width: auto;
-	height: auto;
-	display: block;
-	overflow: visible;
-	margin: auto;
-}
-.reveal {
-	width: auto !important;
-	height: auto !important;
-	overflow: hidden !important;
-}
-.reveal .slides {
-	position: static;
-	width: 100%;
-	height: auto;
-
-	left: auto;
-	top: auto;
-	margin: 0 !important;
-	padding: 0 !important;
-
-	overflow: visible;
-	display: block;
-
-	-webkit-perspective: none;
-	   -moz-perspective: none;
-	    -ms-perspective: none;
-	        perspective: none;
-
-	-webkit-perspective-origin: 50% 50%; /* there isn't a none/auto value but 50-50 is the default */
-	   -moz-perspective-origin: 50% 50%;
-	    -ms-perspective-origin: 50% 50%;
-	        perspective-origin: 50% 50%;
-}
-
-.reveal .slides section {
-	page-break-after: always !important;
-
-	visibility: visible !important;
-	position: relative !important;
-	display: block !important;
-	position: relative !important;
-
-	margin: 0 !important;
-	padding: 0 !important;
-	box-sizing: border-box !important;
-	min-height: 1px;
-
-	opacity: 1 !important;
-
-	-webkit-transform-style: flat !important;
-	   -moz-transform-style: flat !important;
-	    -ms-transform-style: flat !important;
-	        transform-style: flat !important;
-
-	-webkit-transform: none !important;
-	   -moz-transform: none !important;
-	    -ms-transform: none !important;
-	        transform: none !important;
-}
-
-.reveal section.stack {
-	margin: 0 !important;
-	padding: 0 !important;
-	page-break-after: avoid !important;
-	height: auto !important;
-	min-height: auto !important;
-}
-
-.reveal img {
-	box-shadow: none;
-}
-
-.reveal .roll {
-	overflow: visible;
-	line-height: 1em;
-}
-
-/* Slide backgrounds are placed inside of their slide when exporting to PDF */
-.reveal section .slide-background {
-	display: block !important;
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	z-index: -1;
-}
-
-/* All elements should be above the slide-background */
-.reveal section>* {
-	position: relative;
-	z-index: 1;
-}
-
-/* Display slide speaker notes when 'showNotes' is enabled */
-.reveal .speaker-notes-pdf {
-	display: block;
-	width: 100%;
-	max-height: none;
-	left: auto;
-	top: auto;
-	z-index: 100;
-}
-
-/* Display slide numbers when 'slideNumber' is enabled */
-.reveal .slide-number-pdf {
-	display: block;
-	position: absolute;
-	font-size: 14px;
-}
-
-</script>
-
-
-<script>
-var style = document.createElement( 'style' );
-style.type = 'text/css';
-var style_script_id = window.location.search.match( /print-pdf/gi ) ? 'pdf-css' : 'paper-css';
-var style_script = document.getElementById(style_script_id).text;
-style.innerHTML = style_script;
-document.getElementsByTagName('head')[0].appendChild(style);
-</script>
-
-    <script src="libs/header-attrs-2.20/header-attrs.js"></script>
+    <script src="libs/header-attrs-2.29/header-attrs.js"></script>
 </head>
 <body>
   <div class="reveal">
@@ -527,42 +145,18 @@ Making Data Tell its Story
 </center>
 </h2>
 </section>
-<section id="first-some-fun" class="slide level2">
-<h2>First, some fun!</h2>
-<p><a href="https://twitter.com/dataandme/status/965785338227712000?ref_src=twsrc%5Etfw">
-<img data-src="Images/summarizing_data/ggpom.jpg" /> </a></p>
-</section>
-<section id="first-some-fun-1" class="slide level2">
-<h2>First, some fun!</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#devtools::install_github(&quot;gadenbuie/ggpomological&quot;)</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggpomological)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(iris, <span class="fu">aes</span>(<span class="at">x=</span>Petal.Length, <span class="at">y =</span> Petal.Width, <span class="at">color=</span>Species)) <span class="sc">+</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">size=</span><span class="dv">3</span>) <span class="sc">+</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_pomological</span>(<span class="at">base_family =</span> <span class="st">&#39;Homemade Apple&#39;</span>, <span class="at">base_size=</span><span class="dv">16</span>) <span class="sc">+</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_pomological</span>()</span></code></pre></div>
-</section>
-<section id="first-some-fun-2" class="slide level2">
-<h2>First, some fun!</h2>
-<p><img src="09_summarizing_data_files/figure-revealjs/pom-1.jpeg" width="672" /></p>
-</section>
-<section id="first-some-fun-3" class="slide level2">
-<h2>First, some fun!</h2>
-<p><img src="09_summarizing_data_files/figure-revealjs/pom2-1.jpeg" width="672" />
-See also <a href="https://github.com/cttobin/ggthemr"
-class="uri">https://github.com/cttobin/ggthemr</a></p>
-</section>
 <section id="where-are-we-going" class="slide level2">
 <h2>Where are we going?</h2>
 <p><img
 data-src="Images/summarizing_data/legodata_www.mydigitalfootprint.com.png" /></p>
 </section>
-<section id="objectives" class="slide level2">
-<h2>Objectives</h2>
+<section id="groups-of-topics" class="slide level2">
+<h2>Groups of Topics</h2>
 <ol type="1">
-<li><p>Think about how sampling influences data structure</p></li>
-<li><p>Consider how we summarize our data</p></li>
-<li><p>A little bit o’ Boolean</p></li>
+<li><p>Our Data</p></li>
+<li><p>Cleaning and Filtering our Data</p></li>
+<li><p>Summarizing counts functionally!</p></li>
+<li><p>How do we summarize our data?</p></li>
 <li><p>The split-apply-combine philosophy</p></li>
 </ol>
 </section>
@@ -586,159 +180,204 @@ style="width:75.0%" /></p>
 <p>Pair up with someone and come up all of the information you can think
 of that would summarize this population.</p>
 </section>
-<section id="population-versus-sample" class="slide level2">
-<h2>Population versus Sample</h2>
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td style="text-align: center;"><img
-data-src="Images/summarizing_data/salmon_population.png" /></td>
-<td style="text-align: center;"><img
-data-src="Images/summarizing_data/many_salmon.png" /></td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="what-is-a-population" class="slide level2">
-<h2>What is a population?</h2>
-<img src="09_summarizing_data_files/figure-revealjs/population-1.jpeg" width="576" />
-<div class="fragment">
- <br />
-Population = All Individuals
-</div>
-</section>
-<section id="what-is-a-sample" class="slide level2">
-<h2>What is a sample?</h2>
-<img src="09_summarizing_data_files/figure-revealjs/sample-1.jpeg" width="576" />
-<div class="fragment">
-A <b>sample</b> of individuals in a randomly distributed population.
-</div>
-</section>
-<section id="what-are-the-properties-of-a-good-sample"
-class="slide level2">
-<h2>What are the properties of a good sample?</h2>
-<div style="font-size:32pt; text-align:left">
-<ul>
-<li class="fragment">Sample is <strong>representative</strong></li>
-</ul>
-<ul>
-<li class="fragment">Replicates have an <strong>equal chance</strong> of
-being sampled</li>
-</ul>
-<ul>
-<li class="fragment">Replicates are <strong>independent</strong></li>
-</ul>
-</div>
-</section>
-<section id="bias-from-unequal-representation" class="slide level2">
-<h2>Bias from Unequal Representation</h2>
-<p><img src="09_summarizing_data_files/figure-revealjs/colorSize-1.jpeg" width="576" />
-If you only chose one color, you would only get one range of sizes.</p>
-</section>
-<section id="bias-from-unequal-change-of-sampling" class="slide level2">
-<h2>Bias from Unequal Change of Sampling</h2>
-<p><img src="09_summarizing_data_files/figure-revealjs/spatialBias-1.jpeg" width="576" />
-<span class="fragment">Spatial gradient in size</span></p>
-</section>
-<section id="bias-from-unequal-change-of-sampling-1"
-class="slide level2">
-<h2>Bias from Unequal Change of Sampling</h2>
-<p><img src="09_summarizing_data_files/figure-revealjs/spatialSample-1.jpeg" width="576" />
-Oh, I’ll just grab those individuals closest to me…</p>
-</section>
-<section id="good-sampling-schemes-stratified-sampling"
-class="slide level2">
-<h2>Good Sampling Schemes: <strong>Stratified</strong> Sampling</h2>
-<p><img src="09_summarizing_data_files/figure-revealjs/stratified-1.jpeg" width="576" />
-Sample over a known gradient, aka <strong>cluster sampling</strong></p>
-<p>Can incorporate multiple gradients</p>
-</section>
-<section id="good-sampling-schemes-random-sampling"
-class="slide level2">
-<h2>Good Sampling Schemes: Random Sampling</h2>
-<img src="09_summarizing_data_files/figure-revealjs/spatialSample2-1.jpeg" width="576" />
-<div id="fragment">
-Two sampling schemes:
-</div>
-<ul>
-<li class="fragment">Random - samples chosen using random numbers<br />
-</li>
-<li class="fragment">Haphazard - samples chosen without any system
-(careful!)</li>
-</ul>
-</section>
-<section id="stratified-or-random" class="slide level2">
-<h2>Stratified or Random?</h2>
-<ul>
-<li><p>How is your population defined?</p></li>
-<li><p>What is the scale of your inference?</p></li>
-<li><p>What might influence the inclusion of a replicate?</p></li>
-<li><p>How important are external factors you know about?</p></li>
-<li><p>How important are external factors you cannot assess?</p></li>
-</ul>
-</section>
-<section id="different-sampling-for-different-populations"
-class="slide level2">
-<h2>Different Sampling for Different Populations</h2>
-<table>
-<colgroup>
-<col style="width: 50%" />
-<col style="width: 50%" />
-</colgroup>
-<tbody>
-<tr class="odd">
-<td style="text-align: center;"><img
-data-src="Images/summarizing_data/alaska_rivers.png"
-style="width:50.0%" /></td>
-<td style="text-align: center;"><img
-data-src="Images/summarizing_data/salmon_population.png"
-style="width:50.0%" /></td>
-</tr>
-</tbody>
-</table>
-<p align="left">
-Consider each scenario and in pairs design a sampling schema:<br />
-1. Population = All salmon across all rivers<br />
-2. Population = Salmon in one river
-</p>
-</section>
-<section id="objectives-1" class="slide level2">
-<h2>Objectives</h2>
-<ol type="1">
-<li><p>Think about how sampling influences data structure</p></li>
-<li><p><font color="red">Consider how we summarize our
-data</font></p></li>
-<li><p>A little bit o’ Boolean</p></li>
-<li><p>The split-apply-combine philosophy</p></li>
-</ol>
-</section>
 <section id="our-data" class="slide level2">
 <h2>Our Data</h2>
 <p><img src="09_summarizing_data_files/figure-revealjs/hist-1.jpeg" width="672" /></p>
 </section>
-<section id="sample-versus-population-summarization"
+<section id="groups-of-topics-1" class="slide level2">
+<h2>Groups of Topics</h2>
+<ol type="1">
+<li><p>Our Data</p></li>
+<li><p><font color="red">Cleaning and Filtering our Data</font></p></li>
+<li><p>Summarizing counts functionally!</p></li>
+<li><p>How do we summarize our data?</p></li>
+<li><p>The split-apply-combine philosophy</p></li>
+</ol>
+</section>
+<section id="what-data-do-we-want" class="slide level2">
+<h2>What Data Do We Want?</h2>
+<p><img src="09_summarizing_data_files/figure-revealjs/river_facet-1.jpeg" width="672" /></p>
+</section>
+<section id="what-data-do-we-want-adults" class="slide level2">
+<h2>What Data Do We Want? Adults!</h2>
+<p><img src="09_summarizing_data_files/figure-revealjs/river_facet_line-1.jpeg" width="672" /></p>
+</section>
+<section id="our-hero" class="slide level2">
+<h2>Our Hero…</h2>
+<p><img data-src="Images/summarizing_data/hex-dplyr.jpg" /></p>
+</section>
+<section id="filtering" class="slide level2">
+<h2>Filtering</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(salmon, mass <span class="sc">&gt;</span> <span class="dv">2</span>)</span></code></pre></div>
+<pre><code># A tibble: 74 × 3
+    mass river mass_class 
+   &lt;dbl&gt; &lt;chr&gt; &lt;fct&gt;      
+ 1  3.09 a     (2.75,3.14]
+ 2  2.91 b     (2.75,3.14]
+ 3  3.06 c     (2.75,3.14]
+ 4  2.69 d     (2.35,2.75]
+ 5  2.88 e     (2.75,3.14]
+ 6  2.98 f     (2.75,3.14]
+ 7  2.16 b     (1.96,2.35]
+ 8  3.3  f     (3.14,3.53]
+ 9  3.25 e     (3.14,3.53]
+10  2.18 f     (1.96,2.35]
+# ℹ 64 more rows</code></pre>
+</section>
+<section id="filtering-1" class="slide level2">
+<h2>Filtering</h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(salmon, river <span class="sc">==</span> <span class="st">&quot;a&quot;</span>)</span></code></pre></div>
+<pre><code># A tibble: 38 × 3
+    mass river mass_class 
+   &lt;dbl&gt; &lt;chr&gt; &lt;fct&gt;      
+ 1  3.09 a     (2.75,3.14]
+ 2  1.61 a     (1.57,1.96]
+ 3  1.91 a     (1.57,1.96]
+ 4  2.13 a     (1.96,2.35]
+ 5  1.53 a     [1.18,1.57]
+ 6  1.75 a     (1.57,1.96]
+ 7  1.76 a     (1.57,1.96]
+ 8  1.72 a     (1.57,1.96]
+ 9  2.29 a     (1.96,2.35]
+10  1.74 a     (1.57,1.96]
+# ℹ 28 more rows</code></pre>
+</section>
+<section id="logical-operators" class="slide level2">
+<h2>Logical Operators</h2>
+<p><img
+data-src="Images/summarizing_data/transform-logical.png" /></p>
+</section>
+<section id="many-filters" class="slide level2">
+<h2>Many Filters</h2>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(salmon, river <span class="sc">==</span> <span class="st">&quot;a&quot;</span> <span class="sc">&amp;</span> mass <span class="sc">&gt;</span> <span class="dv">3</span>)</span></code></pre></div>
+<pre><code># A tibble: 4 × 3
+   mass river mass_class 
+  &lt;dbl&gt; &lt;chr&gt; &lt;fct&gt;      
+1  3.09 a     (2.75,3.14]
+2  3.04 a     (2.75,3.14]
+3  3.11 a     (2.75,3.14]
+4  3.05 a     (2.75,3.14]</code></pre>
+</section>
+<section id="groups-of-topics-2" class="slide level2">
+<h2>Groups of Topics</h2>
+<ol type="1">
+<li><p>Our Data</p></li>
+<li><p>Cleaning and Filtering our Data</p></li>
+<li><p><font color="red">Summarizing counts
+functionally!</font></p></li>
+<li><p>How do we summarize our data?</p></li>
+<li><p>The split-apply-combine philosophy</p></li>
+</ol>
+</section>
+<section id="counting" class="slide level2">
+<h2>Counting</h2>
+<pre><code># A tibble: 1 × 1
+      n
+  &lt;int&gt;
+1   228</code></pre>
+</section>
+<section id="nesting-functions-ugly-hard-to-read" class="slide level2">
+<h2>Nesting Functions: Ugly! Hard to Read!</h2>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">count</span>( <span class="fu">filter</span>(salmon, river <span class="sc">==</span> <span class="st">&quot;a&quot;</span> <span class="sc">&amp;</span> mass <span class="sc">&gt;</span> <span class="dv">3</span>) )</span></code></pre></div>
+<pre><code># A tibble: 1 × 1
+      n
+  &lt;int&gt;
+1     4</code></pre>
+</section>
+<section id="introducing-the-pipe" class="slide level2">
+<h2>Introducing The Pipe</h2>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(salmon, river <span class="sc">==</span> <span class="st">&quot;a&quot;</span> <span class="sc">&amp;</span> mass <span class="sc">&gt;</span> <span class="dv">3</span>) <span class="sc">|&gt;</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>()</span></code></pre></div>
+<pre><code># A tibble: 1 × 1
+      n
+  &lt;int&gt;
+1     4</code></pre>
+</section>
+<section id="sidebar---the-pipe" class="slide level2">
+<h2>Sidebar - the pipe!</h2>
+<p><img data-src="Images/summarizing_data/magrittr.jpg" /></p>
+</section>
+<section id="sidebar---the-pipe-1" class="slide level2">
+<h2>Sidebar - the pipe!</h2>
+<p><img data-src="Images/summarizing_data/p1.png" /></p>
+</section>
+<section id="pipes-pass-an-object-as-the-first-argument-to-a-function"
 class="slide level2">
-<h2>Sample versus Population Summarization</h2>
+<h2>Pipes pass an object as the first argument to a function</h2>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">|&gt;</span> <span class="fu">sum</span>(<span class="dv">4</span>)</span></code></pre></div>
+<pre><code>[1] 9</code></pre>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>salmon <span class="sc">|&gt;</span> <span class="fu">count</span>()</span></code></pre></div>
+<pre><code># A tibble: 1 × 1
+      n
+  &lt;int&gt;
+1   228</code></pre>
+</section>
+<section id="pipes-and-functional-programming" class="slide level2">
+<h2>Pipes and Functional Programming</h2>
 <ul>
-<li><p>We assume a sample is representative of a population</p></li>
-<li><p>Therefore, sample statistics are estimates of population
-statistics</p></li>
-<li><p>Larger Samples = Better Estimators</p></li>
+<li>We often thing in terms of do this, then then, then this<br />
+<br />
+</li>
+<li>Programming that way requires overwriting a lot of objects<br />
+<br />
+</li>
+<li>It gets…. messy</li>
 </ul>
 </section>
-<section id="accuracy-versus-precision" class="slide level2">
-<h2>Accuracy versus Precision</h2>
-<img data-src="Images/summarizing_data/accurate-precise1.jpg" />
-<br><br><br>
-<div class="small">
-<a
-href="https://bobchoat.files.wordpress.com/2014/01/accurate-precise1.jpg"
-class="uri">https://bobchoat.files.wordpress.com/2014/01/accurate-precise1.jpg</a>
-</div>
+<section id="functional-programming-workflow" class="slide level2">
+<h2>Functional Programming Workflow</h2>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co">#filter the salmon data by river</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co">#filter the salmon data by mass</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="co">#get the count of the salmon</span></span></code></pre></div>
+</section>
+<section id="functional-programming-can-get-verbose"
+class="slide level2">
+<h2>Functional Programming Can get Verbose</h2>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co">#filter the salmon data by river</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>salmon_filtered <span class="ot">&lt;-</span> <span class="fu">filter</span>(salmon, river <span class="sc">==</span> <span class="st">&quot;a&quot;</span>) </span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co">#filter the salmon data by mass</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>salmon_filtered <span class="ot">&lt;-</span> <span class="fu">filter</span>(salmon_filtered, mass <span class="sc">&gt;</span> <span class="dv">3</span>) </span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a><span class="co">#get the count of the salmon</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="fu">count</span>(salmon_filtered)</span></code></pre></div>
+</section>
+<section id="pipes-make-programs-read-like-language"
+class="slide level2">
+<h2>Pipes Make Programs Read Like Language!</h2>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>salmon_filtered <span class="ot">&lt;-</span> salmon <span class="sc">|&gt;</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">#filter the salmon data by river</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(river <span class="sc">==</span> <span class="st">&quot;a&quot;</span>) <span class="sc">|&gt;</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">#filter the salmon data by mass</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(mass <span class="sc">&gt;</span> <span class="dv">3</span>) <span class="sc">|&gt;</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>  <span class="co">#get the count of the salmon</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>()</span></code></pre></div>
+</section>
+<section id="groups-of-topics-3" class="slide level2">
+<h2>Groups of Topics</h2>
+<ol type="1">
+<li><p>Our Data</p></li>
+<li><p>Cleaning and Filtering our Data</p></li>
+<li><p>Summarizing counts functionally!</p></li>
+<li><p><font color="red">How do we summarize our data?</font></p></li>
+<li><p>The split-apply-combine philosophy</p></li>
+</ol>
+</section>
+<section id="summary-properties-of-a-sample" class="slide level2">
+<h2>Summary Properties of a Sample</h2>
+<ul>
+<li><p>Measures of Central tendency: Mean, Median, Mode</p></li>
+<li><p>Measures of Variation: Standard Deviation, Percentiles</p></li>
+<li><p>Measures of Precision of Estimating the Above: Standard
+Error</p></li>
+</ul>
 </section>
 <section id="central-tendancy-mean" class="slide level2 bigger">
 <h2 class="bigger">Central Tendancy: Mean</h2>
@@ -753,11 +392,7 @@ class="uri">https://bobchoat.files.wordpress.com/2014/01/accurate-precise1.jpg</
 value of a sample<br />
 <span class="math inline">\(y_{i}\)</span> - The value of a measurement
 for a single individual<br />
-n - The number of individuals in a sample<br />
- <br />
-<span class="math inline">\(\mu\)</span> - The average value of a
-population<br />
-(Greek = population, Latin = Sample)</p>
+n - The number of individuals in a sample</p>
 </section>
 <section id="median---dead-center" class="slide level2">
 <h2>Median - Dead Center</h2>
@@ -775,7 +410,6 @@ non-normal data
 <section id="central-tendancies" class="slide level2">
 <h2>Central Tendancies</h2>
 <p><img src="09_summarizing_data_files/figure-revealjs/central1-1.jpeg" width="672" /></p>
-<p><font color="blue">mean</font>, <font color="red">median</font></p>
 </section>
 <section id="what-about-population-level-variability"
 class="slide level2">
@@ -785,9 +419,11 @@ class="slide level2">
 What is the range of 2/3 of the population?
 </div>
 </section>
-<section id="what-about-population-level-variability-1"
+<section
+id="what-about-population-level-variability-23-of-the-population-is-within-1sd"
 class="slide level2">
-<h2>What about population-level variability?</h2>
+<h2>What about population-level variability? 2/3 of the population is
+within 1SD</h2>
 <p><img src="09_summarizing_data_files/figure-revealjs/central_var2-1.jpeg" width="672" /></p>
 <p>What is the range of 2/3 of the population?</p>
 </section>
@@ -801,8 +437,6 @@ s^2=  \frac{\displaystyle \sum_{i=1}^{n}{(Y_i - \bar{Y})^2}}
 </li>
 <li>n-1 corrects for both sample size and sample bias<br />
 </li>
-<li><span class="math inline">\(\sigma^2\)</span> if describing the
-population</li>
 <li>Units in square of measurement…</li>
 </ul>
 </section>
@@ -813,17 +447,15 @@ population</li>
 <li>Units the same as the measurement</li>
 <li>If distribution is normal, 67% of data within 1 SD</li>
 <li>95% within 2 SD</li>
-<li><span class="math inline">\(\sigma\)</span> if describing the
-population</li>
 </ul>
 </section>
-<section id="what-about-population-level-variability-2"
-class="slide level2">
-<h2>What about population-level variability?</h2>
+<section id="visualizing-measures-of-variability" class="slide level2">
+<h2>Visualizing Measures of Variability</h2>
 <p><img src="09_summarizing_data_files/figure-revealjs/central-1.jpeg" width="672" /></p>
 </section>
-<section id="variability-quantiles-and-quartiles" class="slide level2">
-<h2>Variability: Quantiles and Quartiles</h2>
+<section id="variability-quantilespercentiles-and-quartiles"
+class="slide level2">
+<h2>Variability: Quantiles/Percentiles and Quartiles</h2>
 <pre><code> [1] 1.56 1.61 1.76 2.16 2.69 2.88 2.91 2.98 3.06 3.09</code></pre>
 <br><br>
 <div class="fragment">
@@ -854,176 +486,13 @@ class="slide level2">
 <h2>Meh, I still like ridgelines</h2>
 <p><img src="09_summarizing_data_files/figure-revealjs/ridgeplot-1.jpeg" width="672" /></p>
 </section>
-<section id="objectives-2" class="slide level2">
-<h2>Objectives</h2>
+<section id="groups-of-topics-4" class="slide level2">
+<h2>Groups of Topics</h2>
 <ol type="1">
-<li><p>Think about how sampling influences data structure</p></li>
-<li><p>Consider how we summarize our data</p></li>
-<li><p><font color="red">A little bit o’ Boolean</font></p></li>
-<li><p>The split-apply-combine philosophy</p></li>
-</ol>
-</section>
-<section id="what-do-we-want-to-see" class="slide level2">
-<h2>What do we want to see?</h2>
-<pre><code># A tibble: 228 × 3
-    mass river mass_class 
-   &lt;dbl&gt; &lt;chr&gt; &lt;fct&gt;      
- 1  3.09 a     (2.75,3.14]
- 2  2.91 b     (2.75,3.14]
- 3  3.06 c     (2.75,3.14]
- 4  2.69 d     (2.35,2.75]
- 5  2.88 e     (2.75,3.14]
- 6  2.98 f     (2.75,3.14]
- 7  1.61 a     (1.57,1.96]
- 8  2.16 b     (1.96,2.35]
- 9  1.56 c     [1.18,1.57]
-10  1.76 d     (1.57,1.96]
-# … with 218 more rows</code></pre>
-</section>
-<section id="our-hero" class="slide level2">
-<h2>Our Hero…</h2>
-<p><img data-src="Images/summarizing_data/hex-dplyr.jpg" /></p>
-</section>
-<section id="filtering" class="slide level2">
-<h2>Filtering</h2>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(salmon, mass <span class="sc">&gt;</span> <span class="dv">2</span>)</span></code></pre></div>
-<pre><code># A tibble: 74 × 3
-    mass river mass_class 
-   &lt;dbl&gt; &lt;chr&gt; &lt;fct&gt;      
- 1  3.09 a     (2.75,3.14]
- 2  2.91 b     (2.75,3.14]
- 3  3.06 c     (2.75,3.14]
- 4  2.69 d     (2.35,2.75]
- 5  2.88 e     (2.75,3.14]
- 6  2.98 f     (2.75,3.14]
- 7  2.16 b     (1.96,2.35]
- 8  3.3  f     (3.14,3.53]
- 9  3.25 e     (3.14,3.53]
-10  2.18 f     (1.96,2.35]
-# … with 64 more rows</code></pre>
-</section>
-<section id="filtering-1" class="slide level2">
-<h2>Filtering</h2>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(salmon, river <span class="sc">==</span> <span class="st">&quot;a&quot;</span>)</span></code></pre></div>
-<pre><code># A tibble: 38 × 3
-    mass river mass_class 
-   &lt;dbl&gt; &lt;chr&gt; &lt;fct&gt;      
- 1  3.09 a     (2.75,3.14]
- 2  1.61 a     (1.57,1.96]
- 3  1.91 a     (1.57,1.96]
- 4  2.13 a     (1.96,2.35]
- 5  1.53 a     [1.18,1.57]
- 6  1.75 a     (1.57,1.96]
- 7  1.76 a     (1.57,1.96]
- 8  1.72 a     (1.57,1.96]
- 9  2.29 a     (1.96,2.35]
-10  1.74 a     (1.57,1.96]
-# … with 28 more rows</code></pre>
-</section>
-<section id="logical-operators" class="slide level2">
-<h2>Logical Operators</h2>
-<p><img
-data-src="Images/summarizing_data/transform-logical.png" /></p>
-</section>
-<section id="many-filters" class="slide level2">
-<h2>Many Filters</h2>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(salmon, river <span class="sc">==</span> <span class="st">&quot;a&quot;</span> <span class="sc">&amp;</span> mass <span class="sc">&gt;</span> <span class="dv">3</span>)</span></code></pre></div>
-<pre><code># A tibble: 4 × 3
-   mass river mass_class 
-  &lt;dbl&gt; &lt;chr&gt; &lt;fct&gt;      
-1  3.09 a     (2.75,3.14]
-2  3.04 a     (2.75,3.14]
-3  3.11 a     (2.75,3.14]
-4  3.05 a     (2.75,3.14]</code></pre>
-</section>
-<section id="many-filters-1" class="slide level2">
-<h2>Many Filters</h2>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(salmon, river <span class="sc">==</span> <span class="st">&quot;a&quot;</span> <span class="sc">&amp;</span> mass <span class="sc">&gt;</span> <span class="dv">3</span>) <span class="sc">|&gt;</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>()</span></code></pre></div>
-<pre><code># A tibble: 1 × 1
-      n
-  &lt;int&gt;
-1     4</code></pre>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">filter</span>(salmon, river <span class="sc">==</span> <span class="st">&quot;b&quot;</span> <span class="sc">&amp;</span> mass <span class="sc">&gt;</span> <span class="dv">3</span>) <span class="sc">|&gt;</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>()</span></code></pre></div>
-<pre><code># A tibble: 1 × 1
-      n
-  &lt;int&gt;
-1     4</code></pre>
-</section>
-<section id="sidebar---the-pipe" class="slide level2">
-<h2>Sidebar - the pipe!</h2>
-<p><img data-src="Images/summarizing_data/magrittr.jpg" /></p>
-</section>
-<section id="sidebar---the-pipe-1" class="slide level2">
-<h2>Sidebar - the pipe!</h2>
-<p><img data-src="Images/summarizing_data/p1.png" /></p>
-</section>
-<section id="pipes-pass-an-object-as-the-first-argument-to-a-function"
-class="slide level2">
-<h2>Pipes pass an object as the first argument to a function</h2>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span> <span class="sc">|&gt;</span> <span class="fu">sum</span>(<span class="dv">4</span>)</span></code></pre></div>
-<pre><code>[1] 9</code></pre>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>salmon <span class="sc">|&gt;</span> <span class="fu">count</span>()</span></code></pre></div>
-<pre><code># A tibble: 1 × 1
-      n
-  &lt;int&gt;
-1   228</code></pre>
-</section>
-<section id="pipes-and-functional-programming" class="slide level2">
-<h2>Pipes and Functional Programming</h2>
-<ul>
-<li>We often thing in terms of do this, then then, then this<br />
-<br />
-</li>
-<li>Programming that way requires overwriting a lot of objects<br />
-<br />
-</li>
-<li>It gets…. messy</li>
-</ul>
-</section>
-<section id="functional-programming-workflow" class="slide level2">
-<h2>Functional Programming Workflow</h2>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co">#filter the salmon data by river</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="co">#filter the salmon data by mass</span></span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="co">#get the count of the salmon</span></span></code></pre></div>
-</section>
-<section id="functional-programming-can-get-verbose"
-class="slide level2">
-<h2>Functional Programming Can get Verbose</h2>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co">#filter the salmon data by river</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>salmon_filtered <span class="ot">&lt;-</span> <span class="fu">filter</span>(salmon, river <span class="sc">==</span> <span class="st">&quot;a&quot;</span>) </span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="co">#filter the salmon data by mass</span></span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>salmon_filtered <span class="ot">&lt;-</span> <span class="fu">filter</span>(salmon_filtered, mass <span class="sc">&gt;</span> <span class="dv">3</span>) </span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="co">#get the count of the salmon</span></span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="fu">count</span>(salmon_filtered)</span></code></pre></div>
-</section>
-<section id="pipes-make-programs-read-like-language"
-class="slide level2">
-<h2>Pipes Make Programs Read Like Language!</h2>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>salmon_filtered <span class="ot">&lt;-</span> salmon <span class="sc">|&gt;</span></span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="co">#filter the salmon data by river</span></span>
-<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(river <span class="sc">==</span> <span class="st">&quot;a&quot;</span>) <span class="sc">|&gt;</span></span>
-<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">#filter the salmon data by mass</span></span>
-<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(mass <span class="sc">&gt;</span> <span class="dv">3</span>) <span class="sc">|&gt;</span></span>
-<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>  <span class="co">#get the count of the salmon</span></span>
-<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>()</span></code></pre></div>
-</section>
-<section id="objectives-3" class="slide level2">
-<h2>Objectives</h2>
-<ol type="1">
-<li><p>Think about how sampling influences data structure</p></li>
-<li><p>Consider how we summarize our data</p></li>
-<li><p>A little bit o’ Boolean</p></li>
+<li><p>Our Data</p></li>
+<li><p>Cleaning and Filtering our Data</p></li>
+<li><p>Summarizing counts functionally!</p></li>
+<li><p>How do we summarize our data?</p></li>
 <li><p><font color="red">The split-apply-combine
 philosophy</font></p></li>
 </ol>
@@ -1046,27 +515,71 @@ enough</p></li>
 <p><img
 data-src="Images/summarizing_data/split_apply_combine.png" /></p>
 </section>
-<section id="think-pair-share" class="slide level2">
-<h2>Think-Pair-Share</h2>
+<section id="two-questions" class="slide level2">
+<h2>Two Questions</h2>
 <ol type="1">
-<li><p>What are things you want to know about different rivers in the
-salmon data?</p></li>
-<li><p>What are things you want to know about different size classes in
-the salmon data?</p></li>
+<li><p>What is the mean and variation of salmon by river?</p></li>
+<li><p>For each size class of salmon, how many are in each
+river?</p></li>
 </ol>
 </section>
-<section id="grouping-by-river" class="slide level2">
-<h2>Grouping by River</h2>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>salmon_rivers <span class="ot">&lt;-</span> salmon <span class="sc">|&gt;</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(river) <span class="sc">|&gt;</span></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_mass =</span> <span class="fu">mean</span>(mass),</span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_mass =</span> <span class="fu">sd</span>(mass))</span></code></pre></div>
+<section id="what-do-we-need-to-know-to-learn-about-rivers"
+class="slide level2">
+<h2>What do we need to know to learn about rivers?</h2>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make a data frame of summary info</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># start with data</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># group them (somehow?) by river</span></span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># for each river, summarize the data to mean and sd</span></span></code></pre></div>
 </section>
-<section id="what-can-we-do-with-this" class="slide level2">
-<h2>What can we do with this?</h2>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(salmon_rivers, mean_mass)</span></code></pre></div>
+<section id="start-with-the-data" class="slide level2">
+<h2>Start with the data</h2>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make a data frame of summary info</span></span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>salmon_rivers <span class="ot">&lt;-</span> </span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># start with data</span></span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  salmon <span class="sc">|&gt;</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># group them (somehow?) by river</span></span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># for each river, summarize the data to mean and sd</span></span></code></pre></div>
+</section>
+<section id="the-group_by-function" class="slide level2">
+<h2>The group_by() function</h2>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make a data frame of summary info</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>salmon_rivers <span class="ot">&lt;-</span> </span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># start with data</span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  salmon <span class="sc">|&gt;</span></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># group them (somehow?) by river</span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(river)</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># for each river, summarize the data to mean and sd</span></span></code></pre></div>
+</section>
+<section id="summarizing" class="slide level2">
+<h2>Summarizing</h2>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make a data frame of summary info</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>salmon_rivers <span class="ot">&lt;-</span> </span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># start with data</span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>  salmon <span class="sc">|&gt;</span></span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># group them (somehow?) by river</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(river) <span class="sc">|&gt;</span></span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># for each river, summarize the data to mean and sd</span></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(</span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean_mass =</span> <span class="fu">mean</span>(mass),</span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd_mass =</span> <span class="fu">sd</span>(mass)</span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div>
+</section>
+<section id="show-the-resultyes-this-could-have-been-piped"
+class="slide level2">
+<h2>Show the result(yes, this could have been piped)</h2>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(salmon_rivers, mean_mass)</span></code></pre></div>
 <pre><code># A tibble: 6 × 3
   river mean_mass sd_mass
   &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;
@@ -1077,32 +590,165 @@ the salmon data?</p></li>
 5 b          2.10   0.608
 6 a          2.11   0.511</code></pre>
 </section>
-<section id="what-can-we-do-with-this-1" class="slide level2">
+<section id="other-way-descending" class="slide level2">
+<h2>Other way! Descending</h2>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">arrange</span>(salmon_rivers, <span class="fu">desc</span>(mean_mass))</span></code></pre></div>
+<pre><code># A tibble: 6 × 3
+  river mean_mass sd_mass
+  &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+1 a          2.11   0.511
+2 b          2.10   0.608
+3 f          2.04   0.612
+4 c          2.04   0.548
+5 e          1.98   0.491
+6 d          1.89   0.450</code></pre>
+</section>
+<section id="what-can-we-do-with-this" class="slide level2">
 <h2>What can we do with this?</h2>
 <p><img src="09_summarizing_data_files/figure-revealjs/plot_groups-1.jpeg" width="672" /></p>
 </section>
-<section id="custom-counts" class="slide level2">
-<h2>Custom Counts</h2>
-<p><img src="09_summarizing_data_files/figure-revealjs/counts-1.jpeg" width="672" /></p>
+<section id="what-about-mass-class-per-river" class="slide level2">
+<h2>What about mass class per river?</h2>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>salmon_mass_count <span class="ot">&lt;-</span> </span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># start with data</span></span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  salmon <span class="sc">|&gt;</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># make mass classes</span></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">mass_class =</span> <span class="fu">cut_interval</span>(mass, <span class="dv">5</span>))</span></code></pre></div>
+</section>
+<section id="mass-classes-from-cut_interval" class="slide level2">
+<h2>Mass Classes from cut_interval()</h2>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>salmon_mass_count</span></code></pre></div>
+<pre><code># A tibble: 228 × 3
+    mass river mass_class 
+   &lt;dbl&gt; &lt;chr&gt; &lt;fct&gt;      
+ 1  3.09 a     (3.06,3.53]
+ 2  2.91 b     (2.59,3.06]
+ 3  3.06 c     (3.06,3.53]
+ 4  2.69 d     (2.59,3.06]
+ 5  2.88 e     (2.59,3.06]
+ 6  2.98 f     (2.59,3.06]
+ 7  1.61 a     [1.18,1.65]
+ 8  2.16 b     (2.12,2.59]
+ 9  1.56 c     [1.18,1.65]
+10  1.76 d     (1.65,2.12]
+# ℹ 218 more rows</code></pre>
+</section>
+<section id="ok-what-next-for-count-by-class-and-river"
+class="slide level2">
+<h2>OK, What next for count by class and river?</h2>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>salmon_mass_count <span class="ot">&lt;-</span> </span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># start with data</span></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>  salmon <span class="sc">|&gt;</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># make mass classes</span></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">mass_class =</span> <span class="fu">cut_interval</span>(mass, <span class="dv">5</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>  <span class="co">#.....</span></span></code></pre></div>
+</section>
+<section id="a-plan-of-attack" class="slide level2">
+<h2>A Plan of Attack</h2>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>salmon_mass_count <span class="ot">&lt;-</span> </span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># start with data</span></span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>  salmon <span class="sc">|&gt;</span></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># make mass classes</span></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">mass_class =</span> <span class="fu">cut_interval</span>(mass, <span class="dv">5</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># group by class and river</span></span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># summarize with a count</span></span></code></pre></div>
+</section>
+<section id="lets-do-it-with-n" class="slide level2">
+<h2>Let’s do it with n()</h2>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>salmon_mass_count <span class="ot">&lt;-</span> </span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># start with data</span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>  salmon <span class="sc">|&gt;</span></span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># make mass classes</span></span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">mass_class =</span> <span class="fu">cut_interval</span>(mass, <span class="dv">5</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># group by class and river</span></span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(mass_class, river) <span class="sc">|&gt;</span></span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># summarize with a count</span></span>
+<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">number_fish =</span> <span class="fu">n</span>())</span></code></pre></div>
+</section>
+<section id="ungrouping-to-cleanup" class="slide level2">
+<h2>Ungrouping to cleanup</h2>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>salmon_mass_count <span class="ot">&lt;-</span> </span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># start with data</span></span>
+<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>  salmon <span class="sc">|&gt;</span></span>
+<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># make mass classes</span></span>
+<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">mass_class =</span> <span class="fu">cut_interval</span>(mass, <span class="dv">5</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># group by class and river</span></span>
+<span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(mass_class, river) <span class="sc">|&gt;</span></span>
+<span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># summarize with a count</span></span>
+<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">number_fish =</span> <span class="fu">n</span>()) <span class="sc">|&gt;</span></span>
+<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>()</span></code></pre></div>
+</section>
+<section id="visualize-our-result" class="slide level2">
+<h2>Visualize our Result</h2>
+<p><img src="09_summarizing_data_files/figure-revealjs/unnamed-chunk-11-1.jpeg" width="672" /></p>
+</section>
+<section id="a-solid-workflow" class="slide level2">
+<h2>A Solid Workflow!</h2>
+<p><img
+data-src="Images/summarizing_data/legodata_www.mydigitalfootprint.com.png" /></p>
+</section>
+<section id="if-we-have-time---lets-see-it-live" class="slide level2">
+<h2>If we have time - let’s see it live!</h2>
+<ol type="1">
+<li><p>What are things you want to know about different rivers in the
+salmon data?</p></li>
+<li><p>What are things you want to know about different size classes in
+the salmon data?</p></li>
+</ol>
 </section>
     </div>
   </div>
 
-  <script src="libs/reveal.js-3.3.0.1/lib/js/head.min.js"></script>
-  <script src="libs/reveal.js-3.3.0.1/js/reveal.js"></script>
-
+  <script src="libs/reveal.js-4.2.1/dist/reveal.js"></script>
+  
+  <!-- reveal.js plugins -->
+  
   <script>
 
       // Full list of configuration options available at:
-      // https://github.com/hakimel/reveal.js#configuration
+      // https://revealjs.com/config/
       Reveal.initialize({
         // Display controls in the bottom right corner
         controls: true,
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: true,
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'bottom-right',
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
         // Display a presentation progress bar
         progress: true,
         // Display the page number of the current slide
         slideNumber: true,
+        // Can be used to limit the contexts in which the slide number appears
+        showSlideNumber: 'all',
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
         // Push each slide change to the browser history
+        // Implies `hash: true`
         history: true,
         // Enable keyboard shortcuts for navigation
         keyboard: true,
@@ -1112,17 +758,35 @@ the salmon data?</p></li>
         center: false,
         // Enables touch navigation on devices with touch input
         touch: true,
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'default',
         // Turns fragments on and off globally
         fragments: true,
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: true,
         // Flags if we should show a help overlay when the questionmark
         // key is pressed
         help: true,
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
         // Number of milliseconds between automatically proceeding to the
         // next slide, disabled when set to 0, this value can be overwritten
         // by using a data-autoslide attribute on your slides
         autoSlide: 0,
         // Stop auto-sliding after user input
         autoSlideStoppable: true,
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
         // Opens links in an iframe preview overlay
         previewLinks: true,
         // Transition style
@@ -1130,16 +794,27 @@ the salmon data?</p></li>
         // Transition speed
         transitionSpeed: 'default', // default/fast/slow
         // Transition style for full page slide backgrounds
-        backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
+        backgroundTransition: 'fade', // none/fade/slide/convex/concave/zoom
         // Number of slides away from the current that are visible
         viewDistance: 3,
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+        // The display mode that will be used to show slides
+        display: 'block',
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
 
 
 
         // Optional reveal.js plugins
-        dependencies: [
+        plugins: [
         ]
       });
+
     </script>
   <!-- dynamically load mathjax for compatibility with self-contained -->
   <script>
