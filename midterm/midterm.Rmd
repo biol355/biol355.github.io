@@ -35,7 +35,13 @@ Throughout the semester, we've been refering you to [R Cheat Sheets](https://rst
 So, for your midterm, I'd like you to create a cheat sheet for the package of your choice. It can be a simple package, or a complex package, or anything in between. Below, I'll detail the steps of the process, as well as provide a list of some packages that might be enjoyable to use for this assignment - although the choice is ultimately up to you!
 
 # Due Date 
-March 24, 2023  
+March 20, 2026  
+
+# Finding Packages
+While I talk about some packages below, here are some neat places to find new or underused packages:
+- [R Weekly New Packages](https://rweekly.org/#NewPackages)  
+- [AwesomeR's list of packages](https://github.com/qinwf/awesome-R?tab=readme-ov-file#awesome-)  
+- [rworks](https://rworks.dev/) regularly has top new package lists. Lots of them!  
 
 # Simple Extra Credit
 Put your cheatsheet up on Github!If you're interested, see [Happy with Git](https://happygitwithr.com/) for more and/or talk to me.  
@@ -78,7 +84,7 @@ The breakdown of your grade for this assignment will be as follows:
 # Finding a Package
 While we provide a few packages below, you're also more than welcome to search for ones you might find interesting. There are a number of places to look. Your package can be from CRAN. It might be from a [CRAN Task View](https://cran.r-project.org/web/views/). You might find it on [awesome-r.com](https://awesome-r.com/). It could be a package featured as a [Top 40 new package at Rviews](https://www.google.com/search?q=top+40&q=site%3Ahttps%3A%2F%2Frviews.rstudio.com). Or take a look at the New and Updated packages section of [rweekly](https://rweekly.org/#NewPackages) (note - I read this daily!). Many data oriented packages can be found at [ROpenGov](https://ropengov.github.io/projects/) or for health data, [rOpenHealth](https://github.com/rOpenHealth). I'm also a big fan of [ROpenSci](https://ropensci.org/packages/) for many ecologically focused packages. Also, on our [data sets page](https://biol355.github.io/datasets.html) there are a variety of R packages that provide access to data. Those are great targets as well!  
 
-# Some package suggestions
+# Some package examples
 
 By all means, don't chose something from the list below if you don't want to! But there are some packages which might be good to think about if your imagination is flagging. I'll also provide a bit of an example of what they can do.
 
@@ -198,8 +204,8 @@ library(hrbrthemes)
 library(dplyr)
 hrbrthemes::import_roboto_condensed()
 
-storms %>% 
-  filter(year >= 2010) %>% 
+storms |> 
+  filter(year >= 2010) |> 
   count(year, status) -> storms_df
 
 ggplot(storms_df, aes(fill = status, values = n)) +
@@ -237,7 +243,7 @@ As with `visdat`, we've used [skimr](https://docs.ropensci.org/skimr/) for one f
 ```{r skimr}
 library(skimr)
 
-faithful %>%
+faithful |>
   skim()
 
 ```
@@ -246,7 +252,7 @@ faithful %>%
 Combine the `skimr` and `visdat` packages along with any others you find that are useful to create a comprehensive data validation cheat sheet for when you first load a new data set. This is a powerful beast, and is worth up to 25% extra credit.
 
 ## worms 
-Taxonomy is hard. [worms](https://docs.ropensci.org/worrms/) makes it easy. Names change. We often want a lot of different information from a taxonomy. One place that is standardized to all marine species is the [World Register of Marine Species](https://www.marinespecies.org/).
+Taxonomy is hard. [worrms](https://docs.ropensci.org/worrms/) makes it easy. Names change. We often want a lot of different information from a taxonomy. One place that is standardized to all marine species is the [World Register of Marine Species](https://www.marinespecies.org/) which I often use - but there are others!.
 
 ```{r worms, cache=TRUE, fig.fullwidth=TRUE}
 library(worrms)
@@ -254,10 +260,10 @@ l <- wm_records_taxamatch(name = 'Laminariales')
 r <- purrr::map_df(seq(1,401, 50),~ wm_records_rank(rank_id = 220, id = l[[1]]$AphiaID[1], offset = .x))
 
 #the plot
-r %>% 
-  filter(status=="accepted") %>%
-  group_by(family, genus) %>% 
-  count() %>%
+r |> 
+  filter(status=="accepted") |>
+  group_by(family, genus) |> 
+  count() |>
   ggplot(aes(x = family, y = n, fill = genus)) +
   geom_col() +
   ggthemes::theme_tufte(base_size=14) +
@@ -305,17 +311,17 @@ ggplot(data = ne_countries(returnclass="sf")) +
 
 ![rayshader](./rayshade.png)
 
-
+<!--
 ## rnoaa
 [rnoaa](https://docs.ropensci.org/rnoaa/) is an astouding package that lets you access many of the different data sets available from NOAA. There is no way you can do a comprehensive cheat sheet here. BUT - if you want to make a cheat sheet to fully explore ONE data set, and show us how to use it to make it useful, that would be perfect!
 
-```{r rnoaa, cache=TRUE, fig.cap = "Sea Ice at the North Pole from 2000-2010"}
+```{r rnoaa, eval= FALSE, cache=TRUE, fig.cap = "Sea Ice at the North Pole from 2000-2010"}
 library(rnoaa)
 
 dat <- sea_ice(year = 2000:2010, month = 'Apr', pole = 'N')
 df <- bind_rows(dat, .id = "x") 
 
-df <- df %>%
+df <- df |>
   mutate(x = c(2000:2010)[as.numeric(x)])
 
 ggplot(df, aes(long, lat, group = group)) +
@@ -324,29 +330,9 @@ ggplot(df, aes(long, lat, group = group)) +
   facet_wrap(~ x)
 ```
 
-## rtweet
-Wanna dig into the stew of Twitter and analyze it? What do you find there? What's awesome? What's terrible? Check out [rtweet](https://rtweet.info/)
-
-```{r rtweet, fig.cap = "How often does Prof. Byrnes tweet?", cache=TRUE}
-library(rtweet)
-library(lubridate)
-
-tmls <- get_timelines(c("jebyrnes"), n = 10000)
-
-tmls %>% group_by(day = floor_date(created_at, "day")) %>%
-  count() %>%
-  ggplot(aes(x = day, y = n)) +
-  geom_line() +
-  geom_point() +
-  xlab("") +
-  ylab("Number of Tweets") +
-  theme_minimal(base_size=14) +
-  ggtitle("My tweet history")
-
-```
-
+-->
 
 ## the lost pies of magrittr
-The [magrittr](https://magrittr.tidyverse.org/) package is far more than just `%>%`. There are a multitude of pipes we don't talk about, different ways of creating repeatable workflows with `. %>%` and more. Write a cheat sheet that embraces the full functionality of `magrittr`!
+The [magrittr](https://magrittr.tidyverse.org/) package is far more than just `|>`. There are a multitude of pipes we don't talk about, different ways of creating repeatable workflows with `. |>` and more. Write a cheat sheet that embraces the full functionality of `magrittr` and maybe even other packages that implement wild pipes!!
 \
 \
