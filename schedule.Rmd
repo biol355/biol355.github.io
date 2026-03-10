@@ -119,16 +119,16 @@ datestring <- paste(month(current_date), day(current_date), year(current_date), 
 ```
 `r datestring_1` and `r datestring`  
 __Readings:__   [Intro to Geocomputation in R](https://geocompr.robinlovelace.net/intro.html), [Geographic Data in R](https://geocompr.robinlovelace.net/spatial-class.html), W&G Chapter on [Relational Data](http://r4ds.hadley.nz/relational-data.html)    
-__Lectures:__  [Intro to GIS](./Lectures/15_gis_intro.html), [Rasters](https://datacarpentry.org/r-raster-vector-geospatial/01-raster-structure/index.html) and [plotting rasters](https://datacarpentry.org/r-raster-vector-geospatial/02-raster-plot/index.html), [Joins](./Lectures/15_joins.pptx), [Vector Data](https://datacarpentry.org/r-raster-vector-geospatial/)  
-__Labs:__ [coronavirus spatial mapping](./Labs/coronavirus_spatial.html) [joins and maps](./Labs/join_maps_lab.html)  
+__Lectures:__  [Intro to GIS](./Lectures/15_gis_intro.html), [Rasters](https://cobalt-casco.github.io/r-raster-vector-geospatial/01-raster-structure.html) and [plotting rasters](https://cobalt-casco.github.io/r-raster-vector-geospatial/02-raster-plot.html),  [Vector Data](https://cobalt-casco.github.io/r-raster-vector-geospatial/06-vector-open-shapefile-in-r.html), [Plotting Vector Data](https://cobalt-casco.github.io/r-raster-vector-geospatial/07-vector-shapefile-attributes-in-r.html), [Plotting Multiple Vectors](https://cobalt-casco.github.io/r-raster-vector-geospatial/08-vector-plot-shapefiles-custom-legend.html), [Joins](./Lectures/15_joins.pptx)  
+<!-- __Labs:__ [coronavirus spatial mapping](./Labs/coronavirus_spatial.html) [joins and maps](./Labs/join_maps_lab.html)  -->
 __Objective(s):__ Know when and where to use different types of joins, Understand how to merge survey data with geospatial information to get a geographic understanding of epidemiological patterns  
-__Biological Examples:__ Hemlock wooly adelgid distribution. CDC records of heart disease across counties of the US. Change in coastal sea surface temperature since 1850. Global TB mortality distribution.  
+__Biological Examples:__ Seagrass in Casco Bay, Hemlock wooly adelgid distribution. CDC records of heart disease across counties of the US. Change in coastal sea surface temperature since 1850. Global TB mortality distribution.  
 __Optional Reading:__ [Making maps in R](https://geocompr.robinlovelace.net/adv-map.html) and other chapters in Geocomputation in R. [Spatial Data Science](https://keen-swartz-3146c4.netlify.com/), [information about the lab data](https://datacarpentry.org/geospatial-workshop/data/)   
-__Files:__  [geospatial data for lab](https://ndownloader.figshare.com/articles/2009586/versions/10), [Hemlock](../Data/hemlock.xlsx), [hemlock_densities](../Data/hemlock_densities.xlsx),  [Arctic Boreal Forest Vegetation](./Lectures/data/boreal.csv), [Heart Disease in America](./Labs/data/hd_all.xlsx), [data for lab on joins](./Labs/data/joinmap_data.zip), [US County Borders in 2013](./Lectures/data/cb_2013_us_county_500k.zip), [March 18, 2018 SST Anomalies ](./Lectures/data/sst_anom.bin.20180318.tif)   
+__Files:__  [geospatial data for lab](https://figshare.com/ndownloader/files/43910115), [Hemlock](../Data/hemlock.xlsx), [hemlock_densities](../Data/hemlock_densities.xlsx),  [Arctic Boreal Forest Vegetation](./Lectures/data/boreal.csv), [Heart Disease in America](./Labs/data/hd_all.xlsx), [data for lab on joins](./Labs/data/joinmap_data.zip), [US County Borders in 2013](./Lectures/data/cb_2013_us_county_500k.zip), [March 18, 2018 SST Anomalies ](./Lectures/data/sst_anom.bin.20180318.tif)   
 __Etherpad:__ https://etherpad.wikimedia.org/p/355-gis-2026_spring  
 __Homework:__ [Map making!](./Assignments/mapping_assignment.html)  
-__Before Class:__ Install `rgdal` (you'll need to install gdal first - see below), `sf`, `sp`, `raster`, `leaflet`, `maptools`, `mapdata`, and `rgeos`. 
-__MIDTERM__: Due March 20th [make a cheatsheet](./midterm/midterm.html)      
+__Before Class:__ Install `rgdal` (you'll need to install gdal first - see below), `sf`, `terra`, `sp`, `raster`, `leaflet`, `maptools`, `mapdata`, and `rgeos`. See [here](https://cobalt-casco.github.io/geospatial-workshop/#setup) for instructions.
+__MIDTERM__: Due March 27th [make a cheatsheet](./midterm/midterm.html)      
 
 
 **To install gdal on a mac, there are two steps**  
