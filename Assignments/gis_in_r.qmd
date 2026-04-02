@@ -1,0 +1,225 @@
+---
+title: "Mapmaker, Mapmaker, Make me a Map!"
+format: html
+---
+
+There are a lot of wonderful packages out there with geospatial data just ready for you to play with! Today, we're going to have you work with some on its own, combine it with some external data, and then go out and fetch your own geospatial data to plot. By the end, I'm hoping you will feel like an accomplished mapmaker with a good mastery of the basics to make lovely figures and maps for future papers or web apps.
+
+### 1. rnaturalearth 
+One of my favorite packages out there is [rnaturalearth](https://docs.ropensci.org/rnaturalearth/articles/rnaturalearth.html). It's a great package that accesses a subset of the [naturalearthdata](https://www.naturalearthdata.com/) dataset (which you can also just download parts of and load up). It makes plotting things VERY easy for me when I'm working on projects. I'd like to have you work with it a bit for this question. Load up the following libraries (and if you are missing some, install them!):
+
+```{r load_libs}
+#| echo: true
+#| message: false
+library(sf)
+library(dplyr)
+library(ggplot2)
+library(rnaturalearth)
+library(rnaturalearthdata)
+```
+
+To learn more, please read [this](https://docs.ropensci.org/rnaturalearth/articles/rnaturalearth.html)
+
+#### 1a) Let's start with loading up a map of the world using `ne_countries()`. Plot it so we know you've got it. Feel free to theme or play with color here.
+
+```{r, load_world}
+#| echo: false
+#| eval: true
+#setwd(here::here())
+knitr::opts_knit$set(root.dir = here::here(), message = "false", warning = "false")
+world <- ne_countries()
+ggplot() + geom_sf(data = world)
+```
+
+#### 1b) View `df_layers_cultural` - it's a data frame showing what cultural layers are available. Choose one that is global in scope, and use `ne_load()` where `type = ` the layer you chose. Don't forget to also set the scale. I'd recommend choosing a layer with a scale of 110. Note - you will need to supply an argument to both the category and scale. Then, plot it on top of the world. Also, some layers are not available. If you can, make it fancy!
+
+```{r}
+#| echo: false
+#| eval: false
+
+airports <- ne_download(type = "airports",
+                        category = "cultural",
+                        scale = 10)
+
+ggplot() + geom_sf(data = world) + geom_sf(data = airports)
+```
+
+#### 1c) One of these cultural layers is airports! Load up the global airports layer at `scale = 10`, and create a leaflet map so that we can explore where the world's airports are. You can use any of the marker functions, such as `addCircleMarkers()` or `addMarkers()`. Use `addProviderTiles()` to give it an interesting background tileset. See [here](https://leaflet-extras.github.io/leaflet-providers/preview/) for those tilesets.
+
+Bonus +1: have a popup where if you click it you get the airport name.  
+Bonus +1: Give it a look other than the default for the marker.
+
+
+
+```{r}
+#| echo: false
+#| eval: false
+library(leaflet)
+
+leaflet() |>
+  addProviderTiles(provider = "NASAGIBS.ViirsEarthAtNight2012") |>
+  addCircleMarkers(data = airports, radius = 5, 
+                   fillColor = "red", fillOpacity = 1,
+                   stroke = FALSE, popup =~ paste(name))
+
+```
+
+### 2. Heart disease
+Let's try some joining and see what we can learn. Grab the [CDC heart disease](https://biol355.github.io/Labs/data/hd_all.xlsx) data from a few years back and let's load it up.
+
+#### 2a. Load the data, noting that we need to set `na="Insufficient Data"`. Take a look at what is in it - anything there that might provide a unique identifier?
+
+```{r}
+#| echo: false
+#| eval: true
+
+heart_disease <- readxl::read_excel("Labs/data/hd_all.xlsx", na="Insufficient Data")
+heart_disease
+```
+
+#### 2b. Now, we need some boundaries of counties! Let's install the `USAboundaries` package. It's a cool package that has boundaries of the US from the revolution to now.
+
+```{r}
+#| echo: true
+#| eval: false
+
+devtools::install_github("ropensci/USAboundaries")
+devtools::install_github("ropensci/USAboundariesData")
+```
+
+Note - comment these out once you do it.
+
+Now, create an object of counties and take a look and what columns are there.
+
+```{r}
+#| echo: true
+#| eval: true
+library(USAboundaries)
+map_sf <- us_counties()
+```
+
+Here, we don't have a [FIPS code](https://en.wikipedia.org/wiki/Federal_Information_Processing_Standard_state_code) as above But.... it's a character
+
+#### 2c. OK, let's make a `FIPS_code` variable to join on! Paste together `statefp` and `countyfp` and turn it into a number. Make sure you don't accidetally paste a space in between the two fp codes!
+
+```{r}
+map_sf <- map_sf |>
+    mutate(FIPS_Code = paste0(statefp, countyfp) |> as.numeric())
+```
+
+
+#### 2d. Before we join, use `anti_join()` to see two things: 1) if we join without modification, what columns are automagically used for the join. 2) How many and what rows are in the heart disease data set, but not in the counties data set?
+
+```{r}
+#| echo: false
+#| eval: false
+
+library(dplyr)
+bad_match <- anti_join(heart_disease, map_sf)
+
+nrow(bad_match)
+
+bad_match
+```
+
+#### 2e. To join the data sets, which join would you use? Why? Join them, and make sure the result is an sf object with `st_as_sf()`. Oh, and make sure you filter our Hawaii and Alaska
+
+```{r}
+joined_map <- left_join(heart_disease, map_sf) |> 
+  st_as_sf() |>
+  filter(!(State %in% c("Hawaii", "Alaska")))
+```
+
+#### 2e. OK! Plot mortality from  heart disease by county in the continental US. Use a color scheme to make it look good and easy to understand. 
+
+```{r}
+#| echo: false
+#| eval: false
+
+ggplot(joined_map, aes(fill = Death_Rate |> as.numeric())) +
+         geom_sf(color = NA) +
+  scale_fill_distiller(palette = "BrBG", direction = 1) +
+  theme_void()
+
+
+```
+
+### 3. Quick combo of different data sources
+A paper recently published a map of % nighttime fire detections. Load it up as follows:
+
+```{r}
+library(terra)
+library(tidyterra)
+
+nightfire <- read.csv("https://static-content.springer.com/esm/art%3A10.1038%2Fs41586-021-04325-1/MediaObjects/41586_2021_4325_MOESM2_ESM.csv")
+
+fire_spatraster <- rast(nightfire, crs = "epsg:4326")
+```
+
+Combine this work your world map above to make a ggplot of fire across the world. Bonus points for exploring `st_union()` or otherwise to remove inner borders in the world sf object
+
+```{r}
+#| echo: false
+sf_use_s2(FALSE)
+
+ ggplot() + 
+  geom_sf(data = world |> st_union(), fill = "white") + 
+  geom_spatraster(data = fire_spatraster) +
+  scale_fill_viridis_c(option = "B", 
+                       na.value = "transparent", direction = -1) +
+   theme_void() +
+   labs(fill = "nighttime fire detection %") +
+   theme(legend.position = "bottom")
+```
+
+### 4. Combining different data sources
+
+OK, we're going to combine two different rasters - one of Cargo Vessel density in the Western Atlantic in 2011 and one of average ocean bottom temperatures. AND we're going to combine them with a map of the Coastline..... but I want this to JUST be of the Gulf of Maine area.
+
+Here's our starting bounding box.
+
+```{r}
+#| echo: true
+aoi <- c(xmin = -71.674805, 
+         xmax = -63.083496, 
+         ymin = 41.277806, 
+         ymax = 45.935871) |>
+  st_bbox() |>
+  st_as_sfc() |>
+  st_set_crs(4326) 
+```
+
+#### 4a. What is your workflow here. Write it out in comments given that you have an aoi, a shapefile of the coast, and two different rasters at different scales, and pretty much everything that a different projection. What is the most efficient way forward from raw files to map?
+
+#### 4b. Let's get these layers loaded:
+
+Download and unzip the following files:
+- [AIS data](https://www.dropbox.com/scl/fi/0x6a90z5zcnaew2e4by7x/AIS2011.zip?rlkey=hjs481u8444impkwdy5e9kj4g&dl=0)  
+- [Oceanography data](Oceanography.zip)  
+
+Well those are rather large! They are also in an interesting format called a gdb - an [ESRI Geodatabase](https://en.wikipedia.org/wiki/Geodatabase_(Esri)). Fortunately, terra can load from that!
+
+**NOTE: USE THIS TO COMPILE YOUR HOMEWORK, BUT DO NOT SUBMIT A ZIPPED UP HOMEWORK WITH THE RASTER DATA OR ZIP FILES - IT WILL KILL CANVAS**
+
+```{r}
+#| echo: true
+#fvcom_temperature_bottom_climatology_1978to2013_annual, fvcom_temperature_surface_climatology_1978to2013_annual, fvcom_stratification_climatology_1978to2013_annual, fvcom_currents_bottom_climatology_1928to2013_annual, fvcom_currents_surface_climatology_1978to2013_annual
+
+envt_raster <- rast("Data/Oceanography/FVCOMAnnualClimatology.gdb", 
+                    subds = "fvcom_temperature_bottom_climatology_1978to2013_annual")
+
+# PassengerVesselDensity2011, TankerVesselDensity2011, TugTowVesselDensity2011, CargoVesselDensity2011, AllVesselDensity2011
+
+ais_raster <- rast("Data/AIS2011/AIS2011.gdb/", 
+                    subds = "CargoVesselDensity2011")
+```
+
+Notice how I 
+
+#### 4c. Plot both rasters. What are their CRS's in proj4 and/or EPSG? What happens if you plot both of them using `plot()` for one followed by `plot(second_raster, add = TRUE)`?
+
+#### 4d. OK! Now, implement your plan from A above. Get everything reprojected and cropped to the AOI. You can use `plot()` and `plot(add = TRUE)` to check and make sure that things are in the same projection and cropped right.
+
+#### 4e. Then plot it all together using ggplot2. Note - you'll need two things to help you. First, think about the order of layers of geospatial data. Second, with your fills, you will need `na.value = "transparent"`. Third - how do you do two fills with different layers? Well, you'll need a new package! [ggnewscale](https://eliocamp.github.io/ggnewscale/) allows you to put a layer into a plot, set properties of it in terms of color of fill, and then reset things to a new fill scale. See the website linked above - but you will need `ggnewscale::new_scale_fill()` in your ggplot2 stack. So `install.packages("ggnewscale")` before you make your plot!
+
+#### 4f. EXTRA CREDIT - can you plot it all together using leaflet?
