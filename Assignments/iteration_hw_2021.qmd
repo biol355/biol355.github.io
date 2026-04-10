@@ -1,7 +1,6 @@
 ---
 title: "Iteration!"
 author: "Biol 355 Homework"
-date: "4/10/2021"
 output: html_document
 ---
 
@@ -11,35 +10,50 @@ knitr::opts_chunk$set(echo = FALSE, eval = FALSE)
 
 [Here](./data/counties.zip) is a set of RDS files that contain sf objects of state county boundaries. We are going to work with these using iteration and functions for some of this week's work.
 
-1. Let's warm up with some SF practice. the function `readRDS()` reads in RDS files. The dplyr function `bind_rows()` can take rows of a data frame, tibble, of sf object, and bind them together properly. Using the `purrr` library, read in all of the counties files and then combine them into a single data frame. Plot the result. 
+**1.** Let's warm up with some SF practice. The function `readRDS()` reads in RDS files. The dplyr function `bind_rows()` can take rows of a data frame, tibble, of sf object, and bind them together properly. 
+
+Using the `purrr` library, read in all of the counties files and then combine them into a single data frame. Note, you're going to get some warnings about old-style crs. It's OK. 
+
+Plot the result. 
 
 ```{r}
+#| warning: false
+#| eval: false
+
 library(dplyr)
 library(sf)
 library(purrr)
 library(ggplot2)
 
-files <- list.files("./data/counties", full.names=TRUE)
+files <- list.files("Assignments/data/counties2", full.names=TRUE)
 
 counties <- map(files, readRDS)
 all_counties <- bind_rows(counties)
 
+ggplot() +
+  geom_sf(data = all_counties)
 ```
 
-2. This is great. Now, I'm curious - is there a link between the number of counties in a state and the ratio of area of the largest county in the state to the total state area? Let's find out!
+  
+**2.** This is great. Now, I'm curious - is there a link between the number of counties in a state and the ratio of area of the largest county in the state to the total state area? Let's find out!
 
-&nbsp; &nbsp; &nbsp; A. Write a function that, given a state name, will use `readRDS` to read in a single data file and fix up the CRS (these are all in lat/long - you want a mollweide, in which distance is in meters). Plot Massachusetts to make sure everything works.
+&nbsp; &nbsp; &nbsp; A. Write a function that, given a state name, will use `readRDS` to read in a single data file and fix up the CRS (these are all in lat/long  - you want a Mollweide - which has the proj4string `"+proj=moll +x_0=0 +y_0=0 +lat_0=0 +lon_0=133"` and in which distance is in meters). Plot Massachusetts to make sure everything works (with a plot! and show us the crs!).
 
 ```{r}
 read_state <- function(state_name){
-  readRDS(glue::glue("data/counties/{state_name}.rds"))
+  readRDS(glue::glue("Assignments/data/counties/{state_name}.rds")) |> 
+    st_transform("+proj=moll +x_0=0 +y_0=0 +lat_0=0 +lon_0=133")
 }
 
 read_state("massachusetts") %>% ggplot() + geom_sf()
 ```
 
 
-&nbsp; &nbsp; &nbsp; B. Write a function that, given an sf object of a single state and its counties, will return a one row data frame with the number of counties, the area of the largest county, the average county area, the state's area, and the ratio of the largest county to total area. `st_area()` will help you calculate area - but you will need to `as.numeric()`, and if you take an sf object and use `summarize()` on it, it will merge all of the polygons into one.
+&nbsp; &nbsp; &nbsp; B. Write a function that, given an sf object of a single state and its counties, will return a one row data frame with the number of counties, the area of the largest county, the average county area, the state's area, and the ratio of the largest county to total area.  
+
+Some tips: `st_area()` will help you calculate area of rows in an sf object. You might want to get a vector of county areas separate from the dplyr processing chain of creating the new row of data. Second, if you take an sf object and use `summarize()` on it, it will merge all of the polygons into one. So, if you did that on a data frame from your function above, it would merge all of the counties into just one state.  
+
+Once you have written the function, show it works on Massachusetts.
 
 ```{r}
 state_properties <- function(sf_obj){
@@ -54,13 +68,16 @@ state_properties <- function(sf_obj){
   ) %>%
   mutate_all(as.numeric)
 }
+
+
+read_state("massachusetts") |> state_properties()
 ```
 
 
-&nbsp; &nbsp; &nbsp; C. Using iteration, make a data frame that has all of the above information for all of the states. +1 EXTRA CREDIT - have a column named state with the state name. (hint: `?setNames`)
+&nbsp; &nbsp; &nbsp; C. Using iteration, make a data frame that has all of the above information for all of the states. +1 EXTRA CREDIT - have a column named state with the state name. (one way to do it is by looking at `?setNames`, or look at some of the purrr functions - there are a lot of solutions to this)
 
 ```{r}
-states <- list.files("data/counties/") %>%
+states <- list.files("Assignments/data/counties/") %>%
   gsub("\\.rds", "", .)
 
 state_info <- map(states, read_state) %>%
@@ -77,7 +94,7 @@ ggplot(state_info,
   geom_point()
 ```
 
-3. Install and load up the package `repurrsive`. It has an object in it, `got_chars` with information about the characters from the Game of Thrones series. Notice it is a list of lists. To explore it, check out `listviewer::jsonedit(got_chars, mode = "view")`.
+**3.** Let's work with list columns! Install and load up the package `repurrsive`. It has an object in it, `got_chars` with information about the characters from the Game of Thrones series. Notice it is a list of lists. To explore it, check out `listviewer::jsonedit(got_chars, mode = "view")`.
 
 Now, using `purrr` functions make a tibble with the following columns:
 
@@ -86,6 +103,8 @@ Now, using `purrr` functions make a tibble with the following columns:
 - gender
 - culture
 - allegiances (a list column)
+
+Note, for every column, you will be using a function from `purrr` to get the info!
 
 ```{r}
 library(repurrrsive)
@@ -111,12 +130,13 @@ got_info %>%
   stat_summary()
 ```
 
-5. One thing that is cool about list columns is that we can filter on them. We can remove rows with list columns that have a length of 0 with `filter(lengths(x) < 0)` where x is some column name. Note we are using `lengths()` and not `length()`.
+**5.** One thing that is cool about list columns is that we can filter on them. We can remove rows with list columns that have a length of 0 with `filter(lengths(x) < 0)` where x is some column name. Note we are using `lengths()` and not `length()`.
 
 Another cool thing is that we can always `tidyr::unnest()` columns to expand them out, repeating, say, names or other elements of a data frame.
 
 
-&nbsp; &nbsp; &nbsp; A. Select just name and aliases. Filter the resulting data down to something usable, and then unnest aliases. Use the resulting data to determine, who had the most aliases!
+&nbsp; &nbsp; &nbsp; A. Select just name and aliases. Filter the resulting data down to something usable, and then unnest aliases. Use the resulting data to determine, who had the most aliases! Who is it?
+
 ```{r}
 library(tidyr)
 
