@@ -254,13 +254,15 @@ planar</code></pre>
 <span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_as_sfc</span>() <span class="sc">|&gt;</span></span>
 <span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">st_set_crs</span>(<span class="dv">4326</span>) </span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<section id="a.-what-is-your-workflow-here.-write-it-out-in-comments-given-that-you-have-an-aoi-a-shapefile-of-the-coast-and-two-different-rasters-at-different-scales-and-pretty-much-everything-that-a-different-projection.-what-is-the-most-efficient-way-forward-from-raw-files-to-map" class="level4">
-<h4 class="anchored" data-anchor-id="a.-what-is-your-workflow-here.-write-it-out-in-comments-given-that-you-have-an-aoi-a-shapefile-of-the-coast-and-two-different-rasters-at-different-scales-and-pretty-much-everything-that-a-different-projection.-what-is-the-most-efficient-way-forward-from-raw-files-to-map">4a. What is your workflow here. Write it out in comments given that you have an aoi, a shapefile of the coast, and two different rasters at different scales, and pretty much everything that a different projection. What is the most efficient way forward from raw files to map?</h4>
+<section id="a.-what-is-your-workflow-here" class="level4">
+<h4 class="anchored" data-anchor-id="a.-what-is-your-workflow-here">4a. What is your workflow here?</h4>
+<p>Write it out in comments given that you have an aoi, a shapefile of the coast (from class OR from using <code>ne_coastline()</code>), and two different rasters at different scales, and pretty much everything that a different projection. What is the most efficient way forward from raw files to map?</p>
 </section>
 <section id="b.-lets-get-these-layers-loaded" class="level4">
 <h4 class="anchored" data-anchor-id="b.-lets-get-these-layers-loaded">4b. Let’s get these layers loaded:</h4>
-<p>Download and unzip the following files: - <a href="https://www.dropbox.com/scl/fi/0x6a90z5zcnaew2e4by7x/AIS2011.zip?rlkey=hjs481u8444impkwdy5e9kj4g&amp;dl=0">AIS data</a><br>
-- <a href="Oceanography.zip">Oceanography data</a></p>
+<p>Download and unzip the following files:<br>
+- <a href="https://www.dropbox.com/scl/fi/0x6a90z5zcnaew2e4by7x/AIS2011.zip?rlkey=hjs481u8444impkwdy5e9kj4g&amp;dl=0">AIS data</a><br>
+- <a href="https://www.dropbox.com/scl/fi/2o171yxp1kdm2zhhivn1n/Oceanography.zip?rlkey=mf4e91v8a6s0f2shqhcvq99b6&amp;dl=0">Oceanography data</a></p>
 <p>Well those are rather large! They are also in an interesting format called a gdb - an <a href="https://en.wikipedia.org/wiki/Geodatabase_(Esri)">ESRI Geodatabase</a>. Fortunately, terra can load from that!</p>
 <p><strong>NOTE: USE THIS TO COMPILE YOUR HOMEWORK, BUT DO NOT SUBMIT A ZIPPED UP HOMEWORK WITH THE RASTER DATA OR ZIP FILES - IT WILL KILL CANVAS</strong></p>
 <div class="cell">
@@ -274,7 +276,7 @@ planar</code></pre>
 <span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>ais_raster <span class="ot">&lt;-</span> <span class="fu">rast</span>(<span class="st">"Data/AIS2011/AIS2011.gdb/"</span>, </span>
 <span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>                    <span class="at">subds =</span> <span class="st">"CargoVesselDensity2011"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </div>
-<p>Notice how I</p>
+<p>Notice how I list what layers are possible above each.</p>
 </section>
 <section id="c.-plot-both-rasters.-what-are-their-crss-in-proj4-andor-epsg-what-happens-if-you-plot-both-of-them-using-plot-for-one-followed-by-plotsecond_raster-add-true" class="level4">
 <h4 class="anchored" data-anchor-id="c.-plot-both-rasters.-what-are-their-crss-in-proj4-andor-epsg-what-happens-if-you-plot-both-of-them-using-plot-for-one-followed-by-plotsecond_raster-add-true">4c. Plot both rasters. What are their CRS’s in proj4 and/or EPSG? What happens if you plot both of them using <code>plot()</code> for one followed by <code>plot(second_raster, add = TRUE)</code>?</h4>
@@ -282,8 +284,9 @@ planar</code></pre>
 <section id="d.-ok-now-implement-your-plan-from-a-above.-get-everything-reprojected-and-cropped-to-the-aoi.-you-can-use-plot-and-plotadd-true-to-check-and-make-sure-that-things-are-in-the-same-projection-and-cropped-right." class="level4">
 <h4 class="anchored" data-anchor-id="d.-ok-now-implement-your-plan-from-a-above.-get-everything-reprojected-and-cropped-to-the-aoi.-you-can-use-plot-and-plotadd-true-to-check-and-make-sure-that-things-are-in-the-same-projection-and-cropped-right.">4d. OK! Now, implement your plan from A above. Get everything reprojected and cropped to the AOI. You can use <code>plot()</code> and <code>plot(add = TRUE)</code> to check and make sure that things are in the same projection and cropped right.</h4>
 </section>
-<section id="e.-then-plot-it-all-together-using-ggplot2.-note---youll-need-two-things-to-help-you.-first-think-about-the-order-of-layers-of-geospatial-data.-second-with-your-fills-you-will-need-na.value-transparent.-third---how-do-you-do-two-fills-with-different-layers-well-youll-need-a-new-package-ggnewscale-allows-you-to-put-a-layer-into-a-plot-set-properties-of-it-in-terms-of-color-of-fill-and-then-reset-things-to-a-new-fill-scale.-see-the-website-linked-above---but-you-will-need-ggnewscalenew_scale_fill-in-your-ggplot2-stack.-so-install.packagesggnewscale-before-you-make-your-plot" class="level4">
-<h4 class="anchored" data-anchor-id="e.-then-plot-it-all-together-using-ggplot2.-note---youll-need-two-things-to-help-you.-first-think-about-the-order-of-layers-of-geospatial-data.-second-with-your-fills-you-will-need-na.value-transparent.-third---how-do-you-do-two-fills-with-different-layers-well-youll-need-a-new-package-ggnewscale-allows-you-to-put-a-layer-into-a-plot-set-properties-of-it-in-terms-of-color-of-fill-and-then-reset-things-to-a-new-fill-scale.-see-the-website-linked-above---but-you-will-need-ggnewscalenew_scale_fill-in-your-ggplot2-stack.-so-install.packagesggnewscale-before-you-make-your-plot">4e. Then plot it all together using ggplot2. Note - you’ll need two things to help you. First, think about the order of layers of geospatial data. Second, with your fills, you will need <code>na.value = "transparent"</code>. Third - how do you do two fills with different layers? Well, you’ll need a new package! <a href="https://eliocamp.github.io/ggnewscale/">ggnewscale</a> allows you to put a layer into a plot, set properties of it in terms of color of fill, and then reset things to a new fill scale. See the website linked above - but you will need <code>ggnewscale::new_scale_fill()</code> in your ggplot2 stack. So <code>install.packages("ggnewscale")</code> before you make your plot!</h4>
+<section id="e.-then-plot-it-all-together-using-ggplot2." class="level4">
+<h4 class="anchored" data-anchor-id="e.-then-plot-it-all-together-using-ggplot2.">4e. Then plot it all together using ggplot2.</h4>
+<p>Note - you’ll need two things to help you. First, think about the order of layers of geospatial data. Second, with your fills for your rasters, you will need <code>na.value = "transparent"</code>. Third - how do you do two fills with different layers? Well, you’ll need a new package! <a href="https://eliocamp.github.io/ggnewscale/">ggnewscale</a> allows you to put a layer into a plot, set properties of it in terms of color of fill, and then reset things to a new fill scale. See the website linked above - but you will need <code>ggnewscale::new_scale_fill()</code> in your ggplot2 stack. So <code>install.packages("ggnewscale")</code> before you make your plot!</p>
 </section>
 <section id="f.-extra-credit---can-you-plot-it-all-together-using-leaflet" class="level4">
 <h4 class="anchored" data-anchor-id="f.-extra-credit---can-you-plot-it-all-together-using-leaflet">4f. EXTRA CREDIT - can you plot it all together using leaflet?</h4>
