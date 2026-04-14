@@ -31,7 +31,7 @@ world <- ne_countries()
 ggplot() + geom_sf(data = world)
 ```
 
-#### 1b) View `df_layers_cultural` - it's a data frame showing what cultural layers are available. Choose one that is global in scope, and use `ne_load()` where `type = ` the layer you chose. Don't forget to also set the scale. I'd recommend choosing a layer with a scale of 110. Note - you will need to supply an argument to both the category and scale. Then, plot it on top of the world. Also, some layers are not available. If you can, make it fancy!
+#### 1b) View `df_layers_cultural` - it's a data frame showing what cultural layers are available. Choose one that is global in scope, and use `ne_download()` where `type = ` the layer you chose. Don't forget to also set the scale. I'd recommend choosing a layer with a scale of 110. Note - you will need to supply an argument to both the category and scale. Then, plot it on top of the world. Also, some layers are not available. If you can, make it fancy!
 
 ```{r}
 #| echo: false
@@ -221,7 +221,42 @@ Notice how I list what layers are possible above each.
 
 #### 4d. OK! Now, implement your plan from A above. Get everything reprojected and cropped to the AOI. You can use `plot()` and `plot(add = TRUE)` to check and make sure that things are in the same projection and cropped right.
 
+```{r}
+#| eval: false
+#| echo: false
+
+aoi <- c(xmin = -71.674805, xmax = -63.083496, ymin = 41.277806, ymax = 45.935871) |>
+  st_bbox() |>
+  st_as_sfc() |>
+  st_set_crs(4326) |>
+  st_transform(crs = crs(your_raster))
+
+plot(crop(your_raster, aoi))
+plot(crop(envt_raster, aoi |> st_transform(crs = crs(envt_raster))))
+
+e <- crop(envt_raster, aoi |> st_transform(crs = crs(envt_raster)))
+y <- crop(your_raster, aoi)
+```
+
+
 #### 4e. Then plot it all together using ggplot2.
 Note - you'll need two things to help you. First, think about the order of layers of geospatial data. Second, with your fills for your rasters, you will need `na.value = "transparent"`. Third - how do you do two fills with different layers? Well, you'll need a new package! [ggnewscale](https://eliocamp.github.io/ggnewscale/) allows you to put a layer into a plot, set properties of it in terms of color of fill, and then reset things to a new fill scale. See the website linked above - but you will need `ggnewscale::new_scale_fill()` in your ggplot2 stack. So `install.packages("ggnewscale")` before you make your plot!
+
+```{r}
+#| echo: false
+#| eval: false
+
+
+library(tidyterra)     
+ggplot() +
+  geom_spatraster(data = e, alpha = 0.9) +
+  scale_fill_viridis_c(option = "A", na.value = "transparent") +
+  ggnewscale::new_scale_fill() +
+  geom_spatraster(data = y) +
+  scale_fill_viridis_c(na = "none", na.value = "transparent",
+                       transform = "log")  +
+  coord_sf(expand = FALSE)
+  
+```
 
 #### 4f. EXTRA CREDIT - can you plot it all together using leaflet?
