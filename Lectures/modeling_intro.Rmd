@@ -210,11 +210,12 @@ dagified <- dagify(cause ~ other,
                    exposure = "cause",
                    outcome = "effect")
 tidy_dagitty(dagified) %>%
-  mutate(x = c(0,1,1,2),
-         y = c(1,2,2,1),
-         xend = c(2,0,2,NA),
-         yend = c(1,1,1,NA),
-         circular = c(F,T,T,F)) %>%
+ # slice(1:2) |>
+  mutate(x = c(0,2,1,1),
+         y = c(0,0,1,1),
+         xend = c(2-0.05,NA,2,0),
+         yend = c(0,NA,0,0),
+         circular = c(F,T,F,F)) %>%
   ggdag() +
   geom_dag_node(aes(color = circular), size = 34) +
   geom_dag_text(aes(label = name), color = "white", size = 8) +
@@ -321,8 +322,8 @@ ggdag(penguin_dag) +
 # How do I think the system works?
 <br>
 
-$$Depth_{ij} \sim \mathcal{N}(\hat{depth}, \sigma^2)\\
-\hat{depth}_i = \alpha_j + \beta * mass_{ij}$$
+$$Depth_{ij} \sim \mathcal{N}(\hat{depth_{ij}}, \sigma^2)\\
+\hat{depth}_{ij} = \alpha_j + \beta * mass_{ij}$$
 
 
 --
@@ -336,6 +337,65 @@ $$Depth_{ij} \sim \mathcal{N}(\hat{depth}, \sigma^2)\\
 --
 
 - the predicted depth is a function of a species-specific intercept -  $\alpha_j$  - and a coefficient $\beta$ times the body mass
+
+---
+# What does that math mean?
+$$Depth_{ij} \sim \mathcal{N}(\hat{depth_{ij}}, \sigma^2)\\
+\hat{depth}_{ij} = \alpha_j + \beta * mass_{ij}$$
+
+```{r body_plot_1, fig.height = 5}
+viz_plot <- ggplot(data = penguins,
+       aes(x = body_mass_g, y = bill_depth_mm,
+           color = species)) +
+  geom_point(aes(y = bill_depth_mm)) +
+  stat_smooth(method = "lm", fill = NA, linewidth = 1.5) 
+
+viz_plot
+```
+
+---
+# What does that math mean?
+$$Depth_{ij} \sim \mathcal{N}(\hat{depth_{ij}}, \sigma^2)\\
+\hat{depth}_{ij} = \alpha_j + \beta * mass_{ij}$$
+
+```{r body_plot_2, fig.height = 5}
+
+viz_plot +
+  geom_vline(xintercept = 4500, color = "red", lty = 2) 
+```
+
+---
+# What does that math mean?
+$$Depth_{ij} \sim \mathcal{N}(\hat{depth_{ij}}, \sigma^2)\\
+\hat{depth}_{ij} = \alpha_j + \beta * mass_{ij}$$
+
+```{r body_plot_3, fig.height = 5}
+mod <- lm(bill_depth_mm ~ body_mass_g + species,
+          data = penguins)
+
+pred <- predict(mod, data.frame(body_mass_g = 4500, species = "Gentoo"))
+
+viz_plot +
+  geom_vline(xintercept = 4500, color = "red", lty = 2) +
+  geom_hline(yintercept = pred, color = "red", lty = 2)
+```
+
+---
+# What does that math mean?
+$$Depth_{ij} \sim \mathcal{N}(\hat{depth_{ij}}, \sigma^2)\\
+\hat{depth}_{ij} = \alpha_j + \beta * mass_{ij}$$
+
+```{r show_dist, fig.height = 5}
+bill_depth_possible <- seq(9, 19, .1)
+prob_of_depth <- dnorm(bill_depth_possible, pred, summary(mod)$sigma)
+ggplot(data.frame(bd = bill_depth_possible, p = prob_of_depth),
+       aes(x = bd, y = p))  +
+  geom_line() +
+  geom_vline(xintercept = pred, lty = 2, color = "red") +
+  annotate(geom = "text", x = 14.7, y = 0.5, label = "estimate", color = "red") +
+  labs(y = "Probability Density", x = "Possible Bill Depths")
+
+```
 
 ---
 
@@ -413,13 +473,15 @@ A comparison of the distribution of observed bill depths versus those predicted 
 
 ```{r assumption, fig.height=6}
 
-mod_dat %>%
-  select(bill_depth_mm, .fitted) %>%
-  pivot_longer(cols = everything()) %>%
-  ggplot(aes(x = value, color = name)) +
-  geom_density(size = 1.5) +
-  labs(color = "") +
-  scale_color_brewer(palette = "Dark2")
+# mod_dat %>%
+#   select(bill_depth_mm, .fitted) %>%
+#   pivot_longer(cols = everything()) %>%
+#   ggplot(aes(x = value, color = name)) +
+#   geom_density(size = 1.5) +
+#   labs(color = "") +
+#   scale_color_brewer(palette = "Dark2")
+
+performance::check_predictions(mod) |> plot()
 ```
 
 ---
@@ -462,7 +524,7 @@ Let's look at the ratio of variation explained by each predictor versus noise, a
 
 --
 
-```{r anova}
+```{r anova, eval=TRUE}
 car::Anova(mod) %>%
   tidy %>%
   kable("html", digits = 2) %>%
@@ -489,8 +551,14 @@ We can see that there is still scatter - but can estimate that our model explain
 ```{r posthoc, fig.height = 5}
 emmeans(mod, ~species) %>%
   contrast("pairwise") %>%
-  plot() +
-  geom_vline(xintercept = 0, lty = 2)
+  confint() |>
+   as_tibble()|>
+  ggplot(aes(y = contrast, x = estimate, xmin = lower.CL, xmax = upper.CL)) +
+  geom_pointrange() +
+  geom_vline(xintercept = 0, lty = 2) +
+  labs(y = "", 
+       x = "difference (mm)",
+       subtitle = "Difference in Bill Depth at Same Body Mass")
 ```
 --
 
