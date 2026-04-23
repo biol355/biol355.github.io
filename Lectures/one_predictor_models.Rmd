@@ -25,6 +25,8 @@ library(knitr)
 library(patchwork)
 library(emmeans)
 library(brms)
+library(performance)
+library(modelbased)
 
 
 
@@ -298,15 +300,15 @@ class:middle
 # Does Your Model Match Your Data?
 
 ```{r densplot}
-mod_data <- augment(mod)
-
-mod_data %>%
-  select(predators, .fitted) %>%
-  pivot_longer(everything()) %>%
-  ggplot(aes(x = value, color = name)) +
-  geom_density(size = 1.3) +
-  scale_color_excel_new()
-
+ mod_data <- augment(mod)
+# 
+# mod_data %>%
+#   select(predators, .fitted) %>%
+#   pivot_longer(everything()) %>%
+#   ggplot(aes(x = value, color = name)) +
+#   geom_density(size = 1.3) +
+#   scale_color_excel_new()
+check_predictions(mod) |> plot()
 ```
 
 
@@ -315,7 +317,8 @@ mod_data %>%
 # Are There Weird Patterns in Your Residuals?
 
 ```{r}
-performance::check_model(mod, check = c("linearity", "normality"))
+performance::check_model(mod, check = c("linearity", "normality"),
+                         detrend = FALSE, size_line = 0)
 ```
 
 ---
@@ -533,14 +536,16 @@ mod_t <- lm(predators ~ resemblance_trt, data = puffer_t)
 # Does Your Model Match Your Data?
 
 ```{r densplot_t}
-mod_data_t <- augment(mod_t)
+# mod_data_t <- augment(mod_t)
+# 
+# mod_data_t %>%
+#   select(predators, .fitted) %>%
+#   pivot_longer(everything()) %>%
+#   ggplot(aes(x = value, color = name)) +
+#   geom_density(size = 1.3) +
+#   scale_color_excel_new()
 
-mod_data_t %>%
-  select(predators, .fitted) %>%
-  pivot_longer(everything()) %>%
-  ggplot(aes(x = value, color = name)) +
-  geom_density(size = 1.3) +
-  scale_color_excel_new()
+check_predictions(mod_t)
 
 ```
 ---
@@ -548,7 +553,8 @@ mod_data_t %>%
 # Are There Weird Patterns in Your Residuals?
 
 ```{r}
-performance::check_model(mod_t, check = c("linearity", "normality"))
+performance::check_model(mod_t, check = c("linearity", "normality"),
+                         size_line = 0)
 ```
 
 ---
@@ -731,8 +737,17 @@ ggplot(puffer_aov_data,
 
 # Still Have to Make Sure We Have Started No Fires
 
+```{r}
+check_predictions(mod_aov) |> plot()
+```
+
+---
+
+# Still Have to Make Sure We Have Started No Fires
+
 ```{r aov_perf}
-performance::check_model(mod_aov, check = c("linearity", "normality"))
+performance::check_model(mod_aov, check = c("linearity", "normality"),
+                         size_line = 0)
 ```
 
 ---
@@ -766,7 +781,8 @@ Compare to regression - note difference in F:
 ```{r tukey, fig.height = 6}
 em_aov <- emmeans(mod_aov, ~resemblance_c)
 em_cont <- contrast(em_aov, "tukey")
-plot(em_cont)
+plot(em_cont) +
+  geom_vline(xintercept = 0, lty = 2, color = "red")
 ```
 
 --

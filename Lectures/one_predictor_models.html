@@ -55,7 +55,7 @@ class: middle
 # Many models have one predictor
 
 
-&lt;img src="one_predictor_models_files/figure-html/dag-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="one_predictor_models_files/figure-html/dag-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -131,7 +131,7 @@ class:middle
 ---
 
 # The Data
-&lt;img src="one_predictor_models_files/figure-html/puffershow-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="one_predictor_models_files/figure-html/puffershow-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -143,7 +143,7 @@ class:middle
 
 ]
 
-&lt;img src="one_predictor_models_files/figure-html/dagmod-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="one_predictor_models_files/figure-html/dagmod-1.png" alt="" style="display: block; margin: auto;" /&gt;
 ---
 
 # Fit with Our Engine: Ordinary Least Squares
@@ -154,7 +154,7 @@ class:middle
 
 .large[
 
-```r
+``` r
 mod &lt;- lm(predators ~ resemblance, data = puffer)
 ```
 
@@ -186,14 +186,14 @@ class:middle
 
 # Does Your Model Match Your Data?
 
-&lt;img src="one_predictor_models_files/figure-html/densplot-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="one_predictor_models_files/figure-html/densplot-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 
 ---
 
 # Are There Weird Patterns in Your Residuals?
 
-&lt;img src="one_predictor_models_files/figure-html/unnamed-chunk-1-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="one_predictor_models_files/figure-html/unnamed-chunk-1-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -224,13 +224,13 @@ class:middle
 
 - This is called a **p-value**
 
-&lt;img src="one_predictor_models_files/figure-html/infer_badly-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="one_predictor_models_files/figure-html/infer_badly-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 ---
 
 # Did Our Predictor Matter?
 &lt;br&gt;&lt;br&gt;
-&lt;table class="table table-striped" style="margin-left: auto; margin-right: auto;"&gt;
+&lt;table class="table table-striped" style="color: black; margin-left: auto; margin-right: auto;"&gt;
  &lt;thead&gt;
   &lt;tr&gt;
    &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
@@ -281,7 +281,7 @@ class:middle
 
 # What is the Association Between Predictor and Response?
 
-&lt;table class="table table-striped" style="margin-left: auto; margin-right: auto;"&gt;
+&lt;table class="table table-striped" style="color: black; margin-left: auto; margin-right: auto;"&gt;
  &lt;thead&gt;
   &lt;tr&gt;
    &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
@@ -318,20 +318,20 @@ class:middle
 # How Precise Are Our Estimates?
 ### We can see by simulating new lines from our coefficients
 
-&lt;img src="one_predictor_models_files/figure-html/unnamed-chunk-2-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="one_predictor_models_files/figure-html/unnamed-chunk-2-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 ---
 
 # How Precise Are Our Estimates?
 ### We can see by with a 95% confidence interval of our estimate
 
-&lt;img src="one_predictor_models_files/figure-html/unnamed-chunk-3-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="one_predictor_models_files/figure-html/unnamed-chunk-3-1.png" alt="" style="display: block; margin: auto;" /&gt;
 ---
 
 # How Strong is the Association Between Our Generative Model and Observed Data?
 
 `$$R^2 = 1 - \frac{Residual \; Variation}{Total \; Variation \; in \; the \; Data}$$`
-&lt;img src="one_predictor_models_files/figure-html/resplot-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="one_predictor_models_files/figure-html/resplot-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -354,7 +354,7 @@ class:middle
 
 # Comparing High and Low Similarity
 
-&lt;img src="one_predictor_models_files/figure-html/two_trts-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="one_predictor_models_files/figure-html/two_trts-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 ---
 class:middle
@@ -372,12 +372,12 @@ background-color: black
 
 ]
 
-&lt;img src="one_predictor_models_files/figure-html/dagmod-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="one_predictor_models_files/figure-html/dagmod-1.png" alt="" style="display: block; margin: auto;" /&gt;
 ---
 
 # Comparing Means is Just a Line with a 0 and 1 as X
 
-&lt;img src="one_predictor_models_files/figure-html/zero_one-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="one_predictor_models_files/figure-html/zero_one-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -388,7 +388,7 @@ background-color: black
 .large[
 
 
-```r
+``` r
 mod_t &lt;- lm(predators ~ resemblance_trt, data = puffer_t)
 ```
 
@@ -398,19 +398,19 @@ mod_t &lt;- lm(predators ~ resemblance_trt, data = puffer_t)
 
 # Does Your Model Match Your Data?
 
-&lt;img src="one_predictor_models_files/figure-html/densplot_t-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="one_predictor_models_files/figure-html/densplot_t-1.png" alt="" style="display: block; margin: auto;" /&gt;
 ---
 
 # Are There Weird Patterns in Your Residuals?
 
-&lt;img src="one_predictor_models_files/figure-html/unnamed-chunk-4-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="one_predictor_models_files/figure-html/unnamed-chunk-4-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 ---
 
 # Did Our Predictor Matter?
 ### F-Test!
 
-&lt;table class="table table-striped" style="margin-left: auto; margin-right: auto;"&gt;
+&lt;table class="table table-striped" style="color: black; margin-left: auto; margin-right: auto;"&gt;
  &lt;thead&gt;
   &lt;tr&gt;
    &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
@@ -463,7 +463,7 @@ Still basically no chance of observing our data or more extreme data
 
 # Are the Groups *REALLY* Different?
 
-&lt;table class="table table-striped" style="margin-left: auto; margin-right: auto;"&gt;
+&lt;table class="table table-striped" style="color: black; margin-left: auto; margin-right: auto;"&gt;
  &lt;thead&gt;
   &lt;tr&gt;
    &lt;th style="text-align:left;"&gt; contrast &lt;/th&gt;
@@ -486,13 +486,13 @@ Still basically no chance of observing our data or more extreme data
 &lt;/tbody&gt;
 &lt;/table&gt;
 
-&lt;img src="one_predictor_models_files/figure-html/emmeans_t-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="one_predictor_models_files/figure-html/emmeans_t-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 ---
 
 # What do our Estimates Look Like?
 
-&lt;img src="one_predictor_models_files/figure-html/unnamed-chunk-5-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="one_predictor_models_files/figure-html/unnamed-chunk-5-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 ---
 # One Predictor Models
@@ -515,7 +515,7 @@ Still basically no chance of observing our data or more extreme data
 # Categorical Instead of Continuous Predictors
 
 
-&lt;img src="one_predictor_models_files/figure-html/puffer_categories-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="one_predictor_models_files/figure-html/puffer_categories-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 ---
 class:middle
@@ -549,30 +549,36 @@ background-color: black
 ---
 # But Conceptually It Is the Same
 
-&lt;img src="one_predictor_models_files/figure-html/dagmod-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="one_predictor_models_files/figure-html/dagmod-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 ---
 
 # It's just a bunch of 0's and 1s!
 
-&lt;img src="one_predictor_models_files/figure-html/unnamed-chunk-6-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="one_predictor_models_files/figure-html/unnamed-chunk-6-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 ---
 
 # What You Are Ultimately Fitting
 
 
-```r
+``` r
 mod_aov &lt;- lm(predators ~ resemblance_c, data = puffer)
 ```
 
-&lt;img src="one_predictor_models_files/figure-html/cat-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="one_predictor_models_files/figure-html/cat-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 ---
 
 # Still Have to Make Sure We Have Started No Fires
 
-&lt;img src="one_predictor_models_files/figure-html/aov_perf-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="one_predictor_models_files/figure-html/unnamed-chunk-7-1.png" alt="" style="display: block; margin: auto;" /&gt;
+
+---
+
+# Still Have to Make Sure We Have Started No Fires
+
+&lt;img src="one_predictor_models_files/figure-html/aov_perf-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -581,7 +587,7 @@ mod_aov &lt;- lm(predators ~ resemblance_c, data = puffer)
 ### It's still just an F test
 
 &lt;br&gt;
-&lt;table class="table table-striped" style="margin-left: auto; margin-right: auto;"&gt;
+&lt;table class="table table-striped" style="color: black; margin-left: auto; margin-right: auto;"&gt;
  &lt;thead&gt;
   &lt;tr&gt;
    &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
@@ -615,7 +621,7 @@ mod_aov &lt;- lm(predators ~ resemblance_c, data = puffer)
 --
 
 Compare to regression - note difference in F:
-&lt;table class="table table-striped" style="margin-left: auto; margin-right: auto;"&gt;
+&lt;table class="table table-striped" style="color: black; margin-left: auto; margin-right: auto;"&gt;
  &lt;thead&gt;
   &lt;tr&gt;
    &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
@@ -649,11 +655,11 @@ Compare to regression - note difference in F:
 ---
 
 # What do our Estimates Look Like?
-&lt;img src="one_predictor_models_files/figure-html/cat-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="one_predictor_models_files/figure-html/cat-1.png" alt="" style="display: block; margin: auto;" /&gt;
 ---
 
 # Which Groups *REALLY* Different?  Have some T...
-&lt;img src="one_predictor_models_files/figure-html/tukey-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="one_predictor_models_files/figure-html/tukey-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 --
 
@@ -688,9 +694,9 @@ Was this model a good way to ask the question?
 <script src="my_macros.js"></script>
 <script src="cols_macro.js"></script>
 <script>var slideshow = remark.create({
-"highlightStyle": "github",
-"highlightLines": true,
-"countIncrementalSlides": false
+  "highlightStyle": "github",
+  "highlightLines": true,
+  "countIncrementalSlides": false
 });
 if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   window.dispatchEvent(new Event('resize'));
@@ -731,6 +737,19 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     deleted = true;
   });
 })();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
 (function() {
   "use strict"
   // Replace <script> tags in slides area to make them executable
