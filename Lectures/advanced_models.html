@@ -87,19 +87,19 @@ Who had a bigger brain: Neanderthals or us?
 ---
 # The Means Look the Same...
 
-&lt;img src="advanced_models_files/figure-html/neand_boxplot-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="advanced_models_files/figure-html/neand_boxplot-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 ---
 
 # But there appears to be a Relationship Between Body and Brain Mass
 
-&lt;img src="advanced_models_files/figure-html/neand_plot-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="advanced_models_files/figure-html/neand_plot-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 ---
 
 # And Mean Body Mass is Different
 
-&lt;img src="advanced_models_files/figure-html/neand_boxplot2-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="advanced_models_files/figure-html/neand_boxplot2-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 ---
 class: center, middle
@@ -109,7 +109,7 @@ class: center, middle
 ---
 # Mixing Categories and Continuous Variables: Analysis of Covariance
 
-`$$lnbrain_i \sim \mathcal{N}(\widehat{lnbrain_i}, \sigma_2)$$`
+`$$lnbrain_{i} \sim \mathcal{N}(\widehat{lnbrain_{i}}, \sigma_2)$$`
 `$$\widehat{lnbrain_i} = \beta_0 + \beta_{1}lnmass_1  + \sum_{j=2}^{k}\beta_{ij}species_{ij}$$`  
 `$$species_{ij} = 0\; or\; 1\; if\; neandertal$$`
 
@@ -121,35 +121,33 @@ Groups modify the *intercept*.
 # Fit with Our Engine: Ordinary Least Squares
 
 
-```r
+``` r
 neand_lm &lt;- lm(lnbrain ~ species + lnmass, 
                data=neand)
-
-neand_dat &lt;- augment(neand_lm)
 ```
 
 ---
 # Does Your Model Match Your Data?
 
-&lt;img src="advanced_models_files/figure-html/unnamed-chunk-1-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="advanced_models_files/figure-html/unnamed-chunk-1-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 ---
 
 # Are There Weird Patterns in Your Residuals?
 
-&lt;img src="advanced_models_files/figure-html/unnamed-chunk-2-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="advanced_models_files/figure-html/unnamed-chunk-2-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 ---
 
 # Did You Modelboss Too Close to the Correlated Suns?
 
-&lt;img src="advanced_models_files/figure-html/unnamed-chunk-3-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="advanced_models_files/figure-html/unnamed-chunk-3-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 ---
 
 # Did Our Predictors Matter?
 
-&lt;table class="table table-striped" style="margin-left: auto; margin-right: auto;"&gt;
+&lt;table class="table table-striped" style="color: black; margin-left: auto; margin-right: auto;"&gt;
  &lt;thead&gt;
   &lt;tr&gt;
    &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
@@ -187,7 +185,7 @@ neand_dat &lt;- augment(neand_lm)
 ---
 
 # What are the Association Between Predictors and Response?
-&lt;table class="table table-striped" style="margin-left: auto; margin-right: auto;"&gt;
+&lt;table class="table table-striped" style="color: black; margin-left: auto; margin-right: auto;"&gt;
  &lt;thead&gt;
   &lt;tr&gt;
    &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
@@ -225,7 +223,7 @@ neand_dat &lt;- augment(neand_lm)
 
 # What Does it Look Like to See the Unique Effect of One Driver?
 
-&lt;table class="table table-striped" style="margin-left: auto; margin-right: auto;"&gt;
+&lt;table class="table table-striped" style="color: black; margin-left: auto; margin-right: auto;"&gt;
  &lt;thead&gt;
   &lt;tr&gt;
    &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
@@ -275,7 +273,7 @@ neand_dat &lt;- augment(neand_lm)
 
 # What Does it Mean Visually?
 
-&lt;img src="advanced_models_files/figure-html/neand_plot_fit-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="advanced_models_files/figure-html/neand_plot_fit-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
  
 
@@ -283,8 +281,34 @@ neand_dat &lt;- augment(neand_lm)
 
 # We can run comparisons at equal body mass
 
-&lt;img src="advanced_models_files/figure-html/unnamed-chunk-7-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="advanced_models_files/figure-html/unnamed-chunk-7-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
+---
+
+# We can run comparisons at equal body mass
+
+&lt;table class="table table-striped" style="color: black; margin-left: auto; margin-right: auto;"&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; contrast &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; estimate &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; SE &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; df &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; t.ratio &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; p.value &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; neanderthal - recent &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -0.0702784 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.0282152 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 36 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; -2.490801 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0.0174947 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
 ---
 
 # So Many Ways to Build a Model
@@ -315,13 +339,13 @@ class:center, middle
 
 # The Linear Effect of Cover on Richness
 
-&lt;img src="advanced_models_files/figure-html/unnamed-chunk-8-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="advanced_models_files/figure-html/unnamed-chunk-8-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 ---
 
 # But... What's Up With That Bend?
 
-&lt;img src="advanced_models_files/figure-html/unnamed-chunk-9-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="advanced_models_files/figure-html/unnamed-chunk-9-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -346,18 +370,18 @@ class:center, middle
 
 # A Nonlinear Effect of Cover?
 
-```r
+``` r
 mod_sq &lt;- lm(rich ~ cover + I(cover^2), data = keeley)
 ```
 
 
-&lt;img src="advanced_models_files/figure-html/unnamed-chunk-10-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="advanced_models_files/figure-html/unnamed-chunk-10-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 ---
 
 # Which is Better? Maybe A Cubic? Cross-Validate with LOO!
 
-&lt;table class="table table-striped" style="margin-left: auto; margin-right: auto;"&gt;
+&lt;table class="table table-striped" style="color: black; margin-left: auto; margin-right: auto;"&gt;
  &lt;thead&gt;
   &lt;tr&gt;
    &lt;th style="text-align:right;"&gt; order &lt;/th&gt;
@@ -395,7 +419,7 @@ mod_sq &lt;- lm(rich ~ cover + I(cover^2), data = keeley)
 ---
 # 2 or 4? Or Other Nonlinear Terms?
 
-&lt;img src="advanced_models_files/figure-html/unnamed-chunk-12-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="advanced_models_files/figure-html/unnamed-chunk-12-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -419,7 +443,7 @@ class: center, middle
 
 # What if Fire Severity Only Affects Species Richness in Old Stands?
 
-&lt;img src="advanced_models_files/figure-html/cat_int_plot-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="advanced_models_files/figure-html/cat_int_plot-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 ---
 # Interaction Effects
@@ -465,11 +489,11 @@ IT'S ALL THE SAME THING!
 # Interaction Effects in Models - and F-Tests!
 
 
-```r
+``` r
 mod_int &lt;- lm(rich ~ firesev * age_break, data = keeley)
 ```
 
-&lt;table class="table table-striped" style="margin-left: auto; margin-right: auto;"&gt;
+&lt;table class="table table-striped" style="color: black; margin-left: auto; margin-right: auto;"&gt;
  &lt;thead&gt;
   &lt;tr&gt;
    &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
@@ -515,7 +539,7 @@ mod_int &lt;- lm(rich ~ firesev * age_break, data = keeley)
 
 # Interaction Effects What does it mean?
 
-&lt;table class="table table-striped" style="margin-left: auto; margin-right: auto;"&gt;
+&lt;table class="table table-striped" style="color: black; margin-left: auto; margin-right: auto;"&gt;
  &lt;thead&gt;
   &lt;tr&gt;
    &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
@@ -575,7 +599,7 @@ mod_int &lt;- lm(rich ~ firesev * age_break, data = keeley)
 ---
 # This is Why I Hate Staring at Coefficients
 
-&lt;img src="advanced_models_files/figure-html/cat_int_plot-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="advanced_models_files/figure-html/cat_int_plot-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 ---
 class: center, middle
@@ -588,7 +612,7 @@ class: center, middle
 `$$y_{i} \sim \mathcal{N}(\widehat{y_{i}}, \sigma^2)$$`
 `$$\widehat{y_{i}} = \beta_{0} +  \beta_{1}x_{1i} +  \beta_{2}x_{2i} +  \beta_{3}x_{1i}x_{2i}$$` 
 
-&lt;img src="advanced_models_files/figure-html/int_dag-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="advanced_models_files/figure-html/int_dag-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -597,13 +621,13 @@ class: center, middle
 .large[
 
 
-```r
+``` r
 mod_int_c &lt;- lm(rich ~ firesev * age, data = keeley)
 ```
 ]
 
 
-&lt;table class="table table-striped" style="margin-left: auto; margin-right: auto;"&gt;
+&lt;table class="table table-striped" style="color: black; margin-left: auto; margin-right: auto;"&gt;
  &lt;thead&gt;
   &lt;tr&gt;
    &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
@@ -649,14 +673,14 @@ mod_int_c &lt;- lm(rich ~ firesev * age, data = keeley)
 
 # Did You Make Sure your Train Wasn't On Fire?
 
-&lt;img src="advanced_models_files/figure-html/unnamed-chunk-14-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="advanced_models_files/figure-html/unnamed-chunk-14-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 
 ---
 
 # But Was This a Good Idea? AIC Edition
 
-&lt;table class="table table-striped" style="margin-left: auto; margin-right: auto;"&gt;
+&lt;table class="table table-striped" style="color: black; margin-left: auto; margin-right: auto;"&gt;
  &lt;thead&gt;
   &lt;tr&gt;
    &lt;th style="text-align:left;"&gt; Modnames &lt;/th&gt;
@@ -702,7 +726,7 @@ mod_int_c &lt;- lm(rich ~ firesev * age, data = keeley)
 
 # Coefficients are Clearer
 
-&lt;table class="table table-striped" style="margin-left: auto; margin-right: auto;"&gt;
+&lt;table class="table table-striped" style="color: black; margin-left: auto; margin-right: auto;"&gt;
  &lt;thead&gt;
   &lt;tr&gt;
    &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
@@ -770,7 +794,7 @@ mod_int_c &lt;- lm(rich ~ firesev * age, data = keeley)
 
 # Model Visualization: The Effect of One Predictor at Different Levels of the Other
 
-&lt;img src="advanced_models_files/figure-html/vr-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="advanced_models_files/figure-html/vr-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -806,9 +830,9 @@ mod_int_c &lt;- lm(rich ~ firesev * age, data = keeley)
 <script src="my_macros.js"></script>
 <script src="cols_macro.js"></script>
 <script>var slideshow = remark.create({
-"highlightStyle": "github",
-"highlightLines": true,
-"countIncrementalSlides": false
+  "highlightStyle": "github",
+  "highlightLines": true,
+  "countIncrementalSlides": false
 });
 if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   window.dispatchEvent(new Event('resize'));
@@ -849,6 +873,19 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     deleted = true;
   });
 })();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
 (function() {
   "use strict"
   // Replace <script> tags in slides area to make them executable

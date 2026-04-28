@@ -36,6 +36,8 @@ library(emmeans)
 library(modelr)
 library(rsample)
 
+library(modelbased)
+
 
 
 opts_chunk$set(fig.height=7, 
@@ -129,8 +131,13 @@ Who had a bigger brain: Neanderthals or us?
 
 ```{r neand_boxplot}
 neand <- read.csv("./data/18q09NeanderthalBrainSize.csv")
-neand_plot_box <- qplot(species, lnbrain, data=neand, fill=species, geom="boxplot") 
-
+neand_plot_box <- 
+  ggplot(neand, 
+         aes(x = species, y = lnbrain, 
+             fill = species)) +
+  geom_boxplot()
+  
+  
 neand_plot_box
 ```
 
@@ -139,8 +146,13 @@ neand_plot_box
 # But there appears to be a Relationship Between Body and Brain Mass
 
 ```{r neand_plot}
-neand_plot <- qplot(lnmass, lnbrain, data=neand, color=species, size=I(3))  
-
+neand_plot <- 
+  ggplot(neand,
+         aes(x = lnmass, y = lnbrain,
+             color = species)) +
+  geom_point(size = 3)
+  
+  
 neand_plot
 ```
 
@@ -149,7 +161,11 @@ neand_plot
 # And Mean Body Mass is Different
 
 ```{r neand_boxplot2}
-neand_plot_box2 <- qplot(species, lnmass, data=neand, fill=species, geom="boxplot") 
+neand_plot_box2 <-   ggplot(neand, 
+         aes(x = species, y = lnmass, 
+             fill = species)) +
+  geom_boxplot()
+  
 
 neand_plot_box2
 ```
@@ -162,7 +178,7 @@ class: center, middle
 ---
 # Mixing Categories and Continuous Variables: Analysis of Covariance
 
-$$lnbrain_i \sim \mathcal{N}(\widehat{lnbrain_i}, \sigma_2)$$
+$$lnbrain_{i} \sim \mathcal{N}(\widehat{lnbrain_{i}}, \sigma_2)$$
 $$\widehat{lnbrain_i} = \beta_0 + \beta_{1}lnmass_1  + \sum_{j=2}^{k}\beta_{ij}species_{ij}$$  
 $$species_{ij} = 0\; or\; 1\; if\; neandertal$$
 
@@ -177,19 +193,20 @@ Groups modify the *intercept*.
 neand_lm <- lm(lnbrain ~ species + lnmass, 
                data=neand)
 
-neand_dat <- augment(neand_lm)
 ```
 
 ---
 # Does Your Model Match Your Data?
 
 ```{r}
-neand_dat %>%
-  select(lnbrain, .fitted) %>%
-  pivot_longer(everything()) %>%
-ggplot(aes(x = value, color = name)) +
-  geom_density(size = 2) +
-  scale_color_colorblind()
+neand_dat <- augment(neand_lm)
+performance::check_predictions(neand_lm)
+# neand_dat %>%
+#   select(lnbrain, .fitted) %>%
+#   pivot_longer(everything()) %>%
+# ggplot(aes(x = value, color = name)) +
+#   geom_density(size = 2) +
+#   scale_color_colorblind()
 ```
 
 ---
@@ -252,13 +269,21 @@ tidy(neand_lm) %>%
 
 ```{r neand_plot_fit}
 neand <- cbind(neand, predict(neand_lm, interval="confidence"))
+# 
+# neand_plot +
+#   geom_line(data=neand, aes(y=fit)) + 
+#   geom_ribbon(data=neand, aes(ymin=lwr, 
+#                               ymax=upr, group=species), 
+#               fill="lightgrey", color=NA,
+#               alpha=0.5) 
 
-neand_plot +
-  geom_line(data=neand, aes(y=fit)) + 
-  geom_ribbon(data=neand, aes(ymin=lwr, 
-                              ymax=upr, group=species), 
-              fill="lightgrey", color=NA,
-              alpha=0.5) 
+
+estimate_relation(neand_lm, 
+                  by = c("lnmass", "species")) |> 
+  plot(show_data = TRUE,
+       point = list(size = 4, alpha = 1),
+       ribbon = list(fill = "darkgrey", alpha = 0.5))+
+  labs(y = "lnbrain")
 ```
 
  
@@ -268,8 +293,24 @@ neand_plot +
 # We can run comparisons at equal body mass
 
 ```{r}
-visreg::visreg(neand_lm, gg = TRUE)[[1]] +
-  labs(subtitle = "Species association holding\nlnmass at its mean")
+estimate_relation(neand_lm, 
+                  by = c("species")) |> 
+  plot(show_data = TRUE,
+       point = list(position = position_jitter(width = 0.1, height = 0)))+
+  labs(y = "lnbrain") +
+    labs(subtitle = "Species effects holding\nlnmass at its mean")
+
+```
+
+---
+
+# We can run comparisons at equal body mass
+
+```{r emmean}
+emmeans(neand_lm, ~species) |>
+  contrast(method = "pairwise") |>
+  knitr::kable() |>
+  kableExtra::kable_styling("striped")
 ```
 
 ---
