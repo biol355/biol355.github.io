@@ -46,7 +46,7 @@ background-image: url("Images/mlr/plate_spinners.jpg")
 
 
 
-&lt;img src="many_predictors_files/figure-html/puffershow-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="many_predictors_files/figure-html/puffershow-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -59,7 +59,7 @@ background-image: url("Images/mlr/plate_spinners.jpg")
 ]
 
 
-&lt;img src="many_predictors_files/figure-html/two_trts-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="many_predictors_files/figure-html/two_trts-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -67,11 +67,11 @@ background-image: url("Images/mlr/plate_spinners.jpg")
 # Where we ended - Many Means, Many 0/1s! So.... Many Slopes?
 .large[
 
-`$$y{ij} \sim \mathcal{N}(\widehat{y_{ij}}, \sigma^2)\\
+`$$y_{ij} \sim \mathcal{N}(\widehat{y_{ij}}, \sigma^2)\\
 \widehat{y_{ij}} = \beta_0 + \sum\beta_j  x_{ij}$$`
 ]
 
-&lt;img src="many_predictors_files/figure-html/aovplot-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="many_predictors_files/figure-html/aovplot-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -121,7 +121,7 @@ background-image: url("Images/mlr/plate_spinners.jpg")
 
 .large[
 
-`$$y{i} \sim \mathcal{N}(\widehat{y_{i}}, \sigma^2)\\
+`$$y_{i} \sim \mathcal{N}(\widehat{y_{i}}, \sigma^2)\\
 \widehat{y_{i}} = \beta_0 + \sum\beta_j  x_{ij}$$`
 
 ]
@@ -152,7 +152,7 @@ background-size: cover
 
 # Many Things may Influence Species Richness
 
-&lt;img src="many_predictors_files/figure-html/keeley_pairs-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="many_predictors_files/figure-html/keeley_pairs-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -161,7 +161,7 @@ background-size: cover
 `$$Richness_i \sim \mathcal{N}(\widehat{Richness_i}, \sigma^2)\\
 \widehat{Richness_i} =\beta_{0} + \beta_{1} cover +\beta_{2} firesev + \beta_{3}hetero$$`
 
-&lt;img src="many_predictors_files/figure-html/dagmlr-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="many_predictors_files/figure-html/dagmlr-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -171,24 +171,8 @@ background-size: cover
 .large[
 
 
-```r
+``` r
 klm &lt;- lm(rich ~ cover + firesev + hetero, data=keeley)
-
-klm_out &lt;- augment(klm)
-```
-
-or.....
- 
-
-```r
-library(parsnip)
-mod &lt;- linear_reg() %&gt;%
-  set_engine("lm") %&gt;%
-  fit(rich ~ cover + firesev + hetero, data=keeley)
-
-mod_out &lt;- mod %&gt;%
-  pluck("fit") %&gt;%
-  augment()
 ```
 
 ]
@@ -196,13 +180,13 @@ mod_out &lt;- mod %&gt;%
 ---
 # Does Your Model Match Your Data?
 
-&lt;img src="many_predictors_files/figure-html/ggplot_dist-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="many_predictors_files/figure-html/ggplot_dist-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 
 ---
 
 # Are There Weird Patterns in Your Residuals?
-&lt;img src="many_predictors_files/figure-html/mlr_resid-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="many_predictors_files/figure-html/mlr_resid-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -213,17 +197,7 @@ If your predictors are correlated at &gt; 0.8.... are they really independent pr
 ---
 # The Variance Inflation Factor
 
-
-```
-# Check for Multicollinearity
-
-Low Correlation
-
-    Term  VIF Increased SE Tolerance
-   cover 1.29         1.14      0.77
- firesev 1.26         1.12      0.79
-  hetero 1.05         1.02      0.95
-```
+&lt;img src="many_predictors_files/figure-html/multico-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 --
 
@@ -256,7 +230,7 @@ F = (MS model with predictor - MS model without)/MS Residual
 &lt;br&gt;
 Where MS is a measure of variability (Sums of squares/DF)  
 
-&lt;table class="table table-striped" style="margin-left: auto; margin-right: auto;"&gt;
+&lt;table class="table table-striped" style="color: black; margin-left: auto; margin-right: auto;"&gt;
  &lt;thead&gt;
   &lt;tr&gt;
    &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
@@ -300,10 +274,10 @@ Where MS is a measure of variability (Sums of squares/DF)
 
 ---
 
-# What are the Association Between Predictors and Response?
+# What are the Coefficients?
 
 
-&lt;table class="table table-striped" style="margin-left: auto; margin-right: auto;"&gt;
+&lt;table class="table table-striped" style="color: black; margin-left: auto; margin-right: auto;"&gt;
  &lt;thead&gt;
   &lt;tr&gt;
    &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
@@ -355,13 +329,13 @@ Where MS is a measure of variability (Sums of squares/DF)
 
 # Visualize Each Predictor Holding Others at the Median or Mean
 
-&lt;img src="many_predictors_files/figure-html/visreg-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="many_predictors_files/figure-html/visreg-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 ---
 
 # Or Build a Plot That Shows the Implication of Selecting Certain Values - a Counterfactual Plot
 
-&lt;img src="many_predictors_files/figure-html/counterfact-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="many_predictors_files/figure-html/counterfact-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 ---
 
@@ -382,8 +356,8 @@ class: center, middle
 
 ### Multiple Linear Regression:
 
-`$$y_{ij} \sim N(\widehat{y_{ij}}, \sigma^{2} )$$`
-`$$\widehat{y_{ij}} = \beta_{0} + \sum \beta_{ij}x_{ij}$$` 
+`$$y_{i} \sim N(\widehat{y_{i}}, \sigma^{2} )$$`
+`$$\widehat{y_{i}} = \beta_{0} + \sum \beta_{j}x_{ij}$$` 
 
 ### Mutiway ANOVA:
 
@@ -415,13 +389,13 @@ class: center, middle
 ---
 # Effects of Both Treatment and Block
 
-&lt;img src="many_predictors_files/figure-html/zooplankton_boxplot-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="many_predictors_files/figure-html/zooplankton_boxplot-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 ---
 # It's All 0s and 1s
 
 Data Prepped for Model
-&lt;table class="table table-striped" style="margin-left: auto; margin-right: auto;"&gt;
+&lt;table class="table table-striped" style="color: black; margin-left: auto; margin-right: auto;"&gt;
  &lt;thead&gt;
   &lt;tr&gt;
    &lt;th style="text-align:right;"&gt; treatmentcontrol &lt;/th&gt;
@@ -493,7 +467,7 @@ Data Prepped for Model
 
 ---
 # Put it to the Test: F-Test
-&lt;table class="table table-striped" style="margin-left: auto; margin-right: auto;"&gt;
+&lt;table class="table table-striped" style="color: black; margin-left: auto; margin-right: auto;"&gt;
  &lt;thead&gt;
   &lt;tr&gt;
    &lt;th style="text-align:left;"&gt; term &lt;/th&gt;
@@ -537,7 +511,7 @@ Data Prepped for Model
 ---
 # Comparison of Differences at Average of Other Treatment(s)
 
-&lt;table class="table table-striped" style="margin-left: auto; margin-right: auto;"&gt;
+&lt;table class="table table-striped" style="color: black; margin-left: auto; margin-right: auto;"&gt;
  &lt;thead&gt;
   &lt;tr&gt;
    &lt;th style="text-align:left;"&gt; contrast &lt;/th&gt;
@@ -581,12 +555,12 @@ Data Prepped for Model
 
 # And a Plot!
 
-&lt;img src="many_predictors_files/figure-html/plot_zoop_em-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="many_predictors_files/figure-html/plot_zoop_em-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 ---
 # If you really wanted to...
 
-&lt;img src="many_predictors_files/figure-html/plot_zoop_em_2-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="many_predictors_files/figure-html/plot_zoop_em_2-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -681,16 +655,19 @@ background-size: cover
 # Common Out of Sample Metrics
 
 `\(MSE = \frac{1}{n}\sum{(Y_i - \hat{Y})^2}\)`  
-    - In units of sums of squares
+
+  - In units of sums of squares
 
 `\(RMSE = \sqrt{\frac{1}{n}\sum{(Y_i - \hat{Y})^2}}\)`  
-    - In units of response variable!
-    - Estimate of SD of out of sample predictions
+
+  - In units of response variable!
+  - Estimate of SD of out of sample predictions
      
 `\(Deviance = -2 \sum log(\space p(Y_i | \hat{Y}, \theta)\space)\)`  
-    - Probability-based
-    - Encompasses a wide number of probability distributions
-    - Just MSE for gaussian linear models!
+
+  - Probability-based
+  - Encompasses a wide number of probability distributions
+  - Just MSE for gaussian linear models!
 
 ---
 
@@ -712,14 +689,14 @@ background-size: cover
 `$$Richness_i \sim \mathcal{N}(\widehat{Richness_i}, \sigma^2)\\
 \widehat{Richness_i} =\beta_{0} + \beta_{1} cover +\beta_{2} firesev + \beta_{3}hetero$$`
 
-&lt;img src="many_predictors_files/figure-html/unnamed-chunk-3-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="many_predictors_files/figure-html/unnamed-chunk-2-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 ---
 
 # Or, Compare Two Models Leaving out 30% of the Data At Random
 
 
-```r
+``` r
 split_dat &lt;- initial_split(keeley, prop = 0.7)
 
 mod_a &lt;- lm(rich ~ cover + firesev + hetero, 
@@ -729,7 +706,7 @@ mod_b &lt;- lm(rich ~ cover,
            data = training(split_dat))
 ```
 
-&lt;img src="many_predictors_files/figure-html/unnamed-chunk-5-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="many_predictors_files/figure-html/unnamed-chunk-4-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 ---
 class: center, middle
@@ -750,46 +727,18 @@ class: center, middle
 
 # Five-Fold CV
 
-&lt;table&gt;
- &lt;thead&gt;
-  &lt;tr&gt;
-   &lt;th style="text-align:left;"&gt; id &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; mse_all &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; mse_cover &lt;/th&gt;
-  &lt;/tr&gt;
- &lt;/thead&gt;
-&lt;tbody&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Fold1 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 173.8523 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 253.6410 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Fold2 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 128.8726 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 256.7461 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Fold3 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 154.1263 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 209.2751 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Fold4 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 139.0737 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 198.8732 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Fold5 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 170.3209 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 132.5258 &lt;/td&gt;
-  &lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
 
-All Predictors Model Score: 153.2491681  
+|id    |   mse_all| mse_cover|
+|:-----|---------:|---------:|
+|Fold1 |  94.25348|  250.9335|
+|Fold2 | 190.27080|  308.0340|
+|Fold3 | 204.84293|  130.2679|
+|Fold4 | 196.50758|  239.8989|
+|Fold5 | 118.88828|  167.7846|
 
-Cover Only Score: 210.2122324
+All Predictors Model Score: 160.952613  
+
+Cover Only Score: 219.3837719
 
 
 ---
@@ -847,7 +796,7 @@ class: center, middle
 
 
 
-&lt;img src="many_predictors_files/figure-html/traintest_plot-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="many_predictors_files/figure-html/traintest_plot-1.png" alt="" style="display: block; margin: auto;" /&gt;
 
 ---
 # Enter the AIC
@@ -879,14 +828,14 @@ class: center, middle
 # AIC Tables Give us Weight of Evidence for Different Models
 
 
-```r
+``` r
 klm &lt;- lm(rich ~ cover + firesev + hetero, data=keeley)
 klm_cover &lt;- lm(rich ~ cover, data=keeley)
 klm_firesev &lt;- lm(rich ~ firesev, data=keeley)
 klm_hetero &lt;- lm(rich ~ hetero, data=keeley)
 ```
 
-&lt;table class="table table-striped" style="margin-left: auto; margin-right: auto;"&gt;
+&lt;table class="table table-striped" style="color: black; margin-left: auto; margin-right: auto;"&gt;
  &lt;thead&gt;
   &lt;tr&gt;
    &lt;th style="text-align:left;"&gt; Modnames &lt;/th&gt;
@@ -976,9 +925,9 @@ klm_hetero &lt;- lm(rich ~ hetero, data=keeley)
 <script src="my_macros.js"></script>
 <script src="cols_macro.js"></script>
 <script>var slideshow = remark.create({
-"highlightStyle": "github",
-"highlightLines": true,
-"countIncrementalSlides": false
+  "highlightStyle": "github",
+  "highlightLines": true,
+  "countIncrementalSlides": false
 });
 if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   window.dispatchEvent(new Event('resize'));
@@ -1019,6 +968,19 @@ if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
     deleted = true;
   });
 })();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
 (function() {
   "use strict"
   // Replace <script> tags in slides area to make them executable
